@@ -12,6 +12,7 @@
 % s = f''(0) = y(3)(0)
 %
 clear all; close all; clc;
+set(0,'DefaultLineLineWidth',2,'DefaultAxesFontName','Arial','DefaultAxesFontSize',20); %Default values for plotting.
 
 x0 = 0; %start
 x1 = 5.75; %etainf
@@ -56,11 +57,8 @@ y0 = [0.0 0.0 s1];
 [x,y] = ode45(@blasius,xspan,y0,options);
 
 h=plot(y(:,2),x, y(:,3),x,'-.');
-% hold on
-% plot()
-% grid on
-ylabel('\eta','FontSize',14,'FontWeight','Bold','Rotation',0)
-xlabel('f'' , f"','Fontsize',14)
-title('Solution of Blasius equation','Fontsize',14)
+
+ylabel('\eta','Rotation',0)
+xlabel('f'' , f"')
+title('Solution of Blasius equation')
 legend('f''','f"')
-hold off

@@ -11,8 +11,8 @@
 % We put etainf = 5.75 (x1 in the program)
 % s = f''(0) = y(3)(0)
 %
-
 clear all; close all; clc;
+set(0,'DefaultLineLineWidth',2,'DefaultAxesFontName','Arial','DefaultAxesFontSize',20); %Default values for plotting.
 
 x0 = 0; %start
 x1 = 5.75; %etainf
@@ -71,20 +71,11 @@ y0 = [0.0 0.0 s1];
 h=plot(y(:,2),x, y(:,3),x,'-.');
 
 
-%% Improve plot: set line width, labels, legends, fonts and title
-set(h(:),'linewidth',2);
-
+%% Legends, labels and title
 grid on
+xlabel('f'' , f"');
+ylabel('\eta');
+h3=legend('f''','f"');
 
-hh(1,:)=xlabel('f'' , f"');
-hh(2,:)=ylabel('\eta');
-hh(3,:)=legend('f''','f"');
-
-FS = 20;
-set(hh(:),'FontName','Arial');
-set(hh(:),'FontSize',FS);
-set(gca,'FontSize',FS);
-%set(hh(3),'box','off');
-%title('Blasius - Nullpunkt for \phi','Fontsize',FS,'FontWeight','Bold')
-title('Solution of Blasius equation','Fontsize',FS)
-
+set(h3,'box','off');
+title('Solution of Blasius equation');
