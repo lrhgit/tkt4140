@@ -1,4 +1,4 @@
-def fblasius(y, t):
+def fblasius(y, x):
     """ODE-system for the Blasius-equation"""
     return [y[1],y[2], -y[0]*y[2]]
 
@@ -32,10 +32,10 @@ class Kutta4(odespy.Solver):
 
 
 solvers=[]
-solvers.append(odespy.RK4(f))
-solvers.append(odespy.RK2(f))
-solvers.append(odespy.RK3(f))
-solvers.append(Kutta4(f))
+solvers.append(odespy.RK4(fblasius))
+solvers.append(odespy.RK2(fblasius))
+solvers.append(odespy.RK3(fblasius))
+solvers.append(Kutta4(fblasius))
 
 from numpy import linspace, exp
 xmin = 0
@@ -44,7 +44,7 @@ xmax = 5.75
 N = 150  # no x-values
 xspan = linspace(xmin, xmax, N+1)
 
-smin=0.05
+smin=0.1
 smax=0.8
 
 Ns=30
@@ -58,6 +58,17 @@ figure()
 legends=[]
 linet=['r-',':','.','-.','--']
 
+solver=solvers[0]
+phi=np.zeros(srange.size)
+beta=1
+i=0
+
+for s in srange:
+    solver.set_initial_condition([0.0, 0.0, s])
+    u, x = solver.solve(xspan)
+    phi[i] = u[-1,1] -beta
+    i+=1
+
 # i=0
 # for solver in solvers:
 #     solver.set_initial_condition([2.0, 0.0])
@@ -66,7 +77,13 @@ linet=['r-',':','.','-.','--']
 #     legends.append(str(solver))
 #     i+=1
 
+plot(srange,phi)
 xlabel('s')
+ylabel('phi')
+
+# plot(x,u[:,0],x,u[:,1],x,u[:,2])
+# xlabel('x')
+# ylabel('u')
 
 # legend(legends)
 
