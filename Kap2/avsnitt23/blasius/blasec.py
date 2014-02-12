@@ -29,7 +29,7 @@ from numpy import linspace, exp, abs
 xmin = 0
 xmax = 5.75
 
-N = 150  # no x-values
+N = 50  # no x-values
 xspan = linspace(xmin, xmax, N+1)
 
 # From the blaplot.py we have two initial guesses
@@ -37,7 +37,7 @@ xspan = linspace(xmin, xmax, N+1)
 s0 = 0.1
 s1 = 0.8
 
-solver=solvers[0]                         
+solver=solvers[1]                         
 
 beta=1.0
 i=0
@@ -49,7 +49,7 @@ u, x = solver.solve(xspan)
 phi0 = u[-1,1] - beta
 
 nmax=10
-eps = 1.0e-10
+eps = 1.0e-3
 for n in range(nmax):
     solver.set_initial_condition([0.0, 0.0, s1])
     u, x = solver.solve(xspan)
@@ -61,13 +61,13 @@ for n in range(nmax):
     print 'n = {}  s1 = {} and ds = {}'.format(n,s1,ds)
     
     if (abs(ds)<=eps):
-        print 'Solution converged for eps = {} and {}. \n'.format(eps,dsfunction(phi0,phi1,s0,s0))
+        print 'Solution converged for eps = {} and {}. \n'.format(eps,dsfunction(phi0,phi1,s0,s1))
         break
 
 
 plot(u[:,1],x,u[:,2],x)
-xlabel('x')
-ylabel('u')
+xlabel('eta')
+ylabel('u og u\'')
 legends.append(str(solver))
 legend(legends)
 show()
