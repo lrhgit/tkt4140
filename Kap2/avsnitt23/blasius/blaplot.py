@@ -4,33 +4,6 @@ def fblasius(y, x):
 
 import odespy
 
-class Kutta4(odespy.Solver):
-    """
-   Kutta 4 method by LR Hellevik::
-
-       u[n+1] = u[n] + (K1 + 3*K2 + 3*K3 + K4)/8.0 
-
-    where::
-           dt3 = dt/3.0
-           K1 = dt*f(u[n], t[n])
-           K2 = dt*f(u[n] + K1/3.0, t[n] + dt3)
-           K3 = dt*f(u[n] - K1/3 +  K2, t[n] + 2*dt3)
-           K4 = dt*f(u[n] + K1 - K2 + K3, t[n] + dt)
-      """
-    quick_description = "Explicit 4th-order Kutta method. LR Hellevik implementation"
-
-    def advance(self):
-        u, f, n, t = self.u, self.f, self.n, self.t
-        dt = t[n+1] - t[n]
-        dt3 = dt/3.0
-        K1 = dt*f(u[n], t[n])
-        K2 = dt*f(u[n] + K1/3.0, t[n] + dt3)
-        K3 = dt*f(u[n] - K1/3 +  K2, t[n] + 2*dt3)
-        K4 = dt*f(u[n] + K1 - K2 + K3, t[n] + dt)
-        u_new = u[n] + (K1 + 3*K2 + 3*K3 + K4)/8.0
-        return u_new
-
-
 solvers=[]
 solvers.append(odespy.RK4(fblasius))
 solvers.append(odespy.RK2(fblasius))
@@ -58,7 +31,7 @@ figure()
 legends=[]
 linet=['r-',':','.','-.','--']
 
-solver=solvers[0]
+solver=solvers[3]                         
 phi=np.zeros(srange.size)
 beta=1
 i=0
@@ -81,11 +54,6 @@ plot(srange,phi)
 xlabel('s')
 ylabel('phi')
 
-# plot(x,u[:,0],x,u[:,1],x,u[:,2])
-# xlabel('x')
-# ylabel('u')
-
-# legend(legends)
 
 show()
 
