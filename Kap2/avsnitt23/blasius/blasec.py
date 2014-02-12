@@ -14,8 +14,8 @@ def fblasius(y, x):
 
 
 def dsfunction(phi0,phi1,s0,s1):
-    if (phi1-phi0>0.0):   
-        return    -phi1 *(s1 - s0)/(phi1 - phi0)
+    if (abs(phi1-phi0)>0.0):   
+        return    -phi1 *(s1 - s0)/float(phi1 - phi0)
     else:
         return 0.0
 
@@ -49,9 +49,7 @@ u, x = solver.solve(xspan)
 phi0 = u[-1,1] - beta
 
 nmax=10
-eps = 1.0e-5
-
-
+eps = 1.0e-10
 for n in range(nmax):
     solver.set_initial_condition([0.0, 0.0, s1])
     u, x = solver.solve(xspan)
@@ -60,7 +58,7 @@ for n in range(nmax):
     s0  = s1
     s1  = s1 + ds
     phi0 = phi1
-    print ' s1 = {} and ds = {}'.format(s1,ds)
+    print 'n = {}  s1 = {} and ds = {}'.format(n,s1,ds)
     
     if (abs(ds)<=eps):
         print 'Solution converged for eps = {} and {}. \n'.format(eps,dsfunction(phi0,phi1,s0,s0))
