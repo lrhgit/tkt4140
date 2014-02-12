@@ -1,7 +1,7 @@
 
 from matplotlib.pyplot import *
 #change some default values to make plots more readable on the screen
-LNWDT=5; FNT=25
+LNWDT=3; FNT=20
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 import odespy
 
@@ -29,18 +29,19 @@ from numpy import linspace, exp, abs
 xmin = 0
 xmax = 5.75
 
-N = 150  # no x-values
+N = 40  # no x-values
 xspan = linspace(xmin, xmax, N+1)
 
 # From the blaplot.py we have two initial guesses
 
-s0 = 0.10
-s1 = 10.0
+s0 = 0.01
+s1 = 1.0
 
-solver=solvers[2]                         
+solver=solvers[0]                         
 
 beta=1
 i=0
+
 
 ## Compute phi0
 solver.set_initial_condition([0.0, 0.0, s0])
@@ -51,16 +52,15 @@ nmax=10
 eps = 1.0e-5
 
 
-
 for n in range(nmax):
     solver.set_initial_condition([0.0, 0.0, s1])
     u, x = solver.solve(xspan)
     phi1 = u[-1,1] -beta
     ds = dsfunction(phi0,phi1,s0,s1)
-    s1  += ds
     s0   = s1
+    s1  += ds
     phi0 = phi1
-    print ' s1 = {} and ds = {}\n'.format(s1,ds)
+    print ' s1 = {} and ds = {}'.format(s1,ds)
     
     if (abs(ds)<eps):
         print 'Solution converged for eps = {} and {}. \n'.format(eps,dsfunction(phi0,phi1,s0,s0))
@@ -68,10 +68,13 @@ for n in range(nmax):
 
 
 plot(x,u[:,1],x,u[:,2])
-xlabel('s')
+xlabel('x')
 ylabel('u')
-
+legends.append(str(solver))
+legend(legends)
 show()
+close() #Close the window opened by show() 
+print 'the end'
 
 
 
