@@ -8,7 +8,6 @@ solvers=[]
 solvers.append(odespy.RK4(fblasius))
 solvers.append(odespy.RK2(fblasius))
 solvers.append(odespy.RK3(fblasius))
-solvers.append(Kutta4(fblasius))
 
 from numpy import linspace, exp
 xmin = 0
@@ -31,7 +30,7 @@ figure()
 legends=[]
 linet=['r-',':','.','-.','--']
 
-solver=solvers[3]                         
+solver=solvers[2]                         
 phi=np.zeros(srange.size)
 beta=1
 i=0
@@ -56,7 +55,7 @@ ylabel('phi')
 
 
 show()
-
+close()
 
 
 
