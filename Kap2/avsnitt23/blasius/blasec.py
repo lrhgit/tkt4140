@@ -61,7 +61,7 @@ for n in range(nmax):
     print 'n = {}  s1 = {} and ds = {}'.format(n,s1,ds)
     
     if (abs(ds)<=eps):
-        print 'Solution converged for eps = {} and {}. \n'.format(eps,dsfunction(phi0,phi1,s0,s1))
+        print 'Solution converged for eps = {} and s1 ={} and ds = {}. \n'.format(eps,s1,ds)
         break
 
 
