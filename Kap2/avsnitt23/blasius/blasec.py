@@ -1,5 +1,4 @@
 from matplotlib.pyplot import *
-
 # Change some default values to make plots more readable on the screen
 LNWDT=3; FNT=20
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
@@ -35,15 +34,12 @@ N = 50  # no x-values
 xspan = linspace(xmin, xmax, N+1)
 
 # From the blaplot.py we have two initial guesses
-
 s0 = 0.1
 s1 = 0.8
 
 solver=solvers[1]                         
 
-beta=1.0
-i=0
-
+beta=1.0 #Boundary value for eta=infty
 
 ## Compute phi0
 solver.set_initial_condition([0.0, 0.0, s0])
