@@ -6,15 +6,18 @@ import scipy.sparse.linalg
 import time
 from math import sinh
 
+
+
 #import matplotlib.pyplot as plt
 from matplotlib.pyplot import *
+
 # Change some default values to make plots more readable on the screen
 LNWDT=3; FNT=20
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 
 # Set simulation parameters
 beta = 5.0
-h = 0.05                 #element size
+h = 0.001                 #element size
 L =1.0                  #length of domain
 n = int(round(L/h)) + 1 #number of unknowns
 x=np.arange(n)*h
@@ -29,10 +32,10 @@ def thetaAnal(beta,x):
     return np.sinh(beta*x)/np.sinh(beta)
 
 #Create matrix for linalg solver
-a=np.ones(n-1)
-b=-np.ones(n)*(2+(beta*h)**2)
-c=a
-A=tridiag(a,b,c)
+a = np.ones(n-1)
+b = -np.ones(n)*(2+(beta*h)**2)
+c = a
+A = tridiag(a,b,c)
 
 #Create matrix for sparse solver
 diagonals=np.zeros((3,n))
@@ -49,12 +52,12 @@ d[n-1]=-1
 tic=time.clock()
 theta = sc.sparse.linalg.spsolve(As,d) #theta=sc.linalg.solve_triangular(A,d)
 toc=time.clock()
-print 'sparse solver:',tic-toc
+print 'sparse solver:',toc-tic
 
 tic=time.clock()
 theta2=sc.linalg.solve(A,d,)
 toc=time.clock()
-print 'linalg solver:',tic-toc
+print 'linalg solver:',toc-tic
 
 # Plot solutions
 plot(x,theta,x,theta2,'-.',x,thetaAnal(beta,x),':')
