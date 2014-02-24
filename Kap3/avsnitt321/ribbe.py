@@ -6,21 +6,18 @@ import scipy.sparse.linalg
 import time
 from math import sinh
 
-
-
 #import matplotlib.pyplot as plt
 from matplotlib.pyplot import *
-
 # Change some default values to make plots more readable on the screen
 LNWDT=3; FNT=20
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 
 # Set simulation parameters
 beta = 5.0
-h = 0.001                 #element size
-L =1.0                  #length of domain
-n = int(round(L/h)) + 1 #number of unknowns
-x=np.arange(n)*h
+h = 0.1               # element size
+L =1.0                  # length of domain
+n = int(round(L/h)) -1  # number of unknowns, assuming known boundary values
+x=np.arange(n+2)*h      # x includes min and max at boundaries were bc are imposed.
 
 
 #Define useful functions
@@ -32,17 +29,17 @@ def thetaAnal(beta,x):
     return np.sinh(beta*x)/np.sinh(beta)
 
 #Create matrix for linalg solver
-a = np.ones(n-1)
-b = -np.ones(n)*(2+(beta*h)**2)
-c = a
-A = tridiag(a,b,c)
+a=np.ones(n-1)
+b=-np.ones(n)*(2+(beta*h)**2)
+c=a
+A=tridiag(a,b,c)
 
 #Create matrix for sparse solver
 diagonals=np.zeros((3,n))
 diagonals[0,:]= 1                       #all elts in first row is set to 1
 diagonals[1,:]= -(2+(beta*h)**2)  
 diagonals[2,:]= 1 
-As = sc.sparse.spdiags(diagonals, [-1,0,1], n, n) #sparse matrix instance
+As = sc.sparse.spdiags(diagonals, [-1,0,1], n, n,format='csc') #sparse matrix instance
 
 #Crete rhs array
 d=np.zeros(n)
@@ -52,15 +49,15 @@ d[n-1]=-1
 tic=time.clock()
 theta = sc.sparse.linalg.spsolve(As,d) #theta=sc.linalg.solve_triangular(A,d)
 toc=time.clock()
-print 'sparse solver:',toc-tic
+print 'sparse solver time:',toc-tic
 
 tic=time.clock()
 theta2=sc.linalg.solve(A,d,)
 toc=time.clock()
-print 'linalg solver:',toc-tic
+print 'linalg solver time:',toc-tic
 
 # Plot solutions
-plot(x,theta,x,theta2,'-.',x,thetaAnal(beta,x),':')
+plot(x[1:-1],theta,x[1:-1],theta2,'-.',x,thetaAnal(beta,x),':')
 legend(['sparse','linalg','analytical'])
 show()
 close()
