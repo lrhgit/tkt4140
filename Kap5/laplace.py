@@ -4,6 +4,10 @@ import numpy
 import matplotlib.pyplot as plt
 import matplotlib.mlab as ml
 from scipy import weave
+import scipy as sc
+import scipy.linalg
+import scipy.sparse
+import scipy.sparse.linalg
 
 
 class Grid:
@@ -15,6 +19,8 @@ class Grid:
         self.dx = float(xmax-xmin)/(nx-1)
         self.dy = float(ymax-ymin)/(ny-1)
         self.u = numpy.zeros((nx, ny), 'd')
+        self.nx = nx
+        self.ny = ny
         # used to compute the change in solution in some of the methods.
         self.old_u = self.u.copy()
 
@@ -110,7 +116,6 @@ class LaplaceSolver:
             self.timeStep = self.slowTimeStep
         elif stepper == 'blitz':
              self.timeStep = self.blitzTimeStep
-             print 'blitz selected'
         else:
             self.timeStep = self.numericTimeStep
 
@@ -169,9 +174,32 @@ umax = numpy.max(mygrid.u); umin = numpy.min(mygrid.u)
 nclevels = 100              # number of contours
 dc = (umax - umin)/nclevels # contour level increment
 
+#Compute solution with a direct solver
+n=mygrid.nx*mygrid.ny
+nd=5
+diagonals=numpy.zeros((5,n))
+diagonals[0,:] = -1                       #all elts in first row is set to 1
+diagonals[1,:] = -1
+diagonals[2,:] =  4
+diagonals[3,:] = -1
+diagonals[4,:] = -1
+As = sc.sparse.spdiags(diagonals, [-mygrid.nx,-1,0,1,mygrid.nx], n, n,format='csc') #sparse matrix instance, numerating in x-direction first
+
+d = numpy.zeros(n)
+d[0:mygrid.nx-1] = 1
+ud = sc.sparse.linalg.spsolve(As,d) #
+ud =numpy.reshape(ud,(mygrid.nx,mygrid.ny))
+
 #CS = plt.contourf(x,y,mygrid.u[0:-1,0:-1],levels=numpy.arange(umin,umax,dc))
+plt.figure(1)
 CS = plt.contourf(x,y,mygrid.u[1:,1:],levels=numpy.arange(umin,umax,dc))
 
+
+#plt.figure(2)
+CS2 = plt.contourf(x,y,ud[1:,1:],levels=numpy.arange(umin,umax,dc))
+
+#print ud.shape
+#print 
 plt.show()
 plt.close()
 
