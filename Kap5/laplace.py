@@ -192,11 +192,11 @@ ud =numpy.reshape(ud,(mygrid.nx,mygrid.ny))
 
 #CS = plt.contourf(x,y,mygrid.u[0:-1,0:-1],levels=numpy.arange(umin,umax,dc))
 plt.figure(1)
-CS = plt.contourf(x,y,mygrid.u[1:,1:],levels=numpy.arange(umin,umax,dc))
+#CS = plt.contourf(x,y,mygrid.u[1:,1:],levels=numpy.arange(umin,umax,dc))
 
 
 #plt.figure(2)
-CS2 = plt.contourf(x,y,ud[1:,1:],levels=numpy.arange(umin,umax,dc))
+CS2 = plt.contourf(x,y,ud[1:,1:],levels=numpy.arange(0,1,0.01))
 
 #print ud.shape
 #print 
