@@ -138,7 +138,7 @@ def BC(x, y):
 
 
 ## Set up simulation and solve 
-mygrid=Grid(nx=80,ny=80)
+mygrid=Grid(nx=20,ny=20)
 #mygrid.setBCFunc(BC) 
 mygrid.setBC(0.0,0.0,0.1,0.0)
 stepper='slow'
@@ -160,6 +160,35 @@ myiter= 400
 solveres=mysolver.solve(myiter,myeps)
 print 'Completed {} iterations with error = {}'.format(solveres[0],solveres[1])
 
+#Compute solution with a direct solver
+n=mygrid.nx*mygrid.ny
+nd=5
+diagonals=numpy.zeros((5,n))
+diagonals[0,:] = -1                       #all elts in first row is set to 1
+diagonals[1,:] = -1
+diagonals[2,:] =  4
+diagonals[3,:] = -1
+diagonals[4,:] = -1
+
+d = numpy.zeros(n)
+#d[0:mygrid.nx-1] = mygrid.dx**2 #Constant value for ymin
+
+#d[n-mygrid.nx:n-1] = mygrid.dx**2 #Constant value for ymax
+
+#Constant value for xmin
+d[0:n-mygrid.nx:mygrid.nx]= mygrid.dx**2 
+diagonals[1,0:n-mygrid.nx:mygrid.nx]=0
+
+#Constant value for xmax
+#d[mygrid.nx-1:n-1:mygrid.nx]= mygrid.dx**2 
+#diagonals[3,mygrid.nx-1:n-1-mygrid.nx:mygrid.nx] = 0
+
+As = sc.sparse.spdiags(diagonals, [-mygrid.nx,-1,0,1,mygrid.nx], n, n,format='csc') #sparse matrix instance, numerating in x-direction first
+
+ud = sc.sparse.linalg.spsolve(As,d) # Compute the solution with a sparse solver.
+ud =numpy.reshape(ud,(mygrid.nx,mygrid.ny)) #reshape ud from a vector to an array.
+
+
 #Visualitzation of results
 x = numpy.arange(mygrid.xmin,mygrid.xmax,mygrid.dx)
 y = numpy.arange(mygrid.ymin,mygrid.ymax,mygrid.dy)
@@ -174,21 +203,6 @@ umax = numpy.max(mygrid.u); umin = numpy.min(mygrid.u)
 nclevels = 100              # number of contours
 dc = (umax - umin)/nclevels # contour level increment
 
-#Compute solution with a direct solver
-n=mygrid.nx*mygrid.ny
-nd=5
-diagonals=numpy.zeros((5,n))
-diagonals[0,:] = -1                       #all elts in first row is set to 1
-diagonals[1,:] = -1
-diagonals[2,:] =  4
-diagonals[3,:] = -1
-diagonals[4,:] = -1
-As = sc.sparse.spdiags(diagonals, [-mygrid.nx,-1,0,1,mygrid.nx], n, n,format='csc') #sparse matrix instance, numerating in x-direction first
-
-d = numpy.zeros(n)
-d[0:mygrid.nx-1] = 1
-ud = sc.sparse.linalg.spsolve(As,d) #
-ud =numpy.reshape(ud,(mygrid.nx,mygrid.ny))
 
 #CS = plt.contourf(x,y,mygrid.u[0:-1,0:-1],levels=numpy.arange(umin,umax,dc))
 plt.figure(1)
@@ -196,7 +210,10 @@ plt.figure(1)
 
 
 #plt.figure(2)
-CS2 = plt.contourf(x,y,ud[1:,1:],levels=numpy.arange(0,1,0.01))
+udmax = numpy.max(ud); udmin = numpy.min(ud)
+dcd = (udmax - udmin)/nclevels # contour level increment
+
+CS2 = plt.contourf(x,y,ud[1:,1:],levels=numpy.arange(udmin,udmax,dcd))
 
 #print ud.shape
 #print 
