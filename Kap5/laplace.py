@@ -157,8 +157,8 @@ mysolver=LaplaceSolver(mygrid,stepper)
 myeps = 1.0e-4
 myiter= 400
 
-solveres=mysolver.solve(myiter,myeps)
-print 'Completed {} iterations with error = {}'.format(solveres[0],solveres[1])
+solverResult=mysolver.solve(myiter,myeps)
+print 'Completed {} iterations with error = {}'.format(solverResult[0],solverResult[1])
 
 #Compute solution with a direct solver
 n=mygrid.nx*mygrid.ny
