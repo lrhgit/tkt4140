@@ -219,5 +219,3 @@ CS2 = plt.contourf(x,y,ud[1:,1:],levels=numpy.arange(udmin,udmax,dcd))
 #print 
 plt.show()
 plt.close()
-
-
