@@ -37,6 +37,15 @@ def f2(x):
 def uexact(x,t):
     return np.sin(np.pi*x)*np.exp(-np.pi**2*t) +3.0*np.sin(2*np.pi*x)*np.exp(-4*np.pi**2*t) 
 
+def uexact2(x,t,U0,L):
+    n=2
+    omegas=np.pi*(2.0*np.linspace(1,n,n)+1)/2/L
+    
+    for omegan in omegas:
+        bn=(alpha*omegan)**2
+        u += np.cos(omegan*x)*np.exp(-bn*t) 
+        
+    return u*U0
 
 k  = 0.25                       #Thermal diffusivity
 (xmin, xmax) = (0,1)
@@ -47,7 +56,7 @@ x = np.linspace(xmin,xmax,n+1)
 r=0.5                          #Numerical Fourier number
 dt=r*dx**2/k**2                   #Compute timestep based on Fourier number, spatial discretization and thermal diffusivity
 print 'timestep = ',dt
-(tmin, tmax)=(0,0.5)
+(tmin, tmax)=(0,2.0)
 
 #m = 128; #4096;                 # Number of temporal intervals
 m=round((tmax-tmin)/dt)
