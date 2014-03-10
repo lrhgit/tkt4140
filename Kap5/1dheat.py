@@ -19,7 +19,7 @@ import numpy as np
 from pylab import *
 import time as timelib
 
-k  = 0.25                       #Thermal diffusivity
+k  = 0.5                       #Thermal diffusivity
 (xmin, xmax) = (0,1)
 n  = 20; #32;                    # Number of spatial intervals
 dx = (xmax-xmin)/float(n)
