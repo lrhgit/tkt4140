@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------------
 # Inspired by 
-# Jonathan Senning <jonathan.senning@gordon.edu>
+# Jonathan Senning
 # Gordon College
 # April 22, 1999
 # Converted to Python November 2008
@@ -43,13 +43,15 @@ print 'timestep = ',dt
 (tmin, tmax)=(0,5)
 
 
-m = 128; #4096;                 # Number of temporal intervals
+#m = 128; #4096;                 # Number of temporal intervals
 m=round((tmax-tmin)/dt)
 time=np.linspace(tmin,tmax,m)
 
 print 'number of timesteps: ',m
 u=np.zeros((n+1,1),float)
 u[0]=1
+
+ion()
 
 (umin,umax)=(min(u),max(u))
 #Plot initial solution
@@ -59,6 +61,7 @@ xlabel( 'x' )
 ylabel( 'Temperature' )
 title( 'step = %3d; t = %f' % ( 0, 0.0 ) )
 draw()
+timelib.sleep(2) #to allow curve to appear
 
 #timelib.sleep(2)
 
@@ -70,6 +73,8 @@ for t in time:
     ylabel( 'Temperature' )
     title( 't = %f' % (t) )
     draw()
+    draw()
+    ion()
 
 show()    
 print 'done'
