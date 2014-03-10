@@ -13,9 +13,7 @@
 # and initial conditions
 #
 #       u(x,tmin) = 0
-#
 #-----------------------------------------------------------------------------
-
 import matplotlib.pyplot as plt
 import numpy as np
 from pylab import *
