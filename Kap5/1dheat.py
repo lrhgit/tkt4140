@@ -25,7 +25,7 @@ n  = 20; #32;                    # Number of spatial intervals
 dx = (xmax-xmin)/float(n)
 x = np.linspace(xmin,xmax,n+1)
 
-r=0.5                       #Numerical Fourier number
+r=0.6                       #Numerical Fourier number
 dt=r*dx**2/k**2             #Compute timestep based on Fourier number, spatial discretization and thermal diffusivity
 print 'timestep = ',dt
 (tmin, tmax)=(0,0.5)
