@@ -1,5 +1,11 @@
 #-----------------------------------------------------------------------------
-# The equation to be solved 
+# Inspired by 
+# Jonathan Senning Gordon College but...seriously modified by Leif Rune Hellevik march 2014
+#
+# Use FTCS (forward time, centered space) scheme to solve the heat equation
+# in a thin rod.
+#
+# The equation solved is
 #
 #       du     d  du
 #       -- = k -- --
@@ -7,12 +13,11 @@
 #
 # along with boundary conditions
 #
-#       u(xmin,t) = U0
-#       u(xmax,t) = 0
+#       u(xmin,t) = a(t)
+#       u(xmax,t) = b(t)
 #
 # and initial conditions
 #
-#       u(x,tmin) = 0
 #-----------------------------------------------------------------------------
 import matplotlib.pyplot as plt
 import numpy as np
@@ -30,17 +35,16 @@ dt=r*dx**2/k**2             #Compute timestep based on Fourier number, spatial d
 print 'timestep = ',dt
 (tmin, tmax)=(0,0.5)
 
-
-m=round((tmax-tmin)/dt)                  # Number of temporal intervals
+#m = 128; #4096;                 # Number of temporal intervals
+m=round((tmax-tmin)/dt)
 time=np.linspace(tmin,tmax,m)
-U0 = 4
+
 print 'number of timesteps: ',m
-
 u=np.zeros((n+1,1),float)
-u[0]=U0
+u[0]=1
+u=uexact(x,0.0)
+
 (umin,umax)=(min(u),max(u))
-
-
 #Plot initial solution
 fig = plt.figure()
 ax=fig.add_subplot(111)
@@ -48,11 +52,11 @@ Curve, = ax.plot( x, u[:], '-')
 ax.set_xlim([xmin,xmax])
 ax.set_ylim([umin,umax])
 plt.xlabel('x')
-plt.ylabel('Velocity')
+plt.ylabel('Temperature')
 
 plt.ion()
 plt.show()
-nOutputInt=1
+nOutputInt=10
 i = 0
 
 for t in time:
