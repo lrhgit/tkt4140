@@ -18,15 +18,19 @@
 #
 # and initial conditions
 #
+<<<<<<< HEAD
 #       u(x,tmin) = f(x)
 #
+=======
+#       u(x,tmin) = 0
+>>>>>>> 8ba341bcf39a98d91d269eda3ad0dfa0170dd8f6
 #-----------------------------------------------------------------------------
-
 import matplotlib.pyplot as plt
 import numpy as np
 from pylab import *
 import time as timelib
 
+<<<<<<< HEAD
 
 def f(x):
     return np.sin(np.pi*x) + 3.0*np.sin(2*np.pi*x)
@@ -39,6 +43,9 @@ def uexact(x,t):
 
 
 k  = 0.25                       #Thermal diffusivity
+=======
+k  = 0.5                       #Thermal diffusivity
+>>>>>>> 8ba341bcf39a98d91d269eda3ad0dfa0170dd8f6
 (xmin, xmax) = (0,1)
 n  = 20; #32;                    # Number of spatial intervals
 dx = (xmax-xmin)/float(n)
