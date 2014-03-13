@@ -18,8 +18,11 @@
 #
 # and initial conditions
 #
+<<<<<<< HEAD
 #       u(x,tmin) = f(x)
 #
+=======
+>>>>>>> 3c18009323e1e9c436756cef957fa7fa9aab1791
 #-----------------------------------------------------------------------------
 
 import matplotlib.pyplot as plt
@@ -27,6 +30,7 @@ import numpy as np
 from pylab import *
 import time as timelib
 
+<<<<<<< HEAD
 
 def f(x):
     return np.sin(np.pi*x) + 3.0*np.sin(2*np.pi*x)
@@ -39,13 +43,16 @@ def uexact(x,t):
 
 
 k  = 0.25                       #Thermal diffusivity
+=======
+k  = 0.5                       #Thermal diffusivity
+>>>>>>> 3c18009323e1e9c436756cef957fa7fa9aab1791
 (xmin, xmax) = (0,1)
 n  = 20; #32;                    # Number of spatial intervals
 dx = (xmax-xmin)/float(n)
 x = np.linspace(xmin,xmax,n+1)
 
-r=0.5                          #Numerical Fourier number
-dt=r*dx**2/k**2                   #Compute timestep based on Fourier number, spatial discretization and thermal diffusivity
+r=0.6                       #Numerical Fourier number
+dt=r*dx**2/k**2             #Compute timestep based on Fourier number, spatial discretization and thermal diffusivity
 print 'timestep = ',dt
 (tmin, tmax)=(0,0.5)
 
