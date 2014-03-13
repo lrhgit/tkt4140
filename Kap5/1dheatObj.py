@@ -55,7 +55,7 @@ class HeatSolver1d:
         print 'time = ', time[0], 'and ', time[-1]
         
 
-        nOutputInt=20 #output every nOutputInt iteration
+        nOutputInt=2 #output every nOutputInt iteration
         i = 0        #iteration counter
 
         #Plot initial solution
@@ -77,7 +77,7 @@ class HeatSolver1d:
     
             if (np.mod(i,nOutputInt)==0): #output every nOutputInt iteration
                 Curve.set_ydata(u)
-                plt.pause(.005)
+                plt.pause(.05)
                 plt.title( 'step = %3d; t = %f' % (i,t ) )
                 
         plt.pause(2)
