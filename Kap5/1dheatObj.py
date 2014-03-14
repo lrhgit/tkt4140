@@ -8,6 +8,9 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+import scipy as sc
+import scipy.sparse
+import scipy.sparse.linalg
 
 
 class Grid1d:
@@ -15,8 +18,8 @@ class Grid1d:
     def __init__(self, nx=10, xmin=0.0, xmax=1.0):
         self.xmin, self.xmax = xmin, xmax
         self.dx = float(xmax-xmin)/(nx)
-        self.nx = nx
-        self.u = np.zeros((nx+1, 1), 'd')
+        self.nx = nx                           # Number of dx  
+        self.u = np.zeros((nx+1, 1), 'd')      # Number of x-values is nx+1
         self.x = np.linspace(xmin,xmax,nx+1)
 
 
@@ -55,7 +58,7 @@ class HeatSolver1d:
         print 'time = ', time[0], 'and ', time[-1]
         
 
-        nOutputInt=20 #output every nOutputInt iteration
+        nOutputInt=5 #output every nOutputInt iteration
         i = 0        #iteration counter
 
         #Plot initial solution
@@ -86,6 +89,41 @@ class HeatSolver1d:
 
 #        return u
 
+    def numpyImplicit(self, tmin, tmax,theta):
+        g = self.grid
+        k = self.k       #Diffusivity
+        r = self.r       #Numerical Fourier number
+        u, x, dx  = g.u, g.x, g.dx
+        xmin, xmax = g.xmin, g.xmax
+        
+        dt=r*dx**2/k     #Compute timestep based on Fourier number, dx and diffusivity
+        print 'timestep = ',dt
+
+        m=round((tmax-tmin)/dt) # Number of temporal intervals
+        print 'm = ',m
+        time=np.linspace(tmin,tmax,m)
+
+        print 'time = ', time[0], 'and ', time[-1]
+        
+        #Create matrix for sparse solver. Solve for interior values only (nx-1)
+        diagonals=np.zeros((3,g.nx-1))   
+        diagonals[0,:] = -r*theta                       #all elts in first row is set to 1
+        diagonals[1,:] = 1+2.0*r.theta  
+        diagonals[2,:] = -r*theta 
+        As = sc.sparse.spdiags(diagonals, [-1,0,1], n, n,format='csc') #sparse matrix instance
+
+        #Crete rhs array
+        d=np.zeros(g.nx-1)
+        d[1:-1]=r*(1-theta)*(u[0:-2]-2*u[1:-1]+u[0:-2])
+
+        #Solve linear problems
+        tic=time.clock()
+        theta = sc.sparse.linalg.spsolve(As,d) #theta=sc.linalg.solve_triangular(A,d)
+        toc=time.clock()
+        print 'sparse solver time:',toc-tic
+        
+        
+        
     def solve(self, tmin, tmax):
         return self.solver(tmin,tmax)
 
