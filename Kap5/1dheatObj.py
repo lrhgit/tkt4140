@@ -55,7 +55,7 @@ class HeatSolver1d:
         print 'time = ', time[0], 'and ', time[-1]
         
 
-        nOutputInt=20 #output every nOutputInt iteration
+        nOutputInt=2 #output every nOutputInt iteration
         i = 0        #iteration counter
 
         #Plot initial solution
@@ -103,7 +103,7 @@ mg=Grid1d(nx,0,L)
 mg2=Grid1d(nx/2,0,L)
 
 ## Make a solver
-ms=HeatSolver1d(mg,scheme='explicit',k=1.0,r=0.5)
+ms=HeatSolver1d(mg,scheme='explicit',k=1.0,r=0.55)
 ms2=HeatSolver1d(mg2,scheme='explicit',k=1.0,r=0.3)
 
 
