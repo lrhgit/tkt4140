@@ -7,6 +7,11 @@
 # along with boundary conditions
 
 import matplotlib.pyplot as plt
+import matplotlib
+# Change some default values to make plots more readable on the screen
+LNWDT=2; FNT=15
+matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
+
 import numpy as np
 import scipy as sc
 import scipy.sparse
@@ -25,11 +30,12 @@ class Grid1d:
 
 class HeatSolver1d:
     """A simple 1dheat equation solver that can use different schemes to solve the problem."""
-    def __init__(self, grid, scheme='explicit',k=1.0,r=0.5):
+    def __init__(self, grid, scheme='explicit',k=1.0,r=0.5,theta=1.0):
         self.grid = grid
         self.setSolverScheme(scheme)
         self.k = k
         self.r = r
+        self.theta = theta #Used for implicit solver only
 
     def setSolverScheme(self, scheme='explicit'):
         """Sets the scheme to be which should be one of ['slow', 'explicit', 'implicit']."""
@@ -42,7 +48,7 @@ class HeatSolver1d:
         else:
             self.solver = self.numpyExplicit
 
-    def numpyExplicit(self, tmin, tmax):
+    def numpyExplicit(self, tmin, tmax, nPlotInc):
         """Solve equation for all t in time step using a NumPy expression."""
         g = self.grid
         k = self.k       #Diffusivity
@@ -55,7 +61,7 @@ class HeatSolver1d:
         m=round((tmax-tmin)/dt) # Number of temporal intervals
         time=np.linspace(tmin,tmax,m)
         
-        nOutputInt=5 #output every nOutputInt iteration
+#        nPlotInc=5 #output every nPlotInc iteration
         i = 0        #iteration counter
 
         #Plot initial solution
@@ -75,22 +81,22 @@ class HeatSolver1d:
 
             u[1:-1] =  r*(u[0:-2]+ u[2:]) + (1.0-2.0*r)*u[1:-1]
     
-            if (np.mod(i,nOutputInt)==0): #output every nOutputInt iteration
+            if (np.mod(i,nPlotInc)==0): #output every nPlotInc iteration
                 Curve.set_ydata(u)
                 plt.pause(.005)
                 plt.title( 'step = %3d; t = %f' % (i,t ) )
-        
-        g.u = u        
-        plt.pause(2)
+        g.u=u
+
+        plt.pause(1)
         plt.ion()
         plt.close()
 
-#        return u
 
-    def numpyImplicit(self, tmin, tmax, theta=1.0):
+    def numpyImplicit(self, tmin, tmax,nPlotInc):
         g = self.grid
-        k = self.k       #Diffusivity
-        r = self.r       #Numerical Fourier number
+        k = self.k         #Diffusivity
+        r = self.r         #Numerical Fourier number
+        theta =self.theta  #Parameter for implicitness: theta=0.5 Crank-Nicholson, theta=1.0 fully implicit
         u, x, dx  = g.u, g.x, g.dx
         xmin, xmax = g.xmin, g.xmax
         
@@ -99,8 +105,9 @@ class HeatSolver1d:
 
         m=round((tmax-tmin)/dt) # Number of temporal intervals
         print 'm = ',m
+        print 'implicit solver with r=',r
+        print 'and theta = ',theta
         time=np.linspace(tmin,tmax,m)
-
 
         #Create matrix for sparse solver. Solve for interior values only (nx-1)
         diagonals=np.zeros((3,g.nx-1))   
@@ -112,11 +119,10 @@ class HeatSolver1d:
         #Crete rhs array
         d=np.zeros((g.nx-1,1),'d')
         
-        
-        nOutputInt=10 #output every nOutputInt iteration
+#        nPlotInc=5 #output every nPlotInc iteration
         i = 0        #iteration counter
 
-        #Plot initial solution
+                #Plot initial solution
         fig = plt.figure()
         ax=fig.add_subplot(111)
         Curve, = ax.plot( x, u[:], '-')
@@ -131,63 +137,61 @@ class HeatSolver1d:
         #Advance in time an solve tridiagonal system for each t in time
         for t in time:
             i+=1
-            d[:] = (1-theta)*(u[0:-2]-2*u[1:-1]+u[2:])  
-            #u[1:-1] = sc.sparse.linalg.spsolve(As,d) #theta=sc.linalg.solve_triangular(A,d)
-            w= sc.sparse.linalg.spsolve(As,d) #theta=sc.linalg.solve_triangular(A,d)
-            g.u[1:-1] = w[:,None]
-            u = g.u
-            if (np.mod(i,nOutputInt)==0): #output every nOutputInt iteration
+            d[:] = u[1:-1]+r*(1-theta)*(u[0:-2]-2*u[1:-1]+u[2:])  
+            d[0] += r*theta*u[0]
+            w = sc.sparse.linalg.spsolve(As,d) #theta=sc.linalg.solve_triangular(A,d)
+            u[1:-1] = w[:,None]
+           
+            if (np.mod(i,nPlotInc)==0): #output every nPlotInc iteration
                 Curve.set_ydata(u)
                 plt.pause(.005)
                 plt.title( 'step = %3d; t = %f' % (i,t ) )
         
+        g.u=u
         
-        plt.pause(2)
+        plt.pause(1)
         plt.ion()
         plt.close()
-
            
-    def solve(self, tmin, tmax):
-        return self.solver(tmin,tmax)
+    def solve(self, tmin, tmax,nPlotInc=5):
+        return self.solver(tmin,tmax,nPlotInc)
 
     def initialize(self,U0=1.0):
         self.grid.u[0] = U0
         
 
+
+
 ## Main program
-print 'hello world'
-## Make a grid
-nx=30
+
+## Make grids for the solvers
+nx=20
 L=1.0
 mg=Grid1d(nx,0,L)
 mg2=Grid1d(nx/2,0,L)
 mg3=Grid1d(nx,0,L)
 
-## Make a solver
-ms=HeatSolver1d(mg,scheme='explicit',k=1.0,r=0.5)
-ms2=HeatSolver1d(mg2,scheme='explicit',k=1.0,r=0.3)
-ms3=HeatSolver1d(mg3,scheme='implicit',k=1.0,r=0.6)
+## Make various solvers.
+solvers=[]
+solvers.append(HeatSolver1d(mg,  scheme = 'explicit', k=1.0, r=0.5))
+solvers.append(HeatSolver1d(mg2, scheme = 'explicit', k=1.0, r=0.3))
+solvers.append(HeatSolver1d(mg3, scheme = 'implicit', k=1.0, r=3.0,theta=1.0))
 
-## Find the solution(s)
+
 U0=1.0
-ms.initialize(U0=U0)
-ms2.initialize(U0=U0)
-ms3.initialize(U0=U0)
+(tmin, tmax)=(0,0.055)
 
-(tmin, tmax)=(0,0.025)
-#ms.solve(tmin,tmax)
-#ms2.solve(tmin,tmax)
-ms3.solve(tmin,tmax)
+## Compute a solution for all solvers
+for solver in solvers:
+    solver.initialize(U0=U0)
+    solver.solve(tmin,tmax,nPlotInc=2)
 
-#plt.plot(ms.grid.x,ms.grid.u,ms2.grid.x,ms2.grid.u,ms3.grid.x,ms3.grid.u)
-#plt.plot(ms.grid.x,ms.grid.u,ms2.grid.x,ms2.grid.u)
-#plt.legend(['explicit r=0.5','explicit r=0.3','implicit r=0.6'])
-#plt.show()
-#plt.pause(5)
-#plt.close()
-#print 'u',ms.grid.u
-#print ms3.grid.u
-print 'done'
-
-
-
+mylegends=[]
+for solver in solvers:
+    plt.plot(solver.grid.x,solver.grid.u)
+    mylegends.append(str('r = %3.1f' % (solver.r)))
+    
+plt.legend(mylegends)
+plt.show()
+plt.pause(5)
+plt.close()
