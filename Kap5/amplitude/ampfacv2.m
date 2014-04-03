@@ -5,7 +5,8 @@
 % as a function of the diffusion number D and the 
 % phase-angle delta
 %
-clear; close;
+clear all; close all; clc;
+FS = 20; LW=3; set(0,'DefaultLineLineWidth',LW,'DefaultAxesFontName','Helvetica','DefaultAxesFontSize',FS);
 dvecg = linspace(0,180,50);
 drad = dvecg*pi/180;% delta i radianer
 sdel = sin(drad/2).^2;

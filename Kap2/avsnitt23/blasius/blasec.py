@@ -37,7 +37,7 @@ xspan = linspace(xmin, xmax, N+1)
 s0 = 0.1
 s1 = 0.8
 
-solver=solvers[1]                         
+solver=solvers[0]                         
 
 beta=1.0 #Boundary value for eta=infty
 

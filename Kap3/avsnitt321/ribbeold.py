@@ -14,7 +14,7 @@ matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size']
 
 # Set simulation parameters
 beta = 5.0
-h = 0.01               # element size
+h = 0.001                # element size
 L =1.0                  # length of domain
 n = int(round(L/h)) -1  # number of unknowns, assuming known boundary values
 x=np.arange(n+2)*h      # x includes min and max at boundaries were bc are imposed.
