@@ -2,8 +2,7 @@ TITLE: An example of an example
 AUTHOR: Johan Kolstø¸ Sønstabø
 DATE: today
 
-# This is an example script generating a simple representative example of typical examples in TKT4140 Numerical Methods with Computer Laboratory.
-# 
+# This is an example script generating a simple representative example of typical examples in TKT4140 Numerical Methods with Computer Laboratory. 
 
 ======= Newton's Equation =======
 
