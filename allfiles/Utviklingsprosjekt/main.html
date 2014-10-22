@@ -1,0 +1,266 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="TKT4140 Numerical Methods with Computer Laboratory">
+
+<title>TKT4140 Numerical Methods with Computer Laboratory</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(' Chapter 1 - Initial value problems for Ordinary Differential Equations ',
+               0,
+               None,
+               '___sec0'),
+              (' Introduction ',
+               1,
+               'section:introduction',
+               'section:introduction'),
+              (' Example: Sphere in free fall ',
+               2,
+               'example:sphere_freefall',
+               'example:sphere_freefall')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="main.html">TKT4140 Numerical Methods with Computer Laboratory</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Chapter 1 - Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example: Sphere in free fall</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>TKT4140 Numerical Methods with Computer Laboratory</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Johan Kolst&#248; S&#248;nstab&#248; -->
+
+<center>
+<b>Johan Kolst&#248; S&#248;nstab&#248;</b> 
+</center>
+
+
+<p>
+<!-- institution(s) -->
+<p>
+<center><h4>Oct 22, 2014</h4></center> <!-- date -->
+
+<h2>Table of contents</h2>
+
+<a href="#___sec0"> Chapter 1 - Initial value problems for Ordinary Differential Equations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#section:introduction"> Introduction </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#example:sphere_freefall"> Example: Sphere in free fall </a><br>
+</p>
+<p>
+<!-- TKT4140 Numerical Methods with Computer Laboratory. -->
+<!-- This is the main file -->
+
+<p>
+
+
+</div> <!-- end jumbotron -->
+
+<h1 class="page-header" id="___sec0">Chapter 1 - Initial value problems for Ordinary Differential Equations <a name="___sec0"></a></h1>
+
+<h1 id="section:introduction">Introduction<a name="section:introduction"></a></h1>
+
+With an initial value problem for an ordinary differential equation we mean a problem where all the boundary conditions are given for a given value of the independent unknown. 
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<h2 id="example:sphere_freefall">Example: Sphere in free fall<a name="example:sphere_freefall"></a></h2>
+
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Falling sphere. </p></center>
+<p><img src="eks1.2/2.png" align="bottom" ></p>
+</center>
+
+<p>
+The figure shows a falling sphere with a diameter \( d \) and mass \( m \) that falls vertically in a fluid. Use of Newton's 2nd law in the \( z \)-direction gives
+$$
+\begin{equation}\label{eq:newton_2nd_sphere}
+m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\right|A_kC_D,
+\end{equation}
+$$
+
+where the different terms are interpreted as follows: \( m=\rho_k V \), where \( \rho_f \) is the density of the sphere and \( V \) is its volume, is the mass of the sphere. \( m_f=\rho_f V \), where \( \rho_f \) is the density of the fluid, is the mass of the displaced fluid. \( m_fg= \) is the buoyancy. \( C_D \) is the drag coefficient. \( A_k \) is the area projection of the sphere \( = \frac{\pi}{4}d^2 \). \( \frac{1}{2}m_f \) is the hydrodynamical mass (added mass). The expression for the hydrodynamical mass is derived in White <a href="#white1999fluid">[1]</a>, page 539-540. 
+
+<p>
+We introduce the following abbreviations:
+$$
+\begin{equation}
+\rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
+\end{equation}
+$$
+
+Equation \eqref{eq:newton_2nd_sphere} may then be written as 
+$$
+\begin{equation} \label{eq:sphere_1st_order}
+\frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
+\end{equation}
+$$
+
+\( C_D \) is found experimentally as a function of the Reynolds number \( R_e = \frac{vd}{\nu} \), where \( \nu \) is the kinematical viscosity. 
+
+<p>
+Figure <a href="#fig:CDsphere">2</a> shows \( C_D \) as a function of \( Re \). The Python programme <b>CDsphere.py</b> produces the plot from a curve fit to the data of Evett and Liu <a href="#evett19892">[2]</a>. The values are not as accurate as the number of digits in the programme might indicate. For example is the location and the size of the "valley" in the diagram strongly dependent of the degree of turbulence in the free stream and the roughness of the sphere. 
+
+<p>
+In air we may often neglect the buoyancy term and the hydrodynamical mass. This should not be done for a liquid.
+
+<p>
+Introducing \( v=\frac{dz}{dt} \) in Equation \eqref{eq:sphere_1st_order}, we get a 2nd order ODE as follows
+$$
+\begin{equation}\label{eq:sphere_second_order}
+\frac{d^2z}{dt^2}=\frac{1}{A}\left(B-C\cdot \frac{dz}{dt}\bigg|\frac{dz}{dt}\bigg|C_d\right)
+\end{equation}
+$$
+
+For Equation \eqref{eq:sphere_second_order} two initial conditions must be specified, e.g. \( v=v_0 \) and \( z=z_0 \) for \( t=0 \). 
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Drag coefficient \( C_D \) as function of the Reynold's number \( R_e \). <a name="fig:CDsphere"></a> </p></center>
+<p><img src="eks1.2/example_sphere.png" align="bottom" ></p>
+</center>
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">CDsphere</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett &amp; Liu :% &quot; Fluid Mechanics &amp; Hydraulics &quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum &#39; s Solved Problems McGraw - Hill 1989.</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <a name="white1999fluid"></a> <b>F. White</b>. 
+    <em>Fluid Mechanics</em>,
+    WCB/McGraw-Hill,
+    1999,
+    <a href="http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y" target="_self"><tt>http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y</tt></a>.</li>
+ <li> <a name="evett19892"></a> <b>J. Evett and C. Liu</b>. 
+    <em>2,500 Solved Problems in Fluid Mechanics and Hydraulics</em>,
+    McGraw-Hill Education,
+    1989,
+    <a href="http://books.google.no/books?id=NBDjWHLKwSQC" target="_self"><tt>http://books.google.no/books?id=NBDjWHLKwSQC</tt></a>.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

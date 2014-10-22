@@ -1,0 +1,114 @@
+TITLE: TKT4140 Numerical Methods with Computer Laboratory
+AUTHOR: Johan Kolstø Sønstabø
+DATE: today
+TOC: on
+
+# TKT4140 Numerical Methods with Computer Laboratory.
+# This is the main file
+
+========= Chapter 1 - Initial value problems for Ordinary Differential Equations =========
+
+======= Introduction =======
+label{section:introduction}
+
+With an initial value problem for an ordinary differential equation we mean a problem where all the boundary conditions are given for a given value of the independent unknown. 
+
+!bbox
+===== Example: Sphere in free fall =====
+label{example:sphere_freefall}
+
+FIGURE:[eks1.2/2.png] Falling sphere.
+
+The figure shows a falling sphere with a diameter $d$ and mass $m$ that falls vertically in a fluid. Use of Newton's 2nd law in the $z$-direction gives
+!bt
+\begin{equation}\label{eq:newton_2nd_sphere}
+m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\right|A_kC_D,
+\end{equation}
+!et
+where the different terms are interpreted as follows: $m=\rho_k V$, where $\rho_f$ is the density of the sphere and $V$ is its volume, is the mass of the sphere. $m_f=\rho_f V$, where $\rho_f$ is the density of the fluid, is the mass of the displaced fluid. $m_fg=$ is the buoyancy. $C_D$ is the drag coefficient. $A_k$ is the area projection of the sphere $= \frac{\pi}{4}d^2$. $\frac{1}{2}m_f$ is the hydrodynamical mass (added mass). The expression for the hydrodynamical mass is derived in White cite{white1999fluid}, page 539-540. 
+
+We introduce the following abbreviations:
+!bt
+\begin{equation}
+\rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
+\end{equation}
+!et
+Equation \eqref{eq:newton_2nd_sphere} may then be written as 
+!bt
+\begin{equation} \label{eq:sphere_1st_order}
+\frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
+\end{equation}
+!et
+$C_D$ is found experimentally as a function of the Reynolds number $R_e = \frac{vd}{\nu}$, where $\nu$ is the kinematical viscosity. 
+
+Figure ref{fig:CDsphere} shows $C_D$ as a function of $Re$. The Python programme _CDsphere.py_ produces the plot from a curve fit to the data of Evett and Liu cite{evett19892}. The values are not as accurate as the number of digits in the programme might indicate. For example is the location and the size of the "valley" in the diagram strongly dependent of the degree of turbulence in the free stream and the roughness of the sphere. 
+
+In air we may often neglect the buoyancy term and the hydrodynamical mass. This should not be done for a liquid.
+
+Introducing $v=\frac{dz}{dt}$ in Equation \eqref{eq:sphere_1st_order}, we get a 2nd order ODE as follows
+!bt
+\begin{equation}\label{eq:sphere_second_order}
+\frac{d^2z}{dt^2}=\frac{1}{A}\left(B-C\cdot \frac{dz}{dt}\bigg|\frac{dz}{dt}\bigg|C_d\right)
+\end{equation}
+!et
+For Equation \eqref{eq:sphere_second_order} two initial conditions must be specified, e.g. $v=v_0$ and $z=z_0$ for $t=0$. 
+
+FIGURE:[eks1.2/example_sphere.png] Drag coefficient $C_D$ as function of the Reynold's number $R_e$. label{fig:CDsphere}
+
+!bc pycod
+def CDsphere(Re):
+    "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
+    # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
+    # Schaum ' s Solved Problems McGraw - Hill 1989.
+    
+    from numpy import log10, array, polyval
+    
+    if Re <= 0.0:
+        CD = 0.0
+    elif Re > 8.0e6:
+        CD = 0.2
+    elif Re > 0.0 and Re <= 0.5:
+        CD = 24.0/Re
+    elif Re > 0.5 and Re <= 100.0:
+        p = array([4.22, -14.05, 34.87, 0.658])
+        CD = polyval(p, 1.0/Re) 
+    elif Re > 100.0 and Re <= 1.0e4:
+        p = array([-30.41, 43.72, -17.08, 2.41])
+        CD = polyval(p, 1.0/log10(Re))
+    elif Re > 1.0e4 and Re <= 3.35e5:
+        p = array([-0.1584, 2.031, -8.472, 11.932])
+        CD = polyval(p, log10(Re))
+    elif Re > 3.35e5 and Re <= 5.0e5:
+        x1 = log10(Re/4.5e5)
+        CD = 91.08*x1**4 + 0.0764
+    else:
+        p = array([-0.06338, 1.1905, -7.332, 14.93])
+        CD = polyval(p, log10(Re))
+    return CD
+!ec
+
+
+!ebox
+
+BIBFILE: references/papers.pub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
