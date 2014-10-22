@@ -5,7 +5,7 @@
 # using Heun's method.
 
 import numpy as np
-
+## kilroy was here...
 xend = 2
 dx = 0.1
 steps = np.int(np.round(xend/dx, 0)) + 1 
