@@ -3,9 +3,9 @@ Created on 23. okt. 2014
 
 @author: leifh
 '''
-from numpy import linspace, array, append, logspace, zeros_like
+from numpy import linspace, array, append, logspace, zeros_like, vectorize
 import numpy as np  
-from matplotlib.pyplot import loglog, xlabel, ylabel, grid, savefig, show, rc
+from matplotlib.pyplot import loglog, xlabel, ylabel, grid, savefig, show, rc, hold, legend
 
 def CDsphere(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
@@ -43,18 +43,27 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     ReNrs = logspace(-2,7,num=500)
     CD    = zeros_like(ReNrs)
 
+    
     counter = 0
     for Re in ReNrs:
         CD[counter]=CDsphere(Re)
         counter += 1
 
+    # make a vecorized version of the funcgtion
+    CDsphereV=vectorize(CDsphere)
+    CD2=CDsphereV(ReNrs)
+    
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font', **font)          
     
     # plot the function    
     loglog(ReNrs, CD)
+    hold('on')
+    loglog(ReNrs,CD2,':')
+    
     xlabel('$Re$',fontsize=fnSz)
     ylabel('$C_D$',fontsize=fnSz) 
     grid('on','both','both')
-    savefig('example_sphere.png')
+    legend(['$C_D$','$C_{D2}$'])
+    #savefig('example_sphere.png')
     show()
