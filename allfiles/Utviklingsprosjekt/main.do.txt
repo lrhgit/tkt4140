@@ -1,5 +1,5 @@
 TITLE: TKT4140 Numerical Methods with Computer Laboratory
-AUTHOR: Johan Kolstø Sønstabø
+AUTHOR: Johan Kolstø Sønstabø and Leif Rune Hellevik
 DATE: today
 TOC: on
 
