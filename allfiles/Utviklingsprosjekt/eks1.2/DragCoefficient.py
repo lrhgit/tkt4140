@@ -69,6 +69,33 @@ def cd_sphere_vector(Re):
 
     return CD
 
+def cv_sphere_vector(Re):
+    "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
+    # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
+    # Schaum ' s Solved Problems McGraw - Hill 1989.
+
+    from numpy import log10,array,polyval
+    CD = zeros_like(Re)
+    CD = where(Re<0,0.0,0.0)
+    CD = where(Re>8.0e6,0.2,CD)
+
+    CD = where((Re > 0.0) & (Re <=0.5),24/Re,CD)
+
+    p = array([4.22,-14.05,34.87,0.658])
+    CD = where((Re > 0.5) & (Re <=100.0),polyval(p,1.0/Re),CD)
+
+    p = array([-30.41,43.72,-17.08,2.41])
+    CD = where((Re >100.0)  & (Re <=1.0e4) ,polyval(p,1.0/log10(Re)),CD)
+
+    p = array([-0.1584,2.031,-8.472,11.932])
+    CD = where((Re > 1.0e4)  &  (Re <=3.35e5),polyval(p,log10(Re)),CD)
+
+    CD = where((Re > 3.35e5) & (Re <=5.0e5),91.08*(log10(Re/4.5e5))**4 + 0.0764,CD)
+
+    p  = array([-0.06338,1.1905,-7.332,14.93])
+    CD = where((Re > 5.05e5)  &  (Re <=8.0e6),polyval(p,log10(Re)),CD)
+
+    return CD
 
 def cd_sphere_vector_boolean(Re):
     from numpy import log10,array,polyval
@@ -151,7 +178,9 @@ if __name__ == '__main__':              #Check whether this file is executed (na
         r = func(ReNrs) 
         t1 = time.clock()
         timings[name] = t1 - t0
-
+       
+    print 'elapbsed time', dt1, dt2, dt3
+            
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font',**font)          
     
