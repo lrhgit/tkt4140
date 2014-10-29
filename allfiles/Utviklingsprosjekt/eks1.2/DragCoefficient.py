@@ -6,9 +6,11 @@ Created on 23. okt. 2014
 from numpy import linspace,array,append,logspace,zeros_like,where,vectorize,\
     logical_and
 import numpy as np  
-from matplotlib.pyplot import loglog,xlabel,ylabel,grid,savefig,show,rc,hold
+from matplotlib.pyplot import loglog,xlabel,ylabel,grid,savefig,show,rc,hold,\
+    legend
 from test.test_heapq import func_names
 from numpy.core.multiarray import scalar
+
 
 def cd_sphere(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
@@ -71,7 +73,7 @@ def cd_sphere_vector(Re):
     return CD
 
 
-def cd_sphere_vector_boolean(Re):
+def cd_sphere_vector_bool(Re):
     from numpy import log10,array,polyval
        
     condition1 = Re < 0
@@ -109,43 +111,52 @@ def cd_sphere_vector_boolean(Re):
 
 if __name__ == '__main__':              #Check whether this file is executed (name==maine) or imported as module
     
-    ReNrs = logspace(-2,7,num=50000)
-    CD    = zeros_like(ReNrs)
-
     import time
+    import timeit 
+    from numpy import mean
     
+    CD = {} # Empty list for all CD computations
+    
+    ReNrs = logspace(-2,7,num=500)
+    CD1    = zeros_like(ReNrs)
+
     t0 = time.clock()
     counter = 0
     for Re in ReNrs:
-        CD[counter]=cd_sphere(Re)
+        CD1[counter]=cd_sphere(Re)
         counter += 1
-    t1 = time.clock()
+
+    #CD.append(CD1)  
+    dt1 = time.clock()-t0
     
-    dt1 = t1-t0
     
+
     
-    cd_sphere_auto_vector=vectorize(cd_sphere) # make a vectorized version of the function automatically
+ 
+    cd_sphere_auto_vec=vectorize(cd_sphere) # make a vectorized version of the function automatically
+    
+    funcs =[cd_sphere_vector,cd_sphere_vector_bool, cd_sphere_auto_vec]     
+    
     t0 = time.clock()           
-    CD2 = cd_sphere_auto_vector(ReNrs) # compute CD for all ReNrs
-    t1 = time.clock()
-    dt2 =t1-t0
+    CD2 = cd_sphere_auto_vec(ReNrs) # compute CD for all ReNrs
+    dt2 = time.clock()-t0
     
+#     
     t0 = time.clock()               
     CD3 = cd_sphere_vector(ReNrs) # compute CD with our vectorized function
-    t1 = time.clock()
-    dt3 =t1-t0
-
+    dt3 = time.clock()-t0
+      
     t0 = time.clock()               
-    CD4 = cd_sphere_vector_boolean(ReNrs) # compute CD with our vectorized function
-    t1 = time.clock()
-    dt4=t1-t0
-              
-    print 'elapsed time', dt1, dt2, dt3, dt4
+    CD4 = cd_sphere_vector_bool(ReNrs) # compute CD with our vectorized function
+    dt4 = time.clock()-t0
+                      
+    #print 'elapsed time', dt1, dt2, dt3, dt4
     
     # Put all functions in a dictionary or comparison    
-    funcs =[cd_sphere_vector,cd_sphere_vector_boolean, cd_sphere_auto_vector]     
+    
 
     timings = {}
+    fncnames = []
     for func in funcs:
         try:
             name = func.func_name
@@ -153,30 +164,36 @@ if __name__ == '__main__':              #Check whether this file is executed (na
             scalarname = func.__getattribute__('pyfunc')
             name = scalarname.__name__+'_auto_vector'
                       
+        fncnames.append(name)
+                                      
         t0 = time.clock()
-        r = func(ReNrs) 
-        t1 = time.clock()
-        timings[name] = t1 - t0
+        CD[name] = func(ReNrs) 
+        timings[name] = time.clock() - t0
        
     fnames=sorted(timings,key=timings.__getitem__)
     fvalues=sorted(timings.values())
     
     for i in range(len(fnames)):
-        print fnames[i], ' dt = ', fvalues[i]
-
-
+        print fnames[i], '\t dt = ', fvalues[i]
+        
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font',**font)          
     
     # plot the function    
-    loglog(ReNrs,CD)
-    hold('on')
-    loglog(ReNrs,CD2)
-    loglog(ReNrs,CD3)
-    loglog(ReNrs,CD4)
-    
+
+    loglog(ReNrs,CD[fncnames[1]])
+    hold('on')     
+      
+    for name in fncnames: # Loops starts with second column
+        loglog(ReNrs,CD[name])  
+          
+    legend(fncnames)
+#     
     xlabel('$Re$',fontsize=fnSz)
     ylabel('$C_D$',fontsize=fnSz) 
     grid('on','both','both')
  #   savefig('example_sphere.png')
     show()
+    
+    print funcnm
+    
