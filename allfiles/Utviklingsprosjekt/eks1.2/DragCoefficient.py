@@ -129,32 +129,25 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     #CD.append(CD1)  
     dt1 = time.clock()-t0
     
-    
-
-    
- 
     cd_sphere_auto_vec=vectorize(cd_sphere) # make a vectorized version of the function automatically
     
     funcs =[cd_sphere_vector,cd_sphere_vector_bool, cd_sphere_auto_vec]     
     
-    t0 = time.clock()           
-    CD2 = cd_sphere_auto_vec(ReNrs) # compute CD for all ReNrs
-    dt2 = time.clock()-t0
-    
+#     t0 = time.clock()           
+#     CD2 = cd_sphere_auto_vec(ReNrs) # compute CD for all ReNrs
+#     dt2 = time.clock()-t0
 #     
-    t0 = time.clock()               
-    CD3 = cd_sphere_vector(ReNrs) # compute CD with our vectorized function
-    dt3 = time.clock()-t0
-      
-    t0 = time.clock()               
-    CD4 = cd_sphere_vector_bool(ReNrs) # compute CD with our vectorized function
-    dt4 = time.clock()-t0
+#     t0 = time.clock()               
+#     CD3 = cd_sphere_vector(ReNrs) # compute CD with our vectorized function
+#     dt3 = time.clock()-t0
+#       
+#     t0 = time.clock()               
+#     CD4 = cd_sphere_vector_bool(ReNrs) # compute CD with our vectorized function
+#     dt4 = time.clock()-t0
                       
     #print 'elapsed time', dt1, dt2, dt3, dt4
     
-    # Put all functions in a dictionary or comparison    
-    
-
+    # Put all timings in a dictionary and fncnames in a list 
     timings = {}
     fncnames = []
     for func in funcs:
@@ -179,13 +172,10 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font',**font)          
     
-    # plot the function    
-
-    loglog(ReNrs,CD[fncnames[1]])
-    hold('on')     
-      
-    for name in fncnames: # Loops starts with second column
-        loglog(ReNrs,CD[name])  
+    # plot the result for all functions    
+    for name in fncnames: 
+        loglog(ReNrs,CD[name])
+        hold('on')        
           
     legend(fncnames)
 #     
@@ -194,6 +184,3 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     grid('on','both','both')
  #   savefig('example_sphere.png')
     show()
-    
-    print funcnm
-    
