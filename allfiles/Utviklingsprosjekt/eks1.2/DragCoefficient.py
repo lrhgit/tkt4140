@@ -131,7 +131,7 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     
     cd_sphere_auto_vec=vectorize(cd_sphere) # make a vectorized version of the function automatically
     
-    funcs =[cd_sphere_vector,cd_sphere_vector_bool, cd_sphere_auto_vec]     
+    funcs =[cd_sphere_vector,cd_sphere_vector_bool, cd_sphere_auto_vec]  # list of functions to test   
     
 #     t0 = time.clock()           
 #     CD2 = cd_sphere_auto_vec(ReNrs) # compute CD for all ReNrs
@@ -147,8 +147,8 @@ if __name__ == '__main__':              #Check whether this file is executed (na
                       
     #print 'elapsed time', dt1, dt2, dt3, dt4
     
-    # Put all timings in a dictionary and fncnames in a list 
-    timings = {}
+    # Put all exec_times in a dictionary and fncnames in a list 
+    exec_times = {}
     fncnames = []
     for func in funcs:
         try:
@@ -161,13 +161,13 @@ if __name__ == '__main__':              #Check whether this file is executed (na
                                       
         t0 = time.clock()
         CD[name] = func(ReNrs) 
-        timings[name] = time.clock() - t0
+        exec_times[name] = time.clock() - t0
        
-    fnames=sorted(timings,key=timings.__getitem__)
-    fvalues=sorted(timings.values())
+    fnames_sorted=sorted(exec_times,key=exec_times.__getitem__)
+    exec_time_sorted=sorted(exec_times.values())
     
-    for i in range(len(fnames)):
-        print fnames[i], '\t dt = ', fvalues[i]
+    for i in range(len(fnames_sorted)):
+        print fnames_sorted[i], '\t execution time = ', exec_time_sorted[i]
         
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font',**font)          
