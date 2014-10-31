@@ -8,9 +8,8 @@ from numpy import linspace,array,append,logspace,zeros_like,where,vectorize,\
 import numpy as np  
 from matplotlib.pyplot import loglog,xlabel,ylabel,grid,savefig,show,rc,hold,\
     legend
-from test.test_heapq import func_names
-from numpy.core.multiarray import scalar
 
+from numpy.core.multiarray import scalar
 
 def cd_sphere(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
