@@ -15,7 +15,7 @@ import scipy.sparse.linalg
 import time
 
 # change some default values to make plots more readable on the screen
-LNWDT = 2; FNT = 15
+LNWDT = 5; FNT = 15
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 
 def explicit_python_solver(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xmax=1.0, tmin=0.0, tmax=1.0, k=1.0):
