@@ -167,4 +167,4 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     ylabel('$C_D$',fontsize=fnSz) 
     grid('on','both','both')
 #     savefig('example_sphere.png')
-#     show()
+    show()
