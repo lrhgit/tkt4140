@@ -1,40 +1,21 @@
-<!DOCTYPE html>
 <!--
-Automatically generated HTML file from Doconce source
+Automatically generated HTML file from DocOnce source
 (https://github.com/hplgit/doconce/)
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
 <meta name="description" content="TKT4140 Numerical Methods with Computer Laboratory">
 
+<title>TKT4140 Numerical Methods with Computer Laboratory</title>
 
-
-<style type="text/css">
-    /* blueish style */
-
-    /* Color definitions:  http://www.december.com/html/spec/color0.html
-       CSS examples:       http://www.w3schools.com/css/css_examples.asp */
-
-    body {
-      margin-top: 1.0em;
-      background-color: #ffffff;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    h1 { font-size: 1.8em; color: #1e36ce; }
-    h2 { font-size: 1.6em; color: #1e36ce; }
-    h3 { font-size: 1.4em; color: #1e36ce; }
-    a { color: #1e36ce; text-decoration:none; }
-    tt { font-family: "Courier New", Courier; }
-    
-    p { text-indent: 0px; }
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    p.caption { width: 80%; font-style: normal; text-align: left; }
-    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-
-</style>
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
 
 </head>
 
@@ -48,10 +29,15 @@ Automatically generated HTML file from Doconce source
                1,
                'section:introduction',
                'section:introduction'),
-              (' Example: Sphere in free fall ',
+              (' Example 1: Sphere in free fall ',
                2,
                'example:sphere_freefall',
-               'example:sphere_freefall')]}
+               'example:sphere_freefall'),
+              (' Generating the plot in ref{example:sphere_freefall} ',
+               2,
+               None,
+               '___sec3'),
+              (' More efficient implementations ', 2, None, '___sec4')]}
 end of tocinfo -->
 
 <body>
@@ -62,25 +48,54 @@ end of tocinfo -->
 MathJax.Hub.Config({
   TeX: {
      equationNumbers: {  autoNumber: "AMS"  },
-     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
   }
 });
 </script>
 <script type="text/javascript"
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- Fix slow MathJax rendering in IE8 -->
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-
 
 
 
     
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="main.html">TKT4140 Numerical Methods with Computer Laboratory</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Chapter 1 - Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Sphere in free fall</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating the plot in ref{example:sphere_freefall}</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;More efficient implementations</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
 <!-- ------------------- main content ---------------------- -->
 
 
-<title>TKT4140 Numerical Methods with Computer Laboratory</title>
 
+<div class="jumbotron">
 <center><h1>TKT4140 Numerical Methods with Computer Laboratory</h1></center>  <!-- document title -->
 
 <p>
@@ -94,34 +109,38 @@ MathJax.Hub.Config({
 <p>
 <!-- institution(s) -->
 <p>
-<center><h4>Oct 23, 2014</h4></center> <!-- date -->
+<center><h4>Nov 3, 2014</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
-<p>
 <a href="#___sec0"> Chapter 1 - Initial value problems for Ordinary Differential Equations </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#section:introduction"> Introduction </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#example:sphere_freefall"> Example: Sphere in free fall </a><br>
-
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#example:sphere_freefall"> Example 1: Sphere in free fall </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec3"> Generating the plot in <a href="#example:sphere_freefall">Example 1: Sphere in free fall</a> </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="#___sec4"> More efficient implementations </a><br>
+</p>
 <p>
 <!-- TKT4140 Numerical Methods with Computer Laboratory. -->
 <!-- This is the main file -->
 
-<h1>Chapter 1 - Initial value problems for Ordinary Differential Equations  <a name="___sec0"></a></h1>
-
-<h2>Introduction <a name="section:introduction"></a></h2>
-
 <p>
-With an initial value problem for an ordinary differential equation we mean a problem where all the boundary conditions are given for a given value of the independent unknown. 
 
-<p>
+
+</div> <!-- end jumbotron -->
+
+<h1 class="page-header" id="___sec0">Chapter 1 - Initial value problems for Ordinary Differential Equations <a name="___sec0"></a></h1>
+
+<h1 id="section:introduction">Introduction<a name="section:introduction"></a></h1>
+
 
 <!-- begin box -->
 <div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
 
-<h3>Example: Sphere in free fall <a name="example:sphere_freefall"></a></h3>
-
 <p>
+<!-- --- begin exercise --- -->
+
+<h2 id="example:sphere_freefall">Example 1: Sphere in free fall<a name="example:sphere_freefall"></a></h2>
+
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 1:  Falling sphere. </p></center>
@@ -156,7 +175,7 @@ $$
 \( C_D \) is found experimentally as a function of the Reynolds number \( R_e = \frac{vd}{\nu} \), where \( \nu \) is the kinematical viscosity. 
 
 <p>
-Figure <a href="#fig:CDsphere">2</a> shows \( C_D \) as a function of \( Re \). The Python programme <b>CDsphere.py</b> produces the plot from a curve fit to the data of Evett and Liu <a href="#evett19892">[2]</a>. The values are not as accurate as the number of digits in the programme might indicate. For example is the location and the size of the "valley" in the diagram strongly dependent of the degree of turbulence in the free stream and the roughness of the sphere. 
+Figure <a href="#fig:CDsphere">2</a> shows \( C_D \) as a function of \( Re \). The Python programme <b>CDsphere.py</b> produces the plot from a curve fit to the data of Evett and Liu <a href="#evett19892">[2]</a>. The programme uses a function <code>cd_sphere</code> which is shown at the end of this example. The values in the plot are not as accurate as the number of digits in the programme might indicate. For example is the location and the size of the "valley" in the diagram strongly dependent of the degree of turbulence in the free stream and the roughness of the sphere. 
 
 <p>
 In air we may often neglect the buoyancy term and the hydrodynamical mass. This should not be done for a liquid.
@@ -180,11 +199,132 @@ For Equation \eqref{eq:sphere_second_order} two initial conditions must be speci
 
 <p>
 
-<!-- code=python (from !bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">CDsphere</span>(Re):
-    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
-    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett &amp; Liu :% &quot; Fluid Mechanics &amp; Hydraulics &quot;,</span>
-    <span style="color: #408080; font-style: italic"># Schaum &#39; s Solved Problems McGraw - Hill 1989.</span>
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;This function computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig. A-56 in Evett &amp; Liu: &quot;Fluid Mechanics &amp; Hydraulics&quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum&#39;s Solved Problems McGraw - Hill 1989.</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># Calculate drag coefficient</span>
+Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
+CD <span style="color: #666666">=</span> zeros(Npts)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,Npts<span style="color: #666666">-1</span>)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
+    CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
+</pre></div>
+<p>
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<h2 id="___sec3">Generating the plot in <a href="#example:sphere_freefall">Example 1: Sphere in free fall</a> <a name="___sec3"></a></h2>
+
+The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. We will break up the programme and explain the different parts. The complete programme is as follows:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
+
+<span style="color: #408080; font-style: italic"># Define the function cd_sphere</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;This function computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig. A-56 in Evett &amp; Liu: &quot;Fluid Mechanics &amp; Hydraulics&quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum&#39;s Solved Problems McGraw - Hill 1989.</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># Calculate drag coefficient</span>
+Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
+CD <span style="color: #666666">=</span> zeros(Npts)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,Npts<span style="color: #666666">-1</span>)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
+    CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
+
+<span style="color: #408080; font-style: italic"># Make plot</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span>   : <span style="color: #666666">16</span>}
+pyplot<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+pyplot<span style="color: #666666">.</span>plot(Re, CD, <span style="color: #BA2121">&#39;-b&#39;</span>)
+pyplot<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
+pyplot<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
+pyplot<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
+pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;example_sphere.png&#39;</span>)
+pyplot<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+In the first code line, 
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
+</pre></div>
+<p>
+the functions <code>logspace</code> and <code>zeros</code> are imported from the package <code>numpy</code>. The <code>numpy</code> package (<em>NumPy</em> is an abbreviation for <em>Numerical Python</em>) enables the use of <em>array</em> objects. Using <code>numpy</code>  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called <em>vectorization</em> and may cause a dramatic increase in computational speed of Python programmes. <code>logspace</code> works on a logarithmic scale just as the function <code>linspace</code> works on a regular scale. <code>zeros</code> creates arrays of a certain zise filled with zeros. Several comprehensive guides to the numpy package may be found at <a href="http://www.numpy.org" target="_self"><tt>http://www.numpy.org</tt></a>. 
+
+<p>
+In <b>CDsphere.py</b> a function <code>cd_sphere</code> was defined as follows:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;This function computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig. A-56 in Evett &amp; Liu: &quot;Fluid Mechanics &amp; Hydraulics&quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum&#39;s Solved Problems McGraw - Hill 1989.</span>
     
     <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
     
@@ -212,9 +352,155 @@ For Equation \eqref{eq:sphere_second_order} two initial conditions must be speci
     <span style="color: #008000; font-weight: bold">return</span> CD
 </pre></div>
 <p>
-</div>
-<!-- end box -->
+The function takes <code>Re</code> as an argument and returns the value <code>CD</code>. All Python functions begin with <code>def</code>, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument <code>Re</code>. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a funciton it is common to use the <code>return</code> statement to return the value of the function. 
 
+<p>
+Variables defined inside a function, such as <code>p</code> and <code>x1</code> above, are <em>local</em> variables that cannot be accessed outside the function. Variables defined outside functions, in the "main programme", are <em>global</em> variables and may be accessed anywhere, also inside functions. 
+
+<p>
+Three more functions from the <code>numpy</code> package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main programme. We refer to the <a href="http://www.numpy.org" target="_self">documentation of NumPy</a> for details about the different functions. 
+
+<p>
+The function above contains an example of the use of the <code>if-elif-else</code> block. The block begins with <code>if</code> and a boolean expression. If the boolean expression evaluates to <code>true</code> the <em>indented</em> statements following the <code>if</code> statment are carried out. If not, the boolean expression following the <code>elif</code> is evaluated. If none of the conditions are evaluated to <code>true</code> the statements following the <code>else</code> are carried out. 
+
+<p>
+In the code block
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
+CD <span style="color: #666666">=</span> zeros(Npts)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,Npts<span style="color: #666666">-1</span>)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
+    CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
+</pre></div>
+<p>
+the function <code>cd_sphere</code> is called. First, the number of data points to be calculated are stored in the integer variable <code>Npts</code>. Using the <code>logspace</code> function imported earlier <code>Re</code> is assigned an array object, with float elements with values ranging from \( 10^{-1} \) to \( 10^7 \). The values are uniformly distributed along a 10logarithmic scale. <code>CD</code> is first defined as an array with <code>Npts</code> zero elements, using the <code>zero</code> function. Then, for each element in <code>Re</code>, the drag coefficient is calculated using our own defined function <code>cd_sphere</code>, in a <code>for</code> loop.
+
+<p>
+The function <code>range</code> is a built-in function that generates a list containing arithmetic progressions. The <code>for i in i_list</code> construct creates a loop over all elements in <code>i_list</code>. In each pass of the loop, the variable <code>i</code> refers to an element in the list, starting with <code>i_list[0]</code> (0 in this case) and ending with the last element <code>i_list[Npts-1]</code> (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful to with the current element; in this case, the return of the function call <code>cd_sphere(Re[i])</code> is assigned to <code>CD[i]</code>. Each statement in the block must be indented. 
+
+<p>
+<!-- Here I will write about the plotting. -->
+
+<h2 id="___sec4">More efficient implementations <a name="___sec4"></a></h2>
+<!-- This will be made more generic, not writing the computer code explicitly, but rather link to the files. -->
+
+<p>
+When solving numerical problems variables are often not single numbers, but arrays containing many numbers. The function <code>CDsphere</code> above takes a single number in and gives a single number out. For computationally intensive algorithms where variables are stored in arrays this is inconvenient and time consuming. It is therefore of interest to implement functions that can take in arrays and output arrays in an efficient manner. This may be done in a variaty of ways. Some possibilities are presented in the following, and, as we shall see, some are more time consuming than others. 
+
+<p>
+A simple extension of the single-valued function above is as follows:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_py_vector</span>(ReNrs):
+    CD <span style="color: #666666">=</span> zeros_like(ReNrs)
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> Re <span style="color: #AA22FF; font-weight: bold">in</span> ReNrs:
+        CD[counter] <span style="color: #666666">=</span> cd_sphere(Re)
+        counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+The new function <code>cd_sphere_py_vector</code> takes in an array <code>ReNrs</code> and calculates the drag coefficient for each element using the previous function <code>cd_sphere</code>. This does the job, but is not very efficient. 
+
+<p>
+PAGE 196 in Langtangen!
+
+<p>
+A second version is implemented in the function <code>cd_sphere_vector</code>. This function takes in the array <code>Re</code> and calculates the drag coefficient of all elements by multiple calls of the function <code>numpy.where</code>; one call for each condition, similarily as each <code>if</code> statement in the function <code>cd_sphere</code>. The function is shown here:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector</span>(Re):
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,where,zeros_like
+    CD <span style="color: #666666">=</span> zeros_like(Re)
+   
+    CD <span style="color: #666666">=</span> where(Re<span style="color: #666666">&lt;0</span>,<span style="color: #666666">0.0</span>,CD)     <span style="color: #408080; font-style: italic"># condition 1</span>
+    
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=0.5</span>),<span style="color: #666666">24/</span>Re,CD) <span style="color: #408080; font-style: italic"># condition 2</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>,<span style="color: #666666">-14.05</span>,<span style="color: #666666">34.87</span>,<span style="color: #666666">0.658</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=100.0</span>),polyval(p,<span style="color: #666666">1.0/</span>Re),CD) <span style="color: #408080; font-style: italic">#condition 3</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>,<span style="color: #666666">43.72</span>,<span style="color: #666666">-17.08</span>,<span style="color: #666666">2.41</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;100.0</span>)  <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=1.0e4</span>) ,polyval(p,<span style="color: #666666">1.0/</span>log10(Re)),CD) <span style="color: #408080; font-style: italic">#condition 4</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>,<span style="color: #666666">2.031</span>,<span style="color: #666666">-8.472</span>,<span style="color: #666666">11.932</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span>)  <span style="color: #666666">&amp;</span>  (Re <span style="color: #666666">&lt;=3.35e5</span>),polyval(p,log10(Re)),CD) <span style="color: #408080; font-style: italic">#condition 5</span>
+
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=5.0e5</span>),<span style="color: #666666">91.08*</span>(log10(Re<span style="color: #666666">/4.5e5</span>))<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>,CD) <span style="color: #408080; font-style: italic">#condition 6</span>
+
+    p  <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>,<span style="color: #666666">1.1905</span>,<span style="color: #666666">-7.332</span>,<span style="color: #666666">14.93</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">5.05e5</span>)  <span style="color: #666666">&amp;</span>  (Re <span style="color: #666666">&lt;=8.0e6</span>),polyval(p,log10(Re)),CD) <span style="color: #408080; font-style: italic">#condition 7</span>
+    
+    CD <span style="color: #666666">=</span> where(Re<span style="color: #666666">&gt;8.0e6</span>,<span style="color: #666666">0.2</span>,CD)  <span style="color: #408080; font-style: italic"># condition 8</span>
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+A third approach we will try is using boolean type variables. The 8 variables <code>condition1</code> through <code>condition8</code> in the function <code>cd_sphere_vector_bool</code> are boolean variables of the same size and shape as <code>Re</code>. The elements of the boolean variables evaluate to either <code>True</code> or <code>False</code>, depending on if the corresponding element in <code>Re</code> satisfy the condition the variable is assigned. 
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector_bool</span>(Re):
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,zeros_like
+       
+    condition1 <span style="color: #666666">=</span> Re <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>
+    condition2 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>)
+    condition3 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0.5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>)
+    condition4 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">100.0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>)
+    condition5 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">1.0e4</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>)
+    condition6 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">3.35e5&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>)
+    condition7 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">5.0e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">8.0e6</span>)
+    condition8 <span style="color: #666666">=</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>
+    
+    CD <span style="color: #666666">=</span> zeros_like(Re)
+    CD[condition1] <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    
+    CD[condition2] <span style="color: #666666">=</span> <span style="color: #666666">24/</span>Re[condition2]
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>,<span style="color: #666666">-14.05</span>,<span style="color: #666666">34.87</span>,<span style="color: #666666">0.658</span>])
+    CD[condition3] <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>Re[condition3]) 
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>,<span style="color: #666666">43.72</span>,<span style="color: #666666">-17.08</span>,<span style="color: #666666">2.41</span>])
+    CD[condition4] <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>log10(Re[condition4]))
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>,<span style="color: #666666">2.031</span>,<span style="color: #666666">-8.472</span>,<span style="color: #666666">11.932</span>])
+    CD[condition5] <span style="color: #666666">=</span> polyval(p,log10(Re[condition5]))
+    
+    CD[condition6] <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>(log10(Re[condition6]<span style="color: #666666">/4.5e5</span>))<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    
+    p  <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>,<span style="color: #666666">1.1905</span>,<span style="color: #666666">-7.332</span>,<span style="color: #666666">14.93</span>])
+    CD[condition7] <span style="color: #666666">=</span> polyval(p,log10(Re[condition7]))
+    
+    CD[condition8] <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+Lastly, the built-in function <code>vectorize</code> is used to automatically generate a vector-version of the function <code>cd_sphere</code>, as follows:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">cd_sphere_auto_vector<span style="color: #666666">=</span>vectorize(cd_sphere)
+</pre></div>
+<p>
+Using the function <code>clock</code> in the module <code>time</code>, the cpu-time for each of the array-type functions described above has been measured for a test example. An array with 500 elements was sent to the functions. 
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">cd_sphere_vector_bool   execution time = 0.000312
+cd_sphere_vector        execution time = 0.000641
+cd_sphere_auto_vector   execution time = 0.009497
+cd_sphere_py_vector     execution time = 0.010144
+</pre></div>
+<p>
+As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function <code>vectorize</code> was nearly as inefficient.
 
 <p>
 <!-- begin bibliography -->
@@ -237,6 +523,17 @@ For Equation \eqref{eq:sphere_second_order} two initial conditions must be speci
 <p>
 
 <!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
 
 
 </body>

@@ -42,23 +42,23 @@ def cd_sphere(Re):
     return CD
 
 def cd_sphere_py_vector(ReNrs):
-    CD= zeros_like(ReNrs)
+    CD = zeros_like(ReNrs)
     counter = 0
 
     for Re in ReNrs:
-        CD[counter]=cd_sphere(Re)
+        CD[counter] = cd_sphere(Re)
         counter += 1
     return CD
-    
+
 def cd_sphere_vector(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
     # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
     # Schaum ' s Solved Problems McGraw - Hill 1989.
 
-    from numpy import log10,array,polyval
+    from numpy import log10,array,polyval,where,zeros_like
     CD = zeros_like(Re)
    
-    CD = where(Re<0,0.0,0.0)     # condition 1
+    CD = where(Re<0,0.0,CD)     # condition 1
     
     CD = where((Re > 0.0) & (Re <=0.5),24/Re,CD) # condition 2
 
@@ -77,12 +77,11 @@ def cd_sphere_vector(Re):
     CD = where((Re > 5.05e5)  &  (Re <=8.0e6),polyval(p,log10(Re)),CD) #condition 7
     
     CD = where(Re>8.0e6,0.2,CD)  # condition 8
-
     return CD
 
 
 def cd_sphere_vector_bool(Re):
-    from numpy import log10,array,polyval
+    from numpy import log10,array,polyval,zeros_like
        
     condition1 = Re < 0
     condition2 = logical_and(0 < Re, Re <= 0.5)
@@ -117,10 +116,9 @@ def cd_sphere_vector_bool(Re):
     return CD
     
 
-if __name__ == '__main__':              #Check whether this file is executed (name==maine) or imported as module
+if __name__ == '__main__':              #Check whether this file is executed (name==main) or imported as module
     
     import time
-    import timeit 
     from numpy import mean
     
     CD = {} # Empty list for all CD computations
@@ -128,9 +126,9 @@ if __name__ == '__main__':              #Check whether this file is executed (na
 
     ReNrs = logspace(-2,7,num=500)
     
-    cd_sphere_auto_vec=vectorize(cd_sphere) # make a vectorized version of the function automatically
+    cd_sphere_auto_vector=vectorize(cd_sphere) # make a vectorized version of the function automatically
     
-    funcs =[cd_sphere_py_vector,cd_sphere_vector,cd_sphere_vector_bool, cd_sphere_auto_vec]  # list of functions to test   
+    funcs =[cd_sphere_py_vector,cd_sphere_vector,cd_sphere_vector_bool, cd_sphere_auto_vector]  # list of functions to test   
     
     
     # Put all exec_times in a dictionary and fncnames in a list 
@@ -153,7 +151,7 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     exec_time_sorted=sorted(exec_times.values())
     
     for i in range(len(fnames_sorted)):
-        print fnames_sorted[i], '\t execution time = ', exec_time_sorted[i]
+        print fnames_sorted[i], '\t execution time = ', '%6.6f'%(exec_time_sorted[i])
         
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font',**font)          
@@ -168,5 +166,5 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     xlabel('$Re$',fontsize=fnSz)
     ylabel('$C_D$',fontsize=fnSz) 
     grid('on','both','both')
- #   savefig('example_sphere.png')
-    show()
+#     savefig('example_sphere.png')
+#     show()

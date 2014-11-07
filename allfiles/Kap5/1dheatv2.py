@@ -15,7 +15,7 @@ import scipy.sparse.linalg
 import time
 
 # change some default values to make plots more readable on the screen
-LNWDT = 2; FNT = 15
+LNWDT = 3; FNT = 15
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 
 def explicit_python_solver(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xmax=1.0, tmin=0.0, tmax=1.0, k=1.0):
@@ -94,45 +94,33 @@ def implicit_numpy_solver(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xmax=
 
     return x, u
 
-import functools        
-
 ## Main program starts here
 
 nx = 20 # number of nodes
 L  = 1.0    # length of beam
 tmax = 0.025    # time length
-theta = 0.75    # parameter for implicitness: theta=0.5 Crank-Nicholson, theta=1.0 fully implicit
+theta = 0.75    # paramet    er for implicitness: theta=0.5 Crank-Nicholson, theta=1.0 fully implicit
 
-call = functools.partial
+
 solvernames = [explicit_python_solver,explicit_numpy_solver,implicit_numpy_solver]
-solvers = [
-    [call(solvernames[0], u_left=100.0, u_right=0.0, nx=nx, r=0.5, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0),
-     call(solvernames[1], u_left=100.0, u_right=0.0, nx=nx, r=0.5, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0),
-     call(solvernames[2], u_left=100.0, u_right=0.0, nx=nx, r=0.5, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0, theta=theta)],
-    [solvernames[0].__name__,solvernames[1].__name__,solvernames[2].__name__]
-    ]
 
 lstyle = ['r-', ':', '.', '-.', '--']
-legends = solvers[1]
 i = 0
-
-for solve in solvers[0]:
-    tic = time.time()
-    x, u = solve()
-    toc = time.time()
-    cputime = toc - tic
-    print cputime, 'seconds process time for', legends[i]
-    plt.plot(x,u,lstyle[i])
-    i += 1
+legends=[]
 
 for solve in solvernames:
+    tic = time.time()
     x, u = solve(u_left=100.0, u_right=0.0, nx=nx, r=0.5, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0)
-    
-    
+    toc = time.time()
+    cputime = toc - tic
+    legends.append(solve.__name__)
+    print legends[i], '\t cpu time = ', cputime 
+    plt.plot(x,u,lstyle[i])
+    i += 1
 
 plt.legend(legends)
 plt.title('Temperature field')
 plt.xlabel('Position on beam')
 plt.ylabel('Temperature')
-plt.savefig('1dheat0_025.pdf')
+#plt.savefig('1dheat0_025.pdf')
 plt.show()

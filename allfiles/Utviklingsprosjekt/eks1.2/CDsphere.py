@@ -1,9 +1,10 @@
 from numpy import logspace, zeros
 
-def CD_sphere(Re):
-    "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
-    # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
-    # Schaum ' s Solved Problems McGraw - Hill 1989.
+# Define the function cd_sphere
+def cd_sphere(Re):
+    "This function computes the drag coefficient of a sphere as a function of the Reynolds number Re."
+    # Curve fitted after fig. A-56 in Evett & Liu: "Fluid Mechanics & Hydraulics",
+    # Schaum's Solved Problems McGraw - Hill 1989.
     
     from numpy import log10, array, polyval
     
@@ -30,12 +31,16 @@ def CD_sphere(Re):
         CD = polyval(p, log10(Re))
     return CD
 
+# Calculate drag coefficient
+Npts = 500
+Re = logspace(-1, 7, Npts, True, 10)
+CD = zeros(Npts)
+i_list = range(0,Npts-1)
+for i in i_list:
+    CD[i] = cd_sphere(Re[i])
+
 # Make plot
 from matplotlib import pyplot
-Re = logspace(-1, 7, 500, True, 10)
-CD = zeros(500)
-for i in range(0,500-1):
-    CD[i] = CD_sphere(Re[i])
 font = {'size'   : 16}
 pyplot.rc('font', **font)
 pyplot.plot(Re, CD, '-b')
@@ -44,5 +49,5 @@ pyplot.xscale('log')
 pyplot.xlabel('$Re$')
 pyplot.ylabel('$C_D$')
 pyplot.grid('on', 'both', 'both')
-pyplot.show()
 pyplot.savefig('example_sphere.png')
+pyplot.show()
