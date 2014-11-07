@@ -13,6 +13,7 @@ import scipy as sc
 import scipy.sparse
 import scipy.sparse.linalg
 import time
+from numpy import newaxis
 
 # change some default values to make plots more readable on the screen
 LNWDT = 3; FNT = 15
@@ -94,10 +95,11 @@ def implicit_numpy_solver(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xmax=
 
     return x, u
 
-def implicita_numpy_solver_time_evolution(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xmax=1.0, tmin=0.0, tmax=1.0, k=1.0, theta=1.0):
+def implicit_numpy_solver_time_evolution(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xmax=1.0, tmin=0.0, tmax=1.0, k=1.0, theta=1.0):
     dx = float(xmax-xmin)/nx
     u = np.zeros((nx+1, 1), 'd')
     x = np.linspace(xmin,xmax,nx+1)
+    
 
     u[0] = u_left
     u[-1] = u_right
@@ -106,6 +108,13 @@ def implicita_numpy_solver_time_evolution(u_left=1.0, u_right=0.0, nx=20, r=0.5,
  
     m = round((tmax-tmin)/dt) # number of temporal intervals
     time = np.linspace(tmin,tmax,m)
+    #uv = np.zeros((nx+1,m),'d')    
+    uv = np.zeros((nx+1,m),'d')
+    uv =uv.reshape((nx+1,m))
+    uv[0,:] = u_left
+    uv[-1,:] = u_right
+
+    
 
     # create matrix for sparse solver. Solve for interior values only (nx-1)
     diagonals = np.zeros((3,nx-1))   
@@ -116,15 +125,20 @@ def implicita_numpy_solver_time_evolution(u_left=1.0, u_right=0.0, nx=20, r=0.5,
 
     # create rhs array
     d = np.zeros((nx-1,1),'d')
-        
+    
+#    print 'd shape:',d.shape, 'and uv[1:-1,i].shape', uv.shape 
+#     print 'd flags', d.flags
+#     print 'uv flags', uv.flags
+#     
     # advance in time and solve tridiagonal system for each t in time
-    for t in time:
-        d[:] = u[1:-1] + r*(1 - theta)*(u[0:-2] - 2.0*u[1:-1] + u[2:])  
-        d[0] += r*theta*u[0]
+    for i, t in enumerate(time):
+         
+        d[:] = (uv[1:-1,i] + r*(1 - theta)*(uv[0:-2,i] - 2.0*uv[1:-1,i] + uv[2:,i])).reshape(nx-1,1)  
+        d[0] += r*theta*uv[0,i]
         w = sc.sparse.linalg.spsolve(As,d)
-        u[1:-1] = w[:,None]
+        uv[1:-1,i] = w[:,]
 
-    return x, u
+    return x, time, uv
 
 ## Main program starts here
 
@@ -149,6 +163,10 @@ for solve in solvernames:
     print legends[i], '\t cpu time = ', cputime 
     plt.plot(x,u,lstyle[i])
     i += 1
+
+
+x, t, uv = implicit_numpy_solver_time_evolution(u_left=100.0, u_right=0.0, nx=nx, r=0.5, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0)
+plt.plot(x,uv[:,len(t)-1])
 
 plt.legend(legends)
 plt.title('Temperature field')
