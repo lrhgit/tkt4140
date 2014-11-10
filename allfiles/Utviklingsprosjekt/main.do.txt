@@ -51,20 +51,28 @@ Introducing $v=\frac{dz}{dt}$ in Equation \eqref{eq:sphere_1st_order}, we get a 
 !et
 For Equation \eqref{eq:sphere_second_order} two initial conditions must be specified, e.g. $v=v_0$ and $z=z_0$ for $t=0$. 
 
-FIGURE:[eks1.2/example_sphere.png] Drag coefficient $C_D$ as function of the Reynold's number $R_e$. label{fig:CDsphere}
+FIGURE:[eks1.2/example_sphere.png, height=400 width=600] Drag coefficient $C_D$ as function of the Reynold's number $R_e$. label{fig:CDsphere}
 
 @@@CODE ./eks1.2/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot
 
 !ebox
 
+
+
+
+
+
+
+
+
 ===== Generating the plot in ref{example:sphere_freefall} =====
 
-The complete programme _CDsphere.py_ used to generate the plot in the example above will now be presented. We will break up the programme and explain the different parts. The complete programme is as follows:
+The complete programme _CDsphere.py_ used to generate the plot in the example above will now be presented. The programme may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/eks1.2/CDsphere.py". We will break up the programme and explain the different parts. The complete programme is as follows:
 @@@CODE ./eks1.2/CDsphere.py
 
 In the first code line, 
 @@@CODE ./eks1.2/CDsphere.py fromto: from numpy import logspace, zeros@^# Define the function cd_sphere
-the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programmes. `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. `zeros` creates arrays of a certain zise filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org". 
+the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programmes. The function `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. The function `zeros` creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org". 
 
 In _CDsphere.py_ a function `cd_sphere` was defined as follows:
 @@@CODE ./eks1.2/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag coefficient
@@ -74,108 +82,55 @@ Variables defined inside a function, such as `p` and `x1` above, are *local* var
 
 Three more functions from the `numpy` package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main programme. We refer to the "documentation of NumPy": "http://www.numpy.org" for details about the different functions. 
 
-The function above contains an example of the use of the `if-elif-else` block. The block begins with `if` and a boolean expression. If the boolean expression evaluates to `true` the *indented* statements following the `if` statment are carried out. If not, the boolean expression following the `elif` is evaluated. If none of the conditions are evaluated to `true` the statements following the `else` are carried out. 
+The function above contains an example of the use of the `if-elif-else` block. The block begins with `if` and a boolean expression. If the boolean expression evaluates to `true` the *indented* statements following the `if` statement are carried out. If not, the boolean expression following the `elif` is evaluated. If none of the conditions are evaluated to `true` the statements following the `else` are carried out. 
 
 In the code block
 @@@CODE ./eks1.2/CDsphere.py from-to: # Calculate drag coefficient@^# Make plot
-the function `cd_sphere` is called. First, the number of data points to be calculated are stored in the integer variable `Npts`. Using the `logspace` function imported earlier `Re` is assigned an array object, with float elements with values ranging from $10^{-1}$ to $10^7$. The values are uniformly distributed along a 10logarithmic scale. `CD` is first defined as an array with `Npts` zero elements, using the `zero` function. Then, for each element in `Re`, the drag coefficient is calculated using our own defined function `cd_sphere`, in a `for` loop.
+the function `cd_sphere` is called. First, the number of data points to be calculated are stored in the integer variable `Npts`. Using the `logspace` function imported earlier, `Re` is assigned an array objet which has float elements with values ranging from $10^{-1}$ to $10^7$. The values are uniformly distributed along a 10logarithmic scale. `CD` is first defined as an array with `Npts` zero elements, using the `zero` function. Then, for each element in `Re`, the drag coefficient is calculated using our own defined function `cd_sphere`, in a `for` loop, which is explained in the following.
 
-The function `range` is a built-in function that generates a list containing arithmetic progressions. The `for i in i_list` construct creates a loop over all elements in `i_list`. In each pass of the loop, the variable `i` refers to an element in the list, starting with `i_list[0]` (0 in this case) and ending with the last element `i_list[Npts-1]` (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful to with the current element; in this case, the return of the function call `cd_sphere(Re[i])` is assigned to `CD[i]`. Each statement in the block must be indented. 
+The function `range` is a built-in function that generates a list containing arithmetic progressions. The `for i in i_list` construct creates a loop over all elements in `i_list`. In each pass of the loop, the variable `i` refers to an element in the list, starting with `i_list[0]` (0 in this case) and ending with the last element `i_list[Npts-1]` (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call `cd_sphere(Re[i])` is assigned to `CD[i]`. Each statement in the block must be indented. 
 
-# Here I will write about the plotting. 
+Lastly, the drag coefficient is plotted and the figure generated:
+@@@CODE ./eks1.2/CDsphere.py from-to:# Make plot@^# End
+
+To generate the plot, the package `matplotlib` is used. `matplotlib` is the standard package for curve plotting in Python. For simple plotting the `matplotlib.pyplot` interface provides a MATLAB-like interface, which has been used here. For documentation and explanation of this package, we refer to URL: "http://www.matplotlib.org". 
+
+First, the curve is generated using the function `plot`, which takes the x-values and y-values as arguments (`Re` and `CD` in this case), as well as a string specifying the line style, like in MATLAB. Then changes are made to the figure in order to make it more readable, very similarily to how it is done in MATLAB. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the `savefig` function. Lastly, the figure is showed on the screen with the `show` function. 
+
+To change the font size the function `rc` is used. This function takes in the object `font`, which is a *dictionary* object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of `key:value` pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: `{}`. Placing a comma-separated list of `key:value` pairs within the braces adds initial `key:value` pairs to the dictionary. In this case the dictionary `font` contains one `key:value` pair, namely `'size' : 16`.
+
+Descriptions and explanations of all functions available in `pyplot` may be found "here": "http://matplotlib.org/api/pyplot_summary.html".
+
+
+
+
+
+
+
+
 
 ===== More efficient implementations =====
 # This will be made more generic, not writing the computer code explicitly, but rather link to the files.
 
-When solving numerical problems variables are often not single numbers, but arrays containing many numbers. The function `CDsphere` above takes a single number in and gives a single number out. For computationally intensive algorithms where variables are stored in arrays this is inconvenient and time consuming. It is therefore of interest to implement functions that can take in arrays and output arrays in an efficient manner. This may be done in a variaty of ways. Some possibilities are presented in the following, and, as we shall see, some are more time consuming than others. 
+When solving numerical problems variables are often not single numbers, but arrays containing many numbers. The function `CDsphere` above takes a single number in and gives a single number out. For computationally intensive algorithms where variables are stored in arrays this is inconvenient and time consuming, as each of the array elements must be sent to the function independently. It is therefore of interest to implement functions that can take in whole arrays and output whole arrays in an efficient manner. This may be done in a variaty of ways. Some possibilities are presented in the following, and, as we shall see, some are more time consuming than others. 
 
 A simple extension of the single-valued function above is as follows:
-!bc pycod
-def cd_sphere_py_vector(ReNrs):
-    CD = zeros_like(ReNrs)
-    counter = 0
+@@@CODE ./eks1.2/DragCoefficientGeneric.py from-to:# simple extension cd_sphere@^# vectorized function
 
-    for Re in ReNrs:
-        CD[counter] = cd_sphere(Re)
-        counter += 1
-    return CD
-!ec
 The new function `cd_sphere_py_vector` takes in an array `ReNrs` and calculates the drag coefficient for each element using the previous function `cd_sphere`. This does the job, but is not very efficient. 
-
-PAGE 196 in Langtangen!
 
 A second version is implemented in the function `cd_sphere_vector`. This function takes in the array `Re` and calculates the drag coefficient of all elements by multiple calls of the function `numpy.where`; one call for each condition, similarily as each `if` statement in the function `cd_sphere`. The function is shown here:
 
-!bc pycod
-def cd_sphere_vector(Re):
-    from numpy import log10,array,polyval,where,zeros_like
-    CD = zeros_like(Re)
-   
-    CD = where(Re<0,0.0,CD)     # condition 1
-    
-    CD = where((Re > 0.0) & (Re <=0.5),24/Re,CD) # condition 2
-
-    p = array([4.22,-14.05,34.87,0.658])
-    CD = where((Re > 0.5) & (Re <=100.0),polyval(p,1.0/Re),CD) #condition 3
-
-    p = array([-30.41,43.72,-17.08,2.41])
-    CD = where((Re >100.0)  & (Re <=1.0e4) ,polyval(p,1.0/log10(Re)),CD) #condition 4
-
-    p = array([-0.1584,2.031,-8.472,11.932])
-    CD = where((Re > 1.0e4)  &  (Re <=3.35e5),polyval(p,log10(Re)),CD) #condition 5
-
-    CD = where((Re > 3.35e5) & (Re <=5.0e5),91.08*(log10(Re/4.5e5))**4 + 0.0764,CD) #condition 6
-
-    p  = array([-0.06338,1.1905,-7.332,14.93])
-    CD = where((Re > 5.05e5)  &  (Re <=8.0e6),polyval(p,log10(Re)),CD) #condition 7
-    
-    CD = where(Re>8.0e6,0.2,CD)  # condition 8
-    return CD
-!ec
+@@@CODE ./eks1.2/DragCoefficientGeneric.py from-to:# vectorized function@^# vectorized boolean
 
 A third approach we will try is using boolean type variables. The 8 variables `condition1` through `condition8` in the function `cd_sphere_vector_bool` are boolean variables of the same size and shape as `Re`. The elements of the boolean variables evaluate to either `True` or `False`, depending on if the corresponding element in `Re` satisfy the condition the variable is assigned. 
 
-!bc pycod
-def cd_sphere_vector_bool(Re):
-    from numpy import log10,array,polyval,zeros_like
-       
-    condition1 = Re < 0
-    condition2 = logical_and(0 < Re, Re <= 0.5)
-    condition3 = logical_and(0.5 < Re, Re <= 100.0)
-    condition4 = logical_and(100.0 < Re, Re <= 1.0e4)
-    condition5 = logical_and(1.0e4 < Re, Re <= 3.35e5)
-    condition6 = logical_and(3.35e5< Re, Re <= 5.0e5)
-    condition7 = logical_and(5.0e5 < Re, Re <= 8.0e6)
-    condition8 = Re > 8.0e6
-    
-    CD = zeros_like(Re)
-    CD[condition1] = 0.0
-    
-    CD[condition2] = 24/Re[condition2]
-    
-    p = array([4.22,-14.05,34.87,0.658])
-    CD[condition3] = polyval(p,1.0/Re[condition3]) 
-    
-    p = array([-30.41,43.72,-17.08,2.41])
-    CD[condition4] = polyval(p,1.0/log10(Re[condition4]))
-    
-    p = array([-0.1584,2.031,-8.472,11.932])
-    CD[condition5] = polyval(p,log10(Re[condition5]))
-    
-    CD[condition6] = 91.08*(log10(Re[condition6]/4.5e5))**4 + 0.0764
-    
-    p  = array([-0.06338,1.1905,-7.332,14.93])
-    CD[condition7] = polyval(p,log10(Re[condition7]))
-    
-    CD[condition8] = 0.2
-    
-    return CD
-!ec
+@@@CODE ./eks1.2/DragCoefficientGeneric.py from-to:# vectorized boolean@^if __name__ == '__main__':              
 
 Lastly, the built-in function `vectorize` is used to automatically generate a vector-version of the function `cd_sphere`, as follows:
 !bc pycod
 cd_sphere_auto_vector=vectorize(cd_sphere)
-!ec
+!ec        
 
 Using the function `clock` in the module `time`, the cpu-time for each of the array-type functions described above has been measured for a test example. An array with 500 elements was sent to the functions. 
 !bc

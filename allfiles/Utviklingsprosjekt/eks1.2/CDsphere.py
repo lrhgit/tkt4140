@@ -1,3 +1,5 @@
+# CDsphere.py
+
 from numpy import logspace, zeros
 
 # Define the function cd_sphere
@@ -41,9 +43,9 @@ for i in i_list:
 
 # Make plot
 from matplotlib import pyplot
-font = {'size'   : 16}
-pyplot.rc('font', **font)
 pyplot.plot(Re, CD, '-b')
+font = {'size' : 16}
+pyplot.rc('font', **font)
 pyplot.yscale('log')
 pyplot.xscale('log')
 pyplot.xlabel('$Re$')
@@ -51,3 +53,6 @@ pyplot.ylabel('$C_D$')
 pyplot.grid('on', 'both', 'both')
 pyplot.savefig('example_sphere.png')
 pyplot.show()
+
+
+# End

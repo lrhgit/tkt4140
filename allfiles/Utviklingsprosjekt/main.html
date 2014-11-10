@@ -109,7 +109,7 @@ MathJax.Hub.Config({
 <p>
 <!-- institution(s) -->
 <p>
-<center><h4>Nov 3, 2014</h4></center> <!-- date -->
+<center><h4>Nov 10, 2014</h4></center> <!-- date -->
 
 <h2>Table of contents</h2>
 
@@ -194,7 +194,7 @@ For Equation \eqref{eq:sphere_second_order} two initial conditions must be speci
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 2:  Drag coefficient \( C_D \) as function of the Reynold's number \( R_e \). <a name="fig:CDsphere"></a> </p></center>
-<p><img src="eks1.2/example_sphere.png" align="bottom" ></p>
+<p><img src="eks1.2/example_sphere.png" align="bottom" height=400 width=600></p>
 </center>
 
 <p>
@@ -248,11 +248,13 @@ i_list <span style="color: #666666">=</span> <span style="color: #008000">range<
 
 <h2 id="___sec3">Generating the plot in <a href="#example:sphere_freefall">Example 1: Sphere in free fall</a> <a name="___sec3"></a></h2>
 
-The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. We will break up the programme and explain the different parts. The complete programme is as follows:
+The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. The programme may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/eks1.2/CDsphere.py" target="_self">here</a>. We will break up the programme and explain the different parts. The complete programme is as follows:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># CDsphere.py</span>
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
 
 <span style="color: #408080; font-style: italic"># Define the function cd_sphere</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
@@ -295,9 +297,9 @@ i_list <span style="color: #666666">=</span> <span style="color: #008000">range<
 
 <span style="color: #408080; font-style: italic"># Make plot</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot
-font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span>   : <span style="color: #666666">16</span>}
-pyplot<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
 pyplot<span style="color: #666666">.</span>plot(Re, CD, <span style="color: #BA2121">&#39;-b&#39;</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+pyplot<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
 pyplot<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
 pyplot<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
 pyplot<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
@@ -305,6 +307,9 @@ pyplot<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&
 pyplot<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
 pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;example_sphere.png&#39;</span>)
 pyplot<span style="color: #666666">.</span>show()
+
+
+<span style="color: #408080; font-style: italic"># End</span>
 </pre></div>
 <p>
 In the first code line, 
@@ -314,7 +319,7 @@ In the first code line,
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
 </pre></div>
 <p>
-the functions <code>logspace</code> and <code>zeros</code> are imported from the package <code>numpy</code>. The <code>numpy</code> package (<em>NumPy</em> is an abbreviation for <em>Numerical Python</em>) enables the use of <em>array</em> objects. Using <code>numpy</code>  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called <em>vectorization</em> and may cause a dramatic increase in computational speed of Python programmes. <code>logspace</code> works on a logarithmic scale just as the function <code>linspace</code> works on a regular scale. <code>zeros</code> creates arrays of a certain zise filled with zeros. Several comprehensive guides to the numpy package may be found at <a href="http://www.numpy.org" target="_self"><tt>http://www.numpy.org</tt></a>. 
+the functions <code>logspace</code> and <code>zeros</code> are imported from the package <code>numpy</code>. The <code>numpy</code> package (<em>NumPy</em> is an abbreviation for <em>Numerical Python</em>) enables the use of <em>array</em> objects. Using <code>numpy</code>  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called <em>vectorization</em> and may cause a dramatic increase in computational speed of Python programmes. The function <code>logspace</code> works on a logarithmic scale just as the function <code>linspace</code> works on a regular scale. The function <code>zeros</code> creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at <a href="http://www.numpy.org" target="_self"><tt>http://www.numpy.org</tt></a>. 
 
 <p>
 In <b>CDsphere.py</b> a function <code>cd_sphere</code> was defined as follows:
@@ -361,7 +366,7 @@ Variables defined inside a function, such as <code>p</code> and <code>x1</code> 
 Three more functions from the <code>numpy</code> package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main programme. We refer to the <a href="http://www.numpy.org" target="_self">documentation of NumPy</a> for details about the different functions. 
 
 <p>
-The function above contains an example of the use of the <code>if-elif-else</code> block. The block begins with <code>if</code> and a boolean expression. If the boolean expression evaluates to <code>true</code> the <em>indented</em> statements following the <code>if</code> statment are carried out. If not, the boolean expression following the <code>elif</code> is evaluated. If none of the conditions are evaluated to <code>true</code> the statements following the <code>else</code> are carried out. 
+The function above contains an example of the use of the <code>if-elif-else</code> block. The block begins with <code>if</code> and a boolean expression. If the boolean expression evaluates to <code>true</code> the <em>indented</em> statements following the <code>if</code> statement are carried out. If not, the boolean expression following the <code>elif</code> is evaluated. If none of the conditions are evaluated to <code>true</code> the statements following the <code>else</code> are carried out. 
 
 <p>
 In the code block
@@ -376,19 +381,45 @@ i_list <span style="color: #666666">=</span> <span style="color: #008000">range<
     CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
 </pre></div>
 <p>
-the function <code>cd_sphere</code> is called. First, the number of data points to be calculated are stored in the integer variable <code>Npts</code>. Using the <code>logspace</code> function imported earlier <code>Re</code> is assigned an array object, with float elements with values ranging from \( 10^{-1} \) to \( 10^7 \). The values are uniformly distributed along a 10logarithmic scale. <code>CD</code> is first defined as an array with <code>Npts</code> zero elements, using the <code>zero</code> function. Then, for each element in <code>Re</code>, the drag coefficient is calculated using our own defined function <code>cd_sphere</code>, in a <code>for</code> loop.
+the function <code>cd_sphere</code> is called. First, the number of data points to be calculated are stored in the integer variable <code>Npts</code>. Using the <code>logspace</code> function imported earlier, <code>Re</code> is assigned an array objet which has float elements with values ranging from \( 10^{-1} \) to \( 10^7 \). The values are uniformly distributed along a 10logarithmic scale. <code>CD</code> is first defined as an array with <code>Npts</code> zero elements, using the <code>zero</code> function. Then, for each element in <code>Re</code>, the drag coefficient is calculated using our own defined function <code>cd_sphere</code>, in a <code>for</code> loop, which is explained in the following.
 
 <p>
-The function <code>range</code> is a built-in function that generates a list containing arithmetic progressions. The <code>for i in i_list</code> construct creates a loop over all elements in <code>i_list</code>. In each pass of the loop, the variable <code>i</code> refers to an element in the list, starting with <code>i_list[0]</code> (0 in this case) and ending with the last element <code>i_list[Npts-1]</code> (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful to with the current element; in this case, the return of the function call <code>cd_sphere(Re[i])</code> is assigned to <code>CD[i]</code>. Each statement in the block must be indented. 
+The function <code>range</code> is a built-in function that generates a list containing arithmetic progressions. The <code>for i in i_list</code> construct creates a loop over all elements in <code>i_list</code>. In each pass of the loop, the variable <code>i</code> refers to an element in the list, starting with <code>i_list[0]</code> (0 in this case) and ending with the last element <code>i_list[Npts-1]</code> (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call <code>cd_sphere(Re[i])</code> is assigned to <code>CD[i]</code>. Each statement in the block must be indented. 
 
 <p>
-<!-- Here I will write about the plotting. -->
+Lastly, the drag coefficient is plotted and the figure generated:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot
+pyplot<span style="color: #666666">.</span>plot(Re, CD, <span style="color: #BA2121">&#39;-b&#39;</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+pyplot<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+pyplot<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
+pyplot<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
+pyplot<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
+pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;example_sphere.png&#39;</span>)
+pyplot<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+To generate the plot, the package <code>matplotlib</code> is used. <code>matplotlib</code> is the standard package for curve plotting in Python. For simple plotting the <code>matplotlib.pyplot</code> interface provides a MATLAB-like interface, which has been used here. For documentation and explanation of this package, we refer to <a href="http://www.matplotlib.org" target="_self"><tt>http://www.matplotlib.org</tt></a>. 
+
+<p>
+First, the curve is generated using the function <code>plot</code>, which takes the x-values and y-values as arguments (<code>Re</code> and <code>CD</code> in this case), as well as a string specifying the line style, like in MATLAB. Then changes are made to the figure in order to make it more readable, very similarily to how it is done in MATLAB. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the <code>savefig</code> function. Lastly, the figure is showed on the screen with the <code>show</code> function. 
+
+<p>
+To change the font size the function <code>rc</code> is used. This function takes in the object <code>font</code>, which is a <em>dictionary</em> object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of <code>key:value</code> pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: <code>{}</code>. Placing a comma-separated list of <code>key:value</code> pairs within the braces adds initial <code>key:value</code> pairs to the dictionary. In this case the dictionary <code>font</code> contains one <code>key:value</code> pair, namely <code>'size' : 16</code>.
+
+<p>
+Descriptions and explanations of all functions available in <code>pyplot</code> may be found <a href="http://matplotlib.org/api/pyplot_summary.html" target="_self">here</a>.
 
 <h2 id="___sec4">More efficient implementations <a name="___sec4"></a></h2>
 <!-- This will be made more generic, not writing the computer code explicitly, but rather link to the files. -->
 
 <p>
-When solving numerical problems variables are often not single numbers, but arrays containing many numbers. The function <code>CDsphere</code> above takes a single number in and gives a single number out. For computationally intensive algorithms where variables are stored in arrays this is inconvenient and time consuming. It is therefore of interest to implement functions that can take in arrays and output arrays in an efficient manner. This may be done in a variaty of ways. Some possibilities are presented in the following, and, as we shall see, some are more time consuming than others. 
+When solving numerical problems variables are often not single numbers, but arrays containing many numbers. The function <code>CDsphere</code> above takes a single number in and gives a single number out. For computationally intensive algorithms where variables are stored in arrays this is inconvenient and time consuming, as each of the array elements must be sent to the function independently. It is therefore of interest to implement functions that can take in whole arrays and output whole arrays in an efficient manner. This may be done in a variaty of ways. Some possibilities are presented in the following, and, as we shall see, some are more time consuming than others. 
 
 <p>
 A simple extension of the single-valued function above is as follows:
@@ -408,15 +439,16 @@ A simple extension of the single-valued function above is as follows:
 The new function <code>cd_sphere_py_vector</code> takes in an array <code>ReNrs</code> and calculates the drag coefficient for each element using the previous function <code>cd_sphere</code>. This does the job, but is not very efficient. 
 
 <p>
-PAGE 196 in Langtangen!
-
-<p>
 A second version is implemented in the function <code>cd_sphere_vector</code>. This function takes in the array <code>Re</code> and calculates the drag coefficient of all elements by multiple calls of the function <code>numpy.where</code>; one call for each condition, similarily as each <code>if</code> statement in the function <code>cd_sphere</code>. The function is shown here:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett &amp; Liu :% &quot; Fluid Mechanics &amp; Hydraulics &quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum &#39; s Solved Problems McGraw - Hill 1989.</span>
+
     <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,where,zeros_like
     CD <span style="color: #666666">=</span> zeros_like(Re)
    
@@ -455,7 +487,7 @@ A third approach we will try is using boolean type variables. The 8 variables <c
     condition3 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0.5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>)
     condition4 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">100.0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>)
     condition5 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">1.0e4</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>)
-    condition6 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">3.35e5&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>)
+    condition6 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">3.35e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>)
     condition7 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">5.0e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">8.0e6</span>)
     condition8 <span style="color: #666666">=</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>
     

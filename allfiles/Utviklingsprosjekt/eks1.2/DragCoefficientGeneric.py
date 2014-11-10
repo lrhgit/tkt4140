@@ -7,10 +7,11 @@ from numpy import linspace,array,append,logspace,zeros_like,where,vectorize,\
     logical_and
 import numpy as np  
 from matplotlib.pyplot import loglog,xlabel,ylabel,grid,savefig,show,rc,hold,\
-    legend
+    legend, setp
 
 from numpy.core.multiarray import scalar
 
+# single-valued function
 def cd_sphere(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
     # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
@@ -41,6 +42,7 @@ def cd_sphere(Re):
         CD = polyval(p,log10(Re))
     return CD
 
+# simple extension cd_sphere
 def cd_sphere_py_vector(ReNrs):
     CD = zeros_like(ReNrs)
     counter = 0
@@ -50,6 +52,7 @@ def cd_sphere_py_vector(ReNrs):
         counter += 1
     return CD
 
+# vectorized function
 def cd_sphere_vector(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
     # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
@@ -79,7 +82,7 @@ def cd_sphere_vector(Re):
     CD = where(Re>8.0e6,0.2,CD)  # condition 8
     return CD
 
-
+# vectorized boolean
 def cd_sphere_vector_bool(Re):
     from numpy import log10,array,polyval,zeros_like
        
@@ -88,7 +91,7 @@ def cd_sphere_vector_bool(Re):
     condition3 = logical_and(0.5 < Re, Re <= 100.0)
     condition4 = logical_and(100.0 < Re, Re <= 1.0e4)
     condition5 = logical_and(1.0e4 < Re, Re <= 3.35e5)
-    condition6 = logical_and(3.35e5< Re, Re <= 5.0e5)
+    condition6 = logical_and(3.35e5 < Re, Re <= 5.0e5)
     condition7 = logical_and(5.0e5 < Re, Re <= 8.0e6)
     condition8 = Re > 8.0e6
     
@@ -116,7 +119,8 @@ def cd_sphere_vector_bool(Re):
     return CD
     
 
-if __name__ == '__main__':              #Check whether this file is executed (name==main) or imported as module
+if __name__ == '__main__':              
+#Check whether this file is executed (name==main) or imported as module
     
     import time
     from numpy import mean
@@ -126,9 +130,11 @@ if __name__ == '__main__':              #Check whether this file is executed (na
 
     ReNrs = logspace(-2,7,num=500)
     
-    cd_sphere_auto_vector=vectorize(cd_sphere) # make a vectorized version of the function automatically
+    # make a vectorized version of the function automatically
+    cd_sphere_auto_vector=vectorize(cd_sphere) 
     
-    funcs =[cd_sphere_py_vector,cd_sphere_vector,cd_sphere_vector_bool, cd_sphere_auto_vector]  # list of functions to test   
+    # make a list of all function objects
+    funcs =[cd_sphere_py_vector, cd_sphere_vector, cd_sphere_vector_bool, cd_sphere_auto_vector]  # list of functions to test   
     
     
     # Put all exec_times in a dictionary and fncnames in a list 
@@ -156,15 +162,20 @@ if __name__ == '__main__':              #Check whether this file is executed (na
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font',**font)          
     
+    # set line styles
+    style = ['v-', '8-', '*-', 'o-']
+    mrkevry = [30, 35, 40, 45]
+    
     # plot the result for all functions    
+    i=0
     for name in fncnames: 
-        loglog(ReNrs,CD[name])
-        hold('on')        
-          
+        loglog(ReNrs,CD[name],style[i],markersize=10,markevery=mrkevry[i])
+        hold('on')
+        i+=1 
+    
     legend(fncnames)
-#     
-    xlabel('$Re$',fontsize=fnSz)
-    ylabel('$C_D$',fontsize=fnSz) 
+    xlabel('$Re$')
+    ylabel('$C_D$')
     grid('on','both','both')
-#     savefig('example_sphere.png')
+    savefig('example_sphere_generic.png')
     show()
