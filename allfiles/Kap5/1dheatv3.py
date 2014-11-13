@@ -185,7 +185,7 @@ def implicit_numpy_solver_v3(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xm
 
 ## Main program starts here
 
-nx = 20 # number of nodes
+nx = 40 # number of nodes
 L  = 1.0    # length of beam
 tmax = 0.025    # time length
 theta = 0.75    # paramet    er for implicitness: theta=0.5 Crank-Nicholson, theta=1.0 fully implicit
