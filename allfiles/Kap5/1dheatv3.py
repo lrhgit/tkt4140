@@ -229,7 +229,7 @@ def myanimation(x,y):
 
 ## Main program starts here
 
-nx = 20 # number of nodes
+nx = 40 # number of nodes
 L  = 1.0    # length of beam
 tmax = 0.025    # time length
 theta = 0.75    # paramet    er for implicitness: theta=0.5 Crank-Nicholson, theta=1.0 fully implicit

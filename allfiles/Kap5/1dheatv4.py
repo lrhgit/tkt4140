@@ -135,52 +135,6 @@ def implicit_numpy_solver_v2(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xm
 
     return x, time, uv
 
-def implicit_numpy_solver_v3(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xmax=1.0, tmin=0.0, tmax=1.0, k=1.0, theta=1.0):
-    dx = float(xmax-xmin)/nx
-    u = np.zeros((nx+1, 1), 'd')
-    x = np.linspace(xmin,xmax,nx+1)
-
-    u[0] = u_left
-    u[-1] = u_right
-
-    dt = r*dx**2/k     # compute timestep based on Fourier number, dx and diffusivity
- 
-    m = round((tmax-tmin)/dt) # number of temporal intervals
-    time = np.linspace(tmin,tmax,m)
-    
-    uv = np.zeros((nx+1,m),'d')
-    uv[0,:] = u_left
-    uv[-1,:] = u_right
-
-
-    # create matrix for sparse solver. Solve for interior values only (nx-1)
-    diagonals = np.zeros((3,nx-1))   
-    diagonals[0,:] = -r*theta                       # all elts in first row is set to 1
-    diagonals[1,:] = 1 + 2.0*r*theta  
-    diagonals[2,:] = -r*theta 
-    As = sc.sparse.spdiags(diagonals, [-1,0,1], nx-1, nx-1,format='csc') # sparse matrix instance
-
-    # create rhs array
-    d = np.zeros((nx-1,1),'d')
-        
-    # advance in time and solve tridiagonal system for each t in time
-    i = 0
-    for t in time:
-        print 'shape d[:] =', d[:].shape
-                
-        print 'uv[1:-1,i] =', uv[1:-1,i].shape
-        print 'uv[0:-2,i] =', uv[0:-2,i].shape
-        print 'shape uv[2:,i] =', uv[2:,i].shape
-
-        
-        d[:] = (uv[1:-1,i] + r*(1 - theta)*(uv[0:-2,i] - 2.0*uv[1:-1,i] + u[2:,i])).reshape(nx-1,1)  
-        d[0] += r*theta*u[0,i]
-        w = sc.sparse.linalg.spsolve(As,d)
-        u[1:-1] = w[:,None]
-        uv[1:-1,i] = w[:]
-        i+=1
-        
-    return x, time, uv
 
 
 ## Main program starts here
@@ -188,7 +142,7 @@ def implicit_numpy_solver_v3(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xm
 nx = 20 # number of nodes
 L  = 1.0    # length of beam
 tmax = 0.25    # time length
-theta = 0.75    # paramet    er for implicitness: theta=0.5 Crank-Nicholson, theta=1.0 fully implicit
+theta = 1.0    # parameter for implicitness: theta=0.5 Crank-Nicholson, theta=1.0 fully implicit
 
 solvernames = [explicit_python_solver,explicit_numpy_solver,implicit_numpy_solver]
 
