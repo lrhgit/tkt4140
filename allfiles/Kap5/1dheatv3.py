@@ -182,6 +182,50 @@ def implicit_numpy_solver_v3(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xm
         
     return x, time, uv
 
+#def myanimation(x,plt_xlabel='x',y, plt_ylabel='y',plt_title=''):
+def myanimation(x,y):
+    
+    fig = plt.figure
+#     plt.title(plt_title)
+#     plt.xlabel(plt_xlabel)
+#     plt.ylabel(plt_ylabel)
+#     
+    plt.axis([x[0], x[-1], min(y), max(y)])
+    lines = plt.plot([], [])
+    
+    
+    # Function to return the background plot in the animation
+    def init():
+        lines[0].set_data([], [])  # empty plot
+        return lines
+
+    
+    # Function to return a frame in the movie
+    def frame(args):
+        frame_no, t, x, lines = args
+        y = uv[:,frame_no]
+        lines[0].set_data(x, y)
+        # Does not work: lines[0].set_label('s=%4.2f' % s)
+        # Does not work: plt.legend(['s=%4.2f' % s])
+        # Does not work: plt.savefig('tmp_%04d.png' % frame_no)
+        return lines
+    
+    
+    # Construct list of all arguments to frame function
+    # (each call sends frame number, s value, x array, and lines list)
+    all_args = [(frame_no, t, x, lines)
+                for frame_no, t in enumerate(time)]
+    # Run the animation
+    anim = animation.FuncAnimation(
+        fig, frame, all_args, interval=150, init_func=init, blit=False)
+    
+    # Make movie file in MP4 format
+    #anim.save('movie1.mp4', fps=5)
+    #plt.show()
+    
+    return 'done'
+
+
 
 ## Main program starts here
 
@@ -219,44 +263,45 @@ x, time, uv = implicit_numpy_solver_v2(u_left=100.0, u_right=0.0, nx=nx, r=0.5, 
 ## Animate the time-evolution of the solution
 #
 # Make a first plot (save the lines objects returned from plt.plot)
-fig1 = plt.figure(1)
-plt.title('Temperature field time evolution')
-plt.xlabel('Position on beam')
-plt.ylabel('Temperature')
-
-plt.axis([x[0], x[-1], min(uv), max(uv)])
-lines = plt.plot([], [])
-
-
-# Function to return the background plot in the animation
-def init():
-    lines[0].set_data([], [])  # empty plot
-    return lines
-
-# Function to return a frame in the movie
-def frame(args):
-    frame_no, t, x, lines = args
-    y = uv[:,frame_no]
-    lines[0].set_data(x, y)
-    # Does not work: lines[0].set_label('s=%4.2f' % s)
-    # Does not work: plt.legend(['s=%4.2f' % s])
-    # Does not work: plt.savefig('tmp_%04d.png' % frame_no)
-    return lines
-
-
-# Construct list of all arguments to frame function
-# (each call sends frame number, s value, x array, and lines list)
-all_args = [(frame_no, t, x, lines)
-            for frame_no, t in enumerate(time)]
-# Run the animation
-anim = animation.FuncAnimation(
-    fig1, frame, all_args, interval=150, init_func=init, blit=False)
+# fig1 = plt.figure(1)
+# plt.title('Temperature field time evolution')
+# plt.xlabel('Position on beam')
+# plt.ylabel('Temperature')
+# 
+# plt.axis([x[0], x[-1], min(uv), max(uv)])
+# lines = plt.plot([], [])
+# 
+# 
+# # Function to return the background plot in the animation
+# def init():
+#     lines[0].set_data([], [])  # empty plot
+#     return lines
+# 
+# # Function to return a frame in the movie
+# def frame(args):
+#     frame_no, t, x, lines = args
+#     y = uv[:,frame_no]
+#     lines[0].set_data(x, y)
+#     # Does not work: lines[0].set_label('s=%4.2f' % s)
+#     # Does not work: plt.legend(['s=%4.2f' % s])
+#     # Does not work: plt.savefig('tmp_%04d.png' % frame_no)
+#     return lines
+# 
+# 
+# # Construct list of all arguments to frame function
+# # (each call sends frame number, s value, x array, and lines list)
+# all_args = [(frame_no, t, x, lines)
+#             for frame_no, t in enumerate(time)]
+# # Run the animation
+# anim = animation.FuncAnimation(
+#     fig1, frame, all_args, interval=150, init_func=init, blit=False)
 
 # Make movie file in MP4 format
 #anim.save('movie1.mp4', fps=5)
+
+myanimation(x,uv)
+
 plt.show()
-
-
 
 
 
