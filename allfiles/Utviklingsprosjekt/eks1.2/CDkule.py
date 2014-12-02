@@ -68,7 +68,7 @@ time2 = linspace(0, T, N+1)
 ze = euler(f2,z0e,time)
 plot(time,ze[:,1])
 legends.append('Euler')
-legend(legends)
+legend(legends, loc='best')
 
 show()
 

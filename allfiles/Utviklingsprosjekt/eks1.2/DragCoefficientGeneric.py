@@ -174,9 +174,10 @@ if __name__ == '__main__':
         hold('on')
         i+=1 
     
-    legend(fncnames)
+    leg = legend(fncnames)
+    leg.get_frame().set_alpha(0.)
     xlabel('$Re$')
     ylabel('$C_D$')
     grid('on','both','both')
-    savefig('example_sphere_generic.png')
+    savefig('example_sphere_generic.png', transparent=True)
     show()
