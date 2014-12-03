@@ -3,7 +3,7 @@ import odespy
 from matplotlib.pyplot import *
 import numpy as np
 #change some default values to make plots more readable on the screen
-LNWDT=5; FNT=25
+LNWDT=5; FNT=11
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 
 g = 9.81      # Gravity m/s^2
@@ -31,15 +31,6 @@ def f2(z, t):
     zout[:] = [z[1], g - alpha*z[1]**2]
     return zout
 
-# Main program starts here
-from numpy import linspace
-T = 30  # end of simulation
-N = 50  # no of time steps
-time = linspace(0, T, N+1)
-
-solvers=[]
-solvers.append(odespy.RK3(f2)) 
-solvers.append(odespy.RK4(f2)) 
 
 def euler(func,z0, time):
     dt = time[1]-time[0]
@@ -50,25 +41,52 @@ def euler(func,z0, time):
         z[i+1,:]=z[i,:] + func(z[i,:],t)*dt
 
     return z
+
+def heun(func,z0, time):
+    dt = time[1]-time[0]
+    z = np.zeros((np.size(time),2))
+    z[0,:] = z0
+    zp = np.zeros_like(z0)
+    
+    for i, t in enumerate(time[1:]):
+        zp = z[i,:] + func(z[i,:],t)*dt   # Predictor step
+        z[i+1,:] = z[i,:] + (func(z[i,:],t) + func(zp,t+dt))*dt/2.0 # Corrector step
+
+    return z
         
+# Main program starts here
+from numpy import linspace
+T = 30  # end of simulation
+N = 50  # no of time steps
+time = linspace(0, T, N+1)
+
+solvers=[]
+solvers.append(odespy.RK3(f2)) 
+solvers.append(odespy.RK4(f2)) 
 
 legends=[]
-linet=['r-',':','.','-.','--']
+line_type=['r-',':','.','-.','--']
 
 z0 = [2.0, 0.0]
 for i, solver in enumerate(solvers):
     solver.set_initial_condition(z0)
     z, t = solver.solve(time)
-    plot(t,z[:,1],linet[i])
+    plot(t,z[:,1],line_type[i])
     legends.append(str(solver))
 
 z0e=np.zeros(2)
 z0e[0] = 2.0
 time2 = linspace(0, T, N+1)
 ze = euler(f2,z0e,time)
-plot(time,ze[:,1])
+zh = heun(f2,z0e,time)
+
+plot(time,ze[:,1],line_type[2])
 legends.append('Euler')
-legend(legends, loc='best')
+
+plot(time,zh[:,1],line_type[3])
+legends.append('Heun')
+
+legend(legends, loc='best', frameon=False)
 
 show()
 
