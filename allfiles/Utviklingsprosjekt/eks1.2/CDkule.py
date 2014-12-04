@@ -1,9 +1,11 @@
 from DragCoefficientGeneric import cd_sphere    
 import odespy
-from matplotlib.pyplot import *
+from matplotlib.pyplot import legend, plot, show
+import matplotlib
 import numpy as np
+#from matplotlib.legend import Legend
 #change some default values to make plots more readable on the screen
-LNWDT=5; FNT=25
+LNWDT=5; FNT=12
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 
 g = 9.81      # Gravity m/s^2
@@ -33,7 +35,7 @@ def f2(z, t):
 
 # Main program starts here
 from numpy import linspace
-T = 30  # end of simulation
+T = 20  # end of simulation
 N = 50  # no of time steps
 time = linspace(0, T, N+1)
 
@@ -68,7 +70,5 @@ time2 = linspace(0, T, N+1)
 ze = euler(f2,z0e,time)
 plot(time,ze[:,1])
 legends.append('Euler')
-legend(legends)
-
+legend(legends,loc='best',frameon=False)
 show()
-
