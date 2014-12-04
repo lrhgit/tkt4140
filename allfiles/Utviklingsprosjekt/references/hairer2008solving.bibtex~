@@ -1,0 +1,7 @@
+@book{hairer2008solving,
+  title={Solving ordinary differential equations I: nonstiff problems},
+  author={Hairer, Ernst and N{\o}rsett, Syvert Paul and Wanner, Gerhard},
+  volume={1},
+  year={2008},
+  publisher={Springer Science \& Business}
+}

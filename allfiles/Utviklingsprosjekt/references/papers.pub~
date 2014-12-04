@@ -1,0 +1,31 @@
+* books
+** Fluid Mechanics
+   key:       white1999fluid
+   author:    F.M. White
+   year:      1999
+   publisher: WCB/McGraw-Hill
+   url:       http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y
+   status:    published
+   isbn:      9780071168489
+   series:    McGraw-Hill series in mechanical engineering
+   lccn:      98026289
+   entrytype: book
+** 2,500 Solved Problems in Fluid Mechanics and Hydraulics
+   key:       evett19892
+   author:    J. Evett, C. Liu
+   year:      1989
+   publisher: McGraw-Hill Education
+   url:       http://books.google.no/books?id=NBDjWHLKwSQC
+   status:    published
+   isbn:      9780070197848
+   series:    Schaum's Solved Problems Series
+   lccn:      88133730
+   entrytype: book
+** Solving Ordinary Differential Equations I: Nonstiff Problems
+   key:       hairer2008solving
+   author:    Ernst Hairer, Syvert Paul N{\o}rsett, Gerhard Wanner
+   year:      2008
+   publisher: Springer
+   volume:    1
+   status:    published
+   entrytype: book
