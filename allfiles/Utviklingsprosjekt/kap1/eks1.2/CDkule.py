@@ -90,9 +90,9 @@ for i, solver in enumerate(solvers):
 scheme_list  = [euler, heun]
 
 for scheme in scheme_list:
-    legends.append(scheme.func_name)
     z = scheme(f2,z0,time)
     plot(time,z[:,1])
+    legends.append(scheme.func_name)
     
 # 
 # A more direct but less generic approach 
