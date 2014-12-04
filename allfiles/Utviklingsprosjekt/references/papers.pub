@@ -18,6 +18,14 @@
    url:       http://books.google.no/books?id=NBDjWHLKwSQC
    status:    published
    isbn:      9780070197848
-   lccn:      88133730
    series:    Schaum's Solved Problems Series
+   lccn:      88133730
+   entrytype: book
+** Solving Ordinary Differential Equations I: Nonstiff Problems
+   key:       hairer2008solving
+   author:    Ernst Hairer, Syvert Paul Norsett, Gerhard Wanner
+   year:      2008
+   publisher: Springer
+   volume:    1
+   status:    published
    entrytype: book
