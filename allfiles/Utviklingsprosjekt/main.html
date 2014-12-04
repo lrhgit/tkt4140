@@ -36,8 +36,23 @@ Automatically generated HTML file from DocOnce source
               (' Generating the plot in ref{example:sphere_freefall} ',
                2,
                None,
+<<<<<<< HEAD
+               '___sec9'),
+              (" Euler's method ", 2, None, '___sec10'),
+              (' Example 3: Falling sphere with constant and varying drag ',
+               2,
+               'ex:falling_sphere',
+               'ex:falling_sphere'),
+              (" Heun's method ", 2, None, '___sec12'),
+              (" Example 4: Newton's equation ", 2, None, '___sec13'),
+              (" Example 5: Falling sphere with Heun's method ",
+               2,
+               None,
+               '___sec14')]}
+=======
                '___sec3'),
               (' More efficient implementations ', 2, None, '___sec4')]}
+>>>>>>> 040abc38b97427748b79aeabb1b4b71375adce42
 end of tocinfo -->
 
 <body>
@@ -76,9 +91,25 @@ MathJax.Hub.Config({
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>Chapter 1 - Initial value problems for Ordinary Differential Equations</b></a></li>
      <!-- navigation toc: --> <li><a href="#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+<<<<<<< HEAD
+     <!-- navigation toc: --> <li><a href="#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
+     <!-- navigation toc: --> <li><a href="#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
+     <!-- navigation toc: --> <li><a href="#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating the plot in ref{example:sphere_freefall}</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;More efficient implementations</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Treatment of the term $\frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right]$</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
+=======
      <!-- navigation toc: --> <li><a href="#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Sphere in free fall</a></li>
      <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating the plot in ref{example:sphere_freefall}</a></li>
      <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;More efficient implementations</a></li>
+>>>>>>> 040abc38b97427748b79aeabb1b4b71375adce42
 
         </ul>
       </li>
@@ -141,11 +172,15 @@ MathJax.Hub.Config({
 
 <h2 id="example:sphere_freefall">Example 1: Sphere in free fall<a name="example:sphere_freefall"></a></h2>
 
+<<<<<<< HEAD
+<center><p><img src="kap1/eks1_2/2.png" align="bottom" width=200></p></center>
+=======
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 1:  Falling sphere. </p></center>
 <p><img src="eks1.2/2.png" align="bottom" ></p>
 </center>
+>>>>>>> 040abc38b97427748b79aeabb1b4b71375adce42
 
 <p>
 The figure shows a falling sphere with a diameter \( d \) and mass \( m \) that falls vertically in a fluid. Use of Newton's 2nd law in the \( z \)-direction gives
@@ -193,8 +228,13 @@ For Equation \eqref{eq:sphere_second_order} two initial conditions must be speci
 <p>
 <center> <!-- figure -->
 <hr class="figure">
+<<<<<<< HEAD
+<center><p class="caption">Figure 1:  Drag coefficient \( C_D \) as function of the Reynold's number \( R_e \). <a name="fig:CDsphere"></a> </p></center>
+<p><img src="kap1/eks1_2/example_sphere.png" align="bottom" height=400 width=600></p>
+=======
 <center><p class="caption">Figure 2:  Drag coefficient \( C_D \) as function of the Reynold's number \( R_e \). <a name="fig:CDsphere"></a> </p></center>
 <p><img src="eks1.2/example_sphere.png" align="bottom" height=400 width=600></p>
+>>>>>>> 040abc38b97427748b79aeabb1b4b71375adce42
 </center>
 
 <p>
@@ -246,13 +286,17 @@ i_list <span style="color: #666666">=</span> <span style="color: #008000">range<
 <p>
 <!-- --- end exercise --- -->
 
+<<<<<<< HEAD
+The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. The programme may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_2/CDsphere.py" target="_blank">here</a>. We will break up the programme and explain the different parts. The complete programme is as follows:
+=======
 <h2 id="___sec3">Generating the plot in <a href="#example:sphere_freefall">Example 1: Sphere in free fall</a> <a name="___sec3"></a></h2>
 
 The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. The programme may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/eks1.2/CDsphere.py" target="_self">here</a>. We will break up the programme and explain the different parts. The complete programme is as follows:
+>>>>>>> 040abc38b97427748b79aeabb1b4b71375adce42
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># eks1.2/CDsphere.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># eks12/CDsphere.py</span>
 
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
 
@@ -553,6 +597,825 @@ As seen, the function with the boolean variables was fastest. The simple vectori
 <!-- end bibliography -->
 
 <p>
+<<<<<<< HEAD
+The remainder \( R_n \) is given by
+$$
+\begin{align}
+R_n&=\frac{1}{(n+1)!}y^{(n+1)}(\xi)\cdot (x-x_0)^{n+1}\\
+&\text{where } \xi \in (x_0,x) \nonumber
+\end{align}
+$$
+
+
+<p>
+By use of \eqref{eq:1202} we get
+$$
+\begin{align} \label{eq:1203a}
+y(x_{j+1}) \equiv &y(x_j+h)=y(x_j)+hy'(x_j) +\frac{h^2}{2}y''(x_j)+\\
+&\dots+\frac{h^ny^{(n)}(x_j)}{n!}+R_n \nonumber
+\end{align}
+$$
+
+where the remainder \( R_n=O(h^{n+1}),\ h\to 0  \).
+
+<p>
+From \eqref{eq:1203a} we also get 
+$$
+\begin{equation}\label{eq:1203b}
+y(x_{j-1}) \equiv y(x_j-h)=y(x_j)-hy'(x_j)+\frac{h^2}{2}y''(x_j)+\dots+\frac{h^k(-1)^ky^{(k)}(x_j)}{k!}+\dots
+\end{equation}
+$$
+
+
+<p>
+We will here and subsequently assume that \( h \) is positive. 
+
+<p>
+We solve \eqref{eq:1203a} with respect to \( y' \):
+$$
+\begin{equation} \label{eq:1204a}
+y'(x_j)=\frac{y(x_{j+1})-y(x_j)}{h}+O(h)
+\end{equation} 
+$$
+
+
+<p>
+We solve \eqref{eq:1203b} with respect to \( y' \):
+$$
+\begin{equation} \label{eq:1204b}
+y'(x_j)=\frac{y(x_{j})-y(x_{j-1})}{h}+O(h)
+\end{equation}
+$$
+
+
+<p>
+By addition of \eqref{eq:1203b} and \eqref{eq:1203a} we get
+$$
+\begin{equation} \label{eq:1204c}
+y''(x_j)=\frac{y(x_{j+1})-2y(x_{j})+y(x_{j-1})}{h^2}+O(h^2)
+\end{equation}
+$$
+
+
+<p>
+By subtraction of \eqref{eq:1203b} from \eqref{eq:1203a} we get
+$$
+\begin{equation} \label{eq:1204d}
+y'(x_j)=\frac{y(x_{j+1})-y(x_{j-1})}{2h}+O(h^2)
+\end{equation}
+$$
+
+
+<p>
+<b>Notation:</b> We let \( y(x_j) \) always denote the function \( y(x) \) with \( x=x_j \). We use \( y_j \) both for the numerical and analytical value. Which is which will be implied. 
+
+<p>
+Equations \eqref{eq:1204a}, \eqref{eq:1204b}, \eqref{eq:1204c} and \eqref{eq:1204d} then gives the following difference expressions:
+$$
+\begin{align} \label{eq:1205a}
+&y'_j=\frac{y_{j+1}-y_j}{h}\ ;\  \text{truncation error}\ O(h)\\
+\label{eq:1205b}
+&y'_j=\frac{y_{j}-y_{j-1}}{h}\ ;\  \text{truncation error}\ O(h)\\
+\label{eq:1205c}
+&y''_j=\frac{y_{j+1}-2y_j+y_{j-1}}{h^2}\ ;\  \text{truncation error}\ O(h^2)\\
+\label{eq:1205d}
+&y'_j=\frac{y_{j+1}-y_{j-1}}{2h}\ ;\  \text{truncation error}\ O(h^2)
+\end{align}
+$$
+
+
+<p>
+\eqref{eq:1205a} is a forward difference, \eqref{eq:1205b} is a backward difference while \eqref{eq:1205c} and \eqref{eq:1205d} are central differences. 
+
+<p>
+<center><p><img src="kap1/6.png" align="bottom" width=300></p></center>
+
+<p>
+The expressions in \eqref{eq:1205a}, \eqref{eq:1205b}, \eqref{eq:1205c} and \eqref{eq:1205d} are easily established from the figure. 
+
+<p>
+\eqref{eq:1205a} follows directly. 
+
+<p>
+\eqref{eq:1205c}:
+$$
+\begin{equation*}
+y''_j(x_j)=\left(\frac{y_{j+1}-y_j}{h}-\frac{y_{j}-y_{j-1}}{h}\right)\cdot \frac{1}{h} = \frac{y_{j+1}-2y_j+y_{j-1}}{h^2}
+\end{equation*}
+$$
+
+
+<p>
+\eqref{eq:1205d}:
+
+$$
+\begin{equation*}
+y'_j=\left(\frac{y_{j+1}-y_j}{h}-\frac{y_{j}+y_{j-1}}{h}\right)\cdot \frac{1}{2}=\frac{y_{j+1}-y_{j-1}}{2h}
+\end{equation*}
+$$
+
+
+<p>
+To find the truncation error we must use the Taylor series expansion. 
+
+<p>
+The derivation above may be done more systematically. We set 
+$$
+\begin{equation} \label{eq:1206a}
+y'(x_j)=a\cdot y(x_{j-1})+b\cdot y(x_j)+c\cdot y(x_{j+1})+O(h^m)
+\end{equation}
+$$
+
+where we shall determine the constants \( a \), \( b \) and \( c \) together with the error term. For simplicity we use the notation \( y_j\equiv y(x_j),\ y'_j \equiv y'(x_j) \) and so on. From the Taylor series expansion in \eqref{eq:1203a} and \eqref{eq:1203b} we get
+$$
+\begin{align*}
+&a\cdot y_{j-1}+b\cdot y_j +c\cdot y_{j+1} = \\
+&a\cdot\left[y_j-hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''_j(\xi)\right]+b\cdot y_j + \\
+&c\cdot \left[y_j-hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''_j(\xi)\right]
+\end{align*}
+$$
+
+Collecting terms:
+$$
+\begin{align*}
+a\cdot y_{j-1}+b\cdot y_j +c\cdot y_{j+1} = \\
+(a+b+c)y_j+(c-a)hy'_j+ \\
+(a+c)\frac{h^2}{2}y''_j+(c-a)\frac{h^3}{6}y'''(\xi)
+\end{align*}
+$$
+
+We determine \( a \), \( b \) and \( c \) such that \( y'_j \) gets as high accuracy as possible:
+$$
+\begin{align} 
+a+b+c=0 \nonumber \\
+(c-a)\cdot h=1 \label{eq:1206b}\\ \nonumber
+a+c=1
+\end{align}
+$$
+
+The solution to \eqref{eq:1206b} is
+$$
+\begin{equation*}
+a=-\frac{1}{2h},\ b=0 \text{ and } c=\frac{1}{2h}
+\end{equation*}
+$$
+
+which when inserted in \eqref{eq:1206a} gives 
+$$
+\begin{equation}\label{eq:1207}
+y'_j=\frac{y_{j+1}-y_{j-1}}{2h}-\frac{h^2}{6}y'''(\xi)
+\end{equation} \\
+$$
+
+Comparing \eqref{eq:1207} with \eqref{eq:1206a} we see that the error term is \( O(h^m)=-\frac{h^2}{6}y'''(\xi) \), which means that \( m=2 \). As expected, \eqref{eq:1207} is identical to \eqref{eq:1204d}.
+
+<p>
+Let's use this method to find a forward difference expression for \( y'(x_j) \) with accuracy of \( O(h^2) \). Second order accuracy requires at least three unknown coefficients. Thus,
+$$
+\begin{equation}\label{eq:1208a}
+y'(x_j)=a\cdot y_j + b\cdot y_{j+1} + c\cdot y_{j+2} + O(h^m)
+\end{equation}	
+$$
+
+The procedure goes as in the previous example as follows,
+$$
+\begin{align*}
+a&\cdot y_{j}+b\cdot y_{j+1} +c\cdot y_{j+2} =\\
+a&\cdot y_j+b\cdot\left[y_j+hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''(\xi)\right]+\\
+c&\cdot \left[y_j+2hy'_j+2h^2y''_j+\frac{8h^3}{6}y'''_j(\xi)\right]\\
+=&(a+b+c)\cdot y_j+(b+2c)\cdot hy'_j \\
++& h^2\left(\frac{b}{2}+2c\right)\cdot y''_j+\frac{h^3}{6}(b+8c)\cdot y'''(\xi)
+\end{align*}
+$$
+
+We determine \( a \), \( b \) and \( c \) such that \( y'_j \) becomes as accurate as possible. Then we get,
+$$
+\begin{align}
+a+b+c=0 \nonumber\\
+(b+2c)\cdot h=1 \label{eq:1208b}\\
+\frac{b}{2}+2c=0\nonumber
+\end{align}
+$$
+
+The solution of \eqref{eq:1208b} is
+$$
+\begin{equation*}
+a=-\frac{3}{2h},\ b=\frac{2}{h},\ c=-\frac{1}{2h}\
+\end{equation*}
+$$
+
+which inserted in \eqref{eq:1208a} gives
+$$
+\begin{equation} \label{eq:1209}
+y'_j=\frac{-3y_j+4y_{j+1}-y_{j+2}}{2h}+\frac{h^2}{3}y'''(\xi)
+\end{equation}
+$$
+
+The error term \( O(h^m)=\frac{h^2}{3}y'''(\xi) \) shows that \( m=2 \).
+
+<p>
+Here follows some difference formulas derived with the procedure above:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Forward differences:
+$$
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i}-y_{i-1}}{\Delta x}+\dfrac{1}{2}y''(\xi)\Delta x \\
+\dfrac{dy_i}{dx}&=\dfrac{3y_i-4y_{i-1}+y_{i-2}}{2\Delta x}+\dfrac{1}{3}y'''(\xi)\cdot (\Delta x)^2 \\
+\dfrac{dy_i}{dx}&=\dfrac{11y_i-18y_{i-1}+9y_{i-2}-y_{i-3}}{6\Delta x}+\dfrac{1}{4}y^{(4)}(\xi)\cdot (\Delta x)^3 \\
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_i-2y_{i-1}+y_{i-2}}{(\Delta x)^2}+y'''(\xi)\cdot \Delta x \\
+\dfrac{d^2y_i}{dx^2}&=\dfrac{2y_i-5y_{i-1}+4y_{i-2}-y_{i-3}}{(\Delta x)^2}+\dfrac{11}{12}y^{(4)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+$$
+</div>
+<!-- end box -->
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Backward differences:
+$$
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i}-y_{i-1}}{\Delta x}+\dfrac{1}{2}y''(\xi)\Delta x \\
+\dfrac{dy_i}{dx}&=\dfrac{3y_i-4y_{i-1}+y_{i-2}}{2\Delta x}+\dfrac{1}{3}y'''(\xi)\cdot (\Delta x)^2 \\
+\dfrac{dy_i}{dx}&=\dfrac{11y_i-18y_{i-1}+9y_{i-2}-y_{i-3}}{6\Delta x}+\dfrac{1}{4}y^{(4)}(\xi)\cdot (\Delta x)^3 \\
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_i-2y_{i-1}+y_{i-2}}{(\Delta x)^2}+y'''(\xi)\cdot \Delta x \\
+\dfrac{d^2y_i}{dx^2}&=\dfrac{2y_i-5y_{i-1}+4y_{i-2}-y_{i-3}}{(\Delta x)^2}+\dfrac{11}{12}y^{(4)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+$$
+</div>
+<!-- end box -->
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Central differences:
+$$
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i+1}-y_{i-1}}{2\Delta x}-\dfrac{1}{6}y'''(\xi)(\Delta x)^2 \\
+\dfrac{dy_i}{dx}&=\dfrac{-y_{i+2}+8y_{i+1}-8y_{i-1}+y_{i-2}}{12\Delta x}+\dfrac{1}{30}y^{(5)}(\xi)\cdot (\Delta x)^4 \\
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_{i+1}-2y_{i}+y_{i-1}}{(\Delta x)^2}-\dfrac{1}{12}y^{(4)}(\xi)\cdot (\Delta x)^2 \\
+\dfrac{d^2y_i}{dx^2}&=\dfrac{-y_{i+2}+16y_{i+1}-30y_{i}+16y_{i-1}-y_{i-2}}{12(\Delta x)^2}+\dfrac{1}{90}y^{(6)}(\xi)\cdot (\Delta x)^4 \\
+\dfrac{d^3y_i}{dx^3}&=\dfrac{y_{i+2}-2y_{i+1}+2y_{i-1}-y_{i-2}}{2(\Delta x)^3}+\dfrac{1}{4}y^{(5)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+$$
+</div>
+<!-- end box -->
+
+
+<h3 id="___sec9">Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) <a name="___sec9"></a></h3>
+
+This term often appears in difference equations, and it may be clever to treat the term as it is instead of first execute the differentiation. 
+
+<p>
+<b>Central differences.</b>
+We use central differences (recall Figure <a href="#fig:1.5">2</a>) as follows,
+$$
+\begin{align*}
+\frac{d}{dx}\left[p(x)\cdot \frac{d}{dx}u(x)\right]\bigg|_i \approx& \frac{[p(x)\cdot u'(x)]|_{i+\frac{1}{2}}-[p(x)\cdot u'(x)]|_{i-\frac{1}{2}}}{h}\\
+=& \frac{p(x_{i+\frac{1}{2}})\cdot u'(x_{i+\frac{1}{2}})-p(x_{i-\frac{1}{2}})\cdot u'(x_{i-\frac{1}{2}})}{h}
+\end{align*}
+$$
+
+Using central differences again, we get
+$$
+\begin{equation*}
+u'(x_{i+\frac{1}{2}}) \approx \frac{u_{i+1}-u_i}{h},\ u'(x_{i-\frac{1}{2}}) \approx \frac{u_{i}-u_{i-1}}{h},\
+\end{equation*}
+$$
+
+which inserted in the previous equation gives the final expression
+$$
+\begin{equation}\label{eq:12010a}
+\frac{d}{dx}\left[p(x)\cdot \frac{d}{dx}u(x)\right]\bigg|_i \approx \frac{p_{i-\frac{1}{2}}\cdot {u_{i-1}-(p_{i+\frac{1}{2}}+p_{i-\frac{1}{2}})\cdot u_i+p_{i+\frac{1}{2}}\cdot u_{i+1}}}{h^2} + \text{error term}
+\end{equation}
+$$
+
+where
+$$
+\begin{equation*}
+\text{error term} =-\frac{h^2}{24}\cdot \frac{d}{dx} \bigg(p(x)\cdot u'''(x)+[p(x)\cdot u'(x)]''\bigg) + O(h^3)
+\end{equation*}
+$$
+
+If \( p(x_{1+\frac{1}{2}}) \) and \( p(x_{1-\frac{1}{2}}) \) cannot be found directly, we use
+$$
+\begin{equation}\label{eq:12011}
+p(x_{1+\frac{1}{2}})\approx \frac{1}{2}(p_{i+1}+p_i),\ p(x_{1-\frac{1}{2}}) \approx \frac{1}{2}(p_i+p_{i-1})
+\end{equation}
+$$
+
+Note that for \( p(x)=1=\text{constant} \) we get the usual expression 
+$$
+\begin{equation*}
+\frac{d^2u}{dx^2}\bigg|_i=\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}+O(h^2)
+\end{equation*}
+$$
+
+<b>Forward differences.</b>
+We start with
+$$
+\begin{align*}
+\frac{d}{dx}\left[p(x)\cdot \frac{du}{dx}\right]\bigg|_i &\approx \frac{p(x_{i+\frac{1}{2}})\cdot u'(x_{i+\frac{1}{2}})-p(x_i)\cdot u'(x_i)}{\frac{h}{2}}\\
+ &\approx \frac{p(x_{i+\frac{1}{2}})\cdot\left( \frac{u_{i+1}-u_i}{h}\right) -p(x_i)\cdot u'(x_i)}{\frac{h}{2}}
+\end{align*}
+$$
+
+which gives
+$$
+\begin{equation}\label{eq:12012a}
+\frac{d}{dx}\left[p(x)\cdot \frac{du}{dx}\right]\bigg|_i = \frac{2\cdot [p(x_{i+\frac{1}{2}})\cdot {(u_{i+1}-u_i)-h\cdot p(x_i)\cdot u'(x_i)]}}{h^2} +\text{error term}
+\end{equation}
+$$
+
+where
+$$
+\begin{equation}\label{eq:12012b}
+\text{error term} =- \frac{h}{12}[3p''(x_i)\cdot u'(x_i)+6p'(x_i)\cdot u''(x_i)+4p(x_i)\cdot u'''(x_i)]+O(h^2)
+\end{equation}
+$$
+
+We have kept the term \( u'(x_i) \) since \eqref{eq:12012a} usually is used at the boundary, and \( u'(x_i) \) may be prescribed there. 
+For \( p(x)=1=\text{constant} \) we get the expression
+$$
+\begin{equation}\label{eq:12013}
+u''_i = \frac{2\cdot [u_{i+1}-u_i-h\cdot u'(x_i)]}{h^2}-\frac{h}{3}u'''(x_i)+O(h^2)
+\end{equation}
+$$
+
+
+<p>
+<b>Backward Differences.</b>
+We start with
+$$
+\begin{align*}
+\frac{d}{dx}\left[p(x)\frac{du}{dx}\right]\bigg|_i \approx& \frac{p(x_i)\cdot u'(x_i)-p(x_i)\cdot u'(x_{i-\frac{1}{2}})\cdot u'(x_{i-\frac{1}{2}})}{\frac{h}{2}}\\ \approx& \frac{p(x_i)\cdot u'(x_i)-p(x_{i-\frac{1}{2}})\left(\frac{u_i-u_{i-1}}{h}\right)}{\frac{h}{2}}
+\end{align*}
+$$
+
+which gives
+$$
+\begin{equation} \label{eq:12014a}
+\frac{d}{dx}\left[p(x)\frac{du}{dx}\right]\bigg|_i = \frac{2\cdot [h\cdot p(x_i)u'(x_i)-p(x_{i-\frac{1}{2}})\cdot (u_i-u_{i-1})]}{h^2}+\text{error term}
+\end{equation}
+$$
+
+where
+$$
+\begin{equation} \label{eq:12014b}
+\text{error term}=\frac{h}{12}[3p''(x_i)\cdot u'(x_i)+6p'(x_i)\cdot u''(x_i)+4p(x_i)\cdot u'''(x_i)]+O(h^2)
+\end{equation}
+$$
+
+This is the same error term as in \eqref{eq:12012b} except from the sign. Also here we have kept the term \( u'(x_i) \) since \eqref{eq:12014b} usually is used at the boundary where \( u'(x_i) \) may be prescribed. 
+For \( p(x)=1=\text{constant} \) we get the expression
+$$
+\begin{equation}
+u''_i = \frac{2\cdot [h\cdot u'(x_i)-(u_i-u_{i-1})]}{h^2}+\frac{h}{3}u'''(x_i)+O(h^2)
+\end{equation}
+$$
+
+<h2 id="___sec10">Euler's method <a name="___sec10"></a></h2>
+
+The ODE is given as
+$$
+\begin{align} \label{eq:1301}
+\frac{dy}{dx} = y'(x)&=f(x,y)\\
+y(x_0)=&y_0 
+\end{align}
+$$
+
+Inserting \eqref{eq:1204a} we obtain
+$$
+\begin{equation*}
+y(x_{n+1})=y(x_n)+h\cdot f(x_n,y(x_n))+O(h^2)
+\end{equation*}
+$$
+
+or
+$$
+\begin{equation} \label{eq:1302}
+y_{n+1}=y_n+h\cdot f(x_n,y_n)
+\end{equation}
+$$
+
+\eqref{eq:1302} is a difference equation and the scheme is called <b>Euler's method</b> (1768). The scheme is illustrated graphically in Figure <a href="#fig:1.7">3</a>. Euler's method is a first order method, since the expression for \( y'(x) \) is first order of \( h \). The method has a global error of order \( h \), and a local of order \( h^2 \).
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  Graphical illustration of Euler's method. <a name="fig:1.7"></a> </p></center>
+<p><img src="kap1/7.png" align="bottom" width=400></p>
+</center>
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="ex:falling_sphere">Example 3: Falling sphere with constant and varying drag<a name="ex:falling_sphere"></a></h2>
+
+We write \eqref{eq:sphere_1st_order} and \eqref{eq:sphere_second_order} as a sytem as follows,
+$$
+\begin{align}
+& \frac{dz}{dt}=v\label{eq:1303a}\\
+& \frac{dv}{dt}=g-\alpha v^2 \label{eq:1303b}
+\end{align}
+$$
+
+where
+$$
+\begin{equation*}
+\alpha =\frac{3\rho _f}{4\rho _k\cdot d}\cdot C_D
+\end{equation*}
+$$
+
+The analytical solution with \( z(0)=0 \) and \( v(0)=0 \) is given by
+$$
+\begin{equation}\label{eq:1304a}
+v(t)=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t), \ z(t)=\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha}
+\end{equation}
+$$
+
+The terminal velocity \( v_t \) is found by \( \frac{dv}{dt}=0 \) which gives \( v_t=\sqrt{\frac{g}{\alpha}} \). 
+
+<p>
+We use data from a golf ball: \( d= 41\text{ mm} \), \( \rho_k = 1275 \text{ kg/m}^3 \), \( \rho_k = 1.22 \text{ kg/m}^3 \), and choose \( C_D = 0.4 \) which gives \( \alpha = 7\cdot 10^{-3} \). The terminal velocity then becomes 
+$$
+\begin{equation*}
+v_t = \sqrt{\frac{g}{\alpha}} = 37.44
+\end{equation*}
+$$
+
+
+<p>
+If we use Teylor's method from the section <a href="#sec:taylor">Taylor's method</a> we get the following expression by using four terms in the series expansion:
+$$
+\begin{align}\label{eq:1305}
+z(t)=&\frac{1}{2}gt^2\cdot (1-\frac{1}{6}\alpha gt^2)\\
+v(t)=&g t\cdot (1-\frac{1}{3}\alpha gt^2)
+\end{align}
+$$
+
+
+<p>
+The Euler scheme \eqref{eq:1302} used on \eqref{eq:1303b} gives
+$$
+\begin{equation} \label{eq:1306}
+v_{n+1}=v_n+\Delta t\cdot (g-\alpha\cdot v^2_n),\ n=0,1,\dots
+\end{equation}
+$$
+
+with \( v(0)=0 \).
+
+<p>
+The programme <b>FallingSphereEuler.py</b> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py" target="_blank">here</a>) computes the solution for the first 10 seconds, using a time step of \( \Delta t=0.5 \) s, and generates the plot in Figure <a href="#fig:faling_sphere_euler">4</a>. In addition to the case of constant drag coefficient, a solution for the case of varying \( C_D \) is included. To find \( C_D \) as function of velocity we use the function <em>cd_sphere()</em> that we implemented in <a href="#example:sphere_freefall">Example 2: Sphere in free fall</a>. The complete programme is as follows,
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># eks1_3/falling_shpere_euler.py</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
+sys<span style="color: #666666">.</span>path<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;../eks1_2&#39;</span>)
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity m/s^2</span>
+d <span style="color: #666666">=</span> <span style="color: #666666">41.0e-3</span>   <span style="color: #408080; font-style: italic"># Diameter of the sphere</span>
+rho_f <span style="color: #666666">=</span> <span style="color: #666666">1.22</span>  <span style="color: #408080; font-style: italic"># Density of fluid [kg/m^3]</span>
+rho_s <span style="color: #666666">=</span> <span style="color: #666666">1275</span>  <span style="color: #408080; font-style: italic"># Density of sphere [kg/m^3]</span>
+nu <span style="color: #666666">=</span> <span style="color: #666666">1.5e-5</span>   <span style="color: #408080; font-style: italic"># Kinematical viscosity [m^2/s]</span>
+CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>      <span style="color: #408080; font-style: italic"># Constant drag coefficient</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with constant drag.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
+    <span style="color: #008000; font-weight: bold">return</span> zout 
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with Re-dependent drag.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    v <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(z[<span style="color: #666666">1</span>]) 
+    Re <span style="color: #666666">=</span> v<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD <span style="color: #666666">=</span> cd_sphere(Re)
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
+    <span style="color: #008000; font-weight: bold">return</span> zout
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func, z0, time):
+    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
+    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),<span style="color: #666666">2</span>))
+    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
+    
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
+        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> func(z[i,:], t)<span style="color: #666666">*</span>dt
+        
+    <span style="color: #008000; font-weight: bold">return</span> z
+        
+<span style="color: #408080; font-style: italic"># main program starts here</span>
+
+T <span style="color: #666666">=</span> <span style="color: #666666">10</span>  <span style="color: #408080; font-style: italic"># end of simulation</span>
+N <span style="color: #666666">=</span> <span style="color: #666666">20</span>  <span style="color: #408080; font-style: italic"># no of time steps</span>
+time <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
+
+z0<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">2</span>)
+z0[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
+
+ze <span style="color: #666666">=</span> euler(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Euler&#39;s method</span>
+ze2 <span style="color: #666666">=</span> euler(f2, z0, time)   <span style="color: #408080; font-style: italic"># compute response with varying CD using Euler&#39;s method</span>
+
+k1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(g<span style="color: #666666">*4*</span>rho_s<span style="color: #666666">*</span>d<span style="color: #666666">/</span>(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>CD))
+k2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>g<span style="color: #666666">*</span>CD<span style="color: #666666">/</span>(<span style="color: #666666">4*</span>rho_s<span style="color: #666666">*</span>d))
+v_a <span style="color: #666666">=</span> k1<span style="color: #666666">*</span>np<span style="color: #666666">.</span>tanh(k2<span style="color: #666666">*</span>time)   <span style="color: #408080; font-style: italic"># compute response with constant CD using analytical solution</span>
+
+<span style="color: #408080; font-style: italic"># plotting</span>
+
+legends<span style="color: #666666">=</span>[]
+line_type<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;-&#39;</span>,<span style="color: #BA2121">&#39;:&#39;</span>,<span style="color: #BA2121">&#39;.&#39;</span>,<span style="color: #BA2121">&#39;-.&#39;</span>,<span style="color: #BA2121">&#39;--&#39;</span>]
+
+plot(time, v_a, line_type[<span style="color: #666666">0</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Analytical (constant CD)&#39;</span>)
+
+plot(time, ze[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">1</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (constant CD)&#39;</span>)
+
+plot(time, ze2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">3</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (varying CD)&#39;</span>)
+
+legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+xlabel(<span style="color: #BA2121">&#39;Time [s]&#39;</span>)
+ylabel(<span style="color: #BA2121">&#39;Velocity [m/s]&#39;</span>)
+savefig(<span style="color: #BA2121">&#39;example_sphere_falling_euler.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+show()
+</pre></div>
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Euler's method with \( \Delta t=0.5 \) s. <a name="fig:faling_sphere_euler"></a> </p></center>
+<p><img src="kap1/eks1_3/example_sphere_falling_euler.png" align="bottom" width=400></p>
+</center>
+
+<p>
+</div>
+<!-- end box -->
+
+
+<p>
+Euler's method may of course also be used for a system. Let's look at a simultaneous system of \( p \) equations
+$$
+\begin{align}
+&y'_1=f_1(x,y_1,y_2,\dots y_p) \nonumber\\
+&y'_2=f_2(x,y_1,y_2,\dots y_p) \nonumber\\
+&. \label{eq:1307a}\\
+&.\nonumber\\
+&y'_p=f_p(x,y_1,y_2,\dots y_p)\nonumber
+\end{align}
+$$
+
+with initial values
+$$
+\begin{equation}\label{eq:1307b}
+y_1(x_0)=a_1,\ y_2(x_0)=a_2,\dots,\ y_p(x_0)=a_p 
+\end{equation}
+$$
+
+Or, in vectorial format as follows,
+$$
+\begin{align}\label{eq:1308}
+\mathbf{y'}&=\mathbf{f}(x,\mathbf{y})\\
+\mathbf{y}&(x_0)=\mathbf{a} \nonumber
+\end{align}
+$$
+
+where \( \mathbf{y'} \), \( \mathbf{f} \), \( \mathbf{y} \) and \( \mathbf{a} \) are column vectores with \( p \) components. 
+
+<p>
+The Euler scheme \eqref{eq:1302} used on \eqref{eq:1308} gives
+$$
+\begin{equation}\label{eq:1309}
+\mathbf{y_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+\end{equation}
+$$
+
+For a system of three equations we get
+$$
+\begin{align} 
+y'_1=&y_2\nonumber\\
+y'_2=&y_3\label{eq:13010}\\
+y'_3=&-y_1y_3\nonumber
+\end{align}
+$$
+
+In this case \eqref{eq:1309} gives
+$$
+\begin{align} 
+&(y_1)_{n+1}=(y_1)_n+h\cdot (y_2)_n\nonumber\\
+&(y_2)_{n+1}=(y_2)_n+h\cdot (y_3)_n\label{eq:13011}\\
+&(y_3)_{n+1}=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n\nonumber\\
+\end{align}
+$$
+
+with \( y_1(x_0)=a_1,\ y_2(x_0)=a_2,\text{ and }y_3(x_0)=a_3 \)
+
+<p>
+In the section <a href="#subsec:reduction">Reduction of Higher order Equations</a> we have seen how we can reduce a higher order ODE to a set of first order ODEs. In \eqref{eq:1303a} and \eqref{eq:1303b} we have the equation \( \frac{d^2z}{dt^2}=g-\alpha\cdot \left(\frac{dz}{dt}\right)^2 \) which we have reduced to a system as
+$$
+\begin{align*}
+\frac{dz}{dt}= v&\\
+\frac{dv}{dt}= g&-\alpha\cdot v^2
+\end{align*}
+$$
+
+which gives an Euler scheme as follows,
+$$
+\begin{align*}
+&z_{n+1}=z_n+\Delta t\cdot v_n\\
+&v_{n+1}=n_n+\Delta t\cdot [g-\alpha(v_n)^2]\\
+&\text{med }z_0=0,\ v_0=0
+\end{align*}
+$$
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<h2 id="___sec12">Heun's method <a name="___sec12"></a></h2>
+
+From \eqref{eq:1204a} or \eqref{eq:1205a} we have
+$$
+\begin{equation}\label{eq:1401}
+y''(x_n,y_n)=f'\left(x_n,y(x_n,y_n)\right)\approx \frac{f(x_n+h)-f(x_n)}{h}
+\end{equation}
+$$
+
+The Taylor series expansion \eqref{eq:1203a} gives
+$$
+\begin{equation*}
+y(x_n+h)=y(x_n)+hy'[x_n,y(x_n)]+\frac{h^2}{2}y''[x_n,y(x_n)]+O(h^3)
+\end{equation*}
+$$
+
+which, inserting \eqref{eq:1401}, gives
+$$
+\begin{equation}\label{eq:1402}
+y_{n+1}=y_n+\frac{h}{2}\cdot [f(x_n,y_n)+f(x_{n+1},y(x_{n+1}))]
+\end{equation}
+$$
+
+
+<p>
+This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if \( f(x,y) \) is only a function of \( x \). Since \( y_{n+1} \) appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function \( f(x,y) \) is non-linear. One way of making the scheme explicit is to use the Euler scheme \eqref{eq:1302} to calculate \( y(x_{n+1}) \) on the right side of \eqref{eq:1402}. The resulting scheme is often denoted <b>Heun's method</b>.
+
+<p>
+The scheme for Heun's method becomes
+$$
+\begin{align}
+&y^p_{n+1}=y_n+h\cdot f(x_n,y_n) \label{eq:1403a} \\
+&y_{n +1}=y_n+\frac{h}{2}\cdot[f(x_n,y_n)+f(x_{n+1},y^p_{n+1})]\label{eq:1403b}
+\end{align}
+$$
+
+Index \( p \) stands for "predicted". \eqref{eq:1403a} is then the predictor and \eqref{eq:1403b} is the corrector. This is a second order method. For more details, see <a href="#cheney2012numerical">[4]</a>. Figure <a href="#fig:illustration_heun">5</a> is a graphical illustration of the method.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  Illustration of Heun's method. <a name="fig:illustration_heun"></a> </p></center>
+<p><img src="kap1/9.png" align="bottom" width=400></p>
+</center>
+
+<p>
+In principle we could make an iteration procedure where we after using the corrector use the corrected values to correct the corrected values to make a new predictor and so on. This will likely lead to a more accurate solution of the difference scheme, but not necessarily of the differential equation. We are therefore satisfied by using the corrector once. For a system, we get
+$$
+\begin{align}
+& \mathbf{y^p_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})\label{eq:1404a}\\
+& \mathbf{y_{n+1}}=\mathbf{y_n} +\frac{h}{2}\cdot [\mathbf{f}(x_n,\mathbf{y_n})+\mathbf{f}(x_{n+1},\mathbf{y^p_{n+1}})]\label{eq:1404b}
+\end{align}
+$$
+
+Note that \( \mathbf{y}^p_{n+1} \) is a temporary variable that is not necessary to store. 
+
+<p>
+If we use \eqref{eq:1404a} and \eqref{eq:1404b} on the example in \eqref{eq:13010} we get
+
+<p>
+Predictor:
+$$
+\begin{align*}
+(y_1)^p_{n+1}&=(y_1)_n+h\cdot (y_2)_n&\\
+(y_2)^p_{n+1}&=(y_2)_n+h\cdot (y_3)_n&\\
+(y_3)^p_{n+1}&=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n
+\end{align*}
+$$
+
+Corrector:
+$$
+\begin{align*}
+(y_1)_{n+1}&=(y_1)_n+0.5h\cdot [(y_2)_n+(y_2)^p_{n+1}]&\\
+(y_2)_{n+1}&=(y_2)_n+0.5h\cdot [(y_3)_n+(y_3)^p_{n+1}]&\\
+(y_3)_{n+1}&=(y_3)_n-0.5h\cdot [(y_1)_n\cdot (y_3)_n+(y_1)^p_{n+1}\cdot (y_3)^p_{n+1}]
+\end{align*}
+$$
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec13">Example 4: Newton's equation <a name="___sec13"></a></h2>
+
+Let's use Heun's method to solve Newton's equation from the section <a href="#section:introduction">Introduction</a>,
+$$
+\begin{equation}\label{eq:1405a}
+y'(x)=1-3x+y+x^2+xy,\ y(0)=0
+\end{equation}
+$$
+
+with analytical solution
+$$
+\DeclareMathOperator\erf{erf}
+\begin{align}
+y(x)=&3\sqrt{2\pi e}\cdot \exp\left(x\left(1+\frac{x}{2}\right)\right)\cdot \left[\erf\left(\frac{\sqrt{2}}{2}(1+x)\right)-\erf\left(\frac{\sqrt{2}}{2}\right)\right]\nonumber \\
+	+&4\cdot \left[1-\exp\left(x\left(1+\frac{x}{2}\right)\right)\right]-x \label{eq:1405b}
+\end{align}
+$$
+
+
+<p>
+Here we have \( f(x,y)=1-3x+y+x^2+xy = 1+x(x-3)+(1+x)y \)
+</div>
+<!-- end box -->
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec14">Example 5: Falling sphere with Heun's method <a name="___sec14"></a></h2>
+
+Let's go back to <a href="#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, and implement a new function <em>heun()</em> in the programme <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>. 
+
+<p>
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <a name="hairer2008solving"></a> <b>E. Hairer, S. P. Norsett and G. Wanner</b>. 
+    <em>Solving Ordinary Differential Equations I: Nonstiff Problems</em>,
+    Springer,
+    2008.</li>
+ <li> <a name="white1999fluid"></a> <b>F. White</b>. 
+    <em>Fluid Mechanics</em>,
+    WCB/McGraw-Hill,
+    1999,
+    <a href="http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y" target="_blank"><tt>http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y</tt></a>.</li>
+ <li> <a name="evett19892"></a> <b>J. Evett and C. Liu</b>. 
+    <em>2,500 Solved Problems in Fluid Mechanics and Hydraulics</em>,
+    McGraw-Hill Education,
+    1989,
+    <a href="http://books.google.no/books?id=NBDjWHLKwSQC" target="_blank"><tt>http://books.google.no/books?id=NBDjWHLKwSQC</tt></a>.</li>
+ <li> <a name="cheney2012numerical"></a> <b>E. Cheney and D. Kincaid</b>. 
+    <em>Numerical Mathematics and Computing</em>,
+    Cengage Learning,
+    2012.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<p>
+<!-- --- end exercise --- -->
+=======
+>>>>>>> 040abc38b97427748b79aeabb1b4b71375adce42
 
 <!-- ------------------- end of main content --------------- -->
 
