@@ -29,3 +29,10 @@
    volume:    1
    status:    published
    entrytype: book
+** Numerical Mathematics and Computing
+   key:       cheney2012numerical
+   author:    E. Cheney, David Kincaid
+   year:      2012
+   publisher: Cengage Learning
+   status:    published
+   entrytype: book
