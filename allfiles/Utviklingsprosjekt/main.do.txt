@@ -1052,7 +1052,7 @@ Using the same time steps as in ref{ex:falling_sphere}, we get the response plot
 
 FIGURE:[kap1/eks/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
 
-The complete programme _FallingSphereEulerHeun.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEulerHeun.py.") is listed below.
+The complete programme _FallingSphereEulerHeun.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEulerHeun.py") is listed below.
 
 @@@CODE ./kap1/eks/FallingSphereEulerHeun.py
 
@@ -1123,7 +1123,7 @@ Let's implement the RK4 scheme and use it on (ref{ex:falling_sphere}). The schem
 
 @@@CODE ./kap1/eks/FallingSphereEulerHeunRK4.py from-to:# define rk4 scheme@return z
 
-Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme _FallingSphereEulerHeunRK4.py_ may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEulerHeunRK4.py." and is listed below.
+Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme _FallingSphereEulerHeunRK4.py_ may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEulerHeunRK4.py" and is listed below.
 
 FIGURE:[kap1/eks/example_sphere_falling_euler_heun_rk4.png, width=400] Velocity of falling sphere using Euler, Heun and RK4. label{fig:falling_sphere_euler_heun_rk4}
 
