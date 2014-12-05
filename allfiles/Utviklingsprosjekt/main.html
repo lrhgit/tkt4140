@@ -534,7 +534,7 @@ $$
 
 <h2 id="example:sphere_freefall">Example 2: Sphere in free fall<a name="example:sphere_freefall"></a></h2>
 
-<center><p><img src="kap1/eks1_2/2.png" align="bottom" width=200></p></center>
+<center><p><img src="kap1/eks/2.png" align="bottom" width=200></p></center>
 
 <p>
 The figure shows a falling sphere with a diameter \( d \) and mass \( m \) that falls vertically in a fluid. Use of Newton's 2nd law in the \( z \)-direction gives
@@ -583,7 +583,7 @@ For Equation \eqref{eq:sphere_second_order} two initial conditions must be speci
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 1:  Drag coefficient \( C_D \) as function of the Reynold's number \( R_e \). <a name="fig:CDsphere"></a> </p></center>
-<p><img src="kap1/eks1_2/example_sphere.png" align="bottom" height=400 width=600></p>
+<p><img src="kap1/eks/example_sphere.png" align="bottom" height=400 width=600></p>
 </center>
 
 <p>
@@ -634,7 +634,7 @@ i_list <span style="color: #666666">=</span> <span style="color: #008000">range<
 
 <h3 id="___sec6">Generating the plot in <a href="#example:sphere_freefall">Example 2: Sphere in free fall</a> <a name="___sec6"></a></h3>
 
-The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. The programme may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_2/CDsphere.py" target="_blank">here</a>. We will break up the programme and explain the different parts. The complete programme is as follows:
+The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. The programme may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/CDsphere.py" target="_blank">here</a>. We will break up the programme and explain the different parts. The complete programme is as follows:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
@@ -1495,7 +1495,7 @@ One way of implementing the integration scheme is given in the following functio
     <span style="color: #008000; font-weight: bold">return</span> z
 </pre></div>
 <p>
-The programme <b>FallingSphereEuler.py</b> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py" target="_blank">here</a>) computes the solution for the first 10 seconds, using a time step of \( \Delta t=0.5 \) s, and generates the plot in Figure <a href="#fig:faling_sphere_euler">4</a>. In addition to the case of constant drag coefficient, a solution for the case of varying \( C_D \) is included. To find \( C_D \) as function of velocity we use the function <em>cd_sphere()</em> that we implemented in <a href="#example:sphere_freefall">Example 2: Sphere in free fall</a>. The complete programme is as follows,
+The programme <b>FallingSphereEuler.py</b> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEuler.py" target="_blank">here</a>) computes the solution for the first 10 seconds, using a time step of \( \Delta t=0.5 \) s, and generates the plot in Figure <a href="#fig:faling_sphere_euler">4</a>. In addition to the case of constant drag coefficient, a solution for the case of varying \( C_D \) is included. To find \( C_D \) as function of velocity we use the function <em>cd_sphere()</em> that we implemented in <a href="#example:sphere_freefall">Example 2: Sphere in free fall</a>. The complete programme is as follows,
 
 <p>
 
@@ -1589,7 +1589,7 @@ show()
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 4:  Euler's method with \( \Delta t=0.5 \) s. <a name="fig:faling_sphere_euler"></a> </p></center>
-<p><img src="kap1/eks1_3/example_sphere_falling_euler.png" align="bottom" width=400></p>
+<p><img src="kap1/eks/example_sphere_falling_euler.png" align="bottom" width=400></p>
 </center>
 
 <p>
@@ -1838,7 +1838,7 @@ py<span style="color: #666666">.</span>show()
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 6:  Velocity of falling sphere using Euler's and Heun's methods. <a name="fig:newton_heun"></a> </p></center>
-<p><img src="kap1/eks1_3/newton_heun.png" align="bottom" width=400></p>
+<p><img src="kap1/eks/newton_heun.png" align="bottom" width=400></p>
 </center>
 
 <p>
@@ -1859,7 +1859,7 @@ py<span style="color: #666666">.</span>show()
 
 <h2 id="___sec14">Example 5: Falling sphere with Heun's method <a name="___sec14"></a></h2>
 
-Let's go back to <a href="#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, and implement a new function <code>heun()</code> in the programme <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>. 
+Let's go back to <a href="#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, and implement a new function <code>heun()</code> in the programme <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>. 
 
 <p>
 We recall the system of equations as
@@ -1920,11 +1920,11 @@ Using the same time steps as in <a href="#ex:falling_sphere">Example 3: Falling 
 <center> <!-- figure -->
 <hr class="figure">
 <center><p class="caption">Figure 7:  Velocity of falling sphere using Euler's and Heun's methods. <a name="fig:falling_sphere_euler_heun"></a> </p></center>
-<p><img src="kap1/eks1_3/example_sphere_falling_euler_heun.png" align="bottom" width=400></p>
+<p><img src="kap1/eks/example_sphere_falling_euler_heun.png" align="bottom" width=400></p>
 </center>
 
 <p>
-The complete programme <b>FallingSphereEulerHeun.py</b> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEulerHeun.py." target="_blank">here</a>) is listed below.
+The complete programme <b>FallingSphereEulerHeun.py</b> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEulerHeun.py." target="_blank">here</a>) is listed below.
 
 <p>
 

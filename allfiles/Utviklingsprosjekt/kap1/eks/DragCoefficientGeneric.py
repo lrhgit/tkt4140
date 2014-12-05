@@ -1,4 +1,4 @@
-# eks1.2/DragCoefficientGeneric.py
+# eks/DragCoefficientGeneric.py
 '''
 Created on 23. okt. 2014
 

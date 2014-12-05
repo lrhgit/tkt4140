@@ -300,7 +300,7 @@ By use of \eqref{eq:1128} we get
 ===== Example: Sphere in free fall =====
 label{example:sphere_freefall}
 
-FIGURE:[kap1/eks1_2/2.png, width=200]
+FIGURE:[kap1/eks/2.png, width=200]
 
 The figure shows a falling sphere with a diameter $d$ and mass $m$ that falls vertically in a fluid. Use of Newton's 2nd law in the $z$-direction gives
 !bt
@@ -336,23 +336,23 @@ Introducing $v=\frac{dz}{dt}$ in Equation \eqref{eq:sphere_1st_order}, we get a 
 !et
 For Equation \eqref{eq:sphere_second_order} two initial conditions must be specified, e.g. $v=v_0$ and $z=z_0$ for $t=0$. 
 
-FIGURE:[kap1/eks1_2/example_sphere.png, height=400 width=600] Drag coefficient $C_D$ as function of the Reynold's number $R_e$. label{fig:CDsphere}
+FIGURE:[kap1/eks/example_sphere.png, height=400 width=600] Drag coefficient $C_D$ as function of the Reynold's number $R_e$. label{fig:CDsphere}
 
-@@@CODE ./kap1/eks1_2/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot
+@@@CODE ./kap1/eks/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot
 
 !ebox
 
 === Generating the plot in ref{example:sphere_freefall} ===
 
-The complete programme _CDsphere.py_ used to generate the plot in the example above will now be presented. The programme may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_2/CDsphere.py". We will break up the programme and explain the different parts. The complete programme is as follows:
-@@@CODE ./kap1/eks1_2/CDsphere.py
+The complete programme _CDsphere.py_ used to generate the plot in the example above will now be presented. The programme may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/CDsphere.py". We will break up the programme and explain the different parts. The complete programme is as follows:
+@@@CODE ./kap1/eks/CDsphere.py
 
 In the first code line, 
-@@@CODE ./kap1/eks1_2/CDsphere.py fromto: from numpy import logspace, zeros@^# Define the function cd_sphere
+@@@CODE ./kap1/eks/CDsphere.py fromto: from numpy import logspace, zeros@^# Define the function cd_sphere
 the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programmes. The function `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. The function `zeros` creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org". 
 
 In _CDsphere.py_ a function `cd_sphere` was defined as follows:
-@@@CODE ./kap1/eks1_2/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag coefficient
+@@@CODE ./kap1/eks/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag coefficient
 The function takes `Re` as an argument and returns the value `CD`. All Python functions begin with `def`, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument `Re`. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a funciton it is common to use the `return` statement to return the value of the function. 
 
 Variables defined inside a function, such as `p` and `x1` above, are *local* variables that cannot be accessed outside the function. Variables defined outside functions, in the "main programme", are *global* variables and may be accessed anywhere, also inside functions. 
@@ -362,13 +362,13 @@ Three more functions from the `numpy` package are imported in the function. They
 The function above contains an example of the use of the `if-elif-else` block. The block begins with `if` and a boolean expression. If the boolean expression evaluates to `true` the *indented* statements following the `if` statement are carried out. If not, the boolean expression following the `elif` is evaluated. If none of the conditions are evaluated to `true` the statements following the `else` are carried out. 
 
 In the code block
-@@@CODE ./kap1/eks1_2/CDsphere.py from-to: # Calculate drag coefficient@^# Make plot
+@@@CODE ./kap1/eks/CDsphere.py from-to: # Calculate drag coefficient@^# Make plot
 the function `cd_sphere` is called. First, the number of data points to be calculated are stored in the integer variable `Npts`. Using the `logspace` function imported earlier, `Re` is assigned an array objet which has float elements with values ranging from $10^{-1}$ to $10^7$. The values are uniformly distributed along a 10logarithmic scale. `CD` is first defined as an array with `Npts` zero elements, using the `zero` function. Then, for each element in `Re`, the drag coefficient is calculated using our own defined function `cd_sphere`, in a `for` loop, which is explained in the following.
 
 The function `range` is a built-in function that generates a list containing arithmetic progressions. The `for i in i_list` construct creates a loop over all elements in `i_list`. In each pass of the loop, the variable `i` refers to an element in the list, starting with `i_list[0]` (0 in this case) and ending with the last element `i_list[Npts-1]` (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call `cd_sphere(Re[i])` is assigned to `CD[i]`. Each statement in the block must be indented. 
 
 Lastly, the drag coefficient is plotted and the figure generated:
-@@@CODE ./kap1/eks1_2/CDsphere.py from-to:# Make plot@^# End
+@@@CODE ./kap1/eks/CDsphere.py from-to:# Make plot@^# End
 
 To generate the plot, the package `matplotlib` is used. `matplotlib` is the standard package for curve plotting in Python. For simple plotting the `matplotlib.pyplot` interface provides a MATLAB-like interface, which has been used here. For documentation and explanation of this package, we refer to URL: "http://www.matplotlib.org". 
 
@@ -383,17 +383,17 @@ Descriptions and explanations of all functions available in `pyplot` may be foun
 When solving numerical problems variables are often not single numbers, but arrays containing many numbers. The function `CDsphere` above takes a single number in and gives a single number out. For computationally intensive algorithms where variables are stored in arrays this is inconvenient and time consuming, as each of the array elements must be sent to the function independently. It is therefore of interest to implement functions that can take in whole arrays and output whole arrays in an efficient manner. This may be done in a variaty of ways. Some possibilities are presented in the following, and, as we shall see, some are more time consuming than others. 
 
 A simple extension of the single-valued function above is as follows:
-@@@CODE ./kap1/eks1_2/DragCoefficientGeneric.py from-to:# simple extension cd_sphere@^# vectorized function
+@@@CODE ./kap1/eks/DragCoefficientGeneric.py from-to:# simple extension cd_sphere@^# vectorized function
 
 The new function `cd_sphere_py_vector` takes in an array `ReNrs` and calculates the drag coefficient for each element using the previous function `cd_sphere`. This does the job, but is not very efficient. 
 
 A second version is implemented in the function `cd_sphere_vector`. This function takes in the array `Re` and calculates the drag coefficient of all elements by multiple calls of the function `numpy.where`; one call for each condition, similarily as each `if` statement in the function `cd_sphere`. The function is shown here:
 
-@@@CODE ./kap1/eks1_2/DragCoefficientGeneric.py from-to:# vectorized function@^# vectorized boolean
+@@@CODE ./kap1/eks/DragCoefficientGeneric.py from-to:# vectorized function@^# vectorized boolean
 
 A third approach we will try is using boolean type variables. The 8 variables `condition1` through `condition8` in the function `cd_sphere_vector_bool` are boolean variables of the same size and shape as `Re`. The elements of the boolean variables evaluate to either `True` or `False`, depending on if the corresponding element in `Re` satisfy the condition the variable is assigned. 
 
-@@@CODE ./kap1/eks1_2/DragCoefficientGeneric.py from-to:# vectorized boolean@^if __name__ == '__main__':              
+@@@CODE ./kap1/eks/DragCoefficientGeneric.py from-to:# vectorized boolean@^if __name__ == '__main__':              
 
 Lastly, the built-in function `vectorize` is used to automatically generate a vector-version of the function `cd_sphere`, as follows:
 !bc pycod
@@ -850,13 +850,13 @@ v_{n+1}=v_n+\Delta t\cdot (g-\alpha\cdot v^2_n),\ n=0,1,\dots
 with $v(0)=0$.
 
 One way of implementing the integration scheme is given in the following function `euler()`:
-@@@CODE ./kap1/eks1_3/FallingSphereEuler.py from-to:# define euler scheme@# main program starts here
+@@@CODE ./kap1/eks/FallingSphereEuler.py from-to:# define euler scheme@# main program starts here
 
-The programme _FallingSphereEuler.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function *cd_sphere()* that we implemented in ref{example:sphere_freefall}. The complete programme is as follows,
+The programme _FallingSphereEuler.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function *cd_sphere()* that we implemented in ref{example:sphere_freefall}. The complete programme is as follows,
 
-@@@CODE ./kap1/eks1_3/FallingSphereEuler.py
+@@@CODE ./kap1/eks/FallingSphereEuler.py
 
-FIGURE:[kap1/eks1_3/example_sphere_falling_euler.png, width=400] Euler's method with $\Delta t=0.5$ s. label{fig:faling_sphere_euler}
+FIGURE:[kap1/eks/example_sphere_falling_euler.png, width=400] Euler's method with $\Delta t=0.5$ s. label{fig:faling_sphere_euler}
 
 !ebox
 
@@ -1009,16 +1009,16 @@ Here we have $f(x,y)=1-3x+y+x^2+xy = 1+x(x-3)+(1+x)y$
 
 The following programme _NewtonHeun.py_ solves this problem using Heun's method, and the resulting figure is shown in Figure ref{fig:newton_heun}.
 
-@@@CODE ./kap1/eks1_3/NewtonHeun.py
+@@@CODE ./kap1/eks/NewtonHeun.py
 
-FIGURE:[kap1/eks1_3/newton_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:newton_heun}
+FIGURE:[kap1/eks/newton_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:newton_heun}
 
 !ebox
 
 !bbox
 ===== Example: Falling sphere with Heun's method =====
 
-Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the programme "FallingSphereEuler.py": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py". 
+Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the programme "FallingSphereEuler.py": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEuler.py". 
 
 We recall the system of equations as
 !bt
@@ -1046,15 +1046,15 @@ v_{n+1}&=v_n+0.5\Delta t \cdot \left[2g-\alpha[v^2_n+(v^p_{n+1})^2\right] \nonum
 with initial values $z_0=z(0)=0,\ v_0=v(0)=0$. Note that we don't use the predictor $z^p_{n+1}$ since it doesn't appear on the right hand side of the equation system. 
 
 One possible way of implementing this scheme is given in the following function named `heun()`:
-@@@CODE ./kap1/eks1_3/FallingSphereEulerHeun.py from-to:# define heun scheme@# main program starts here
+@@@CODE ./kap1/eks/FallingSphereEulerHeun.py from-to:# define heun scheme@# main program starts here
 
 Using the same time steps as in ref{ex:falling_sphere}, we get the response plotted in Figure ref{fig:falling_sphere_euler_heun}.
 
-FIGURE:[kap1/eks1_3/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
+FIGURE:[kap1/eks/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
 
-The complete programme _FallingSphereEulerHeun.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEulerHeun.py.") is listed below.
+The complete programme _FallingSphereEulerHeun.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEulerHeun.py.") is listed below.
 
-@@@CODE ./kap1/eks1_3/FallingSphereEulerHeun.py
+@@@CODE ./kap1/eks/FallingSphereEulerHeun.py
 
 
 
