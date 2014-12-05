@@ -820,7 +820,7 @@ where
 !et
 The analytical solution with $z(0)=0$ and $v(0)=0$ is given by
 !bt
-\begin{equation}\label{eq:1304a}
+\begin{equation} label{eq:1304a}
 v(t)=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t), \ z(t)=\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha}
 \end{equation}
 !et
@@ -848,6 +848,9 @@ v_{n+1}=v_n+\Delta t\cdot (g-\alpha\cdot v^2_n),\ n=0,1,\dots
 \end{equation}
 !et
 with $v(0)=0$.
+
+One way of implementing the integration scheme is given in the following function `euler()`:
+@@@CODE ./kap1/eks1_3/FallingSphereEuler.py from-to:# define euler scheme@# main program starts here
 
 The programme _FallingSphereEuler.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function *cd_sphere()* that we implemented in ref{example:sphere_freefall}. The complete programme is as follows,
 
@@ -1003,12 +1006,56 @@ y(x)=&3\sqrt{2\pi e}\cdot \exp\left(x\left(1+\frac{x}{2}\right)\right)\cdot \lef
 !et
 
 Here we have $f(x,y)=1-3x+y+x^2+xy = 1+x(x-3)+(1+x)y$
+
+The following programme _NewtonHeun.py_ solves this problem using Heun's method, and the resulting figure is shown in Figure ref{fig:newton_heun}.
+
+@@@CODE ./kap1/eks1_3/NewtonHeun.py
+
+FIGURE:[kap1/eks1_3/newton_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:newton_heun}
+
 !ebox
 
 !bbox
 ===== Example: Falling sphere with Heun's method =====
 
-Let's go back to ref{ex:falling_sphere}, and implement a new function *heun()* in the programme "FallingSphereEuler.py": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py". 
+Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the programme "FallingSphereEuler.py": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEuler.py". 
+
+We recall the system of equations as
+!bt
+\begin{align*}
+&\frac{dz}{dt}=v\\
+&\frac{dv}{dt}=g-\alpha v^2
+\end{align*}
+!et
+which by use of Heun's method in \eqref{eq:1404a} and \eqref{eq:1404b} becomes
+
+Predictor:
+!bt
+\begin{align}
+z^p_{n+1}&=z_n+\Delta t v_n \\
+v^p_{n+1}&= v_n +\Delta t \cdot (g-\alpha v^2_n) \nonumber
+\end{align}
+!et
+Corrector:
+!bt
+\begin{align}
+z_{n+1}&=z_n+0.5\Delta t \cdot (v_n+v^p_{n+1}) \\
+v_{n+1}&=v_n+0.5\Delta t \cdot \left[2g-\alpha[v^2_n+(v^p_{n+1})^2\right] \nonumber
+\end{align}
+!et
+with initial values $z_0=z(0)=0,\ v_0=v(0)=0$. Note that we don't use the predictor $z^p_{n+1}$ since it doesn't appear on the right hand side of the equation system. 
+
+One possible way of implementing this scheme is given in the following function named `heun()`:
+@@@CODE ./kap1/eks1_3/FallingSphereEulerHeun.py from-to:# define heun scheme@# main program starts here
+
+Using the same time steps as in ref{ex:falling_sphere}, we get the response plotted in Figure ref{fig:falling_sphere_euler_heun}.
+
+FIGURE:[kap1/eks1_3/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
+
+The complete programme _FallingSphereEulerHeun.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks1_3/FallingSphereEulerHeun.py.") is listed below.
+
+@@@CODE ./kap1/eks1_3/FallingSphereEulerHeun.py
+
 
 
 !ebox

@@ -20,7 +20,6 @@ def f(z, t):
     zout[:] = [z[1], g - alpha*z[1]**2]
     return zout 
 
-
 def f2(z, t):
     """2x2 syst for sphere with Re-dependent drag."""
     zout = np.zeros_like(z)
@@ -31,7 +30,7 @@ def f2(z, t):
     zout[:] = [z[1], g - alpha*z[1]**2]
     return zout
 
-
+# define euler scheme
 def euler(func,z0, time):
     """The Euler scheme for solution of systems of of ODEs. 
     z0 is a vector for the initial conditions, 
@@ -47,6 +46,7 @@ def euler(func,z0, time):
 
     return z
 
+# define heun scheme
 def heun(func,z0, time):
     """The Heun scheme for solution of systems of of ODEs. 
     z0 is a vector for the initial conditions, 
