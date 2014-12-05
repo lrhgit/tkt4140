@@ -63,7 +63,15 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec14'),
-              (' Runge - Kutta of 4th order ', 2, None, '___sec15')]}
+              (' Runge-Kutta of 4th order ', 2, None, '___sec15'),
+              (' Example 6: Falling sphere using RK4 ',
+               2,
+               'example:falling_sphere_RK4',
+               'example:falling_sphere_RK4'),
+              (' Example 7: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec17')]}
 end of tocinfo -->
 
 <body>
@@ -106,16 +114,15 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
      <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
      <!-- navigation toc: --> <li><a href="#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generating the plot in ref{example:sphere_freefall}</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;More efficient implementations</a></li>
      <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Treatment of the term $\frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right]$</a></li>
      <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
      <!-- navigation toc: --> <li><a href="#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
      <!-- navigation toc: --> <li><a href="#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
      <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge - Kutta of 4th order</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
+     <!-- navigation toc: --> <li><a href="#example:falling_sphere_RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Falling sphere using RK4</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 7: Particle motion in two dimensions</a></li>
 
         </ul>
       </li>
@@ -638,7 +645,7 @@ The complete programme <b>CDsphere.py</b> used to generate the plot in the examp
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># eks12/CDsphere.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/CDsphere.py</span>
 
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
 
@@ -1500,12 +1507,15 @@ The programme <b>FallingSphereEuler.py</b> (may be downloaded <a href="https://r
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># eks1_3/FallingSphereEuler.py</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
-sys<span style="color: #666666">.</span>path<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;../eks1_2&#39;</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/FallingSphereEuler.py</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #408080; font-style: italic"># change some default values to make plots more readable </span>
+LNWDT<span style="color: #666666">=5</span>; FNT<span style="color: #666666">=11</span>
+rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
+
 
 g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity m/s^2</span>
 d <span style="color: #666666">=</span> <span style="color: #666666">41.0e-3</span>   <span style="color: #408080; font-style: italic"># Diameter of the sphere</span>
@@ -1791,7 +1801,7 @@ The following programme <b>NewtonHeun.py</b> solves this problem using Heun's me
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># eks1_3/NewtonHeun.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/NewtonHeun.py</span>
 <span style="color: #408080; font-style: italic"># Program Newton</span>
 <span style="color: #408080; font-style: italic"># Computes the solution of Newton&#39;s 1st order equation (1671):</span>
 <span style="color: #408080; font-style: italic"># dy/dx = 1-3*x + y + x^2 +x*y , y(0) = 0</span>
@@ -1910,8 +1920,6 @@ One possible way of implementing this scheme is given in the following function 
     <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
         zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> func(z[i,:],t)<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
         z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (func(z[i,:],t) <span style="color: #666666">+</span> func(zp,t<span style="color: #666666">+</span>dt))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
-
-    <span style="color: #008000; font-weight: bold">return</span> z
 </pre></div>
 <p>
 Using the same time steps as in <a href="#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, we get the response plotted in Figure <a href="#fig:falling_sphere_euler_heun">7</a>.
@@ -1929,12 +1937,14 @@ The complete programme <b>FallingSphereEulerHeun.py</b> (may be downloaded <a hr
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># eks1_3/FallingSphereEulerHeun.py</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">sys</span>
-sys<span style="color: #666666">.</span>path<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;../eks1_2&#39;</span>)
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/FallingSphereEulerHeun.py</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #408080; font-style: italic"># change some default values to make plots more readable </span>
+LNWDT<span style="color: #666666">=5</span>; FNT<span style="color: #666666">=11</span>
+rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
 
 g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity m/s^2</span>
 d <span style="color: #666666">=</span> <span style="color: #666666">41.0e-3</span>   <span style="color: #408080; font-style: italic"># Diameter of the sphere</span>
@@ -2049,8 +2059,295 @@ show()
 <p>
 <!-- --- end exercise --- -->
 
-<h2 id="___sec15">Runge - Kutta of 4th order <a name="___sec15"></a></h2>
+<h2 id="___sec15">Runge-Kutta of 4th order <a name="___sec15"></a></h2>
 
+Euler's method and Heun's method belong to the Runge-Kutta family of explicit methods, and is respectively Runge-Kutta of 1st and 2nd order, the latter with one time use of corrector. Explicit Runge-Kutta schemes are single step schemes that try to copy the Taylor series expansion of the differential equation to a given order. 
+
+<p>
+The classical Runge-Kutta scheme of 4th order (RK4) is given by 
+$$
+\begin{align} 
+&k_1=f(x_n,y_n)\nonumber\\
+&k_2=f(x_n+\frac{h}{2}, y_n+\frac{h}{2}k_1)\nonumber\\ \label{eq:1501}
+&k_3=f(x_n+\frac{h}{2},y_n+\frac{h}{2}k_2)\\
+&k_4=f(x_n+h,y_n+hk_3)\nonumber\\
+&y_{n+1}=y_n+\frac{h}{6}(k_1+2k_2+2k_3+k_4)\nonumber
+\end{align}
+$$
+
+
+<p>
+We see that we are actually using Euler's method four times and find a weighted gradient. The local error is of order \( O(h^5) \), while the global is of \( O(h^4) \). We refer to <a href="#cheney2012numerical">[4]</a>. 
+
+<p>
+Figure <a href="#fig:RK4_illustration">8</a> shows a graphical illustration of the RK4 scheme. 
+
+<p>
+In detail we have
+
+<ol>
+ <li> In point \( (x_n,y_n) \) we know the gradient \( k_1 \) and use this when we go forward a step \( h/2 \) where the gradient \( k_2 \) is calculated.</li> 
+ <li> With this gradient we start again in point \( (x_n,y_n) \), go forward a step \( h/2 \) and find a new gradient \( k_3 \).</li>
+ <li> With this gradient we start again in point \( (x_n,y_n) \), but go forward a complete step \( h \) and find a new gradient \( k_4 \).</li>
+ <li> The four gradients are averaged with weights \( 1/6 \), \( 2/6 \), \( 2/6 \) and \( 1/6 \). Using the averaged gradient we calculate the final value \( y_{n+1} \).</li>
+</ol>
+
+Each of the steps above are Euler steps. 
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 8:  Illustration of the RK4 scheme. <a name="fig:RK4_illustration"></a> </p></center>
+<p><img src="kap1/12.png" align="bottom" width=400></p>
+</center>
+
+<p>
+Using \eqref{eq:1501} on the equation system in \eqref{eq:13010} we get
+$$
+\begin{align}
+&(y_1)_{n+1}=(y_1)_n +\frac{h}{6}(k_1+2k_2+2k_3+k_4) \nonumber\\
+&(y_2)_{n+1}=(y_2)_n +\frac{h}{6}(l_1+2l_2+2l_3+l_4) \label{eq:1502} \\
+&(y_3)_{n+1}=(y_3)_n +\frac{h}{6}(m_1+2m_2+2m_3+m_4) \nonumber\\
+\end{align}
+$$
+
+where
+$$
+\begin{align*}
+k_1&=y_2 \\
+l_1&=y_3 \\
+m_1&=-y_1y_3\\
+\\
+k_2&=(y_2+hl_l/2)\\
+l_2&=(y_3+hm_1/2)\\
+m_2&=-[(y_1+hk_1/2)(y_3+hm_1/2)]\\
+\\
+k_3&=(y_2+hl_2/2)\\
+l_3&=(y_3+hm_2/2)\\
+m_3&=-[(y_1+hk_2/2)(y_3+hm_2/2)]\\
+\\
+k_4&=(y_2+hl_3)\\
+l_4&=(y_3+hm_3)\\
+m_4&=-[(y_1+hk_3)(y_3+hm_3)
+\end{align*}
+$$
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="example:falling_sphere_RK4">Example 6: Falling sphere using RK4<a name="example:falling_sphere_RK4"></a></h2>
+
+Let's implement the RK4 scheme and use it on (<a href="#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>). The scheme has been implemented in the function <code>rk4()</code>, and is given below
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4</span>(func, z0, time):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Runge-Kutta 4 scheme for solution of systems of ODEs. </span>
+<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
+<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
+<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
+    
+    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
+    dt2 <span style="color: #666666">=</span> dt<span style="color: #666666">/2.0</span>
+    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),<span style="color: #666666">2</span>))
+    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
+    zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
+    
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
+        k1 <span style="color: #666666">=</span> func(z[i,:],t)                 <span style="color: #408080; font-style: italic"># predictor step 1</span>
+        k2 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k1<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2) <span style="color: #408080; font-style: italic"># predictor step 2</span>
+        k3 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k2<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2) <span style="color: #408080; font-style: italic"># predictor step 3</span>
+        k4 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k3<span style="color: #666666">*</span>dt, t <span style="color: #666666">+</span> dt)   <span style="color: #408080; font-style: italic"># predictor step 4</span>
+        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> dt<span style="color: #666666">/6.0*</span>(k1 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k2 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k3 <span style="color: #666666">+</span> k4) <span style="color: #408080; font-style: italic"># Corrector step</span>
+</pre></div>
+<p>
+Figure <a href="#fig:falling_sphere_euler_heun_rk4">9</a> shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme <b>FallingSphereEulerHeunRK4.py</b> may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEulerHeunRK4.py." target="_blank">here</a> and is listed below.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 9:  Velocity of falling sphere using Euler, Heun and RK4. <a name="fig:falling_sphere_euler_heun_rk4"></a> </p></center>
+<p><img src="kap1/eks/example_sphere_falling_euler_heun_rk4.png" align="bottom" width=400></p>
+</center>
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/FallingSphereEulerHeunRK4.py</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #408080; font-style: italic"># change some default values to make plots more readable </span>
+LNWDT<span style="color: #666666">=5</span>; FNT<span style="color: #666666">=11</span>
+rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
+
+g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity m/s^2</span>
+d <span style="color: #666666">=</span> <span style="color: #666666">41.0e-3</span>   <span style="color: #408080; font-style: italic"># Diameter of the sphere</span>
+rho_f <span style="color: #666666">=</span> <span style="color: #666666">1.22</span>  <span style="color: #408080; font-style: italic"># Density of fluid [kg/m^3]</span>
+rho_s <span style="color: #666666">=</span> <span style="color: #666666">1275</span>  <span style="color: #408080; font-style: italic"># Density of sphere [kg/m^3]</span>
+nu <span style="color: #666666">=</span> <span style="color: #666666">1.5e-5</span>   <span style="color: #408080; font-style: italic"># Kinematical viscosity [m^2/s]</span>
+CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>      <span style="color: #408080; font-style: italic"># Constant drag coefficient</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with constant drag.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
+    <span style="color: #008000; font-weight: bold">return</span> zout 
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with Re-dependent drag.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    v <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(z[<span style="color: #666666">1</span>]) 
+    Re <span style="color: #666666">=</span> v<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD <span style="color: #666666">=</span> cd_sphere(Re)
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
+    <span style="color: #008000; font-weight: bold">return</span> zout
+
+<span style="color: #408080; font-style: italic"># define euler scheme</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func, z0, time):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs. </span>
+<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
+<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
+<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
+    
+    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
+    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),<span style="color: #666666">2</span>))
+    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
+
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
+        z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> func(z[i,:],t)<span style="color: #666666">*</span>dt
+
+    <span style="color: #008000; font-weight: bold">return</span> z
+
+<span style="color: #408080; font-style: italic"># define heun scheme</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func, z0, time):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Heun scheme for solution of systems of ODEs. </span>
+<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
+<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
+<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
+    
+    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
+    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),<span style="color: #666666">2</span>))
+    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
+    zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
+    
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
+        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> func(z[i,:],t)<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
+        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (func(z[i,:],t) <span style="color: #666666">+</span> func(zp,t<span style="color: #666666">+</span>dt))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> z
+        
+<span style="color: #408080; font-style: italic"># define rk4 scheme</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4</span>(func, z0, time):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Runge-Kutta 4 scheme for solution of systems of ODEs. </span>
+<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
+<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
+<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
+    
+    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
+    dt2 <span style="color: #666666">=</span> dt<span style="color: #666666">/2.0</span>
+    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),<span style="color: #666666">2</span>))
+    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
+    zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
+    
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
+        k1 <span style="color: #666666">=</span> func(z[i,:],t)                 <span style="color: #408080; font-style: italic"># predictor step 1</span>
+        k2 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k1<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2) <span style="color: #408080; font-style: italic"># predictor step 2</span>
+        k3 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k2<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2) <span style="color: #408080; font-style: italic"># predictor step 3</span>
+        k4 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k3<span style="color: #666666">*</span>dt, t <span style="color: #666666">+</span> dt)   <span style="color: #408080; font-style: italic"># predictor step 4</span>
+        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> dt<span style="color: #666666">/6.0*</span>(k1 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k2 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k3 <span style="color: #666666">+</span> k4) <span style="color: #408080; font-style: italic"># Corrector step</span>
+
+    <span style="color: #008000; font-weight: bold">return</span> z
+
+<span style="color: #408080; font-style: italic"># main program starts here</span>
+
+T <span style="color: #666666">=</span> <span style="color: #666666">10</span>  <span style="color: #408080; font-style: italic"># end of simulation</span>
+N <span style="color: #666666">=</span> <span style="color: #666666">20</span>  <span style="color: #408080; font-style: italic"># no of time steps</span>
+time <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
+
+z0<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">2</span>)
+z0[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
+
+ze <span style="color: #666666">=</span> euler(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Euler&#39;s method</span>
+ze2 <span style="color: #666666">=</span> euler(f2, z0, time)   <span style="color: #408080; font-style: italic"># compute response with varying CD using Euler&#39;s method</span>
+
+zh <span style="color: #666666">=</span> heun(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Heun&#39;s method</span>
+zh2 <span style="color: #666666">=</span> heun(f2, z0, time)   <span style="color: #408080; font-style: italic"># compute response with varying CD using Heun&#39;s method</span>
+
+zrk4 <span style="color: #666666">=</span> rk4(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using RK4</span>
+zrk4_2 <span style="color: #666666">=</span> rk4(f2, z0, time)  <span style="color: #408080; font-style: italic"># compute response with varying CD using RK4</span>
+
+k1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(g<span style="color: #666666">*4*</span>rho_s<span style="color: #666666">*</span>d<span style="color: #666666">/</span>(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>CD))
+k2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>g<span style="color: #666666">*</span>CD<span style="color: #666666">/</span>(<span style="color: #666666">4*</span>rho_s<span style="color: #666666">*</span>d))
+v_a <span style="color: #666666">=</span> k1<span style="color: #666666">*</span>np<span style="color: #666666">.</span>tanh(k2<span style="color: #666666">*</span>time)   <span style="color: #408080; font-style: italic"># compute response with constant CD using analytical solution</span>
+
+<span style="color: #408080; font-style: italic"># plotting</span>
+
+legends<span style="color: #666666">=</span>[]
+line_type<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;-&#39;</span>,<span style="color: #BA2121">&#39;:&#39;</span>,<span style="color: #BA2121">&#39;.&#39;</span>,<span style="color: #BA2121">&#39;-.&#39;</span>,<span style="color: #BA2121">&#39;:&#39;</span>,<span style="color: #BA2121">&#39;.&#39;</span>,<span style="color: #BA2121">&#39;-.&#39;</span>]
+
+plot(time, v_a, line_type[<span style="color: #666666">0</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Analytical (constant CD)&#39;</span>)
+
+plot(time, ze[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">1</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (constant CD)&#39;</span>)
+
+plot(time, zh[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">2</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Heun (constant CD)&#39;</span>)
+
+plot(time, zrk4[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">3</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;RK4 (constant CD)&#39;</span>)
+
+plot(time, ze2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">4</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (varying CD)&#39;</span>)
+
+plot(time, zh2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">5</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Heun (varying CD)&#39;</span>)
+
+plot(time, zrk4_2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">6</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;RK4 (varying CD)&#39;</span>)
+
+legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+xlabel(<span style="color: #BA2121">&#39;Time [s]&#39;</span>)
+ylabel(<span style="color: #BA2121">&#39;Velocity [m/s]&#39;</span>)
+savefig(<span style="color: #BA2121">&#39;example_sphere_falling_euler_heun_rk4.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+show()
+</pre></div>
+<p>
+</div>
+<!-- end box -->
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec17">Example 7: Particle motion in two dimensions <a name="___sec17"></a></h2>
+</div>
+<!-- end box -->
+
+
+<p>
 <!-- begin bibliography -->
 
 <ol>
@@ -2077,6 +2374,7 @@ show()
 <!-- end bibliography -->
 
 <p>
+<!-- --- end exercise --- -->
 
 <!-- ------------------- end of main content --------------- -->
 

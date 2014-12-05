@@ -1,4 +1,4 @@
-# kap1/eks/FallingSphereEulerHeun.py
+# kap1/eks/FallingSphereEulerHeunRK4.py
 from DragCoefficientGeneric import cd_sphere    
 from matplotlib.pyplot import *
 import numpy as np
@@ -32,8 +32,8 @@ def f2(z, t):
     return zout
 
 # define euler scheme
-def euler(func,z0, time):
-    """The Euler scheme for solution of systems of of ODEs. 
+def euler(func, z0, time):
+    """The Euler scheme for solution of systems of ODEs. 
     z0 is a vector for the initial conditions, 
     the right hand side of the system is represented by func which returns 
     a vector with the same size as z0 ."""
@@ -48,8 +48,8 @@ def euler(func,z0, time):
     return z
 
 # define heun scheme
-def heun(func,z0, time):
-    """The Heun scheme for solution of systems of of ODEs. 
+def heun(func, z0, time):
+    """The Heun scheme for solution of systems of ODEs. 
     z0 is a vector for the initial conditions, 
     the right hand side of the system is represented by func which returns 
     a vector with the same size as z0 ."""
@@ -65,6 +65,28 @@ def heun(func,z0, time):
 
     return z
         
+# define rk4 scheme
+def rk4(func, z0, time):
+    """The Runge-Kutta 4 scheme for solution of systems of ODEs. 
+    z0 is a vector for the initial conditions, 
+    the right hand side of the system is represented by func which returns 
+    a vector with the same size as z0 ."""
+    
+    dt = time[1]-time[0]
+    dt2 = dt/2.0
+    z = np.zeros((np.size(time),2))
+    z[0,:] = z0
+    zp = np.zeros_like(z0)
+    
+    for i, t in enumerate(time[1:]):
+        k1 = func(z[i,:],t)                 # predictor step 1
+        k2 = func(z[i,:] + k1*dt2, t + dt2) # predictor step 2
+        k3 = func(z[i,:] + k2*dt2, t + dt2) # predictor step 3
+        k4 = func(z[i,:] + k3*dt, t + dt)   # predictor step 4
+        z[i+1,:] = z[i,:] + dt/6.0*(k1 + 2.0*k2 + 2.0*k3 + k4) # Corrector step
+
+    return z
+
 # main program starts here
 
 T = 10  # end of simulation
@@ -80,6 +102,9 @@ ze2 = euler(f2, z0, time)   # compute response with varying CD using Euler's met
 zh = heun(f, z0, time)     # compute response with constant CD using Heun's method
 zh2 = heun(f2, z0, time)   # compute response with varying CD using Heun's method
 
+zrk4 = rk4(f, z0, time)     # compute response with constant CD using RK4
+zrk4_2 = rk4(f2, z0, time)  # compute response with varying CD using RK4
+
 k1 = np.sqrt(g*4*rho_s*d/(3*rho_f*CD))
 k2 = np.sqrt(3*rho_f*g*CD/(4*rho_s*d))
 v_a = k1*np.tanh(k2*time)   # compute response with constant CD using analytical solution
@@ -87,7 +112,7 @@ v_a = k1*np.tanh(k2*time)   # compute response with constant CD using analytical
 # plotting
 
 legends=[]
-line_type=['-',':','.','-.','--']
+line_type=['-',':','.','-.',':','.','-.']
 
 plot(time, v_a, line_type[0])
 legends.append('Analytical (constant CD)')
@@ -98,17 +123,24 @@ legends.append('Euler (constant CD)')
 plot(time, zh[:,1], line_type[2])
 legends.append('Heun (constant CD)')
 
-plot(time, ze2[:,1], line_type[3])
+plot(time, zrk4[:,1], line_type[3])
+legends.append('RK4 (constant CD)')
+
+plot(time, ze2[:,1], line_type[4])
 legends.append('Euler (varying CD)')
 
-plot(time, zh2[:,1], line_type[4])
+plot(time, zh2[:,1], line_type[5])
 legends.append('Heun (varying CD)')
 
+plot(time, zrk4_2[:,1], line_type[6])
+legends.append('RK4 (varying CD)')
+
 legend(legends, loc='best', frameon=False)
+
 font = {'size' : 16}
 rc('font', **font)
 xlabel('Time [s]')
 ylabel('Velocity [m/s]')
-savefig('example_sphere_falling_euler_heun.png', transparent=True)
+savefig('example_sphere_falling_euler_heun_rk4.png', transparent=True)
 show()
 

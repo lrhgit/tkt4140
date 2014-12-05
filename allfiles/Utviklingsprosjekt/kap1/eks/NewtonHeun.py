@@ -1,4 +1,4 @@
-# eks/NewtonHeun.py
+# kap1/eks/NewtonHeun.py
 # Program Newton
 # Computes the solution of Newton's 1st order equation (1671):
 # dy/dx = 1-3*x + y + x^2 +x*y , y(0) = 0

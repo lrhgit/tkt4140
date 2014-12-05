@@ -1,4 +1,4 @@
-# eks/CDsphere.py
+# kap1/eks/CDsphere.py
 
 from numpy import logspace, zeros
 
