@@ -40,7 +40,7 @@ def euler(func,z0, time):
     a vector with the same size as z0 ."""
     
     dt = time[1]-time[0]
-    z = np.zeros((np.size(time),2))
+    z = np.zeros((np.size(time),np.size(z0)))
     z[0,:] = z0
 
     for i, t in enumerate(time[1:]):
