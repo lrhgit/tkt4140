@@ -1240,9 +1240,10 @@ The results are shown in in Figure ref{fig:golf_drag_lift}. The motion of a golf
 
 FIGURE:[kap1/eks/example_particle_motion_2d_2.png, width=700] Motion of golf ball with drag and lift. label{fig:golf_drag_lift}
 
-The complete program _ParticleMotion2D.py_ may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/ParticleMotion2D.py" and is listed below.
+The complete program _ParticleMotion2D.py_ may be 
+#downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/ParticleMotion2D.py" and is listed below.
 
-#@@@CODE ./kap1/eks/ParticleMotion2D.py
+@@@CODE ./kap1/eks/ParticleMotion2D.py
 !ebox
 
 
