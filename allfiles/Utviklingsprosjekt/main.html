@@ -160,7 +160,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Centre for Advanced Structural Analysis (CASA)</b></center>
 <center>[2] <b>Department of Structural Engineering, NTNU</b></center>
 <p>
-<center><h4>Dec 8, 2014</h4></center> <!-- date -->
+<center><h4>Dec 9, 2014</h4></center> <!-- date -->
 <!-- TOC: on -->
 
 <p>
@@ -806,7 +806,7 @@ First, the curve is generated using the function <code>plot</code>, which takes 
 To change the font size the function <code>rc</code> is used. This function takes in the object <code>font</code>, which is a <em>dictionary</em> object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of <code>key:value</code> pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: <code>{}</code>. Placing a comma-separated list of <code>key:value</code> pairs within the braces adds initial <code>key:value</code> pairs to the dictionary. In this case the dictionary <code>font</code> contains one <code>key:value</code> pair, namely <code>'size' : 16</code>.
 
 <p>
-Descriptions and explanations of all functions available in <code>pyplot</code> may be found <a href="http://matplotlib.org/api/pyplot_summary.html" target="_blank">here</a>.
+Descriptions and explanations of all functions available in <code>pyplot</code> may be found <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py" target="_blank">here</a>.
 
 <h3 id="___sec7">More efficient implementations <a name="___sec7"></a></h3>
 
@@ -923,7 +923,7 @@ cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 </pre></div>
 <p>
-As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function <code>vectorize</code> was nearly as inefficient.
+As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function <code>vectorize</code> was nearly as inefficient. The complete programme <b>DragCoefficientGeneric.py</b> may be downloaded <a href="http://matplotlib.org/api/pyplot_summary.html" target="_blank">here</a>
 
 <p>
 <!-- --- end exercise --- -->

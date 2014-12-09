@@ -376,7 +376,7 @@ First, the curve is generated using the function `plot`, which takes the x-value
 
 To change the font size the function `rc` is used. This function takes in the object `font`, which is a *dictionary* object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of `key:value` pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: `{}`. Placing a comma-separated list of `key:value` pairs within the braces adds initial `key:value` pairs to the dictionary. In this case the dictionary `font` contains one `key:value` pair, namely `'size' : 16`.
 
-Descriptions and explanations of all functions available in `pyplot` may be found "here": "http://matplotlib.org/api/pyplot_summary.html".
+Descriptions and explanations of all functions available in `pyplot` may be found "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py".
 
 === More efficient implementations ===
 
@@ -407,7 +407,7 @@ cd_sphere_vector        execution time = 0.000641
 cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 !ec
-As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function `vectorize` was nearly as inefficient.
+As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function `vectorize` was nearly as inefficient. The complete programme _DragCoefficientGeneric.py_ may be downloaded "here": "http://matplotlib.org/api/pyplot_summary.html"
 
 ===== Differences =====
 
