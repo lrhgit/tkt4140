@@ -1,0 +1,247 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Electronic Compendium for TKT4140">
+
+<title>Electronic Compendium for TKT4140</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(' Initial value problems for Ordinary Differential Equations ',
+               0,
+               None,
+               '___sec0'),
+              (' Introduction ',
+               1,
+               'section:introduction',
+               'section:introduction'),
+              (" Taylor's method ", 2, 'sec:taylor', 'sec:taylor'),
+              (' Reduction of Higher order Equations ',
+               2,
+               'subsec:reduction',
+               'subsec:reduction'),
+              (' Example 1: Reduction of higher order system ',
+               2,
+               None,
+               '___sec4'),
+              (' Example 2: Sphere in free fall ',
+               2,
+               'example:sphere_freefall',
+               'example:sphere_freefall'),
+              (' Generating the plot in ref{example:sphere_freefall} ',
+               3,
+               None,
+               '___sec6'),
+              (' More efficient implementations ', 3, None, '___sec7'),
+              (' Differences ', 2, None, '___sec8'),
+              (' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
+               3,
+               None,
+               '___sec9'),
+              (" Euler's method ", 2, None, '___sec10'),
+              (' Example 3: Falling sphere with constant and varying drag ',
+               2,
+               'ex:falling_sphere',
+               'ex:falling_sphere'),
+              (" Euler's method for a system ", 3, None, '___sec12'),
+              (" Heun's method ", 2, None, '___sec13'),
+              (" Example 4: Newton's equation ", 2, None, '___sec14'),
+              (" Example 5: Falling sphere with Heun's method ",
+               2,
+               None,
+               '___sec15'),
+              (' Runge-Kutta of 4th order ', 2, None, '___sec16'),
+              (' Example 6: Falling sphere using RK4 ',
+               2,
+               'example:falling_sphere_RK4',
+               'example:falling_sphere_RK4'),
+              (' Example 7: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec18')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="main.html">Electronic Compendium for TKT4140</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;"><b>Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
+     <!-- navigation toc: --> <li><a href="._main004.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
+     <!-- navigation toc: --> <li><a href="._main005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
+     <!-- navigation toc: --> <li><a href="._main010.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main011.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main012.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main013.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#example:falling_sphere_RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Falling sphere using RK4</a></li>
+     <!-- navigation toc: --> <li><a href="._main015.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 7: Particle motion in two dimensions</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0009"></a>
+<!-- !split -->
+
+<h3 id="___sec12">Euler's method for a system <a name="___sec12"></a></h3>
+
+Euler's method may of course also be used for a system. Let's look at a simultaneous system of \( p \) equations
+$$
+\begin{align}
+&y'_1=f_1(x,y_1,y_2,\dots y_p) \nonumber\\
+&y'_2=f_2(x,y_1,y_2,\dots y_p) \nonumber\\
+&. \tag{47}\\
+&.\nonumber\\
+&y'_p=f_p(x,y_1,y_2,\dots y_p)\nonumber
+\end{align}
+$$
+
+with initial values
+$$
+\begin{equation}\tag{48}
+y_1(x_0)=a_1,\ y_2(x_0)=a_2,\dots,\ y_p(x_0)=a_p 
+\end{equation}
+$$
+
+Or, in vectorial format as follows,
+$$
+\begin{align}\tag{49}
+\mathbf{y'}&=\mathbf{f}(x,\mathbf{y})\\
+\mathbf{y}&(x_0)=\mathbf{a} \nonumber
+\end{align}
+$$
+
+where \( \mathbf{y'} \), \( \mathbf{f} \), \( \mathbf{y} \) and \( \mathbf{a} \) are column vectores with \( p \) components. 
+
+<p>
+The Euler scheme <a href="._main007.html#mjx-eqn-41">(41)</a> used on <a href="#mjx-eqn-49">(49)</a> gives
+$$
+\begin{equation}\tag{50}
+\mathbf{y_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+\end{equation}
+$$
+
+For a system of three equations we get
+$$
+\begin{align} 
+y'_1=&y_2\nonumber\\
+y'_2=&y_3\tag{51}\\
+y'_3=&-y_1y_3\nonumber
+\end{align}
+$$
+
+In this case <a href="#mjx-eqn-50">(50)</a> gives
+$$
+\begin{align} 
+&(y_1)_{n+1}=(y_1)_n+h\cdot (y_2)_n\nonumber\\
+&(y_2)_{n+1}=(y_2)_n+h\cdot (y_3)_n\tag{52}\\
+&(y_3)_{n+1}=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n\nonumber\\
+\end{align}
+$$
+
+with \( y_1(x_0)=a_1,\ y_2(x_0)=a_2,\text{ and }y_3(x_0)=a_3 \)
+
+<p>
+In the section <a href="._main002.html#subsec:reduction">Reduction of Higher order Equations</a> we have seen how we can reduce a higher order ODE to a set of first order ODEs. In <a href="._main008.html#mjx-eqn-42">(42)</a> and <a href="._main008.html#mjx-eqn-43">(43)</a> we have the equation \( \frac{d^2z}{dt^2}=g-\alpha\cdot \left(\frac{dz}{dt}\right)^2 \) which we have reduced to a system as
+$$
+\begin{align*}
+\frac{dz}{dt}= v&\\
+\frac{dv}{dt}= g&-\alpha\cdot v^2
+\end{align*}
+$$
+
+which gives an Euler scheme as follows,
+$$
+\begin{align*}
+&z_{n+1}=z_n+\Delta t\cdot v_n\\
+&v_{n+1}=n_n+\Delta t\cdot [g-\alpha(v_n)^2]\\
+&\text{med }z_0=0,\ v_0=0
+\end{align*}
+$$
+
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._main008.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._main010.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,7 @@
+doconce format html main.do.txt --html_style=bootstrap_bluegray --examples_as_exercises --device=screen --short_title=Compendium --html_links_in_new_window
+doconce split_html main.html
+
+#--urlcheck 
+
+#--section_numbering=on (problem with example as exercises)
+# --html_bootstrap_navbar=off turns off the navigation bar
