@@ -38,6 +38,7 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec4'),
+              (' Scientific computing with Python ', 2, None, '___sec5'),
               (' Example 2: Sphere in free fall ',
                2,
                'example:sphere_freefall',
@@ -45,26 +46,26 @@ Automatically generated HTML file from DocOnce source
               (' Generating the plot in ref{example:sphere_freefall} ',
                3,
                None,
-               '___sec6'),
-              (' More efficient implementations ', 3, None, '___sec7'),
-              (' Differences ', 2, None, '___sec8'),
+               '___sec7'),
+              (' More efficient implementations ', 3, None, '___sec8'),
+              (' Differences ', 2, None, '___sec9'),
               (' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
                3,
                None,
-               '___sec9'),
-              (" Euler's method ", 2, None, '___sec10'),
+               '___sec10'),
+              (" Euler's method ", 2, None, '___sec11'),
               (' Example 3: Falling sphere with constant and varying drag ',
                2,
                'ex:falling_sphere',
                'ex:falling_sphere'),
-              (" Euler's method for a system ", 3, None, '___sec12'),
-              (" Heun's method ", 2, None, '___sec13'),
-              (" Example 4: Newton's equation ", 2, None, '___sec14'),
+              (" Euler's method for a system ", 3, None, '___sec13'),
+              (" Heun's method ", 2, None, '___sec14'),
+              (" Example 4: Newton's equation ", 2, None, '___sec15'),
               (" Example 5: Falling sphere with Heun's method ",
                2,
                None,
-               '___sec15'),
-              (' Runge-Kutta of 4th order ', 2, None, '___sec16'),
+               '___sec16'),
+              (' Runge-Kutta of 4th order ', 2, None, '___sec17'),
               (' Example 6: Falling sphere using RK4 ',
                2,
                'example:falling_sphere_RK4',
@@ -72,7 +73,7 @@ Automatically generated HTML file from DocOnce source
               (' Example 7: Particle motion in two dimensions ',
                2,
                None,
-               '___sec18')]}
+               '___sec19')]}
 end of tocinfo -->
 
 <body>
@@ -114,16 +115,17 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
      <!-- navigation toc: --> <li><a href="#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
      <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
      <!-- navigation toc: --> <li><a href="#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
      <!-- navigation toc: --> <li><a href="#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
      <!-- navigation toc: --> <li><a href="#example:falling_sphere_RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Falling sphere using RK4</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 7: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 7: Particle motion in two dimensions</a></li>
 
         </ul>
       </li>
@@ -147,7 +149,7 @@ MathJax.Hub.Config({
 <!-- author(s): Johan Kolst&#248; S&#248;nstab&#248;, and Leif Rune Hellevik -->
 
 <center>
-<b>Johan Kolst&#248; S&#248;nstab&#248;</b> [1]
+<b>Johan Kolst&#248; S&#248;nstab&#248;</b> [1, 2]
 </center>
 
 <center>
@@ -161,7 +163,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Centre for Advanced Structural Analysis (CASA)</b></center>
 <center>[2] <b>Department of Structural Engineering, NTNU</b></center>
 <p>
-<center><h4>Dec 9, 2014</h4></center> <!-- date -->
+<center><h4>Dec 10, 2014</h4></center> <!-- date -->
 <!-- TOC: on -->
 
 <p>
@@ -169,9 +171,10 @@ MathJax.Hub.Config({
 <!-- This is the main file -->
 
 <p>
-
-
+<!-- potential-jumbotron-button -->
 </div> <!-- end jumbotron -->
+
+<!-- !split -->
 
 <h1 class="page-header" id="___sec0">Initial value problems for Ordinary Differential Equations <a name="___sec0"></a></h1>
 
@@ -542,6 +545,13 @@ $$
 <p>
 <!-- !split -->
 
+<h2 id="___sec5">Scientific computing with Python <a name="___sec5"></a></h2>
+
+In this course we will use the programming language <b>Python</b> to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example <a href="http://folk.ntnu.no/johankso/electronic_compendium/Utviklingsprosjekt/python_intro/doc/src/bumpy.html" target="_blank">Intro to scientific computing with Python</a> before proceeding. If you are familiar with <b>Matlab</b> the transfer to Python should not be a problem. 
+
+<p>
+<!-- !split -->
+
 <!-- begin box -->
 <div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
 
@@ -648,7 +658,7 @@ i_list <span style="color: #666666">=</span> <span style="color: #008000">range<
 <!-- end box -->
 
 
-<h3 id="___sec6">Generating the plot in <a href="#example:sphere_freefall">Example 2: Sphere in free fall</a> <a name="___sec6"></a></h3>
+<h3 id="___sec7">Generating the plot in <a href="#example:sphere_freefall">Example 2: Sphere in free fall</a> <a name="___sec7"></a></h3>
 
 The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. The programme may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/CDsphere.py" target="_blank">here</a>. We will break up the programme and explain the different parts. The complete programme is as follows:
 <p>
@@ -817,7 +827,7 @@ To change the font size the function <code>rc</code> is used. This function take
 <p>
 Descriptions and explanations of all functions available in <code>pyplot</code> may be found <a href="http://matplotlib.org/api/pyplot_summary.html" target="_blank">here</a>.
 
-<h3 id="___sec7">More efficient implementations <a name="___sec7"></a></h3>
+<h3 id="___sec8">More efficient implementations <a name="___sec8"></a></h3>
 
 When solving numerical problems variables are often not single numbers, but arrays containing many numbers. The function <code>CDsphere</code> above takes a single number in and gives a single number out. For computationally intensive algorithms where variables are stored in arrays this is inconvenient and time consuming, as each of the array elements must be sent to the function independently. It is therefore of interest to implement functions that can take in whole arrays and output whole arrays in an efficient manner. This may be done in a variaty of ways. Some possibilities are presented in the following, and, as we shall see, some are more time consuming than others. 
 
@@ -940,7 +950,7 @@ As seen, the function with the boolean variables was fastest. The simple vectori
 <p>
 <!-- !split -->
 
-<h2 id="___sec8">Differences <a name="___sec8"></a></h2>
+<h2 id="___sec9">Differences <a name="___sec9"></a></h2>
 
 We will study some simple methods to solve initial value problems. Later we shall see that these methods also may be used to solve boundary value problems for ODEs.
 
@@ -1288,7 +1298,7 @@ $$
 <p>
 <!-- !split -->
 
-<h3 id="___sec9">Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) <a name="___sec9"></a></h3>
+<h3 id="___sec10">Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) <a name="___sec10"></a></h3>
 
 This term often appears in difference equations, and it may be clever to treat the term as it is instead of first execute the differentiation. 
 
@@ -1404,7 +1414,7 @@ $$
 <p>
 <!-- !split -->
 
-<h2 id="___sec10">Euler's method <a name="___sec10"></a></h2>
+<h2 id="___sec11">Euler's method <a name="___sec11"></a></h2>
 
 The ODE is given as
 $$
@@ -1633,7 +1643,7 @@ show()
 <p>
 <!-- !split -->
 
-<h3 id="___sec12">Euler's method for a system <a name="___sec12"></a></h3>
+<h3 id="___sec13">Euler's method for a system <a name="___sec13"></a></h3>
 
 Euler's method may of course also be used for a system. Let's look at a simultaneous system of \( p \) equations
 $$
@@ -1713,7 +1723,7 @@ $$
 <p>
 <!-- !split -->
 
-<h2 id="___sec13">Heun's method <a name="___sec13"></a></h2>
+<h2 id="___sec14">Heun's method <a name="___sec14"></a></h2>
 
 From \eqref{eq:1204a} or \eqref{eq:1205a} we have
 $$
@@ -1801,7 +1811,7 @@ $$
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec14">Example 4: Newton's equation <a name="___sec14"></a></h2>
+<h2 id="___sec15">Example 4: Newton's equation <a name="___sec15"></a></h2>
 
 Let's use Heun's method to solve Newton's equation from the section <a href="#section:introduction">Introduction</a>,
 $$
@@ -1896,7 +1906,7 @@ py<span style="color: #666666">.</span>show()
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec15">Example 5: Falling sphere with Heun's method <a name="___sec15"></a></h2>
+<h2 id="___sec16">Example 5: Falling sphere with Heun's method <a name="___sec16"></a></h2>
 
 Let's go back to <a href="#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, and implement a new function <code>heun()</code> in the programme <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>. 
 
@@ -2091,7 +2101,7 @@ show()
 <p>
 <!-- !split -->
 
-<h2 id="___sec16">Runge-Kutta of 4th order <a name="___sec16"></a></h2>
+<h2 id="___sec17">Runge-Kutta of 4th order <a name="___sec17"></a></h2>
 
 Euler's method and Heun's method belong to the Runge-Kutta family of explicit methods, and is respectively Runge-Kutta of 1st and 2nd order, the latter with one time use of corrector. Explicit Runge-Kutta schemes are single step schemes that try to copy the Taylor series expansion of the differential equation to a given order. 
 
@@ -2376,7 +2386,7 @@ show()
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec18">Example 7: Particle motion in two dimensions <a name="___sec18"></a></h2>
+<h2 id="___sec19">Example 7: Particle motion in two dimensions <a name="___sec19"></a></h2>
 
 In this example we will calculate the motion of a particle in two dimensions. First we will calculate the motion of a smooth ball with drag coefficient given by the previously defined function <code>cd_sphere()</code> (see <a href="#example:sphere_freefall">Example 2: Sphere in free fall</a>), and then of a golf ball with drag and lift. 
 

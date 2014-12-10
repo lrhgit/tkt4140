@@ -1,0 +1,15 @@
+w#!/bin/sh
+name=bumpy
+wrap=$name
+
+#doconce format pdflatex $wrap --device=paper
+#doconce ptex2tex $wrap envir=minted
+#pdflatex -shell-escape $wrap
+#pdflatex -shell-escape $wrap
+
+
+# Plain HTML
+doconce format html $wrap --html_style=bootstrap_bluegray --html_links_in_new_window
+if [ $? -ne 0 ]; then echo "doconce could not compile document"; exit; fi
+doconce replace '<hr class="figure">' ' ' *.html
+doconce split_html $wrap.html --pagination
