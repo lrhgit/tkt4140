@@ -16,12 +16,13 @@ def euler(func,z0, time):
     the right hand side of the system is represented by func which returns 
     a vector with the same size as z0 ."""
     
-    dt = time[1]-time[0]
-    z = np.zeros((np.size(time),2))
-    z[0,:] = z0
+    time_local = np.asarray(time)
+    z = np.zeros((np.size(time_local),2))
+    z[0,:] = float(z0)
 
-    for i, t in enumerate(time[1:]):
-        z[i+1,:]=z[i,:] + func(z[i,:],t)*dt
+    for i, t in enumerate(time_local[1:]):
+        dt = time_local[i+1]-t 
+        z[i+1,:]=z[i,:] + np.asarray(func(z[i,:],t))*dt
 
     return z
 
@@ -87,8 +88,8 @@ class ForwardEuler:
         u, f, k, t = self.u, self.f, self.k, self.t
 
         dt = t[k+1] - t[k]
-        u_new = u[k] + dt*f(u[k], t[k])
-        return u_new
+        u_new = u[k] + dt*np.asarray(f(u[k], t[k]))
+        return np.asarray(u_new)
 
 
 if __name__ == '__main__':              
@@ -97,7 +98,7 @@ if __name__ == '__main__':
 
     
     def test_ode_schemes():
-        """Use knowledge of an     exact numerical solution for testing."""
+        """Use knowledge of an exact numerical solution for testing."""
         from numpy import linspace
         T = 2.0  # end of simulation
         N = 20  # no of time steps
@@ -107,31 +108,21 @@ if __name__ == '__main__':
         b = 3.0 
         u_exact = lambda t: a*t   +  b 
          
-#         def u_exact(t):
-#            return 0.2*t + 3
-#         
         def f_local(u,t):
-            return np.asarray([0.2 + (u - 0.2*t -3)**5])
+            return np.asarray([a + (u - u_exact(t))**5])
             # return np.asarray([a])
 
-
         def f(z, t):
-            zout = np.zeros_like(z)
-            zout[0] = np.asarray([0.2 + (z[0] - u_exact(t))**5])
-            
-            return zout 
-
+            return [a + (z - u_exact(t))**5]
         
         z0=np.zeros(1)
         z0[0] = u_exact(0.0)
         
-#        euler(f_local,z0, time)
-
         # scheme_list  = [euler, heun]
-        scheme_list  = [heun]
+        scheme_list  = [euler]
          
         for scheme in scheme_list:
-             z = scheme(f_local,z0,time)
+            z = scheme(f,z0,time)
              
         #solver = ForwardEuler(lambda u, t: 0.2 + (u - u_exact(t))**4)
         solver = ForwardEuler(f)
@@ -142,7 +133,8 @@ if __name__ == '__main__':
         zc, tc = solver.solve(time)
         
         #print 'success', np.abs(np.asarray(u_exact(time))-z[:,-1]).max(), np.abs(u_exact(time)-zc).max
-        print 'success', np.max(u_exact(time)-zc[:])
+        print 'success', np.max(u_exact(time)-z[:,1])
+        print 'success', np.max(u_exact(time)-zc)
         
     def plot_ode_schemes_solutions():
         """Use knowledge of an     exact numerical solution for testing."""
@@ -179,16 +171,16 @@ if __name__ == '__main__':
         
          
         for scheme in scheme_list:
-             z = scheme(f_local,z0,time)
-             plot(time,z[:,-1])
-             legends.append(scheme.func_name)
+            z = scheme(f_local,z0,time)
+            plot(time,z[:,-1])
+            legends.append(scheme.func_name)
              
              
         legend(legends) 
         show()
         
 test_ode_schemes()
-plot_ode_schemes_solutions()               
+#plot_ode_schemes_solutions()               
 
         
         
