@@ -1,4 +1,4 @@
-# kap1/eks/FallingSphereEuler.py
+# kap1/eks/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py;
 from DragCoefficientGeneric import cd_sphere    
 from matplotlib.pyplot import *
 import numpy as np
