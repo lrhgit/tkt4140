@@ -1,11 +1,6 @@
-w#!/bin/sh
+#!/bin/sh
 name=bumpy
 wrap=$name
-
-#doconce format pdflatex $wrap --device=paper
-#doconce ptex2tex $wrap envir=minted
-#pdflatex -shell-escape $wrap
-#pdflatex -shell-escape $wrap
 
 
 # Plain HTML

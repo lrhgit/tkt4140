@@ -163,12 +163,17 @@ MathJax.Hub.Config({
 <center>[1] <b>Centre for Advanced Structural Analysis (CASA)</b></center>
 <center>[2] <b>Department of Structural Engineering, NTNU</b></center>
 <p>
-<center><h4>Dec 12, 2014</h4></center> <!-- date -->
+<center><h4>Dec 15, 2014</h4></center> <!-- date -->
 <!-- TOC: on -->
 
 <p>
 <!-- TKT4140 Numerical Methods with Computer Laboratory. -->
-<!-- This is the main file -->
+
+<p>
+This webpage is a reworked version of the first chapter of the compendium <em>Numeriske Beregninger</em> by J.B. Aarseth. It's intended to be used as a learning resource in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
+
+<p>
+Students are strongly encouraged to work through the following chapter. 
 
 <p>
 <!-- potential-jumbotron-button -->

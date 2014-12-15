@@ -5,7 +5,10 @@ DATE: today
 #TOC: on
 
 # TKT4140 Numerical Methods with Computer Laboratory.
-# This is the main file
+
+This webpage is a reworked version of the first chapter of the compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to be used as a learning resource in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
+
+Students are strongly encouraged to work through the following chapter. 
 
 !split
 ========= Initial value problems for Ordinary Differential Equations =========
