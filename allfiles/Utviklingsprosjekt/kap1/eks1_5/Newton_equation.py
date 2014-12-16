@@ -21,7 +21,7 @@ def newton_solution(x):
 # Main program starts here
 from numpy import linspace
 L = 1.0  # end of simulation
-N = 50  # no of x steps
+N = 10  # no of x steps
 x = linspace(0, L, N+1)
 
 solvers=[]
