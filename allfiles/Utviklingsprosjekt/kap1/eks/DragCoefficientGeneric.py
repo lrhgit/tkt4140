@@ -1,9 +1,5 @@
 # kap1/eks/DragCoefficientGeneric.py
-'''
-Created on 23. okt. 2014
 
-@author: leifh
-'''
 from numpy import linspace,array,append,logspace,zeros_like,where,vectorize,\
     logical_and
 import numpy as np  

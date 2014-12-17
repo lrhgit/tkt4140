@@ -1,4 +1,5 @@
-# kap1/eks/ParticleMotion2D.py
+# kap1/eks/ParticleMotion2D.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py;cdclgolfball.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/kap1/eks/cdclgolfball.py;
+
 from DragCoefficientGeneric import cd_sphere
 from cdclgolfball import cdcl  
 from matplotlib.pyplot import *
@@ -61,19 +62,19 @@ def rk4(func, z0, time):
     the right hand side of the system is represented by func which returns 
     a vector with the same size as z0 ."""
     
-    dt = time[1]-time[0]
-    dt2 = dt/2.0
     z = np.zeros((np.size(time),np.size(z0)))
     z[0,:] = z0
     zp = np.zeros_like(z0)
     
-    for i, t in enumerate(time[1:]):
-        k1 = func(z[i,:],t)                 # predictor step 1
-        k2 = func(z[i,:] + k1*dt2, t + dt2) # predictor step 2
-        k3 = func(z[i,:] + k2*dt2, t + dt2) # predictor step 3
-        k4 = func(z[i,:] + k3*dt, t + dt)   # predictor step 4
+    for i, t in enumerate(time[0:-1]):
+        dt = time[i+1]-time[i]
+        dt2 = dt/2.0
+        k1 = np.asarray(func(z[i,:],t))                 # predictor step 1
+        k2 = np.asarray(func(z[i,:] + k1*dt2, t + dt2)) # predictor step 2
+        k3 = np.asarray(func(z[i,:] + k2*dt2, t + dt2)) # predictor step 3
+        k4 = np.asarray(func(z[i,:] + k3*dt, t + dt))   # predictor step 4
         z[i+1,:] = z[i,:] + dt/6.0*(k1 + 2.0*k2 + 2.0*k3 + k4) # Corrector step
-
+        
     return z
 
 # main program starts here

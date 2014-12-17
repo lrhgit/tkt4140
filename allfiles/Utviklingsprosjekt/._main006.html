@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Electronic Compendium for TKT4140">
+<meta name="description" content="Digital Compendium for TKT4140">
 
-<title>Electronic Compendium for TKT4140</title>
+<title>Digital Compendium for TKT4140</title>
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -104,7 +104,7 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="main.html">Electronic Compendium for TKT4140</a>
+    <a class="navbar-brand" href="main.html">Digital Compendium for TKT4140</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -309,9 +309,6 @@ pyplot<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&
 pyplot<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
 pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;example_sphere.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 pyplot<span style="color: #666666">.</span>show()
-
-
-<span style="color: #408080; font-style: italic"># End</span>
 </pre></div>
 <p>
 In the first code line, 
@@ -532,8 +529,191 @@ cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 </pre></div>
 <p>
-As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function <code>vectorize</code> was nearly as inefficient. The complete programme <b>DragCoefficientGeneric.py</b> may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py" target="_blank">here</a>.
+As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function <code>vectorize</code> was nearly as inefficient. The complete programme <b>DragCoefficientGeneric.py</b> is listed below.
 
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/DragCoefficientGeneric.py</span>
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace,array,append,logspace,zeros_like,where,vectorize,\
+    logical_and
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>  
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> loglog,xlabel,ylabel,grid,savefig,show,rc,hold,\
+    legend, setp
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.core.multiarray</span> <span style="color: #008000; font-weight: bold">import</span> scalar
+
+<span style="color: #408080; font-style: italic"># single-valued function</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett &amp; Liu :% &quot; Fluid Mechanics &amp; Hydraulics &quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum &#39; s Solved Problems McGraw - Hill 1989.</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval    
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>,<span style="color: #666666">-14.05</span>,<span style="color: #666666">34.87</span>,<span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>,<span style="color: #666666">43.72</span>,<span style="color: #666666">-17.08</span>,<span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>,<span style="color: #666666">2.031</span>,<span style="color: #666666">-8.472</span>,<span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p,log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>,<span style="color: #666666">1.1905</span>,<span style="color: #666666">-7.332</span>,<span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p,log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># simple extension cd_sphere</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_py_vector</span>(ReNrs):
+    CD <span style="color: #666666">=</span> zeros_like(ReNrs)
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> Re <span style="color: #AA22FF; font-weight: bold">in</span> ReNrs:
+        CD[counter] <span style="color: #666666">=</span> cd_sphere(Re)
+        counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># vectorized function</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett &amp; Liu :% &quot; Fluid Mechanics &amp; Hydraulics &quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum &#39; s Solved Problems McGraw - Hill 1989.</span>
+
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,where,zeros_like
+    CD <span style="color: #666666">=</span> zeros_like(Re)
+   
+    CD <span style="color: #666666">=</span> where(Re<span style="color: #666666">&lt;0</span>,<span style="color: #666666">0.0</span>,CD)     <span style="color: #408080; font-style: italic"># condition 1</span>
+    
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=0.5</span>),<span style="color: #666666">24/</span>Re,CD) <span style="color: #408080; font-style: italic"># condition 2</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>,<span style="color: #666666">-14.05</span>,<span style="color: #666666">34.87</span>,<span style="color: #666666">0.658</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=100.0</span>),polyval(p,<span style="color: #666666">1.0/</span>Re),CD) <span style="color: #408080; font-style: italic">#condition 3</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>,<span style="color: #666666">43.72</span>,<span style="color: #666666">-17.08</span>,<span style="color: #666666">2.41</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;100.0</span>)  <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=1.0e4</span>) ,polyval(p,<span style="color: #666666">1.0/</span>log10(Re)),CD) <span style="color: #408080; font-style: italic">#condition 4</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>,<span style="color: #666666">2.031</span>,<span style="color: #666666">-8.472</span>,<span style="color: #666666">11.932</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span>)  <span style="color: #666666">&amp;</span>  (Re <span style="color: #666666">&lt;=3.35e5</span>),polyval(p,log10(Re)),CD) <span style="color: #408080; font-style: italic">#condition 5</span>
+
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=5.0e5</span>),<span style="color: #666666">91.08*</span>(log10(Re<span style="color: #666666">/4.5e5</span>))<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>,CD) <span style="color: #408080; font-style: italic">#condition 6</span>
+
+    p  <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>,<span style="color: #666666">1.1905</span>,<span style="color: #666666">-7.332</span>,<span style="color: #666666">14.93</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">5.05e5</span>)  <span style="color: #666666">&amp;</span>  (Re <span style="color: #666666">&lt;=8.0e6</span>),polyval(p,log10(Re)),CD) <span style="color: #408080; font-style: italic">#condition 7</span>
+    
+    CD <span style="color: #666666">=</span> where(Re<span style="color: #666666">&gt;8.0e6</span>,<span style="color: #666666">0.2</span>,CD)  <span style="color: #408080; font-style: italic"># condition 8</span>
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># vectorized boolean</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector_bool</span>(Re):
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,zeros_like
+       
+    condition1 <span style="color: #666666">=</span> Re <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>
+    condition2 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>)
+    condition3 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0.5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>)
+    condition4 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">100.0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>)
+    condition5 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">1.0e4</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>)
+    condition6 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">3.35e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>)
+    condition7 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">5.0e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">8.0e6</span>)
+    condition8 <span style="color: #666666">=</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>
+    
+    CD <span style="color: #666666">=</span> zeros_like(Re)
+    CD[condition1] <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    
+    CD[condition2] <span style="color: #666666">=</span> <span style="color: #666666">24/</span>Re[condition2]
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>,<span style="color: #666666">-14.05</span>,<span style="color: #666666">34.87</span>,<span style="color: #666666">0.658</span>])
+    CD[condition3] <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>Re[condition3]) 
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>,<span style="color: #666666">43.72</span>,<span style="color: #666666">-17.08</span>,<span style="color: #666666">2.41</span>])
+    CD[condition4] <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>log10(Re[condition4]))
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>,<span style="color: #666666">2.031</span>,<span style="color: #666666">-8.472</span>,<span style="color: #666666">11.932</span>])
+    CD[condition5] <span style="color: #666666">=</span> polyval(p,log10(Re[condition5]))
+    
+    CD[condition6] <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>(log10(Re[condition6]<span style="color: #666666">/4.5e5</span>))<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    
+    p  <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>,<span style="color: #666666">1.1905</span>,<span style="color: #666666">-7.332</span>,<span style="color: #666666">14.93</span>])
+    CD[condition7] <span style="color: #666666">=</span> polyval(p,log10(Re[condition7]))
+    
+    CD[condition8] <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    
+    <span style="color: #008000; font-weight: bold">return</span> CD
+    
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:              
+<span style="color: #408080; font-style: italic">#Check whether this file is executed (name==main) or imported as module</span>
+    
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">time</span>
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> mean
+    
+    CD <span style="color: #666666">=</span> {} <span style="color: #408080; font-style: italic"># Empty list for all CD computations</span>
+    
+
+    ReNrs <span style="color: #666666">=</span> logspace(<span style="color: #666666">-2</span>,<span style="color: #666666">7</span>,num<span style="color: #666666">=500</span>)
+    
+    <span style="color: #408080; font-style: italic"># make a vectorized version of the function automatically</span>
+    cd_sphere_auto_vector<span style="color: #666666">=</span>vectorize(cd_sphere) 
+    
+    <span style="color: #408080; font-style: italic"># make a list of all function objects</span>
+    funcs <span style="color: #666666">=</span>[cd_sphere_py_vector, cd_sphere_vector, cd_sphere_vector_bool, cd_sphere_auto_vector]  <span style="color: #408080; font-style: italic"># list of functions to test   </span>
+    
+    
+    <span style="color: #408080; font-style: italic"># Put all exec_times in a dictionary and fncnames in a list </span>
+    exec_times <span style="color: #666666">=</span> {}
+    fncnames <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
+        <span style="color: #008000; font-weight: bold">try</span>:
+            name <span style="color: #666666">=</span> func<span style="color: #666666">.</span>func_name
+        <span style="color: #008000; font-weight: bold">except</span>: 
+            scalarname <span style="color: #666666">=</span> func<span style="color: #666666">.</span>__getattribute__(<span style="color: #BA2121">&#39;pyfunc&#39;</span>)
+            name <span style="color: #666666">=</span> scalarname<span style="color: #666666">.</span>__name__<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_auto_vector&#39;</span>
+                      
+        fncnames<span style="color: #666666">.</span>append(name)
+                                      
+        t0 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()
+        CD[name] <span style="color: #666666">=</span> func(ReNrs) 
+        exec_times[name] <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock() <span style="color: #666666">-</span> t0
+       
+    fnames_sorted<span style="color: #666666">=</span><span style="color: #008000">sorted</span>(exec_times,key<span style="color: #666666">=</span>exec_times<span style="color: #666666">.</span>__getitem__)
+    exec_time_sorted<span style="color: #666666">=</span><span style="color: #008000">sorted</span>(exec_times<span style="color: #666666">.</span>values())
+    
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(fnames_sorted)):
+        <span style="color: #008000; font-weight: bold">print</span> fnames_sorted[i], <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> execution time = &#39;</span>, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%6.6f</span><span style="color: #BA2121">&#39;</span><span style="color: #666666">%</span>(exec_time_sorted[i])
+        
+    <span style="color: #408080; font-style: italic"># set fontsize prms </span>
+    fnSz <span style="color: #666666">=</span> <span style="color: #666666">16</span>; font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span>   : fnSz}; rc(<span style="color: #BA2121">&#39;font&#39;</span>,<span style="color: #666666">**</span>font)          
+    
+    <span style="color: #408080; font-style: italic"># set line styles</span>
+    style <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;v-&#39;</span>, <span style="color: #BA2121">&#39;8-&#39;</span>, <span style="color: #BA2121">&#39;*-&#39;</span>, <span style="color: #BA2121">&#39;o-&#39;</span>]
+    mrkevry <span style="color: #666666">=</span> [<span style="color: #666666">30</span>, <span style="color: #666666">35</span>, <span style="color: #666666">40</span>, <span style="color: #666666">45</span>]
+    
+    <span style="color: #408080; font-style: italic"># plot the result for all functions    </span>
+    i<span style="color: #666666">=0</span>
+    <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> fncnames: 
+        loglog(ReNrs,CD[name],style[i],markersize<span style="color: #666666">=10</span>,markevery<span style="color: #666666">=</span>mrkevry[i])
+        hold(<span style="color: #BA2121">&#39;on&#39;</span>)
+        i<span style="color: #666666">+=1</span> 
+    
+    leg <span style="color: #666666">=</span> legend(fncnames)
+    leg<span style="color: #666666">.</span>get_frame()<span style="color: #666666">.</span>set_alpha(<span style="color: #666666">0.</span>)
+    xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
+    ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
+    grid(<span style="color: #BA2121">&#39;on&#39;</span>,<span style="color: #BA2121">&#39;both&#39;</span>,<span style="color: #BA2121">&#39;both&#39;</span>)
+    savefig(<span style="color: #BA2121">&#39;example_sphere_generic.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    show()
+</pre></div>
 <p>
 <!-- --- end exercise --- -->
 

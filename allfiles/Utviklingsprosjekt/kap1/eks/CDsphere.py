@@ -53,6 +53,3 @@ pyplot.ylabel('$C_D$')
 pyplot.grid('on', 'both', 'both')
 pyplot.savefig('example_sphere.png', transparent=True)
 pyplot.show()
-
-
-# End

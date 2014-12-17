@@ -1,4 +1,4 @@
-TITLE: Electronic Compendium for TKT4140
+TITLE: Digital Compendium for TKT4140
 AUTHOR: Johan Kolstø Sønstabø at Centre for Advanced Structural Analysis (CASA) & Department of Structural Engineering, NTNU
 AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
@@ -381,7 +381,7 @@ the function `cd_sphere` is called. First, the number of data points to be calcu
 The function `range` is a built-in function that generates a list containing arithmetic progressions. The `for i in i_list` construct creates a loop over all elements in `i_list`. In each pass of the loop, the variable `i` refers to an element in the list, starting with `i_list[0]` (0 in this case) and ending with the last element `i_list[Npts-1]` (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call `cd_sphere(Re[i])` is assigned to `CD[i]`. Each statement in the block must be indented. 
 
 Lastly, the drag coefficient is plotted and the figure generated:
-@@@CODE ./kap1/eks/CDsphere.py from-to:# Make plot@^# End
+@@@CODE ./kap1/eks/CDsphere.py from-to:# Make plot@
 
 To generate the plot, the package `matplotlib` is used. `matplotlib` is the standard package for curve plotting in Python. For simple plotting the `matplotlib.pyplot` interface provides a MATLAB-like interface, which has been used here. For documentation and explanation of this package, we refer to URL: "http://www.matplotlib.org". 
 
@@ -420,7 +420,9 @@ cd_sphere_vector        execution time = 0.000641
 cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 !ec
-As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function `vectorize` was nearly as inefficient. The complete programme _DragCoefficientGeneric.py_ may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py". 
+As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function `vectorize` was nearly as inefficient. The complete programme _DragCoefficientGeneric.py_ is listed below.
+
+@@@CODE ./kap1/eks/DragCoefficientGeneric.py
 
 !split
 ===== Differences =====

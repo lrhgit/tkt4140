@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Electronic Compendium for TKT4140">
+<meta name="description" content="Digital Compendium for TKT4140">
 
-<title>Electronic Compendium for TKT4140</title>
+<title>Digital Compendium for TKT4140</title>
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -104,7 +104,7 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="main.html">Electronic Compendium for TKT4140</a>
+    <a class="navbar-brand" href="main.html">Digital Compendium for TKT4140</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
@@ -161,17 +161,17 @@ Let's implement the RK4 scheme and use it on (<a href="._main010.html#ex:falling
 <span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
 <span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
     
-    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
-    dt2 <span style="color: #666666">=</span> dt<span style="color: #666666">/2.0</span>
     z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
     zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
     
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
-        k1 <span style="color: #666666">=</span> func(z[i,:],t)                 <span style="color: #408080; font-style: italic"># predictor step 1</span>
-        k2 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k1<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2) <span style="color: #408080; font-style: italic"># predictor step 2</span>
-        k3 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k2<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2) <span style="color: #408080; font-style: italic"># predictor step 3</span>
-        k4 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k3<span style="color: #666666">*</span>dt, t <span style="color: #666666">+</span> dt)   <span style="color: #408080; font-style: italic"># predictor step 4</span>
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
+        dt2 <span style="color: #666666">=</span> dt<span style="color: #666666">/2.0</span>
+        k1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],t))                 <span style="color: #408080; font-style: italic"># predictor step 1</span>
+        k2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(func(z[i,:] <span style="color: #666666">+</span> k1<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2)) <span style="color: #408080; font-style: italic"># predictor step 2</span>
+        k3 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(func(z[i,:] <span style="color: #666666">+</span> k2<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2)) <span style="color: #408080; font-style: italic"># predictor step 3</span>
+        k4 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(func(z[i,:] <span style="color: #666666">+</span> k3<span style="color: #666666">*</span>dt, t <span style="color: #666666">+</span> dt))   <span style="color: #408080; font-style: italic"># predictor step 4</span>
         z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> dt<span style="color: #666666">/6.0*</span>(k1 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k2 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k3 <span style="color: #666666">+</span> k4) <span style="color: #408080; font-style: italic"># Corrector step</span>
 </pre></div>
 <p>
@@ -221,36 +221,36 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
     <span style="color: #008000; font-weight: bold">return</span> zout
 
 <span style="color: #408080; font-style: italic"># define euler scheme</span>
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func, z0, time):
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func,z0, time):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs. </span>
 <span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
 <span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
 <span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
     
-    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
     z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
 
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
-        z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> func(z[i,:],t)<span style="color: #666666">*</span>dt
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i] 
+        z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
 
     <span style="color: #008000; font-weight: bold">return</span> z
 
 <span style="color: #408080; font-style: italic"># define heun scheme</span>
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func, z0, time):
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func,z0, time):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Heun scheme for solution of systems of ODEs. </span>
 <span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
 <span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
 <span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
     
-    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
     z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
     zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
     
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
-        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> func(z[i,:],t)<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
-        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (func(z[i,:],t) <span style="color: #666666">+</span> func(zp,t<span style="color: #666666">+</span>dt))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
+        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],t))<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
+        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (np<span style="color: #666666">.</span>asarray(func(z[i,:],t)) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(zp,t<span style="color: #666666">+</span>dt)))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
 
     <span style="color: #008000; font-weight: bold">return</span> z
         
@@ -261,19 +261,19 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
 <span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
 <span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
     
-    dt <span style="color: #666666">=</span> time[<span style="color: #666666">1</span>]<span style="color: #666666">-</span>time[<span style="color: #666666">0</span>]
-    dt2 <span style="color: #666666">=</span> dt<span style="color: #666666">/2.0</span>
     z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
     zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
     
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
-        k1 <span style="color: #666666">=</span> func(z[i,:],t)                 <span style="color: #408080; font-style: italic"># predictor step 1</span>
-        k2 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k1<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2) <span style="color: #408080; font-style: italic"># predictor step 2</span>
-        k3 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k2<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2) <span style="color: #408080; font-style: italic"># predictor step 3</span>
-        k4 <span style="color: #666666">=</span> func(z[i,:] <span style="color: #666666">+</span> k3<span style="color: #666666">*</span>dt, t <span style="color: #666666">+</span> dt)   <span style="color: #408080; font-style: italic"># predictor step 4</span>
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
+        dt2 <span style="color: #666666">=</span> dt<span style="color: #666666">/2.0</span>
+        k1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],t))                 <span style="color: #408080; font-style: italic"># predictor step 1</span>
+        k2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(func(z[i,:] <span style="color: #666666">+</span> k1<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2)) <span style="color: #408080; font-style: italic"># predictor step 2</span>
+        k3 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(func(z[i,:] <span style="color: #666666">+</span> k2<span style="color: #666666">*</span>dt2, t <span style="color: #666666">+</span> dt2)) <span style="color: #408080; font-style: italic"># predictor step 3</span>
+        k4 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(func(z[i,:] <span style="color: #666666">+</span> k3<span style="color: #666666">*</span>dt, t <span style="color: #666666">+</span> dt))   <span style="color: #408080; font-style: italic"># predictor step 4</span>
         z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> dt<span style="color: #666666">/6.0*</span>(k1 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k2 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k3 <span style="color: #666666">+</span> k4) <span style="color: #408080; font-style: italic"># Corrector step</span>
-
+        
     <span style="color: #008000; font-weight: bold">return</span> z
 
 <span style="color: #408080; font-style: italic"># main program starts here</span>
