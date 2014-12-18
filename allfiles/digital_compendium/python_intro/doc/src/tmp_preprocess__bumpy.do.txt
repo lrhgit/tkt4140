@@ -240,7 +240,7 @@ for $t\in [0,10\pi]$. This will be a damped sinusoidal solution
 (setting $b=0$ will result in $u(t)=\cos t$).
 The test code becomes
 
-@@@CODE src-bumpy/session.py fromto: #/python_intro/doc/src/src-bumpy/session.py@# End solver_linear
+@@@CODE src-bumpy/session.py
 
 The `solver_linear_damping` function resides in the file `solver.py`,
 so if we make the call to this function in separate file (assumed above),

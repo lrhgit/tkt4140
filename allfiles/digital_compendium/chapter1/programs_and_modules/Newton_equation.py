@@ -2,7 +2,7 @@ import numpy as np
 import odespy
 import matplotlib
 from matplotlib.pyplot import legend, plot, show
-from ode_schemes import euler, heun
+from ODEschemes import euler, heun
 
 LNWDT=5; FNT=11
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT

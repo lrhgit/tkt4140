@@ -310,7 +310,7 @@ By use of \eqref{eq:1128} we get
 !split
 ===== Scientific computing with Python =====
 
-In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://folk.ntnu.no/johankso/electronic_compendium/Utviklingsprosjekt/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem. 
+In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://folk.ntnu.no/johankso/electronic_compendium/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem. 
 
 !split
 !bbox
@@ -1073,14 +1073,14 @@ v_{n+1}&=v_n+0.5\Delta t \cdot \left[2g-\alpha[v^2_n+(v^p_{n+1})^2\right] \nonum
 !et
 with initial values $z_0=z(0)=0,\ v_0=v(0)=0$. Note that we don't use the predictor $z^p_{n+1}$ since it doesn't appear on the right hand side of the equation system. 
 
-One possible way of implementing this scheme is given in the following function named `heun()`:
-@@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeun.py from-to:# define heun scheme@return z
+One possible way of implementing this scheme is given in the following function named `heun()`, in the programme _ODEschemes.py_:
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define Heun solver@return z
 
 Using the same time steps as in ref{ex:falling_sphere}, we get the response plotted in Figure ref{fig:falling_sphere_euler_heun}.
 
 FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
 
-The complete programme _FallingSphereEulerHeun.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEulerHeun.py") is listed below.
+The complete programme _FallingSphereEulerHeun.py_ is listed below. Note that the solver functions `euler` and `heun` are imported from the script _ODEschemes.py_. 
 
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeun.py
 
@@ -1144,22 +1144,8 @@ m_4&=-[(y_1+hk_3)(y_3+hm_3)
 \end{align*}
 !et
 
-!split
-!bbox
-===== Example: Falling sphere using RK4 =====
-label{example:falling_sphere_RK4}
-
-Let's implement the RK4 scheme and use it on (ref{ex:falling_sphere}). The scheme has been implemented in the function `rk4()`, and is given below
-
-@@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py from-to:# define rk4 scheme@return z
-
-Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme _FallingSphereEulerHeunRK4.py_ may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py" and is listed below.
-
-FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun_rk4.png, width=400] Velocity of falling sphere using Euler, Heun and RK4. label{fig:falling_sphere_euler_heun_rk4}
-
-@@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py
-
-!ebox
+# left out for exercise
+## #include "falling_sphere_rk4.do.txt"
 
 !split
 !bbox
@@ -1246,8 +1232,7 @@ Let's first look at the case of a smooth ball. We use the following data (which 
 \text{Diameter } d = 41 \text{mm},\text{ mass } m = 46\text{g which gives } \rho_k=\frac{6m}{\pi d^3} = 1275 \text{kg/m}^3
 \end{equation*}
 !et
-We use the initial velocity $v_0=50$ m/s and solve \eqref{eq:1508} using the Runge-Kutta 4 scheme defined before:
-@@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py from-to:# define rk4 scheme@return z
+We use the initial velocity $v_0=50$ m/s and solve \eqref{eq:1508} using the Runge-Kutta 4 scheme. In this example we have used the Python package _Odespy_ (ODE Software in Python), which offers a large collection of functions for solving ODE's. The RK4 scheme available in Odespy is used herein. 
 
 The right hand side in \eqref{eq:1508} is implemented as the following function:
 @@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py from-to:# smooth ball@return zout

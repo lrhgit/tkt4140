@@ -50,7 +50,7 @@ y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
 !et
 Here $f=y^\frac{1}{3}$ and $\frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}}$. $f$ is continuous in $x=0$, but that's not the case for $\frac{\partial f}{\partial y}$. It may be shown that this ODE has two solutions: $y=0$ and $y=(\frac{2}{3}x)^\frac{2}{3}$. Hopefully this equation doesn't present a physical problem. A problem of more interest is shown below.
 
-FIGURE:[kap1/1.png, width=200]
+FIGURE:[chapter1/1.png, width=200]
 
 The figure shows a mathematical pendulum where the motion is described by the following equation:
 !bt
@@ -310,7 +310,7 @@ By use of \eqref{eq:1128} we get
 !split
 ===== Scientific computing with Python =====
 
-In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://folk.ntnu.no/johankso/electronic_compendium/Utviklingsprosjekt/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem. 
+In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://folk.ntnu.no/johankso/electronic_compendium/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem. 
 
 !split
 !bbox
@@ -1073,14 +1073,14 @@ v_{n+1}&=v_n+0.5\Delta t \cdot \left[2g-\alpha[v^2_n+(v^p_{n+1})^2\right] \nonum
 !et
 with initial values $z_0=z(0)=0,\ v_0=v(0)=0$. Note that we don't use the predictor $z^p_{n+1}$ since it doesn't appear on the right hand side of the equation system. 
 
-One possible way of implementing this scheme is given in the following function named `heun()`:
-@@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeun.py from-to:# define heun scheme@return z
+One possible way of implementing this scheme is given in the following function named `heun()`, in the programme _ODEschemes.py_:
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define Heun solver@return z
 
 Using the same time steps as in ref{ex:falling_sphere}, we get the response plotted in Figure ref{fig:falling_sphere_euler_heun}.
 
 FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
 
-The complete programme _FallingSphereEulerHeun.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEulerHeun.py") is listed below.
+The complete programme _FallingSphereEulerHeun.py_ is listed below. Note that the solver functions `euler` and `heun` are imported from the script _ODEschemes.py_. 
 
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeun.py
 
@@ -1151,16 +1151,15 @@ label{example:falling_sphere_RK4}
 
 Let's implement the RK4 scheme and use it on (ref{ex:falling_sphere}). The scheme has been implemented in the function `rk4()`, and is given below
 
-@@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py from-to:# define rk4 scheme@return z
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define rk4 scheme@return z
 
-Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme _FallingSphereEulerHeunRK4.py_ may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py" and is listed below.
+Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme _FallingSphereEulerHeunRK4.py_ is listed below. The functions `euler`, `heun` and `rk4` are imported from the programme _ODEschemes.py_. 
 
 FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun_rk4.png, width=400] Velocity of falling sphere using Euler, Heun and RK4. label{fig:falling_sphere_euler_heun_rk4}
 
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py
 
 !ebox
-
 !split
 !bbox
 ===== Example: Particle motion in two dimensions =====
@@ -1271,7 +1270,7 @@ The results are shown in in Figure ref{fig:golf_drag_lift}. The motion of a golf
 
 FIGURE:[chapter1/programs_and_modules/example_particle_motion_2d_2.png, width=700] Motion of golf ball with drag and lift. label{fig:golf_drag_lift}
 
-The complete program _ParticleMotion2D.py_ may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/ParticleMotion2D.py" and is listed below.
+The complete program _ParticleMotion2D.py_ is listed below.
 
 @@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py
 !ebox

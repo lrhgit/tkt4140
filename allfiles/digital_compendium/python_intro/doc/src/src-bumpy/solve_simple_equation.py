@@ -1,4 +1,4 @@
-#/python_intro/doc/src/src-bumpy/solve_simple_equation.py;solver.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/python_intro/doc/src/src-bumpy/solver.py
+#/python_intro/solve_simple_equation.py;solver.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/python_intro/doc/src/src-bumpy/solver.py
 import numpy as np
 from solver import solver
 from numpy import sin, pi  # for nice math

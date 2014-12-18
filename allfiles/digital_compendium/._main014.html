@@ -67,14 +67,10 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec16'),
               (' Runge-Kutta of 4th order ', 2, None, '___sec17'),
-              (' Example 6: Falling sphere using RK4 ',
-               2,
-               'example:falling_sphere_RK4',
-               'example:falling_sphere_RK4'),
-              (' Example 7: Particle motion in two dimensions ',
+              (' Example 6: Particle motion in two dimensions ',
                2,
                None,
-               '___sec19')]}
+               '___sec18')]}
 end of tocinfo -->
 
 <body>
@@ -125,8 +121,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main013.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
      <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="._main015.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="._main016.html#example:falling_sphere_RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Falling sphere using RK4</a></li>
-     <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 7: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="._main016.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
 
         </ul>
       </li>
@@ -183,15 +178,20 @@ $$
 with initial values \( z_0=z(0)=0,\ v_0=v(0)=0 \). Note that we don't use the predictor \( z^p_{n+1} \) since it doesn't appear on the right hand side of the equation system. 
 
 <p>
-One possible way of implementing this scheme is given in the following function named <code>heun()</code>:
+One possible way of implementing this scheme is given in the following function named <code>heun()</code>, in the programme <b>ODEschemes.py</b>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func,z0, time):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func, z0, time):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Heun scheme for solution of systems of ODEs. </span>
 <span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
 <span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
 <span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
+    
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f_np</span>(z,t):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;A local function to ensure that the return of func is an np array </span>
+<span style="color: #BA2121; font-style: italic">        and to avoid lengthy code for implementation of the Heun algorithm&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>asarray(func(z,t))
     
     z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
@@ -199,8 +199,8 @@ One possible way of implementing this scheme is given in the following function 
     
     <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
         dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
-        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],t))<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
-        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (np<span style="color: #666666">.</span>asarray(func(z[i,:],t)) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(zp,t<span style="color: #666666">+</span>dt)))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
+        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> f_np(z[i,:],t)<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
+        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (f_np(z[i,:],t) <span style="color: #666666">+</span> f_np(zp,t<span style="color: #666666">+</span>dt))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
 </pre></div>
 <p>
 Using the same time steps as in <a href="._main010.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, we get the response plotted in Figure <a href="#fig:falling_sphere_euler_heun">7</a>.
@@ -213,13 +213,14 @@ Using the same time steps as in <a href="._main010.html#ex:falling_sphere">Examp
 </center>
 
 <p>
-The complete programme <b>FallingSphereEulerHeun.py</b> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEulerHeun.py" target="_blank">here</a>) is listed below.
+The complete programme <b>FallingSphereEulerHeun.py</b> is listed below. Note that the solver functions <code>euler</code> and <code>heun</code> are imported from the script <b>ODEschemes.py</b>. 
 
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/FallingSphereEulerHeun.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/DragCoefficientGeneric.py;</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/FallingSphereEulerHeun.py;ODEschemes.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/ODEschemes.py;</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">ODEschemes</span> <span style="color: #008000; font-weight: bold">import</span> euler, heun
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
@@ -250,40 +251,6 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
     alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
     zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
     <span style="color: #008000; font-weight: bold">return</span> zout
-
-<span style="color: #408080; font-style: italic"># define euler scheme</span>
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func,z0, time):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs. </span>
-<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
-<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
-<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
-    
-    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
-    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
-
-    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i] 
-        z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
-
-    <span style="color: #008000; font-weight: bold">return</span> z
-
-<span style="color: #408080; font-style: italic"># define heun scheme</span>
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func,z0, time):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Heun scheme for solution of systems of ODEs. </span>
-<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
-<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
-<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
-    
-    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
-    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
-    zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
-    
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
-        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],t))<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
-        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (np<span style="color: #666666">.</span>asarray(func(z[i,:],t)) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(zp,t<span style="color: #666666">+</span>dt)))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
-
-    <span style="color: #008000; font-weight: bold">return</span> z
         
 <span style="color: #408080; font-style: italic"># main program starts here</span>
 
@@ -362,7 +329,6 @@ show()
   <li class="active"><a href="._main014.html">15</a></li>
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
-  <li><a href="._main017.html">18</a></li>
   <li><a href="._main015.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

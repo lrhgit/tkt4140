@@ -1,4 +1,4 @@
-#/python_intro/doc/src/src-bumpy/session.py;solver.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/python_intro/doc/src/src-bumpy/solver.py
+#/python_intro/session.py;solver.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/python_intro/doc/src/src-bumpy/solver.py
 
 from solver import solver_linear_damping
 from numpy import *
@@ -20,4 +20,3 @@ plot(t, u)
 savefig('tmp.pdf')   # save plot to PDF file
 savefig('tmp.png')   # save plot to PNG file
 show()
-# End solver_linear_damping

@@ -1,6 +1,6 @@
 import numpy as np
 
-from ode_schemes import euler, heun
+from ODEschemes import euler, heun
 
 if __name__ == '__main__':              
 #Check whether this file is executed (name==main) or imported as module

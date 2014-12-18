@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib.pyplot import plot, show, legend
 
-
+# define Euler solver
 def euler(func, z0, time):
     """The Euler scheme for solution of systems of ODEs. 
     z0 is a vector for the initial conditions, 
@@ -67,7 +67,7 @@ def euler4(func, z0, time):
 
     return z
 
-
+# define Heun solver
 def heun(func, z0, time):
     """The Heun scheme for solution of systems of ODEs. 
     z0 is a vector for the initial conditions, 
@@ -147,7 +147,7 @@ if __name__ == '__main__':
         return [a + (z - u_exact(t))**5]
     
     
-    def test_ode_schemes():
+    def test_ODEschemes():
         """Use knowledge of an exact numerical solution for testing."""
         from numpy import linspace, size
         
@@ -168,7 +168,7 @@ if __name__ == '__main__':
             msg = '%s failed with error = %g' % (scheme.func_name, max_error)
             assert max_error < tol, msg
              
-    def plot_ode_schemes_solutions():
+    def plot_ODEschemes_solutions():
         """Plot the linear solutions for the test schemes in scheme_list"""
         from numpy import linspace
         T = 1.5  # end of simulation
@@ -191,8 +191,8 @@ if __name__ == '__main__':
         legend(legends) 
         show()
         
-    test_ode_schemes()
-    #plot_ode_schemes_solutions()               
+    test_ODEschemes()
+    #plot_ODEschemes_solutions()               
 
         
         
