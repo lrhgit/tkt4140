@@ -675,7 +675,7 @@ The complete programme <b>CDsphere.py</b> used to generate the plot in the examp
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/CDsphere.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/CDsphere.py</span>
 
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
 
@@ -955,7 +955,7 @@ As seen, the function with the boolean variables was fastest. The simple vectori
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/DragCoefficientGeneric.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/DragCoefficientGeneric.py</span>
 
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace,array,append,logspace,zeros_like,where,vectorize,\
     logical_and
@@ -1728,7 +1728,7 @@ The programme <b>FallingSphereEuler.py</b> (may be downloaded <a href="https://r
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/DragCoefficientGeneric.py;</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
@@ -2030,7 +2030,7 @@ The following programme <b>NewtonHeun.py</b> solves this problem using Heun's me
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/NewtonHeun.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/NewtonHeun.py</span>
 <span style="color: #408080; font-style: italic"># Program Newton</span>
 <span style="color: #408080; font-style: italic"># Computes the solution of Newton&#39;s 1st order equation (1671):</span>
 <span style="color: #408080; font-style: italic"># dy/dx = 1-3*x + y + x^2 +x*y , y(0) = 0</span>
@@ -2167,7 +2167,7 @@ The complete programme <b>FallingSphereEulerHeun.py</b> (may be downloaded <a hr
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/FallingSphereEulerHeun.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/FallingSphereEulerHeun.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/DragCoefficientGeneric.py;</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
@@ -2414,7 +2414,7 @@ Figure <a href="#fig:falling_sphere_euler_heun_rk4">9</a> shows the results usin
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/FallingSphereEulerHeunRK4.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
@@ -2776,7 +2776,7 @@ The complete program <b>ParticleMotion2D.py</b> may be downloaded <a href="https
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/ParticleMotion2D.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py;cdclgolfball.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/kap1/eks/cdclgolfball.py;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/ParticleMotion2D.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/DragCoefficientGeneric.py;cdclgolfball.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/cdclgolfball.py;</span>
 
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">cdclgolfball</span> <span style="color: #008000; font-weight: bold">import</span> cdcl  
