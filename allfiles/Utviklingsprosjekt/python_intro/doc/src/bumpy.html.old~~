@@ -158,7 +158,7 @@ MathJax.Hub.Config({
 <center>[1] <b>Centre for Advanced Structural Analysis (CASA)</b></center>
 <center>[2] <b>Department of Structural Engineering, NTNU</b></center>
 <p>
-<center><h4>Dec 15, 2014</h4></center> <!-- date -->
+<center><h4>Dec 18, 2014</h4></center> <!-- date -->
 <p>
 This example is to a large extent developed by <b>Hans Petter Langtangen</b> (<a href="http://hplgit.github.io/bumpy/doc/pub/bumpy.html" target="_blank"><tt>http://hplgit.github.io/bumpy/doc/pub/bumpy.html</tt></a>) at Simula Research Laboratory and University of Oslo, and he is credited for that. 
 
@@ -271,7 +271,7 @@ illustrates the situation.
 
 <p>
 <center> <!-- figure -->
-<hr class="figure">
+ 
 <center><p class="caption">Figure 1:  Vehicle on a bumpy road. <a name="bumpy:fig1"></a> </p></center>
 <p><img src="fig-bumpy/vehicle2_2.png" align="bottom" width=600></p>
 </center>
@@ -457,7 +457,7 @@ The test code becomes
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic">#/python_intro/doc/src/src-bumpy/session.py</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic">#/python_intro/doc/src/src-bumpy/session.py;solver.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/python_intro/doc/src/src-bumpy/solver.py</span>
 
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">solver</span> <span style="color: #008000; font-weight: bold">import</span> solver_linear_damping
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
@@ -496,7 +496,7 @@ shows the result.
 
 <p>
 <center> <!-- figure -->
-<hr class="figure">
+ 
 <center><p class="caption">Figure 2:  Plot of computed curve. <a name="bumpy:fig0"></a> </p></center>
 <p><img src="fig-bumpy/solver_linear_damping.png" align="bottom" width=500></p>
 </center>
@@ -681,8 +681,12 @@ to solve the differential equation problem \( mu'' + bu' + ku = A\sin\pi t \),
 
 <p>
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic">#/python_intro/doc/src/src-bumpy/solve_simple_equation.py;solver.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/python_intro/doc/src/src-bumpy/solver.py</span>
+
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">solver</span> <span style="color: #008000; font-weight: bold">import</span> solver
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> sin, pi  <span style="color: #408080; font-style: italic"># for nice math</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">F</span>(t):
@@ -1205,7 +1209,7 @@ Figure <a href="#bumpy:fig3">3</a> shows the result.
 
 <p>
 <center> <!-- figure -->
-<hr class="figure">
+ 
 <center><p class="caption">Figure 3:  Root mean square of displacement. <a name="bumpy:fig3"></a> </p></center>
 <p><img src="fig-bumpy/u_rms.png" align="bottom" width=600></p>
 </center>
@@ -1260,7 +1264,7 @@ dominating frequency is 1 Hz.
 
 <p>
 <center> <!-- figure -->
-<hr class="figure">
+ 
 <center><p class="caption">Figure 4:  Spectrum of displacement. <a name="bumpy:fig2"></a> </p></center>
 <p><img src="fig-bumpy/u_spectrum.png" align="bottom" width=600></p>
 </center>
@@ -1305,21 +1309,21 @@ these arrays:
 
 <p>
 <center> <!-- figure -->
-<hr class="figure">
+ 
 <center><p class="caption">Figure 5:  First realization of a bumpy road, with corresponding acceleration of the wheel and resulting vibrations. <a name="bumpy:fig4"></a> </p></center>
 <p><img src="fig-bumpy/hau0.png" align="bottom" width=700></p>
 </center>
 
 <p>
 <center> <!-- figure -->
-<hr class="figure">
+ 
 <center><p class="caption">Figure 6:  Second realization of a bumpy road, with corresponding acceleration of the wheel and resulting vibrations. <a name="bumpy:fig5"></a> </p></center>
 <p><img src="fig-bumpy/hau1.png" align="bottom" width=700></p>
 </center>
 
 <p>
 <center> <!-- figure -->
-<hr class="figure">
+ 
 <center><p class="caption">Figure 7:  Third realization of a bumpy road, with corresponding acceleration of the wheel and resulting vibrations. <a name="bumpy:fig6"></a> </p></center>
 <p><img src="fig-bumpy/hau2.png" align="bottom" width=700></p>
 </center>

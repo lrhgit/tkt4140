@@ -257,12 +257,15 @@ The general procedure to reduce a higher order ODE to a system of first order OD
 Given the equation
 !bt
 \begin{align} \label{eq:1127}
-\begin{split}
 &y^{(m)}=f(x,y,y',y'',\dots,y^{(m-1)})\\
-&y(x_0)=a_1,\ y'(x_0)=a_2,\ \dots,y^{(m-1)}(x_0)=a_m\\
-&\text{derwhere } y^{(m)}\equiv \frac{d^my}{dx^m}
-\end{split}
+&y(x_0)=a_1,\ y'(x_0)=a_2,\ \dots,y^{(m-1)}(x_0)=a_m \nonumber\\
 \end{align}
+!et
+where
+!bt
+\begin{align*}
+y^{(m)}\equiv \frac{d^my}{dx^m}
+\end{align*}
 !et
 with $y=y_1$, we set
 !bt
@@ -277,6 +280,7 @@ with $y=y_1$, we set
 !et
 
 !split
+
 !bbox
 ===== Example: Reduction of higher order system =====
 Write the following ODE as a system of first order ODEs:
@@ -1275,7 +1279,6 @@ The complete program _ParticleMotion2D.py_ may be downloaded "here": "https://ra
 
 
 
-
 BIBFILE: references/papers.pub
 
 
@@ -1295,6 +1298,4 @@ BIBFILE: references/papers.pub
 
 
 
-
-}
 

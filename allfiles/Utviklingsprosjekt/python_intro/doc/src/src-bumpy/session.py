@@ -1,4 +1,4 @@
-#/python_intro/doc/src/src-bumpy/session.py
+#/python_intro/doc/src/src-bumpy/session.py;solver.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/python_intro/doc/src/src-bumpy/solver.py
 
 from solver import solver_linear_damping
 from numpy import *

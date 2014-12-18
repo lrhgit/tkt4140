@@ -74,7 +74,8 @@ Automatically generated HTML file from DocOnce source
               (' Example 7: Particle motion in two dimensions ',
                2,
                None,
-               '___sec19')]}
+               '___sec19'),
+              (' TEST ', 2, None, '___sec20')]}
 end of tocinfo -->
 
 <body>
@@ -125,8 +126,9 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main013.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
      <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="._main015.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="#example:falling_sphere_RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Falling sphere using RK4</a></li>
-     <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 7: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="._main015.html#example:falling_sphere_RK4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Falling sphere using RK4</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 7: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="._main017.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TEST</a></li>
 
         </ul>
       </li>
@@ -148,10 +150,113 @@ MathJax.Hub.Config({
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="example:falling_sphere_RK4">Example 6: Falling sphere using RK4<a name="example:falling_sphere_RK4"></a></h2>
+<h2 id="___sec19">Example 7: Particle motion in two dimensions <a name="___sec19"></a></h2>
 
-Let's implement the RK4 scheme and use it on (<a href="._main010.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>). The scheme has been implemented in the function <code>rk4()</code>, and is given below
+In this example we will calculate the motion of a particle in two dimensions. First we will calculate the motion of a smooth ball with drag coefficient given by the previously defined function <code>cd_sphere()</code> (see <a href="._main006.html#example:sphere_freefall">Example 2: Sphere in free fall</a>), and then of a golf ball with drag and lift. 
 
+<p>
+The problem is illustrated in the following figure:
+<center><p><img src="kap1/14.png" align="bottom" width=400></p></center>
+
+<p>
+where \( v \) is the absolute velocity, \( v_f= \) is the velocity of the fluid, \( v_r=v-v_f \) is the relative velocity between the fluid and the ball, \( \alpha \) is the elevation angle, \( v_0 \) is the initial velocity and \( \phi \) is the angle between the \( x \)-axis and \( v_r \).
+
+<p>
+\( \mathbf{F}_l \) is the lift force stemming from the rotation of the ball (the Magnus-effect) and is normal to \( v_r \). With the given direction the ball rotates counter-clockwise (backspin). \( \mathbf{F}_d \) is the fluids resistance against the motion and is parallell to \( v_r \). These forces are given by 
+$$
+\begin{align} 
+\mathbf{F}_d=\frac{1}{2}\rho _f AC_Dv_r^2 \tag{63}\\
+\mathbf{F}_l=\frac{1}{2}\rho _f AC_Lv_r^2 \tag{64}
+\end{align}
+$$
+
+
+<p>
+\( C_D \) is the drag coefficient, \( C_L \) is the lift coefficient, \( A \) is the area projected in the velocity direction and \( \rho_F \) is the density of the fluid. 
+
+<p>
+Newton's law in \( x \)- and \( y \)-directions gives
+$$
+\begin{align}\tag{65}
+\frac{dv_x}{dt}&= -\rho _f\frac{A}{2m}v_r^2(C_D\cdot \cos(\phi)+C_L\sin(\phi)) \\
+\frac{dv_y}{dt}&=\rho _f\frac{A}{2m}v_r^2(C_L\cdot \cos(\phi)-C_D\sin(\phi))-g \tag{66}
+\end{align}
+$$
+
+
+<p>
+From the figure we have
+$$
+\begin{align*}
+\cos (\phi)&=\frac{v_{rx}}{v_r} \\
+\sin(\phi)&=\frac{v_{ry}}{v_r}
+\end{align*}
+$$
+
+
+<p>
+We assume that the particle is a sphere, such that \( C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd} \) as in <a href="._main006.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. Here \( d \) is the diameter of the sphere and \( \rho_k \) the density of the sphere. 
+
+<p>
+Now <a href="#mjx-eqn-65">(65)</a> and <a href="#mjx-eqn-66">(66)</a> become
+$$
+\begin{align}\tag{67}
+\frac{dv_x}{dt} &= -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry})\\
+\frac{dv_y}{dt} &= C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-  \tag{68}g
+\end{align}
+$$
+
+
+<p>
+With \( \frac{dx}{dt}=v_x \) and \( \frac{dy}{dt}=v_y \) we get a system of 1st order equations as follows,
+$$
+\begin{align}
+&\frac{dx}{dt}=v_x \nonumber \\
+& \frac{dy}{dt}=v_y \nonumber\\
+& \frac{dv_x}{dt} = -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry}) \tag{69}\\
+&\frac{dv_y}{dt} = C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-g \nonumber
+\end{align}
+$$
+
+
+<p>
+Introducing the notation \( x=y_1 \), \( y=y_2 \), \( v_x=y_3 \), \( v_y=y_4 \), we get
+$$
+\begin{align}
+&\frac{dy_1}{dt}=y_3\nonumber\\
+& \frac{dy_2}{dt}=y_4\nonumber\\
+& \frac{dy_3}{dt} = -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry})\tag{70}\\
+&\frac{dy_4}{dt} = C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-g\nonumber
+\end{align}
+$$
+
+
+<p>
+Here we have \( v_{rx}=v_x-v_{fx}=y_3-v_{fx},\ v_{ry}=v_y-v_{fy}=y_4-v_{fy},\\ v_r=\sqrt{v_{rx}^2+v_{ry}^2} \)
+
+<p>
+Initial conditions for \( t=0 \) are
+$$
+\begin{align*}
+y_1&=y_2=0 \\
+y_3&=v_0\cos(\alpha)\\
+y_4&=v_0\sin(\alpha)
+\end{align*}
+$$
+
+
+<p>
+<hr>
+
+<p>
+Let's first look at the case of a smooth ball. We use the following data (which are the data for a golf ball):
+$$
+\begin{equation*}  \tag{71}
+\text{Diameter } d = 41 \text{mm},\text{ mass } m = 46\text{g which gives } \rho_k=\frac{6m}{\pi d^3} = 1275 \text{kg/m}^3
+\end{equation*}
+$$
+
+We use the initial velocity \( v_0=50 \) m/s and solve <a href="#mjx-eqn-70">(70)</a> using the Runge-Kutta 4 scheme defined before:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
@@ -175,85 +280,132 @@ Let's implement the RK4 scheme and use it on (<a href="._main010.html#ex:falling
         z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> dt<span style="color: #666666">/6.0*</span>(k1 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k2 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k3 <span style="color: #666666">+</span> k4) <span style="color: #408080; font-style: italic"># Corrector step</span>
 </pre></div>
 <p>
-Figure <a href="#fig:falling_sphere_euler_heun_rk4">9</a> shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme <b>FallingSphereEulerHeunRK4.py</b> may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/FallingSphereEulerHeunRK4.py" target="_blank">here</a> and is listed below.
+The right hand side in <a href="#mjx-eqn-70">(70)</a> is implemented as the following function:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;4x4 system for smooth sphere with drag in two directions.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    C <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)
+    vrx <span style="color: #666666">=</span> z[<span style="color: #666666">2</span>] <span style="color: #666666">-</span> vfx
+    vry <span style="color: #666666">=</span> z[<span style="color: #666666">3</span>] <span style="color: #666666">-</span> vfy
+    vr <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(vrx<span style="color: #666666">**2</span> <span style="color: #666666">+</span> vry<span style="color: #666666">**2</span>)
+    Re <span style="color: #666666">=</span> vr<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD <span style="color: #666666">=</span> cd_sphere(Re) <span style="color: #408080; font-style: italic"># using the already defined function</span>
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">2</span>], z[<span style="color: #666666">3</span>], <span style="color: #666666">-</span>C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CD<span style="color: #666666">*</span>vrx), C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(<span style="color: #666666">-</span>CD<span style="color: #666666">*</span>vry) <span style="color: #666666">-</span> g]
+</pre></div>
+<p>
+Note that we have used the function <code>cd_sphere()</code> defined in <a href="._main006.html#example:sphere_freefall">Example 2: Sphere in free fall</a> to calculate the drag coefficient of the smooth sphere. 
+
+<p>
+The results are shown for some initial angles in Figure <a href="#fig:smooth_ball_drag">10</a>.
 
 <p>
 <center> <!-- figure -->
  
-<center><p class="caption">Figure 9:  Velocity of falling sphere using Euler, Heun and RK4. <a name="fig:falling_sphere_euler_heun_rk4"></a> </p></center>
-<p><img src="kap1/eks/example_sphere_falling_euler_heun_rk4.png" align="bottom" width=400></p>
+<center><p class="caption">Figure 10:  Motion of smooth ball with drag. <a name="fig:smooth_ball_drag"></a> </p></center>
+<p><img src="kap1/eks/example_particle_motion_2d_1.png" align="bottom" width=700></p>
 </center>
+
+<p>
+<hr>
+
+<p>
+Now let's look at the same case for a golf ball. The dimension and weight are the same as for the sphere. Now we need to account for the lift force from the spin of the ball. In addition, the drag data for a golf ball are completely different from the smooth sphere. We use the data from Bearman and Harvey <a href="._main017.html#Bearman1976112">[5]</a> who measured the drag and lift of a golf ball for different spin velocities in a vindtunnel. We choose as an example 3500 rpm, and an initial velocity of \( v_0=50 \) m/s. 
+
+<p>
+The right hand side in <a href="#mjx-eqn-70">(70)</a> is now implemented as the following function:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;4x4 system for golf ball with drag and lift in two directions.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    C <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)
+    vrx <span style="color: #666666">=</span> z[<span style="color: #666666">2</span>] <span style="color: #666666">-</span> vfx
+    vry <span style="color: #666666">=</span> z[<span style="color: #666666">3</span>] <span style="color: #666666">-</span> vfy
+    vr <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(vrx<span style="color: #666666">**2</span> <span style="color: #666666">+</span> vry<span style="color: #666666">**2</span>)
+    Re <span style="color: #666666">=</span> vr<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD, CL <span style="color: #666666">=</span> cdcl(vr, nrpm)
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">2</span>], z[<span style="color: #666666">3</span>], <span style="color: #666666">-</span>C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CD<span style="color: #666666">*</span>vrx <span style="color: #666666">+</span> CL<span style="color: #666666">*</span>vry), C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CL<span style="color: #666666">*</span>vrx <span style="color: #666666">-</span> CD<span style="color: #666666">*</span>vry) <span style="color: #666666">-</span> g]
+</pre></div>
+<p>
+The function <code>cdcl()</code> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/cdclgolfball.py" target="_blank">here</a>) gives the drag and lift data for a given velocity and spin.
+
+<p>
+The results are shown in in Figure <a href="#fig:golf_drag_lift">11</a>. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift. 
+
+<p>
+<center> <!-- figure -->
+ 
+<center><p class="caption">Figure 11:  Motion of golf ball with drag and lift. <a name="fig:golf_drag_lift"></a> </p></center>
+<p><img src="kap1/eks/example_particle_motion_2d_2.png" align="bottom" width=700></p>
+</center>
+
+<p>
+The complete program <b>ParticleMotion2D.py</b> may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/kap1/eks/ParticleMotion2D.py" target="_blank">here</a> and is listed below.
 
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/FallingSphereEulerHeunRK4.py</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># kap1/eks/ParticleMotion2D.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/kap1/eks/DragCoefficientGeneric.py;cdclgolfball.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/kap1/eks/cdclgolfball.py;</span>
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">cdclgolfball</span> <span style="color: #008000; font-weight: bold">import</span> cdcl  
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
 
-<span style="color: #408080; font-style: italic"># change some default values to make plots more readable </span>
-LNWDT<span style="color: #666666">=5</span>; FNT<span style="color: #666666">=11</span>
-rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
-
-g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity m/s^2</span>
-d <span style="color: #666666">=</span> <span style="color: #666666">41.0e-3</span>   <span style="color: #408080; font-style: italic"># Diameter of the sphere</span>
-rho_f <span style="color: #666666">=</span> <span style="color: #666666">1.22</span>  <span style="color: #408080; font-style: italic"># Density of fluid [kg/m^3]</span>
-rho_s <span style="color: #666666">=</span> <span style="color: #666666">1275</span>  <span style="color: #408080; font-style: italic"># Density of sphere [kg/m^3]</span>
+g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity [m/s^2]</span>
 nu <span style="color: #666666">=</span> <span style="color: #666666">1.5e-5</span>   <span style="color: #408080; font-style: italic"># Kinematical viscosity [m^2/s]</span>
-CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>      <span style="color: #408080; font-style: italic"># Constant drag coefficient</span>
+rho_f <span style="color: #666666">=</span> <span style="color: #666666">1.20</span>  <span style="color: #408080; font-style: italic"># Density of fluid [kg/m^3]</span>
+rho_s <span style="color: #666666">=</span> <span style="color: #666666">1275</span>  <span style="color: #408080; font-style: italic"># Density of sphere [kg/m^3]</span>
+d <span style="color: #666666">=</span> <span style="color: #666666">41.0e-3</span>   <span style="color: #408080; font-style: italic"># Diameter of the sphere [m]</span>
+v0 <span style="color: #666666">=</span> <span style="color: #666666">50.0</span>     <span style="color: #408080; font-style: italic"># Initial velocity [m/s]</span>
+vfx <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>     <span style="color: #408080; font-style: italic"># x-component of fluid&#39;s velocity</span>
+vfy <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>     <span style="color: #408080; font-style: italic"># y-component of fluid&#39;s velocity</span>
 
+nrpm <span style="color: #666666">=</span> <span style="color: #666666">3500</span>   <span style="color: #408080; font-style: italic"># no of rpm of golf ball</span>
+
+<span style="color: #408080; font-style: italic"># smooth ball</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(z, t):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with constant drag.&quot;&quot;&quot;</span>
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;4x4 system for smooth sphere with drag in two directions.&quot;&quot;&quot;</span>
     zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
-    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
-    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
+    C <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)
+    vrx <span style="color: #666666">=</span> z[<span style="color: #666666">2</span>] <span style="color: #666666">-</span> vfx
+    vry <span style="color: #666666">=</span> z[<span style="color: #666666">3</span>] <span style="color: #666666">-</span> vfy
+    vr <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(vrx<span style="color: #666666">**2</span> <span style="color: #666666">+</span> vry<span style="color: #666666">**2</span>)
+    Re <span style="color: #666666">=</span> vr<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD <span style="color: #666666">=</span> cd_sphere(Re) <span style="color: #408080; font-style: italic"># using the already defined function</span>
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">2</span>], z[<span style="color: #666666">3</span>], <span style="color: #666666">-</span>C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CD<span style="color: #666666">*</span>vrx), C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(<span style="color: #666666">-</span>CD<span style="color: #666666">*</span>vry) <span style="color: #666666">-</span> g]
     <span style="color: #008000; font-weight: bold">return</span> zout 
 
+<span style="color: #408080; font-style: italic"># golf ball without lift</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(z, t):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with Re-dependent drag.&quot;&quot;&quot;</span>
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;4x4 system for golf ball with drag in two directions.&quot;&quot;&quot;</span>
     zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
-    v <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(z[<span style="color: #666666">1</span>]) 
-    Re <span style="color: #666666">=</span> v<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
-    CD <span style="color: #666666">=</span> cd_sphere(Re)
-    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
-    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
-    <span style="color: #008000; font-weight: bold">return</span> zout
+    C <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)
+    vrx <span style="color: #666666">=</span> z[<span style="color: #666666">2</span>] <span style="color: #666666">-</span> vfx
+    vry <span style="color: #666666">=</span> z[<span style="color: #666666">3</span>] <span style="color: #666666">-</span> vfy
+    vr <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(vrx<span style="color: #666666">**2</span> <span style="color: #666666">+</span> vry<span style="color: #666666">**2</span>)
+    Re <span style="color: #666666">=</span> vr<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD, CL <span style="color: #666666">=</span> cdcl(vr, nrpm)
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">2</span>], z[<span style="color: #666666">3</span>], <span style="color: #666666">-</span>C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CD<span style="color: #666666">*</span>vrx), C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(<span style="color: #666666">-</span>CD<span style="color: #666666">*</span>vry) <span style="color: #666666">-</span> g]
+    <span style="color: #008000; font-weight: bold">return</span> zout 
 
-<span style="color: #408080; font-style: italic"># define euler scheme</span>
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func,z0, time):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs. </span>
-<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
-<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
-<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
-    
-    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
-    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
+<span style="color: #408080; font-style: italic"># golf ball with lift</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;4x4 system for golf ball with drag and lift in two directions.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    C <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)
+    vrx <span style="color: #666666">=</span> z[<span style="color: #666666">2</span>] <span style="color: #666666">-</span> vfx
+    vry <span style="color: #666666">=</span> z[<span style="color: #666666">3</span>] <span style="color: #666666">-</span> vfy
+    vr <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(vrx<span style="color: #666666">**2</span> <span style="color: #666666">+</span> vry<span style="color: #666666">**2</span>)
+    Re <span style="color: #666666">=</span> vr<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD, CL <span style="color: #666666">=</span> cdcl(vr, nrpm)
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">2</span>], z[<span style="color: #666666">3</span>], <span style="color: #666666">-</span>C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CD<span style="color: #666666">*</span>vrx <span style="color: #666666">+</span> CL<span style="color: #666666">*</span>vry), C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CL<span style="color: #666666">*</span>vrx <span style="color: #666666">-</span> CD<span style="color: #666666">*</span>vry) <span style="color: #666666">-</span> g]
+    <span style="color: #008000; font-weight: bold">return</span> zout 
 
-    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i] 
-        z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
-
-    <span style="color: #008000; font-weight: bold">return</span> z
-
-<span style="color: #408080; font-style: italic"># define heun scheme</span>
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func,z0, time):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Heun scheme for solution of systems of ODEs. </span>
-<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
-<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
-<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
-    
-    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
-    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
-    zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
-    
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
-        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],t))<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
-        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (np<span style="color: #666666">.</span>asarray(func(z[i,:],t)) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(zp,t<span style="color: #666666">+</span>dt)))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
-
-    <span style="color: #008000; font-weight: bold">return</span> z
-        
 <span style="color: #408080; font-style: italic"># define rk4 scheme</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4</span>(func, z0, time):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Runge-Kutta 4 scheme for solution of systems of ODEs. </span>
@@ -278,59 +430,51 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
 
 <span style="color: #408080; font-style: italic"># main program starts here</span>
 
-T <span style="color: #666666">=</span> <span style="color: #666666">10</span>  <span style="color: #408080; font-style: italic"># end of simulation</span>
-N <span style="color: #666666">=</span> <span style="color: #666666">20</span>  <span style="color: #408080; font-style: italic"># no of time steps</span>
+T <span style="color: #666666">=</span> <span style="color: #666666">7</span>   <span style="color: #408080; font-style: italic"># end of simulation</span>
+N <span style="color: #666666">=</span> <span style="color: #666666">60</span>  <span style="color: #408080; font-style: italic"># no of time steps</span>
 time <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
 
-z0<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">2</span>)
-z0[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
-
-ze <span style="color: #666666">=</span> euler(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Euler&#39;s method</span>
-ze2 <span style="color: #666666">=</span> euler(f2, z0, time)   <span style="color: #408080; font-style: italic"># compute response with varying CD using Euler&#39;s method</span>
-
-zh <span style="color: #666666">=</span> heun(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Heun&#39;s method</span>
-zh2 <span style="color: #666666">=</span> heun(f2, z0, time)   <span style="color: #408080; font-style: italic"># compute response with varying CD using Heun&#39;s method</span>
-
-zrk4 <span style="color: #666666">=</span> rk4(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using RK4</span>
-zrk4_2 <span style="color: #666666">=</span> rk4(f2, z0, time)  <span style="color: #408080; font-style: italic"># compute response with varying CD using RK4</span>
-
-k1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(g<span style="color: #666666">*4*</span>rho_s<span style="color: #666666">*</span>d<span style="color: #666666">/</span>(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>CD))
-k2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>g<span style="color: #666666">*</span>CD<span style="color: #666666">/</span>(<span style="color: #666666">4*</span>rho_s<span style="color: #666666">*</span>d))
-v_a <span style="color: #666666">=</span> k1<span style="color: #666666">*</span>np<span style="color: #666666">.</span>tanh(k2<span style="color: #666666">*</span>time)   <span style="color: #408080; font-style: italic"># compute response with constant CD using analytical solution</span>
-
-<span style="color: #408080; font-style: italic"># plotting</span>
+N2 <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+alfa <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">30</span>, <span style="color: #666666">15</span>, N2)   <span style="color: #408080; font-style: italic"># Angle of elevation [degrees]</span>
+angle <span style="color: #666666">=</span> alfa<span style="color: #666666">*</span>np<span style="color: #666666">.</span>pi<span style="color: #666666">/180.0</span> <span style="color: #408080; font-style: italic"># convert to radians</span>
 
 legends<span style="color: #666666">=</span>[]
-line_type<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;-&#39;</span>,<span style="color: #BA2121">&#39;:&#39;</span>,<span style="color: #BA2121">&#39;.&#39;</span>,<span style="color: #BA2121">&#39;-.&#39;</span>,<span style="color: #BA2121">&#39;:&#39;</span>,<span style="color: #BA2121">&#39;.&#39;</span>,<span style="color: #BA2121">&#39;-.&#39;</span>]
-
-plot(time, v_a, line_type[<span style="color: #666666">0</span>])
-legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Analytical (constant CD)&#39;</span>)
-
-plot(time, ze[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">1</span>])
-legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (constant CD)&#39;</span>)
-
-plot(time, zh[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">2</span>])
-legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Heun (constant CD)&#39;</span>)
-
-plot(time, zrk4[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">3</span>])
-legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;RK4 (constant CD)&#39;</span>)
-
-plot(time, ze2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">4</span>])
-legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (varying CD)&#39;</span>)
-
-plot(time, zh2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">5</span>])
-legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Heun (varying CD)&#39;</span>)
-
-plot(time, zrk4_2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">6</span>])
-legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;RK4 (varying CD)&#39;</span>)
-
+<span style="color: #408080; font-style: italic"># line_type=[&#39;:&#39;,&#39;.&#39;,&#39;-.&#39;,&#39;:&#39;,&#39;.&#39;,&#39;-.&#39;,&#39;:&#39;,&#39;.&#39;]</span>
+line_color<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;k&#39;</span>,<span style="color: #BA2121">&#39;m&#39;</span>,<span style="color: #BA2121">&#39;b&#39;</span>,<span style="color: #BA2121">&#39;r&#39;</span>]
+figure(figsize<span style="color: #666666">=</span>(<span style="color: #666666">20</span>, <span style="color: #666666">8</span>))
+hold(<span style="color: #BA2121">&#39;on&#39;</span>)
+LNWDT<span style="color: #666666">=4</span>; FNT<span style="color: #666666">=18</span>
+rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N2):
+    z0 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #666666">4</span>)
+    z0[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> v0<span style="color: #666666">*</span>np<span style="color: #666666">.</span>cos(angle[i])
+    z0[<span style="color: #666666">3</span>] <span style="color: #666666">=</span> v0<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sin(angle[i])
+    z <span style="color: #666666">=</span> rk4(f, z0, time)
+    plot(z[:,<span style="color: #666666">0</span>], z[:,<span style="color: #666666">1</span>], <span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span>line_color[i])
+    legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;angle=&#39;</span><span style="color: #666666">+</span><span style="color: #008000">str</span>(alfa[i])<span style="color: #666666">+</span><span style="color: #BA2121">&#39;, smooth ball&#39;</span>)
+    
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N2):
+    z0 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #666666">4</span>)
+    z0[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> v0<span style="color: #666666">*</span>np<span style="color: #666666">.</span>cos(angle[i])
+    z0[<span style="color: #666666">3</span>] <span style="color: #666666">=</span> v0<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sin(angle[i])
+    z <span style="color: #666666">=</span> rk4(f2, z0, time)
+    plot(z[:,<span style="color: #666666">0</span>], z[:,<span style="color: #666666">1</span>], <span style="color: #BA2121">&#39;-.&#39;</span>, color<span style="color: #666666">=</span>line_color[i])
+    legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;angle=&#39;</span><span style="color: #666666">+</span><span style="color: #008000">str</span>(alfa[i])<span style="color: #666666">+</span><span style="color: #BA2121">&#39;, golf ball&#39;</span>)
+     
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,N2):
+    z0 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #666666">4</span>)
+    z0[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> v0<span style="color: #666666">*</span>np<span style="color: #666666">.</span>cos(angle[i])
+    z0[<span style="color: #666666">3</span>] <span style="color: #666666">=</span> v0<span style="color: #666666">*</span>np<span style="color: #666666">.</span>sin(angle[i])
+    z <span style="color: #666666">=</span> rk4(f3, z0, time)
+    plot(z[:,<span style="color: #666666">0</span>], z[:,<span style="color: #666666">1</span>], <span style="color: #BA2121">&#39;.&#39;</span>, color<span style="color: #666666">=</span>line_color[i])
+    legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;angle=&#39;</span><span style="color: #666666">+</span><span style="color: #008000">str</span>(alfa[i])<span style="color: #666666">+</span><span style="color: #BA2121">&#39;, golf ball (with lift)&#39;</span>)
+ 
 legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
 
-font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
-rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
-xlabel(<span style="color: #BA2121">&#39;Time [s]&#39;</span>)
-ylabel(<span style="color: #BA2121">&#39;Velocity [m/s]&#39;</span>)
-savefig(<span style="color: #BA2121">&#39;example_sphere_falling_euler_heun_rk4.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+xlabel(<span style="color: #BA2121">&#39;x [m]&#39;</span>)
+ylabel(<span style="color: #BA2121">&#39;y [m]&#39;</span>)
+axis([<span style="color: #666666">0</span>, <span style="color: #666666">250</span>, <span style="color: #666666">0</span>, <span style="color: #666666">50</span>])
+savefig(<span style="color: #BA2121">&#39;example_particle_motion_2d_2.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 show()
 </pre></div>
 <p>

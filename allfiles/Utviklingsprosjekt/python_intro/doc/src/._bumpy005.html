@@ -14,7 +14,7 @@ Automatically generated HTML file from DocOnce source
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://raw.github.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -307,8 +307,12 @@ to solve the differential equation problem \( mu'' + bu' + ku = A\sin\pi t \),
 
 <p>
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic">#/python_intro/doc/src/src-bumpy/solve_simple_equation.py;solver.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/python_intro/doc/src/src-bumpy/solver.py</span>
+
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">solver</span> <span style="color: #008000; font-weight: bold">import</span> solver
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> sin, pi  <span style="color: #408080; font-style: italic"># for nice math</span>
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">F</span>(t):
