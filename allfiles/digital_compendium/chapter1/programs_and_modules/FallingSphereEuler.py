@@ -1,4 +1,4 @@
-# chapter1/programs_and_modules/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/DragCoefficientGeneric.py;
+# chapter1/programs_and_modules/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/DragCoefficientGeneric.py;
 from DragCoefficientGeneric import cd_sphere    
 from matplotlib.pyplot import *
 import numpy as np
@@ -43,7 +43,7 @@ def euler(func,z0, time):
     z[0,:] = z0
 
     for i in range(len(time)-1):
-        dt = time[i+1]-time[i] 
+        dt = time[i+1]-time[i] rm -rf *~ 
         z[i+1,:]=z[i,:] + np.asarray(func(z[i,:],time[i]))*dt
 
     return z

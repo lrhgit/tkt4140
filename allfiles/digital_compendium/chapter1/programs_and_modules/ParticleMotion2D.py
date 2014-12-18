@@ -1,4 +1,4 @@
-# chapter1/programs_and_modules/ParticleMotion2D.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/DragCoefficientGeneric.py;cdclgolfball.py @ git@lrhgit/tkt4140/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/cdclgolfball.py;
+# chapter1/programs_and_modules/ParticleMotion2D.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/DragCoefficientGeneric.py;cdclgolfball.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/cdclgolfball.py;
 
 from DragCoefficientGeneric import cd_sphere
 from cdclgolfball import cdcl  
