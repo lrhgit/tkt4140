@@ -6,7 +6,10 @@ DATE: today
 
 # TKT4140 Numerical Methods with Computer Laboratory.
 
-This webpage is a reworked version of the first chapter of the compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to be used as a learning resource in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
+This digital compendium is based on the first chapter of the
+compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
+be used as a learning resource in the course TKT4140 Numerical Methods
+with Computer Laboratory at NTNU.
 
 Students are strongly encouraged to work through the following chapter. 
 
@@ -1261,26 +1264,22 @@ The complete program _ParticleMotion2D.py_ is listed below.
 @@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py
 !ebox
 
+=======How to make a python-module======= 
+label{section:python_module}
+
+A module is a file containing Python definitions and statements and
+represents a convenient way of collecting useful and related
+functions, classes or python code in a single file. The module name is
+the file name without the suffix .py cite{cheney2012numerical}. To make a module of the
+ODE-solvers A module can contain executable statements as well as
+function definitions. These statements are intended to initialize the
+module. They are executed only the first time the module name is
+encountered in an import statement
+hello world. (They are also run if the file is executed as a
+script.) 
+
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Check whether @a = 0.2
 
 
 
 BIBFILE: references/papers.pub
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
