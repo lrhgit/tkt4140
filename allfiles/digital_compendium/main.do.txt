@@ -1270,13 +1270,15 @@ label{section:python_module}
 A module is a file containing Python definitions and statements and
 represents a convenient way of collecting useful and related
 functions, classes or python code in a single file. The module name is
-the file name without the suffix .py cite{cheney2012numerical}. To make a module of the
+the file name without the suffix .py cite{python14}. To make a module of the
 ODE-solvers A module can contain executable statements as well as
 function definitions. These statements are intended to initialize the
 module. They are executed only the first time the module name is
 encountered in an import statement
 hello world. (They are also run if the file is executed as a
 script.) 
+
+
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Check whether @a = 0.2
 
