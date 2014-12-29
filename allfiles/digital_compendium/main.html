@@ -13,64 +13,69 @@ Automatically generated HTML file from DocOnce source
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="bootstrap_bluegray.css" rel="stylesheet">
+<link href="https:://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
+
 
 </head>
 
 <!-- tocinfo
 {'highest level': 0,
- 'sections': [(' Initial value problems for Ordinary Differential Equations ',
+ 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
                0,
                None,
                '___sec0'),
-              (' Introduction ',
+              (u' Introduction ',
                1,
-               'section:introduction',
-               'section:introduction'),
-              (" Taylor's method ", 2, 'sec:taylor', 'sec:taylor'),
-              (' Reduction of Higher order Equations ',
+               u'section:introduction',
+               u'section:introduction'),
+              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u' Reduction of Higher order Equations ',
                2,
-               'subsec:reduction',
-               'subsec:reduction'),
-              (' Example 1: Reduction of higher order system ',
+               u'subsec:reduction',
+               u'subsec:reduction'),
+              (u' Example 1: Reduction of higher order system ',
                2,
                None,
                '___sec4'),
-              (' Scientific computing with Python ', 2, None, '___sec5'),
-              (' Example 2: Sphere in free fall ',
+              (u' Scientific computing with Python ', 2, None, '___sec5'),
+              (u' Example 2: Sphere in free fall ',
                2,
-               'example:sphere_freefall',
-               'example:sphere_freefall'),
-              (' Generating the plot in ref{example:sphere_freefall} ',
+               u'example:sphere_freefall',
+               u'example:sphere_freefall'),
+              (u' Generating the plot in ref{example:sphere_freefall} ',
                3,
                None,
                '___sec7'),
-              (' More efficient implementations ', 3, None, '___sec8'),
-              (' Differences ', 2, None, '___sec9'),
-              (' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
+              (u' More efficient implementations ', 3, None, '___sec8'),
+              (u' Differences ', 2, None, '___sec9'),
+              (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
                3,
                None,
                '___sec10'),
-              (" Euler's method ", 2, None, '___sec11'),
-              (' Example 3: Falling sphere with constant and varying drag ',
+              (u" Euler's method ", 2, None, '___sec11'),
+              (u' Example 3: Falling sphere with constant and varying drag ',
                2,
-               'ex:falling_sphere',
-               'ex:falling_sphere'),
-              (" Euler's method for a system ", 3, None, '___sec13'),
-              (" Heun's method ", 2, None, '___sec14'),
-              (" Example 4: Newton's equation ", 2, None, '___sec15'),
-              (" Example 5: Falling sphere with Heun's method ",
+               u'ex:falling_sphere',
+               u'ex:falling_sphere'),
+              (u" Euler's method for a system ", 3, None, '___sec13'),
+              (u" Heun's method ", 2, None, '___sec14'),
+              (u" Example 4: Newton's equation ", 2, None, '___sec15'),
+              (u" Example 5: Falling sphere with Heun's method ",
                2,
                None,
                '___sec16'),
-              (' Runge-Kutta of 4th order ', 2, None, '___sec17'),
-              (' Example 6: Particle motion in two dimensions ',
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec17'),
+              (u' Example 6: Particle motion in two dimensions ',
                2,
                None,
-               '___sec18')]}
+               '___sec18'),
+              (u' How to make a python-module ',
+               1,
+               u'section:python_module',
+               u'section:python_module')]}
 end of tocinfo -->
 
 <body>
@@ -122,6 +127,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="._main015.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
      <!-- navigation toc: --> <li><a href="._main016.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="._main016.html#section:python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to make a python-module</a></li>
 
         </ul>
       </li>
@@ -135,6 +141,22 @@ MathJax.Hub.Config({
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
 <a name="part0000"></a>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+  <li class="active"><a href="._main000.html">1</a></li>
+  <li><a href="._main001.html">2</a></li>
+  <li><a href="._main002.html">3</a></li>
+  <li><a href="._main003.html">4</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li><a href="._main005.html">6</a></li>
+  <li><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main001.html">&raquo;</a></li>
+</ul>
 <!-- ------------------- main content ---------------------- -->
 
 
@@ -143,10 +165,10 @@ MathJax.Hub.Config({
 <center><h1>Digital Compendium for TKT4140</h1></center>  <!-- document title -->
 
 <p>
-<!-- author(s): Johan Kolst&#248; S&#248;nstab&#248;, and Leif Rune Hellevik -->
+<!-- author(s): Johan Kolstø Sønstabø, and Leif Rune Hellevik -->
 
 <center>
-<b>Johan Kolst&#248; S&#248;nstab&#248;</b> [1, 2]
+<b>Johan Kolstø Sønstabø</b> [1, 2]
 </center>
 
 <center>
@@ -160,17 +182,20 @@ MathJax.Hub.Config({
 <center>[1] <b>Centre for Advanced Structural Analysis (CASA)</b></center>
 <center>[2] <b>Department of Structural Engineering, NTNU</b></center>
 <p>
-<center><h4>Dec 18, 2014</h4></center> <!-- date -->
+<center><h4>Dec 29, 2014</h4></center> <!-- date -->
 <!-- TOC: on -->
 
 <p>
 <!-- TKT4140 Numerical Methods with Computer Laboratory. -->
 
 <p>
-This webpage is a reworked version of the first chapter of the compendium <em>Numeriske Beregninger</em> by J.B. Aarseth. It's intended to be used as a learning resource in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
+This digital compendium is based on the first chapter of the
+compendium <em>Numeriske Beregninger</em> by J.B. Aarseth. It's intended to
+be used as a learning resource in the course TKT4140 Numerical Methods
+with Computer Laboratory at NTNU.
 
 <p>
-Students are strongly encouraged to work through the following chapter. 
+Students are strongly encouraged to work through the following chapter.
 
 <p>
 
@@ -193,12 +218,7 @@ Students are strongly encouraged to work through the following chapter.
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
-  <li><a href="._main010.html">11</a></li>
-  <li><a href="._main011.html">12</a></li>
-  <li><a href="._main012.html">13</a></li>
-  <li><a href="._main013.html">14</a></li>
-  <li><a href="._main014.html">15</a></li>
-  <li><a href="._main015.html">16</a></li>
+  <li><a href="">...</a></li>
   <li><a href="._main016.html">17</a></li>
   <li><a href="._main001.html">&raquo;</a></li>
 </ul>
