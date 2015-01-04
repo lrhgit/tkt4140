@@ -45,7 +45,7 @@ Automatically generated HTML file from DocOnce source
                2,
                u'example:sphere_freefall',
                u'example:sphere_freefall'),
-              (u' Generating the plot in ref{example:sphere_freefall} ',
+              (u' The drag coefficient function and how to plot it  ',
                3,
                None,
                '___sec7'),
@@ -170,7 +170,7 @@ MathJax.Hub.Config({
 <h2 id="___sec16">Example 5: Falling sphere with Heun's method <a name="___sec16"></a></h2>
 
 <p>
-Let's go back to <a href="._main010.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, and implement a new function <code>heun()</code> in the programme <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>.
+Let's go back to <a href="._main010.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, and implement a new function <code>heun()</code> in the program <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>.
 
 <p>
 We recall the system of equations as
@@ -203,7 +203,7 @@ $$
 with initial values \( z_0=z(0)=0,\ v_0=v(0)=0 \). Note that we don't use the predictor \( z^p_{n+1} \) since it doesn't appear on the right hand side of the equation system.
 
 <p>
-One possible way of implementing this scheme is given in the following function named <code>heun()</code>, in the programme <b>ODEschemes.py</b>:
+One possible way of implementing this scheme is given in the following function named <code>heun()</code>, in the program <b>ODEschemes.py</b>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
@@ -237,7 +237,7 @@ Using the same time steps as in <a href="._main010.html#ex:falling_sphere">Examp
 </center>
 
 <p>
-The complete programme <b>FallingSphereEulerHeun.py</b> is listed below. Note that the solver functions <code>euler</code> and <code>heun</code> are imported from the script <b>ODEschemes.py</b>.
+The complete program <b>FallingSphereEulerHeun.py</b> is listed below. Note that the solver functions <code>euler</code> and <code>heun</code> are imported from the script <b>ODEschemes.py</b>.
 
 <p>
 

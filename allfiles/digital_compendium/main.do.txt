@@ -78,7 +78,7 @@ label{eq:1104a}
 label{eq:1104b}
 \end{align}
 !et
-The dot symbolyzes derivation with respect to the dimensionless time $t$. For small displacements we can set $\sin (\theta) \approx \theta$, such that (ref{eq:1104a}) and (ref{eq:1104b}) becomes
+The dot denotes derivation with respect to the dimensionless time $t$. For small displacements we can set $\sin (\theta) \approx \theta$, such that (ref{eq:1104a}) and (ref{eq:1104b}) becomes
 !bt
 \begin{align}
 label{eq:1105a}
@@ -100,7 +100,7 @@ where $y^{(k)}, k=0,1,\dots n$ is referring to the $k$'th derivative and $y^{(0)
 
 If one or more of the coefficients $a_k$ also are functions of at least one $y^{(k)},\ k = 0,1,\dots n$, the ODE is non-linear. From (ref{eq:1106}) it follows that (ref{eq:1104a}) is non-linear and (ref{eq:1105a}) is linear.
 
-Analytical solutions of non-linear ODEs are rare, og except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
+Analytical solutions of non-linear ODEs are rare, and except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
 !bt
 \begin{equation}
 a_2(x)\cdot y''(x)+a_1(x)\cdot y'(x) +a_0(x)\cdot y(x) =b(x)\nonumber
@@ -114,7 +114,7 @@ For instance the equation $y'(x)=y^2(x),\ y(0)=1$ has the solution $y(x)=\frac{1
 !split
 ===== Taylor's method =====
 label{sec:taylor}
-Taylor's formula for series expansion of a funciton $f(x)$ around $x_0$ is given by
+Taylor's formula for series expansion of a function $f(x)$ around $x_0$ is given by
 !bt
 \begin{equation}
 f(x)=f(x_0)+(x-x_0)\cdot f'(x_0)+\frac{(x-x_0)^2}{2}f''(x_0)+\dots +\frac{(x-x_0)^n}{n !}f^{(n)}(x_0)+ \text{remainder} \nonumber
@@ -177,7 +177,7 @@ Series expansions are often useful around the starting point when we solve initi
 
 Symbolic mathematical programs like _Maple_ and _Mathematica_ do this easily.
 
-We will end with one of the earlies known differential equations, which Newton solved with series expansion in 1671.
+We will end with one of the earliest known differential equations, which Newton solved with series expansion in 1671.
 !bt
 \begin{equation*}
 y'(x) =1-3x+y+x^2+xy,\ y(0)=0
@@ -339,66 +339,91 @@ label{example:sphere_freefall}
 
 FIGURE:[chapter1/programs_and_modules/2.png, width=200]
 
-The figure shows a falling sphere with a diameter $d$ and mass $m$ that falls vertically in a fluid. Use of Newton's 2nd law in the $z$-direction gives
+The figure shows a falling sphere with a diameter $d$ and mass $m$
+that falls vertically in a fluid. Use of Newton's 2nd law in the
+$z$-direction gives
 !bt
 \begin{equation}
 label{eq:newton_2nd_sphere}
 m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\right|A_kC_D,
 \end{equation}
 !et
-where the different terms are interpreted as follows: $m=\rho_k V$, where $\rho_f$ is the density of the sphere and $V$ is its volume, is the mass of the sphere. $m_f=\rho_f V$, where $\rho_f$ is the density of the fluid, is the mass of the displaced fluid. $m_fg=$ is the buoyancy. $C_D$ is the drag coefficient. $A_k$ is the area projection of the sphere $= \frac{\pi}{4}d^2$. $\frac{1}{2}m_f$ is the hydrodynamical mass (added mass). The expression for the hydrodynamical mass is derived in White cite{white1999fluid}, page 539-540.
-
-We introduce the following abbreviations:
+where the different terms are interpreted as follows: $m=\rho_k V$,
+where $\rho_k$ is the density of the sphere and $V$ is the sphere
+volume.  The mass of the displaced fluid is given by $m_f=\rho_f V$,
+where $\rho_f$ is the density of the fluid, whereas buoyancy and the
+drag coefficient are expressed by $m_f \, g$ and $C_D$, respectively.
+The projected area of the sphere is given by $A_k = \frac{\pi}{4}d^2$
+and $\frac{1}{2}m_f$ is the hydrodynamical mass (added mass). The
+expression for the hydrodynamical mass is derived in White
+cite{white1999fluid}, page 539-540. To write Equation
+(ref{eq:newton_2nd_sphere}) on a more convenient form we introduce the
+following abbreviations:
 !bt
 \begin{equation}
 \rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
 \end{equation}
 !et
-Equation (ref{eq:newton_2nd_sphere}) may then be written as
+in addition to the drag coefficient $C_D$ which is a function of the Reynolds number $\displaystyle R_e = \frac{vd}{\nu}$, where $\nu$ is the kinematical viscosity. Equation (ref{eq:newton_2nd_sphere}) may then be written as
 !bt
 \begin{equation}
 label{eq:sphere_1st_order}
 \frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
 \end{equation}
 !et
-$C_D$ is found experimentally as a function of the Reynolds number $R_e = \frac{vd}{\nu}$, where $\nu$ is the kinematical viscosity.
-
-Figure ref{fig:CDsphere} shows $C_D$ as a function of $Re$. The Python programme _CDsphere.py_ produces the plot from a curve fit to the data of Evett and Liu cite{evett19892}. The programme uses a function `cd_sphere` which is shown at the end of this example. The values in the plot are not as accurate as the number of digits in the programme might indicate. For example is the location and the size of the "valley" in the diagram strongly dependent of the degree of turbulence in the free stream and the roughness of the sphere.
-
-In air we may often neglect the buoyancy term and the hydrodynamical mass. This should not be done for a liquid.
-
-Introducing $v=\frac{dz}{dt}$ in Equation (ref{eq:sphere_1st_order}), we get a 2nd order ODE as follows
+In air we may often neglect the buoyancy term and the hydrodynamical
+mass, whereas this is not the case for a liquid. Introducing
+$v=\frac{dz}{dt}$ in Equation (ref{eq:sphere_1st_order}), we get a 2nd
+order ODE as follows
 !bt
 \begin{equation}
 label{eq:sphere_second_order}
 \frac{d^2z}{dt^2}=\frac{1}{A}\left(B-C\cdot \frac{dz}{dt}\bigg|\frac{dz}{dt}\bigg|C_d\right)
 \end{equation}
 !et
-For Equation (ref{eq:sphere_second_order}) two initial conditions must be specified, e.g. $v=v_0$ and $z=z_0$ for $t=0$.
+For Equation (ref{eq:sphere_second_order}) two initial conditions must
+be specified, e.g. $v=v_0$ and $z=z_0$ for $t=0$.
+
+Figure ref{fig:CDsphere} illustrates $C_D$ as a function of $Re$.  As
+the drag coefficient $C_D$ is a function of the Reynolds number, it is
+also a function of the solution $v$ (i.e. the velocity) of the ODE in
+Equation (ref{eq:sphere_1st_order}). We will use the function
+$C_D(Re)$ as an example of how functions may be implemented in Python.
 
 FIGURE:[chapter1/programs_and_modules/example_sphere.png, height=400 width=600] Drag coefficient $C_D$ as function of the Reynold's number $R_e$. label{fig:CDsphere}
 
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot
+#@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot
 
 ${ebox()}
 
 
-=== Generating the plot in ref{example:sphere_freefall} ===
+=== The drag coefficient function and how to plot it  ===
 
-The complete programme _CDsphere.py_ used to generate the plot in the example above will now be presented. The programme may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/CDsphere.py". We will break up the programme and explain the different parts. The complete programme is as follows:
+The Python program _CDsphere.py_ produces the plot from a curve fit to
+the data of Evett and Liu cite{evett19892}. 
+# The program uses a
+# function `cd_sphere` which is shown at the end of this example. 
+The values in the plot are not as accurate as the number of digits in the
+program might indicate. For example is the location and the size of
+the "valley" in the diagram strongly dependent of the degree of
+turbulence in the free stream and the roughness of the sphere. The
+complete program _CDsphere.py_ used to plot the drag coefficient in
+the example above is listed below:
+
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py
 
-In the first code line,
+In the following, we will break up the program and
+explain the different parts.In the first code line,
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py fromto: from numpy import logspace, zeros@^# Define the function cd_sphere
-the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programmes. The function `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. The function `zeros` creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org".
+the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programs. The function `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. The function `zeros` creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org".
 
 In _CDsphere.py_ a function `cd_sphere` was defined as follows:
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag coefficient
 The function takes `Re` as an argument and returns the value `CD`. All Python functions begin with `def`, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument `Re`. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a funciton it is common to use the `return` statement to return the value of the function.
 
-Variables defined inside a function, such as `p` and `x1` above, are *local* variables that cannot be accessed outside the function. Variables defined outside functions, in the "main programme", are *global* variables and may be accessed anywhere, also inside functions.
+Variables defined inside a function, such as `p` and `x1` above, are *local* variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are *global* variables and may be accessed anywhere, also inside functions.
 
-Three more functions from the `numpy` package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main programme. We refer to the "documentation of NumPy": "http://www.numpy.org" for details about the different functions.
+Three more functions from the `numpy` package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the "documentation of NumPy": "http://www.numpy.org" for details about the different functions.
 
 The function above contains an example of the use of the `if-elif-else` block. The block begins with `if` and a boolean expression. If the boolean expression evaluates to `true` the *indented* statements following the `if` statement are carried out. If not, the boolean expression following the `elif` is evaluated. If none of the conditions are evaluated to `true` the statements following the `else` are carried out.
 
@@ -448,7 +473,7 @@ cd_sphere_vector        execution time = 0.000641
 cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 !ec
-As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function `vectorize` was nearly as inefficient. The complete programme _DragCoefficientGeneric.py_ is listed below.
+As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function `vectorize` was nearly as inefficient. The complete program _DragCoefficientGeneric.py_ is listed below.
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py
 
@@ -925,7 +950,7 @@ with $v(0)=0$.
 One way of implementing the integration scheme is given in the following function `euler()`:
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py from-to:# define euler scheme@# main program starts here
 
-The programme _FallingSphereEuler.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in ref{example:sphere_freefall}. The complete programme is as follows,
+The program _FallingSphereEuler.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in ref{example:sphere_freefall}. The complete program is as follows,
 
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py
 
@@ -1096,7 +1121,7 @@ label{eq:1405b}
 
 Here we have $f(x,y)=1-3x+y+x^2+xy = 1+x(x-3)+(1+x)y$
 
-The following programme _NewtonHeun.py_ solves this problem using Heun's method, and the resulting figure is shown in Figure ref{fig:newton_heun}.
+The following program _NewtonHeun.py_ solves this problem using Heun's method, and the resulting figure is shown in Figure ref{fig:newton_heun}.
 
 @@@CODE ./chapter1/programs_and_modules/NewtonHeun.py
 
@@ -1108,7 +1133,7 @@ ${ebox()}
 ${bbox()}
 ===== Example: Falling sphere with Heun's method =====
 
-Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the programme "FallingSphereEuler.py": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py".
+Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the program "FallingSphereEuler.py": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py".
 
 We recall the system of equations as
 !bt
@@ -1135,14 +1160,14 @@ v_{n+1}&=v_n+0.5\Delta t \cdot \left[2g-\alpha[v^2_n+(v^p_{n+1})^2\right] \nonum
 !et
 with initial values $z_0=z(0)=0,\ v_0=v(0)=0$. Note that we don't use the predictor $z^p_{n+1}$ since it doesn't appear on the right hand side of the equation system.
 
-One possible way of implementing this scheme is given in the following function named `heun()`, in the programme _ODEschemes.py_:
+One possible way of implementing this scheme is given in the following function named `heun()`, in the program _ODEschemes.py_:
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define Heun solver@return z
 
 Using the same time steps as in ref{ex:falling_sphere}, we get the response plotted in Figure ref{fig:falling_sphere_euler_heun}.
 
 FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
 
-The complete programme _FallingSphereEulerHeun.py_ is listed below. Note that the solver functions `euler` and `heun` are imported from the script _ODEschemes.py_.
+The complete program _FallingSphereEulerHeun.py_ is listed below. Note that the solver functions `euler` and `heun` are imported from the script _ODEschemes.py_.
 
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeun.py
 
@@ -1348,8 +1373,6 @@ module. They are executed only the first time the module name is
 encountered in an import statement
 hello world. (They are also run if the file is executed as a
 script.)
-
-
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to: a = 0.2@
 

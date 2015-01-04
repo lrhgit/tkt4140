@@ -46,6 +46,14 @@
    publisher: Python Software Foundation
    status:    published
    entrytype: book
+** A Primer on Scientific Programming With {P}ython
+   key:       langtangen14
+   author:    Hans Petter Langtangen
+   year:      2014
+   publisher: Springer
+   status:    published
+   edition:   Fourth
+   entrytype: book
 ** Fluid Mechanics
    key:       white1999fluid
    author:    F.M. White
@@ -54,6 +62,6 @@
    url:       http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y
    status:    published
    isbn:      9780071168489
-   lccn:      98026289
    series:    McGraw-Hill series in mechanical engineering
+   lccn:      98026289
    entrytype: book

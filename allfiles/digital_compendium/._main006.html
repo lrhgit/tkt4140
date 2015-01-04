@@ -45,7 +45,7 @@ Automatically generated HTML file from DocOnce source
                2,
                u'example:sphere_freefall',
                u'example:sphere_freefall'),
-              (u' Generating the plot in ref{example:sphere_freefall} ',
+              (u' The drag coefficient function and how to plot it  ',
                3,
                None,
                '___sec7'),
@@ -178,7 +178,9 @@ MathJax.Hub.Config({
 <center><p><img src="chapter1/programs_and_modules/2.png" align="bottom" width=200></p></center>
 
 <p>
-The figure shows a falling sphere with a diameter \( d \) and mass \( m \) that falls vertically in a fluid. Use of Newton's 2nd law in the \( z \)-direction gives
+The figure shows a falling sphere with a diameter \( d \) and mass \( m \)
+that falls vertically in a fluid. Use of Newton's 2nd law in the
+\( z \)-direction gives
 $$
 \begin{equation}
 \tag{12}
@@ -186,17 +188,24 @@ m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\r
 \end{equation}
 $$
 
-where the different terms are interpreted as follows: \( m=\rho_k V \), where \( \rho_f \) is the density of the sphere and \( V \) is its volume, is the mass of the sphere. \( m_f=\rho_f V \), where \( \rho_f \) is the density of the fluid, is the mass of the displaced fluid. \( m_fg= \) is the buoyancy. \( C_D \) is the drag coefficient. \( A_k \) is the area projection of the sphere \( = \frac{\pi}{4}d^2 \). \( \frac{1}{2}m_f \) is the hydrodynamical mass (added mass). The expression for the hydrodynamical mass is derived in White <a href="._main016.html#white1999fluid">[2]</a>, page 539-540.
-
-<p>
-We introduce the following abbreviations:
+where the different terms are interpreted as follows: \( m=\rho_k V \),
+where \( \rho_k \) is the density of the sphere and \( V \) is the sphere
+volume.  The mass of the displaced fluid is given by \( m_f=\rho_f V \),
+where \( \rho_f \) is the density of the fluid, whereas buoyancy and the
+drag coefficient are expressed by \( m_f \, g \) and \( C_D \), respectively.
+The projected area of the sphere is given by \( A_k = \frac{\pi}{4}d^2 \)
+and \( \frac{1}{2}m_f \) is the hydrodynamical mass (added mass). The
+expression for the hydrodynamical mass is derived in White
+<a href="._main016.html#white1999fluid">[2]</a>, page 539-540. To write Equation
+<a href="#mjx-eqn-12">(12)</a> on a more convenient form we introduce the
+following abbreviations:
 $$
 \begin{equation}
 \rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
 \end{equation}
 $$
 
-Equation <a href="#mjx-eqn-12">(12)</a> may then be written as
+in addition to the drag coefficient \( C_D \) which is a function of the Reynolds number \( \displaystyle R_e = \frac{vd}{\nu} \), where \( \nu \) is the kinematical viscosity. Equation <a href="#mjx-eqn-12">(12)</a> may then be written as
 $$
 \begin{equation}
 \tag{13}
@@ -204,16 +213,10 @@ $$
 \end{equation}
 $$
 
-\( C_D \) is found experimentally as a function of the Reynolds number \( R_e = \frac{vd}{\nu} \), where \( \nu \) is the kinematical viscosity.
-
-<p>
-Figure <a href="#fig:CDsphere">1</a> shows \( C_D \) as a function of \( Re \). The Python programme <b>CDsphere.py</b> produces the plot from a curve fit to the data of Evett and Liu <a href="._main016.html#evett19892">[3]</a>. The programme uses a function <code>cd_sphere</code> which is shown at the end of this example. The values in the plot are not as accurate as the number of digits in the programme might indicate. For example is the location and the size of the "valley" in the diagram strongly dependent of the degree of turbulence in the free stream and the roughness of the sphere.
-
-<p>
-In air we may often neglect the buoyancy term and the hydrodynamical mass. This should not be done for a liquid.
-
-<p>
-Introducing \( v=\frac{dz}{dt} \) in Equation <a href="#mjx-eqn-13">(13)</a>, we get a 2nd order ODE as follows
+In air we may often neglect the buoyancy term and the hydrodynamical
+mass, whereas this is not the case for a liquid. Introducing
+\( v=\frac{dz}{dt} \) in Equation <a href="#mjx-eqn-13">(13)</a>, we get a 2nd
+order ODE as follows
 $$
 \begin{equation}
 \tag{14}
@@ -221,7 +224,15 @@ $$
 \end{equation}
 $$
 
-For Equation <a href="#mjx-eqn-14">(14)</a> two initial conditions must be specified, e.g. \( v=v_0 \) and \( z=z_0 \) for \( t=0 \).
+For Equation <a href="#mjx-eqn-14">(14)</a> two initial conditions must
+be specified, e.g. \( v=v_0 \) and \( z=z_0 \) for \( t=0 \).
+
+<p>
+Figure <a href="#fig:CDsphere">1</a> illustrates \( C_D \) as a function of \( Re \).  As
+the drag coefficient \( C_D \) is a function of the Reynolds number, it is
+also a function of the solution \( v \) (i.e. the velocity) of the ODE in
+Equation <a href="#mjx-eqn-13">(13)</a>. We will use the function
+\( C_D(Re) \) as an example of how functions may be implemented in Python.
 
 <p>
 <center> <!-- figure -->
@@ -230,55 +241,27 @@ For Equation <a href="#mjx-eqn-14">(14)</a> two initial conditions must be speci
 </center>
 
 <p>
+<!-- @@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot -->
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
-    <span style="color: #BA2121">&quot;This function computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
-    <span style="color: #408080; font-style: italic"># Curve fitted after fig. A-56 in Evett &amp; Liu: &quot;Fluid Mechanics &amp; Hydraulics&quot;,</span>
-    <span style="color: #408080; font-style: italic"># Schaum&#39;s Solved Problems McGraw - Hill 1989.</span>
-    
-    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
-    
-    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
-        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
-    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
-        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
-    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
-        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
-    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
-        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
-        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>Re) 
-    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
-        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
-        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>log10(Re))
-    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
-        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
-        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
-    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
-        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
-        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
-    <span style="color: #008000; font-weight: bold">else</span>:
-        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
-        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
-    <span style="color: #008000; font-weight: bold">return</span> CD
-
-<span style="color: #408080; font-style: italic"># Calculate drag coefficient</span>
-Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
-Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
-CD <span style="color: #666666">=</span> zeros(Npts)
-i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,Npts<span style="color: #666666">-1</span>)
-<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
-    CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
-</pre></div>
 <p>
 </div>
 <!-- end box -->
 
 
-<h3 id="___sec7">Generating the plot in <a href="#example:sphere_freefall">Example 2: Sphere in free fall</a> <a name="___sec7"></a></h3>
+<h3 id="___sec7">The drag coefficient function and how to plot it  <a name="___sec7"></a></h3>
 
 <p>
-The complete programme <b>CDsphere.py</b> used to generate the plot in the example above will now be presented. The programme may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/CDsphere.py" target="_blank">here</a>. We will break up the programme and explain the different parts. The complete programme is as follows:
+The Python program <b>CDsphere.py</b> produces the plot from a curve fit to
+the data of Evett and Liu <a href="._main016.html#evett19892">[3]</a>. 
+<!-- The program uses a -->
+<!-- function <code>cd_sphere</code> which is shown at the end of this example. -->
+The values in the plot are not as accurate as the number of digits in the
+program might indicate. For example is the location and the size of
+the "valley" in the diagram strongly dependent of the degree of
+turbulence in the free stream and the roughness of the sphere. The
+complete program <b>CDsphere.py</b> used to plot the drag coefficient in
+the example above is listed below:
+
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
@@ -339,14 +322,15 @@ pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">
 pyplot<span style="color: #666666">.</span>show()
 </pre></div>
 <p>
-In the first code line,
+In the following, we will break up the program and
+explain the different parts.In the first code line,
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
 </pre></div>
 <p>
-the functions <code>logspace</code> and <code>zeros</code> are imported from the package <code>numpy</code>. The <code>numpy</code> package (<em>NumPy</em> is an abbreviation for <em>Numerical Python</em>) enables the use of <em>array</em> objects. Using <code>numpy</code>  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called <em>vectorization</em> and may cause a dramatic increase in computational speed of Python programmes. The function <code>logspace</code> works on a logarithmic scale just as the function <code>linspace</code> works on a regular scale. The function <code>zeros</code> creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at <a href="http://www.numpy.org" target="_blank"><tt>http://www.numpy.org</tt></a>.
+the functions <code>logspace</code> and <code>zeros</code> are imported from the package <code>numpy</code>. The <code>numpy</code> package (<em>NumPy</em> is an abbreviation for <em>Numerical Python</em>) enables the use of <em>array</em> objects. Using <code>numpy</code>  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called <em>vectorization</em> and may cause a dramatic increase in computational speed of Python programs. The function <code>logspace</code> works on a logarithmic scale just as the function <code>linspace</code> works on a regular scale. The function <code>zeros</code> creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at <a href="http://www.numpy.org" target="_blank"><tt>http://www.numpy.org</tt></a>.
 
 <p>
 In <b>CDsphere.py</b> a function <code>cd_sphere</code> was defined as follows:
@@ -387,10 +371,10 @@ In <b>CDsphere.py</b> a function <code>cd_sphere</code> was defined as follows:
 The function takes <code>Re</code> as an argument and returns the value <code>CD</code>. All Python functions begin with <code>def</code>, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument <code>Re</code>. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a funciton it is common to use the <code>return</code> statement to return the value of the function.
 
 <p>
-Variables defined inside a function, such as <code>p</code> and <code>x1</code> above, are <em>local</em> variables that cannot be accessed outside the function. Variables defined outside functions, in the "main programme", are <em>global</em> variables and may be accessed anywhere, also inside functions.
+Variables defined inside a function, such as <code>p</code> and <code>x1</code> above, are <em>local</em> variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are <em>global</em> variables and may be accessed anywhere, also inside functions.
 
 <p>
-Three more functions from the <code>numpy</code> package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main programme. We refer to the <a href="http://www.numpy.org" target="_blank">documentation of NumPy</a> for details about the different functions.
+Three more functions from the <code>numpy</code> package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the <a href="http://www.numpy.org" target="_blank">documentation of NumPy</a> for details about the different functions.
 
 <p>
 The function above contains an example of the use of the <code>if-elif-else</code> block. The block begins with <code>if</code> and a boolean expression. If the boolean expression evaluates to <code>true</code> the <em>indented</em> statements following the <code>if</code> statement are carried out. If not, the boolean expression following the <code>elif</code> is evaluated. If none of the conditions are evaluated to <code>true</code> the statements following the <code>else</code> are carried out.
@@ -558,7 +542,7 @@ cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 </pre></div>
 <p>
-As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function <code>vectorize</code> was nearly as inefficient. The complete programme <b>DragCoefficientGeneric.py</b> is listed below.
+As seen, the function with the boolean variables was fastest. The simple vectorized version of the original function was much slower, and the built-in function <code>vectorize</code> was nearly as inefficient. The complete program <b>DragCoefficientGeneric.py</b> is listed below.
 
 <p>
 
