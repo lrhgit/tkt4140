@@ -9,8 +9,8 @@ doconce split_html $wrap.html --pagination --nav_button=top+bottom
 
 # Wise to run latex now and then to get error messages in equations
 # (will lead to display errors in MathJax anyway...)
-doconce format pdflatex $wrap --device=paper --encoding=utf-8
-doconce ptex2tex $wrap envir=Verbatim  # very simple code envir
+# doconce format pdflatex $wrap --device=paper --encoding=utf-8
+# doconce ptex2tex $wrap envir=Verbatim  # very simple code envir
 # pdflatex $wrap
 # bibtex $wrap
 # pdflatex $wrap
