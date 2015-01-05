@@ -1,0 +1,477 @@
+<!DOCTYPE HTML>
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Digital Compendium for TKT4140">
+
+<title>Digital Compendium for TKT4140</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https:://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
+               0,
+               None,
+               '___sec0'),
+              (u' Introduction ',
+               1,
+               u'section:introduction',
+               u'section:introduction'),
+              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u' Reduction of Higher order Equations ',
+               2,
+               u'subsec:reduction',
+               u'subsec:reduction'),
+              (u' Example 1: Reduction of higher order system ',
+               2,
+               None,
+               '___sec4'),
+              (u' Scientific computing with Python ', 2, None, '___sec5'),
+              (u' Example 2: Sphere in free fall ',
+               2,
+               u'example:sphere_freefall',
+               u'example:sphere_freefall'),
+              (u' Python implementation of the drag coefficient function and how to plot it ',
+               3,
+               None,
+               '___sec7'),
+              (u' Python functions with vector arguments and modules ',
+               2,
+               None,
+               '___sec8'),
+              (u' How to make a Python-module ',
+               2,
+               u'section:Python_module',
+               u'section:Python_module'),
+              (u' Differences ', 2, None, '___sec10'),
+              (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
+               3,
+               None,
+               '___sec11'),
+              (u" Euler's method ", 2, None, '___sec12'),
+              (u' Example 3: Falling sphere with constant and varying drag ',
+               2,
+               u'ex:falling_sphere',
+               u'ex:falling_sphere'),
+              (u" Euler's method for a system ", 3, None, '___sec14'),
+              (u" Heun's method ", 2, None, '___sec15'),
+              (u" Example 4: Newton's equation ", 2, None, '___sec16'),
+              (u" Example 5: Falling sphere with Heun's method ",
+               2,
+               None,
+               '___sec17'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec18'),
+              (u' Example 6: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec19')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="main.html">Digital Compendium for TKT4140</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;"><b>Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
+     <!-- navigation toc: --> <li><a href="._main005.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
+     <!-- navigation toc: --> <li><a href="#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make a Python-module</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main010.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main011.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
+     <!-- navigation toc: --> <li><a href="._main013.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main015.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main016.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
+     <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0006"></a>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._main005.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="._main001.html">2</a></li>
+  <li><a href="._main002.html">3</a></li>
+  <li><a href="._main003.html">4</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li><a href="._main005.html">6</a></li>
+  <li class="active"><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li><a href="._main015.html">16</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main017.html">18</a></li>
+  <li><a href="._main007.html">&raquo;</a></li>
+</ul>
+<!-- !split -->
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="example:sphere_freefall">Example 2: Sphere in free fall<a name="example:sphere_freefall"></a></h2>
+
+<p>
+<center><p><img src="chapter1/programs_and_modules/2.png" align="bottom" width=200></p></center>
+
+<p>
+The figure shows a falling sphere with a diameter \( d \) and mass \( m \)
+that falls vertically in a fluid. Use of Newton's 2nd law in the
+\( z \)-direction gives
+$$
+\begin{equation}
+\tag{12}
+m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\right|A_kC_D,
+\end{equation}
+$$
+
+where the different terms are interpreted as follows: \( m=\rho_k V \),
+where \( \rho_k \) is the density of the sphere and \( V \) is the sphere
+volume.  The mass of the displaced fluid is given by \( m_f=\rho_f V \),
+where \( \rho_f \) is the density of the fluid, whereas buoyancy and the
+drag coefficient are expressed by \( m_f \, g \) and \( C_D \), respectively.
+The projected area of the sphere is given by \( A_k = \frac{\pi}{4}d^2 \)
+and \( \frac{1}{2}m_f \) is the hydrodynamical mass (added mass). The
+expression for the hydrodynamical mass is derived in White
+<a href="._main017.html#white1999fluid">[2]</a>, page 539-540. To write Equation
+<a href="#mjx-eqn-12">(12)</a> on a more convenient form we introduce the
+following abbreviations:
+$$
+\begin{equation}
+\rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
+\end{equation}
+$$
+
+in addition to the drag coefficient \( C_D \) which is a function of the Reynolds number \( \displaystyle R_e = \frac{vd}{\nu} \), where \( \nu \) is the kinematical viscosity. Equation <a href="#mjx-eqn-12">(12)</a> may then be written as
+$$
+\begin{equation}
+\tag{13}
+\frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
+\end{equation}
+$$
+
+In air we may often neglect the buoyancy term and the hydrodynamical
+mass, whereas this is not the case for a liquid. Introducing
+\( v=\frac{dz}{dt} \) in Equation <a href="#mjx-eqn-13">(13)</a>, we get a 2nd
+order ODE as follows
+$$
+\begin{equation}
+\tag{14}
+\frac{d^2z}{dt^2}=\frac{1}{A}\left(B-C\cdot \frac{dz}{dt}\bigg|\frac{dz}{dt}\bigg|C_d\right)
+\end{equation}
+$$
+
+For Equation <a href="#mjx-eqn-14">(14)</a> two initial conditions must
+be specified, e.g. \( v=v_0 \) and \( z=z_0 \) for \( t=0 \).
+
+<p>
+Figure <a href="#fig:CDsphere">1</a> illustrates \( C_D \) as a function of \( Re \). The values in the plot are not as accurate as the number of digits in the
+program might indicate. For example is the location and the size of
+the "valley" in the diagram strongly dependent of the degree of
+turbulence in the free stream and the roughness of the sphere. As
+the drag coefficient \( C_D \) is a function of the Reynolds number, it is
+also a function of the solution \( v \) (i.e. the velocity) of the ODE in
+Equation <a href="#mjx-eqn-13">(13)</a>. We will use the function
+\( C_D(Re) \) as an example of how functions may be implemented in Python.
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 1:  Drag coefficient \( C_D \) as function of the Reynold's number \( R_e \). <a name="fig:CDsphere"></a> </p></center>
+<p><img src="chapter1/programs_and_modules/example_sphere.png" align="bottom" height=400 width=600></p>
+</center>
+
+<p>
+<!-- @@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot -->
+
+<p>
+</div>
+<!-- end box -->
+
+
+<h3 id="___sec7">Python implementation of the drag coefficient function and how to plot it <a name="___sec7"></a></h3>
+
+<p>
+The complete Python program <b>CDsphere.py</b> used to plot the drag
+coefficient in the example above is listed below.  The program uses a
+function <code>cd_sphere</code> which results from a curve fit to the data of
+Evett and Liu <a href="._main017.html#evett19892">[3]</a>. In our setting we will use this
+function for two purposes, namely to demonstrate how functions and modules are
+implemented in Python and finally use these functions in the solution of the ODE in Equations <a href="#mjx-eqn-13">(13)</a> and  <a href="#mjx-eqn-14">(14)</a>. 
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/CDsphere.py</span>
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
+
+<span style="color: #408080; font-style: italic"># Define the function cd_sphere</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;This function computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig. A-56 in Evett &amp; Liu: &quot;Fluid Mechanics &amp; Hydraulics&quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum&#39;s Solved Problems McGraw - Hill 1989.</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># Calculate drag coefficient</span>
+Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
+CD <span style="color: #666666">=</span> zeros(Npts)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,Npts<span style="color: #666666">-1</span>)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
+    CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
+
+<span style="color: #408080; font-style: italic"># Make plot</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot
+pyplot<span style="color: #666666">.</span>plot(Re, CD, <span style="color: #BA2121">&#39;-b&#39;</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+pyplot<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+pyplot<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
+pyplot<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
+pyplot<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
+pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;example_sphere.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+pyplot<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+In the following, we will break up the program and
+explain the different parts.In the first code line,
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
+</pre></div>
+<p>
+the functions <code>logspace</code> and <code>zeros</code> are imported from the package <code>numpy</code>. The <code>numpy</code> package (<em>NumPy</em> is an abbreviation for <em>Numerical Python</em>) enables the use of <em>array</em> objects. Using <code>numpy</code>  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called <em>vectorization</em> and may cause a dramatic increase in computational speed of Python programs. The function <code>logspace</code> works on a logarithmic scale just as the function <code>linspace</code> works on a regular scale. The function <code>zeros</code> creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at <a href="http://www.numpy.org" target="_blank"><tt>http://www.numpy.org</tt></a>.
+
+<p>
+In <b>CDsphere.py</b> a function <code>cd_sphere</code> was defined as follows:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;This function computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig. A-56 in Evett &amp; Liu: &quot;Fluid Mechanics &amp; Hydraulics&quot;,</span>
+    <span style="color: #408080; font-style: italic"># Schaum&#39;s Solved Problems McGraw - Hill 1989.</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+The function takes <code>Re</code> as an argument and returns the value <code>CD</code>. All Python functions begin with <code>def</code>, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument <code>Re</code>. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a funciton it is common to use the <code>return</code> statement to return the value of the function.
+
+<p>
+Variables defined inside a function, such as <code>p</code> and <code>x1</code> above, are <em>local</em> variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are <em>global</em> variables and may be accessed anywhere, also inside functions.
+
+<p>
+Three more functions from the <code>numpy</code> package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the <a href="http://www.numpy.org" target="_blank">documentation of NumPy</a> for details about the different functions.
+
+<p>
+The function above contains an example of the use of the <code>if-elif-else</code> block. The block begins with <code>if</code> and a boolean expression. If the boolean expression evaluates to <code>true</code> the <em>indented</em> statements following the <code>if</code> statement are carried out. If not, the boolean expression following the <code>elif</code> is evaluated. If none of the conditions are evaluated to <code>true</code> the statements following the <code>else</code> are carried out.
+
+<p>
+In the code block
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
+CD <span style="color: #666666">=</span> zeros(Npts)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,Npts<span style="color: #666666">-1</span>)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
+    CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
+</pre></div>
+<p>
+the function <code>cd_sphere</code> is called. First, the number of data points to be calculated are stored in the integer variable <code>Npts</code>. Using the <code>logspace</code> function imported earlier, <code>Re</code> is assigned an array objet which has float elements with values ranging from \( 10^{-1} \) to \( 10^7 \). The values are uniformly distributed along a 10logarithmic scale. <code>CD</code> is first defined as an array with <code>Npts</code> zero elements, using the <code>zero</code> function. Then, for each element in <code>Re</code>, the drag coefficient is calculated using our own defined function <code>cd_sphere</code>, in a <code>for</code> loop, which is explained in the following.
+
+<p>
+The function <code>range</code> is a built-in function that generates a list containing arithmetic progressions. The <code>for i in i_list</code> construct creates a loop over all elements in <code>i_list</code>. In each pass of the loop, the variable <code>i</code> refers to an element in the list, starting with <code>i_list[0]</code> (0 in this case) and ending with the last element <code>i_list[Npts-1]</code> (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call <code>cd_sphere(Re[i])</code> is assigned to <code>CD[i]</code>. Each statement in the block must be indented.
+
+<p>
+Lastly, the drag coefficient is plotted and the figure generated:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot
+pyplot<span style="color: #666666">.</span>plot(Re, CD, <span style="color: #BA2121">&#39;-b&#39;</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+pyplot<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+pyplot<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
+pyplot<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
+pyplot<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
+pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;example_sphere.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+pyplot<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+To generate the plot, the package <code>matplotlib</code> is used. <code>matplotlib</code> is the standard package for curve plotting in Python. For simple plotting the <code>matplotlib.pyplot</code> interface provides a MATLAB-like interface, which has been used here. For documentation and explanation of this package, we refer to <a href="http://www.matplotlib.org" target="_blank"><tt>http://www.matplotlib.org</tt></a>.
+
+<p>
+First, the curve is generated using the function <code>plot</code>, which takes the x-values and y-values as arguments (<code>Re</code> and <code>CD</code> in this case), as well as a string specifying the line style, like in MATLAB. Then changes are made to the figure in order to make it more readable, very similarily to how it is done in MATLAB. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the <code>savefig</code> function. Lastly, the figure is showed on the screen with the <code>show</code> function.
+
+<p>
+To change the font size the function <code>rc</code> is used. This function takes in the object <code>font</code>, which is a <em>dictionary</em> object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of <code>key:value</code> pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: <code>{}</code>. Placing a comma-separated list of <code>key:value</code> pairs within the braces adds initial <code>key:value</code> pairs to the dictionary. In this case the dictionary <code>font</code> contains one <code>key:value</code> pair, namely <code>'size' : 16</code>.
+
+<p>
+Descriptions and explanations of all functions available in <code>pyplot</code> may be found <a href="http://matplotlib.org/api/pyplot_summary.html" target="_blank">here</a>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._main005.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="._main001.html">2</a></li>
+  <li><a href="._main002.html">3</a></li>
+  <li><a href="._main003.html">4</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li><a href="._main005.html">6</a></li>
+  <li class="active"><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li><a href="._main015.html">16</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main017.html">18</a></li>
+  <li><a href="._main007.html">&raquo;</a></li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,24 @@
+*               === UNIROT.INP ===
+* This file supplies input values for program UNIROT.
+* Lines with * in 1. column are skipped during input.
+* Format for REAL    : 40X,F15.0
+* Format for INTEGER : 40X,I15
+* Do not make any changes in the input layout without making
+* corresponding changes in the read statements of main program UNIROT.
+*                                       <--- INPUT --->
+Max. error in iteration ......... EPS  =  1.0D-8
+Initial grid spacing .............. H  =  0.05
+Max. grid spacing .............. HMAX  =  0.5
+Unit no. for SOLOUT output .... NUNIT  =  -1
+*
+*                                       <--- INPUT --->
+Velocity ratio U2/U1 ........... U2U1  =  0.5
+Max. value of eta ............ ETAMAX  =  4.0
+Max. value of ksi ............ KSIMAX  =  5.0
+Starting value of r .......... RSTART  =  0.3
+Ending value of r .............. REND  =  0.9
+Value of r-step ............... RSTEP  =  0.05
+Starting value of s .......... SSTART  =  0.1
+Ending value of s .............. SEND  =  0.4
+Value of s-step ............... SSTEP  =  0.05
+

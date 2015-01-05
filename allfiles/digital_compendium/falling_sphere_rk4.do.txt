@@ -1,0 +1,16 @@
+!split
+!bbox
+===== Example: Falling sphere using RK4 =====
+label{example:falling_sphere_RK4}
+
+Let's implement the RK4 scheme and use it on (ref{ex:falling_sphere}). The scheme has been implemented in the function `rk4()`, and is given below
+
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define rk4 scheme@return z
+
+Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme _FallingSphereEulerHeunRK4.py_ is listed below. The functions `euler`, `heun` and `rk4` are imported from the programme _ODEschemes.py_. 
+
+FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun_rk4.png, width=400] Velocity of falling sphere using Euler, Heun and RK4. label{fig:falling_sphere_euler_heun_rk4}
+
+@@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py
+
+!ebox

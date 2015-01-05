@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Digital Compendium for TKT4140">
+
+<title>Digital Compendium for TKT4140</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https:://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
+               0,
+               None,
+               '___sec0'),
+              (u' Introduction ',
+               1,
+               u'section:introduction',
+               u'section:introduction'),
+              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u' Reduction of Higher order Equations ',
+               2,
+               u'subsec:reduction',
+               u'subsec:reduction'),
+              (u' Example 1: Reduction of higher order system ',
+               2,
+               None,
+               '___sec4'),
+              (u' Scientific computing with Python ', 2, None, '___sec5'),
+              (u' Example 2: Sphere in free fall ',
+               2,
+               u'example:sphere_freefall',
+               u'example:sphere_freefall'),
+              (u' Python implementation of the drag coefficient function and how to plot it ',
+               3,
+               None,
+               '___sec7'),
+              (u' Python functions with vector arguments and modules ',
+               2,
+               None,
+               '___sec8'),
+              (u' How to make a Python-module ',
+               2,
+               u'section:Python_module',
+               u'section:Python_module'),
+              (u' Differences ', 2, None, '___sec10'),
+              (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
+               3,
+               None,
+               '___sec11'),
+              (u" Euler's method ", 2, None, '___sec12'),
+              (u' Example 3: Falling sphere with constant and varying drag ',
+               2,
+               u'ex:falling_sphere',
+               u'ex:falling_sphere'),
+              (u" Euler's method for a system ", 3, None, '___sec14'),
+              (u" Heun's method ", 2, None, '___sec15'),
+              (u" Example 4: Newton's equation ", 2, None, '___sec16'),
+              (u" Example 5: Falling sphere with Heun's method ",
+               2,
+               None,
+               '___sec17'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec18'),
+              (u' Example 6: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec19')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="main.html">Digital Compendium for TKT4140</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;"><b>Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
+     <!-- navigation toc: --> <li><a href="._main006.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make a Python-module</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main010.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main011.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
+     <!-- navigation toc: --> <li><a href="._main013.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main015.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main016.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
+     <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0005"></a>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._main004.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="._main001.html">2</a></li>
+  <li><a href="._main002.html">3</a></li>
+  <li><a href="._main003.html">4</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li class="active"><a href="._main005.html">6</a></li>
+  <li><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main017.html">18</a></li>
+  <li><a href="._main006.html">&raquo;</a></li>
+</ul>
+<!-- !split -->
+
+<h2 id="___sec5">Scientific computing with Python <a name="___sec5"></a></h2>
+
+<p>
+In this course we will use the programming language <b>Python</b> to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example <a href="http://folk.ntnu.no/johankso/electronic_compendium/digital_compendium/Python_intro/doc/src/bumpy.html" target="_blank">Intro to scientific computing with Python</a> before proceeding. If you are familiar with <b>Matlab</b> the transfer to Python should not be a problem.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._main004.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="._main001.html">2</a></li>
+  <li><a href="._main002.html">3</a></li>
+  <li><a href="._main003.html">4</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li class="active"><a href="._main005.html">6</a></li>
+  <li><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main017.html">18</a></li>
+  <li><a href="._main006.html">&raquo;</a></li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
