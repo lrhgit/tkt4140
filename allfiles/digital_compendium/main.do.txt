@@ -591,7 +591,7 @@ except:
 
 In the `DragCoefficientGeneric` module, this feature is used to handle
 the function name for a function which has been vectorized
-automatically. For such function `func.func_name` has no value and
+automatically. For such a function `func.func_name` has no value and
 will return an error, and the name may be found by the statements in
 the exception block.
       
