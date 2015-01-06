@@ -578,14 +578,22 @@ which allows for convenient looping over all of the functions with the following
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames =@try:
 
 _Exception handling._ Python has a very convenient construction for
-testing of potential errors with `try-except` blocks: !bc try:
-<statements> except ExceptionType1: <remedy for ExceptionType1 errors>
-except ExceptionType2: <remedy for ExceptionType1 errors> except:
-<remedy for any other errors> !ec In the `DragCoefficientGeneric`
-module, this feature is used to handle the function name for a
-function which has been vectorized automatically. For such function
-`func.func_name` has no value and will return an error, and the name
-may be found by the statements in the exception block.
+testing of potential errors with `try-except` blocks: 
+!bc try:
+    <statements> 
+except ExceptionType1: 
+       <remedy for ExceptionType1 errors>
+except ExceptionType2: 
+       <remedy for ExceptionType1 errors> 
+except:
+	<remedy for any other errors> 
+!ec 
+
+In the `DragCoefficientGeneric` module, this feature is used to handle
+the function name for a function which has been vectorized
+automatically. For such function `func.func_name` has no value and
+will return an error, and the name may be found by the statements in
+the exception block.
       
 _Efficiency and benchmarking._ The function `clock` in the module
 "time": "https://docs.python.org/2/library/time.html", return a time
@@ -601,8 +609,6 @@ the
 cpu-time for each of the array-type functions described above has been
 measured for a test example. An array with 500 elements was sent to
 the functions.
-
-
 
 
 !bc
