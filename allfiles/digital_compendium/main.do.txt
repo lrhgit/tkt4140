@@ -295,13 +295,12 @@ label{eq:1128}
 \end{align}
 !et
 
-!split
 ## Examples are put inside box environments, but these lead to
 ## use of minipage in latex, which cannot handle figures. Therefore,
 ## box environments are not used in latex (but for all other formats).
 ## This is easy to handle through two mako functions: bbox() and ebox().
 ${bbox()}
-===== Example: Reduction of higher order system =====
+===== Example: Reduction of higher order systems =====
 Write the following ODE as a system of first order ODEs:
 !bt
 \begin{align*}
@@ -326,10 +325,7 @@ By use of (ref{eq:1128}) we get
 #!ec
 ${ebox()}
 
-
-!split
 ===== Scientific computing with Python =====
-
 In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://folk.ntnu.no/johankso/electronic_compendium/digital_compendium/Python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
 
 !split

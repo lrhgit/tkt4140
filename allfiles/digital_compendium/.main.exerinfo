@@ -17,7 +17,7 @@
   'solution_file': None,
   'subex': [],
   'text': u"Write the following ODE as a system of first order ODEs:\n!bt\n\\begin{align*}\ny'''-y'y''-(y')^2+2y=x^3 \\\\ \ny(0)=a,\\ y'(0)=b,\\ y''(0)=c\n\\end{align*}\n\n!et\n\n#!bsol\nFirst we write $y'''=y'y''+(y')^2-2y+x^3$.\n\nBy use of (ref{eq:1128}) we get\n!bt\n\\begin{align*}\n&y_1'=y_2\\\\ \n&y_2'=y_3\\\\ \n&y_3'=y_2y_3+(y_2)^2-2y_1+x^3\\\\ \n&y_1(0)=a,\\ y_2(0)=b,\\ y_3=c\n\\end{align*}\n\n!et\n#!esol\n#!ec\n!ebox",
-  'title': u'Reduction of higher order system',
+  'title': u'Reduction of higher order systems',
   'type': u'Example',
   'type_visible': True},
  {'answer': '',
