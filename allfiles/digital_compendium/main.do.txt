@@ -491,24 +491,22 @@ To provide a convenient and practical means to compare the various
 implementations of the drag function, we have collected them all in a
 file _DragCoefficientGeneric.py_. This file constitues a Python module which is a concept we will dicuss in section ref{section:Python_module}.
 
-===== How to make a Python-module =====
+===== How to make a Python-module and some useful programming features =====
 label{section:Python_module}
 
-A module is a file containing Python definitions and statements and
-represents a convenient way of collecting useful and related
-functions, classes or Python code in a single file. A motivation to
-implement the drag coefficient function was that we should be able to
-import it in other programs to solve e.g. the problems outlined in
-ref{example:sphere_freefall}.
-
-In general, a file containing Python-code may be executed either as a
-main program (script), typically with python filename.py or imported
-in another script/module with import filename.
+_Python modules._ A module is a file containing Python definitions and
+statements and represents a convenient way of collecting useful and
+related functions, classes or Python code in a single file. A
+motivation to implement the drag coefficient function was that we
+should be able to import it in other programs to solve e.g. the
+problems outlined in ref{example:sphere_freefall}. In general, a file
+containing Python-code may be executed either as a main program
+(script), typically with python filename.py or imported in another
+script/module with import filename.
 
 A module file should not execute a main program, but rather just
 define functions, import other modules, and define global
 variables. 
-
 Inside modules, the standard practice is to only have functions and
 not any statements outside functions. The reason is that all
 statements in the module file are executed from top to bottom during
@@ -541,20 +539,59 @@ intended to initialize the module and are executed only the first time
 the module name is encountered in an import statement. They are also
 run if the file is executed as a script.
 
-To illustrate the module concept along with some other usefull
-features we have made a module of the various implementations of the
-drag coefficient functions from the previous section in the file
-`DragCoefficientGeneric.py`, which is listed below.
+Below we have listed the content of the file
+`DragCoefficientGeneric.py` to illustrate a specific implementation of
+the module `DragCoefficientGeneric` and some other useful programming
+features in Python. The functions in the module are the various
+implementations of the drag coefficient functions from the previous
+section.
 
-To illustrate the very powerful datastructures in Python allowing to
-make list of e.g. function objects we put all the function names in a
-list with the statement:
-@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# make a list of all function objects@# Put all exec_times in a dictionary and fncnames in a list 
+_Python lists and dictionaries._ To illustrate a very powerful feature
+of Python data structures allowing for lists of e.g. function
+objects we put all the function names in a list with the statement:
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# make a list of all function objects@# Put all exec_times in a dictionary and fncnames in a list  
 which allows to loop over all of the functions with the following construction:
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames =@try:
 
+    * Lists hold a list of values and are intialized with empty
+      brackets, e.g `fncnames = []`. The values of the list are
+      accessed with an index, starting from zero. The first value of
+      `fncnames` is `fncnames[0]`, the second value of `fncnames` is
+      `fncnames[1]` and so on. You can remove values from the list,
+      and add new values to the end by fncnames. Example:
+      `fncnames.append(name)` will append `name` as the last value of
+      the list `fncnames`. In case case it was empty prior to the
+      append-operation, `name` will be the only element in the list.
 
-  * Using the function `clock` in the module `time`, the cpu-time for each of the array-type functions described above has been measured for a  test example. An array with 500 elements was sent to the functions.
+    * Dictionaries are similar to what their name suggests - a
+      dictionary. In a dictionary, you have an 'index' of words, and
+      for each of them a definition. In python, the word is called a
+      'key', and the definition a 'value'. The values in a dictionary
+      aren't numbered - tare similar to what their name suggests - a
+      dictionary. In a dictionary, you have an 'index' of words, and
+      for each of them a definition. In python, the word is called a
+      'key', and the definition a 'value'. The values in a dictionary
+      aren't numbered - they aren't in any specific order, either -
+      the key does the same thing. You can add, remove, and modify the
+      values in dictionaries. Example: telephone book.
+
+
+_Efficiency and benchmarking._ The function `clock` in the module
+"time": "https://docs.python.org/2/library/time.html", return a time
+expressed in seconds for the current statement and is frequently used
+for benchmarking in Python or timing of functions. By subtracting the
+time `t0` recored immediately before a function call from the time
+immediately after the function call, an estimate of the elapsed
+cpu-time is obtained. In our module `DragCoefficientGeneric` the
+efficency is implemented with the codelines:
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames.append@fnames_sorted
+The computed execution times are for convenicene stored in the dictionary exec_times. 
+the
+cpu-time for each of the array-type functions described above has been
+measured for a test example. An array with 500 elements was sent to
+the functions.
+
+
 
 
 !bc
