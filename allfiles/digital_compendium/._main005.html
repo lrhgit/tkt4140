@@ -407,19 +407,26 @@ which allows for convenient looping over all of the functions with the following
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
 </pre></div>
 <p>
-<b>Exception handling.</b> Python has a very convenient construction for testing of potential errors with <code>try-except</code> blocks:
+<b>Exception handling.</b> Python has a very convenient construction for
+testing of potential errors with <code>try-except</code> blocks: 
 <p>
 
-<!-- code=text typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">try:
-	&lt;statements&gt;
-except ExceptionType1:
+<!-- code=text (!bc try:) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    &lt;statements&gt; 
+except ExceptionType1: 
        &lt;remedy for ExceptionType1 errors&gt;
-except ExceptionType2:
-       &lt;remedy for ExceptionType1 errors&gt;
+except ExceptionType2: 
+       &lt;remedy for ExceptionType1 errors&gt; 
 except:
-       &lt;remedy for any other errors&gt;
+	&lt;remedy for any other errors&gt; 
 </pre></div>
+<p>
+In the <code>DragCoefficientGeneric</code> module, this feature is used to handle
+the function name for a function which has been vectorized
+automatically. For such function <code>func.func_name</code> has no value and
+will return an error, and the name may be found by the statements in
+the exception block.
+
 <p>
 <b>Efficiency and benchmarking.</b> The function <code>clock</code> in the module
 <a href="https://docs.python.org/2/library/time.html" target="_blank">time</a>, return a time
