@@ -366,24 +366,11 @@ implementations of the drag coefficient functions from the previous
 section.
 
 <p>
-<b>Python lists and dictionaries.</b> To illustrate a very powerful feature
-of Python data structures allowing for lists of e.g. function
-objects we put all the function names in a list with the statement:
-<p>
+<b>Python lists and dictionaries.</b> 
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    funcs <span style="color: #666666">=</span>[cd_sphere_py_vector, cd_sphere_vector, cd_sphere_vector_bool, cd_sphere_auto_vector]  <span style="color: #408080; font-style: italic"># list of functions to test</span>
-</pre></div>
-<p>
-which allows to loop over all of the functions with the following construction:
-<p>
-
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
-</pre></div>
 <ul>
     <li> Lists hold a list of values and are intialized with empty
-      brackets, e.g <code>fncnames = []</code>. The values of the list are
+      brackets, e.g. <code>fncnames = []</code>. The values of the list are
       accessed with an index, starting from zero. The first value of
       <code>fncnames</code> is <code>fncnames[0]</code>, the second value of <code>fncnames</code> is
       <code>fncnames[1]</code> and so on. You can remove values from the list,
@@ -392,18 +379,48 @@ which allows to loop over all of the functions with the following construction:
       the list <code>fncnames</code>. In case case it was empty prior to the
       append-operation, <code>name</code> will be the only element in the list.</li>
     <li> Dictionaries are similar to what their name suggests - a
-      dictionary. In a dictionary, you have an 'index' of words, and
-      for each of them a definition. In python, the word is called a
-      'key', and the definition a 'value'. The values in a dictionary
-      aren't numbered - tare similar to what their name suggests - a
-      dictionary. In a dictionary, you have an 'index' of words, and
-      for each of them a definition. In python, the word is called a
-      'key', and the definition a 'value'. The values in a dictionary
-      aren't numbered - they aren't in any specific order, either -
-      the key does the same thing. You can add, remove, and modify the
-      values in dictionaries. Example: telephone book.</li>
+      dictionary, and an empty dictionary is intialized with empty
+      braces, e.g. <code>CD = {}</code>.  In a dictionary, you have an 'index' of
+      words or keys and the valuesacccessed by their 'key'. Thus, the
+      values in a dictionary aren't numbered or ordered, the only
+      accessed by the key. You can add, remove, and modify the values
+      in dictionaries. For example with the statement <code>CD[name] =
+      func(ReNrs)</code> the results of <code>func(ReNrs)</code> are stored in the list
+      <code>CD</code> with key <code>name</code>.</li>
 </ul>
 
+To illustrate a very powerful feature of Python data structures
+allowing for lists of e.g. function objects we put all the function
+names in a list with the statement:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    funcs <span style="color: #666666">=</span>[cd_sphere_py_vector, cd_sphere_vector, cd_sphere_vector_bool, cd_sphere_auto_vector]  <span style="color: #408080; font-style: italic"># list of functions to test</span>
+</pre></div>
+<p>
+which allows for convenient looping over all of the functions with the following construction:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
+</pre></div>
+<p>
+<b>Exception handling.</b> Python has a very convenient construction for testing of potential errors with <code>try-except</code> blocks:
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">try:
+	&lt;statements&gt;
+except ExceptionType1:
+       &lt;remedy for ExceptionType1 errors&gt;
+except ExceptionType2:
+       &lt;remedy for ExceptionType1 errors&gt;
+except:
+       &lt;remedy for any other errors&gt;
+</pre></div>
+<p>
 <b>Efficiency and benchmarking.</b> The function <code>clock</code> in the module
 <a href="https://docs.python.org/2/library/time.html" target="_blank">time</a>, return a time
 expressed in seconds for the current statement and is frequently used

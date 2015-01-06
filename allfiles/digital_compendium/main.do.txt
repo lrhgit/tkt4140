@@ -546,15 +546,9 @@ features in Python. The functions in the module are the various
 implementations of the drag coefficient functions from the previous
 section.
 
-_Python lists and dictionaries._ To illustrate a very powerful feature
-of Python data structures allowing for lists of e.g. function
-objects we put all the function names in a list with the statement:
-@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# make a list of all function objects@# Put all exec_times in a dictionary and fncnames in a list  
-which allows to loop over all of the functions with the following construction:
-@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames =@try:
-
+_Python lists and dictionaries._ 
     * Lists hold a list of values and are intialized with empty
-      brackets, e.g `fncnames = []`. The values of the list are
+      brackets, e.g. `fncnames = []`. The values of the list are
       accessed with an index, starting from zero. The first value of
       `fncnames` is `fncnames[0]`, the second value of `fncnames` is
       `fncnames[1]` and so on. You can remove values from the list,
@@ -564,18 +558,35 @@ which allows to loop over all of the functions with the following construction:
       append-operation, `name` will be the only element in the list.
 
     * Dictionaries are similar to what their name suggests - a
-      dictionary. In a dictionary, you have an 'index' of words, and
-      for each of them a definition. In python, the word is called a
-      'key', and the definition a 'value'. The values in a dictionary
-      aren't numbered - tare similar to what their name suggests - a
-      dictionary. In a dictionary, you have an 'index' of words, and
-      for each of them a definition. In python, the word is called a
-      'key', and the definition a 'value'. The values in a dictionary
-      aren't numbered - they aren't in any specific order, either -
-      the key does the same thing. You can add, remove, and modify the
-      values in dictionaries. Example: telephone book.
+      dictionary, and an empty dictionary is intialized with empty
+      braces, e.g. `CD = {}`.  In a dictionary, you have an 'index' of
+      words or keys and the valuesacccessed by their 'key'. Thus, the
+      values in a dictionary aren't numbered or ordered, the only
+      accessed by the key. You can add, remove, and modify the values
+      in dictionaries. For example with the statement `CD[name] =
+      func(ReNrs)` the results of `func(ReNrs)` are stored in the list
+      `CD` with key `name`.
 
+To illustrate a very powerful feature of Python data structures
+allowing for lists of e.g. function objects we put all the function
+names in a list with the statement:
 
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# make a list of all function objects@# Put all exec_times in a dictionary and fncnames in a list 
+
+which allows for convenient looping over all of the functions with the following construction:
+
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames =@try:
+
+_Exception handling._ Python has a very convenient construction for
+testing of potential errors with `try-except` blocks: !bc try:
+<statements> except ExceptionType1: <remedy for ExceptionType1 errors>
+except ExceptionType2: <remedy for ExceptionType1 errors> except:
+<remedy for any other errors> !ec In the `DragCoefficientGeneric`
+module, this feature is used to handle the function name for a
+function which has been vectorized automatically. For such function
+`func.func_name` has no value and will return an error, and the name
+may be found by the statements in the exception block.
+      
 _Efficiency and benchmarking._ The function `clock` in the module
 "time": "https://docs.python.org/2/library/time.html", return a time
 expressed in seconds for the current statement and is frequently used
