@@ -1,4 +1,6 @@
-TITLE: TKT4140 Numerical Methods for Engineers
+TITLE: TKT4140 
+TITLE: Numerical Methods for Engineers
+TITLE: A digital compendium
 AUTHOR: Johan Kolstø Sønstabø at Department of Structural Engineering, NTNU
 AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
