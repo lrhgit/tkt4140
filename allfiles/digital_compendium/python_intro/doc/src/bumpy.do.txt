@@ -8,7 +8,8 @@ AUTHOR: Johan Kolstø Sønstabø at Centre for Advanced Structural Analysis (CAS
 AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
 
-This example is to a large extent developed by _Hans Petter Langtangen_ (URL: "http://hplgit.github.io/bumpy/doc/pub/bumpy.html") at Simula Research Laboratory and University of Oslo, and he is credited for that. 
+This example is originally developed by _Hans Petter Langtangen_ (URL: "http://hplgit.github.io/bumpy/doc/pub/bumpy.html") at Simula Research Laboratory and University of Oslo.
+
 
 !bsummary Contents
 This worked example
