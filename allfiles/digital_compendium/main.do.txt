@@ -12,8 +12,7 @@ DATE: today
 
 This digital compendium is based on the first chapter of the
 compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
-be used as a learning resource in the course TKT4140 Numerical Methods
-with Computer Laboratory at NTNU.
+be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
 
 
 !split

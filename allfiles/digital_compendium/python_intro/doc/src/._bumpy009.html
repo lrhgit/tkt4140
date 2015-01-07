@@ -14,62 +14,63 @@ Automatically generated HTML file from DocOnce source
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
+
 
 </head>
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Optimal backround for reading this note ',
+ 'sections': [(u' Optimal backround for reading this note ',
                3,
                None,
                '___sec0'),
-              (' A scientific application ', 1, None, '___sec1'),
-              (' Physical problem and mathematical model ',
+              (u' A scientific application ', 1, None, '___sec1'),
+              (u' Physical problem and mathematical model ',
                2,
                None,
                '___sec2'),
-              (' Numerical model ', 2, None, '___sec3'),
-              (' Simple implementation ', 2, None, '___sec4'),
-              (' Dissection of the code ', 2, None, '___sec5'),
-              (' More advanced implementation ', 2, None, '___sec6'),
-              (' Dissection of the code ', 2, None, '___sec7'),
-              (' The excitation force ', 2, None, '___sec8'),
-              (' A high-level solve function ', 2, None, '___sec9'),
-              (' User input ', 1, None, '___sec10'),
-              (' Positional command-line arguments ', 2, None, '___sec11'),
-              (' Option-value pairs on the command line ',
+              (u' Numerical model ', 2, None, '___sec3'),
+              (u' Simple implementation ', 2, None, '___sec4'),
+              (u' Dissection of the code ', 2, None, '___sec5'),
+              (u' More advanced implementation ', 2, None, '___sec6'),
+              (u' Dissection of the code ', 2, None, '___sec7'),
+              (u' The excitation force ', 2, None, '___sec8'),
+              (u' A high-level solve function ', 2, None, '___sec9'),
+              (u' User input ', 1, None, '___sec10'),
+              (u' Positional command-line arguments ', 2, None, '___sec11'),
+              (u' Option-value pairs on the command line ',
                2,
                None,
                '___sec12'),
-              (' Visual exploration ', 1, None, '___sec13'),
-              (' Advanced topics ', 1, None, '___sec14'),
-              (' Symbolic computing via SymPy ', 2, None, '___sec15'),
-              (' Testing ', 2, None, '___sec16'),
-              (' Example on a test function ', 3, None, '___sec17'),
-              (' Test function for the numerical solver ',
+              (u' Visual exploration ', 1, None, '___sec13'),
+              (u' Advanced topics ', 1, None, '___sec14'),
+              (u' Symbolic computing via SymPy ', 2, None, '___sec15'),
+              (u' Testing ', 2, None, '___sec16'),
+              (u' Example on a test function ', 3, None, '___sec17'),
+              (u' Test function for the numerical solver ',
                3,
                None,
                '___sec18'),
-              (' Appendix: Quick motivation for programming with Python ',
+              (u' Appendix: Quick motivation for programming with Python ',
                1,
-               'app:motivation',
-               'app:motivation'),
-              (' Appendix: Scientific Python resources ',
+               u'app:motivation',
+               u'app:motivation'),
+              (u' Appendix: Scientific Python resources ',
                1,
-               'app:resources',
-               'app:resources'),
-              (' Full tutorials on scientific programming with Python ',
+               u'app:resources',
+               u'app:resources'),
+              (u' Full tutorials on scientific programming with Python ',
                3,
                None,
                '___sec21'),
-              (' NumPy resources ', 3, None, '___sec22'),
-              (' Useful resources ', 3, None, '___sec23'),
-              (' Some relevant Python books ', 3, None, '___sec24'),
-              (' Course material on Python programming in general ',
+              (u' NumPy resources ', 3, None, '___sec22'),
+              (u' Useful resources ', 3, None, '___sec23'),
+              (u' Some relevant Python books ', 3, None, '___sec24'),
+              (u' Course material on Python programming in general ',
                3,
                None,
                '___sec25')]}
@@ -128,10 +129,25 @@ MathJax.Hub.Config({
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
 <a name="part0009"></a>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._bumpy008.html">&laquo;</a></li>
+  <li><a href="._bumpy000.html">1</a></li>
+  <li><a href="._bumpy001.html">2</a></li>
+  <li><a href="._bumpy002.html">3</a></li>
+  <li><a href="._bumpy003.html">4</a></li>
+  <li><a href="._bumpy004.html">5</a></li>
+  <li><a href="._bumpy005.html">6</a></li>
+  <li><a href="._bumpy006.html">7</a></li>
+  <li><a href="._bumpy007.html">8</a></li>
+  <li><a href="._bumpy008.html">9</a></li>
+  <li class="active"><a href="._bumpy009.html">10</a></li>
+</ul>
 <!-- !split -->
 
 <h1 id="___sec13">Visual exploration <a name="___sec13"></a></h1>
 
+<p>
 This section explains how to load the data from the computation, stored
 as a pickled list in the file <code>bumpy.res</code>, into various arrays, and how
 to visualize these arrays. We want to produce the following plots:
@@ -192,7 +208,7 @@ Indexing by a boolean array extracts all the elements corresponding to
 the <code>True</code> elements in the index array.
 
 <p>
-Plotting the root mean square value array <code>u_rms</code> for <code>t >= t_s</code> is now done by
+Plotting the root mean square value array <code>u_rms</code> for <code>t &gt;= t_s</code> is now done by
 
 <p>
 
@@ -209,7 +225,6 @@ Figure <a href="#bumpy:fig3">3</a> shows the result.
 
 <p>
 <center> <!-- figure -->
- 
 <center><p class="caption">Figure 3:  Root mean square of displacement. <a name="bumpy:fig3"></a> </p></center>
 <p><img src="fig-bumpy/u_rms.png" align="bottom" width=600></p>
 </center>
@@ -264,7 +279,6 @@ dominating frequency is 1 Hz.
 
 <p>
 <center> <!-- figure -->
- 
 <center><p class="caption">Figure 4:  Spectrum of displacement. <a name="bumpy:fig2"></a> </p></center>
 <p><img src="fig-bumpy/u_spectrum.png" align="bottom" width=600></p>
 </center>
@@ -309,21 +323,18 @@ these arrays:
 
 <p>
 <center> <!-- figure -->
- 
 <center><p class="caption">Figure 5:  First realization of a bumpy road, with corresponding acceleration of the wheel and resulting vibrations. <a name="bumpy:fig4"></a> </p></center>
 <p><img src="fig-bumpy/hau0.png" align="bottom" width=700></p>
 </center>
 
 <p>
 <center> <!-- figure -->
- 
 <center><p class="caption">Figure 6:  Second realization of a bumpy road, with corresponding acceleration of the wheel and resulting vibrations. <a name="bumpy:fig5"></a> </p></center>
 <p><img src="fig-bumpy/hau1.png" align="bottom" width=700></p>
 </center>
 
 <p>
 <center> <!-- figure -->
- 
 <center><p class="caption">Figure 7:  Third realization of a bumpy road, with corresponding acceleration of the wheel and resulting vibrations. <a name="bumpy:fig6"></a> </p></center>
 <p><img src="fig-bumpy/hau2.png" align="bottom" width=700></p>
 </center>
@@ -346,6 +357,7 @@ IPython.
 
 <h2 id="___sec15">Symbolic computing via SymPy <a name="___sec15"></a></h2>
 
+<p>
 Python has a package SymPy that offers symbolic computing. Here is
 a simple introductory example where we differentiate a quadratic
 polynomial, integrate it again, and find the roots:
@@ -397,6 +409,7 @@ a<span style="color: #666666">*</span>x<span style="color: #666666">**2*</span>s
 
 <h2 id="___sec16">Testing <a name="___sec16"></a></h2>
 
+<p>
 Software testing in Python is best done with a <em>unit test framework</em>
 such as <code>nose</code> or <code>pytest</code>. These frameworks can automatically
 run all functions starting with <code>test_</code> recursively in files in a
@@ -406,6 +419,7 @@ that is <code>True</code> if the test passes and <code>False</code> if it fails.
 
 <h3 id="___sec17">Example on a test function <a name="___sec17"></a></h3>
 
+<p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">halve</span>(x):
@@ -424,6 +438,7 @@ that is <code>True</code> if the test passes and <code>False</code> if it fails.
 
 <h3 id="___sec18">Test function for the numerical solver <a name="___sec18"></a></h3>
 
+<p>
 A frequently used technique to test differential equation solvers
 is to just specify a solution and fit a source term in the differential
 equation such that the specified solution solves the equation.
