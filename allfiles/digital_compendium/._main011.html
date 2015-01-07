@@ -13,7 +13,7 @@ Automatically generated HTML file from DocOnce source
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https:://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -36,7 +36,7 @@ Automatically generated HTML file from DocOnce source
                2,
                u'subsec:reduction',
                u'subsec:reduction'),
-              (u' Example 1: Reduction of higher order system ',
+              (u' Example 1: Reduction of higher order systems ',
                2,
                None,
                '___sec4'),
@@ -45,37 +45,40 @@ Automatically generated HTML file from DocOnce source
                2,
                u'example:sphere_freefall',
                u'example:sphere_freefall'),
-              (u' Generating the plot in ref{example:sphere_freefall} ',
+              (u' Python implementation of the drag coefficient function and how to plot it ',
                3,
                None,
                '___sec7'),
-              (u' More efficient implementations ', 3, None, '___sec8'),
-              (u' Differences ', 2, None, '___sec9'),
+              (u' Python functions with vector arguments and modules ',
+               2,
+               None,
+               '___sec8'),
+              (u' How to make a Python-module and some useful programming features ',
+               2,
+               u'section:Python_module',
+               u'section:Python_module'),
+              (u' Differences ', 2, None, '___sec10'),
               (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
                3,
                None,
-               '___sec10'),
-              (u" Euler's method ", 2, None, '___sec11'),
+               '___sec11'),
+              (u" Euler's method ", 2, None, '___sec12'),
               (u' Example 3: Falling sphere with constant and varying drag ',
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u" Euler's method for a system ", 3, None, '___sec13'),
-              (u" Heun's method ", 2, None, '___sec14'),
-              (u" Example 4: Newton's equation ", 2, None, '___sec15'),
+              (u" Euler's method for a system ", 3, None, '___sec14'),
+              (u" Heun's method ", 2, None, '___sec15'),
+              (u" Example 4: Newton's equation ", 2, None, '___sec16'),
               (u" Example 5: Falling sphere with Heun's method ",
                2,
                None,
-               '___sec16'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec17'),
+               '___sec17'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec18'),
               (u' Example 6: Particle motion in two dimensions ',
                2,
                None,
-               '___sec18'),
-              (u' How to make a python-module ',
-               1,
-               u'section:python_module',
-               u'section:python_module')]}
+               '___sec19')]}
 end of tocinfo -->
 
 <body>
@@ -116,18 +119,19 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
      <!-- navigation toc: --> <li><a href="._main002.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
      <!-- navigation toc: --> <li><a href="._main003.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
-     <!-- navigation toc: --> <li><a href="._main006.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
-     <!-- navigation toc: --> <li><a href="._main007.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
-     <!-- navigation toc: --> <li><a href="._main009.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main010.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
-     <!-- navigation toc: --> <li><a href="._main012.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main013.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main015.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="._main016.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
-     <!-- navigation toc: --> <li><a href="._main016.html#section:python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to make a python-module</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order systems</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
+     <!-- navigation toc: --> <li><a href="._main004.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
+     <!-- navigation toc: --> <li><a href="._main005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._main005.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
+     <!-- navigation toc: --> <li><a href="._main006.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main009.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main012.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main013.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
+     <!-- navigation toc: --> <li><a href="._main015.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
 
         </ul>
       </li>
@@ -159,89 +163,91 @@ MathJax.Hub.Config({
   <li><a href="._main013.html">14</a></li>
   <li><a href="._main014.html">15</a></li>
   <li><a href="._main015.html">16</a></li>
-  <li><a href="._main016.html">17</a></li>
   <li><a href="._main012.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
 
-<h3 id="___sec13">Euler's method for a system <a name="___sec13"></a></h3>
+<h2 id="___sec15">Heun's method <a name="___sec15"></a></h2>
 
-Euler's method may of course also be used for a system. Let's look at a simultaneous system of \( p \) equations
-$$
-\begin{align}
-&y'_1=f_1(x,y_1,y_2,\dots y_p) \nonumber\\ 
-&y'_2=f_2(x,y_1,y_2,\dots y_p) \nonumber\\ 
-&. \tag{47}\\ 
-&.\nonumber\\ 
-&y'_p=f_p(x,y_1,y_2,\dots y_p)\nonumber
-\end{align}
-$$
-
-with initial values
+<p>
+From <a href="._main006.html#mjx-eqn-19">(19)</a> or <a href="._main006.html#mjx-eqn-23">(23)</a> we have
 $$
 \begin{equation}
-\tag{48}
-y_1(x_0)=a_1,\ y_2(x_0)=a_2,\dots,\ y_p(x_0)=a_p
+\tag{53}
+y''(x_n,y_n)=f'\left(x_n,y(x_n,y_n)\right)\approx \frac{f(x_n+h)-f(x_n)}{h}
 \end{equation}
 $$
 
-Or, in vectorial format as follows,
+The Taylor series expansion <a href="._main006.html#mjx-eqn-17">(17)</a> gives
 $$
-\begin{align}
-\tag{49}
-\mathbf{y'}&=\mathbf{f}(x,\mathbf{y})\\ 
-\mathbf{y}&(x_0)=\mathbf{a} \nonumber
-\end{align}
+\begin{equation*}
+y(x_n+h)=y(x_n)+hy'[x_n,y(x_n)]+\frac{h^2}{2}y''[x_n,y(x_n)]+O(h^3)
+\end{equation*}
 $$
 
-where \( \mathbf{y'} \), \( \mathbf{f} \), \( \mathbf{y} \) and \( \mathbf{a} \) are column vectores with \( p \) components.
-
-<p>
-The Euler scheme <a href="._main009.html#mjx-eqn-41">(41)</a> used on <a href="#mjx-eqn-49">(49)</a> gives
+which, inserting <a href="#mjx-eqn-53">(53)</a>, gives
 $$
 \begin{equation}
-\tag{50}
-\mathbf{y_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+\tag{54}
+y_{n+1}=y_n+\frac{h}{2}\cdot [f(x_n,y_n)+f(x_{n+1},y(x_{n+1}))]
 \end{equation}
 $$
 
-For a system of three equations we get
-$$
-\begin{align}
-y'_1=&y_2\nonumber\\ 
-y'_2=&y_3
-\tag{51}\\ 
-y'_3=&-y_1y_3\nonumber
-\end{align}
-$$
-
-In this case <a href="#mjx-eqn-50">(50)</a> gives
-$$
-\begin{align}
-&(y_1)_{n+1}=(y_1)_n+h\cdot (y_2)_n\nonumber\\ 
-&(y_2)_{n+1}=(y_2)_n+h\cdot (y_3)_n
-\tag{52}\\ 
-&(y_3)_{n+1}=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n\nonumber\\ 
-\end{align}
-$$
-
-with \( y_1(x_0)=a_1,\ y_2(x_0)=a_2,\text{ and }y_3(x_0)=a_3 \)
 
 <p>
-In the section <a href="._main003.html#subsec:reduction">Reduction of Higher order Equations</a> we have seen how we can reduce a higher order ODE to a set of first order ODEs. In <a href="._main010.html#mjx-eqn-42">(42)</a> and <a href="._main010.html#mjx-eqn-43">(43)</a> we have the equation \( \frac{d^2z}{dt^2}=g-\alpha\cdot \left(\frac{dz}{dt}\right)^2 \) which we have reduced to a system as
+This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if \( f(x,y) \) is only a function of \( x \). Since \( y_{n+1} \) appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function \( f(x,y) \) is non-linear. One way of making the scheme explicit is to use the Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> to calculate \( y(x_{n+1}) \) on the right side of <a href="#mjx-eqn-54">(54)</a>. The resulting scheme is often denoted <b>Heun's method</b>.
+
+<p>
+The scheme for Heun's method becomes
+$$
+\begin{align}
+&y^p_{n+1}=y_n+h\cdot f(x_n,y_n)
+\tag{55} \\ 
+&y_{n +1}=y_n+\frac{h}{2}\cdot[f(x_n,y_n)+f(x_{n+1},y^p_{n+1})]
+\tag{56}
+\end{align}
+$$
+
+Index \( p \) stands for "predicted". <a href="#mjx-eqn-55">(55)</a> is then the predictor and <a href="#mjx-eqn-56">(56)</a> is the corrector. This is a second order method. For more details, see <a href="._main015.html#cheney2012numerical">[6]</a>. Figure <a href="#fig:illustration_heun">5</a> is a graphical illustration of the method.
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 5:  Illustration of Heun's method. <a name="fig:illustration_heun"></a> </p></center>
+<p><img src="chapter1/9.png" align="bottom" width=400></p>
+</center>
+
+<p>
+In principle we could make an iteration procedure where we after using the corrector use the corrected values to correct the corrected values to make a new predictor and so on. This will likely lead to a more accurate solution of the difference scheme, but not necessarily of the differential equation. We are therefore satisfied by using the corrector once. For a system, we get
+$$
+\begin{align}
+& \mathbf{y^p_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+\tag{57}\\ 
+& \mathbf{y_{n+1}}=\mathbf{y_n} +\frac{h}{2}\cdot [\mathbf{f}(x_n,\mathbf{y_n})+\mathbf{f}(x_{n+1},\mathbf{y^p_{n+1}})]
+\tag{58}
+\end{align}
+$$
+
+Note that \( \mathbf{y}^p_{n+1} \) is a temporary variable that is not necessary to store.
+
+<p>
+If we use <a href="#mjx-eqn-57">(57)</a> and <a href="#mjx-eqn-58">(58)</a> on the example in <a href="._main010.html#mjx-eqn-51">(51)</a> we get
+
+<p>
+Predictor:
 $$
 \begin{align*}
-\frac{dz}{dt}= v&\\ 
-\frac{dv}{dt}= g&-\alpha\cdot v^2
+(y_1)^p_{n+1}&=(y_1)_n+h\cdot (y_2)_n&\\ 
+(y_2)^p_{n+1}&=(y_2)_n+h\cdot (y_3)_n&\\ 
+(y_3)^p_{n+1}&=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n
 \end{align*}
 $$
 
-which gives an Euler scheme as follows,
+Corrector:
 $$
 \begin{align*}
-&z_{n+1}=z_n+\Delta t\cdot v_n\\ 
-&v_{n+1}=n_n+\Delta t\cdot [g-\alpha(v_n)^2]\\ 
-&\text{med }z_0=0,\ v_0=0
+(y_1)_{n+1}&=(y_1)_n+0.5h\cdot [(y_2)_n+(y_2)^p_{n+1}]&\\ 
+(y_2)_{n+1}&=(y_2)_n+0.5h\cdot [(y_3)_n+(y_3)^p_{n+1}]&\\ 
+(y_3)_{n+1}&=(y_3)_n-0.5h\cdot [(y_1)_n\cdot (y_3)_n+(y_1)^p_{n+1}\cdot (y_3)^p_{n+1}]
 \end{align*}
 $$
 
@@ -266,7 +272,6 @@ $$
   <li><a href="._main013.html">14</a></li>
   <li><a href="._main014.html">15</a></li>
   <li><a href="._main015.html">16</a></li>
-  <li><a href="._main016.html">17</a></li>
   <li><a href="._main012.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

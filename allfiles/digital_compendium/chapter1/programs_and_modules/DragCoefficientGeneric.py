@@ -117,7 +117,7 @@ def cd_sphere_vector_bool(Re):
     
 
 if __name__ == '__main__':              
-#Check whether this file is executed (name==main) or imported as module
+#Check whether this file is executed (name==main) or imported as a module
     
     import time
     from numpy import mean
@@ -146,15 +146,18 @@ if __name__ == '__main__':
                       
         fncnames.append(name)
                                       
+        # benchmark 
         t0 = time.clock()
         CD[name] = func(ReNrs) 
         exec_times[name] = time.clock() - t0
-       
-    fnames_sorted=sorted(exec_times,key=exec_times.__getitem__)
-    exec_time_sorted=sorted(exec_times.values())
     
-    for i in range(len(fnames_sorted)):
-        print fnames_sorted[i], '\t execution time = ', '%6.6f'%(exec_time_sorted[i])
+    # sort the dictionary exec_times on values and return a list of the corresponding keys   
+    exec_keys_sorted = sorted(exec_times,key=exec_times.get)
+    
+    # print the exec_times by ascending values
+    for name_key in exec_keys_sorted:
+        print name_key, '\t execution time = ', '%6.6f' % exec_times[name_key]
+
         
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font',**font)          
@@ -170,10 +173,11 @@ if __name__ == '__main__':
         hold('on')
         i+=1 
     
-    leg = legend(fncnames)
+    # use fncnames as plot legend
+    leg = legend(fncnames) 
     leg.get_frame().set_alpha(0.)
     xlabel('$Re$')
     ylabel('$C_D$')
     grid('on','both','both')
-    savefig('example_sphere_generic.png', transparent=True)
+    # savefig('example_sphere_generic.png', transparent=True) # save plot if needed
     show()

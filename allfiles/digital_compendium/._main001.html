@@ -13,7 +13,7 @@ Automatically generated HTML file from DocOnce source
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https:://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -36,7 +36,7 @@ Automatically generated HTML file from DocOnce source
                2,
                u'subsec:reduction',
                u'subsec:reduction'),
-              (u' Example 1: Reduction of higher order system ',
+              (u' Example 1: Reduction of higher order systems ',
                2,
                None,
                '___sec4'),
@@ -45,37 +45,40 @@ Automatically generated HTML file from DocOnce source
                2,
                u'example:sphere_freefall',
                u'example:sphere_freefall'),
-              (u' Generating the plot in ref{example:sphere_freefall} ',
+              (u' Python implementation of the drag coefficient function and how to plot it ',
                3,
                None,
                '___sec7'),
-              (u' More efficient implementations ', 3, None, '___sec8'),
-              (u' Differences ', 2, None, '___sec9'),
+              (u' Python functions with vector arguments and modules ',
+               2,
+               None,
+               '___sec8'),
+              (u' How to make a Python-module and some useful programming features ',
+               2,
+               u'section:Python_module',
+               u'section:Python_module'),
+              (u' Differences ', 2, None, '___sec10'),
               (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
                3,
                None,
-               '___sec10'),
-              (u" Euler's method ", 2, None, '___sec11'),
+               '___sec11'),
+              (u" Euler's method ", 2, None, '___sec12'),
               (u' Example 3: Falling sphere with constant and varying drag ',
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u" Euler's method for a system ", 3, None, '___sec13'),
-              (u" Heun's method ", 2, None, '___sec14'),
-              (u" Example 4: Newton's equation ", 2, None, '___sec15'),
+              (u" Euler's method for a system ", 3, None, '___sec14'),
+              (u" Heun's method ", 2, None, '___sec15'),
+              (u" Example 4: Newton's equation ", 2, None, '___sec16'),
               (u" Example 5: Falling sphere with Heun's method ",
                2,
                None,
-               '___sec16'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec17'),
+               '___sec17'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec18'),
               (u' Example 6: Particle motion in two dimensions ',
                2,
                None,
-               '___sec18'),
-              (u' How to make a python-module ',
-               1,
-               u'section:python_module',
-               u'section:python_module')]}
+               '___sec19')]}
 end of tocinfo -->
 
 <body>
@@ -116,18 +119,19 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
      <!-- navigation toc: --> <li><a href="._main002.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
      <!-- navigation toc: --> <li><a href="._main003.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
-     <!-- navigation toc: --> <li><a href="._main006.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
-     <!-- navigation toc: --> <li><a href="._main007.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
-     <!-- navigation toc: --> <li><a href="._main009.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main010.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
-     <!-- navigation toc: --> <li><a href="._main012.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main013.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main015.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="._main016.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
-     <!-- navigation toc: --> <li><a href="._main016.html#section:python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to make a python-module</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order systems</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
+     <!-- navigation toc: --> <li><a href="._main004.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
+     <!-- navigation toc: --> <li><a href="._main005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._main005.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
+     <!-- navigation toc: --> <li><a href="._main006.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main009.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
+     <!-- navigation toc: --> <li><a href="._main011.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main012.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main013.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
+     <!-- navigation toc: --> <li><a href="._main015.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
 
         </ul>
       </li>
@@ -156,7 +160,7 @@ MathJax.Hub.Config({
   <li><a href="._main009.html">10</a></li>
   <li><a href="._main010.html">11</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main015.html">16</a></li>
   <li><a href="._main002.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
@@ -233,7 +237,7 @@ $$
 \end{align}
 $$
 
-The dot symbolyzes derivation with respect to the dimensionless time \( t \). For small displacements we can set \( \sin (\theta) \approx \theta \), such that <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-6">(6)</a> becomes
+The dot denotes derivation with respect to the dimensionless time \( t \). For small displacements we can set \( \sin (\theta) \approx \theta \), such that <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-6">(6)</a> becomes
 $$
 \begin{align}
 \tag{7}
@@ -260,7 +264,7 @@ where \( y^{(k)}, k=0,1,\dots n \) is referring to the \( k \)'th derivative and
 If one or more of the coefficients \( a_k \) also are functions of at least one \( y^{(k)},\ k = 0,1,\dots n \), the ODE is non-linear. From <a href="#mjx-eqn-9">(9)</a> it follows that <a href="#mjx-eqn-5">(5)</a> is non-linear and <a href="#mjx-eqn-7">(7)</a> is linear.
 
 <p>
-Analytical solutions of non-linear ODEs are rare, og except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
+Analytical solutions of non-linear ODEs are rare, and except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
 $$
 \begin{equation}
 a_2(x)\cdot y''(x)+a_1(x)\cdot y'(x) +a_0(x)\cdot y(x) =b(x)\nonumber
@@ -291,7 +295,7 @@ For instance the equation \( y'(x)=y^2(x),\ y(0)=1 \) has the solution \( y(x)=\
   <li><a href="._main009.html">10</a></li>
   <li><a href="._main010.html">11</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main015.html">16</a></li>
   <li><a href="._main002.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
