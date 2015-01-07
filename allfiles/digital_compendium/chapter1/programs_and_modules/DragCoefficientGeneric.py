@@ -117,7 +117,7 @@ def cd_sphere_vector_bool(Re):
     
 
 if __name__ == '__main__':              
-#Check whether this file is executed (name==main) or imported as module
+#Check whether this file is executed (name==main) or imported as a module
     
     import time
     from numpy import mean
@@ -146,10 +146,12 @@ if __name__ == '__main__':
                       
         fncnames.append(name)
                                       
+        # benchmark 
         t0 = time.clock()
         CD[name] = func(ReNrs) 
         exec_times[name] = time.clock() - t0
-       
+    
+    # sort the dictionaries
     fnames_sorted=sorted(exec_times,key=exec_times.__getitem__)
     exec_time_sorted=sorted(exec_times.values())
     
@@ -170,10 +172,11 @@ if __name__ == '__main__':
         hold('on')
         i+=1 
     
-    leg = legend(fncnames)
+    # use fncnames as plot legend
+    leg = legend(fncnames) 
     leg.get_frame().set_alpha(0.)
     xlabel('$Re$')
     ylabel('$C_D$')
     grid('on','both','both')
-    savefig('example_sphere_generic.png', transparent=True)
+    # savefig('example_sphere_generic.png', transparent=True) # save plot if needed
     show()
