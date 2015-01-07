@@ -1,5 +1,5 @@
-TITLE: Digital Compendium for TKT4140
-AUTHOR: Johan Kolstø Sønstabø at Centre for Advanced Structural Analysis (CASA) & Department of Structural Engineering, NTNU
+TITLE: TKT4140 Numerical Methods for Engineers
+AUTHOR: Johan Kolstø Sønstabø at Department of Structural Engineering, NTNU
 AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
 #TOC: on
@@ -14,7 +14,6 @@ compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
 be used as a learning resource in the course TKT4140 Numerical Methods
 with Computer Laboratory at NTNU.
 
-Students are strongly encouraged to work through the following chapter.
 
 !split
 ========= Initial value problems for Ordinary Differential Equations =========
@@ -613,7 +612,7 @@ _Sorting of dictionaries_
 The computed execution times are for convenicene stored in the dictionary `exec_time` to allow for pairing of the names of the functions and their execution time. 
 The dictionary may be "sorted":"http://stackoverflow.com/questions/575819/sorting-dictionary-keys-in-python" on the values and the corresponding keys sorted are returned by:
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# sort the dictionary@# print the 
-Afterwards the results may be printed with name and execution time, orded by the latter, with the most efficient funtion at the top. 
+Afterwards the results may be printed with name and execution time, ordered by the latter, with the most efficient funtion at the top. 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# print the @# set fontsize
 
 By running the module `DragCoefficientGeneric` as a script, and with
