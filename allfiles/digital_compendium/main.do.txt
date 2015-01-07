@@ -578,8 +578,9 @@ which allows for convenient looping over all of the functions with the following
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames =@try:
 
 _Exception handling._ Python has a very convenient construction for
-testing of potential errors with `try-except` blocks: 
-!bc try:
+testing of potential errors with "try-except": "https://wiki.python.org/moin/HandlingExceptions" blocks: 
+!bc 
+try:
     <statements> 
 except ExceptionType1: 
        <remedy for ExceptionType1 errors>
@@ -594,6 +595,9 @@ the function name for a function which has been vectorized
 automatically. For such a function `func.func_name` has no value and
 will return an error, and the name may be found by the statements in
 the exception block.
+
+_Sorting of dictionaries_
+
       
 _Efficiency and benchmarking._ The function `clock` in the module
 "time": "https://docs.python.org/2/library/time.html", return a time
@@ -603,10 +607,9 @@ time `t0` recored immediately before a function call from the time
 immediately after the function call, an estimate of the elapsed
 cpu-time is obtained. In our module `DragCoefficientGeneric` the
 efficency is implemented with the codelines:
-@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames.append@fnames_sorted
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# benchmark@# sort the dictionaries
 The computed execution times are for convenicene stored in the dictionary exec_times. 
-the
-cpu-time for each of the array-type functions described above has been
+the cpu-time for each of the array-type functions described above has been
 measured for a test example. An array with 500 elements was sent to
 the functions.
 
@@ -617,11 +620,11 @@ cd_sphere_vector        execution time = 0.000641
 cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 !ec
-
 As seen, the function with the boolean variables was fastest. The
 simple vectorized version of the original function was much slower,
-and the built-in function `vectorize` was nearly as inefficient. The
-complete program _DragCoefficientGeneric.py_ is listed below.
+and the built-in function `vectorize` was nearly as inefficient. 
+
+The complete module _DragCoefficientGeneric_ is listed below.
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py
 

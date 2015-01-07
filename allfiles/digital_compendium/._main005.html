@@ -408,11 +408,12 @@ which allows for convenient looping over all of the functions with the following
 </pre></div>
 <p>
 <b>Exception handling.</b> Python has a very convenient construction for
-testing of potential errors with <code>try-except</code> blocks: 
+testing of potential errors with <a href="https://wiki.python.org/moin/HandlingExceptions" target="_blank">try-except</a> blocks: 
 <p>
 
-<!-- code=text (!bc try:) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    &lt;statements&gt; 
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">try:
+    &lt;statements&gt; 
 except ExceptionType1: 
        &lt;remedy for ExceptionType1 errors&gt;
 except ExceptionType2: 
@@ -428,6 +429,9 @@ will return an error, and the name may be found by the statements in
 the exception block.
 
 <p>
+<b>Sorting of dictionaries</b>
+
+<p>
 <b>Efficiency and benchmarking.</b> The function <code>clock</code> in the module
 <a href="https://docs.python.org/2/library/time.html" target="_blank">time</a>, return a time
 expressed in seconds for the current statement and is frequently used
@@ -439,15 +443,13 @@ efficency is implemented with the codelines:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">                                      
-        t0 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">        t0 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()
         CD[name] <span style="color: #666666">=</span> func(ReNrs) 
         exec_times[name] <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock() <span style="color: #666666">-</span> t0
 </pre></div>
 <p>
 The computed execution times are for convenicene stored in the dictionary exec_times. 
-the
-cpu-time for each of the array-type functions described above has been
+the cpu-time for each of the array-type functions described above has been
 measured for a test example. An array with 500 elements was sent to
 the functions.
 
@@ -462,8 +464,10 @@ cd_sphere_py_vector     execution time = 0.010144
 <p>
 As seen, the function with the boolean variables was fastest. The
 simple vectorized version of the original function was much slower,
-and the built-in function <code>vectorize</code> was nearly as inefficient. The
-complete program <b>DragCoefficientGeneric.py</b> is listed below.
+and the built-in function <code>vectorize</code> was nearly as inefficient. 
+
+<p>
+The complete module <b>DragCoefficientGeneric</b> is listed below.
 
 <p>
 
@@ -587,7 +591,7 @@ complete program <b>DragCoefficientGeneric.py</b> is listed below.
     
 
 <span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:              
-<span style="color: #408080; font-style: italic">#Check whether this file is executed (name==main) or imported as module</span>
+<span style="color: #408080; font-style: italic">#Check whether this file is executed (name==main) or imported as a module</span>
     
     <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">time</span>
     <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> mean
@@ -616,10 +620,12 @@ complete program <b>DragCoefficientGeneric.py</b> is listed below.
                       
         fncnames<span style="color: #666666">.</span>append(name)
                                       
+        <span style="color: #408080; font-style: italic"># benchmark </span>
         t0 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()
         CD[name] <span style="color: #666666">=</span> func(ReNrs) 
         exec_times[name] <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock() <span style="color: #666666">-</span> t0
-       
+    
+    <span style="color: #408080; font-style: italic"># sort the dictionaries</span>
     fnames_sorted<span style="color: #666666">=</span><span style="color: #008000">sorted</span>(exec_times,key<span style="color: #666666">=</span>exec_times<span style="color: #666666">.</span>__getitem__)
     exec_time_sorted<span style="color: #666666">=</span><span style="color: #008000">sorted</span>(exec_times<span style="color: #666666">.</span>values())
     
@@ -640,12 +646,13 @@ complete program <b>DragCoefficientGeneric.py</b> is listed below.
         hold(<span style="color: #BA2121">&#39;on&#39;</span>)
         i<span style="color: #666666">+=1</span> 
     
-    leg <span style="color: #666666">=</span> legend(fncnames)
+    <span style="color: #408080; font-style: italic"># use fncnames as plot legend</span>
+    leg <span style="color: #666666">=</span> legend(fncnames) 
     leg<span style="color: #666666">.</span>get_frame()<span style="color: #666666">.</span>set_alpha(<span style="color: #666666">0.</span>)
     xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
     ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
     grid(<span style="color: #BA2121">&#39;on&#39;</span>,<span style="color: #BA2121">&#39;both&#39;</span>,<span style="color: #BA2121">&#39;both&#39;</span>)
-    savefig(<span style="color: #BA2121">&#39;example_sphere_generic.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+    <span style="color: #408080; font-style: italic"># savefig(&#39;example_sphere_generic.png&#39;, transparent=True) # save plot if needed</span>
     show()
 </pre></div>
 <p>
