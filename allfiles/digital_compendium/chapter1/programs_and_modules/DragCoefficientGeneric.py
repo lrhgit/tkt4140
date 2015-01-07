@@ -152,8 +152,7 @@ if __name__ == '__main__':
         exec_times[name] = time.clock() - t0
     
     # sort the dictionary exec_times on values and return a list of the corresponding keys   
-    #exec_keys_sorted = sorted(exec_times,key=exec_times.get)
-    exec_keys_sorted = sorted(exec_times.values())
+    exec_keys_sorted = sorted(exec_times,key=exec_times.get)
     
     # print the exec_times by ascending values
     for name_key in exec_keys_sorted:
