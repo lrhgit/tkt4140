@@ -151,12 +151,13 @@ if __name__ == '__main__':
         CD[name] = func(ReNrs) 
         exec_times[name] = time.clock() - t0
     
-    # sort the dictionaries
-    fnames_sorted=sorted(exec_times,key=exec_times.__getitem__)
-    exec_time_sorted=sorted(exec_times.values())
+    # sort the dictionary exec_times on values and return a list of the corresponding keys   
+    exec_keys_sorted = sorted(exec_times,key=exec_times.get)
     
-    for i in range(len(fnames_sorted)):
-        print fnames_sorted[i], '\t execution time = ', '%6.6f'%(exec_time_sorted[i])
+    # print the exec_times by ascending values
+    for name_key in exec_keys_sorted:
+        print name_key, '\t execution time = ', '%6.6f' % exec_times[name_key]
+
         
     # set fontsize prms 
     fnSz = 16; font = {'size'   : fnSz}; rc('font',**font)          

@@ -307,7 +307,7 @@ file <b>DragCoefficientGeneric.py</b>. This file constitues a Python module whic
 <h2 id="section:Python_module">How to make a Python-module and some useful programming features<a name="section:Python_module"></a></h2>
 
 <p>
-<b>Python modules.</b> A module is a file containing Python definitions and
+<b>Python modules</b> A module is a file containing Python definitions and
 statements and represents a convenient way of collecting useful and
 related functions, classes or Python code in a single file. A
 motivation to implement the drag coefficient function was that we
@@ -366,7 +366,7 @@ implementations of the drag coefficient functions from the previous
 section.
 
 <p>
-<b>Python lists and dictionaries.</b> 
+<b>Python lists and dictionaries</b> 
 
 <ul>
     <li> Lists hold a list of values and are intialized with empty
@@ -407,7 +407,7 @@ which allows for convenient looping over all of the functions with the following
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
 </pre></div>
 <p>
-<b>Exception handling.</b> Python has a very convenient construction for
+<b>Exception handling</b> Python has a very convenient construction for
 testing of potential errors with <a href="https://wiki.python.org/moin/HandlingExceptions" target="_blank">try-except</a> blocks: 
 <p>
 
@@ -429,10 +429,7 @@ will return an error, and the name may be found by the statements in
 the exception block.
 
 <p>
-<b>Sorting of dictionaries</b>
-
-<p>
-<b>Efficiency and benchmarking.</b> The function <code>clock</code> in the module
+<b>Efficiency and benchmarking</b> The function <code>clock</code> in the module
 <a href="https://docs.python.org/2/library/time.html" target="_blank">time</a>, return a time
 expressed in seconds for the current statement and is frequently used
 for benchmarking in Python or timing of functions. By subtracting the
@@ -448,11 +445,25 @@ efficency is implemented with the codelines:
         exec_times[name] <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock() <span style="color: #666666">-</span> t0
 </pre></div>
 <p>
-The computed execution times are for convenicene stored in the dictionary exec_times. 
-the cpu-time for each of the array-type functions described above has been
-measured for a test example. An array with 500 elements was sent to
-the functions.
+<b>Sorting of dictionaries</b>
+The computed execution times are for convenicene stored in the dictionary <code>exec_time</code> to allow for pairing of the names of the functions and their execution time. 
+The dictionary may be <a href="http://stackoverflow.com/questions/575819/sorting-dictionary-keys-in-python" target="_blank">sorted</a> on the values and the corresponding keys sorted are returned by:
+<p>
 
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    exec_keys_sorted <span style="color: #666666">=</span> <span style="color: #008000">sorted</span>(exec_times,key<span style="color: #666666">=</span>exec_times<span style="color: #666666">.</span>get)
+</pre></div>
+<p>
+Afterwards the results may be printed with name and execution time, orded by the latter, with the most efficient funtion at the top. 
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">for</span> name_key <span style="color: #AA22FF; font-weight: bold">in</span> exec_keys_sorted:
+        <span style="color: #008000; font-weight: bold">print</span> name_key, <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> execution time = &#39;</span>, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%6.6f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> exec_times[name_key]
+</pre></div>
+<p>
+By running the module <code>DragCoefficientGeneric</code> as a script, and with
+500 elements in the <code>ReNrs</code> array we got the following output
 <p>
 
 <!-- code=text typeset with pygments style "default" -->
@@ -462,9 +473,9 @@ cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 </pre></div>
 <p>
-As seen, the function with the boolean variables was fastest. The
-simple vectorized version of the original function was much slower,
-and the built-in function <code>vectorize</code> was nearly as inefficient. 
+Clearly, the function with the boolean variables was fastest, 
+the straight forward vectorized version <code>cd_sphere_py_vector</code> was much slowest 
+whereas the built-in function <code>vectorize</code> was nearly as inefficient. 
 
 <p>
 The complete module <b>DragCoefficientGeneric</b> is listed below.
@@ -625,12 +636,13 @@ The complete module <b>DragCoefficientGeneric</b> is listed below.
         CD[name] <span style="color: #666666">=</span> func(ReNrs) 
         exec_times[name] <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock() <span style="color: #666666">-</span> t0
     
-    <span style="color: #408080; font-style: italic"># sort the dictionaries</span>
-    fnames_sorted<span style="color: #666666">=</span><span style="color: #008000">sorted</span>(exec_times,key<span style="color: #666666">=</span>exec_times<span style="color: #666666">.</span>__getitem__)
-    exec_time_sorted<span style="color: #666666">=</span><span style="color: #008000">sorted</span>(exec_times<span style="color: #666666">.</span>values())
+    <span style="color: #408080; font-style: italic"># sort the dictionary exec_times on values and return a list of the corresponding keys   </span>
+    exec_keys_sorted <span style="color: #666666">=</span> <span style="color: #008000">sorted</span>(exec_times,key<span style="color: #666666">=</span>exec_times<span style="color: #666666">.</span>get)
     
-    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(fnames_sorted)):
-        <span style="color: #008000; font-weight: bold">print</span> fnames_sorted[i], <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> execution time = &#39;</span>, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%6.6f</span><span style="color: #BA2121">&#39;</span><span style="color: #666666">%</span>(exec_time_sorted[i])
+    <span style="color: #408080; font-style: italic"># print the exec_times by ascending values</span>
+    <span style="color: #008000; font-weight: bold">for</span> name_key <span style="color: #AA22FF; font-weight: bold">in</span> exec_keys_sorted:
+        <span style="color: #008000; font-weight: bold">print</span> name_key, <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> execution time = &#39;</span>, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%6.6f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> exec_times[name_key]
+
         
     <span style="color: #408080; font-style: italic"># set fontsize prms </span>
     fnSz <span style="color: #666666">=</span> <span style="color: #666666">16</span>; font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span>   : fnSz}; rc(<span style="color: #BA2121">&#39;font&#39;</span>,<span style="color: #666666">**</span>font)          
