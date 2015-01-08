@@ -16,10 +16,9 @@ for oving in $(ls -d $SVNDIR/poving?) ; do
     echo "mkdir" $local_oving
     mkdir $local_oving
 
-    for files in $(ls $oving/python_exercise_?.html); do
-	echo "cp" $files  $local_oving
-	cp $files $local_oving
-    done
+    echo "cp" $oving/index.html  $local_oving
+    cp $oving/index.html  $local_oving
+
     for files in $(ls $oving/*.png); do
 	echo "cp" $files $local_oving
 	cp $files $local_oving
