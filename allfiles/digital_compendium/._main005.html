@@ -217,8 +217,7 @@ here:
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector</span>(Re):
     <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
-    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett &amp; Liu :% &quot; Fluid Mechanics &amp; Hydraulics &quot;,</span>
-    <span style="color: #408080; font-style: italic"># Schaum &#39; s Solved Problems McGraw - Hill 1989.</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
 
     <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,where,zeros_like
     CD <span style="color: #666666">=</span> zeros_like(Re)
@@ -256,6 +255,9 @@ either <code>True</code> or <code>False</code>, depending on if the correspondin
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector_bool</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+    
     <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,zeros_like
        
     condition1 <span style="color: #666666">=</span> Re <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>
@@ -496,8 +498,7 @@ The complete module <b>DragCoefficientGeneric</b> is listed below.
 <span style="color: #408080; font-style: italic"># single-valued function</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
     <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
-    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett &amp; Liu :% &quot; Fluid Mechanics &amp; Hydraulics &quot;,</span>
-    <span style="color: #408080; font-style: italic"># Schaum &#39; s Solved Problems McGraw - Hill 1989.</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
     
     <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval    
     
@@ -537,8 +538,7 @@ The complete module <b>DragCoefficientGeneric</b> is listed below.
 <span style="color: #408080; font-style: italic"># vectorized function</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector</span>(Re):
     <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
-    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett &amp; Liu :% &quot; Fluid Mechanics &amp; Hydraulics &quot;,</span>
-    <span style="color: #408080; font-style: italic"># Schaum &#39; s Solved Problems McGraw - Hill 1989.</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
 
     <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,where,zeros_like
     CD <span style="color: #666666">=</span> zeros_like(Re)
@@ -566,6 +566,9 @@ The complete module <b>DragCoefficientGeneric</b> is listed below.
 
 <span style="color: #408080; font-style: italic"># vectorized boolean</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector_bool</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+    
     <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval,zeros_like
        
     condition1 <span style="color: #666666">=</span> Re <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>

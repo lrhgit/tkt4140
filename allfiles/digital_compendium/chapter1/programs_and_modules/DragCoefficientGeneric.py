@@ -11,8 +11,7 @@ from numpy.core.multiarray import scalar
 # single-valued function
 def cd_sphere(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
-    # Curve fitted after fig . A -56 in Evett and Liu :% " Fluid Mechanics & Hydraulics ",
-    # Schaum ' s Solved Problems McGraw - Hill 1989.
+    # Curve fitted after fig . A -56 in Evett and Liu: "Fluid Mechanics and Hydraulics"
     
     from numpy import log10,array,polyval    
     
@@ -52,8 +51,7 @@ def cd_sphere_py_vector(ReNrs):
 # vectorized function
 def cd_sphere_vector(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
-    # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
-    # Schaum ' s Solved Problems McGraw - Hill 1989.
+    # Curve fitted after fig . A -56 in Evett and Liu: "Fluid Mechanics and Hydraulics"
 
     from numpy import log10,array,polyval,where,zeros_like
     CD = zeros_like(Re)
@@ -81,6 +79,9 @@ def cd_sphere_vector(Re):
 
 # vectorized boolean
 def cd_sphere_vector_bool(Re):
+    "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
+    # Curve fitted after fig . A -56 in Evett and Liu: "Fluid Mechanics and Hydraulics"
+    
     from numpy import log10,array,polyval,zeros_like
        
     condition1 = Re < 0

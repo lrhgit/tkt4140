@@ -5,8 +5,7 @@ from numpy import logspace, zeros
 # Define the function cd_sphere
 def cd_sphere(Re):
     "This function computes the drag coefficient of a sphere as a function of the Reynolds number Re."
-    # Curve fitted after fig. A-56 in Evett and Liu: "Fluid Mechanics & Hydraulics",
-    # Schaum's Solved Problems McGraw - Hill 1989.
+    # Curve fitted after fig . A -56 in Evett and Liu: "Fluid Mechanics and Hydraulics"
     
     from numpy import log10, array, polyval
     
