@@ -43,7 +43,7 @@ def euler(func,z0, time):
     z[0,:] = z0
 
     for i in range(len(time)-1):
-        dt = time[i+1]-time[i] rm -rf *~ 
+        dt = time[i+1]-time[i]
         z[i+1,:]=z[i,:] + np.asarray(func(z[i,:],time[i]))*dt
 
     return z

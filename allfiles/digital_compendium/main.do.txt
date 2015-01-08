@@ -1,5 +1,6 @@
-TITLE: Digital Compendium for TKT4140
-AUTHOR: Johan Kolstø Sønstabø at Centre for Advanced Structural Analysis (CASA) & Department of Structural Engineering, NTNU
+TITLE: Numerical Methods for Engineers
+TITLE: A digital compendium
+AUTHOR: Johan Kolstø Sønstabø at Department of Structural Engineering, NTNU
 AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
 #TOC: on
@@ -11,10 +12,8 @@ DATE: today
 
 This digital compendium is based on the first chapter of the
 compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
-be used as a learning resource in the course TKT4140 Numerical Methods
-with Computer Laboratory at NTNU.
+be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
 
-Students are strongly encouraged to work through the following chapter.
 
 !split
 ========= Initial value problems for Ordinary Differential Equations =========
@@ -326,7 +325,7 @@ By use of (ref{eq:1128}) we get
 ${ebox()}
 
 ===== Scientific computing with Python =====
-In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://folk.ntnu.no/johankso/electronic_compendium/digital_compendium/Python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
+In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
 
 !split
 ${bbox()}
@@ -494,7 +493,7 @@ file _DragCoefficientGeneric.py_. This file constitues a Python module which is 
 ===== How to make a Python-module and some useful programming features =====
 label{section:Python_module}
 
-_Python modules._ A module is a file containing Python definitions and
+_Python modules_ A module is a file containing Python definitions and
 statements and represents a convenient way of collecting useful and
 related functions, classes or Python code in a single file. A
 motivation to implement the drag coefficient function was that we
@@ -546,7 +545,7 @@ features in Python. The functions in the module are the various
 implementations of the drag coefficient functions from the previous
 section.
 
-_Python lists and dictionaries._ 
+_Python lists and dictionaries_ 
     * Lists hold a list of values and are intialized with empty
       brackets, e.g. `fncnames = []`. The values of the list are
       accessed with an index, starting from zero. The first value of
@@ -577,9 +576,10 @@ which allows for convenient looping over all of the functions with the following
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames =@try:
 
-_Exception handling._ Python has a very convenient construction for
-testing of potential errors with `try-except` blocks: 
-!bc try:
+_Exception handling_ Python has a very convenient construction for
+testing of potential errors with "try-except": "https://wiki.python.org/moin/HandlingExceptions" blocks: 
+!bc 
+try:
     <statements> 
 except ExceptionType1: 
        <remedy for ExceptionType1 errors>
@@ -594,8 +594,11 @@ the function name for a function which has been vectorized
 automatically. For such a function `func.func_name` has no value and
 will return an error, and the name may be found by the statements in
 the exception block.
+
+
+
       
-_Efficiency and benchmarking._ The function `clock` in the module
+_Efficiency and benchmarking_ The function `clock` in the module
 "time": "https://docs.python.org/2/library/time.html", return a time
 expressed in seconds for the current statement and is frequently used
 for benchmarking in Python or timing of functions. By subtracting the
@@ -603,25 +606,28 @@ time `t0` recored immediately before a function call from the time
 immediately after the function call, an estimate of the elapsed
 cpu-time is obtained. In our module `DragCoefficientGeneric` the
 efficency is implemented with the codelines:
-@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames.append@fnames_sorted
-The computed execution times are for convenicene stored in the dictionary exec_times. 
-the
-cpu-time for each of the array-type functions described above has been
-measured for a test example. An array with 500 elements was sent to
-the functions.
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# benchmark@# sort the dictionary 
 
+_Sorting of dictionaries_
+The computed execution times are for convenicene stored in the dictionary `exec_time` to allow for pairing of the names of the functions and their execution time. 
+The dictionary may be "sorted":"http://stackoverflow.com/questions/575819/sorting-dictionary-keys-in-python" on the values and the corresponding keys sorted are returned by:
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# sort the dictionary@# print the 
+Afterwards the results may be printed with name and execution time, ordered by the latter, with the most efficient funtion at the top. 
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# print the @# set fontsize
 
+By running the module `DragCoefficientGeneric` as a script, and with
+500 elements in the `ReNrs` array we got the following output
 !bc
 cd_sphere_vector_bool   execution time = 0.000312
 cd_sphere_vector        execution time = 0.000641
 cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 !ec
+Clearly, the function with the boolean variables was fastest, 
+the straight forward vectorized version `cd_sphere_py_vector` was much slowest 
+whereas the built-in function `vectorize` was nearly as inefficient. 
 
-As seen, the function with the boolean variables was fastest. The
-simple vectorized version of the original function was much slower,
-and the built-in function `vectorize` was nearly as inefficient. The
-complete program _DragCoefficientGeneric.py_ is listed below.
+The complete module _DragCoefficientGeneric_ is listed below.
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py
 
@@ -918,7 +924,7 @@ Central differences:
 === Treatment of the term $\frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right]$ ===
 This term often appears in difference equations, and it may be clever to treat the term as it is instead of first execute the differentiation.
 
-__Central differences.__
+__Central differences__
 We use central differences (recall Figure ref{fig:1.5}) as follows,
 !bt
 \begin{align*}
@@ -958,7 +964,7 @@ Note that for $p(x)=1=\text{constant}$ we get the usual expression
 \frac{d^2u}{dx^2}\bigg|_i=\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}+O(h^2)
 \end{equation*}
 !et
-__Forward differences.__
+__Forward differences__
 We start with
 !bt
 \begin{align*}
@@ -989,7 +995,7 @@ u''_i = \frac{2\cdot [u_{i+1}-u_i-h\cdot u'(x_i)]}{h^2}-\frac{h}{3}u'''(x_i)+O(h
 \end{equation}
 !et
 
-__Backward Differences.__
+__Backward Differences__
 We start with
 !bt
 \begin{align*}

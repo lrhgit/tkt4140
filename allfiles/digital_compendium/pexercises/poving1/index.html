@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Python Exercise 1">
+
+<title>Python Exercise 1</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' Intro to Python ', 1, None, '___sec0'),
+              (u' Problem 1: Simple tasks ',
+               2,
+               u'problem:simple_tasks',
+               u'problem:simple_tasks')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Python Exercise 1</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Johan Kolstø Sønstabø -->
+
+<center>
+<b>Johan Kolstø Sønstabø</b> 
+</center>
+
+
+<p>
+<!-- institution(s) -->
+<p>
+<center><h4>Jan 7, 2015</h4></center> <!-- date -->
+<p>
+
+
+</div> <!-- end jumbotron -->
+
+<h1 id="___sec0">Intro to Python <a name="___sec0"></a></h1>
+
+<p>
+The first python exercise involves some simple tasks in order to get familiar with Python. It requires that you have installed <em>Python 2.7</em> together with the packages <em>numpy</em>, <em>scipy</em> and <em>matplotlib</em>. In addition, <em>odespy</em> is required in subsequent exercises. 
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="problem:simple_tasks">Problem 1: Simple tasks<a name="problem:simple_tasks"></a></h2>
+
+<p>
+Perform the following simple tasks.
+
+<p>
+<b>a)</b>
+Write a Python programme that writes "Hello, World!" to the screen.
+
+<p>
+<!-- removed !bans ... !eans environment
+ --><!-- (because of the command-line option --without_answers)
+ -->
+<p>
+<b>b)</b>
+In this subexercise some simple mathematical operations are to be carried out. Define the vectors \( a \) and \( b \) and the matrices \( A \) and \( B \) as numpy arrays as follows,
+$$
+\begin{align*}
+a&=\left[ \begin{matrix}
+  1  \\ 
+  2  \\ 
+  3 
+ \end{matrix}\right]  &
+b&=\left[ \begin{matrix}
+  4  \\ 
+  5  \\ 
+  6 
+ \end{matrix}\right]  &
+A&=\left[ \begin{matrix}
+  1 & 1 & 2 \\ 
+  2 & 3 & 3 \\ 
+  4 & 4 & 5
+ \end{matrix}\right] &
+ B&=\left[ \begin{matrix}
+   2 & 4 & 6 \\ 
+   8 & 10 & 12 \\ 
+   14 & 16 & 18
+  \end{matrix}\right] 
+\end{align*}
+$$
+
+Carry out the following calculations and print the results to the screen:
+
+<ul>
+<li> \( a+b \)</li>
+<li> \( a \cdot b \)</li>
+<li> \( AB \)</li>
+<li> \( A^{\text{T}} \)</li>
+<li> \( A^{-1} \)</li>
+<li> Solve the equation system \( Ax=b \)</li>
+</ul>
+
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+For the latter two calculations some functions in <em>numpy.linalg</em> might be useful. See <a href="http://docs.scipy.org/doc/numpy/reference/routines.linalg.html" target="_blank"><tt>http://docs.scipy.org/doc/numpy/reference/routines.linalg.html</tt></a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- removed !bans ... !eans environment
+ --><!-- (because of the command-line option --without_answers)
+ -->
+<p>
+<b>c)</b>
+Implement a function <code>fib(n)</code> that writes the first <code>n</code> elements in the Fibonacci series to the screen. Write the first 20 elements to the screen.
+
+<p>
+<!-- removed !bans ... !eans environment
+ --><!-- (because of the command-line option --without_answers)
+ -->
+<p>
+<b>d)</b>
+Plot \( sin(x) \) from \( x=0 \) to \( x=2\pi \) with 10 and 100 points. Make the figure presentable by naming the axes, set different colors to the lines, including legend etc. Save the figure as a file.
+
+<p>
+<!-- removed !bans ... !eans environment
+ --><!-- (because of the command-line option --without_answers)
+ -->
+<p>
+<b>e)</b>
+Rewrite the function <code>fib(n)</code> such that the sum of the series is stored in a variable (numpy array). Plot the first 30 first values in the variable with logarithmic y-axis. Make the plot presentable.
+
+<p>
+<!-- removed !bans ... !eans environment
+ --><!-- (because of the command-line option --without_answers)
+ -->
+<p>
+<!-- --- end exercise --- -->
+
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

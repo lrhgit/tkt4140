@@ -14,62 +14,63 @@ Automatically generated HTML file from DocOnce source
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
+
 
 </head>
 
 <!-- tocinfo
 {'highest level': 1,
- 'sections': [(' Optimal backround for reading this note ',
+ 'sections': [(u' Optimal backround for reading this note ',
                3,
                None,
                '___sec0'),
-              (' A scientific application ', 1, None, '___sec1'),
-              (' Physical problem and mathematical model ',
+              (u' A scientific application ', 1, None, '___sec1'),
+              (u' Physical problem and mathematical model ',
                2,
                None,
                '___sec2'),
-              (' Numerical model ', 2, None, '___sec3'),
-              (' Simple implementation ', 2, None, '___sec4'),
-              (' Dissection of the code ', 2, None, '___sec5'),
-              (' More advanced implementation ', 2, None, '___sec6'),
-              (' Dissection of the code ', 2, None, '___sec7'),
-              (' The excitation force ', 2, None, '___sec8'),
-              (' A high-level solve function ', 2, None, '___sec9'),
-              (' User input ', 1, None, '___sec10'),
-              (' Positional command-line arguments ', 2, None, '___sec11'),
-              (' Option-value pairs on the command line ',
+              (u' Numerical model ', 2, None, '___sec3'),
+              (u' Simple implementation ', 2, None, '___sec4'),
+              (u' Dissection of the code ', 2, None, '___sec5'),
+              (u' More advanced implementation ', 2, None, '___sec6'),
+              (u' Dissection of the code ', 2, None, '___sec7'),
+              (u' The excitation force ', 2, None, '___sec8'),
+              (u' A high-level solve function ', 2, None, '___sec9'),
+              (u' User input ', 1, None, '___sec10'),
+              (u' Positional command-line arguments ', 2, None, '___sec11'),
+              (u' Option-value pairs on the command line ',
                2,
                None,
                '___sec12'),
-              (' Visual exploration ', 1, None, '___sec13'),
-              (' Advanced topics ', 1, None, '___sec14'),
-              (' Symbolic computing via SymPy ', 2, None, '___sec15'),
-              (' Testing ', 2, None, '___sec16'),
-              (' Example on a test function ', 3, None, '___sec17'),
-              (' Test function for the numerical solver ',
+              (u' Visual exploration ', 1, None, '___sec13'),
+              (u' Advanced topics ', 1, None, '___sec14'),
+              (u' Symbolic computing via SymPy ', 2, None, '___sec15'),
+              (u' Testing ', 2, None, '___sec16'),
+              (u' Example on a test function ', 3, None, '___sec17'),
+              (u' Test function for the numerical solver ',
                3,
                None,
                '___sec18'),
-              (' Appendix: Quick motivation for programming with Python ',
+              (u' Appendix: Quick motivation for programming with Python ',
                1,
-               'app:motivation',
-               'app:motivation'),
-              (' Appendix: Scientific Python resources ',
+               u'app:motivation',
+               u'app:motivation'),
+              (u' Appendix: Scientific Python resources ',
                1,
-               'app:resources',
-               'app:resources'),
-              (' Full tutorials on scientific programming with Python ',
+               u'app:resources',
+               u'app:resources'),
+              (u' Full tutorials on scientific programming with Python ',
                3,
                None,
                '___sec21'),
-              (' NumPy resources ', 3, None, '___sec22'),
-              (' Useful resources ', 3, None, '___sec23'),
-              (' Some relevant Python books ', 3, None, '___sec24'),
-              (' Course material on Python programming in general ',
+              (u' NumPy resources ', 3, None, '___sec22'),
+              (u' Useful resources ', 3, None, '___sec23'),
+              (u' Some relevant Python books ', 3, None, '___sec24'),
+              (u' Course material on Python programming in general ',
                3,
                None,
                '___sec25')]}
@@ -128,10 +129,26 @@ MathJax.Hub.Config({
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
 <a name="part0005"></a>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._bumpy004.html">&laquo;</a></li>
+  <li><a href="._bumpy000.html">1</a></li>
+  <li><a href="._bumpy001.html">2</a></li>
+  <li><a href="._bumpy002.html">3</a></li>
+  <li><a href="._bumpy003.html">4</a></li>
+  <li><a href="._bumpy004.html">5</a></li>
+  <li class="active"><a href="._bumpy005.html">6</a></li>
+  <li><a href="._bumpy006.html">7</a></li>
+  <li><a href="._bumpy007.html">8</a></li>
+  <li><a href="._bumpy008.html">9</a></li>
+  <li><a href="._bumpy009.html">10</a></li>
+  <li><a href="._bumpy006.html">&raquo;</a></li>
+</ul>
 <!-- !split -->
 
 <h2 id="___sec6">More advanced implementation <a name="___sec6"></a></h2>
 
+<p>
 Let us extend the function above to also include the quadratic damping
 formulas. The \( F(t) \) function in <a href="._bumpy002.html#mjx-eqn-1">(1)</a> is required to be
 available as an array in the <code>solver_linear_damping</code> function, but
@@ -190,6 +207,7 @@ checks that variables have correct values or are of correct type.
 
 <h2 id="___sec7">Dissection of the code <a name="___sec7"></a></h2>
 
+<p>
 <b>Two types of import.</b>
 This time we replace <code>from numpy import *</code>, which imports over 500
 variables and functions, by <code>import numpy as np</code>, which just imports

@@ -1,0 +1,8 @@
+To update the web-pages on github, both the master branch and the gh-pages branch must be in sync. 
+To perform this sync run the gitw defined below in the path of your git repo.
+Add the following aliases in your ~/.bashrc
+
+# some useful aliases from hpl
+alias gitc='git commit -am updates; git push origin master'
+alias gitw='gitc; git checkout gh-pages; git pull origin gh-pages; git merge -m merge master; git push origin gh-pages; git checkout master'
+
