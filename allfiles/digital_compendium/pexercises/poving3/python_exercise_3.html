@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Python Exercise 3">
+
+<title>Python Exercise 3</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' Satellite trajectory around a planet ', 1, None, '___sec0'),
+              (u' Problem 1: System of 1st order equations ',
+               2,
+               u'problem:system',
+               u'problem:system'),
+              (u' Problem 2: Runge-Kutta 4 ',
+               2,
+               u'problem:rk4',
+               u'problem:rk4'),
+              (u' Problem 3: Odespy ',
+               2,
+               u'problem:odespy',
+               u'problem:odespy')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>Python Exercise 3</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Johan Kolstø Sønstabø -->
+
+<center>
+<b>Johan Kolstø Sønstabø</b> 
+</center>
+
+
+<p>
+<!-- institution(s) -->
+<p>
+<center><h4>Jan 7, 2015</h4></center> <!-- date -->
+<p>
+
+
+</div> <!-- end jumbotron -->
+
+<h1 id="___sec0">Satellite trajectory around a planet <a name="___sec0"></a></h1>
+
+<p>
+In this exercise we will play a little with Netwon's law of gravitation in two dimensions. Figure <a href="#fig:fig1">1</a> shows a satellite in a trajectory around the Earth. We want to find out how the satellite's trajectory looks like, given a starting point and a corresponding starting velocity. 
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 1:  Satellite in trajectory around the Earth. <a name="fig:fig1"></a> </p></center>
+<p><img src="figure1.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The differential equation for this problem we can get from Newton's law of gravitation:
+
+$$
+\begin{equation}
+\boldsymbol{F}=-G\frac{Mm}{r^2}\boldsymbol{e}_r
+\label{eq:Newton}
+\end{equation}
+$$
+
+Here \( \boldsymbol{F}=[F_x,F_y] \) is the force on the satellite from the Earth, \( G \) is the gravitational constant, \( M \) is the mass of the Earth, \( r \) is the distance between the centre of the Earth and the satellite and \( \boldsymbol{e}_r \) is a (unit) directional vector in the direction of the satellite from the centre of the Earth (see Figure <a href="#fig:fig1">1</a>). We are modelling the Earth and the satellite as point masses, and we pretend that the Earth is not moving. We define a coordinate system with the origin in the centre of the Earth, and let the \( x \)- and \( y \)-axes point as shown in the figure. The position of the satellite in this system is given by the vector \( \boldsymbol{r}=[x,y] \), with length \( r=\sqrt{x^2+y^2} \), and the velocity is given by \( \boldsymbol{v}=[u,v] \). Now we have that \( \boldsymbol{e}_r=\frac{\boldsymbol{r}}{r} \), and can thus write \eqref{eq:Newton} as
+$$
+\begin{equation}
+\boldsymbol{F}=-G\frac{Mm}{r^3}\boldsymbol{r}
+\label{eq:Newton2}
+\end{equation}
+$$
+
+
+<p>
+which on component form becomes
+
+$$
+\begin{align}
+F_x=-G\frac{Mmx}{(\sqrt{x^2+y^2})^3} 
+\label{eq:Newton_xcomponent}	\\ 
+F_y=-G\frac{Mmy}{(\sqrt{x^2+y^2})^3} 
+\label{eq:Newton_ycomponent}
+\end{align}
+$$
+
+
+<p>
+From Newton's 2nd law we have that \( \boldsymbol{F}=m\boldsymbol{a} \), where \( \boldsymbol{a}=[\ddot{x},\ddot{y}] \) is the acceleration vector of the satellite. Together with \eqref{eq:Newton_xcomponent} and \eqref{eq:Newton_ycomponent} this gives the following ODE's:
+
+$$
+\begin{align}
+\ddot{x}=-G\frac{Mx}{(\sqrt{x^2+y^2})^3} 
+\label{eq:ode_xcomponent}	\\ 
+\ddot{y}=-G\frac{My}{(\sqrt{x^2+y^2})^3} 
+\label{eq:ode_ycomponent}
+\end{align}
+$$
+
+
+<p>
+This is the non-linear ODE's we need to solve to find \( x(t) \) and \( y(t) \). The initial conditions are \( x(t_0)=x_0 \), \( y(t_0)=y_0 \), \( u(t_0)=u_0 \) and \( v(t_0)=v_0 \).
+
+<p>
+In the following problems we set \( MG=1 \).
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="problem:system">Problem 1: System of 1st order equations<a name="problem:system"></a></h2>
+
+<p>
+Equations \eqref{eq:ode_xcomponent} and \eqref{eq:ode_ycomponent} are a system of two 2nd order ODE's. Write them as a system of four 1st order ODE's. Write them on the form 
+
+$$
+\begin{align}
+\dot{\boldsymbol{g}} &= \boldsymbol{f}(g_0,g_1,g_2,g_3) & \boldsymbol{g}(t_0) &= \boldsymbol{a}
+\label{eq:system}
+\end{align}
+$$
+
+
+<p>
+<!-- removed !bsol ... !esol environment
+ --><!-- (because of the command-line option --without_solutions)
+ -->
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="problem:rk4">Problem 2: Runge-Kutta 4<a name="problem:rk4"></a></h2>
+
+<p>
+Write a Python programme that solves the system in \eqref{eq:system} using the Runge-Kutta scheme of 4th order. Use the initial values \( x_0=1.0 \), \( y_0=0.0 \), \( u_0=0.0 \) and \( v_0=0.7 \), and a time step \( \Delta t=0.01 \). Plot the satellite trajectory from \( t=t_0=0 \) to \( t=t_{\text{max}}=3.0 \).
+
+<p>
+<!-- removed !bsol ... !esol environment
+ --><!-- (because of the command-line option --without_solutions)
+ -->
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="problem:odespy">Problem 3: Odespy<a name="problem:odespy"></a></h2>
+
+<p>
+In this problem we will use the package <em>Odespy</em> to simulate the trajectory.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+It may be useful to take a look at <a href="http://hplgit.github.io/odespy/doc/api/odespy.html" target="_blank"><tt>http://hplgit.github.io/odespy/doc/api/odespy.html</tt></a>, where you find information about Odespy and instructions on how to use it.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>a)</b>
+Compute the trajectory in Problem 2 using the implemented RK4-solver in Odespy. Verify that your implementation works properly by comparing with the odespy solver.
+
+<p>
+<b>b)</b>
+Use Odespy to solve Problem 2 using Euler's method and Heun's method. Plot the trajectories together with the RK4 solution, up to a time of \( t=10.0 \). Explain what you observe.
+
+<p>
+<!-- removed !bans ... !eans environment
+ --><!-- (because of the command-line option --without_answers)
+ -->
+<p>
+<b>c)</b>
+Change the time step to \( \Delta t=0.001 \) and plot the trajectories together again. What is changed, and why?
+
+<p>
+<!-- removed !bans ... !eans environment
+ --><!-- (because of the command-line option --without_answers)
+ -->
+<p>
+<b>d)</b>
+Change the initial conditions to \( x_0=1.0 \), \( y_0=0.0 \), \( u_0=0.0 \) and \( v_0=1.5 \). How does the trajectory look now? What is happening?
+
+<p>
+<!-- removed !bans ... !eans environment
+ --><!-- (because of the command-line option --without_answers)
+ -->
+<p>
+<!-- removed !bsol ... !esol environment
+ --><!-- (because of the command-line option --without_solutions)
+ -->
+<p>
+<!-- --- end exercise --- -->
+
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
