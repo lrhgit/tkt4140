@@ -11,7 +11,7 @@ from numpy.core.multiarray import scalar
 # single-valued function
 def cd_sphere(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
-    # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
+    # Curve fitted after fig . A -56 in Evett and Liu :% " Fluid Mechanics & Hydraulics ",
     # Schaum ' s Solved Problems McGraw - Hill 1989.
     
     from numpy import log10,array,polyval    
