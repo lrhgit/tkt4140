@@ -247,7 +247,7 @@ One way of implementing the integration scheme is given in the following functio
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
 
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i] rm <span style="color: #666666">-</span>rf <span style="color: #666666">*~</span> 
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
         z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
 
     <span style="color: #008000; font-weight: bold">return</span> z
@@ -303,7 +303,7 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
 
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i] rm <span style="color: #666666">-</span>rf <span style="color: #666666">*~</span> 
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
         z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
 
     <span style="color: #008000; font-weight: bold">return</span> z
