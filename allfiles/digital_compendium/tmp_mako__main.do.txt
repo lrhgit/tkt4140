@@ -403,14 +403,15 @@ implemented in Python and finally use these functions in the solution of the ODE
 
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py
 
-In the following, we will break up the program and
-explain the different parts.In the first code line,
+In the following, we will break up the program and explain the different parts. In the first code line,
+
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py fromto: from numpy import logspace, zeros@^# Define the function cd_sphere
+
 the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programs. The function `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. The function `zeros` creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org".
 
 In _CDsphere.py_ a function `cd_sphere` was defined as follows:
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag coefficient
-The function takes `Re` as an argument and returns the value `CD`. All Python functions begin with `def`, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument `Re`. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a funciton it is common to use the `return` statement to return the value of the function.
+The function takes `Re` as an argument and returns the value `CD`. All Python functions begin with `def`, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument, `Re`. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a function it is common to use the `return` statement to return the value of the function.
 
 Variables defined inside a function, such as `p` and `x1` above, are *local* variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are *global* variables and may be accessed anywhere, also inside functions.
 
@@ -420,7 +421,7 @@ The function above contains an example of the use of the `if-elif-else` block. T
 
 In the code block
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Calculate drag coefficient@^# Make plot
-the function `cd_sphere` is called. First, the number of data points to be calculated are stored in the integer variable `Npts`. Using the `logspace` function imported earlier, `Re` is assigned an array objet which has float elements with values ranging from $10^{-1}$ to $10^7$. The values are uniformly distributed along a 10logarithmic scale. `CD` is first defined as an array with `Npts` zero elements, using the `zero` function. Then, for each element in `Re`, the drag coefficient is calculated using our own defined function `cd_sphere`, in a `for` loop, which is explained in the following.
+the function `cd_sphere` is called. First, the number of data points to be calculated are stored in the integer variable `Npts`. Using the `logspace` function imported earlier, `Re` is assigned an array object which has float elements with values ranging from $10^{-1}$ to $10^7$. The values are uniformly distributed along a 10-logarithmic scale. `CD` is first defined as an array with `Npts` zero elements, using the `zero` function. Then, for each element in `Re`, the drag coefficient is calculated using our own defined function `cd_sphere`, in a `for` loop, which is explained in the following.
 
 The function `range` is a built-in function that generates a list containing arithmetic progressions. The `for i in i_list` construct creates a loop over all elements in `i_list`. In each pass of the loop, the variable `i` refers to an element in the list, starting with `i_list[0]` (0 in this case) and ending with the last element `i_list[Npts-1]` (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call `cd_sphere(Re[i])` is assigned to `CD[i]`. Each statement in the block must be indented.
 
@@ -439,8 +440,8 @@ Descriptions and explanations of all functions available in `pyplot` may be foun
 ===== Python functions with vector arguments and modules =====
 
 For many numerical problems variables are most conveniently expressed
-by as arrays containing many numbers (i.e. vectors) rather than single
-numbers (i.e. scalars). The function `CDsphere` above takes a scalar
+by arrays containing many numbers (i.e. vectors) rather than single
+numbers (i.e. scalars). The function `cd_sphere` above takes a scalar
 as an argument and returns a scalar value too. For computationally
 intensive algorithms where variables are stored in arrays this is
 inconvenient and time consuming, as each of the array elements must be
@@ -451,7 +452,7 @@ possibilities are presented in the following, and, as we shall see,
 some are more time consuming than others. We will also demonstrate how
 the time consumption (or efficiency) may be tested.
 
-A simple extension of the single-valued function above is as follows:
+A simple extension of the single-valued function `cd_sphere` is as follows:
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# simple extension cd_sphere@^# vectorized function
 
 The new function `cd_sphere_py_vector` takes in an array `ReNrs` and
@@ -480,7 +481,7 @@ Lastly, the built-in function `vectorize` is used to automatically
 generate a vector-version of the function `cd_sphere`, as follows:
 
 !bc pycod
-cd_sphere_auto_vector=vectorize(cd_sphere)
+cd_sphere_auto_vector = vectorize(cd_sphere)
 !ec
 
 To provide a convenient and practical means to compare the various
@@ -497,8 +498,8 @@ motivation to implement the drag coefficient function was that we
 should be able to import it in other programs to solve e.g. the
 problems outlined in ref{example:sphere_freefall}. In general, a file
 containing Python-code may be executed either as a main program
-(script), typically with python filename.py or imported in another
-script/module with import filename.
+(script), typically with `python filename.py` or imported in another
+script/module with `import filename`.
 
 A module file should not execute a main program, but rather just
 define functions, import other modules, and define global
@@ -512,19 +513,20 @@ situations it is also desirable to allow for tests or demonstration of
 usage inside the module file, and for such situations the need for a
 main program arises. To meet these demands Python allows for a
 fortunate construction to let a file act both as a module with
-function definitions only (i.e no main program) and as an ordinary
-program we can run, with functions and a main program. By letting the
+function definitions only (i.e. no main program) and as an ordinary
+program we can run, with functions and a main program. The latter is possible by letting the
 main program follow an `if` test of the form: 
-!bc if __name__ ==
-'__main__': <main program statements> 
+!bc pycod 
+if __name__ =='__main__': 
+    <main program statements> 
 !ec 
-The '__name__' variable is automatically defined in any module and
+The `__name__` variable is automatically defined in any module and
 equals the module name if the module is imported in another
-program/script, but when the module file is executed as a program
-'__name__' equals the string '__main__'. Consequently, the `if` test
+program/script, but when the module file is executed as a program,
+`__name__` equals the string `'__main__'`. Consequently, the `if` test
 above will only be true whenever the module file is executed as a
 program and allow for the execution of the `<main program
-statements>`.  The `<main program statements>` as normally referred to
+statements>`.  The `<main program statements>` is normally referred to
 as the *test block* of a module.
 
 The module name is the file name without the suffix `.py`
@@ -548,16 +550,16 @@ _Python lists and dictionaries_
       accessed with an index, starting from zero. The first value of
       `fncnames` is `fncnames[0]`, the second value of `fncnames` is
       `fncnames[1]` and so on. You can remove values from the list,
-      and add new values to the end by fncnames. Example:
+      and add new values to the end by `fncnames`. Example:
       `fncnames.append(name)` will append `name` as the last value of
-      the list `fncnames`. In case case it was empty prior to the
+      the list `fncnames`. In case it was empty prior to the
       append-operation, `name` will be the only element in the list.
 
     * Dictionaries are similar to what their name suggests - a
-      dictionary, and an empty dictionary is intialized with empty
+      dictionary - and an empty dictionary is intialized with empty
       braces, e.g. `CD = {}`.  In a dictionary, you have an 'index' of
-      words or keys and the valuesacccessed by their 'key'. Thus, the
-      values in a dictionary aren't numbered or ordered, the only
+      words or keys and the values acccessed by their 'key'. Thus, the
+      values in a dictionary aren't numbered or ordered, they are only
       accessed by the key. You can add, remove, and modify the values
       in dictionaries. For example with the statement `CD[name] =
       func(ReNrs)` the results of `func(ReNrs)` are stored in the list
@@ -575,15 +577,15 @@ which allows for convenient looping over all of the functions with the following
 
 _Exception handling_ Python has a very convenient construction for
 testing of potential errors with "try-except": "https://wiki.python.org/moin/HandlingExceptions" blocks: 
-!bc 
+!bc pycod
 try:
     <statements> 
 except ExceptionType1: 
-       <remedy for ExceptionType1 errors>
+    <remedy for ExceptionType1 errors>
 except ExceptionType2: 
-       <remedy for ExceptionType1 errors> 
+    <remedy for ExceptionType1 errors> 
 except:
-	<remedy for any other errors> 
+    <remedy for any other errors> 
 !ec 
 
 In the `DragCoefficientGeneric` module, this feature is used to handle
@@ -591,9 +593,6 @@ the function name for a function which has been vectorized
 automatically. For such a function `func.func_name` has no value and
 will return an error, and the name may be found by the statements in
 the exception block.
-
-
-
       
 _Efficiency and benchmarking_ The function `clock` in the module
 "time": "https://docs.python.org/2/library/time.html", return a time
@@ -606,14 +605,14 @@ efficency is implemented with the codelines:
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# benchmark@# sort the dictionary 
 
 _Sorting of dictionaries_
-The computed execution times are for convenicene stored in the dictionary `exec_time` to allow for pairing of the names of the functions and their execution time. 
+The computed execution times are for convenience stored in the dictionary `exec_time` to allow for pairing of the names of the functions and their execution time. 
 The dictionary may be "sorted":"http://stackoverflow.com/questions/575819/sorting-dictionary-keys-in-python" on the values and the corresponding keys sorted are returned by:
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# sort the dictionary@# print the 
-Afterwards the results may be printed with name and execution time, ordered by the latter, with the most efficient funtion at the top. 
+Afterwards the results may be printed with name and execution time, ordered by the latter, with the most efficient function at the top:
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# print the @# set fontsize
 
 By running the module `DragCoefficientGeneric` as a script, and with
-500 elements in the `ReNrs` array we got the following output
+500 elements in the `ReNrs` array we got the following output:
 !bc
 cd_sphere_vector_bool   execution time = 0.000312
 cd_sphere_vector        execution time = 0.000641
@@ -621,8 +620,8 @@ cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 !ec
 Clearly, the function with the boolean variables was fastest, 
-the straight forward vectorized version `cd_sphere_py_vector` was much slowest 
-whereas the built-in function `vectorize` was nearly as inefficient. 
+the straight forward vectorized version `cd_sphere_py_vector` was slowest 
+and the built-in function `vectorize` was nearly as inefficient. 
 
 The complete module _DragCoefficientGeneric_ is listed below.
 

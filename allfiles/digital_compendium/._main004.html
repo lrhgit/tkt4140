@@ -304,7 +304,7 @@ implemented in Python and finally use these functions in the solution of the ODE
 Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
 Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
 CD <span style="color: #666666">=</span> zeros(Npts)
-i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,Npts<span style="color: #666666">-1</span>)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Npts<span style="color: #666666">-1</span>)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
     CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
 
@@ -322,8 +322,8 @@ pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">
 pyplot<span style="color: #666666">.</span>show()
 </pre></div>
 <p>
-In the following, we will break up the program and
-explain the different parts.In the first code line,
+In the following, we will break up the program and explain the different parts. In the first code line,
+
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
@@ -367,7 +367,7 @@ In <b>CDsphere.py</b> a function <code>cd_sphere</code> was defined as follows:
     <span style="color: #008000; font-weight: bold">return</span> CD
 </pre></div>
 <p>
-The function takes <code>Re</code> as an argument and returns the value <code>CD</code>. All Python functions begin with <code>def</code>, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument <code>Re</code>. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a funciton it is common to use the <code>return</code> statement to return the value of the function.
+The function takes <code>Re</code> as an argument and returns the value <code>CD</code>. All Python functions begin with <code>def</code>, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument, <code>Re</code>. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a function it is common to use the <code>return</code> statement to return the value of the function.
 
 <p>
 Variables defined inside a function, such as <code>p</code> and <code>x1</code> above, are <em>local</em> variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are <em>global</em> variables and may be accessed anywhere, also inside functions.
@@ -386,12 +386,12 @@ In the code block
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
 Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
 CD <span style="color: #666666">=</span> zeros(Npts)
-i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,Npts<span style="color: #666666">-1</span>)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Npts<span style="color: #666666">-1</span>)
 <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
     CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
 </pre></div>
 <p>
-the function <code>cd_sphere</code> is called. First, the number of data points to be calculated are stored in the integer variable <code>Npts</code>. Using the <code>logspace</code> function imported earlier, <code>Re</code> is assigned an array objet which has float elements with values ranging from \( 10^{-1} \) to \( 10^7 \). The values are uniformly distributed along a 10logarithmic scale. <code>CD</code> is first defined as an array with <code>Npts</code> zero elements, using the <code>zero</code> function. Then, for each element in <code>Re</code>, the drag coefficient is calculated using our own defined function <code>cd_sphere</code>, in a <code>for</code> loop, which is explained in the following.
+the function <code>cd_sphere</code> is called. First, the number of data points to be calculated are stored in the integer variable <code>Npts</code>. Using the <code>logspace</code> function imported earlier, <code>Re</code> is assigned an array object which has float elements with values ranging from \( 10^{-1} \) to \( 10^7 \). The values are uniformly distributed along a 10-logarithmic scale. <code>CD</code> is first defined as an array with <code>Npts</code> zero elements, using the <code>zero</code> function. Then, for each element in <code>Re</code>, the drag coefficient is calculated using our own defined function <code>cd_sphere</code>, in a <code>for</code> loop, which is explained in the following.
 
 <p>
 The function <code>range</code> is a built-in function that generates a list containing arithmetic progressions. The <code>for i in i_list</code> construct creates a loop over all elements in <code>i_list</code>. In each pass of the loop, the variable <code>i</code> refers to an element in the list, starting with <code>i_list[0]</code> (0 in this case) and ending with the last element <code>i_list[Npts-1]</code> (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call <code>cd_sphere(Re[i])</code> is assigned to <code>CD[i]</code>. Each statement in the block must be indented.

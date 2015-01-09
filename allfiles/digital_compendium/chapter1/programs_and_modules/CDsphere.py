@@ -36,7 +36,7 @@ def cd_sphere(Re):
 Npts = 500
 Re = logspace(-1, 7, Npts, True, 10)
 CD = zeros(Npts)
-i_list = range(0,Npts-1)
+i_list = range(0, Npts-1)
 for i in i_list:
     CD[i] = cd_sphere(Re[i])
 
