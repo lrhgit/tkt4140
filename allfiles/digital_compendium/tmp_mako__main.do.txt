@@ -1,0 +1,1518 @@
+TITLE: Numerical Methods for Engineers
+TITLE: A digital compendium
+AUTHOR: Johan Kolstø Sønstabø at Department of Structural Engineering, NTNU
+AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
+DATE: today
+#TOC: on
+
+
+
+
+
+# TKT4140 Numerical Methods with Computer Laboratory.
+
+This digital compendium is based on the first chapter of the
+compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
+be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
+
+
+!split
+========= Initial value problems for Ordinary Differential Equations =========
+
+======= Introduction =======
+label{section:introduction}
+
+With an initial value problem for an ordinary differential equation (ODE) we mean a problem where all boundary conditions are given for one and the same value of the independent variable. For a first order ODE we get e.g.
+!bt
+\begin{align}
+label{eq:1101}
+ y'(x)&=f(x,y) \\ 
+y(x_0)&=a  \nonumber
+\end{align}
+!et
+while for a second order ODE we get
+!bt
+\begin{align}
+label{eq:1102}
+y''(x)&=f(x,y,y') \\ 
+y(x_0)&=a,\ y'(x_0) = b \nonumber
+\end{align}
+!et
+A first order ODE, as shown in Equation (ref{eq:1101}), will always be an *initial value problem*. For Equation (ref{eq:1102}), on the other hand, we can for instance specify the boundary conditions as follows,
+!bt
+\begin{align}
+y(x_0)=a,\ y(x_1) = b \nonumber
+\end{align}
+!et
+With these boundary conditions Equation (ref{eq:1102}) presents a *boundary value problem*. In many applications boundary value problems are more common than initial value problems. But the solution technique for initial value problems may often be applied to solve boundary value problems.
+
+Both from an analytical and numerical viewpoint initial value problems are easier to solve than boundary value problems, and methods for solution of initial value problems are more developed than for boundary value problems.
+
+If we are to solve an initial value problem of the type in Equation (ref{eq:1101}), we must first be sure that it has a solution. In addition we will demand that this solution is unique. A sufficient solution for this is that both $f(x,y)$ and $\frac{\partial f}{\partial y}$ are continuous in and around $x_0$. For (ref{eq:1102}) this conditions becomes that $f(x,y)$, $\frac{\partial f}{\partial y}$ and $\frac{\partial f}{\partial y'}$  are continuous in and around $x_0$. Similarly for higher order equations.
+
+An example:
+!bt
+\begin{equation}
+y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
+\end{equation}
+!et
+Here $f=y^\frac{1}{3}$ and $\frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}}$. $f$ is continuous in $x=0$, but that's not the case for $\frac{\partial f}{\partial y}$. It may be shown that this ODE has two solutions: $y=0$ and $y=(\frac{2}{3}x)^\frac{2}{3}$. Hopefully this equation doesn't present a physical problem. A problem of more interest is shown below.
+
+FIGURE:[chapter1/1.png, width=200]
+
+The figure shows a mathematical pendulum where the motion is described by the following equation:
+!bt
+\begin{align}
+ \frac{\partial^2 \theta}{\partial \tau^2} + \frac{g}{l}\sin (\theta) = 0
+label{eq:1103a}\\ 
+\theta (0) = \theta_0 ,\ \frac{d\theta}{d\tau}(0) = 0
+label{eq:1103b}
+\end{align}
+!et
+We introduce a dimensionless time $t$ given by $t=\sqrt{\frac{g}{l}}\cdot\tau$ such that (ref{eq:1103a}) and (ref{eq:1103b}) may be written as
+!bt
+\begin{align}
+label{eq:1104a}
+\ddot{\theta}(t) + \sin (\theta (t)) = 0 \\ 
+\theta (0) = \theta_0 ,\ \dot\theta (0) = 0
+label{eq:1104b}
+\end{align}
+!et
+The dot denotes derivation with respect to the dimensionless time $t$. For small displacements we can set $\sin (\theta) \approx \theta$, such that (ref{eq:1104a}) and (ref{eq:1104b}) becomes
+!bt
+\begin{align}
+label{eq:1105a}
+\ddot\theta (t)& + \theta (t) = 0 \\ 
+\theta (0)& = \theta_0 ,\ \dot\theta (0) = 0
+label{eq:1105b}
+\end{align}
+!et
+
+The difference between (ref{eq:1104a}) and (ref{eq:1105a}) is that the latter is linear, while the first is non-linear. The analytical solution of Equations (ref{eq:1104a}) and (ref{eq:1104b}) is given in Appendix G.2. in the
+"compendium": "./NumeriskeBeregninger.pdf". An $n$'th order linear ODE may be written on the form
+!bt
+\begin{equation}
+label{eq:1106}
+a_n(x)y^{(n)}(x)+a_{n-1}(x)y^{(n-1)}(x)+\cdots+a_1(x)y'(x)+a_0(x)y(x)=b(x)
+\end{equation}
+!et
+where $y^{(k)}, k=0,1,\dots n$ is referring to the $k$'th derivative and $y^{(0)}(x)=y(x)$.
+
+If one or more of the coefficients $a_k$ also are functions of at least one $y^{(k)},\ k = 0,1,\dots n$, the ODE is non-linear. From (ref{eq:1106}) it follows that (ref{eq:1104a}) is non-linear and (ref{eq:1105a}) is linear.
+
+Analytical solutions of non-linear ODEs are rare, and except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
+!bt
+\begin{equation}
+a_2(x)\cdot y''(x)+a_1(x)\cdot y'(x) +a_0(x)\cdot y(x) =b(x)\nonumber
+\end{equation}
+!et
+
+From a numerical point of view the main difference between linear and non-linear equations is the multitude of solutions that may arise when solving non-linear equations. In a linear ODE it will be evident from the equation if there are special critical points where the solution change character, while this is often not the case for non-linear equations.
+
+For instance the equation $y'(x)=y^2(x),\ y(0)=1$ has the solution $y(x)=\frac{1}{1-x}$ such that $y(x) \to \infty $ for $x \to 1$, which isn't evident from the equation itself.
+
+!split
+===== Taylor's method =====
+label{sec:taylor}
+Taylor's formula for series expansion of a function $f(x)$ around $x_0$ is given by
+!bt
+\begin{equation}
+f(x)=f(x_0)+(x-x_0)\cdot f'(x_0)+\frac{(x-x_0)^2}{2}f''(x_0)+\dots +\frac{(x-x_0)^n}{n !}f^{(n)}(x_0)+ \text{remainder} \nonumber
+\end{equation}
+!et
+Let's use this formula to find the first terms in the series expansion for $\theta(t)$ around $t=0$ from the differential equation given in (ref{eq:1105a}):
+!bt
+\begin{align*}
+&\ddot{\theta} (t) +\theta (t) = 0 \\ 
+&\theta (0) = \theta_0,\  \dot{\theta}(0)=0
+\end{align*}
+!et
+We set $\theta(t) \approx \theta(0)+t\cdot\dot{\theta}(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)$. By use of the initial conditions $\theta(0)=\theta_0,\ \dot\theta(0)=0$ we get
+!bt
+\begin{equation}
+\theta(t)\approx\theta_0 +\frac{t^2}{2}\ddot\theta+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)  \nonumber
+\end{equation}
+!et
+From the differential equation we have $\ddot\theta(t)=-\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0$
+
+By differentiation we get $\dddot\theta(t)=-\dot\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0$
+
+We now get
+!bt
+\begin{equation}
+\theta^{(4)}(t)=-\ddot\theta(t) \to \theta^{(4)}(0)=-\ddot\theta(0)=\theta_0 \nonumber
+\end{equation}
+!et
+Setting this into the expression for $\theta(t)$ gives $\theta(t)\approx \theta_0\left(1-\frac{t^2}{2}+\frac{t^4}{24}\right)=\theta_0\left(1-\frac{t^2}{2!}+\frac{t^4}{4!}\right)$
+
+If we include $n$ terms, we get
+!bt
+\begin{equation}
+\theta(t)\approx \theta_0\cdot \left(1-\frac{t^2}{2!}+\frac{t^4}{4!}-\frac{t^6}{6!}+\dots+(-1)^n \frac{t^{2n}}{(2n)!}\right) \nonumber
+\end{equation}
+!et
+
+If we let $n \to \infty$ we see that the parentheses give the series for $\cos(t)$. In this case we have found the exact solution $\theta(t)=\theta_0\cos(t)$ of the differential equation. Since this equation is linear we manage in this case to find a connection between the coefficients such that we recognize the series expansion of $\cos(t)$.
+
+Let's try the same procedure on the non-linear version (ref{eq:1104a})
+!bt
+\begin{align} \nonumber
+\ddot{\theta}(t)& + \sin \left(\theta (t)\right) = 0 \\ 
+\theta (0) &= \theta_0 ,\ \dot\theta (0) = 0 \nonumber
+\end{align}
+!et
+We start in the same manner: $\theta(t) \approx \theta(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)$.
+From the differential equation we have $\ddot\theta=-\sin (\theta) \to \ddot\theta(0)=-\sin(\theta_0)$, which by consecutive differentiation gives
+!bt
+\begin{align}
+&\dddot\theta=-\cos(\theta)\cdot\dot\theta \to \dddot\theta(0)=0 \nonumber \\ 
+&\theta^{(4)}=\sin(\theta)\cdot\dot\theta^2-\cos(\theta)\cdot\ddot\theta \to \theta^{(4)}(0)=-\ddot\theta(0)\cos(\theta(0))=\sin(\theta_0)\cos(\theta_0) \nonumber
+\end{align}
+!et
+Inserted above: $\theta(t) \approx \theta_0 -\frac{t^2}{2}\sin(\theta_0) + \frac{t^4}{24} \sin (\theta_0) \cos (\theta_0)$.
+
+We may include more terms, but this complicates the differentiation and it is hard to find any connection between the coefficients. When we have found an approximation for for $\theta(t)$ we can get an approximation for $\dot\theta(t)$ by differentiation: $\dot\theta(t) \approx -t\sin(\theta_0) + \frac{t^3}{8} \sin (\theta_0) \cos (\theta_0)$.
+
+Series expansions are often useful around the starting point when we solve initial value problems. The technique may also be used on non-linear equations.
+
+Symbolic mathematical programs like _Maple_ and _Mathematica_ do this easily.
+
+We will end with one of the earliest known differential equations, which Newton solved with series expansion in 1671.
+!bt
+\begin{equation*}
+y'(x) =1-3x+y+x^2+xy,\ y(0)=0
+\end{equation*}
+!et
+Series expansion around $x=0$ gives
+!bt
+\begin{equation*}
+y(x) \approx x\cdot y'(0)+ \frac{x^2}{2} y''(0)+\frac{x^3}{6}y'''(0)+\frac{x^4}{24}y^{(4)}(0)
+\end{equation*}
+!et
+From the differential equation we get $y'(0)=1$. By consecutive differentiation we get
+!bt
+\begin{equation*}
+  \begin{array}{lclclcr}
+    y''(x) &=&-3+y'+2x+xy'+y &\to& y''(0)&=&-2\\ 
+    y'''(x)&=& y''+2+xy''+2y'  &\to& y'''(0)&=& 2\\ 
+    y^{(4)}(x)&=&y'''+xy'''+3y'' &\to &y^{(4)}(0)&=&-4
+  \end{array}
+\end{equation*}
+!et
+Inserting above gives $y(x) \approx x-x^2+\frac{x^3}{3}-\frac{x^4}{6}$.
+
+Newton gave the following solution: $y(x) \approx  x-x^2+\frac{x^3}{3}-\frac{x^4}{6}+ \frac{x^5}{30}-\frac{x^6}{45}$.
+
+Now you can check if Newton calculated correctly. Today it is possible to give the solution on closed form with known functions as follows,
+!bt
+\begin{align*}
+y(x)=&3\sqrt{2\pi e}\cdot \exp\left[x\left(1+\frac{x}{2}\right)\right]\cdot \left[\text{erf}\left(\frac{\sqrt{2}}{2}(1+x)\right)-\text{erf}\left(\frac{\sqrt{2}}{2}\right)\right]\\ 
++& 4\cdot\left[1-\exp[x\left(1+\frac{x}{2}\right)\right]-x
+\end{align*}
+!et
+
+Note the combination $\sqrt{2\pi e}$. See Hairer et al. cite{hairer2008solving} section 1.2 for more details on classical differential equations.
+
+!split
+===== Reduction of Higher order Equations =====
+label{subsec:reduction}
+
+When we are solving initial value problems, we usually need to write these as sets of first order equations, because most of the program packages require this.
+
+Example: $y''(x)+y(x)=0,\ y(0)=a_0,\ y'(0)=b_0$
+
+We may for instance write this equation in a system as follows,
+!bt
+\begin{align*}
+y'(x)=&g(x)\\ 
+g'(x)=&-y(x)\\ 
+y(0)=&a_0,\  g(0)=b_0
+\end{align*}
+!et
+
+Another example:
+!bt
+\begin{align*}
+&y'''(x)+2y''(x)-(y'(x))^2+2y(x)=x^2\\ 
+&y(0)=a_0,\ y'(0)=b_0,\ y''(0)=c_0
+\end{align*}
+!et
+We set $y'(x)=g(x)$ and $y''(x)=g'(x)=f(x)$, and the system may be written as
+!bt
+\begin{align*}
+y'(x)=&g(x)\\ 
+g'(x)=&f(x)\\ 
+f'(x)=&-2f(x)+(g(x))^2-2y(x)+x^2
+\end{align*}
+!et
+with initial values $y(0)=a_0,\ g(0)=b_0,\ f(0)=c_0$.
+
+This is fair enough for hand calculations, men when we use program packages a more systematic procedure is needed. Let's use the equation above as an example.
+
+We start by renaming $y$ to $y_1$. We then get the following procedure:
+!bt
+\begin{align*}
+y&'=y'_1=y_2\\ 
+y&''=y''_1=y'_2=y_3
+\end{align*}
+!et
+The system may then be written as
+!bt
+\begin{align*}
+y'_1(x)=&y_2(x)\\ 
+y'_2(x)=&y_3(x)\\ 
+y'_3(x)=&-2y_3(x)+(y_2(x))^2-2y_1(x)+x^2
+\end{align*}
+!et
+with initial conditions $y_1(0)=a_0,\ y_2(0)=b_0,\ y_3(0)=c_0$.
+
+The general procedure to reduce a higher order ODE to a system of first order ODEs becomes the following:
+
+Given the equation
+!bt
+\begin{align}
+label{eq:1127}
+&y^{(m)}=f(x,y,y',y'',\dots,y^{(m-1)})\\ 
+&y(x_0)=a_1,\ y'(x_0)=a_2,\ \dots,y^{(m-1)}(x_0)=a_m \nonumber\\ 
+\end{align}
+!et
+where
+!bt
+\begin{align*}
+y^{(m)}\equiv \frac{d^my}{dx^m}
+\end{align*}
+!et
+with $y=y_1$, we set
+!bt
+\begin{align}
+&y'_1=y_2 \nonumber \\ \nonumber
+&y'_2=y_3\\ \nonumber
+&.\\ \nonumber
+&.\\ \nonumber
+&y'_{m-1}=y_m\\\nonumber\\\nonumber
+&y_1(x_0)=a_1,y_2(x_0)=a_2,\dots,y_m(x_0)=a_m
+label{eq:1128}
+\end{align}
+!et
+
+!bbox
+===== Example: Reduction of higher order systems =====
+Write the following ODE as a system of first order ODEs:
+!bt
+\begin{align*}
+y'''-y'y''-(y')^2+2y=x^3 \\ 
+y(0)=a,\ y'(0)=b,\ y''(0)=c
+\end{align*}
+!et
+
+#!bsol
+First we write $y'''=y'y''+(y')^2-2y+x^3$.
+
+By use of (ref{eq:1128}) we get
+!bt
+\begin{align*}
+&y_1'=y_2\\ 
+&y_2'=y_3\\ 
+&y_3'=y_2y_3+(y_2)^2-2y_1+x^3\\ 
+&y_1(0)=a,\ y_2(0)=b,\ y_3=c
+\end{align*}
+!et
+#!esol
+#!ec
+!ebox
+
+===== Scientific computing with Python =====
+In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
+
+!split
+!bbox
+===== Example: Sphere in free fall =====
+label{example:sphere_freefall}
+
+FIGURE:[chapter1/programs_and_modules/2.png, width=200]
+
+The figure shows a falling sphere with a diameter $d$ and mass $m$
+that falls vertically in a fluid. Use of Newton's 2nd law in the
+$z$-direction gives
+!bt
+\begin{equation}
+label{eq:newton_2nd_sphere}
+m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\right|A_kC_D,
+\end{equation}
+!et
+where the different terms are interpreted as follows: $m=\rho_k V$,
+where $\rho_k$ is the density of the sphere and $V$ is the sphere
+volume.  The mass of the displaced fluid is given by $m_f=\rho_f V$,
+where $\rho_f$ is the density of the fluid, whereas buoyancy and the
+drag coefficient are expressed by $m_f \, g$ and $C_D$, respectively.
+The projected area of the sphere is given by $A_k = \frac{\pi}{4}d^2$
+and $\frac{1}{2}m_f$ is the hydrodynamical mass (added mass). The
+expression for the hydrodynamical mass is derived in White
+cite{white1999fluid}, page 539-540. To write Equation
+(ref{eq:newton_2nd_sphere}) on a more convenient form we introduce the
+following abbreviations:
+!bt
+\begin{equation}
+\rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
+\end{equation}
+!et
+in addition to the drag coefficient $C_D$ which is a function of the Reynolds number $\displaystyle R_e = \frac{vd}{\nu}$, where $\nu$ is the kinematical viscosity. Equation (ref{eq:newton_2nd_sphere}) may then be written as
+!bt
+\begin{equation}
+label{eq:sphere_1st_order}
+\frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
+\end{equation}
+!et
+In air we may often neglect the buoyancy term and the hydrodynamical
+mass, whereas this is not the case for a liquid. Introducing
+$v=\frac{dz}{dt}$ in Equation (ref{eq:sphere_1st_order}), we get a 2nd
+order ODE as follows
+!bt
+\begin{equation}
+label{eq:sphere_second_order}
+\frac{d^2z}{dt^2}=\frac{1}{A}\left(B-C\cdot \frac{dz}{dt}\bigg|\frac{dz}{dt}\bigg|C_d\right)
+\end{equation}
+!et
+For Equation (ref{eq:sphere_second_order}) two initial conditions must
+be specified, e.g. $v=v_0$ and $z=z_0$ for $t=0$.
+
+Figure ref{fig:CDsphere} illustrates $C_D$ as a function of $Re$. The values in the plot are not as accurate as the number of digits in the
+program might indicate. For example is the location and the size of
+the "valley" in the diagram strongly dependent of the degree of
+turbulence in the free stream and the roughness of the sphere. As
+the drag coefficient $C_D$ is a function of the Reynolds number, it is
+also a function of the solution $v$ (i.e. the velocity) of the ODE in
+Equation (ref{eq:sphere_1st_order}). We will use the function
+$C_D(Re)$ as an example of how functions may be implemented in Python.
+
+FIGURE:[chapter1/programs_and_modules/example_sphere.png, height=400 width=600] Drag coefficient $C_D$ as function of the Reynold's number $R_e$. label{fig:CDsphere}
+
+#@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot
+
+!ebox
+
+
+=== Python implementation of the drag coefficient function and how to plot it === 
+
+The complete Python program _CDsphere.py_ used to plot the drag
+coefficient in the example above is listed below.  The program uses a
+function `cd_sphere` which results from a curve fit to the data of
+Evett and Liu cite{evett19892}. In our setting we will use this
+function for two purposes, namely to demonstrate how functions and modules are
+implemented in Python and finally use these functions in the solution of the ODE in Equations (ref{eq:sphere_1st_order}) and  (ref{eq:sphere_second_order}). 
+
+@@@CODE ./chapter1/programs_and_modules/CDsphere.py
+
+In the following, we will break up the program and
+explain the different parts.In the first code line,
+@@@CODE ./chapter1/programs_and_modules/CDsphere.py fromto: from numpy import logspace, zeros@^# Define the function cd_sphere
+the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programs. The function `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. The function `zeros` creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org".
+
+In _CDsphere.py_ a function `cd_sphere` was defined as follows:
+@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag coefficient
+The function takes `Re` as an argument and returns the value `CD`. All Python functions begin with `def`, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument `Re`. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a funciton it is common to use the `return` statement to return the value of the function.
+
+Variables defined inside a function, such as `p` and `x1` above, are *local* variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are *global* variables and may be accessed anywhere, also inside functions.
+
+Three more functions from the `numpy` package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the "documentation of NumPy": "http://www.numpy.org" for details about the different functions.
+
+The function above contains an example of the use of the `if-elif-else` block. The block begins with `if` and a boolean expression. If the boolean expression evaluates to `true` the *indented* statements following the `if` statement are carried out. If not, the boolean expression following the `elif` is evaluated. If none of the conditions are evaluated to `true` the statements following the `else` are carried out.
+
+In the code block
+@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Calculate drag coefficient@^# Make plot
+the function `cd_sphere` is called. First, the number of data points to be calculated are stored in the integer variable `Npts`. Using the `logspace` function imported earlier, `Re` is assigned an array objet which has float elements with values ranging from $10^{-1}$ to $10^7$. The values are uniformly distributed along a 10logarithmic scale. `CD` is first defined as an array with `Npts` zero elements, using the `zero` function. Then, for each element in `Re`, the drag coefficient is calculated using our own defined function `cd_sphere`, in a `for` loop, which is explained in the following.
+
+The function `range` is a built-in function that generates a list containing arithmetic progressions. The `for i in i_list` construct creates a loop over all elements in `i_list`. In each pass of the loop, the variable `i` refers to an element in the list, starting with `i_list[0]` (0 in this case) and ending with the last element `i_list[Npts-1]` (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call `cd_sphere(Re[i])` is assigned to `CD[i]`. Each statement in the block must be indented.
+
+Lastly, the drag coefficient is plotted and the figure generated:
+@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to:# Make plot@
+
+To generate the plot, the package `matplotlib` is used. `matplotlib` is the standard package for curve plotting in Python. For simple plotting the `matplotlib.pyplot` interface provides a MATLAB-like interface, which has been used here. For documentation and explanation of this package, we refer to URL: "http://www.matplotlib.org".
+
+First, the curve is generated using the function `plot`, which takes the x-values and y-values as arguments (`Re` and `CD` in this case), as well as a string specifying the line style, like in MATLAB. Then changes are made to the figure in order to make it more readable, very similarily to how it is done in MATLAB. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the `savefig` function. Lastly, the figure is showed on the screen with the `show` function.
+
+To change the font size the function `rc` is used. This function takes in the object `font`, which is a *dictionary* object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of `key:value` pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: `{}`. Placing a comma-separated list of `key:value` pairs within the braces adds initial `key:value` pairs to the dictionary. In this case the dictionary `font` contains one `key:value` pair, namely `'size' : 16`.
+
+Descriptions and explanations of all functions available in `pyplot` may be found "here": "http://matplotlib.org/api/pyplot_summary.html".
+
+!split
+===== Python functions with vector arguments and modules =====
+
+For many numerical problems variables are most conveniently expressed
+by as arrays containing many numbers (i.e. vectors) rather than single
+numbers (i.e. scalars). The function `CDsphere` above takes a scalar
+as an argument and returns a scalar value too. For computationally
+intensive algorithms where variables are stored in arrays this is
+inconvenient and time consuming, as each of the array elements must be
+sent to the function independently. In the following, we will
+therefore show how to implement functions with vector arguments that
+also return vectors. This may be done in a variaty of ways. Some
+possibilities are presented in the following, and, as we shall see,
+some are more time consuming than others. We will also demonstrate how
+the time consumption (or efficiency) may be tested.
+
+A simple extension of the single-valued function above is as follows:
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# simple extension cd_sphere@^# vectorized function
+
+The new function `cd_sphere_py_vector` takes in an array `ReNrs` and
+calculates the drag coefficient for each element using the previous
+function `cd_sphere`. This does the job, but is not very efficient.
+
+A second version is implemented in the function
+`cd_sphere_vector`. This function takes in the array `Re` and
+calculates the drag coefficient of all elements by multiple calls of
+the function `numpy.where`; one call for each condition, similarily as
+each `if` statement in the function `cd_sphere`. The function is shown
+here:
+
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# vectorized function@^# vectorized boolean
+
+A third approach we will try is using boolean type variables. The 8
+variables `condition1` through `condition8` in the function
+`cd_sphere_vector_bool` are boolean variables of the same size and
+shape as `Re`. The elements of the boolean variables evaluate to
+either `True` or `False`, depending on if the corresponding element in
+`Re` satisfy the condition the variable is assigned.
+
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# vectorized boolean@^if __name__ == '__main__':
+
+Lastly, the built-in function `vectorize` is used to automatically
+generate a vector-version of the function `cd_sphere`, as follows:
+
+!bc pycod
+cd_sphere_auto_vector=vectorize(cd_sphere)
+!ec
+
+To provide a convenient and practical means to compare the various
+implementations of the drag function, we have collected them all in a
+file _DragCoefficientGeneric.py_. This file constitues a Python module which is a concept we will dicuss in section ref{section:Python_module}.
+
+===== How to make a Python-module and some useful programming features =====
+label{section:Python_module}
+
+_Python modules_ A module is a file containing Python definitions and
+statements and represents a convenient way of collecting useful and
+related functions, classes or Python code in a single file. A
+motivation to implement the drag coefficient function was that we
+should be able to import it in other programs to solve e.g. the
+problems outlined in ref{example:sphere_freefall}. In general, a file
+containing Python-code may be executed either as a main program
+(script), typically with python filename.py or imported in another
+script/module with import filename.
+
+A module file should not execute a main program, but rather just
+define functions, import other modules, and define global
+variables. 
+Inside modules, the standard practice is to only have functions and
+not any statements outside functions. The reason is that all
+statements in the module file are executed from top to bottom during
+import in another module/script cite{langtangen14}, and thus a
+desirable behaviour is no output to avoid confusion. However, in many
+situations it is also desirable to allow for tests or demonstration of
+usage inside the module file, and for such situations the need for a
+main program arises. To meet these demands Python allows for a
+fortunate construction to let a file act both as a module with
+function definitions only (i.e no main program) and as an ordinary
+program we can run, with functions and a main program. By letting the
+main program follow an `if` test of the form: 
+!bc if __name__ ==
+'__main__': <main program statements> 
+!ec 
+The '__name__' variable is automatically defined in any module and
+equals the module name if the module is imported in another
+program/script, but when the module file is executed as a program
+'__name__' equals the string '__main__'. Consequently, the `if` test
+above will only be true whenever the module file is executed as a
+program and allow for the execution of the `<main program
+statements>`.  The `<main program statements>` as normally referred to
+as the *test block* of a module.
+
+The module name is the file name without the suffix `.py`
+cite{python14}, i.e. the module contained in the module file `filename.py` has the
+module name `filename`. Note that a module can contain executable
+statements as well as function definitions. These statements are
+intended to initialize the module and are executed only the first time
+the module name is encountered in an import statement. They are also
+run if the file is executed as a script.
+
+Below we have listed the content of the file
+`DragCoefficientGeneric.py` to illustrate a specific implementation of
+the module `DragCoefficientGeneric` and some other useful programming
+features in Python. The functions in the module are the various
+implementations of the drag coefficient functions from the previous
+section.
+
+_Python lists and dictionaries_ 
+    * Lists hold a list of values and are intialized with empty
+      brackets, e.g. `fncnames = []`. The values of the list are
+      accessed with an index, starting from zero. The first value of
+      `fncnames` is `fncnames[0]`, the second value of `fncnames` is
+      `fncnames[1]` and so on. You can remove values from the list,
+      and add new values to the end by fncnames. Example:
+      `fncnames.append(name)` will append `name` as the last value of
+      the list `fncnames`. In case case it was empty prior to the
+      append-operation, `name` will be the only element in the list.
+
+    * Dictionaries are similar to what their name suggests - a
+      dictionary, and an empty dictionary is intialized with empty
+      braces, e.g. `CD = {}`.  In a dictionary, you have an 'index' of
+      words or keys and the valuesacccessed by their 'key'. Thus, the
+      values in a dictionary aren't numbered or ordered, the only
+      accessed by the key. You can add, remove, and modify the values
+      in dictionaries. For example with the statement `CD[name] =
+      func(ReNrs)` the results of `func(ReNrs)` are stored in the list
+      `CD` with key `name`.
+
+To illustrate a very powerful feature of Python data structures
+allowing for lists of e.g. function objects we put all the function
+names in a list with the statement:
+
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# make a list of all function objects@# Put all exec_times in a dictionary and fncnames in a list 
+
+which allows for convenient looping over all of the functions with the following construction:
+
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames =@try:
+
+_Exception handling_ Python has a very convenient construction for
+testing of potential errors with "try-except": "https://wiki.python.org/moin/HandlingExceptions" blocks: 
+!bc 
+try:
+    <statements> 
+except ExceptionType1: 
+       <remedy for ExceptionType1 errors>
+except ExceptionType2: 
+       <remedy for ExceptionType1 errors> 
+except:
+	<remedy for any other errors> 
+!ec 
+
+In the `DragCoefficientGeneric` module, this feature is used to handle
+the function name for a function which has been vectorized
+automatically. For such a function `func.func_name` has no value and
+will return an error, and the name may be found by the statements in
+the exception block.
+
+
+
+      
+_Efficiency and benchmarking_ The function `clock` in the module
+"time": "https://docs.python.org/2/library/time.html", return a time
+expressed in seconds for the current statement and is frequently used
+for benchmarking in Python or timing of functions. By subtracting the
+time `t0` recored immediately before a function call from the time
+immediately after the function call, an estimate of the elapsed
+cpu-time is obtained. In our module `DragCoefficientGeneric` the
+efficency is implemented with the codelines:
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# benchmark@# sort the dictionary 
+
+_Sorting of dictionaries_
+The computed execution times are for convenicene stored in the dictionary `exec_time` to allow for pairing of the names of the functions and their execution time. 
+The dictionary may be "sorted":"http://stackoverflow.com/questions/575819/sorting-dictionary-keys-in-python" on the values and the corresponding keys sorted are returned by:
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# sort the dictionary@# print the 
+Afterwards the results may be printed with name and execution time, ordered by the latter, with the most efficient funtion at the top. 
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# print the @# set fontsize
+
+By running the module `DragCoefficientGeneric` as a script, and with
+500 elements in the `ReNrs` array we got the following output
+!bc
+cd_sphere_vector_bool   execution time = 0.000312
+cd_sphere_vector        execution time = 0.000641
+cd_sphere_auto_vector   execution time = 0.009497
+cd_sphere_py_vector     execution time = 0.010144
+!ec
+Clearly, the function with the boolean variables was fastest, 
+the straight forward vectorized version `cd_sphere_py_vector` was much slowest 
+whereas the built-in function `vectorize` was nearly as inefficient. 
+
+The complete module _DragCoefficientGeneric_ is listed below.
+
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py
+
+!split
+===== Differences =====
+
+We will study some simple methods to solve initial value
+problems. Later we shall see that these methods also may be used to
+solve boundary value problems for ODEs.
+
+FIGURE:[chapter1/4_new.png, width=300]
+
+!bt
+\begin{equation*}
+x_j=x_0+jh
+\end{equation*}
+!et
+where $h=\Delta x$ is assumed constant unless otherwise stated.
+
+FIGURE:[chapter1/5_new.png, width=300] Illustration of how to obtain difference equations. label{fig:1.5}
+
+Forward differences:
+!bt
+\begin{equation*}
+\Delta y_j=y_{j+1}-y_j
+\end{equation*}
+!et
+
+Backward differences:
+!bt
+\begin{equation}
+label{eq:1201}
+\nabla y_j=y_j-y_{j-1}
+\end{equation}
+!et
+
+Central differences:
+!bt
+\begin{equation*}
+\delta y_{j+\frac{1}{2}}=y_{j+1}-y_j
+\end{equation*}
+!et
+
+The linear difference operators $\Delta$, $\nabla$ and $\delta$ are useful when we are deriving more complicated expressions. An example of usage is as follows,
+!bt
+\begin{equation*}
+\delta ^2y_j=\delta (\delta y_j)=\delta (y_{1+\frac{1}{2}}-y_{1-\frac{1}{2}})
+=y_{j+1}-y_j-(y_j-y_{j-1})=y_{j+1}-2y_j+y_{j-1}
+\end{equation*}
+!et
+
+We will mainly write out the formulas entirely instead of using operators.
+
+We shall find difference formulas and need again _Taylor's theorem_:
+!bt
+\begin{align}
+label{eq:1202}
+y(x)=&y(x_0)+y'(x_0)\cdot (x-x_0)+\frac{1}{2}y''(x_0)\cdot (x-x_0)^2 + \\ 
+&\dots + \frac{1}{n!}y^{(n)}(x_0)\cdot (x-x_0)^n +R_n \nonumber
+\end{align}
+!et
+
+The remainder $R_n$ is given by
+!bt
+\begin{align}
+R_n&=\frac{1}{(n+1)!}y^{(n+1)}(\xi)\cdot (x-x_0)^{n+1}\\ 
+&\text{where } \xi \in (x_0,x) \nonumber
+\end{align}
+!et
+
+By use of (ref{eq:1202}) we get
+!bt
+\begin{align}
+label{eq:1203a}
+y(x_{j+1}) \equiv &y(x_j+h)=y(x_j)+hy'(x_j) +\frac{h^2}{2}y''(x_j)+\\ 
+&\dots+\frac{h^ny^{(n)}(x_j)}{n!}+R_n \nonumber
+\end{align}
+!et
+where the remainder $R_n=O(h^{n+1}),\ h\to 0 $.
+
+From (ref{eq:1203a}) we also get
+!bt
+\begin{equation}
+label{eq:1203b}
+y(x_{j-1}) \equiv y(x_j-h)=y(x_j)-hy'(x_j)+\frac{h^2}{2}y''(x_j)+\dots+\frac{h^k(-1)^ky^{(k)}(x_j)}{k!}+\dots
+\end{equation}
+!et
+
+We will here and subsequently assume that $h$ is positive.
+
+We solve (ref{eq:1203a}) with respect to $y'$:
+!bt
+\begin{equation}
+label{eq:1204a}
+y'(x_j)=\frac{y(x_{j+1})-y(x_j)}{h}+O(h)
+\end{equation}
+!et
+
+We solve (ref{eq:1203b}) with respect to $y'$:
+!bt
+\begin{equation}
+label{eq:1204b}
+y'(x_j)=\frac{y(x_{j})-y(x_{j-1})}{h}+O(h)
+\end{equation}
+!et
+
+By addition of (ref{eq:1203b}) and (ref{eq:1203a}) we get
+!bt
+\begin{equation}
+label{eq:1204c}
+y''(x_j)=\frac{y(x_{j+1})-2y(x_{j})+y(x_{j-1})}{h^2}+O(h^2)
+\end{equation}
+!et
+
+By subtraction of (ref{eq:1203b}) from (ref{eq:1203a}) we get
+!bt
+\begin{equation}
+label{eq:1204d}
+y'(x_j)=\frac{y(x_{j+1})-y(x_{j-1})}{2h}+O(h^2)
+\end{equation}
+!et
+
+_Notation:_ We let $y(x_j)$ always denote the function $y(x)$ with $x=x_j$. We use $y_j$ both for the numerical and analytical value. Which is which will be implied.
+
+Equations (ref{eq:1204a}), (ref{eq:1204b}), (ref{eq:1204c}) and (ref{eq:1204d}) then gives the following difference expressions:
+!bt
+\begin{align}
+label{eq:1205a}
+&y'_j=\frac{y_{j+1}-y_j}{h}\ ;\  \text{truncation error}\ O(h)\\ 
+label{eq:1205b}
+&y'_j=\frac{y_{j}-y_{j-1}}{h}\ ;\  \text{truncation error}\ O(h)\\ 
+label{eq:1205c}
+&y''_j=\frac{y_{j+1}-2y_j+y_{j-1}}{h^2}\ ;\  \text{truncation error}\ O(h^2)\\ 
+label{eq:1205d}
+&y'_j=\frac{y_{j+1}-y_{j-1}}{2h}\ ;\  \text{truncation error}\ O(h^2)
+\end{align}
+!et
+
+(ref{eq:1205a}) is a forward difference, (ref{eq:1205b}) is a backward difference while (ref{eq:1205c}) and (ref{eq:1205d}) are central differences.
+
+FIGURE:[chapter1/6.png, width=300]
+
+The expressions in (ref{eq:1205a}), (ref{eq:1205b}), (ref{eq:1205c}) and (ref{eq:1205d}) are easily established from the figure.
+
+(ref{eq:1205a}) follows directly.
+
+(ref{eq:1205c}):
+!bt
+\begin{equation*}
+y''_j(x_j)=\left(\frac{y_{j+1}-y_j}{h}-\frac{y_{j}-y_{j-1}}{h}\right)\cdot \frac{1}{h} = \frac{y_{j+1}-2y_j+y_{j-1}}{h^2}
+\end{equation*}
+!et
+
+(ref{eq:1205d}):
+
+!bt
+\begin{equation*}
+y'_j=\left(\frac{y_{j+1}-y_j}{h}-\frac{y_{j}+y_{j-1}}{h}\right)\cdot \frac{1}{2}=\frac{y_{j+1}-y_{j-1}}{2h}
+\end{equation*}
+!et
+
+To find the truncation error we must use the Taylor series expansion.
+
+The derivation above may be done more systematically. We set
+!bt
+\begin{equation}
+label{eq:1206a}
+y'(x_j)=a\cdot y(x_{j-1})+b\cdot y(x_j)+c\cdot y(x_{j+1})+O(h^m)
+\end{equation}
+!et
+where we shall determine the constants $a$, $b$ and $c$ together with the error term. For simplicity we use the notation $y_j\equiv y(x_j),\ y'_j \equiv y'(x_j)$ and so on. From the Taylor series expansion in (ref{eq:1203a}) and (ref{eq:1203b}) we get
+!bt
+\begin{align*}
+&a\cdot y_{j-1}+b\cdot y_j +c\cdot y_{j+1} = \\ 
+&a\cdot\left[y_j-hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''_j(\xi)\right]+b\cdot y_j + \\ 
+&c\cdot \left[y_j-hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''_j(\xi)\right]
+\end{align*}
+!et
+Collecting terms:
+!bt
+\begin{align*}
+a\cdot y_{j-1}+b\cdot y_j +c\cdot y_{j+1} = \\ 
+(a+b+c)y_j+(c-a)hy'_j+ \\ 
+(a+c)\frac{h^2}{2}y''_j+(c-a)\frac{h^3}{6}y'''(\xi)
+\end{align*}
+!et
+We determine $a$, $b$ and $c$ such that $y'_j$ gets as high accuracy as possible:
+!bt
+\begin{align}
+a+b+c=0 \nonumber \\ 
+(c-a)\cdot h=1
+label{eq:1206b}\\ \nonumber
+a+c=1
+\end{align}
+!et
+The solution to (ref{eq:1206b}) is
+!bt
+\begin{equation*}
+a=-\frac{1}{2h},\ b=0 \text{ and } c=\frac{1}{2h}
+\end{equation*}
+!et
+which when inserted in (ref{eq:1206a}) gives
+!bt
+\begin{equation}
+label{eq:1207}
+y'_j=\frac{y_{j+1}-y_{j-1}}{2h}-\frac{h^2}{6}y'''(\xi)
+\end{equation}
+!et
+Comparing (ref{eq:1207}) with (ref{eq:1206a}) we see that the error term is $O(h^m)=-\frac{h^2}{6}y'''(\xi)$, which means that $m=2$. As expected, (ref{eq:1207}) is identical to (ref{eq:1204d}).
+
+Let's use this method to find a forward difference expression for $y'(x_j)$ with accuracy of $O(h^2)$. Second order accuracy requires at least three unknown coefficients. Thus,
+!bt
+\begin{equation}
+label{eq:1208a}
+y'(x_j)=a\cdot y_j + b\cdot y_{j+1} + c\cdot y_{j+2} + O(h^m)
+\end{equation}
+!et
+The procedure goes as in the previous example as follows,
+!bt
+\begin{align*}
+a&\cdot y_{j}+b\cdot y_{j+1} +c\cdot y_{j+2} =\\ 
+a&\cdot y_j+b\cdot\left[y_j+hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''(\xi)\right]+\\ 
+c&\cdot \left[y_j+2hy'_j+2h^2y''_j+\frac{8h^3}{6}y'''_j(\xi)\right]\\ 
+=&(a+b+c)\cdot y_j+(b+2c)\cdot hy'_j \\ 
++& h^2\left(\frac{b}{2}+2c\right)\cdot y''_j+\frac{h^3}{6}(b+8c)\cdot y'''(\xi)
+\end{align*}
+!et
+We determine $a$, $b$ and $c$ such that $y'_j$ becomes as accurate as possible. Then we get,
+!bt
+\begin{align}
+a+b+c=0 \nonumber\\ 
+(b+2c)\cdot h=1
+label{eq:1208b}\\ 
+\frac{b}{2}+2c=0\nonumber
+\end{align}
+!et
+The solution of (ref{eq:1208b}) is
+!bt
+\begin{equation*}
+a=-\frac{3}{2h},\ b=\frac{2}{h},\ c=-\frac{1}{2h}\ 
+\end{equation*}
+!et
+which inserted in (ref{eq:1208a}) gives
+!bt
+\begin{equation}
+label{eq:1209}
+y'_j=\frac{-3y_j+4y_{j+1}-y_{j+2}}{2h}+\frac{h^2}{3}y'''(\xi)
+\end{equation}
+!et
+The error term $O(h^m)=\frac{h^2}{3}y'''(\xi)$ shows that $m=2$.
+
+Here follows some difference formulas derived with the procedure above:
+
+!bbox
+Forward differences:
+!bt
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i}-y_{i-1}}{\Delta x}+\dfrac{1}{2}y''(\xi)\Delta x \\ 
+\dfrac{dy_i}{dx}&=\dfrac{3y_i-4y_{i-1}+y_{i-2}}{2\Delta x}+\dfrac{1}{3}y'''(\xi)\cdot (\Delta x)^2 \\ 
+\dfrac{dy_i}{dx}&=\dfrac{11y_i-18y_{i-1}+9y_{i-2}-y_{i-3}}{6\Delta x}+\dfrac{1}{4}y^{(4)}(\xi)\cdot (\Delta x)^3 \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_i-2y_{i-1}+y_{i-2}}{(\Delta x)^2}+y'''(\xi)\cdot \Delta x \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{2y_i-5y_{i-1}+4y_{i-2}-y_{i-3}}{(\Delta x)^2}+\dfrac{11}{12}y^{(4)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+!et
+!ebox
+
+!bbox
+Backward differences:
+!bt
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i}-y_{i-1}}{\Delta x}+\dfrac{1}{2}y''(\xi)\Delta x \\ 
+\dfrac{dy_i}{dx}&=\dfrac{3y_i-4y_{i-1}+y_{i-2}}{2\Delta x}+\dfrac{1}{3}y'''(\xi)\cdot (\Delta x)^2 \\ 
+\dfrac{dy_i}{dx}&=\dfrac{11y_i-18y_{i-1}+9y_{i-2}-y_{i-3}}{6\Delta x}+\dfrac{1}{4}y^{(4)}(\xi)\cdot (\Delta x)^3 \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_i-2y_{i-1}+y_{i-2}}{(\Delta x)^2}+y'''(\xi)\cdot \Delta x \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{2y_i-5y_{i-1}+4y_{i-2}-y_{i-3}}{(\Delta x)^2}+\dfrac{11}{12}y^{(4)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+!et
+!ebox
+
+!bbox
+Central differences:
+!bt
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i+1}-y_{i-1}}{2\Delta x}-\dfrac{1}{6}y'''(\xi)(\Delta x)^2 \\ 
+\dfrac{dy_i}{dx}&=\dfrac{-y_{i+2}+8y_{i+1}-8y_{i-1}+y_{i-2}}{12\Delta x}+\dfrac{1}{30}y^{(5)}(\xi)\cdot (\Delta x)^4 \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_{i+1}-2y_{i}+y_{i-1}}{(\Delta x)^2}-\dfrac{1}{12}y^{(4)}(\xi)\cdot (\Delta x)^2 \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{-y_{i+2}+16y_{i+1}-30y_{i}+16y_{i-1}-y_{i-2}}{12(\Delta x)^2}+\dfrac{1}{90}y^{(6)}(\xi)\cdot (\Delta x)^4 \\ 
+\dfrac{d^3y_i}{dx^3}&=\dfrac{y_{i+2}-2y_{i+1}+2y_{i-1}-y_{i-2}}{2(\Delta x)^3}+\dfrac{1}{4}y^{(5)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+!et
+!ebox
+
+!split
+=== Treatment of the term $\frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right]$ ===
+This term often appears in difference equations, and it may be clever to treat the term as it is instead of first execute the differentiation.
+
+__Central differences__
+We use central differences (recall Figure ref{fig:1.5}) as follows,
+!bt
+\begin{align*}
+\frac{d}{dx}\left[p(x)\cdot \frac{d}{dx}u(x)\right]\bigg|_i \approx& \frac{[p(x)\cdot u'(x)]|_{i+\frac{1}{2}}-[p(x)\cdot u'(x)]|_{i-\frac{1}{2}}}{h}\\ 
+=& \frac{p(x_{i+\frac{1}{2}})\cdot u'(x_{i+\frac{1}{2}})-p(x_{i-\frac{1}{2}})\cdot u'(x_{i-\frac{1}{2}})}{h}
+\end{align*}
+!et
+Using central differences again, we get
+!bt
+\begin{equation*}
+u'(x_{i+\frac{1}{2}}) \approx \frac{u_{i+1}-u_i}{h},\ u'(x_{i-\frac{1}{2}}) \approx \frac{u_{i}-u_{i-1}}{h},\ 
+\end{equation*}
+!et
+which inserted in the previous equation gives the final expression
+!bt
+\begin{equation}
+label{eq:12010a}
+\frac{d}{dx}\left[p(x)\cdot \frac{d}{dx}u(x)\right]\bigg|_i \approx \frac{p_{i-\frac{1}{2}}\cdot {u_{i-1}-(p_{i+\frac{1}{2}}+p_{i-\frac{1}{2}})\cdot u_i+p_{i+\frac{1}{2}}\cdot u_{i+1}}}{h^2} + \text{error term}
+\end{equation}
+!et
+where
+!bt
+\begin{equation*}
+\text{error term} =-\frac{h^2}{24}\cdot \frac{d}{dx} \bigg(p(x)\cdot u'''(x)+[p(x)\cdot u'(x)]''\bigg) + O(h^3)
+\end{equation*}
+!et
+If $p(x_{1+\frac{1}{2}})$ and $p(x_{1-\frac{1}{2}})$ cannot be found directly, we use
+!bt
+\begin{equation}
+label{eq:12011}
+p(x_{1+\frac{1}{2}})\approx \frac{1}{2}(p_{i+1}+p_i),\ p(x_{1-\frac{1}{2}}) \approx \frac{1}{2}(p_i+p_{i-1})
+\end{equation}
+!et
+Note that for $p(x)=1=\text{constant}$ we get the usual expression
+!bt
+\begin{equation*}
+\frac{d^2u}{dx^2}\bigg|_i=\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}+O(h^2)
+\end{equation*}
+!et
+__Forward differences__
+We start with
+!bt
+\begin{align*}
+\frac{d}{dx}\left[p(x)\cdot \frac{du}{dx}\right]\bigg|_i &\approx \frac{p(x_{i+\frac{1}{2}})\cdot u'(x_{i+\frac{1}{2}})-p(x_i)\cdot u'(x_i)}{\frac{h}{2}}\\ 
+ &\approx \frac{p(x_{i+\frac{1}{2}})\cdot\left( \frac{u_{i+1}-u_i}{h}\right) -p(x_i)\cdot u'(x_i)}{\frac{h}{2}}
+\end{align*}
+!et
+which gives
+!bt
+\begin{equation}
+label{eq:12012a}
+\frac{d}{dx}\left[p(x)\cdot \frac{du}{dx}\right]\bigg|_i = \frac{2\cdot [p(x_{i+\frac{1}{2}})\cdot {(u_{i+1}-u_i)-h\cdot p(x_i)\cdot u'(x_i)]}}{h^2} +\text{error term}
+\end{equation}
+!et
+where
+!bt
+\begin{equation}
+label{eq:12012b}
+\text{error term} =- \frac{h}{12}[3p''(x_i)\cdot u'(x_i)+6p'(x_i)\cdot u''(x_i)+4p(x_i)\cdot u'''(x_i)]+O(h^2)
+\end{equation}
+!et
+We have kept the term $u'(x_i)$ since (ref{eq:12012a}) usually is used at the boundary, and $u'(x_i)$ may be prescribed there.
+For $p(x)=1=\text{constant}$ we get the expression
+!bt
+\begin{equation}
+label{eq:12013}
+u''_i = \frac{2\cdot [u_{i+1}-u_i-h\cdot u'(x_i)]}{h^2}-\frac{h}{3}u'''(x_i)+O(h^2)
+\end{equation}
+!et
+
+__Backward Differences__
+We start with
+!bt
+\begin{align*}
+\frac{d}{dx}\left[p(x)\frac{du}{dx}\right]\bigg|_i \approx& \frac{p(x_i)\cdot u'(x_i)-p(x_i)\cdot u'(x_{i-\frac{1}{2}})\cdot u'(x_{i-\frac{1}{2}})}{\frac{h}{2}}\\ \approx& \frac{p(x_i)\cdot u'(x_i)-p(x_{i-\frac{1}{2}})\left(\frac{u_i-u_{i-1}}{h}\right)}{\frac{h}{2}}
+\end{align*}
+!et
+which gives
+!bt
+\begin{equation}
+label{eq:12014a}
+\frac{d}{dx}\left[p(x)\frac{du}{dx}\right]\bigg|_i = \frac{2\cdot [h\cdot p(x_i)u'(x_i)-p(x_{i-\frac{1}{2}})\cdot (u_i-u_{i-1})]}{h^2}+\text{error term}
+\end{equation}
+!et
+where
+!bt
+\begin{equation}
+label{eq:12014b}
+\text{error term}=\frac{h}{12}[3p''(x_i)\cdot u'(x_i)+6p'(x_i)\cdot u''(x_i)+4p(x_i)\cdot u'''(x_i)]+O(h^2)
+\end{equation}
+!et
+This is the same error term as in (ref{eq:12012b}) except from the sign. Also here we have kept the term $u'(x_i)$ since (ref{eq:12014b}) usually is used at the boundary where $u'(x_i)$ may be prescribed.
+For $p(x)=1=\text{constant}$ we get the expression
+!bt
+\begin{equation}
+u''_i = \frac{2\cdot [h\cdot u'(x_i)-(u_i-u_{i-1})]}{h^2}+\frac{h}{3}u'''(x_i)+O(h^2)
+\end{equation}
+!et
+
+!split
+===== Euler's method =====
+
+The ODE is given as
+!bt
+\begin{align}
+label{eq:1301}
+\frac{dy}{dx} = y'(x)&=f(x,y)\\ 
+y(x_0)=&y_0
+\end{align}
+!et
+Inserting (ref{eq:1204a}) we obtain
+!bt
+\begin{equation*}
+y(x_{n+1})=y(x_n)+h\cdot f(x_n,y(x_n))+O(h^2)
+\end{equation*}
+!et
+or
+!bt
+\begin{equation}
+label{eq:1302}
+y_{n+1}=y_n+h\cdot f(x_n,y_n)
+\end{equation}
+!et
+(ref{eq:1302}) is a difference equation and the scheme is called _Euler's method_ (1768). The scheme is illustrated graphically in Figure ref{fig:1.7}. Euler's method is a first order method, since the expression for $y'(x)$ is first order of $h$. The method has a global error of order $h$, and a local of order $h^2$.
+
+FIGURE:[chapter1/7.png, width=400] Graphical illustration of Euler's method. label{fig:1.7}
+
+!split
+!bbox
+===== Example: Falling sphere with constant and varying drag =====
+label{ex:falling_sphere}
+
+We write (ref{eq:sphere_1st_order}) and (ref{eq:sphere_second_order}) as a sytem as follows,
+!bt
+\begin{align}
+& \frac{dz}{dt}=v label{eq:1303a}\\ 
+& \frac{dv}{dt}=g-\alpha v^2 label{eq:1303b}
+\end{align}
+!et
+where
+!bt
+\begin{equation*}
+\alpha =\frac{3\rho _f}{4\rho _k\cdot d}\cdot C_D
+\end{equation*}
+!et
+The analytical solution with $z(0)=0$ and $v(0)=0$ is given by
+!bt
+\begin{equation} label{eq:1304a}
+v(t)=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t), \ z(t)=\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha}
+\end{equation}
+!et
+The terminal velocity $v_t$ is found by $\frac{dv}{dt}=0$ which gives $v_t=\sqrt{\frac{g}{\alpha}}$.
+
+We use data from a golf ball: $d= 41\text{ mm}$, $\rho_k = 1275 \text{ kg/m}^3$, $\rho_k = 1.22 \text{ kg/m}^3$, and choose $C_D = 0.4$ which gives $\alpha = 7\cdot 10^{-3}$. The terminal velocity then becomes
+!bt
+\begin{equation*}
+v_t = \sqrt{\frac{g}{\alpha}} = 37.44
+\end{equation*}
+!et
+
+If we use Teylor's method from section ref{sec:taylor} we get the following expression by using four terms in the series expansion:
+!bt
+\begin{align}
+label{eq:1305}
+z(t)=&\frac{1}{2}gt^2\cdot (1-\frac{1}{6}\alpha gt^2)\\ 
+v(t)=&g t\cdot (1-\frac{1}{3}\alpha gt^2)
+\end{align}
+!et
+
+The Euler scheme (ref{eq:1302}) used on (ref{eq:1303b}) gives
+!bt
+\begin{equation}
+label{eq:1306}
+v_{n+1}=v_n+\Delta t\cdot (g-\alpha\cdot v^2_n),\ n=0,1,\dots
+\end{equation}
+!et
+with $v(0)=0$.
+
+One way of implementing the integration scheme is given in the following function `euler()`:
+@@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py from-to:# define euler scheme@# main program starts here
+
+The program _FallingSphereEuler.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in ref{example:sphere_freefall}. The complete program is as follows,
+
+@@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py
+
+FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler.png, width=400] Euler's method with $\Delta t=0.5$ s. label{fig:faling_sphere_euler}
+
+!ebox
+
+!split
+=== Euler's method for a system ===
+Euler's method may of course also be used for a system. Let's look at a simultaneous system of $p$ equations
+!bt
+\begin{align}
+&y'_1=f_1(x,y_1,y_2,\dots y_p) \nonumber\\ 
+&y'_2=f_2(x,y_1,y_2,\dots y_p) \nonumber\\ 
+&. label{eq:1307a}\\ 
+&.\nonumber\\ 
+&y'_p=f_p(x,y_1,y_2,\dots y_p)\nonumber
+\end{align}
+!et
+with initial values
+!bt
+\begin{equation}
+label{eq:1307b}
+y_1(x_0)=a_1,\ y_2(x_0)=a_2,\dots,\ y_p(x_0)=a_p
+\end{equation}
+!et
+Or, in vectorial format as follows,
+!bt
+\begin{align}
+label{eq:1308}
+\mathbf{y'}&=\mathbf{f}(x,\mathbf{y})\\ 
+\mathbf{y}&(x_0)=\mathbf{a} \nonumber
+\end{align}
+!et
+where $\mathbf{y'}$, $\mathbf{f}$, $\mathbf{y}$ and $\mathbf{a}$ are column vectores with $p$ components.
+
+The Euler scheme (ref{eq:1302}) used on (ref{eq:1308}) gives
+!bt
+\begin{equation}
+label{eq:1309}
+\mathbf{y_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+\end{equation}
+!et
+For a system of three equations we get
+!bt
+\begin{align}
+y'_1=&y_2\nonumber\\ 
+y'_2=&y_3
+label{eq:13010}\\ 
+y'_3=&-y_1y_3\nonumber
+\end{align}
+!et
+In this case (ref{eq:1309}) gives
+!bt
+\begin{align}
+&(y_1)_{n+1}=(y_1)_n+h\cdot (y_2)_n\nonumber\\ 
+&(y_2)_{n+1}=(y_2)_n+h\cdot (y_3)_n
+label{eq:13011}\\ 
+&(y_3)_{n+1}=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n\nonumber\\ 
+\end{align}
+!et
+with $y_1(x_0)=a_1,\ y_2(x_0)=a_2,\text{ and }y_3(x_0)=a_3$
+
+In section ref{subsec:reduction} we have seen how we can reduce a higher order ODE to a set of first order ODEs. In (ref{eq:1303a}) and (ref{eq:1303b}) we have the equation $\frac{d^2z}{dt^2}=g-\alpha\cdot \left(\frac{dz}{dt}\right)^2$ which we have reduced to a system as
+!bt
+\begin{align*}
+\frac{dz}{dt}= v&\\ 
+\frac{dv}{dt}= g&-\alpha\cdot v^2
+\end{align*}
+!et
+which gives an Euler scheme as follows,
+!bt
+\begin{align*}
+&z_{n+1}=z_n+\Delta t\cdot v_n\\ 
+&v_{n+1}=n_n+\Delta t\cdot [g-\alpha(v_n)^2]\\ 
+&\text{med }z_0=0,\ v_0=0
+\end{align*}
+!et
+
+!split
+===== Heun's method =====
+
+From (ref{eq:1204a}) or (ref{eq:1205a}) we have
+!bt
+\begin{equation}
+label{eq:1401}
+y''(x_n,y_n)=f'\left(x_n,y(x_n,y_n)\right)\approx \frac{f(x_n+h)-f(x_n)}{h}
+\end{equation}
+!et
+The Taylor series expansion (ref{eq:1203a}) gives
+!bt
+\begin{equation*}
+y(x_n+h)=y(x_n)+hy'[x_n,y(x_n)]+\frac{h^2}{2}y''[x_n,y(x_n)]+O(h^3)
+\end{equation*}
+!et
+which, inserting (ref{eq:1401}), gives
+!bt
+\begin{equation}
+label{eq:1402}
+y_{n+1}=y_n+\frac{h}{2}\cdot [f(x_n,y_n)+f(x_{n+1},y(x_{n+1}))]
+\end{equation}
+!et
+
+This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if $f(x,y)$ is only a function of $x$. Since $y_{n+1}$ appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function $f(x,y)$ is non-linear. One way of making the scheme explicit is to use the Euler scheme (ref{eq:1302}) to calculate $y(x_{n+1})$ on the right side of (ref{eq:1402}). The resulting scheme is often denoted _Heun's method_.
+
+The scheme for Heun's method becomes
+!bt
+\begin{align}
+&y^p_{n+1}=y_n+h\cdot f(x_n,y_n)
+label{eq:1403a} \\ 
+&y_{n +1}=y_n+\frac{h}{2}\cdot[f(x_n,y_n)+f(x_{n+1},y^p_{n+1})]
+label{eq:1403b}
+\end{align}
+!et
+Index $p$ stands for "predicted". (ref{eq:1403a}) is then the predictor and (ref{eq:1403b}) is the corrector. This is a second order method. For more details, see cite{cheney2012numerical}. Figure ref{fig:illustration_heun} is a graphical illustration of the method.
+
+FIGURE:[chapter1/9.png, width=400] Illustration of Heun's method. label{fig:illustration_heun}
+
+In principle we could make an iteration procedure where we after using the corrector use the corrected values to correct the corrected values to make a new predictor and so on. This will likely lead to a more accurate solution of the difference scheme, but not necessarily of the differential equation. We are therefore satisfied by using the corrector once. For a system, we get
+!bt
+\begin{align}
+& \mathbf{y^p_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+label{eq:1404a}\\ 
+& \mathbf{y_{n+1}}=\mathbf{y_n} +\frac{h}{2}\cdot [\mathbf{f}(x_n,\mathbf{y_n})+\mathbf{f}(x_{n+1},\mathbf{y^p_{n+1}})]
+label{eq:1404b}
+\end{align}
+!et
+Note that $\mathbf{y}^p_{n+1}$ is a temporary variable that is not necessary to store.
+
+If we use (ref{eq:1404a}) and (ref{eq:1404b}) on the example in (ref{eq:13010}) we get
+
+Predictor:
+!bt
+\begin{align*}
+(y_1)^p_{n+1}&=(y_1)_n+h\cdot (y_2)_n&\\ 
+(y_2)^p_{n+1}&=(y_2)_n+h\cdot (y_3)_n&\\ 
+(y_3)^p_{n+1}&=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n
+\end{align*}
+!et
+Corrector:
+!bt
+\begin{align*}
+(y_1)_{n+1}&=(y_1)_n+0.5h\cdot [(y_2)_n+(y_2)^p_{n+1}]&\\ 
+(y_2)_{n+1}&=(y_2)_n+0.5h\cdot [(y_3)_n+(y_3)^p_{n+1}]&\\ 
+(y_3)_{n+1}&=(y_3)_n-0.5h\cdot [(y_1)_n\cdot (y_3)_n+(y_1)^p_{n+1}\cdot (y_3)^p_{n+1}]
+\end{align*}
+!et
+
+!split
+!bbox
+===== Example: Newton's equation =====
+
+Let's use Heun's method to solve Newton's equation from section ref{section:introduction},
+!bt
+\begin{equation}
+label{eq:1405a}
+y'(x)=1-3x+y+x^2+xy,\ y(0)=0
+\end{equation}
+!et
+with analytical solution
+!bt
+\begin{align}
+y(x)=&3\sqrt{2\pi e}\cdot \exp\left(x\left(1+\frac{x}{2}\right)\right)\cdot \left[\mbox{erf}\left(\frac{\sqrt{2}}{2}(1+x)\right)-\mbox{erf}\left(\frac{\sqrt{2}}{2}\right)\right]\nonumber \\ 
+	+&4\cdot \left[1-\exp\left(x\left(1+\frac{x}{2}\right)\right)\right]-x
+label{eq:1405b}
+\end{align}
+!et
+
+Here we have $f(x,y)=1-3x+y+x^2+xy = 1+x(x-3)+(1+x)y$
+
+The following program _NewtonHeun.py_ solves this problem using Heun's method, and the resulting figure is shown in Figure ref{fig:newton_heun}.
+
+@@@CODE ./chapter1/programs_and_modules/NewtonHeun.py
+
+FIGURE:[chapter1/programs_and_modules/newton_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:newton_heun}
+
+!ebox
+
+!split
+!bbox
+===== Example: Falling sphere with Heun's method =====
+
+Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the program "FallingSphereEuler.py": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py".
+
+We recall the system of equations as
+!bt
+\begin{align*}
+&\frac{dz}{dt}=v\\ 
+&\frac{dv}{dt}=g-\alpha v^2
+\end{align*}
+!et
+which by use of Heun's method in (ref{eq:1404a}) and (ref{eq:1404b}) becomes
+
+Predictor:
+!bt
+\begin{align}
+z^p_{n+1}&=z_n+\Delta t v_n \\ 
+v^p_{n+1}&= v_n +\Delta t \cdot (g-\alpha v^2_n) \nonumber
+\end{align}
+!et
+Corrector:
+!bt
+\begin{align}
+z_{n+1}&=z_n+0.5\Delta t \cdot (v_n+v^p_{n+1}) \\ 
+v_{n+1}&=v_n+0.5\Delta t \cdot \left[2g-\alpha[v^2_n+(v^p_{n+1})^2\right] \nonumber
+\end{align}
+!et
+with initial values $z_0=z(0)=0,\ v_0=v(0)=0$. Note that we don't use the predictor $z^p_{n+1}$ since it doesn't appear on the right hand side of the equation system.
+
+One possible way of implementing this scheme is given in the following function named `heun()`, in the program _ODEschemes.py_:
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define Heun solver@return z
+
+Using the same time steps as in ref{ex:falling_sphere}, we get the response plotted in Figure ref{fig:falling_sphere_euler_heun}.
+
+FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
+
+The complete program _FallingSphereEulerHeun.py_ is listed below. Note that the solver functions `euler` and `heun` are imported from the script _ODEschemes.py_.
+
+@@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeun.py
+
+!ebox
+
+!split
+===== Runge-Kutta of 4th order =====
+
+Euler's method and Heun's method belong to the Runge-Kutta family of explicit methods, and is respectively Runge-Kutta of 1st and 2nd order, the latter with one time use of corrector. Explicit Runge-Kutta schemes are single step schemes that try to copy the Taylor series expansion of the differential equation to a given order.
+
+The classical Runge-Kutta scheme of 4th order (RK4) is given by
+!bt
+\begin{align}
+&k_1=f(x_n,y_n)\nonumber\\ 
+&k_2=f(x_n+\frac{h}{2}, y_n+\frac{h}{2}k_1)\nonumber\\ 
+label{eq:1501}
+&k_3=f(x_n+\frac{h}{2},y_n+\frac{h}{2}k_2)\\ 
+&k_4=f(x_n+h,y_n+hk_3)\nonumber\\ 
+&y_{n+1}=y_n+\frac{h}{6}(k_1+2k_2+2k_3+k_4)\nonumber
+\end{align}
+!et
+
+We see that we are actually using Euler's method four times and find a weighted gradient. The local error is of order $O(h^5)$, while the global is of $O(h^4)$. We refer to cite{cheney2012numerical}.
+
+Figure ref{fig:RK4_illustration} shows a graphical illustration of the RK4 scheme.
+
+In detail we have
+  o In point $(x_n,y_n)$ we know the gradient $k_1$ and use this when we go forward a step $h/2$ where the gradient $k_2$ is calculated.
+  o With this gradient we start again in point $(x_n,y_n)$, go forward a step $h/2$ and find a new gradient $k_3$.
+  o With this gradient we start again in point $(x_n,y_n)$, but go forward a complete step $h$ and find a new gradient $k_4$.
+  o The four gradients are averaged with weights $1/6$, $2/6$, $2/6$ and $1/6$. Using the averaged gradient we calculate the final value $y_{n+1}$.
+Each of the steps above are Euler steps.
+
+FIGURE:[chapter1/12.png, width=400] Illustration of the RK4 scheme. label{fig:RK4_illustration}
+
+Using (ref{eq:1501}) on the equation system in (ref{eq:13010}) we get
+!bt
+\begin{align}
+&(y_1)_{n+1}=(y_1)_n +\frac{h}{6}(k_1+2k_2+2k_3+k_4) \nonumber\\ 
+&(y_2)_{n+1}=(y_2)_n +\frac{h}{6}(l_1+2l_2+2l_3+l_4)
+label{eq:1502} \\ 
+&(y_3)_{n+1}=(y_3)_n +\frac{h}{6}(m_1+2m_2+2m_3+m_4) \nonumber\\ 
+\end{align}
+!et
+where
+!bt
+\begin{align*}
+k_1&=y_2 \\ 
+l_1&=y_3 \\ 
+m_1&=-y_1y_3\\ 
+\\ 
+k_2&=(y_2+hl_l/2)\\ 
+l_2&=(y_3+hm_1/2)\\ 
+m_2&=-[(y_1+hk_1/2)(y_3+hm_1/2)]\\ 
+\\ 
+k_3&=(y_2+hl_2/2)\\ 
+l_3&=(y_3+hm_2/2)\\ 
+m_3&=-[(y_1+hk_2/2)(y_3+hm_2/2)]\\ 
+\\ 
+k_4&=(y_2+hl_3)\\ 
+l_4&=(y_3+hm_3)\\ 
+m_4&=-[(y_1+hk_3)(y_3+hm_3)
+\end{align*}
+!et
+
+# left out for exercise
+
+!split
+!bbox
+===== Example: Particle motion in two dimensions =====
+In this example we will calculate the motion of a particle in two dimensions. First we will calculate the motion of a smooth ball with drag coefficient given by the previously defined function `cd_sphere()` (see ref{example:sphere_freefall}), and then of a golf ball with drag and lift.
+
+The problem is illustrated in the following figure:
+FIGURE:[chapter1/14.png, width=400]
+
+where $v$ is the absolute velocity, $v_f=$ is the velocity of the fluid, $v_r=v-v_f$ is the relative velocity between the fluid and the ball, $\alpha$ is the elevation angle, $v_0$ is the initial velocity and $\phi$ is the angle between the $x$-axis and $v_r$.
+
+$\mathbf{F}_l$ is the lift force stemming from the rotation of the ball (the Magnus-effect) and is normal to $v_r$. With the given direction the ball rotates counter-clockwise (backspin). $\mathbf{F}_d$ is the fluids resistance against the motion and is parallell to $v_r$. These forces are given by
+!bt
+\begin{align}
+\mathbf{F}_d=\frac{1}{2}\rho _f AC_Dv_r^2
+label{eq:1504a}\\ 
+\mathbf{F}_l=\frac{1}{2}\rho _f AC_Lv_r^2
+label{eq:150b}
+\end{align}
+!et
+
+$C_D$ is the drag coefficient, $C_L$ is the lift coefficient, $A$ is the area projected in the velocity direction and $\rho_F$ is the density of the fluid.
+
+Newton's law in $x$- and $y$-directions gives
+!bt
+\begin{align}
+label{eq:1505a}
+\frac{dv_x}{dt}&= -\rho _f\frac{A}{2m}v_r^2(C_D\cdot \cos(\phi)+C_L\sin(\phi)) \\ 
+\frac{dv_y}{dt}&=\rho _f\frac{A}{2m}v_r^2(C_L\cdot \cos(\phi)-C_D\sin(\phi))-g
+label{eq:1505b}
+\end{align}
+!et
+
+From the figure we have
+!bt
+\begin{align*}
+\cos (\phi)&=\frac{v_{rx}}{v_r} \\ 
+\sin(\phi)&=\frac{v_{ry}}{v_r}
+\end{align*}
+!et
+
+We assume that the particle is a sphere, such that $C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd}$ as in ref{example:sphere_freefall}. Here $d$ is the diameter of the sphere and $\rho_k$ the density of the sphere.
+
+Now (ref{eq:1505a}) and (ref{eq:1505b}) become
+!bt
+\begin{align}
+label{eq:1506a}
+\frac{dv_x}{dt} &= -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry})\\ 
+\frac{dv_y}{dt} &= C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-
+label{eq:1506b}g
+\end{align}
+!et
+
+With $\frac{dx}{dt}=v_x$ and $\frac{dy}{dt}=v_y$ we get a system of 1st order equations as follows,
+!bt
+\begin{align}
+&\frac{dx}{dt}=v_x \nonumber \\ 
+& \frac{dy}{dt}=v_y \nonumber\\ 
+& \frac{dv_x}{dt} = -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry})
+label{eq:1507}\\ 
+&\frac{dv_y}{dt} = C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-g \nonumber
+\end{align}
+!et
+
+Introducing the notation $x=y_1$, $y=y_2$, $v_x=y_3$, $v_y=y_4$, we get
+!bt
+\begin{align}
+&\frac{dy_1}{dt}=y_3\nonumber\\ 
+& \frac{dy_2}{dt}=y_4\nonumber\\ 
+& \frac{dy_3}{dt} = -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry})
+label{eq:1508}\\ 
+&\frac{dy_4}{dt} = C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-g\nonumber
+\end{align}
+!et
+
+Here we have $v_{rx}=v_x-v_{fx}=y_3-v_{fx},\ v_{ry}=v_y-v_{fy}=y_4-v_{fy},\\ v_r=\sqrt{v_{rx}^2+v_{ry}^2}$
+
+Initial conditions for $t=0$ are
+!bt
+\begin{align*}
+y_1&=y_2=0 \\ 
+y_3&=v_0\cos(\alpha)\\ 
+y_4&=v_0\sin(\alpha)
+\end{align*}
+!et
+
+-----
+
+Let's first look at the case of a smooth ball. We use the following data (which are the data for a golf ball):
+!bt
+\begin{equation*}
+label{eq:1509}
+\text{Diameter } d = 41 \text{mm},\text{ mass } m = 46\text{g which gives } \rho_k=\frac{6m}{\pi d^3} = 1275 \text{kg/m}^3
+\end{equation*}
+!et
+We use the initial velocity $v_0=50$ m/s and solve (ref{eq:1508}) using the Runge-Kutta 4 scheme. In this example we have used the Python package _Odespy_ (ODE Software in Python), which offers a large collection of functions for solving ODE's. The RK4 scheme available in Odespy is used herein.
+
+The right hand side in (ref{eq:1508}) is implemented as the following function:
+@@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py from-to:# smooth ball@return zout
+
+Note that we have used the function `cd_sphere()` defined in ref{example:sphere_freefall} to calculate the drag coefficient of the smooth sphere.
+
+The results are shown for some initial angles in Figure ref{fig:smooth_ball_drag}.
+
+FIGURE:[chapter1/programs_and_modules/example_particle_motion_2d_1.png, width=700] Motion of smooth ball with drag. label{fig:smooth_ball_drag}
+
+-----
+
+Now let's look at the same case for a golf ball. The dimension and weight are the same as for the sphere. Now we need to account for the lift force from the spin of the ball. In addition, the drag data for a golf ball are completely different from the smooth sphere. We use the data from Bearman and Harvey cite{Bearman1976112} who measured the drag and lift of a golf ball for different spin velocities in a vindtunnel. We choose as an example 3500 rpm, and an initial velocity of $v_0=50$ m/s.
+
+The right hand side in (ref{eq:1508}) is now implemented as the following function:
+@@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py from-to:# golf ball with lift@return zout
+
+The function `cdcl()` (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/cdclgolfball.py") gives the drag and lift data for a given velocity and spin.
+
+The results are shown in in Figure ref{fig:golf_drag_lift}. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift.
+
+FIGURE:[chapter1/programs_and_modules/example_particle_motion_2d_2.png, width=700] Motion of golf ball with drag and lift. label{fig:golf_drag_lift}
+
+The complete program _ParticleMotion2D.py_ is listed below.
+
+@@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py
+
+!ebox
+
+
+
+
+BIBFILE: references/papers.pub
