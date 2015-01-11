@@ -1105,7 +1105,7 @@ with $v(0)=0$.
 One way of implementing the integration scheme is given in the following function `euler()`:
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py from-to:# define euler scheme@# main program starts here
 
-The program _FallingSphereEuler.py_ (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in ref{example:sphere_freefall}. The complete program is as follows,
+The program _FallingSphereEuler.py_ (may be downloaded "here": "https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in ref{example:sphere_freefall}. The complete program is as follows,
 
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py
 
@@ -1288,7 +1288,7 @@ ${ebox()}
 ${bbox()}
 ===== Example: Falling sphere with Heun's method =====
 
-Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the program "FallingSphereEuler.py": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py".
+Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the program "FallingSphereEuler.py": "https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py".
 
 We recall the system of equations as
 !bt
@@ -1503,7 +1503,7 @@ Now let's look at the same case for a golf ball. The dimension and weight are th
 The right hand side in (ref{eq:1508}) is now implemented as the following function:
 @@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py from-to:# golf ball with lift@return zout
 
-The function `cdcl()` (may be downloaded "here": "https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/cdclgolfball.py") gives the drag and lift data for a given velocity and spin.
+The function `cdcl()` (may be downloaded "here": "https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/cdclgolfball.py") gives the drag and lift data for a given velocity and spin.
 
 The results are shown in in Figure ref{fig:golf_drag_lift}. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift.
 
