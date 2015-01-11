@@ -67,7 +67,7 @@ Both from an analytical and numerical viewpoint initial value problems are easie
 
 If we are to solve an initial value problem of the type in Equation (ref{eq:1101}), we must first be sure that it has a solution. In addition we will demand that this solution is unique. A sufficient solution for this is that both $f(x,y)$ and $\frac{\partial f}{\partial y}$ are continuous in and around $x_0$. For (ref{eq:1102}) this conditions becomes that $f(x,y)$, $\frac{\partial f}{\partial y}$ and $\frac{\partial f}{\partial y'}$  are continuous in and around $x_0$. Similarly for higher order equations.
 
-An example:
+===== Example: Violation of the criteria for uniqueness and existence =====
 !bt
 \begin{equation}
 y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
@@ -343,7 +343,7 @@ By use of (ref{eq:1128}) we get
 ${ebox()}
 
 ===== Scientific computing with Python =====
-In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
+In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem. 
 
 !split
 ${bbox()}
