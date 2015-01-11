@@ -325,7 +325,7 @@ By use of (ref{eq:1128}) we get
 ${ebox()}
 
 ===== Scientific computing with Python =====
-In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
+In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem. 
 
 !split
 ${bbox()}
