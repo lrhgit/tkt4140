@@ -3,7 +3,7 @@ TITLE: A digital compendium
 AUTHOR: Johan Kolstø Sønstabø at Department of Structural Engineering, NTNU
 AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
-#TOC: on
+TOC: on
 
 
 
@@ -15,6 +15,17 @@ This digital compendium is based on the first chapter of the
 compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
 be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
 
+The development of the technical solutions for this digital compendium
+results from collaborations with professor "Hans Petter
+Langtangen":"http://folk.uio.no/hpl/" at UiO (hpl@simula.no), who has
+developed "Doconce": "https://github.com/hplgit/doconce" for flexible
+typesetting, and associate professor "Hallvard
+Trætteberg":"http://www.ntnu.edu/employees/hal" at IDI, NTNU
+(hal@idi.ntnu.no), who has developed the webpage-parser which
+identifies Python-code and it's integration in Eclipse IDEs (such as
+LiClipse). The latter part of the development has been funded by the
+project
+"IKTiSU":"https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826"
 
 !split
 ========= Initial value problems for Ordinary Differential Equations =========
@@ -50,13 +61,16 @@ Both from an analytical and numerical viewpoint initial value problems are easie
 
 If we are to solve an initial value problem of the type in Equation (ref{eq:1101}), we must first be sure that it has a solution. In addition we will demand that this solution is unique. A sufficient solution for this is that both $f(x,y)$ and $\frac{\partial f}{\partial y}$ are continuous in and around $x_0$. For (ref{eq:1102}) this conditions becomes that $f(x,y)$, $\frac{\partial f}{\partial y}$ and $\frac{\partial f}{\partial y'}$  are continuous in and around $x_0$. Similarly for higher order equations.
 
-===== Example: Violation of the criteria for uniqueness and existence =====
+_Violation of the criteria for uniqueness and existence_
 !bt
 \begin{equation}
 y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
 \end{equation}
 !et
-Here $f=y^\frac{1}{3}$ and $\frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}}$. $f$ is continuous in $x=0$, but that's not the case for $\frac{\partial f}{\partial y}$. It may be shown that this ODE has two solutions: $y=0$ and $y=(\frac{2}{3}x)^\frac{2}{3}$. Hopefully this equation doesn't present a physical problem. A problem of more interest is shown below.
+Here $f=y^\frac{1}{3}$ and $\frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}}$. $f$ is continuous in $x=0$, but that's not the case for $\frac{\partial f}{\partial y}$. It may be shown that this ODE has two solutions: $y=0$ and $y=(\frac{2}{3}x)^\frac{2}{3}$. Hopefully this equation doesn't present a physical problem. 
+
+_A mathematical pendulum_
+A problem of more interest is shown below.
 
 FIGURE:[chapter1/1.png, width=200]
 
@@ -171,7 +185,7 @@ From the differential equation we have $\ddot\theta=-\sin (\theta) \to \ddot\the
 !et
 Inserted above: $\theta(t) \approx \theta_0 -\frac{t^2}{2}\sin(\theta_0) + \frac{t^4}{24} \sin (\theta_0) \cos (\theta_0)$.
 
-We may include more terms, but this complicates the differentiation and it is hard to find any connection between the coefficients. When we have found an approximation for for $\theta(t)$ we can get an approximation for $\dot\theta(t)$ by differentiation: $\dot\theta(t) \approx -t\sin(\theta_0) + \frac{t^3}{8} \sin (\theta_0) \cos (\theta_0)$.
+We may include more terms, but this complicates the differentiation and it is hard to find any connection between the coefficients. When we have found an approximation for $\theta(t)$ we can get an approximation for $\dot\theta(t)$ by differentiation: $\dot\theta(t) \approx -t\sin(\theta_0) + \frac{t^3}{8} \sin (\theta_0) \cos (\theta_0)$.
 
 Series expansions are often useful around the starting point when we solve initial value problems. The technique may also be used on non-linear equations.
 
@@ -346,8 +360,8 @@ volume.  The mass of the displaced fluid is given by $m_f=\rho_f V$,
 where $\rho_f$ is the density of the fluid, whereas buoyancy and the
 drag coefficient are expressed by $m_f \, g$ and $C_D$, respectively.
 The projected area of the sphere is given by $A_k = \frac{\pi}{4}d^2$
-and $\frac{1}{2}m_f$ is the hydrodynamical mass (added mass). The
-expression for the hydrodynamical mass is derived in White
+and $\frac{1}{2}m_f$ is the hydro-dynamical mass (added mass). The
+expression for the hydro-dynamical mass is derived in White
 cite{white1999fluid}, page 539-540. To write Equation
 (ref{eq:newton_2nd_sphere}) on a more convenient form we introduce the
 following abbreviations:
@@ -363,7 +377,7 @@ label{eq:sphere_1st_order}
 \frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
 \end{equation}
 !et
-In air we may often neglect the buoyancy term and the hydrodynamical
+In air we may often neglect the buoyancy term and the hydro-dynamical
 mass, whereas this is not the case for a liquid. Introducing
 $v=\frac{dz}{dt}$ in Equation (ref{eq:sphere_1st_order}), we get a 2nd
 order ODE as follows
@@ -415,7 +429,7 @@ The function takes `Re` as an argument and returns the value `CD`. All Python fu
 
 Variables defined inside a function, such as `p` and `x1` above, are *local* variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are *global* variables and may be accessed anywhere, also inside functions.
 
-Three more functions from the `numpy` package are imported in the function. They are not used oustide the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the "documentation of NumPy": "http://www.numpy.org" for details about the different functions.
+Three more functions from the `numpy` package are imported in the function. They are not used outside the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the "documentation of NumPy": "http://www.numpy.org" for details about the different functions.
 
 The function above contains an example of the use of the `if-elif-else` block. The block begins with `if` and a boolean expression. If the boolean expression evaluates to `true` the *indented* statements following the `if` statement are carried out. If not, the boolean expression following the `elif` is evaluated. If none of the conditions are evaluated to `true` the statements following the `else` are carried out.
 
@@ -428,9 +442,9 @@ The function `range` is a built-in function that generates a list containing ari
 Lastly, the drag coefficient is plotted and the figure generated:
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to:# Make plot@
 
-To generate the plot, the package `matplotlib` is used. `matplotlib` is the standard package for curve plotting in Python. For simple plotting the `matplotlib.pyplot` interface provides a MATLAB-like interface, which has been used here. For documentation and explanation of this package, we refer to URL: "http://www.matplotlib.org".
+To generate the plot, the package `matplotlib` is used. `matplotlib` is the standard package for curve plotting in Python. For simple plotting the `matplotlib.pyplot` interface provides a Matlab-like interface, which has been used here. For documentation and explanation of this package, we refer to URL: "http://www.matplotlib.org".
 
-First, the curve is generated using the function `plot`, which takes the x-values and y-values as arguments (`Re` and `CD` in this case), as well as a string specifying the line style, like in MATLAB. Then changes are made to the figure in order to make it more readable, very similarily to how it is done in MATLAB. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the `savefig` function. Lastly, the figure is showed on the screen with the `show` function.
+First, the curve is generated using the function `plot`, which takes the x-values and y-values as arguments (`Re` and `CD` in this case), as well as a string specifying the line style, like in Matlab. Then changes are made to the figure in order to make it more readable, very similarly to how it is done in Matlab. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the `savefig` function. Lastly, the figure is showed on the screen with the `show` function.
 
 To change the font size the function `rc` is used. This function takes in the object `font`, which is a *dictionary* object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of `key:value` pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: `{}`. Placing a comma-separated list of `key:value` pairs within the braces adds initial `key:value` pairs to the dictionary. In this case the dictionary `font` contains one `key:value` pair, namely `'size' : 16`.
 
@@ -447,7 +461,7 @@ intensive algorithms where variables are stored in arrays this is
 inconvenient and time consuming, as each of the array elements must be
 sent to the function independently. In the following, we will
 therefore show how to implement functions with vector arguments that
-also return vectors. This may be done in a variaty of ways. Some
+also return vectors. This may be done in various ways. Some
 possibilities are presented in the following, and, as we shall see,
 some are more time consuming than others. We will also demonstrate how
 the time consumption (or efficiency) may be tested.
@@ -462,7 +476,7 @@ function `cd_sphere`. This does the job, but is not very efficient.
 A second version is implemented in the function
 `cd_sphere_vector`. This function takes in the array `Re` and
 calculates the drag coefficient of all elements by multiple calls of
-the function `numpy.where`; one call for each condition, similarily as
+the function `numpy.where`; one call for each condition, similarly as
 each `if` statement in the function `cd_sphere`. The function is shown
 here:
 
@@ -486,7 +500,7 @@ cd_sphere_auto_vector = vectorize(cd_sphere)
 
 To provide a convenient and practical means to compare the various
 implementations of the drag function, we have collected them all in a
-file _DragCoefficientGeneric.py_. This file constitues a Python module which is a concept we will dicuss in section ref{section:Python_module}.
+file _DragCoefficientGeneric.py_. This file constitutes a Python module which is a concept we will discuss in section ref{section:Python_module}.
 
 ===== How to make a Python-module and some useful programming features =====
 label{section:Python_module}
@@ -508,7 +522,7 @@ Inside modules, the standard practice is to only have functions and
 not any statements outside functions. The reason is that all
 statements in the module file are executed from top to bottom during
 import in another module/script cite{langtangen14}, and thus a
-desirable behaviour is no output to avoid confusion. However, in many
+desirable behavior is no output to avoid confusion. However, in many
 situations it is also desirable to allow for tests or demonstration of
 usage inside the module file, and for such situations the need for a
 main program arises. To meet these demands Python allows for a
@@ -545,7 +559,7 @@ implementations of the drag coefficient functions from the previous
 section.
 
 _Python lists and dictionaries_ 
-    * Lists hold a list of values and are intialized with empty
+    * Lists hold a list of values and are initialized with empty
       brackets, e.g. `fncnames = []`. The values of the list are
       accessed with an index, starting from zero. The first value of
       `fncnames` is `fncnames[0]`, the second value of `fncnames` is
@@ -556,9 +570,9 @@ _Python lists and dictionaries_
       append-operation, `name` will be the only element in the list.
 
     * Dictionaries are similar to what their name suggests - a
-      dictionary - and an empty dictionary is intialized with empty
+      dictionary - and an empty dictionary is initialized with empty
       braces, e.g. `CD = {}`.  In a dictionary, you have an 'index' of
-      words or keys and the values acccessed by their 'key'. Thus, the
+      words or keys and the values accessed by their 'key'. Thus, the
       values in a dictionary aren't numbered or ordered, they are only
       accessed by the key. You can add, remove, and modify the values
       in dictionaries. For example with the statement `CD[name] =
@@ -601,7 +615,7 @@ for benchmarking in Python or timing of functions. By subtracting the
 time `t0` recored immediately before a function call from the time
 immediately after the function call, an estimate of the elapsed
 cpu-time is obtained. In our module `DragCoefficientGeneric` the
-efficency is implemented with the codelines:
+efficiency is implemented with the codelines:
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# benchmark@# sort the dictionary 
 
 _Sorting of dictionaries_
@@ -1053,7 +1067,7 @@ FIGURE:[chapter1/7.png, width=400] Graphical illustration of Euler's method. lab
 ===== Example: Falling sphere with constant and varying drag =====
 label{ex:falling_sphere}
 
-We write (ref{eq:sphere_1st_order}) and (ref{eq:sphere_second_order}) as a sytem as follows,
+We write (ref{eq:sphere_1st_order}) and (ref{eq:sphere_second_order}) as a system as follows,
 !bt
 \begin{align}
 & \frac{dz}{dt}=v label{eq:1303a}\\ 
@@ -1137,7 +1151,7 @@ label{eq:1308}
 \mathbf{y}&(x_0)=\mathbf{a} \nonumber
 \end{align}
 !et
-where $\mathbf{y'}$, $\mathbf{f}$, $\mathbf{y}$ and $\mathbf{a}$ are column vectores with $p$ components.
+where $\mathbf{y'}$, $\mathbf{f}$, $\mathbf{y}$ and $\mathbf{a}$ are column vectors with $p$ components.
 
 The Euler scheme (ref{eq:1302}) used on (ref{eq:1308}) gives
 !bt
@@ -1397,7 +1411,7 @@ FIGURE:[chapter1/14.png, width=400]
 
 where $v$ is the absolute velocity, $v_f=$ is the velocity of the fluid, $v_r=v-v_f$ is the relative velocity between the fluid and the ball, $\alpha$ is the elevation angle, $v_0$ is the initial velocity and $\phi$ is the angle between the $x$-axis and $v_r$.
 
-$\mathbf{F}_l$ is the lift force stemming from the rotation of the ball (the Magnus-effect) and is normal to $v_r$. With the given direction the ball rotates counter-clockwise (backspin). $\mathbf{F}_d$ is the fluids resistance against the motion and is parallell to $v_r$. These forces are given by
+$\mathbf{F}_l$ is the lift force stemming from the rotation of the ball (the Magnus-effect) and is normal to $v_r$. With the given direction the ball rotates counter-clockwise (backspin). $\mathbf{F}_d$ is the fluids resistance against the motion and is parallel to $v_r$. These forces are given by
 !bt
 \begin{align}
 \mathbf{F}_d=\frac{1}{2}\rho _f AC_Dv_r^2
@@ -1501,7 +1515,7 @@ The right hand side in (ref{eq:1508}) is now implemented as the following functi
 
 The function `cdcl()` (may be downloaded "here": "https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/cdclgolfball.py") gives the drag and lift data for a given velocity and spin.
 
-The results are shown in in Figure ref{fig:golf_drag_lift}. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift.
+The results are shown in Figure ref{fig:golf_drag_lift}. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift.
 
 FIGURE:[chapter1/programs_and_modules/example_particle_motion_2d_2.png, width=700] Motion of golf ball with drag and lift. label{fig:golf_drag_lift}
 
