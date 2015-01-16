@@ -21,10 +21,10 @@ developed "Doconce": "https://github.com/hplgit/doconce" for flexible
 typesetting, and associate professor "Hallvard
 Trætteberg":"http://www.ntnu.edu/employees/hal" at IDI, NTNU
 (hal@idi.ntnu.no), who has developed the webpage-parser which
-identifies Python-code and it's integration in Eclipse IDEs (such as
+identifies Python-code for integration in Eclipse IDEs (such as
 LiClipse). The latter part of the development has been funded by the
 project
-"IKTiSU":"https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826"
+"IKTiSU.":"https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826"
 
 !split
 ========= Initial value problems for Ordinary Differential Equations =========
