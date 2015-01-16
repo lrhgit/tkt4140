@@ -78,6 +78,7 @@ Both from an analytical and numerical viewpoint initial value problems are easie
 
 If we are to solve an initial value problem of the type in Equation (ref{eq:1101}), we must first be sure that it has a solution. In addition we will demand that this solution is unique. A sufficient solution for this is that both $f(x,y)$ and $\frac{\partial f}{\partial y}$ are continuous in and around $x_0$. For (ref{eq:1102}) this conditions becomes that $f(x,y)$, $\frac{\partial f}{\partial y}$ and $\frac{\partial f}{\partial y'}$  are continuous in and around $x_0$. Similarly for higher order equations.
 
+!bblock
 _Violation of the criteria for uniqueness and existence_
 !bt
 \begin{equation}
@@ -85,7 +86,7 @@ y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
 \end{equation}
 !et
 Here $f=y^\frac{1}{3}$ and $\frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}}$. $f$ is continuous in $x=0$, but that's not the case for $\frac{\partial f}{\partial y}$. It may be shown that this ODE has two solutions: $y=0$ and $y=(\frac{2}{3}x)^\frac{2}{3}$. Hopefully this equation doesn't present a physical problem. 
-
+!eblock
 _A mathematical pendulum_
 A problem of more interest is shown below.
 
