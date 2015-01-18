@@ -1111,7 +1111,7 @@ v_t = \sqrt{\frac{g}{\alpha}} = 37.44
 \end{equation*}
 !et
 
-If we use Teylor's method from section ref{sec:taylor} we get the following expression by using four terms in the series expansion:
+If we use Taylor's method from section ref{sec:taylor} we get the following expression by using four terms in the series expansion:
 !bt
 \begin{align}
 label{eq:1305}
