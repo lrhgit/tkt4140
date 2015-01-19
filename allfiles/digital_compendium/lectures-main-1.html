@@ -1,0 +1,1819 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Numerical Methods for Engineers">
+
+<title>Numerical Methods for Engineers</title>
+
+
+<style type="text/css">
+/* bloodish style */
+
+body {
+  font-family: Helvetica, Verdana, Arial, Sans-serif;
+  color: #404040;
+  background: #ffffff;
+}
+h1 { font-size: 1.8em;  color: #8A0808; }
+h2 { font-size: 1.6em;  color: #8A0808; }
+h3 { font-size: 1.4em;  color: #8A0808; }
+h4 { color: #8A0808; }
+a { color: #8A0808; text-decoration:none; }
+tt { font-family: "Courier New", Courier; }
+/* pre style removed because it will interfer with pygments */
+p { text-indent: 0px; }
+hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+p.caption { width: 80%; font-style: normal; text-align: left; }
+hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
+               0,
+               None,
+               '___sec0'),
+              (u' Introduction ',
+               1,
+               u'section:introduction',
+               u'section:introduction'),
+              (u' Example: Violation of the criteria for uniqueness and existence ',
+               2,
+               None,
+               '___sec2'),
+              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u' Reduction of Higher order Equations ',
+               2,
+               u'subsec:reduction',
+               u'subsec:reduction'),
+              (u' Example: Reduction of higher order systems ',
+               2,
+               None,
+               '___sec5'),
+              (u' Scientific computing with Python ', 2, None, '___sec6'),
+              (u' Example: Sphere in free fall ',
+               2,
+               u'example:sphere_freefall',
+               u'example:sphere_freefall'),
+              (u' Python implementation of the drag coefficient function and how to plot it ',
+               3,
+               None,
+               '___sec8'),
+              (u' Python functions with vector arguments and modules ',
+               2,
+               None,
+               '___sec9'),
+              (u' How to make a Python-module and some useful programming features ',
+               2,
+               u'section:Python_module',
+               u'section:Python_module'),
+              (u' Differences ', 2, None, '___sec11'),
+              (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
+               3,
+               None,
+               '___sec12')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<center><h1>Numerical Methods for Engineers</h1></center>  <!-- document title -->
+
+
+
+<center><h1>A digital compendium</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Johan Kolstø Sønstabø, and Leif Rune Hellevik -->
+
+<center>
+<b>Johan Kolstø Sønstabø</b> [1]
+</center>
+
+<center>
+<b>Leif Rune Hellevik</b> [1]
+</center>
+
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Department of Structural Engineering, NTNU</b></center>
+<p>
+<center><h4>Jan 15, 2015</h4></center> <!-- date -->
+<!-- TOC: on -->
+
+<p>
+<!-- TKT4140 Numerical Methods with Computer Laboratory. -->
+
+<p>
+Based on: <em>Numeriske Beregninger</em> by J.B. Aarseth. 
+
+<p>
+Important elements:
+
+<ul>
+ <li> <a href="https://github.com/hplgit/doconce" target="_blank">Doconce</a> for flexible typesetting (prof. HP Langtangen, UiO)</li>
+ <li> Webpage-parser and integration in Eclipse (assoc. prof. H. Trætteberg, IDI, NTNU)</li>
+ <li> Funding: <a href="https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826" target="_blank">IKTiSU</a></li>
+</ul>
+
+<!-- !split --><br><br><br><br><br><br><br><br>
+
+<h1 id="___sec0">Initial value problems for Ordinary Differential Equations </h1> <hr>
+
+<h1 id="section:introduction">Introduction</h1>
+
+<p>
+With an initial value problem for an ordinary differential equation (ODE) we mean a problem where all boundary conditions are given for one and the same value of the independent variable. For a first order ODE we get e.g.
+$$
+\begin{align}
+\label{eq:1101}
+ y'(x)&=f(x,y) \\ 
+y(x_0)&=a  \nonumber
+\end{align}
+$$
+
+while for a second order ODE we get
+$$
+\begin{align}
+\label{eq:1102}
+y''(x)&=f(x,y,y') \\ 
+y(x_0)&=a,\ y'(x_0) = b \nonumber
+\end{align}
+$$
+
+A first order ODE, as shown in Equation \eqref{eq:1101}, will always be an <em>initial value problem</em>. For Equation \eqref{eq:1102}, on the other hand, we can for instance specify the boundary conditions as follows,
+$$
+\begin{align}
+y(x_0)=a,\ y(x_1) = b \nonumber
+\end{align}
+$$
+
+With these boundary conditions Equation \eqref{eq:1102} presents a <em>boundary value problem</em>. In many applications boundary value problems are more common than initial value problems. But the solution technique for initial value problems may often be applied to solve boundary value problems.
+
+<p>
+Both from an analytical and numerical viewpoint initial value problems are easier to solve than boundary value problems, and methods for solution of initial value problems are more developed than for boundary value problems.
+
+<p>
+If we are to solve an initial value problem of the type in Equation \eqref{eq:1101}, we must first be sure that it has a solution. In addition we will demand that this solution is unique. A sufficient solution for this is that both \( f(x,y) \) and \( \frac{\partial f}{\partial y} \) are continuous in and around \( x_0 \). For \eqref{eq:1102} this conditions becomes that \( f(x,y) \), \( \frac{\partial f}{\partial y} \) and \( \frac{\partial f}{\partial y'} \)  are continuous in and around \( x_0 \). Similarly for higher order equations.
+
+<h2 id="___sec2">Example: Violation of the criteria for uniqueness and existence </h2>
+$$
+\begin{equation}
+y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
+\end{equation}
+$$
+
+Here \( f=y^\frac{1}{3} \) and \( \frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}} \). \( f \) is continuous in \( x=0 \), but that's not the case for \( \frac{\partial f}{\partial y} \). It may be shown that this ODE has two solutions: \( y=0 \) and \( y=(\frac{2}{3}x)^\frac{2}{3} \). Hopefully this equation doesn't present a physical problem. A problem of more interest is shown below.
+
+<p>
+<center><p><img src="chapter1/1.png" align="bottom" width=200></p></center>
+
+<p>
+The figure shows a mathematical pendulum where the motion is described by the following equation:
+$$
+\begin{align}
+ \frac{\partial^2 \theta}{\partial \tau^2} + \frac{g}{l}\sin (\theta) = 0
+\label{eq:1103a}\\ 
+\theta (0) = \theta_0 ,\ \frac{d\theta}{d\tau}(0) = 0
+\label{eq:1103b}
+\end{align}
+$$
+
+We introduce a dimensionless time \( t \) given by \( t=\sqrt{\frac{g}{l}}\cdot\tau \) such that \eqref{eq:1103a} and \eqref{eq:1103b} may be written as
+$$
+\begin{align}
+\label{eq:1104a}
+\ddot{\theta}(t) + \sin (\theta (t)) = 0 \\ 
+\theta (0) = \theta_0 ,\ \dot\theta (0) = 0
+\label{eq:1104b}
+\end{align}
+$$
+
+The dot denotes derivation with respect to the dimensionless time \( t \). For small displacements we can set \( \sin (\theta) \approx \theta \), such that \eqref{eq:1104a} and \eqref{eq:1104b} becomes
+$$
+\begin{align}
+\label{eq:1105a}
+\ddot\theta (t)& + \theta (t) = 0 \\ 
+\theta (0)& = \theta_0 ,\ \dot\theta (0) = 0
+\label{eq:1105b}
+\end{align}
+$$
+
+
+<p>
+The difference between \eqref{eq:1104a} and \eqref{eq:1105a} is that the latter is linear, while the first is non-linear. The analytical solution of Equations \eqref{eq:1104a} and \eqref{eq:1104b} is given in Appendix G.2. in the
+<a href="./NumeriskeBeregninger.pdf" target="_blank">compendium</a>. An \( n \)'th order linear ODE may be written on the form
+$$
+\begin{equation}
+\label{eq:1106}
+a_n(x)y^{(n)}(x)+a_{n-1}(x)y^{(n-1)}(x)+\cdots+a_1(x)y'(x)+a_0(x)y(x)=b(x)
+\end{equation}
+$$
+
+where \( y^{(k)}, k=0,1,\dots n \) is referring to the \( k \)'th derivative and \( y^{(0)}(x)=y(x) \).
+
+<p>
+If one or more of the coefficients \( a_k \) also are functions of at least one \( y^{(k)},\ k = 0,1,\dots n \), the ODE is non-linear. From \eqref{eq:1106} it follows that \eqref{eq:1104a} is non-linear and \eqref{eq:1105a} is linear.
+
+<p>
+Analytical solutions of non-linear ODEs are rare, and except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
+$$
+\begin{equation}
+a_2(x)\cdot y''(x)+a_1(x)\cdot y'(x) +a_0(x)\cdot y(x) =b(x)\nonumber
+\end{equation}
+$$
+
+
+<p>
+From a numerical point of view the main difference between linear and non-linear equations is the multitude of solutions that may arise when solving non-linear equations. In a linear ODE it will be evident from the equation if there are special critical points where the solution change character, while this is often not the case for non-linear equations.
+
+<p>
+For instance the equation \( y'(x)=y^2(x),\ y(0)=1 \) has the solution \( y(x)=\frac{1}{1-x} \) such that \( y(x) \to \infty  \) for \( x \to 1 \), which isn't evident from the equation itself.
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br>
+
+<h2 id="sec:taylor">Taylor's method</h2>
+Taylor's formula for series expansion of a function \( f(x) \) around \( x_0 \) is given by
+$$
+\begin{equation}
+f(x)=f(x_0)+(x-x_0)\cdot f'(x_0)+\frac{(x-x_0)^2}{2}f''(x_0)+\dots +\frac{(x-x_0)^n}{n !}f^{(n)}(x_0)+ \text{remainder} \nonumber
+\end{equation}
+$$
+
+Let's use this formula to find the first terms in the series expansion for \( \theta(t) \) around \( t=0 \) from the differential equation given in \eqref{eq:1105a}:
+$$
+\begin{align*}
+&\ddot{\theta} (t) +\theta (t) = 0 \\ 
+&\theta (0) = \theta_0,\  \dot{\theta}(0)=0
+\end{align*}
+$$
+
+We set \( \theta(t) \approx \theta(0)+t\cdot\dot{\theta}(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0) \). By use of the initial conditions \( \theta(0)=\theta_0,\ \dot\theta(0)=0 \) we get
+$$
+\begin{equation}
+\theta(t)\approx\theta_0 +\frac{t^2}{2}\ddot\theta+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)  \nonumber
+\end{equation}
+$$
+
+From the differential equation we have \( \ddot\theta(t)=-\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0 \)
+
+<p>
+By differentiation we get \( \dddot\theta(t)=-\dot\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0 \)
+
+<p>
+We now get
+$$
+\begin{equation}
+\theta^{(4)}(t)=-\ddot\theta(t) \to \theta^{(4)}(0)=-\ddot\theta(0)=\theta_0 \nonumber
+\end{equation}
+$$
+
+Setting this into the expression for \( \theta(t) \) gives \( \theta(t)\approx \theta_0\left(1-\frac{t^2}{2}+\frac{t^4}{24}\right)=\theta_0\left(1-\frac{t^2}{2!}+\frac{t^4}{4!}\right) \)
+
+<p>
+If we include \( n \) terms, we get
+$$
+\begin{equation}
+\theta(t)\approx \theta_0\cdot \left(1-\frac{t^2}{2!}+\frac{t^4}{4!}-\frac{t^6}{6!}+\dots+(-1)^n \frac{t^{2n}}{(2n)!}\right) \nonumber
+\end{equation}
+$$
+
+
+<p>
+If we let \( n \to \infty \) we see that the parentheses give the series for \( \cos(t) \). In this case we have found the exact solution \( \theta(t)=\theta_0\cos(t) \) of the differential equation. Since this equation is linear we manage in this case to find a connection between the coefficients such that we recognize the series expansion of \( \cos(t) \).
+
+<p>
+Let's try the same procedure on the non-linear version \eqref{eq:1104a}
+$$
+\begin{align} \nonumber
+\ddot{\theta}(t)& + \sin \left(\theta (t)\right) = 0 \\ 
+\theta (0) &= \theta_0 ,\ \dot\theta (0) = 0 \nonumber
+\end{align}
+$$
+
+We start in the same manner: \( \theta(t) \approx \theta(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0) \).
+From the differential equation we have \( \ddot\theta=-\sin (\theta) \to \ddot\theta(0)=-\sin(\theta_0) \), which by consecutive differentiation gives
+$$
+\begin{align}
+&\dddot\theta=-\cos(\theta)\cdot\dot\theta \to \dddot\theta(0)=0 \nonumber \\ 
+&\theta^{(4)}=\sin(\theta)\cdot\dot\theta^2-\cos(\theta)\cdot\ddot\theta \to \theta^{(4)}(0)=-\ddot\theta(0)\cos(\theta(0))=\sin(\theta_0)\cos(\theta_0) \nonumber
+\end{align}
+$$
+
+Inserted above: \( \theta(t) \approx \theta_0 -\frac{t^2}{2}\sin(\theta_0) + \frac{t^4}{24} \sin (\theta_0) \cos (\theta_0) \).
+
+<p>
+We may include more terms, but this complicates the differentiation and it is hard to find any connection between the coefficients. When we have found an approximation for \( \theta(t) \) we can get an approximation for \( \dot\theta(t) \) by differentiation: \( \dot\theta(t) \approx -t\sin(\theta_0) + \frac{t^3}{8} \sin (\theta_0) \cos (\theta_0) \).
+
+<p>
+Series expansions are often useful around the starting point when we solve initial value problems. The technique may also be used on non-linear equations.
+
+<p>
+Symbolic mathematical programs like <b>Maple</b> and <b>Mathematica</b> do this easily.
+
+<p>
+We will end with one of the earliest known differential equations, which Newton solved with series expansion in 1671.
+$$
+\begin{equation*}
+y'(x) =1-3x+y+x^2+xy,\ y(0)=0
+\end{equation*}
+$$
+
+Series expansion around \( x=0 \) gives
+$$
+\begin{equation*}
+y(x) \approx x\cdot y'(0)+ \frac{x^2}{2} y''(0)+\frac{x^3}{6}y'''(0)+\frac{x^4}{24}y^{(4)}(0)
+\end{equation*}
+$$
+
+From the differential equation we get \( y'(0)=1 \). By consecutive differentiation we get
+$$
+\begin{equation*}
+  \begin{array}{lclclcr}
+    y''(x) &=&-3+y'+2x+xy'+y &\to& y''(0)&=&-2\\ 
+    y'''(x)&=& y''+2+xy''+2y'  &\to& y'''(0)&=& 2\\ 
+    y^{(4)}(x)&=&y'''+xy'''+3y'' &\to &y^{(4)}(0)&=&-4
+  \end{array}
+\end{equation*}
+$$
+
+Inserting above gives \( y(x) \approx x-x^2+\frac{x^3}{3}-\frac{x^4}{6} \).
+
+<p>
+Newton gave the following solution: \( y(x) \approx  x-x^2+\frac{x^3}{3}-\frac{x^4}{6}+ \frac{x^5}{30}-\frac{x^6}{45} \).
+
+<p>
+Now you can check if Newton calculated correctly. Today it is possible to give the solution on closed form with known functions as follows,
+$$
+\begin{align*}
+y(x)=&3\sqrt{2\pi e}\cdot \exp\left[x\left(1+\frac{x}{2}\right)\right]\cdot \left[\text{erf}\left(\frac{\sqrt{2}}{2}(1+x)\right)-\text{erf}\left(\frac{\sqrt{2}}{2}\right)\right]\\ 
++& 4\cdot\left[1-\exp[x\left(1+\frac{x}{2}\right)\right]-x
+\end{align*}
+$$
+
+
+<p>
+Note the combination \( \sqrt{2\pi e} \). See Hairer et al. <a href="#hairer2008solving">[1]</a> section 1.2 for more details on classical differential equations.
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br>
+
+<h2 id="subsec:reduction">Reduction of Higher order Equations</h2>
+
+<p>
+When we are solving initial value problems, we usually need to write these as sets of first order equations, because most of the program packages require this.
+
+<p>
+Example: \( y''(x)+y(x)=0,\ y(0)=a_0,\ y'(0)=b_0 \)
+
+<p>
+We may for instance write this equation in a system as follows,
+$$
+\begin{align*}
+y'(x)=&g(x)\\ 
+g'(x)=&-y(x)\\ 
+y(0)=&a_0,\  g(0)=b_0
+\end{align*}
+$$
+
+
+<p>
+Another example:
+$$
+\begin{align*}
+&y'''(x)+2y''(x)-(y'(x))^2+2y(x)=x^2\\ 
+&y(0)=a_0,\ y'(0)=b_0,\ y''(0)=c_0
+\end{align*}
+$$
+
+We set \( y'(x)=g(x) \) and \( y''(x)=g'(x)=f(x) \), and the system may be written as
+$$
+\begin{align*}
+y'(x)=&g(x)\\ 
+g'(x)=&f(x)\\ 
+f'(x)=&-2f(x)+(g(x))^2-2y(x)+x^2
+\end{align*}
+$$
+
+with initial values \( y(0)=a_0,\ g(0)=b_0,\ f(0)=c_0 \).
+
+<p>
+This is fair enough for hand calculations, men when we use program packages a more systematic procedure is needed. Let's use the equation above as an example.
+
+<p>
+We start by renaming \( y \) to \( y_1 \). We then get the following procedure:
+$$
+\begin{align*}
+y&'=y'_1=y_2\\ 
+y&''=y''_1=y'_2=y_3
+\end{align*}
+$$
+
+The system may then be written as
+$$
+\begin{align*}
+y'_1(x)=&y_2(x)\\ 
+y'_2(x)=&y_3(x)\\ 
+y'_3(x)=&-2y_3(x)+(y_2(x))^2-2y_1(x)+x^2
+\end{align*}
+$$
+
+with initial conditions \( y_1(0)=a_0,\ y_2(0)=b_0,\ y_3(0)=c_0 \).
+
+<p>
+The general procedure to reduce a higher order ODE to a system of first order ODEs becomes the following:
+
+<p>
+Given the equation
+$$
+\begin{align}
+\label{eq:1127}
+&y^{(m)}=f(x,y,y',y'',\dots,y^{(m-1)})\\ 
+&y(x_0)=a_1,\ y'(x_0)=a_2,\ \dots,y^{(m-1)}(x_0)=a_m \nonumber\\ 
+\end{align}
+$$
+
+where
+$$
+\begin{align*}
+y^{(m)}\equiv \frac{d^my}{dx^m}
+\end{align*}
+$$
+
+with \( y=y_1 \), we set
+$$
+\begin{align}
+&y'_1=y_2 \nonumber \\ \nonumber
+&y'_2=y_3\\ \nonumber
+&.\\ \nonumber
+&.\\ \nonumber
+&y'_{m-1}=y_m\\\nonumber\\\nonumber
+&y_1(x_0)=a_1,y_2(x_0)=a_2,\dots,y_m(x_0)=a_m
+\label{eq:1128}
+\end{align}
+$$
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<h2 id="___sec5">Example: Reduction of higher order systems </h2>
+Write the following ODE as a system of first order ODEs:
+$$
+\begin{align*}
+y'''-y'y''-(y')^2+2y=x^3 \\ 
+y(0)=a,\ y'(0)=b,\ y''(0)=c
+\end{align*}
+$$
+
+
+<p>
+<!-- !bsol -->
+First we write \( y'''=y'y''+(y')^2-2y+x^3 \).
+
+<p>
+By use of \eqref{eq:1128} we get
+$$
+\begin{align*}
+&y_1'=y_2\\ 
+&y_2'=y_3\\ 
+&y_3'=y_2y_3+(y_2)^2-2y_1+x^3\\ 
+&y_1(0)=a,\ y_2(0)=b,\ y_3=c
+\end{align*}
+$$
+
+<!-- !esol -->
+<!-- !ec -->
+</div>
+<!-- end box -->
+
+
+<h2 id="___sec6">Scientific computing with Python </h2>
+In this course we will use the programming language <b>Python</b> to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example <a href="http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" target="_blank">Intro to scientific computing with Python</a> before proceeding. If you are familiar with <b>Matlab</b> the transfer to Python should not be a problem. 
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<h2 id="example:sphere_freefall">Example: Sphere in free fall</h2>
+
+<p>
+<center><p><img src="chapter1/programs_and_modules/2.png" align="bottom" width=200></p></center>
+
+<p>
+The figure shows a falling sphere with a diameter \( d \) and mass \( m \)
+that falls vertically in a fluid. Use of Newton's 2nd law in the
+\( z \)-direction gives
+$$
+\begin{equation}
+\label{eq:newton_2nd_sphere}
+m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\right|A_kC_D,
+\end{equation}
+$$
+
+where the different terms are interpreted as follows: \( m=\rho_k V \),
+where \( \rho_k \) is the density of the sphere and \( V \) is the sphere
+volume.  The mass of the displaced fluid is given by \( m_f=\rho_f V \),
+where \( \rho_f \) is the density of the fluid, whereas buoyancy and the
+drag coefficient are expressed by \( m_f \, g \) and \( C_D \), respectively.
+The projected area of the sphere is given by \( A_k = \frac{\pi}{4}d^2 \)
+and \( \frac{1}{2}m_f \) is the hydro-dynamical mass (added mass). The
+expression for the hydro-dynamical mass is derived in White
+<a href="#white1999fluid">[2]</a>, page 539-540. To write Equation
+\eqref{eq:newton_2nd_sphere} on a more convenient form we introduce the
+following abbreviations:
+$$
+\begin{equation}
+\rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
+\end{equation}
+$$
+
+in addition to the drag coefficient \( C_D \) which is a function of the Reynolds number \( \displaystyle R_e = \frac{vd}{\nu} \), where \( \nu \) is the kinematical viscosity. Equation \eqref{eq:newton_2nd_sphere} may then be written as
+$$
+\begin{equation}
+\label{eq:sphere_1st_order}
+\frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
+\end{equation}
+$$
+
+In air we may often neglect the buoyancy term and the hydro-dynamical
+mass, whereas this is not the case for a liquid. Introducing
+\( v=\frac{dz}{dt} \) in Equation \eqref{eq:sphere_1st_order}, we get a 2nd
+order ODE as follows
+$$
+\begin{equation}
+\label{eq:sphere_second_order}
+\frac{d^2z}{dt^2}=\frac{1}{A}\left(B-C\cdot \frac{dz}{dt}\bigg|\frac{dz}{dt}\bigg|C_d\right)
+\end{equation}
+$$
+
+For Equation \eqref{eq:sphere_second_order} two initial conditions must
+be specified, e.g. \( v=v_0 \) and \( z=z_0 \) for \( t=0 \).
+
+<p>
+Figure <a href="#fig:CDsphere">1</a> illustrates \( C_D \) as a function of \( Re \). The values in the plot are not as accurate as the number of digits in the
+program might indicate. For example is the location and the size of
+the "valley" in the diagram strongly dependent of the degree of
+turbulence in the free stream and the roughness of the sphere. As
+the drag coefficient \( C_D \) is a function of the Reynolds number, it is
+also a function of the solution \( v \) (i.e. the velocity) of the ODE in
+Equation \eqref{eq:sphere_1st_order}. We will use the function
+\( C_D(Re) \) as an example of how functions may be implemented in Python.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 1:  Drag coefficient \( C_D \) as function of the Reynold's number \( R_e \). <div id="fig:CDsphere"></div> </p></center>
+<p><img src="chapter1/programs_and_modules/example_sphere.png" align="bottom" height=400 width=600></p>
+</center>
+
+<p>
+<!-- @@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot -->
+
+<p>
+</div>
+<!-- end box -->
+
+
+<h3 id="___sec8">Python implementation of the drag coefficient function and how to plot it </h3>
+
+<p>
+The complete Python program <b>CDsphere.py</b> used to plot the drag
+coefficient in the example above is listed below.  The program uses a
+function <code>cd_sphere</code> which results from a curve fit to the data of
+Evett and Liu <a href="#evett19892">[3]</a>. In our setting we will use this
+function for two purposes, namely to demonstrate how functions and modules are
+implemented in Python and finally use these functions in the solution of the ODE in Equations \eqref{eq:sphere_1st_order} and  \eqref{eq:sphere_second_order}. 
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/CDsphere.py</span>
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
+
+<span style="color: #408080; font-style: italic"># Define the function cd_sphere</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;This function computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># Calculate drag coefficient</span>
+Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
+CD <span style="color: #666666">=</span> zeros(Npts)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Npts<span style="color: #666666">-1</span>)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
+    CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
+
+<span style="color: #408080; font-style: italic"># Make plot</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot
+pyplot<span style="color: #666666">.</span>plot(Re, CD, <span style="color: #BA2121">&#39;-b&#39;</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+pyplot<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+pyplot<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
+pyplot<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
+pyplot<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
+pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;example_sphere.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+pyplot<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+In the following, we will break up the program and explain the different parts. In the first code line,
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> logspace, zeros
+</pre></div>
+<p>
+the functions <code>logspace</code> and <code>zeros</code> are imported from the package <code>numpy</code>. The <code>numpy</code> package (<em>NumPy</em> is an abbreviation for <em>Numerical Python</em>) enables the use of <em>array</em> objects. Using <code>numpy</code>  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called <em>vectorization</em> and may cause a dramatic increase in computational speed of Python programs. The function <code>logspace</code> works on a logarithmic scale just as the function <code>linspace</code> works on a regular scale. The function <code>zeros</code> creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at <a href="http://www.numpy.org" target="_blank"><tt>http://www.numpy.org</tt></a>.
+
+<p>
+In <b>CDsphere.py</b> a function <code>cd_sphere</code> was defined as follows:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;This function computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p, <span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p, log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+The function takes <code>Re</code> as an argument and returns the value <code>CD</code>. All Python functions begin with <code>def</code>, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument, <code>Re</code>. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a function it is common to use the <code>return</code> statement to return the value of the function.
+
+<p>
+Variables defined inside a function, such as <code>p</code> and <code>x1</code> above, are <em>local</em> variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are <em>global</em> variables and may be accessed anywhere, also inside functions.
+
+<p>
+Three more functions from the <code>numpy</code> package are imported in the function. They are not used outside the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the <a href="http://www.numpy.org" target="_blank">documentation of NumPy</a> for details about the different functions.
+
+<p>
+The function above contains an example of the use of the <code>if-elif-else</code> block. The block begins with <code>if</code> and a boolean expression. If the boolean expression evaluates to <code>true</code> the <em>indented</em> statements following the <code>if</code> statement are carried out. If not, the boolean expression following the <code>elif</code> is evaluated. If none of the conditions are evaluated to <code>true</code> the statements following the <code>else</code> are carried out.
+
+<p>
+In the code block
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Npts <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+Re <span style="color: #666666">=</span> logspace(<span style="color: #666666">-1</span>, <span style="color: #666666">7</span>, Npts, <span style="color: #008000">True</span>, <span style="color: #666666">10</span>)
+CD <span style="color: #666666">=</span> zeros(Npts)
+i_list <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, Npts<span style="color: #666666">-1</span>)
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> i_list:
+    CD[i] <span style="color: #666666">=</span> cd_sphere(Re[i])
+</pre></div>
+<p>
+the function <code>cd_sphere</code> is called. First, the number of data points to be calculated are stored in the integer variable <code>Npts</code>. Using the <code>logspace</code> function imported earlier, <code>Re</code> is assigned an array object which has float elements with values ranging from \( 10^{-1} \) to \( 10^7 \). The values are uniformly distributed along a 10-logarithmic scale. <code>CD</code> is first defined as an array with <code>Npts</code> zero elements, using the <code>zero</code> function. Then, for each element in <code>Re</code>, the drag coefficient is calculated using our own defined function <code>cd_sphere</code>, in a <code>for</code> loop, which is explained in the following.
+
+<p>
+The function <code>range</code> is a built-in function that generates a list containing arithmetic progressions. The <code>for i in i_list</code> construct creates a loop over all elements in <code>i_list</code>. In each pass of the loop, the variable <code>i</code> refers to an element in the list, starting with <code>i_list[0]</code> (0 in this case) and ending with the last element <code>i_list[Npts-1]</code> (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call <code>cd_sphere(Re[i])</code> is assigned to <code>CD[i]</code>. Each statement in the block must be indented.
+
+<p>
+Lastly, the drag coefficient is plotted and the figure generated:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> pyplot
+pyplot<span style="color: #666666">.</span>plot(Re, CD, <span style="color: #BA2121">&#39;-b&#39;</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+pyplot<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+pyplot<span style="color: #666666">.</span>yscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xscale(<span style="color: #BA2121">&#39;log&#39;</span>)
+pyplot<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
+pyplot<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
+pyplot<span style="color: #666666">.</span>grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
+pyplot<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;example_sphere.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+pyplot<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+To generate the plot, the package <code>matplotlib</code> is used. <code>matplotlib</code> is the standard package for curve plotting in Python. For simple plotting the <code>matplotlib.pyplot</code> interface provides a Matlab-like interface, which has been used here. For documentation and explanation of this package, we refer to <a href="http://www.matplotlib.org" target="_blank"><tt>http://www.matplotlib.org</tt></a>.
+
+<p>
+First, the curve is generated using the function <code>plot</code>, which takes the x-values and y-values as arguments (<code>Re</code> and <code>CD</code> in this case), as well as a string specifying the line style, like in Matlab. Then changes are made to the figure in order to make it more readable, very similarly to how it is done in Matlab. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the <code>savefig</code> function. Lastly, the figure is showed on the screen with the <code>show</code> function.
+
+<p>
+To change the font size the function <code>rc</code> is used. This function takes in the object <code>font</code>, which is a <em>dictionary</em> object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of <code>key:value</code> pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: <code>{}</code>. Placing a comma-separated list of <code>key:value</code> pairs within the braces adds initial <code>key:value</code> pairs to the dictionary. In this case the dictionary <code>font</code> contains one <code>key:value</code> pair, namely <code>'size' : 16</code>.
+
+<p>
+Descriptions and explanations of all functions available in <code>pyplot</code> may be found <a href="http://matplotlib.org/api/pyplot_summary.html" target="_blank">here</a>.
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec9">Python functions with vector arguments and modules </h2>
+
+<p>
+For many numerical problems variables are most conveniently expressed
+by arrays containing many numbers (i.e. vectors) rather than single
+numbers (i.e. scalars). The function <code>cd_sphere</code> above takes a scalar
+as an argument and returns a scalar value too. For computationally
+intensive algorithms where variables are stored in arrays this is
+inconvenient and time consuming, as each of the array elements must be
+sent to the function independently. In the following, we will
+therefore show how to implement functions with vector arguments that
+also return vectors. This may be done in various ways. Some
+possibilities are presented in the following, and, as we shall see,
+some are more time consuming than others. We will also demonstrate how
+the time consumption (or efficiency) may be tested.
+
+<p>
+A simple extension of the single-valued function <code>cd_sphere</code> is as follows:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_py_vector</span>(ReNrs):
+    CD <span style="color: #666666">=</span> zeros_like(ReNrs)
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> Re <span style="color: #AA22FF; font-weight: bold">in</span> ReNrs:
+        CD[counter] <span style="color: #666666">=</span> cd_sphere(Re)
+        counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+The new function <code>cd_sphere_py_vector</code> takes in an array <code>ReNrs</code> and
+calculates the drag coefficient for each element using the previous
+function <code>cd_sphere</code>. This does the job, but is not very efficient.
+
+<p>
+A second version is implemented in the function
+<code>cd_sphere_vector</code>. This function takes in the array <code>Re</code> and
+calculates the drag coefficient of all elements by multiple calls of
+the function <code>numpy.where</code>; one call for each condition, similarly as
+each <code>if</code> statement in the function <code>cd_sphere</code>. The function is shown
+here:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval, where, zeros_like
+    CD <span style="color: #666666">=</span> zeros_like(Re)
+   
+    CD <span style="color: #666666">=</span> where(Re <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>, <span style="color: #666666">0.0</span>, CD)     <span style="color: #408080; font-style: italic"># condition 1</span>
+    
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=0.5</span>), <span style="color: #666666">24/</span>Re, CD) <span style="color: #408080; font-style: italic"># condition 2</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=100.0</span>), polyval(p, <span style="color: #666666">1.0/</span>Re), CD) <span style="color: #408080; font-style: italic">#condition 3</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span>)  <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>), polyval(p, <span style="color: #666666">1.0/</span>log10(Re)), CD) <span style="color: #408080; font-style: italic">#condition 4</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span>)  <span style="color: #666666">&amp;</span>  (Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>), polyval(p, log10(Re)), CD) <span style="color: #408080; font-style: italic">#condition 5</span>
+
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>), <span style="color: #666666">91.08*</span>(log10(Re<span style="color: #666666">/4.5e5</span>))<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>, CD) <span style="color: #408080; font-style: italic">#condition 6</span>
+
+    p  <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">5.05e5</span>)  <span style="color: #666666">&amp;</span>  (Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">8.0e6</span>), polyval(p, log10(Re)), CD) <span style="color: #408080; font-style: italic">#condition 7</span>
+    
+    CD <span style="color: #666666">=</span> where(Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>, <span style="color: #666666">0.2</span>, CD)  <span style="color: #408080; font-style: italic"># condition 8</span>
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+A third approach we will try is using boolean type variables. The 8
+variables <code>condition1</code> through <code>condition8</code> in the function
+<code>cd_sphere_vector_bool</code> are boolean variables of the same size and
+shape as <code>Re</code>. The elements of the boolean variables evaluate to
+either <code>True</code> or <code>False</code>, depending on if the corresponding element in
+<code>Re</code> satisfy the condition the variable is assigned.
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector_bool</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval, zeros_like
+       
+    condition1 <span style="color: #666666">=</span> Re <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>
+    condition2 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>)
+    condition3 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0.5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>)
+    condition4 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">100.0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>)
+    condition5 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">1.0e4</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>)
+    condition6 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">3.35e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>)
+    condition7 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">5.0e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">8.0e6</span>)
+    condition8 <span style="color: #666666">=</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>
+    
+    CD <span style="color: #666666">=</span> zeros_like(Re)
+    CD[condition1] <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    
+    CD[condition2] <span style="color: #666666">=</span> <span style="color: #666666">24/</span>Re[condition2]
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>,<span style="color: #666666">-14.05</span>,<span style="color: #666666">34.87</span>,<span style="color: #666666">0.658</span>])
+    CD[condition3] <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>Re[condition3]) 
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>,<span style="color: #666666">43.72</span>,<span style="color: #666666">-17.08</span>,<span style="color: #666666">2.41</span>])
+    CD[condition4] <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>log10(Re[condition4]))
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>,<span style="color: #666666">2.031</span>,<span style="color: #666666">-8.472</span>,<span style="color: #666666">11.932</span>])
+    CD[condition5] <span style="color: #666666">=</span> polyval(p,log10(Re[condition5]))
+    
+    CD[condition6] <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>(log10(Re[condition6]<span style="color: #666666">/4.5e5</span>))<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    
+    p  <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>,<span style="color: #666666">1.1905</span>,<span style="color: #666666">-7.332</span>,<span style="color: #666666">14.93</span>])
+    CD[condition7] <span style="color: #666666">=</span> polyval(p,log10(Re[condition7]))
+    
+    CD[condition8] <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    
+    <span style="color: #008000; font-weight: bold">return</span> CD
+</pre></div>
+<p>
+Lastly, the built-in function <code>vectorize</code> is used to automatically
+generate a vector-version of the function <code>cd_sphere</code>, as follows:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">cd_sphere_auto_vector <span style="color: #666666">=</span> vectorize(cd_sphere)
+</pre></div>
+<p>
+To provide a convenient and practical means to compare the various
+implementations of the drag function, we have collected them all in a
+file <b>DragCoefficientGeneric.py</b>. This file constitutes a Python module which is a concept we will discuss in the section <a href="#section:Python_module">How to make a Python-module and some useful programming features</a>.
+
+<h2 id="section:Python_module">How to make a Python-module and some useful programming features</h2>
+
+<p>
+<b>Python modules</b> A module is a file containing Python definitions and
+statements and represents a convenient way of collecting useful and
+related functions, classes or Python code in a single file. A
+motivation to implement the drag coefficient function was that we
+should be able to import it in other programs to solve e.g. the
+problems outlined in <a href="#example:sphere_freefall">Example: Sphere in free fall</a>. In general, a file
+containing Python-code may be executed either as a main program
+(script), typically with <code>python filename.py</code> or imported in another
+script/module with <code>import filename</code>.
+
+<p>
+A module file should not execute a main program, but rather just
+define functions, import other modules, and define global
+variables. 
+Inside modules, the standard practice is to only have functions and
+not any statements outside functions. The reason is that all
+statements in the module file are executed from top to bottom during
+import in another module/script <a href="#langtangen14">[4]</a>, and thus a
+desirable behavior is no output to avoid confusion. However, in many
+situations it is also desirable to allow for tests or demonstration of
+usage inside the module file, and for such situations the need for a
+main program arises. To meet these demands Python allows for a
+fortunate construction to let a file act both as a module with
+function definitions only (i.e. no main program) and as an ordinary
+program we can run, with functions and a main program. The latter is possible by letting the
+main program follow an <code>if</code> test of the form: 
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span><span style="color: #BA2121">&#39;__main__&#39;</span>: 
+    <span style="color: #666666">&lt;</span>main program statements<span style="color: #666666">&gt;</span> 
+</pre></div>
+<p>
+The <code>__name__</code> variable is automatically defined in any module and
+equals the module name if the module is imported in another
+program/script, but when the module file is executed as a program,
+<code>__name__</code> equals the string <code>'__main__'</code>. Consequently, the <code>if</code> test
+above will only be true whenever the module file is executed as a
+program and allow for the execution of the <code>&lt;main program
+statements&gt;</code>.  The <code>&lt;main program statements&gt;</code> is normally referred to
+as the <em>test block</em> of a module.
+
+<p>
+The module name is the file name without the suffix <code>.py</code>
+<a href="#python14">[5]</a>, i.e. the module contained in the module file <code>filename.py</code> has the
+module name <code>filename</code>. Note that a module can contain executable
+statements as well as function definitions. These statements are
+intended to initialize the module and are executed only the first time
+the module name is encountered in an import statement. They are also
+run if the file is executed as a script.
+
+<p>
+Below we have listed the content of the file
+<code>DragCoefficientGeneric.py</code> to illustrate a specific implementation of
+the module <code>DragCoefficientGeneric</code> and some other useful programming
+features in Python. The functions in the module are the various
+implementations of the drag coefficient functions from the previous
+section.
+
+<p>
+<b>Python lists and dictionaries</b> 
+
+<ul>
+    <li> Lists hold a list of values and are initialized with empty
+      brackets, e.g. <code>fncnames = []</code>. The values of the list are
+      accessed with an index, starting from zero. The first value of
+      <code>fncnames</code> is <code>fncnames[0]</code>, the second value of <code>fncnames</code> is
+      <code>fncnames[1]</code> and so on. You can remove values from the list,
+      and add new values to the end by <code>fncnames</code>. Example:
+      <code>fncnames.append(name)</code> will append <code>name</code> as the last value of
+      the list <code>fncnames</code>. In case it was empty prior to the
+      append-operation, <code>name</code> will be the only element in the list.</li>
+    <li> Dictionaries are similar to what their name suggests - a
+      dictionary - and an empty dictionary is initialized with empty
+      braces, e.g. <code>CD = {}</code>.  In a dictionary, you have an 'index' of
+      words or keys and the values accessed by their 'key'. Thus, the
+      values in a dictionary aren't numbered or ordered, they are only
+      accessed by the key. You can add, remove, and modify the values
+      in dictionaries. For example with the statement <code>CD[name] =
+      func(ReNrs)</code> the results of <code>func(ReNrs)</code> are stored in the list
+      <code>CD</code> with key <code>name</code>.</li>
+</ul>
+
+To illustrate a very powerful feature of Python data structures
+allowing for lists of e.g. function objects we put all the function
+names in a list with the statement:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    funcs <span style="color: #666666">=</span> [cd_sphere_py_vector, cd_sphere_vector, cd_sphere_vector_bool, \ 
+             cd_sphere_auto_vector]  <span style="color: #408080; font-style: italic"># list of functions to test</span>
+</pre></div>
+<p>
+which allows for convenient looping over all of the functions with the following construction:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
+</pre></div>
+<p>
+<b>Exception handling</b> Python has a very convenient construction for
+testing of potential errors with <a href="https://wiki.python.org/moin/HandlingExceptions" target="_blank">try-except</a> blocks: 
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">try</span>:
+    <span style="color: #666666">&lt;</span>statements<span style="color: #666666">&gt;</span> 
+<span style="color: #008000; font-weight: bold">except</span> ExceptionType1: 
+    <span style="color: #666666">&lt;</span>remedy <span style="color: #008000; font-weight: bold">for</span> ExceptionType1 errors<span style="color: #666666">&gt;</span>
+<span style="color: #008000; font-weight: bold">except</span> ExceptionType2: 
+    <span style="color: #666666">&lt;</span>remedy <span style="color: #008000; font-weight: bold">for</span> ExceptionType1 errors<span style="color: #666666">&gt;</span> 
+<span style="color: #008000; font-weight: bold">except</span>:
+    <span style="color: #666666">&lt;</span>remedy <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">any</span> other errors<span style="color: #666666">&gt;</span> 
+</pre></div>
+<p>
+In the <code>DragCoefficientGeneric</code> module, this feature is used to handle
+the function name for a function which has been vectorized
+automatically. For such a function <code>func.func_name</code> has no value and
+will return an error, and the name may be found by the statements in
+the exception block.
+
+<p>
+<b>Efficiency and benchmarking</b> The function <code>clock</code> in the module
+<a href="https://docs.python.org/2/library/time.html" target="_blank">time</a>, return a time
+expressed in seconds for the current statement and is frequently used
+for benchmarking in Python or timing of functions. By subtracting the
+time <code>t0</code> recored immediately before a function call from the time
+immediately after the function call, an estimate of the elapsed
+cpu-time is obtained. In our module <code>DragCoefficientGeneric</code> the
+efficiency is implemented with the codelines:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">        t0 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()
+        CD[name] <span style="color: #666666">=</span> func(ReNrs) 
+        exec_times[name] <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock() <span style="color: #666666">-</span> t0
+</pre></div>
+<p>
+<b>Sorting of dictionaries</b>
+The computed execution times are for convenience stored in the dictionary <code>exec_time</code> to allow for pairing of the names of the functions and their execution time. 
+The dictionary may be <a href="http://stackoverflow.com/questions/575819/sorting-dictionary-keys-in-python" target="_blank">sorted</a> on the values and the corresponding keys sorted are returned by:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    exec_keys_sorted <span style="color: #666666">=</span> <span style="color: #008000">sorted</span>(exec_times, key<span style="color: #666666">=</span>exec_times<span style="color: #666666">.</span>get)
+</pre></div>
+<p>
+Afterwards the results may be printed with name and execution time, ordered by the latter, with the most efficient function at the top:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">for</span> name_key <span style="color: #AA22FF; font-weight: bold">in</span> exec_keys_sorted:
+        <span style="color: #008000; font-weight: bold">print</span> name_key, <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> execution time = &#39;</span>, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%6.6f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> exec_times[name_key]
+</pre></div>
+<p>
+By running the module <code>DragCoefficientGeneric</code> as a script, and with
+500 elements in the <code>ReNrs</code> array we got the following output:
+<p>
+
+<!-- code=text typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">cd_sphere_vector_bool   execution time = 0.000312
+cd_sphere_vector        execution time = 0.000641
+cd_sphere_auto_vector   execution time = 0.009497
+cd_sphere_py_vector     execution time = 0.010144
+</pre></div>
+<p>
+Clearly, the function with the boolean variables was fastest, 
+the straight forward vectorized version <code>cd_sphere_py_vector</code> was slowest 
+and the built-in function <code>vectorize</code> was nearly as inefficient. 
+
+<p>
+The complete module <b>DragCoefficientGeneric</b> is listed below.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/DragCoefficientGeneric.py</span>
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace,array,append,logspace,zeros_like,where,vectorize,\
+    logical_and
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>  
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> loglog,xlabel,ylabel,grid,savefig,show,rc,hold,\
+    legend, setp
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy.core.multiarray</span> <span style="color: #008000; font-weight: bold">import</span> scalar
+
+<span style="color: #408080; font-style: italic"># single-valued function</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10,array,polyval    
+    
+    <span style="color: #008000; font-weight: bold">if</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.0</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>:
+        CD <span style="color: #666666">=</span> <span style="color: #666666">24.0/</span>Re
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>,<span style="color: #666666">-14.05</span>,<span style="color: #666666">34.87</span>,<span style="color: #666666">0.658</span>])
+        CD <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>Re) 
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>,<span style="color: #666666">43.72</span>,<span style="color: #666666">-17.08</span>,<span style="color: #666666">2.41</span>])
+        CD <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>,<span style="color: #666666">2.031</span>,<span style="color: #666666">-8.472</span>,<span style="color: #666666">11.932</span>])
+        CD <span style="color: #666666">=</span> polyval(p,log10(Re))
+    <span style="color: #008000; font-weight: bold">elif</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span> <span style="color: #AA22FF; font-weight: bold">and</span> Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>:
+        x1 <span style="color: #666666">=</span> log10(Re<span style="color: #666666">/4.5e5</span>)
+        CD <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>x1<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>,<span style="color: #666666">1.1905</span>,<span style="color: #666666">-7.332</span>,<span style="color: #666666">14.93</span>])
+        CD <span style="color: #666666">=</span> polyval(p,log10(Re))
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># simple extension cd_sphere</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_py_vector</span>(ReNrs):
+    CD <span style="color: #666666">=</span> zeros_like(ReNrs)
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> Re <span style="color: #AA22FF; font-weight: bold">in</span> ReNrs:
+        CD[counter] <span style="color: #666666">=</span> cd_sphere(Re)
+        counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># vectorized function</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval, where, zeros_like
+    CD <span style="color: #666666">=</span> zeros_like(Re)
+   
+    CD <span style="color: #666666">=</span> where(Re <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>, <span style="color: #666666">0.0</span>, CD)     <span style="color: #408080; font-style: italic"># condition 1</span>
+    
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.0</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=0.5</span>), <span style="color: #666666">24/</span>Re, CD) <span style="color: #408080; font-style: italic"># condition 2</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>, <span style="color: #666666">-14.05</span>, <span style="color: #666666">34.87</span>, <span style="color: #666666">0.658</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">0.5</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=100.0</span>), polyval(p, <span style="color: #666666">1.0/</span>Re), CD) <span style="color: #408080; font-style: italic">#condition 3</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>, <span style="color: #666666">43.72</span>, <span style="color: #666666">-17.08</span>, <span style="color: #666666">2.41</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">100.0</span>)  <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>), polyval(p, <span style="color: #666666">1.0/</span>log10(Re)), CD) <span style="color: #408080; font-style: italic">#condition 4</span>
+
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>, <span style="color: #666666">2.031</span>, <span style="color: #666666">-8.472</span>, <span style="color: #666666">11.932</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">1.0e4</span>)  <span style="color: #666666">&amp;</span>  (Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>), polyval(p, log10(Re)), CD) <span style="color: #408080; font-style: italic">#condition 5</span>
+
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">3.35e5</span>) <span style="color: #666666">&amp;</span> (Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>), <span style="color: #666666">91.08*</span>(log10(Re<span style="color: #666666">/4.5e5</span>))<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>, CD) <span style="color: #408080; font-style: italic">#condition 6</span>
+
+    p  <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>, <span style="color: #666666">1.1905</span>, <span style="color: #666666">-7.332</span>, <span style="color: #666666">14.93</span>])
+    CD <span style="color: #666666">=</span> where((Re <span style="color: #666666">&gt;</span> <span style="color: #666666">5.05e5</span>)  <span style="color: #666666">&amp;</span>  (Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">8.0e6</span>), polyval(p, log10(Re)), CD) <span style="color: #408080; font-style: italic">#condition 7</span>
+    
+    CD <span style="color: #666666">=</span> where(Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>, <span style="color: #666666">0.2</span>, CD)  <span style="color: #408080; font-style: italic"># condition 8</span>
+    <span style="color: #008000; font-weight: bold">return</span> CD
+
+<span style="color: #408080; font-style: italic"># vectorized boolean</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">cd_sphere_vector_bool</span>(Re):
+    <span style="color: #BA2121">&quot;Computes the drag coefficient of a sphere as a function of the Reynolds number Re.&quot;</span>
+    <span style="color: #408080; font-style: italic"># Curve fitted after fig . A -56 in Evett and Liu: &quot;Fluid Mechanics and Hydraulics&quot;</span>
+    
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> log10, array, polyval, zeros_like
+       
+    condition1 <span style="color: #666666">=</span> Re <span style="color: #666666">&lt;</span> <span style="color: #666666">0</span>
+    condition2 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.5</span>)
+    condition3 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">0.5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">100.0</span>)
+    condition4 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">100.0</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">1.0e4</span>)
+    condition5 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">1.0e4</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">3.35e5</span>)
+    condition6 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">3.35e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">5.0e5</span>)
+    condition7 <span style="color: #666666">=</span> logical_and(<span style="color: #666666">5.0e5</span> <span style="color: #666666">&lt;</span> Re, Re <span style="color: #666666">&lt;=</span> <span style="color: #666666">8.0e6</span>)
+    condition8 <span style="color: #666666">=</span> Re <span style="color: #666666">&gt;</span> <span style="color: #666666">8.0e6</span>
+    
+    CD <span style="color: #666666">=</span> zeros_like(Re)
+    CD[condition1] <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>
+    
+    CD[condition2] <span style="color: #666666">=</span> <span style="color: #666666">24/</span>Re[condition2]
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">4.22</span>,<span style="color: #666666">-14.05</span>,<span style="color: #666666">34.87</span>,<span style="color: #666666">0.658</span>])
+    CD[condition3] <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>Re[condition3]) 
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-30.41</span>,<span style="color: #666666">43.72</span>,<span style="color: #666666">-17.08</span>,<span style="color: #666666">2.41</span>])
+    CD[condition4] <span style="color: #666666">=</span> polyval(p,<span style="color: #666666">1.0/</span>log10(Re[condition4]))
+    
+    p <span style="color: #666666">=</span> array([<span style="color: #666666">-0.1584</span>,<span style="color: #666666">2.031</span>,<span style="color: #666666">-8.472</span>,<span style="color: #666666">11.932</span>])
+    CD[condition5] <span style="color: #666666">=</span> polyval(p,log10(Re[condition5]))
+    
+    CD[condition6] <span style="color: #666666">=</span> <span style="color: #666666">91.08*</span>(log10(Re[condition6]<span style="color: #666666">/4.5e5</span>))<span style="color: #666666">**4</span> <span style="color: #666666">+</span> <span style="color: #666666">0.0764</span>
+    
+    p  <span style="color: #666666">=</span> array([<span style="color: #666666">-0.06338</span>,<span style="color: #666666">1.1905</span>,<span style="color: #666666">-7.332</span>,<span style="color: #666666">14.93</span>])
+    CD[condition7] <span style="color: #666666">=</span> polyval(p,log10(Re[condition7]))
+    
+    CD[condition8] <span style="color: #666666">=</span> <span style="color: #666666">0.2</span>
+    
+    <span style="color: #008000; font-weight: bold">return</span> CD
+    
+
+<span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;__main__&#39;</span>:              
+<span style="color: #408080; font-style: italic">#Check whether this file is executed (name==main) or imported as a module</span>
+    
+    <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">time</span>
+    <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> mean
+    
+    CD <span style="color: #666666">=</span> {} <span style="color: #408080; font-style: italic"># Empty list for all CD computations</span>
+    
+
+    ReNrs <span style="color: #666666">=</span> logspace(<span style="color: #666666">-2</span>,<span style="color: #666666">7</span>,num<span style="color: #666666">=500</span>)
+    
+    <span style="color: #408080; font-style: italic"># make a vectorized version of the function automatically</span>
+    cd_sphere_auto_vector <span style="color: #666666">=</span> vectorize(cd_sphere) 
+    
+    <span style="color: #408080; font-style: italic"># make a list of all function objects</span>
+    funcs <span style="color: #666666">=</span> [cd_sphere_py_vector, cd_sphere_vector, cd_sphere_vector_bool, \
+             cd_sphere_auto_vector]  <span style="color: #408080; font-style: italic"># list of functions to test   </span>
+    
+    
+    <span style="color: #408080; font-style: italic"># Put all exec_times in a dictionary and fncnames in a list </span>
+    exec_times <span style="color: #666666">=</span> {}
+    fncnames <span style="color: #666666">=</span> []
+    <span style="color: #008000; font-weight: bold">for</span> func <span style="color: #AA22FF; font-weight: bold">in</span> funcs:
+        <span style="color: #008000; font-weight: bold">try</span>:
+            name <span style="color: #666666">=</span> func<span style="color: #666666">.</span>func_name
+        <span style="color: #008000; font-weight: bold">except</span>: 
+            scalarname <span style="color: #666666">=</span> func<span style="color: #666666">.</span>__getattribute__(<span style="color: #BA2121">&#39;pyfunc&#39;</span>)
+            name <span style="color: #666666">=</span> scalarname<span style="color: #666666">.</span>__name__<span style="color: #666666">+</span><span style="color: #BA2121">&#39;_auto_vector&#39;</span>
+                      
+        fncnames<span style="color: #666666">.</span>append(name)
+                                      
+        <span style="color: #408080; font-style: italic"># benchmark </span>
+        t0 <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock()
+        CD[name] <span style="color: #666666">=</span> func(ReNrs) 
+        exec_times[name] <span style="color: #666666">=</span> time<span style="color: #666666">.</span>clock() <span style="color: #666666">-</span> t0
+    
+    <span style="color: #408080; font-style: italic"># sort the dictionary exec_times on values and return a list of the corresponding keys   </span>
+    exec_keys_sorted <span style="color: #666666">=</span> <span style="color: #008000">sorted</span>(exec_times, key<span style="color: #666666">=</span>exec_times<span style="color: #666666">.</span>get)
+    
+    <span style="color: #408080; font-style: italic"># print the exec_times by ascending values</span>
+    <span style="color: #008000; font-weight: bold">for</span> name_key <span style="color: #AA22FF; font-weight: bold">in</span> exec_keys_sorted:
+        <span style="color: #008000; font-weight: bold">print</span> name_key, <span style="color: #BA2121">&#39;</span><span style="color: #BB6622; font-weight: bold">\t</span><span style="color: #BA2121"> execution time = &#39;</span>, <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%6.6f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> exec_times[name_key]
+
+        
+    <span style="color: #408080; font-style: italic"># set fontsize prms </span>
+    fnSz <span style="color: #666666">=</span> <span style="color: #666666">16</span>; font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span>   : fnSz}; rc(<span style="color: #BA2121">&#39;font&#39;</span>,<span style="color: #666666">**</span>font)          
+    
+    <span style="color: #408080; font-style: italic"># set line styles</span>
+    style <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;v-&#39;</span>, <span style="color: #BA2121">&#39;8-&#39;</span>, <span style="color: #BA2121">&#39;*-&#39;</span>, <span style="color: #BA2121">&#39;o-&#39;</span>]
+    mrkevry <span style="color: #666666">=</span> [<span style="color: #666666">30</span>, <span style="color: #666666">35</span>, <span style="color: #666666">40</span>, <span style="color: #666666">45</span>]
+    
+    <span style="color: #408080; font-style: italic"># plot the result for all functions    </span>
+    i<span style="color: #666666">=0</span>
+    <span style="color: #008000; font-weight: bold">for</span> name <span style="color: #AA22FF; font-weight: bold">in</span> fncnames: 
+        loglog(ReNrs, CD[name], style[i], markersize<span style="color: #666666">=10</span>, markevery<span style="color: #666666">=</span>mrkevry[i])
+        hold(<span style="color: #BA2121">&#39;on&#39;</span>)
+        i<span style="color: #666666">+=1</span> 
+    
+    <span style="color: #408080; font-style: italic"># use fncnames as plot legend</span>
+    leg <span style="color: #666666">=</span> legend(fncnames) 
+    leg<span style="color: #666666">.</span>get_frame()<span style="color: #666666">.</span>set_alpha(<span style="color: #666666">0.</span>)
+    xlabel(<span style="color: #BA2121">&#39;$Re$&#39;</span>)
+    ylabel(<span style="color: #BA2121">&#39;$C_D$&#39;</span>)
+    grid(<span style="color: #BA2121">&#39;on&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>, <span style="color: #BA2121">&#39;both&#39;</span>)
+    <span style="color: #408080; font-style: italic"># savefig(&#39;example_sphere_generic.png&#39;, transparent=True) # save plot if needed</span>
+    show()
+</pre></div>
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br>
+
+<h2 id="___sec11">Differences </h2>
+
+<p>
+We will study some simple methods to solve initial value
+problems. Later we shall see that these methods also may be used to
+solve boundary value problems for ODEs.
+
+<p>
+<center><p><img src="chapter1/4_new.png" align="bottom" width=300></p></center>
+
+$$
+\begin{equation*}
+x_j=x_0+jh
+\end{equation*}
+$$
+
+where \( h=\Delta x \) is assumed constant unless otherwise stated.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Illustration of how to obtain difference equations. <div id="fig:1.5"></div> </p></center>
+<p><img src="chapter1/5_new.png" align="bottom" width=300></p>
+</center>
+
+<p>
+Forward differences:
+$$
+\begin{equation*}
+\Delta y_j=y_{j+1}-y_j
+\end{equation*}
+$$
+
+
+<p>
+Backward differences:
+$$
+\begin{equation}
+\label{eq:1201}
+\nabla y_j=y_j-y_{j-1}
+\end{equation}
+$$
+
+
+<p>
+Central differences:
+$$
+\begin{equation*}
+\delta y_{j+\frac{1}{2}}=y_{j+1}-y_j
+\end{equation*}
+$$
+
+
+<p>
+The linear difference operators \( \Delta \), \( \nabla \) and \( \delta \) are useful when we are deriving more complicated expressions. An example of usage is as follows,
+$$
+\begin{equation*}
+\delta ^2y_j=\delta (\delta y_j)=\delta (y_{1+\frac{1}{2}}-y_{1-\frac{1}{2}})
+=y_{j+1}-y_j-(y_j-y_{j-1})=y_{j+1}-2y_j+y_{j-1}
+\end{equation*}
+$$
+
+
+<p>
+We will mainly write out the formulas entirely instead of using operators.
+
+<p>
+We shall find difference formulas and need again <b>Taylor's theorem</b>:
+$$
+\begin{align}
+\label{eq:1202}
+y(x)=&y(x_0)+y'(x_0)\cdot (x-x_0)+\frac{1}{2}y''(x_0)\cdot (x-x_0)^2 + \\ 
+&\dots + \frac{1}{n!}y^{(n)}(x_0)\cdot (x-x_0)^n +R_n \nonumber
+\end{align}
+$$
+
+
+<p>
+The remainder \( R_n \) is given by
+$$
+\begin{align}
+R_n&=\frac{1}{(n+1)!}y^{(n+1)}(\xi)\cdot (x-x_0)^{n+1}\\ 
+&\text{where } \xi \in (x_0,x) \nonumber
+\end{align}
+$$
+
+
+<p>
+By use of \eqref{eq:1202} we get
+$$
+\begin{align}
+\label{eq:1203a}
+y(x_{j+1}) \equiv &y(x_j+h)=y(x_j)+hy'(x_j) +\frac{h^2}{2}y''(x_j)+\\ 
+&\dots+\frac{h^ny^{(n)}(x_j)}{n!}+R_n \nonumber
+\end{align}
+$$
+
+where the remainder \( R_n=O(h^{n+1}),\ h\to 0  \).
+
+<p>
+From \eqref{eq:1203a} we also get
+$$
+\begin{equation}
+\label{eq:1203b}
+y(x_{j-1}) \equiv y(x_j-h)=y(x_j)-hy'(x_j)+\frac{h^2}{2}y''(x_j)+\dots+\frac{h^k(-1)^ky^{(k)}(x_j)}{k!}+\dots
+\end{equation}
+$$
+
+
+<p>
+We will here and subsequently assume that \( h \) is positive.
+
+<p>
+We solve \eqref{eq:1203a} with respect to \( y' \):
+$$
+\begin{equation}
+\label{eq:1204a}
+y'(x_j)=\frac{y(x_{j+1})-y(x_j)}{h}+O(h)
+\end{equation}
+$$
+
+
+<p>
+We solve \eqref{eq:1203b} with respect to \( y' \):
+$$
+\begin{equation}
+\label{eq:1204b}
+y'(x_j)=\frac{y(x_{j})-y(x_{j-1})}{h}+O(h)
+\end{equation}
+$$
+
+
+<p>
+By addition of \eqref{eq:1203b} and \eqref{eq:1203a} we get
+$$
+\begin{equation}
+\label{eq:1204c}
+y''(x_j)=\frac{y(x_{j+1})-2y(x_{j})+y(x_{j-1})}{h^2}+O(h^2)
+\end{equation}
+$$
+
+
+<p>
+By subtraction of \eqref{eq:1203b} from \eqref{eq:1203a} we get
+$$
+\begin{equation}
+\label{eq:1204d}
+y'(x_j)=\frac{y(x_{j+1})-y(x_{j-1})}{2h}+O(h^2)
+\end{equation}
+$$
+
+
+<p>
+<b>Notation:</b> We let \( y(x_j) \) always denote the function \( y(x) \) with \( x=x_j \). We use \( y_j \) both for the numerical and analytical value. Which is which will be implied.
+
+<p>
+Equations \eqref{eq:1204a}, \eqref{eq:1204b}, \eqref{eq:1204c} and \eqref{eq:1204d} then gives the following difference expressions:
+$$
+\begin{align}
+\label{eq:1205a}
+&y'_j=\frac{y_{j+1}-y_j}{h}\ ;\  \text{truncation error}\ O(h)\\ 
+\label{eq:1205b}
+&y'_j=\frac{y_{j}-y_{j-1}}{h}\ ;\  \text{truncation error}\ O(h)\\ 
+\label{eq:1205c}
+&y''_j=\frac{y_{j+1}-2y_j+y_{j-1}}{h^2}\ ;\  \text{truncation error}\ O(h^2)\\ 
+\label{eq:1205d}
+&y'_j=\frac{y_{j+1}-y_{j-1}}{2h}\ ;\  \text{truncation error}\ O(h^2)
+\end{align}
+$$
+
+
+<p>
+\eqref{eq:1205a} is a forward difference, \eqref{eq:1205b} is a backward difference while \eqref{eq:1205c} and \eqref{eq:1205d} are central differences.
+
+<p>
+<center><p><img src="chapter1/6.png" align="bottom" width=300></p></center>
+
+<p>
+The expressions in \eqref{eq:1205a}, \eqref{eq:1205b}, \eqref{eq:1205c} and \eqref{eq:1205d} are easily established from the figure.
+
+<p>
+\eqref{eq:1205a} follows directly.
+
+<p>
+\eqref{eq:1205c}:
+$$
+\begin{equation*}
+y''_j(x_j)=\left(\frac{y_{j+1}-y_j}{h}-\frac{y_{j}-y_{j-1}}{h}\right)\cdot \frac{1}{h} = \frac{y_{j+1}-2y_j+y_{j-1}}{h^2}
+\end{equation*}
+$$
+
+
+<p>
+\eqref{eq:1205d}:
+
+$$
+\begin{equation*}
+y'_j=\left(\frac{y_{j+1}-y_j}{h}-\frac{y_{j}+y_{j-1}}{h}\right)\cdot \frac{1}{2}=\frac{y_{j+1}-y_{j-1}}{2h}
+\end{equation*}
+$$
+
+
+<p>
+To find the truncation error we must use the Taylor series expansion.
+
+<p>
+The derivation above may be done more systematically. We set
+$$
+\begin{equation}
+\label{eq:1206a}
+y'(x_j)=a\cdot y(x_{j-1})+b\cdot y(x_j)+c\cdot y(x_{j+1})+O(h^m)
+\end{equation}
+$$
+
+where we shall determine the constants \( a \), \( b \) and \( c \) together with the error term. For simplicity we use the notation \( y_j\equiv y(x_j),\ y'_j \equiv y'(x_j) \) and so on. From the Taylor series expansion in \eqref{eq:1203a} and \eqref{eq:1203b} we get
+$$
+\begin{align*}
+&a\cdot y_{j-1}+b\cdot y_j +c\cdot y_{j+1} = \\ 
+&a\cdot\left[y_j-hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''_j(\xi)\right]+b\cdot y_j + \\ 
+&c\cdot \left[y_j-hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''_j(\xi)\right]
+\end{align*}
+$$
+
+Collecting terms:
+$$
+\begin{align*}
+a\cdot y_{j-1}+b\cdot y_j +c\cdot y_{j+1} = \\ 
+(a+b+c)y_j+(c-a)hy'_j+ \\ 
+(a+c)\frac{h^2}{2}y''_j+(c-a)\frac{h^3}{6}y'''(\xi)
+\end{align*}
+$$
+
+We determine \( a \), \( b \) and \( c \) such that \( y'_j \) gets as high accuracy as possible:
+$$
+\begin{align}
+a+b+c=0 \nonumber \\ 
+(c-a)\cdot h=1
+\label{eq:1206b}\\ \nonumber
+a+c=1
+\end{align}
+$$
+
+The solution to \eqref{eq:1206b} is
+$$
+\begin{equation*}
+a=-\frac{1}{2h},\ b=0 \text{ and } c=\frac{1}{2h}
+\end{equation*}
+$$
+
+which when inserted in \eqref{eq:1206a} gives
+$$
+\begin{equation}
+\label{eq:1207}
+y'_j=\frac{y_{j+1}-y_{j-1}}{2h}-\frac{h^2}{6}y'''(\xi)
+\end{equation}
+$$
+
+Comparing \eqref{eq:1207} with \eqref{eq:1206a} we see that the error term is \( O(h^m)=-\frac{h^2}{6}y'''(\xi) \), which means that \( m=2 \). As expected, \eqref{eq:1207} is identical to \eqref{eq:1204d}.
+
+<p>
+Let's use this method to find a forward difference expression for \( y'(x_j) \) with accuracy of \( O(h^2) \). Second order accuracy requires at least three unknown coefficients. Thus,
+$$
+\begin{equation}
+\label{eq:1208a}
+y'(x_j)=a\cdot y_j + b\cdot y_{j+1} + c\cdot y_{j+2} + O(h^m)
+\end{equation}
+$$
+
+The procedure goes as in the previous example as follows,
+$$
+\begin{align*}
+a&\cdot y_{j}+b\cdot y_{j+1} +c\cdot y_{j+2} =\\ 
+a&\cdot y_j+b\cdot\left[y_j+hy'_j+\frac{h^2}{2}y''_j+\frac{h^3}{6}y'''(\xi)\right]+\\ 
+c&\cdot \left[y_j+2hy'_j+2h^2y''_j+\frac{8h^3}{6}y'''_j(\xi)\right]\\ 
+=&(a+b+c)\cdot y_j+(b+2c)\cdot hy'_j \\ 
++& h^2\left(\frac{b}{2}+2c\right)\cdot y''_j+\frac{h^3}{6}(b+8c)\cdot y'''(\xi)
+\end{align*}
+$$
+
+We determine \( a \), \( b \) and \( c \) such that \( y'_j \) becomes as accurate as possible. Then we get,
+$$
+\begin{align}
+a+b+c=0 \nonumber\\ 
+(b+2c)\cdot h=1
+\label{eq:1208b}\\ 
+\frac{b}{2}+2c=0\nonumber
+\end{align}
+$$
+
+The solution of \eqref{eq:1208b} is
+$$
+\begin{equation*}
+a=-\frac{3}{2h},\ b=\frac{2}{h},\ c=-\frac{1}{2h}\ 
+\end{equation*}
+$$
+
+which inserted in \eqref{eq:1208a} gives
+$$
+\begin{equation}
+\label{eq:1209}
+y'_j=\frac{-3y_j+4y_{j+1}-y_{j+2}}{2h}+\frac{h^2}{3}y'''(\xi)
+\end{equation}
+$$
+
+The error term \( O(h^m)=\frac{h^2}{3}y'''(\xi) \) shows that \( m=2 \).
+
+<p>
+Here follows some difference formulas derived with the procedure above:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Forward differences:
+$$
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i}-y_{i-1}}{\Delta x}+\dfrac{1}{2}y''(\xi)\Delta x \\ 
+\dfrac{dy_i}{dx}&=\dfrac{3y_i-4y_{i-1}+y_{i-2}}{2\Delta x}+\dfrac{1}{3}y'''(\xi)\cdot (\Delta x)^2 \\ 
+\dfrac{dy_i}{dx}&=\dfrac{11y_i-18y_{i-1}+9y_{i-2}-y_{i-3}}{6\Delta x}+\dfrac{1}{4}y^{(4)}(\xi)\cdot (\Delta x)^3 \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_i-2y_{i-1}+y_{i-2}}{(\Delta x)^2}+y'''(\xi)\cdot \Delta x \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{2y_i-5y_{i-1}+4y_{i-2}-y_{i-3}}{(\Delta x)^2}+\dfrac{11}{12}y^{(4)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+$$
+</div>
+<!-- end box -->
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Backward differences:
+$$
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i}-y_{i-1}}{\Delta x}+\dfrac{1}{2}y''(\xi)\Delta x \\ 
+\dfrac{dy_i}{dx}&=\dfrac{3y_i-4y_{i-1}+y_{i-2}}{2\Delta x}+\dfrac{1}{3}y'''(\xi)\cdot (\Delta x)^2 \\ 
+\dfrac{dy_i}{dx}&=\dfrac{11y_i-18y_{i-1}+9y_{i-2}-y_{i-3}}{6\Delta x}+\dfrac{1}{4}y^{(4)}(\xi)\cdot (\Delta x)^3 \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_i-2y_{i-1}+y_{i-2}}{(\Delta x)^2}+y'''(\xi)\cdot \Delta x \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{2y_i-5y_{i-1}+4y_{i-2}-y_{i-3}}{(\Delta x)^2}+\dfrac{11}{12}y^{(4)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+$$
+</div>
+<!-- end box -->
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Central differences:
+$$
+\begin{align*}
+\dfrac{dy_i}{dx}&=\dfrac{y_{i+1}-y_{i-1}}{2\Delta x}-\dfrac{1}{6}y'''(\xi)(\Delta x)^2 \\ 
+\dfrac{dy_i}{dx}&=\dfrac{-y_{i+2}+8y_{i+1}-8y_{i-1}+y_{i-2}}{12\Delta x}+\dfrac{1}{30}y^{(5)}(\xi)\cdot (\Delta x)^4 \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{y_{i+1}-2y_{i}+y_{i-1}}{(\Delta x)^2}-\dfrac{1}{12}y^{(4)}(\xi)\cdot (\Delta x)^2 \\ 
+\dfrac{d^2y_i}{dx^2}&=\dfrac{-y_{i+2}+16y_{i+1}-30y_{i}+16y_{i-1}-y_{i-2}}{12(\Delta x)^2}+\dfrac{1}{90}y^{(6)}(\xi)\cdot (\Delta x)^4 \\ 
+\dfrac{d^3y_i}{dx^3}&=\dfrac{y_{i+2}-2y_{i+1}+2y_{i-1}-y_{i-2}}{2(\Delta x)^3}+\dfrac{1}{4}y^{(5)}(\xi)\cdot (\Delta x)^2
+\end{align*}
+$$
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- !split --><br><br><br><br><br><br><br><br>
+
+<h3 id="___sec12">Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) </h3>
+
+This term often appears in difference equations, and it may be clever to treat the term as it is instead of first execute the differentiation.
+
+<p>
+<b>Central differences</b>
+We use central differences (recall Figure <a href="#fig:1.5">2</a>) as follows,
+$$
+\begin{align*}
+\frac{d}{dx}\left[p(x)\cdot \frac{d}{dx}u(x)\right]\bigg|_i \approx& \frac{[p(x)\cdot u'(x)]|_{i+\frac{1}{2}}-[p(x)\cdot u'(x)]|_{i-\frac{1}{2}}}{h}\\ 
+=& \frac{p(x_{i+\frac{1}{2}})\cdot u'(x_{i+\frac{1}{2}})-p(x_{i-\frac{1}{2}})\cdot u'(x_{i-\frac{1}{2}})}{h}
+\end{align*}
+$$
+
+Using central differences again, we get
+$$
+\begin{equation*}
+u'(x_{i+\frac{1}{2}}) \approx \frac{u_{i+1}-u_i}{h},\ u'(x_{i-\frac{1}{2}}) \approx \frac{u_{i}-u_{i-1}}{h},\ 
+\end{equation*}
+$$
+
+which inserted in the previous equation gives the final expression
+$$
+\begin{equation}
+\label{eq:12010a}
+\frac{d}{dx}\left[p(x)\cdot \frac{d}{dx}u(x)\right]\bigg|_i \approx \frac{p_{i-\frac{1}{2}}\cdot {u_{i-1}-(p_{i+\frac{1}{2}}+p_{i-\frac{1}{2}})\cdot u_i+p_{i+\frac{1}{2}}\cdot u_{i+1}}}{h^2} + \text{error term}
+\end{equation}
+$$
+
+where
+$$
+\begin{equation*}
+\text{error term} =-\frac{h^2}{24}\cdot \frac{d}{dx} \bigg(p(x)\cdot u'''(x)+[p(x)\cdot u'(x)]''\bigg) + O(h^3)
+\end{equation*}
+$$
+
+If \( p(x_{1+\frac{1}{2}}) \) and \( p(x_{1-\frac{1}{2}}) \) cannot be found directly, we use
+$$
+\begin{equation}
+\label{eq:12011}
+p(x_{1+\frac{1}{2}})\approx \frac{1}{2}(p_{i+1}+p_i),\ p(x_{1-\frac{1}{2}}) \approx \frac{1}{2}(p_i+p_{i-1})
+\end{equation}
+$$
+
+Note that for \( p(x)=1=\text{constant} \) we get the usual expression
+$$
+\begin{equation*}
+\frac{d^2u}{dx^2}\bigg|_i=\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}+O(h^2)
+\end{equation*}
+$$
+
+<b>Forward differences</b>
+We start with
+$$
+\begin{align*}
+\frac{d}{dx}\left[p(x)\cdot \frac{du}{dx}\right]\bigg|_i &\approx \frac{p(x_{i+\frac{1}{2}})\cdot u'(x_{i+\frac{1}{2}})-p(x_i)\cdot u'(x_i)}{\frac{h}{2}}\\ 
+ &\approx \frac{p(x_{i+\frac{1}{2}})\cdot\left( \frac{u_{i+1}-u_i}{h}\right) -p(x_i)\cdot u'(x_i)}{\frac{h}{2}}
+\end{align*}
+$$
+
+which gives
+$$
+\begin{equation}
+\label{eq:12012a}
+\frac{d}{dx}\left[p(x)\cdot \frac{du}{dx}\right]\bigg|_i = \frac{2\cdot [p(x_{i+\frac{1}{2}})\cdot {(u_{i+1}-u_i)-h\cdot p(x_i)\cdot u'(x_i)]}}{h^2} +\text{error term}
+\end{equation}
+$$
+
+where
+$$
+\begin{equation}
+\label{eq:12012b}
+\text{error term} =- \frac{h}{12}[3p''(x_i)\cdot u'(x_i)+6p'(x_i)\cdot u''(x_i)+4p(x_i)\cdot u'''(x_i)]+O(h^2)
+\end{equation}
+$$
+
+We have kept the term \( u'(x_i) \) since \eqref{eq:12012a} usually is used at the boundary, and \( u'(x_i) \) may be prescribed there.
+For \( p(x)=1=\text{constant} \) we get the expression
+$$
+\begin{equation}
+\label{eq:12013}
+u''_i = \frac{2\cdot [u_{i+1}-u_i-h\cdot u'(x_i)]}{h^2}-\frac{h}{3}u'''(x_i)+O(h^2)
+\end{equation}
+$$
+
+
+<p>
+<b>Backward Differences</b>
+We start with
+$$
+\begin{align*}
+\frac{d}{dx}\left[p(x)\frac{du}{dx}\right]\bigg|_i \approx& \frac{p(x_i)\cdot u'(x_i)-p(x_i)\cdot u'(x_{i-\frac{1}{2}})\cdot u'(x_{i-\frac{1}{2}})}{\frac{h}{2}}\\ \approx& \frac{p(x_i)\cdot u'(x_i)-p(x_{i-\frac{1}{2}})\left(\frac{u_i-u_{i-1}}{h}\right)}{\frac{h}{2}}
+\end{align*}
+$$
+
+which gives
+$$
+\begin{equation}
+\label{eq:12014a}
+\frac{d}{dx}\left[p(x)\frac{du}{dx}\right]\bigg|_i = \frac{2\cdot [h\cdot p(x_i)u'(x_i)-p(x_{i-\frac{1}{2}})\cdot (u_i-u_{i-1})]}{h^2}+\text{error term}
+\end{equation}
+$$
+
+where
+$$
+\begin{equation}
+\label{eq:12014b}
+\text{error term}=\frac{h}{12}[3p''(x_i)\cdot u'(x_i)+6p'(x_i)\cdot u''(x_i)+4p(x_i)\cdot u'''(x_i)]+O(h^2)
+\end{equation}
+$$
+
+This is the same error term as in \eqref{eq:12012b} except from the sign. Also here we have kept the term \( u'(x_i) \) since \eqref{eq:12014b} usually is used at the boundary where \( u'(x_i) \) may be prescribed.
+For \( p(x)=1=\text{constant} \) we get the expression
+$$
+\begin{equation}
+u''_i = \frac{2\cdot [h\cdot u'(x_i)-(u_i-u_{i-1})]}{h^2}+\frac{h}{3}u'''(x_i)+O(h^2)
+\end{equation}
+$$
+
+
+<p>
+<!-- begin bibliography -->
+
+<ol>
+ <li> <div id="hairer2008solving"></div> <b>E. Hairer, S. P. Norsett and G. Wanner</b>. 
+    <em>Solving Ordinary Differential Equations I: Nonstiff Problems</em>,
+    Springer Science &amp; Business,
+    2008.</li>
+ <li> <div id="white1999fluid"></div> <b>F. White</b>. 
+    <em>Fluid Mechanics</em>,
+    WCB/McGraw-Hill,
+    1999,
+    <a href="http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y" target="_blank"><tt>http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y</tt></a>.</li>
+ <li> <div id="evett19892"></div> <b>J. Evett and C. Liu</b>. 
+    <em>2,500 Solved Problems in Fluid Mechanics and Hydraulics</em>,
+    McGraw-Hill Education,
+    1989,
+    <a href="http://books.google.no/books?id=NBDjWHLKwSQC" target="_blank"><tt>http://books.google.no/books?id=NBDjWHLKwSQC</tt></a>.</li>
+ <li> <div id="langtangen14"></div> <b>H. P. Langtangen</b>. 
+    <em>A Primer on Scientific Programming With Python</em>,
+    Springer,
+    2014.</li>
+ <li> <div id="python14"></div> <b>S. F. Python</b>. 
+    <em>The Python Tutorial</em>,
+    Python Software Foundation,
+    2014.</li>
+</ol>
+
+<!-- end bibliography -->
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+
