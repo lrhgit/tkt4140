@@ -48,6 +48,14 @@ def euler(func,z0, time):
 
     return z
 
+def v_taylor(t):
+#    z = np.zeros_like(t)
+    v = np.zeros_like(t)
+
+    alpha = 3.0*rho_f/(4.0*rho_s*d)*CD
+    v=g*t*(1-alpha*g*t**2)
+    return v
+     
 # main program starts here
 
 T = 10  # end of simulation
@@ -77,6 +85,11 @@ legends.append('Euler (constant CD)')
 
 plot(time, ze2[:,1], line_type[3])
 legends.append('Euler (varying CD)')
+
+time_taylor = np.linspace(0, 3, N+1)
+
+plot(time_taylor, v_taylor(time_taylor))
+legends.append('Taylor (constant CD)')
 
 legend(legends, loc='best', frameon=False)
 font = {'size' : 16}
