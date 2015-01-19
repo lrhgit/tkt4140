@@ -10,6 +10,7 @@ TOC: on
 
 # TKT4140 Numerical Methods with Computer Laboratory.
 
+======= Initial value problems for Ordinary Differential Equations =======
 This digital compendium is based on the first chapter of the
 compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
 be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
@@ -27,7 +28,6 @@ project
 "IKTiSU.":"https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826"
 
 !split
-========= Initial value problems for Ordinary Differential Equations =========
 
 ======= Introduction =======
 label{section:introduction}

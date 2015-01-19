@@ -22,7 +22,8 @@ fi
 opt="COURSE=$COURSE"
 
 # Spellcheck must be performed in the dir where the file resides
-system doconce spellcheck -d ../.dict4spell.txt main.do.txt
+system doconce spellcheck -d ./.dict4spell.txt main.do.txt
+system doconce spellcheck -d ./.dict4spell.txt lectures-main.do.txt
 # cd ..
 
 names="lectures-main"

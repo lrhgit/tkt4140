@@ -1,3 +1,5 @@
+cd
+Vectorize
 Aarseth
 Kolst
 hpl

@@ -26,6 +26,8 @@ label{example:sphere_freefall}
 
 FIGURE:[chapter1/programs_and_modules/2.png, width=500 frac=0.2]
 
+!split
+===== Example: Sphere in free fall =====
  * diameter $d$ 
  * mass $m=\rho_k V$,
  * $\rho_k$ : sphere density 
@@ -49,11 +51,6 @@ m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\r
 
 !split
 ===== Example: Sphere in free fall =====
-label{example:sphere_freefall}
-
-FIGURE:[chapter1/programs_and_modules/2.png, width=500 frac=0.2]
-
-
 Convenient abbreviations:
 !bt
 \begin{equation}
@@ -63,10 +60,11 @@ Convenient abbreviations:
 
 _Newton's 2nd law reformulated as first order ODE_
 !bt
-\begin{equation}
+\begin{eqnarray}
 label{eq:sphere_1st_order}
-\frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
-\end{equation}
+\frac{dz}{dt}&=& v \\
+\frac{dv}{dt}&=&\frac{1}{A}(B-C\cdot v\left|v\right|C_d)
+\end{eqnarray}
 !et
 
 _Newton's 2nd law  as second order ODE_ $\Leftarrow v=\frac{dz}{dt}$ 
@@ -81,12 +79,7 @@ Second order $\Rightarrow$ requires two initial conditions, e.g. $v=v_0$ and $z=
 !split
 ===== Drag coefficient as a function of Re =====
 
-
-
 FIGURE:[chapter1/programs_and_modules/example_sphere.png, height=400 width=600 frac=1.0] 
-
-#@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot
-
 
 
 !split
@@ -96,42 +89,12 @@ _Motivation_
  * Demonstrate functions and modules in Python
  * Use $C_D$ to solve the ODEs for the falling sphere
 
+
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py
 
 !split
 
-In the following, we will break up the program and explain the different parts. In the first code line,
-
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py fromto: from numpy import logspace, zeros@^# Define the function cd_sphere
-
-the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programs. The function `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. The function `zeros` creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org".
-
-In _CDsphere.py_ a function `cd_sphere` was defined as follows:
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag coefficient
-The function takes `Re` as an argument and returns the value `CD`. All Python functions begin with `def`, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument, `Re`. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a function it is common to use the `return` statement to return the value of the function.
-
-Variables defined inside a function, such as `p` and `x1` above, are *local* variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are *global* variables and may be accessed anywhere, also inside functions.
-
-Three more functions from the `numpy` package are imported in the function. They are not used outside the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the "documentation of NumPy": "http://www.numpy.org" for details about the different functions.
-
-The function above contains an example of the use of the `if-elif-else` block. The block begins with `if` and a boolean expression. If the boolean expression evaluates to `true` the *indented* statements following the `if` statement are carried out. If not, the boolean expression following the `elif` is evaluated. If none of the conditions are evaluated to `true` the statements following the `else` are carried out.
-
-In the code block
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Calculate drag coefficient@^# Make plot
-the function `cd_sphere` is called. First, the number of data points to be calculated are stored in the integer variable `Npts`. Using the `logspace` function imported earlier, `Re` is assigned an array object which has float elements with values ranging from $10^{-1}$ to $10^7$. The values are uniformly distributed along a 10-logarithmic scale. `CD` is first defined as an array with `Npts` zero elements, using the `zero` function. Then, for each element in `Re`, the drag coefficient is calculated using our own defined function `cd_sphere`, in a `for` loop, which is explained in the following.
-
-The function `range` is a built-in function that generates a list containing arithmetic progressions. The `for i in i_list` construct creates a loop over all elements in `i_list`. In each pass of the loop, the variable `i` refers to an element in the list, starting with `i_list[0]` (0 in this case) and ending with the last element `i_list[Npts-1]` (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call `cd_sphere(Re[i])` is assigned to `CD[i]`. Each statement in the block must be indented.
-
-Lastly, the drag coefficient is plotted and the figure generated:
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to:# Make plot@
-
-To generate the plot, the package `matplotlib` is used. `matplotlib` is the standard package for curve plotting in Python. For simple plotting the `matplotlib.pyplot` interface provides a Matlab-like interface, which has been used here. For documentation and explanation of this package, we refer to URL: "http://www.matplotlib.org".
-
-First, the curve is generated using the function `plot`, which takes the x-values and y-values as arguments (`Re` and `CD` in this case), as well as a string specifying the line style, like in Matlab. Then changes are made to the figure in order to make it more readable, very similarly to how it is done in Matlab. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the `savefig` function. Lastly, the figure is showed on the screen with the `show` function.
-
-To change the font size the function `rc` is used. This function takes in the object `font`, which is a *dictionary* object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of `key:value` pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: `{}`. Placing a comma-separated list of `key:value` pairs within the braces adds initial `key:value` pairs to the dictionary. In this case the dictionary `font` contains one `key:value` pair, namely `'size' : 16`.
-
-Descriptions and explanations of all functions available in `pyplot` may be found "here": "http://matplotlib.org/api/pyplot_summary.html".
+@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag 
 
 !split
 ===== Python functions with vector arguments and modules =====
@@ -149,97 +112,75 @@ possibilities are presented in the following, and, as we shall see,
 some are more time consuming than others. We will also demonstrate how
 the time consumption (or efficiency) may be tested.
 
-A simple extension of the single-valued function `cd_sphere` is as follows:
+!split 
+===== A simple extension of the single-valued function =====
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# simple extension cd_sphere@^# vectorized function
 
-The new function `cd_sphere_py_vector` takes in an array `ReNrs` and
-calculates the drag coefficient for each element using the previous
-function `cd_sphere`. This does the job, but is not very efficient.
 
-A second version is implemented in the function
-`cd_sphere_vector`. This function takes in the array `Re` and
-calculates the drag coefficient of all elements by multiple calls of
-the function `numpy.where`; one call for each condition, similarly as
-each `if` statement in the function `cd_sphere`. The function is shown
-here:
+ * does the job
+ * not very efficient.
+
+!split
+===== Vectorize the if test with `where` =====
+
+idx{vectorizing if tests}
+
+Functions with if tests require a complete rewrite to work with
+arrays.
+
+!bc pycod
+s = np.where(condition, s1, s2)
+!ec
+
+Explanation:
+
+ * `condition`: array of boolean values
+ * `s[i] = s1[i]` if `condition[i]` is `True`
+ * `s[i] = s2[i]` if `condition[i]` is `False`
+
+Example
+
+!bc pycod
+s = np.where(t <= t1,
+             v0*t + 0.5*a0*t**2,
+             v0*t + 0.5*a0*t1**2 + a0*t1*(t-t1))
+!ec
+
+Note that `t <= t1` with array `t` and scalar `t1` results in a boolean
+array `b` where `b[i] = t[i] <= t1`.
+
+
+!split
+===== Vectorize cd_sphere with `where` =====
+
+ * multiple calls of the function `numpy.where` 
+ * one call for each condition, as for each `if` statement in the function `cd_sphere`. 
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# vectorized function@^# vectorized boolean
 
-A third approach we will try is using boolean type variables. The 8
-variables `condition1` through `condition8` in the function
-`cd_sphere_vector_bool` are boolean variables of the same size and
-shape as `Re`. The elements of the boolean variables evaluate to
+
+!split 
+===== Vectorize with booleans =====
+
+ The elements of the boolean variables evaluate to
 either `True` or `False`, depending on if the corresponding element in
 `Re` satisfy the condition the variable is assigned.
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# vectorized boolean@^if __name__ == '__main__':
 
-Lastly, the built-in function `vectorize` is used to automatically
-generate a vector-version of the function `cd_sphere`, as follows:
 
-!bc pycod
-cd_sphere_auto_vector = vectorize(cd_sphere)
-!ec
-
-To provide a convenient and practical means to compare the various
-implementations of the drag function, we have collected them all in a
-file _DragCoefficientGeneric.py_. This file constitutes a Python module which is a concept we will discuss in section ref{section:Python_module}.
-
+!split 
 ===== How to make a Python-module and some useful programming features =====
-label{section:Python_module}
 
-_Python modules_ A module is a file containing Python definitions and
-statements and represents a convenient way of collecting useful and
-related functions, classes or Python code in a single file. A
-motivation to implement the drag coefficient function was that we
-should be able to import it in other programs to solve e.g. the
-problems outlined in ref{example:sphere_freefall}. In general, a file
-containing Python-code may be executed either as a main program
-(script), typically with `python filename.py` or imported in another
-script/module with `import filename`.
-
-A module file should not execute a main program, but rather just
-define functions, import other modules, and define global
-variables. 
-Inside modules, the standard practice is to only have functions and
-not any statements outside functions. The reason is that all
-statements in the module file are executed from top to bottom during
-import in another module/script cite{langtangen14}, and thus a
-desirable behavior is no output to avoid confusion. However, in many
-situations it is also desirable to allow for tests or demonstration of
-usage inside the module file, and for such situations the need for a
-main program arises. To meet these demands Python allows for a
-fortunate construction to let a file act both as a module with
-function definitions only (i.e. no main program) and as an ordinary
-program we can run, with functions and a main program. The latter is possible by letting the
-main program follow an `if` test of the form: 
+Python-code may be executed either as a
+ * main program (script), typically with `python filename.py`
+ * imported in another script/module with `import filename`.
+ 
 !bc pycod 
 if __name__ =='__main__': 
     <main program statements> 
 !ec 
-The `__name__` variable is automatically defined in any module and
-equals the module name if the module is imported in another
-program/script, but when the module file is executed as a program,
-`__name__` equals the string `'__main__'`. Consequently, the `if` test
-above will only be true whenever the module file is executed as a
-program and allow for the execution of the `<main program
-statements>`.  The `<main program statements>` is normally referred to
-as the *test block* of a module.
 
-The module name is the file name without the suffix `.py`
-cite{python14}, i.e. the module contained in the module file `filename.py` has the
-module name `filename`. Note that a module can contain executable
-statements as well as function definitions. These statements are
-intended to initialize the module and are executed only the first time
-the module name is encountered in an import statement. They are also
-run if the file is executed as a script.
-
-Below we have listed the content of the file
-`DragCoefficientGeneric.py` to illustrate a specific implementation of
-the module `DragCoefficientGeneric` and some other useful programming
-features in Python. The functions in the module are the various
-implementations of the drag coefficient functions from the previous
-section.
 
 _Python lists and dictionaries_ 
     * Lists hold a list of values and are initialized with empty
@@ -320,18 +261,14 @@ Clearly, the function with the boolean variables was fastest,
 the straight forward vectorized version `cd_sphere_py_vector` was slowest 
 and the built-in function `vectorize` was nearly as inefficient. 
 
-The complete module _DragCoefficientGeneric_ is listed below.
+!split 
+===== An example module `DragCoefficientGeneric` =====
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py
 
 !split
 ===== Differences =====
-
-We will study some simple methods to solve initial value
-problems. Later we shall see that these methods also may be used to
-solve boundary value problems for ODEs.
-
-FIGURE:[chapter1/4_new.png, width=300]
+FIGURE:[chapter1/4_new.png, width=500]
 
 !bt
 \begin{equation*}
@@ -339,6 +276,8 @@ x_j=x_0+jh
 \end{equation*}
 !et
 where $h=\Delta x$ is assumed constant unless otherwise stated.
+
+!split
 
 FIGURE:[chapter1/5_new.png, width=300] Illustration of how to obtain difference equations. label{fig:1.5}
 
