@@ -3,486 +3,98 @@ TITLE: A digital compendium
 AUTHOR: Johan Kolstø Sønstabø at Department of Structural Engineering, NTNU
 AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
-TOC: on
+# TOC: on
 
 ## Mako functions and variables
-## Mako code
-
-## !bbox environments lead to minipage, which cannot contain figures.
-## Solution: use !bbox except for latex.
-## Code: ${bbox()} and ${ebox()} instead of !bbox and !ebox
-
-<%
-def boxenvir(tp='b'):
-    if FORMAT not in ('latex', 'pdflatex'):
-        return '!%sbox' % tp
-    else:
-        return ''
-
-def bbox():
-    return boxenvir('b')
-
-def ebox():
-    return boxenvir('e')
-%>
+# #include "mako.txt"
 
 # TKT4140 Numerical Methods with Computer Laboratory.
 
-This digital compendium is based on the first chapter of the
-compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
-be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
-
-The development of the technical solutions for this digital compendium
-results from collaborations with professor "Hans Petter
-Langtangen":"http://folk.uio.no/hpl/" at UiO (hpl@simula.no), who has
-developed "Doconce": "https://github.com/hplgit/doconce" for flexible
-typesetting, and associate professor "Hallvard
-Trætteberg":"http://www.ntnu.edu/employees/hal" at IDI, NTNU
-(hal@idi.ntnu.no), who has developed the webpage-parser which
-identifies Python-code for integration in Eclipse IDEs (such as
-LiClipse). The latter part of the development has been funded by the
-project
-"IKTiSU.":"https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826"
+!split
+===== Digital compendium for TKT4140 =====
+ * Numeriske Beregninger by J.B. Aarseth, revised by Hellevik 2014
+ * Collaborators
+  * professor Langtangen, UiO 
+    * "Doconce": "https://github.com/hplgit/doconce" for flexible typesetting
+   * associate professor Trætteberg, IDI,  NTNU
+    * webpage-parser which identifies Python-code for integration in Eclipse IDEs 
+ * Funding project "IKTiSU.":"https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826"
 
 !split
-========= Initial value problems for Ordinary Differential Equations =========
-
-======= Introduction =======
-label{section:introduction}
-
-With an initial value problem for an ordinary differential equation (ODE) we mean a problem where all boundary conditions are given for one and the same value of the independent variable. For a first order ODE we get e.g.
-!bt
-\begin{align}
-label{eq:1101}
- y'(x)&=f(x,y) \\
-y(x_0)&=a  \nonumber
-\end{align}
-!et
-while for a second order ODE we get
-!bt
-\begin{align}
-label{eq:1102}
-y''(x)&=f(x,y,y') \\
-y(x_0)&=a,\ y'(x_0) = b \nonumber
-\end{align}
-!et
-A first order ODE, as shown in Equation (ref{eq:1101}), will always be an *initial value problem*. For Equation (ref{eq:1102}), on the other hand, we can for instance specify the boundary conditions as follows,
-!bt
-\begin{align}
-y(x_0)=a,\ y(x_1) = b \nonumber
-\end{align}
-!et
-With these boundary conditions Equation (ref{eq:1102}) presents a *boundary value problem*. In many applications boundary value problems are more common than initial value problems. But the solution technique for initial value problems may often be applied to solve boundary value problems.
-
-Both from an analytical and numerical viewpoint initial value problems are easier to solve than boundary value problems, and methods for solution of initial value problems are more developed than for boundary value problems.
-
-If we are to solve an initial value problem of the type in Equation
-(ref{eq:1101}), we must first be sure that it has a solution. In
-addition we will demand that this solution is unique, together the two criteria above lead to the following criteria:
-!bblock
-_The criteria for existence and uniqueness_ 
-
-A sufficient criteria for existence and uniqueness of a solution of the problem in Equation (ref{eq:1101}) is that both $f(x,y)$ and $\frac{\partial
-f}{\partial y}$ are continuous in and around $x_0$. 
-!eblock
-For (ref{eq:1102}) this conditions becomes that $f(x,y)$,
-$\frac{\partial f}{\partial y}$ and $\frac{\partial f}{\partial y'}$
-are continuous in and around $x_0$. Similarly for higher order
-equations.
-
-!bblock
-_Violation of the criteria for existence and uniqueness_
-!bt
-\begin{equation}
-y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
-\end{equation}
-!et
-Here $f=y^\frac{1}{3}$ and $\frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}}$. $f$ is continuous in $x=0$, but that's not the case for $\frac{\partial f}{\partial y}$. It may be shown that this ODE has two solutions: $y=0$ and $y=(\frac{2}{3}x)^\frac{2}{3}$. Hopefully this equation doesn't present a physical problem. 
-!eblock
-_A mathematical pendulum_
-A problem of more interest is shown below.
-
-FIGURE:[chapter1/1.png, width=200]
-
-The figure shows a mathematical pendulum where the motion is described by the following equation:
-!bt
-\begin{align}
- \frac{\partial^2 \theta}{\partial \tau^2} + \frac{g}{l}\sin (\theta) = 0
-label{eq:1103a}\\
-\theta (0) = \theta_0 ,\ \frac{d\theta}{d\tau}(0) = 0
-label{eq:1103b}
-\end{align}
-!et
-We introduce a dimensionless time $t$ given by $t=\sqrt{\frac{g}{l}}\cdot\tau$ such that (ref{eq:1103a}) and (ref{eq:1103b}) may be written as
-!bt
-\begin{align}
-label{eq:1104a}
-\ddot{\theta}(t) + \sin (\theta (t)) = 0 \\
-\theta (0) = \theta_0 ,\ \dot\theta (0) = 0
-label{eq:1104b}
-\end{align}
-!et
-The dot denotes derivation with respect to the dimensionless time $t$. For small displacements we can set $\sin (\theta) \approx \theta$, such that (ref{eq:1104a}) and (ref{eq:1104b}) becomes
-!bt
-\begin{align}
-label{eq:1105a}
-\ddot\theta (t)& + \theta (t) = 0 \\
-\theta (0)& = \theta_0 ,\ \dot\theta (0) = 0
-label{eq:1105b}
-\end{align}
-!et
-
-The difference between (ref{eq:1104a}) and (ref{eq:1105a}) is that the latter is linear, while the first is non-linear. The analytical solution of Equations (ref{eq:1104a}) and (ref{eq:1104b}) is given in Appendix G.2. in the
-"compendium": "./NumeriskeBeregninger.pdf". An $n$'th order linear ODE may be written on the form
-!bt
-\begin{equation}
-label{eq:1106}
-a_n(x)y^{(n)}(x)+a_{n-1}(x)y^{(n-1)}(x)+\cdots+a_1(x)y'(x)+a_0(x)y(x)=b(x)
-\end{equation}
-!et
-where $y^{(k)}, k=0,1,\dots n$ is referring to the $k$'th derivative and $y^{(0)}(x)=y(x)$.
-
-If one or more of the coefficients $a_k$ also are functions of at least one $y^{(k)},\ k = 0,1,\dots n$, the ODE is non-linear. From (ref{eq:1106}) it follows that (ref{eq:1104a}) is non-linear and (ref{eq:1105a}) is linear.
-
-Analytical solutions of non-linear ODEs are rare, and except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
-!bt
-\begin{equation}
-a_2(x)\cdot y''(x)+a_1(x)\cdot y'(x) +a_0(x)\cdot y(x) =b(x)\nonumber
-\end{equation}
-!et
-
-From a numerical point of view the main difference between linear and non-linear equations is the multitude of solutions that may arise when solving non-linear equations. In a linear ODE it will be evident from the equation if there are special critical points where the solution change character, while this is often not the case for non-linear equations.
-
-For instance the equation $y'(x)=y^2(x),\ y(0)=1$ has the solution $y(x)=\frac{1}{1-x}$ such that $y(x) \to \infty $ for $x \to 1$, which isn't evident from the equation itself.
-
-!split
-===== Taylor's method =====
-label{sec:taylor}
-Taylor's formula for series expansion of a function $f(x)$ around $x_0$ is given by
-!bt
-\begin{equation}
-f(x)=f(x_0)+(x-x_0)\cdot f'(x_0)+\frac{(x-x_0)^2}{2}f''(x_0)+\dots +\frac{(x-x_0)^n}{n !}f^{(n)}(x_0)+ \text{remainder} \nonumber
-\end{equation}
-!et
-Let's use this formula to find the first terms in the series expansion for $\theta(t)$ around $t=0$ from the differential equation given in (ref{eq:1105a}):
-!bt
-\begin{align*}
-&\ddot{\theta} (t) +\theta (t) = 0 \\
-&\theta (0) = \theta_0,\  \dot{\theta}(0)=0
-\end{align*}
-!et
-We set $\theta(t) \approx \theta(0)+t\cdot\dot{\theta}(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)$. By use of the initial conditions $\theta(0)=\theta_0,\ \dot\theta(0)=0$ we get
-!bt
-\begin{equation}
-\theta(t)\approx\theta_0 +\frac{t^2}{2}\ddot\theta+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)  \nonumber
-\end{equation}
-!et
-From the differential equation we have $\ddot\theta(t)=-\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0$
-
-By differentiation we get $\dddot\theta(t)=-\dot\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0$
-
-We now get
-!bt
-\begin{equation}
-\theta^{(4)}(t)=-\ddot\theta(t) \to \theta^{(4)}(0)=-\ddot\theta(0)=\theta_0 \nonumber
-\end{equation}
-!et
-Setting this into the expression for $\theta(t)$ gives $\theta(t)\approx \theta_0\left(1-\frac{t^2}{2}+\frac{t^4}{24}\right)=\theta_0\left(1-\frac{t^2}{2!}+\frac{t^4}{4!}\right)$
-
-If we include $n$ terms, we get
-!bt
-\begin{equation}
-\theta(t)\approx \theta_0\cdot \left(1-\frac{t^2}{2!}+\frac{t^4}{4!}-\frac{t^6}{6!}+\dots+(-1)^n \frac{t^{2n}}{(2n)!}\right) \nonumber
-\end{equation}
-!et
-
-If we let $n \to \infty$ we see that the parentheses give the series for $\cos(t)$. In this case we have found the exact solution $\theta(t)=\theta_0\cos(t)$ of the differential equation. Since this equation is linear we manage in this case to find a connection between the coefficients such that we recognize the series expansion of $\cos(t)$.
-
-Let's try the same procedure on the non-linear version (ref{eq:1104a})
-!bt
-\begin{align} \nonumber
-\ddot{\theta}(t)& + \sin \left(\theta (t)\right) = 0 \\
-\theta (0) &= \theta_0 ,\ \dot\theta (0) = 0 \nonumber
-\end{align}
-!et
-We start in the same manner: $\theta(t) \approx \theta(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)$.
-From the differential equation we have $\ddot\theta=-\sin (\theta) \to \ddot\theta(0)=-\sin(\theta_0)$, which by consecutive differentiation gives
-!bt
-\begin{align}
-&\dddot\theta=-\cos(\theta)\cdot\dot\theta \to \dddot\theta(0)=0 \nonumber \\
-&\theta^{(4)}=\sin(\theta)\cdot\dot\theta^2-\cos(\theta)\cdot\ddot\theta \to \theta^{(4)}(0)=-\ddot\theta(0)\cos(\theta(0))=\sin(\theta_0)\cos(\theta_0) \nonumber
-\end{align}
-!et
-Inserted above: $\theta(t) \approx \theta_0 -\frac{t^2}{2}\sin(\theta_0) + \frac{t^4}{24} \sin (\theta_0) \cos (\theta_0)$.
-
-We may include more terms, but this complicates the differentiation and it is hard to find any connection between the coefficients. When we have found an approximation for $\theta(t)$ we can get an approximation for $\dot\theta(t)$ by differentiation: $\dot\theta(t) \approx -t\sin(\theta_0) + \frac{t^3}{8} \sin (\theta_0) \cos (\theta_0)$.
-
-Series expansions are often useful around the starting point when we solve initial value problems. The technique may also be used on non-linear equations.
-
-Symbolic mathematical programs like _Maple_ and _Mathematica_ do this easily.
-
-We will end with one of the earliest known differential equations, which Newton solved with series expansion in 1671.
-!bt
-\begin{equation*}
-y'(x) =1-3x+y+x^2+xy,\ y(0)=0
-\end{equation*}
-!et
-Series expansion around $x=0$ gives
-!bt
-\begin{equation*}
-y(x) \approx x\cdot y'(0)+ \frac{x^2}{2} y''(0)+\frac{x^3}{6}y'''(0)+\frac{x^4}{24}y^{(4)}(0)
-\end{equation*}
-!et
-From the differential equation we get $y'(0)=1$. By consecutive differentiation we get
-!bt
-\begin{equation*}
-  \begin{array}{lclclcr}
-    y''(x) &=&-3+y'+2x+xy'+y &\to& y''(0)&=&-2\\
-    y'''(x)&=& y''+2+xy''+2y'  &\to& y'''(0)&=& 2\\
-    y^{(4)}(x)&=&y'''+xy'''+3y'' &\to &y^{(4)}(0)&=&-4
-  \end{array}
-\end{equation*}
-!et
-Inserting above gives $y(x) \approx x-x^2+\frac{x^3}{3}-\frac{x^4}{6}$.
-
-Newton gave the following solution: $y(x) \approx  x-x^2+\frac{x^3}{3}-\frac{x^4}{6}+ \frac{x^5}{30}-\frac{x^6}{45}$.
-
-Now you can check if Newton calculated correctly. Today it is possible to give the solution on closed form with known functions as follows,
-!bt
-\begin{align*}
-y(x)=&3\sqrt{2\pi e}\cdot \exp\left[x\left(1+\frac{x}{2}\right)\right]\cdot \left[\text{erf}\left(\frac{\sqrt{2}}{2}(1+x)\right)-\text{erf}\left(\frac{\sqrt{2}}{2}\right)\right]\\
-+& 4\cdot\left[1-\exp[x\left(1+\frac{x}{2}\right)\right]-x
-\end{align*}
-!et
-
-Note the combination $\sqrt{2\pi e}$. See Hairer et al. cite{hairer2008solving} section 1.2 for more details on classical differential equations.
-
-!split
-===== Reduction of Higher order Equations =====
-label{subsec:reduction}
-
-When we are solving initial value problems, we usually need to write these as sets of first order equations, because most of the program packages require this.
-
-Example: $y''(x)+y(x)=0,\ y(0)=a_0,\ y'(0)=b_0$
-
-We may for instance write this equation in a system as follows,
-!bt
-\begin{align*}
-y'(x)=&g(x)\\
-g'(x)=&-y(x)\\
-y(0)=&a_0,\  g(0)=b_0
-\end{align*}
-!et
-
-Another example:
-!bt
-\begin{align*}
-&y'''(x)+2y''(x)-(y'(x))^2+2y(x)=x^2\\
-&y(0)=a_0,\ y'(0)=b_0,\ y''(0)=c_0
-\end{align*}
-!et
-We set $y'(x)=g(x)$ and $y''(x)=g'(x)=f(x)$, and the system may be written as
-!bt
-\begin{align*}
-y'(x)=&g(x)\\
-g'(x)=&f(x)\\
-f'(x)=&-2f(x)+(g(x))^2-2y(x)+x^2
-\end{align*}
-!et
-with initial values $y(0)=a_0,\ g(0)=b_0,\ f(0)=c_0$.
-
-This is fair enough for hand calculations, men when we use program packages a more systematic procedure is needed. Let's use the equation above as an example.
-
-We start by renaming $y$ to $y_1$. We then get the following procedure:
-!bt
-\begin{align*}
-y&'=y'_1=y_2\\
-y&''=y''_1=y'_2=y_3
-\end{align*}
-!et
-The system may then be written as
-!bt
-\begin{align*}
-y'_1(x)=&y_2(x)\\
-y'_2(x)=&y_3(x)\\
-y'_3(x)=&-2y_3(x)+(y_2(x))^2-2y_1(x)+x^2
-\end{align*}
-!et
-with initial conditions $y_1(0)=a_0,\ y_2(0)=b_0,\ y_3(0)=c_0$.
-
-The general procedure to reduce a higher order ODE to a system of first order ODEs becomes the following:
-
-Given the equation
-!bt
-\begin{align}
-label{eq:1127}
-&y^{(m)}=f(x,y,y',y'',\dots,y^{(m-1)})\\
-&y(x_0)=a_1,\ y'(x_0)=a_2,\ \dots,y^{(m-1)}(x_0)=a_m \nonumber\\
-\end{align}
-!et
-where
-!bt
-\begin{align*}
-y^{(m)}\equiv \frac{d^my}{dx^m}
-\end{align*}
-!et
-with $y=y_1$, we set
-!bt
-\begin{align}
-&y'_1=y_2 \nonumber \\ \nonumber
-&y'_2=y_3\\ \nonumber
-&.\\ \nonumber
-&.\\ \nonumber
-&y'_{m-1}=y_m\\\nonumber\\\nonumber
-&y_1(x_0)=a_1,y_2(x_0)=a_2,\dots,y_m(x_0)=a_m
-label{eq:1128}
-\end{align}
-!et
-
-## Examples are put inside box environments, but these lead to
-## use of minipage in latex, which cannot handle figures. Therefore,
-## box environments are not used in latex (but for all other formats).
-## This is easy to handle through two mako functions: bbox() and ebox().
-${bbox()}
-===== Example: Reduction of higher order systems =====
-Write the following ODE as a system of first order ODEs:
-!bt
-\begin{align*}
-y'''-y'y''-(y')^2+2y=x^3 \\
-y(0)=a,\ y'(0)=b,\ y''(0)=c
-\end{align*}
-!et
-
-#!bsol
-First we write $y'''=y'y''+(y')^2-2y+x^3$.
-
-By use of (ref{eq:1128}) we get
-!bt
-\begin{align*}
-&y_1'=y_2\\
-&y_2'=y_3\\
-&y_3'=y_2y_3+(y_2)^2-2y_1+x^3\\
-&y_1(0)=a,\ y_2(0)=b,\ y_3=c
-\end{align*}
-!et
-#!esol
-#!ec
-${ebox()}
-
-===== Scientific computing with Python =====
-In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem. 
-
-!split
-${bbox()}
 ===== Example: Sphere in free fall =====
 label{example:sphere_freefall}
 
-FIGURE:[chapter1/programs_and_modules/2.png, width=200]
+FIGURE:[chapter1/programs_and_modules/2.png, width=500 frac=0.2]
 
-The figure shows a falling sphere with a diameter $d$ and mass $m$
-that falls vertically in a fluid. Use of Newton's 2nd law in the
-$z$-direction gives
+!split
+===== Example: Sphere in free fall =====
+ * diameter $d$ 
+ * mass $m=\rho_k V$,
+ * $\rho_k$ : sphere density 
+ * $V$: sphere volume
+ * $\rho_f$: fluid density 
+ * $m_f=\rho_f V$ mass of displaced fluid 
+ * $A_k = \frac{\pi}{4}d^2$: projected area
+ * $\frac{1}{2}m_f$: hydro-dynamical mass (added mass)
+ * $C_D=C_D(Re)$: drag coefficient
+ * $\displaystyle R_e = \frac{vd}{\nu}$: Reynolds number
+ * $\nu$: kinematical viscosity
+
+
+_Newton's 2nd law in the $z$-direction_
 !bt
 \begin{equation}
 label{eq:newton_2nd_sphere}
 m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\right|A_kC_D,
 \end{equation}
 !et
-where the different terms are interpreted as follows: $m=\rho_k V$,
-where $\rho_k$ is the density of the sphere and $V$ is the sphere
-volume.  The mass of the displaced fluid is given by $m_f=\rho_f V$,
-where $\rho_f$ is the density of the fluid, whereas buoyancy and the
-drag coefficient are expressed by $m_f \, g$ and $C_D$, respectively.
-The projected area of the sphere is given by $A_k = \frac{\pi}{4}d^2$
-and $\frac{1}{2}m_f$ is the hydro-dynamical mass (added mass). The
-expression for the hydro-dynamical mass is derived in White
-cite{white1999fluid}, page 539-540. To write Equation
-(ref{eq:newton_2nd_sphere}) on a more convenient form we introduce the
-following abbreviations:
+
+!split
+===== Example: Sphere in free fall =====
+Convenient abbreviations:
 !bt
 \begin{equation}
 \rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
 \end{equation}
 !et
-in addition to the drag coefficient $C_D$ which is a function of the Reynolds number $\displaystyle R_e = \frac{vd}{\nu}$, where $\nu$ is the kinematical viscosity. Equation (ref{eq:newton_2nd_sphere}) may then be written as
+
+_Newton's 2nd law reformulated as first order ODE_
 !bt
-\begin{equation}
+\begin{eqnarray}
 label{eq:sphere_1st_order}
-\frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
-\end{equation}
+\frac{dz}{dt}&=& v \\
+\frac{dv}{dt}&=&\frac{1}{A}(B-C\cdot v\left|v\right|C_d)
+\end{eqnarray}
 !et
-In air we may often neglect the buoyancy term and the hydro-dynamical
-mass, whereas this is not the case for a liquid. Introducing
-$v=\frac{dz}{dt}$ in Equation (ref{eq:sphere_1st_order}), we get a 2nd
-order ODE as follows
+
+_Newton's 2nd law  as second order ODE_ $\Leftarrow v=\frac{dz}{dt}$ 
 !bt
 \begin{equation}
 label{eq:sphere_second_order}
 \frac{d^2z}{dt^2}=\frac{1}{A}\left(B-C\cdot \frac{dz}{dt}\bigg|\frac{dz}{dt}\bigg|C_d\right)
 \end{equation}
 !et
-For Equation (ref{eq:sphere_second_order}) two initial conditions must
-be specified, e.g. $v=v_0$ and $z=z_0$ for $t=0$.
+Second order $\Rightarrow$ requires two initial conditions, e.g. $v=v_0$ and $z=z_0$ for $t=0$.
 
-Figure ref{fig:CDsphere} illustrates $C_D$ as a function of $Re$. The values in the plot are not as accurate as the number of digits in the
-program might indicate. For example is the location and the size of
-the "valley" in the diagram strongly dependent of the degree of
-turbulence in the free stream and the roughness of the sphere. As
-the drag coefficient $C_D$ is a function of the Reynolds number, it is
-also a function of the solution $v$ (i.e. the velocity) of the ODE in
-Equation (ref{eq:sphere_1st_order}). We will use the function
-$C_D(Re)$ as an example of how functions may be implemented in Python.
+!split
+===== Drag coefficient as a function of Re =====
 
-FIGURE:[chapter1/programs_and_modules/example_sphere.png, height=400 width=600] Drag coefficient $C_D$ as function of the Reynold's number $R_e$. label{fig:CDsphere}
-
-#@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot
-
-${ebox()}
+FIGURE:[chapter1/programs_and_modules/example_sphere.png, height=400 width=600 frac=1.0] 
 
 
-=== Python implementation of the drag coefficient function and how to plot it === 
+!split
+===== Python implementation of $C_D$ ===== 
 
-The complete Python program _CDsphere.py_ used to plot the drag
-coefficient in the example above is listed below.  The program uses a
-function `cd_sphere` which results from a curve fit to the data of
-Evett and Liu cite{evett19892}. In our setting we will use this
-function for two purposes, namely to demonstrate how functions and modules are
-implemented in Python and finally use these functions in the solution of the ODE in Equations (ref{eq:sphere_1st_order}) and  (ref{eq:sphere_second_order}). 
+_Motivation_
+ * Demonstrate functions and modules in Python
+ * Use $C_D$ to solve the ODEs for the falling sphere
+
 
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py
 
-In the following, we will break up the program and explain the different parts. In the first code line,
+!split
 
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py fromto: from numpy import logspace, zeros@^# Define the function cd_sphere
-
-the functions `logspace` and `zeros` are imported from the package `numpy`. The `numpy` package (*NumPy* is an abbreviation for *Numerical Python*) enables the use of *array* objects. Using `numpy`  a wide range of mathematical operations can be done directly on complete arrays, thereby removing the need for loops over array elements. This is commonly called *vectorization* and may cause a dramatic increase in computational speed of Python programs. The function `logspace` works on a logarithmic scale just as the function `linspace` works on a regular scale. The function `zeros` creates arrays of a certain size filled with zeros. Several comprehensive guides to the numpy package may be found at URL: "http://www.numpy.org".
-
-In _CDsphere.py_ a function `cd_sphere` was defined as follows:
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag coefficient
-The function takes `Re` as an argument and returns the value `CD`. All Python functions begin with `def`, followed by the function name, and then inside parentheses a comma-separated list of function arguments, ended with a colon. Here we have only one argument, `Re`. This argument acts as a standard variable inside the function. The statements to perform inside the function must be indented. At the end of a function it is common to use the `return` statement to return the value of the function.
-
-Variables defined inside a function, such as `p` and `x1` above, are *local* variables that cannot be accessed outside the function. Variables defined outside functions, in the "main program", are *global* variables and may be accessed anywhere, also inside functions.
-
-Three more functions from the `numpy` package are imported in the function. They are not used outside the function and are therefore chosen to be imported only if the function is called from the main program. We refer to the "documentation of NumPy": "http://www.numpy.org" for details about the different functions.
-
-The function above contains an example of the use of the `if-elif-else` block. The block begins with `if` and a boolean expression. If the boolean expression evaluates to `true` the *indented* statements following the `if` statement are carried out. If not, the boolean expression following the `elif` is evaluated. If none of the conditions are evaluated to `true` the statements following the `else` are carried out.
-
-In the code block
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Calculate drag coefficient@^# Make plot
-the function `cd_sphere` is called. First, the number of data points to be calculated are stored in the integer variable `Npts`. Using the `logspace` function imported earlier, `Re` is assigned an array object which has float elements with values ranging from $10^{-1}$ to $10^7$. The values are uniformly distributed along a 10-logarithmic scale. `CD` is first defined as an array with `Npts` zero elements, using the `zero` function. Then, for each element in `Re`, the drag coefficient is calculated using our own defined function `cd_sphere`, in a `for` loop, which is explained in the following.
-
-The function `range` is a built-in function that generates a list containing arithmetic progressions. The `for i in i_list` construct creates a loop over all elements in `i_list`. In each pass of the loop, the variable `i` refers to an element in the list, starting with `i_list[0]` (0 in this case) and ending with the last element `i_list[Npts-1]` (499 in this case). Note that element indices start at 0 in Python. After the colon comes a block of statements which does something useful with the current element; in this case, the return of the function call `cd_sphere(Re[i])` is assigned to `CD[i]`. Each statement in the block must be indented.
-
-Lastly, the drag coefficient is plotted and the figure generated:
-@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to:# Make plot@
-
-To generate the plot, the package `matplotlib` is used. `matplotlib` is the standard package for curve plotting in Python. For simple plotting the `matplotlib.pyplot` interface provides a Matlab-like interface, which has been used here. For documentation and explanation of this package, we refer to URL: "http://www.matplotlib.org".
-
-First, the curve is generated using the function `plot`, which takes the x-values and y-values as arguments (`Re` and `CD` in this case), as well as a string specifying the line style, like in Matlab. Then changes are made to the figure in order to make it more readable, very similarly to how it is done in Matlab. For instance, in this case it makes sense to use logarithmic scales. A png version of the figure is saved using the `savefig` function. Lastly, the figure is showed on the screen with the `show` function.
-
-To change the font size the function `rc` is used. This function takes in the object `font`, which is a *dictionary* object. Roughly speaking, a dictionary is a list where the index can be a text (in lists the index must be an integer). It is best to think of a dictionary as an unordered set of `key:value` pairs, with the requirement that the keys are unique (within one dictionary). A pair of braces creates an empty dictionary: `{}`. Placing a comma-separated list of `key:value` pairs within the braces adds initial `key:value` pairs to the dictionary. In this case the dictionary `font` contains one `key:value` pair, namely `'size' : 16`.
-
-Descriptions and explanations of all functions available in `pyplot` may be found "here": "http://matplotlib.org/api/pyplot_summary.html".
+@@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Calculate drag 
 
 !split
 ===== Python functions with vector arguments and modules =====
@@ -500,97 +112,75 @@ possibilities are presented in the following, and, as we shall see,
 some are more time consuming than others. We will also demonstrate how
 the time consumption (or efficiency) may be tested.
 
-A simple extension of the single-valued function `cd_sphere` is as follows:
+!split 
+===== A simple extension of the single-valued function =====
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# simple extension cd_sphere@^# vectorized function
 
-The new function `cd_sphere_py_vector` takes in an array `ReNrs` and
-calculates the drag coefficient for each element using the previous
-function `cd_sphere`. This does the job, but is not very efficient.
 
-A second version is implemented in the function
-`cd_sphere_vector`. This function takes in the array `Re` and
-calculates the drag coefficient of all elements by multiple calls of
-the function `numpy.where`; one call for each condition, similarly as
-each `if` statement in the function `cd_sphere`. The function is shown
-here:
+ * does the job
+ * not very efficient.
+
+!split
+===== Vectorize the if test with `where` =====
+
+idx{vectorizing if tests}
+
+Functions with if tests require a complete rewrite to work with
+arrays.
+
+!bc pycod
+s = np.where(condition, s1, s2)
+!ec
+
+Explanation:
+
+ * `condition`: array of boolean values
+ * `s[i] = s1[i]` if `condition[i]` is `True`
+ * `s[i] = s2[i]` if `condition[i]` is `False`
+
+Example
+
+!bc pycod
+s = np.where(t <= t1,
+             v0*t + 0.5*a0*t**2,
+             v0*t + 0.5*a0*t1**2 + a0*t1*(t-t1))
+!ec
+
+Note that `t <= t1` with array `t` and scalar `t1` results in a boolean
+array `b` where `b[i] = t[i] <= t1`.
+
+
+!split
+===== Vectorize cd_sphere with `where` =====
+
+ * multiple calls of the function `numpy.where` 
+ * one call for each condition, as for each `if` statement in the function `cd_sphere`. 
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# vectorized function@^# vectorized boolean
 
-A third approach we will try is using boolean type variables. The 8
-variables `condition1` through `condition8` in the function
-`cd_sphere_vector_bool` are boolean variables of the same size and
-shape as `Re`. The elements of the boolean variables evaluate to
+
+!split 
+===== Vectorize with booleans =====
+
+ The elements of the boolean variables evaluate to
 either `True` or `False`, depending on if the corresponding element in
 `Re` satisfy the condition the variable is assigned.
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# vectorized boolean@^if __name__ == '__main__':
 
-Lastly, the built-in function `vectorize` is used to automatically
-generate a vector-version of the function `cd_sphere`, as follows:
 
-!bc pycod
-cd_sphere_auto_vector = vectorize(cd_sphere)
-!ec
-
-To provide a convenient and practical means to compare the various
-implementations of the drag function, we have collected them all in a
-file _DragCoefficientGeneric.py_. This file constitutes a Python module which is a concept we will discuss in section ref{section:Python_module}.
-
+!split 
 ===== How to make a Python-module and some useful programming features =====
-label{section:Python_module}
 
-_Python modules_ A module is a file containing Python definitions and
-statements and represents a convenient way of collecting useful and
-related functions, classes or Python code in a single file. A
-motivation to implement the drag coefficient function was that we
-should be able to import it in other programs to solve e.g. the
-problems outlined in ref{example:sphere_freefall}. In general, a file
-containing Python-code may be executed either as a main program
-(script), typically with `python filename.py` or imported in another
-script/module with `import filename`.
-
-A module file should not execute a main program, but rather just
-define functions, import other modules, and define global
-variables. 
-Inside modules, the standard practice is to only have functions and
-not any statements outside functions. The reason is that all
-statements in the module file are executed from top to bottom during
-import in another module/script cite{langtangen14}, and thus a
-desirable behavior is no output to avoid confusion. However, in many
-situations it is also desirable to allow for tests or demonstration of
-usage inside the module file, and for such situations the need for a
-main program arises. To meet these demands Python allows for a
-fortunate construction to let a file act both as a module with
-function definitions only (i.e. no main program) and as an ordinary
-program we can run, with functions and a main program. The latter is possible by letting the
-main program follow an `if` test of the form: 
+Python-code may be executed either as a
+ * main program (script), typically with `python filename.py`
+ * imported in another script/module with `import filename`.
+ 
 !bc pycod 
 if __name__ =='__main__': 
     <main program statements> 
 !ec 
-The `__name__` variable is automatically defined in any module and
-equals the module name if the module is imported in another
-program/script, but when the module file is executed as a program,
-`__name__` equals the string `'__main__'`. Consequently, the `if` test
-above will only be true whenever the module file is executed as a
-program and allow for the execution of the `<main program
-statements>`.  The `<main program statements>` is normally referred to
-as the *test block* of a module.
 
-The module name is the file name without the suffix `.py`
-cite{python14}, i.e. the module contained in the module file `filename.py` has the
-module name `filename`. Note that a module can contain executable
-statements as well as function definitions. These statements are
-intended to initialize the module and are executed only the first time
-the module name is encountered in an import statement. They are also
-run if the file is executed as a script.
-
-Below we have listed the content of the file
-`DragCoefficientGeneric.py` to illustrate a specific implementation of
-the module `DragCoefficientGeneric` and some other useful programming
-features in Python. The functions in the module are the various
-implementations of the drag coefficient functions from the previous
-section.
 
 _Python lists and dictionaries_ 
     * Lists hold a list of values and are initialized with empty
@@ -671,18 +261,14 @@ Clearly, the function with the boolean variables was fastest,
 the straight forward vectorized version `cd_sphere_py_vector` was slowest 
 and the built-in function `vectorize` was nearly as inefficient. 
 
-The complete module _DragCoefficientGeneric_ is listed below.
+!split 
+===== An example module `DragCoefficientGeneric` =====
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py
 
 !split
 ===== Differences =====
-
-We will study some simple methods to solve initial value
-problems. Later we shall see that these methods also may be used to
-solve boundary value problems for ODEs.
-
-FIGURE:[chapter1/4_new.png, width=300]
+FIGURE:[chapter1/4_new.png, width=500]
 
 !bt
 \begin{equation*}
@@ -690,6 +276,8 @@ x_j=x_0+jh
 \end{equation*}
 !et
 where $h=\Delta x$ is assumed constant unless otherwise stated.
+
+!split
 
 FIGURE:[chapter1/5_new.png, width=300] Illustration of how to obtain difference equations. label{fig:1.5}
 
@@ -1129,7 +717,7 @@ v_t = \sqrt{\frac{g}{\alpha}} = 37.44
 \end{equation*}
 !et
 
-If we use Taylor's method from section ref{sec:taylor} we get the following expression by using four terms in the series expansion:
+With Taylor's method  we get the following expression by using four terms in the series expansion:
 !bt
 \begin{align}
 label{eq:1305}
@@ -1214,7 +802,7 @@ label{eq:13011}\\
 !et
 with $y_1(x_0)=a_1,\ y_2(x_0)=a_2,\text{ and }y_3(x_0)=a_3$
 
-In section ref{subsec:reduction} we have seen how we can reduce a higher order ODE to a set of first order ODEs. In (ref{eq:1303a}) and (ref{eq:1303b}) we have the equation $\frac{d^2z}{dt^2}=g-\alpha\cdot \left(\frac{dz}{dt}\right)^2$ which we have reduced to a system as
+A higher order ODE can be reduced to a set of first order ODEs. In (ref{eq:1303a}) and (ref{eq:1303b}) we have the equation $\frac{d^2z}{dt^2}=g-\alpha\cdot \left(\frac{dz}{dt}\right)^2$ which we have reduced to a system as
 !bt
 \begin{align*}
 \frac{dz}{dt}= v&\\
