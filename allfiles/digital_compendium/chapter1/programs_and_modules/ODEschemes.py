@@ -1,5 +1,5 @@
 import numpy as np
-from matplotlib.pyplot import plot, show, legend
+from matplotlib.pyplot import plot, show, legend, hold
 
 # define Euler solver
 def euler(func, z0, time):
@@ -166,6 +166,47 @@ if __name__ == '__main__':
             msg = '%s failed with error = %g' % (scheme.func_name, max_error)
             assert max_error < tol, msg
 
+    def f3(z, t,a=-0.5,b=-1):
+        """ """
+        return [a*z + b]
+
+    def u_nonlin_analytical(u0,t,a=-0.5,b=-1):
+        from numpy import exp
+        TOL = 1E-15
+        if (abs(a)>TOL):
+            return (u0 + b/2)*exp(a*t)-b/2
+        else:
+            return u0 + b*t
+            
+ 
+        
+
+    def test_convergence():
+        """ Test convergence rate of the methods """
+        from numpy import linspace, size, abs, log10
+
+        tol = 1E-15
+        T = 6.0  # end of simulation
+        Ndts = 6
+        N = 10  # no of time steps
+        time = linspace(0, T, N+1)
+
+        z0 = 2
+        
+#        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
+        scheme_list  = [euler]
+
+        for scheme in scheme_list:
+            for i in range(Ndts):
+                z = scheme(f3,z0,time)   
+                max_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
+                log_error = log10(max_error[1:]) # Drop first element as it is always zero and casue prob for log10
+                plot(time[1:], log_error)
+                hold('on')
+                N *=2
+                time = linspace(0, T, N+1)
+        show()
+        
     def plot_ODEschemes_solutions():
         """Plot the linear solutions for the test schemes in scheme_list"""
         from numpy import linspace
@@ -176,7 +217,7 @@ if __name__ == '__main__':
         z0 = np.zeros(1)
         z0[0] = u_exact(0.0)
 
-        scheme_list  = [euler, heun]
+        scheme_list  = [euler,euler2, euler3, euler4,heun, heun2, rk4]
         legends = []
 
 
@@ -190,4 +231,5 @@ if __name__ == '__main__':
         show()
 
     test_ODEschemes()
+    test_convergence()
     #plot_ODEschemes_solutions()
