@@ -295,16 +295,23 @@ The plot resulting from the code above is shown in Figure
 curves seems to be rather constant after an initial transient. As we
 have plotted the logarithm of the absolute value of the error
 \( \epsilon_i \), the difference \( d_{i+1} \) between two curves is \( d_{i+1}=
-\log10 \epsilon_{i+1}-\log10 \epsilon_{i} = \Displaystyle \log10
-\frac{\epsilon_{i+1}}{\epsilon_{i}} \). A rough visual inspection yields
-\( d_{i+1} \approx 0.3 \), from which we may deduce:
+\log10 \epsilon_{i}-\log10 \epsilon_{i+1} = \displaystyle \log10
+\frac{\epsilon_{i}}{\epsilon_{i+1}} \). A rough visual inspection of Figure
+(<a href="#fig:error_evolution">5</a>) yields \( d_{i+1} \approx 0.3 \), from which we may deduce:
 $$
 \begin{equation}
-
+\log10
+\frac{\epsilon_{i}}{\epsilon_{i+1}} \approx 0.3 \Rightarrow \epsilon_{i+1} \approx 10^{-0.3}\, \epsilon_{i} \approx 0.501\, \epsilon_{i}
 \tag{47}
 \end{equation}
 $$
 
+
+<p>
+The     print     statements     'print     10**(np.mean(error_diff)),
+np.mean(error_diff)'  return '2.04715154702  0.311149993907', thus  we
+see  that   the  error  is   reduced  even  slightly  more   than  the
+theoretically expected value for a first order scheme, i.e. \( \Delta t_{i+1} = \Delta t_{i}/2 \) yields \( \epsilon_{i+1} \approx\epsilon_{i}/2 \).
 
 <p>
 <center> <!-- figure -->
