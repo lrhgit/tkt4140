@@ -6,7 +6,7 @@ matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size']
 
 def f(x):
     f=np.ones(x.shape)
-    f[np.where(x>0.5)] = 0.0
+    f[np.where(x>0.2)] = 0.0
     
     return f
 
@@ -17,10 +17,10 @@ x = np.linspace(xmin,xmax,n+1,'float')
 dx = float(xmax-xmin)/n
 
 a=1.0
-C=1.01
+C=0.9
 dt = C*dx/a
 
-(tmin,tmax) = (0, 0.4)
+(tmin,tmax) = (0, 0.9)
 
 m=round((tmax-tmin)/dt) #Number of temporal intervals
 time=np.linspace(tmin,tmax,m)
@@ -58,7 +58,7 @@ for t in time:
 
     if (np.mod(i,nOutputInt)==0):
         Curve.set_ydata(u)
-        plt.pause(0.0001)
+        plt.pause(0.5)
         plt.title('step = %3d; t = %f' % (i,t))
 
 #Curve.set_ydata(u)

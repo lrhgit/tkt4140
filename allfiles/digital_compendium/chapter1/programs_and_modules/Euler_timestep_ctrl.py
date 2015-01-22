@@ -1,4 +1,4 @@
-# chapter1/programs_and_modules/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/DragCoefficientGeneric.py;
+# chapter1/programs_and_modules/Euler_timestep_ctrl.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/DragCoefficientGeneric.py;
 from DragCoefficientGeneric import cd_sphere    
 from matplotlib.pyplot import *
 import numpy as np
@@ -78,27 +78,30 @@ for i in range(Ndts):
     v_a = k1*np.tanh(k2*time)   # compute response with constant CD using analytical solution
     abs_error=np.abs(ze[:,1] - v_a)
     log_error = np.log10(abs_error[1:])
-    max_log_err = np.max(log_error)
-    plot(time, ze[:,1])
-    legends.append('euler ' + str(i))
+    max_log_error = np.max(log_error)
+    #plot(time, ze[:,1])
+    plot(time[1:], log_error)
+    legends.append('euler: N ' + str(N) + ' timesteps' )
     N*=2
     if i > 0:
-        error_diff.append(previous_max_log_err-max_log_err)
+        error_diff.append(previous_max_log_err-max_log_error)
 
-    previous_max_log_err = max_log_err
-
+    previous_max_log_err = max_log_error
+    
 print 10**(np.mean(error_diff))
 
 # plot analytical solution
-plot(time,v_a)
-legends.append('analytical')
+# plot(time,v_a)
+# legends.append('analytical')
 
 # fix plot 
 legend(legends, loc='best', frameon=False)
 font = {'size' : 16}
 rc('font', **font)
 xlabel('Time [s]')
-ylabel('Velocity [m/s]')
+#ylabel('Velocity [m/s]')
+ylabel('log10-error')
+
 #savefig('example_sphere_falling_euler.png', transparent=True)
 show()
 

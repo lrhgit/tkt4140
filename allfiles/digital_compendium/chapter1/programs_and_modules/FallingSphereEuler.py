@@ -86,7 +86,7 @@ legends.append('Euler (constant CD)')
 plot(time, ze2[:,1], line_type[3])
 legends.append('Euler (varying CD)')
 
-time_taylor = np.linspace(0, 3, N+1)
+time_taylor = np.linspace(0, 4, N+1)
 
 plot(time_taylor, v_taylor(time_taylor))
 legends.append('Taylor (constant CD)')
@@ -96,6 +96,6 @@ font = {'size' : 16}
 rc('font', **font)
 xlabel('Time [s]')
 ylabel('Velocity [m/s]')
-savefig('example_sphere_falling_euler.png', transparent=True)
+#savefig('example_sphere_falling_euler.png', transparent=True)
 show()
 
