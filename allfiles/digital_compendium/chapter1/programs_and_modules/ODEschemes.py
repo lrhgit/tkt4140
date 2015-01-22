@@ -186,8 +186,8 @@ if __name__ == '__main__':
         from numpy import linspace, size, abs, log10, mean
 
         tol = 1E-15
-        T = 6.0  # end of simulation
-        Ndts = 4
+        T = 8.0  # end of simulation
+        Ndts = 3
         N = 20  # no of time steps
         time = linspace(0, T, N+1)
 
@@ -196,8 +196,9 @@ if __name__ == '__main__':
 #        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
         scheme_list  = [euler, heun, rk4]
         legends =[]
-        error_diff = []
+        
         for scheme in scheme_list:
+            error_diff = []
             for i in range(Ndts):
                 z = scheme(f3,z0,time)   
                 abs_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
@@ -218,8 +219,8 @@ if __name__ == '__main__':
                 
                 N *=2
                 time = linspace(0, T, N+1)
-        print error_diff
-        print mean(error_diff), 10**(mean(error_diff))
+            #print error_diff
+            print mean(error_diff), 10**(mean(error_diff))
         
         legend(legends)
         show()
