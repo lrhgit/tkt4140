@@ -167,7 +167,7 @@ $$
 \begin{align}
 &y'_1=f_1(x,y_1,y_2,\dots y_p) \nonumber\\ 
 &y'_2=f_2(x,y_1,y_2,\dots y_p) \nonumber\\ 
-&. \tag{47}\\ 
+&. \tag{48}\\ 
 &.\nonumber\\ 
 &y'_p=f_p(x,y_1,y_2,\dots y_p)\nonumber
 \end{align}
@@ -176,7 +176,7 @@ $$
 with initial values
 $$
 \begin{equation}
-\tag{48}
+\tag{49}
 y_1(x_0)=a_1,\ y_2(x_0)=a_2,\dots,\ y_p(x_0)=a_p
 \end{equation}
 $$
@@ -184,7 +184,7 @@ $$
 Or, in vectorial format as follows,
 $$
 \begin{align}
-\tag{49}
+\tag{50}
 \mathbf{y'}&=\mathbf{f}(x,\mathbf{y})\\ 
 \mathbf{y}&(x_0)=\mathbf{a} \nonumber
 \end{align}
@@ -193,10 +193,10 @@ $$
 where \( \mathbf{y'} \), \( \mathbf{f} \), \( \mathbf{y} \) and \( \mathbf{a} \) are column vectors with \( p \) components.
 
 <p>
-The Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> used on <a href="#mjx-eqn-49">(49)</a> gives
+The Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> used on <a href="#mjx-eqn-50">(50)</a> gives
 $$
 \begin{equation}
-\tag{50}
+\tag{51}
 \mathbf{y_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
 \end{equation}
 $$
@@ -206,17 +206,17 @@ $$
 \begin{align}
 y'_1=&y_2\nonumber\\ 
 y'_2=&y_3
-\tag{51}\\ 
+\tag{52}\\ 
 y'_3=&-y_1y_3\nonumber
 \end{align}
 $$
 
-In this case <a href="#mjx-eqn-50">(50)</a> gives
+In this case <a href="#mjx-eqn-51">(51)</a> gives
 $$
 \begin{align}
 &(y_1)_{n+1}=(y_1)_n+h\cdot (y_2)_n\nonumber\\ 
 &(y_2)_{n+1}=(y_2)_n+h\cdot (y_3)_n
-\tag{52}\\ 
+\tag{53}\\ 
 &(y_3)_{n+1}=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n\nonumber\\ 
 \end{align}
 $$

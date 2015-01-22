@@ -165,7 +165,7 @@ MathJax.Hub.Config({
 From <a href="._main006.html#mjx-eqn-19">(19)</a> or <a href="._main006.html#mjx-eqn-23">(23)</a> we have
 $$
 \begin{equation}
-\tag{53}
+\tag{54}
 y''(x_n,y_n)=f'\left(x_n,y(x_n,y_n)\right)\approx \frac{f(x_n+h)-f(x_n)}{h}
 \end{equation}
 $$
@@ -177,30 +177,30 @@ y(x_n+h)=y(x_n)+hy'[x_n,y(x_n)]+\frac{h^2}{2}y''[x_n,y(x_n)]+O(h^3)
 \end{equation*}
 $$
 
-which, inserting <a href="#mjx-eqn-53">(53)</a>, gives
+which, inserting <a href="#mjx-eqn-54">(54)</a>, gives
 $$
 \begin{equation}
-\tag{54}
+\tag{55}
 y_{n+1}=y_n+\frac{h}{2}\cdot [f(x_n,y_n)+f(x_{n+1},y(x_{n+1}))]
 \end{equation}
 $$
 
 
 <p>
-This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if \( f(x,y) \) is only a function of \( x \). Since \( y_{n+1} \) appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function \( f(x,y) \) is non-linear. One way of making the scheme explicit is to use the Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> to calculate \( y(x_{n+1}) \) on the right side of <a href="#mjx-eqn-54">(54)</a>. The resulting scheme is often denoted <b>Heun's method</b>.
+This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if \( f(x,y) \) is only a function of \( x \). Since \( y_{n+1} \) appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function \( f(x,y) \) is non-linear. One way of making the scheme explicit is to use the Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> to calculate \( y(x_{n+1}) \) on the right side of <a href="#mjx-eqn-55">(55)</a>. The resulting scheme is often denoted <b>Heun's method</b>.
 
 <p>
 The scheme for Heun's method becomes
 $$
 \begin{align}
 &y^p_{n+1}=y_n+h\cdot f(x_n,y_n)
-\tag{55} \\ 
+\tag{56} \\ 
 &y_{n +1}=y_n+\frac{h}{2}\cdot[f(x_n,y_n)+f(x_{n+1},y^p_{n+1})]
-\tag{56}
+\tag{57}
 \end{align}
 $$
 
-Index \( p \) stands for "predicted". <a href="#mjx-eqn-55">(55)</a> is then the predictor and <a href="#mjx-eqn-56">(56)</a> is the corrector. This is a second order method. For more details, see <a href="._main016.html#cheney2012numerical">[6]</a>. Figure <a href="#fig:illustration_heun">6</a> is a graphical illustration of the method.
+Index \( p \) stands for "predicted". <a href="#mjx-eqn-56">(56)</a> is then the predictor and <a href="#mjx-eqn-57">(57)</a> is the corrector. This is a second order method. For more details, see <a href="._main016.html#cheney2012numerical">[6]</a>. Figure <a href="#fig:illustration_heun">6</a> is a graphical illustration of the method.
 
 <p>
 <center> <!-- figure -->
@@ -213,16 +213,16 @@ In principle we could make an iteration procedure where we after using the corre
 $$
 \begin{align}
 & \mathbf{y^p_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
-\tag{57}\\ 
+\tag{58}\\ 
 & \mathbf{y_{n+1}}=\mathbf{y_n} +\frac{h}{2}\cdot [\mathbf{f}(x_n,\mathbf{y_n})+\mathbf{f}(x_{n+1},\mathbf{y^p_{n+1}})]
-\tag{58}
+\tag{59}
 \end{align}
 $$
 
 Note that \( \mathbf{y}^p_{n+1} \) is a temporary variable that is not necessary to store.
 
 <p>
-If we use <a href="#mjx-eqn-57">(57)</a> and <a href="#mjx-eqn-58">(58)</a> on the example in <a href="._main011.html#mjx-eqn-51">(51)</a> we get
+If we use <a href="#mjx-eqn-58">(58)</a> and <a href="#mjx-eqn-59">(59)</a> on the example in <a href="._main011.html#mjx-eqn-52">(52)</a> we get
 
 <p>
 Predictor:
