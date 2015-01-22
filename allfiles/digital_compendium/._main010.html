@@ -201,6 +201,8 @@ positive and negative.
 <span style="color: #408080; font-style: italic"># change some default values to make plots more readable </span>
 LNWDT<span style="color: #666666">=5</span>; FNT<span style="color: #666666">=11</span>
 rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}; rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+
 
 
 g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity m/s^2</span>
@@ -217,16 +219,6 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
     zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
     <span style="color: #008000; font-weight: bold">return</span> zout 
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(z, t):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with Re-dependent drag.&quot;&quot;&quot;</span>
-    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
-    v <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(z[<span style="color: #666666">1</span>]) 
-    Re <span style="color: #666666">=</span> v<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
-    CD <span style="color: #666666">=</span> cd_sphere(Re)
-    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
-    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
-    <span style="color: #008000; font-weight: bold">return</span> zout
-
 <span style="color: #408080; font-style: italic"># define euler scheme</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func,z0, time):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs. </span>
@@ -240,13 +232,11 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
         dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
         z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
-
     <span style="color: #008000; font-weight: bold">return</span> z
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">v_taylor</span>(t):
 <span style="color: #408080; font-style: italic">#    z = np.zeros_like(t)</span>
     v <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(t)
-
     alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
     v<span style="color: #666666">=</span>g<span style="color: #666666">*</span>t<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>alpha<span style="color: #666666">*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>)
     <span style="color: #008000; font-weight: bold">return</span> v
@@ -260,14 +250,15 @@ N <span style="color: #666666">=</span> <span style="color: #666666">10</span>  
 z0<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">2</span>)
 z0[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
 
+<span style="color: #408080; font-style: italic"># Prms for the analytical solution </span>
 k1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(g<span style="color: #666666">*4*</span>rho_s<span style="color: #666666">*</span>d<span style="color: #666666">/</span>(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>CD))
 k2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>g<span style="color: #666666">*</span>CD<span style="color: #666666">/</span>(<span style="color: #666666">4*</span>rho_s<span style="color: #666666">*</span>d))
 
-
-Ndts <span style="color: #666666">=</span> <span style="color: #666666">4</span>
+Ndts <span style="color: #666666">=</span> <span style="color: #666666">4</span>  <span style="color: #408080; font-style: italic"># Number of times to divide the dt by 2 </span>
 legends<span style="color: #666666">=</span>[]
 error_diff <span style="color: #666666">=</span> []
-<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Ndts):
+
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Ndts<span style="color: #666666">+1</span>):
     time <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
     ze <span style="color: #666666">=</span> euler(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Euler&#39;s method</span>
     v_a <span style="color: #666666">=</span> k1<span style="color: #666666">*</span>np<span style="color: #666666">.</span>tanh(k2<span style="color: #666666">*</span>time)   <span style="color: #408080; font-style: italic"># compute response with constant CD using analytical solution</span>
@@ -276,7 +267,7 @@ error_diff <span style="color: #666666">=</span> []
     max_log_error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>max(log_error)
     <span style="color: #408080; font-style: italic">#plot(time, ze[:,1])</span>
     plot(time[<span style="color: #666666">1</span>:], log_error)
-    legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;euler: N &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N) <span style="color: #666666">+</span> <span style="color: #BA2121">&#39; timesteps&#39;</span> )
+    legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler scheme: N &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N) <span style="color: #666666">+</span> <span style="color: #BA2121">&#39; timesteps&#39;</span> )
     N<span style="color: #666666">*=2</span>
     <span style="color: #008000; font-weight: bold">if</span> i <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
         error_diff<span style="color: #666666">.</span>append(previous_max_log_err<span style="color: #666666">-</span>max_log_error)
@@ -291,15 +282,18 @@ error_diff <span style="color: #666666">=</span> []
 
 <span style="color: #408080; font-style: italic"># fix plot </span>
 legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
-font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
-rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
 xlabel(<span style="color: #BA2121">&#39;Time [s]&#39;</span>)
 <span style="color: #408080; font-style: italic">#ylabel(&#39;Velocity [m/s]&#39;)</span>
 ylabel(<span style="color: #BA2121">&#39;log10-error&#39;</span>)
-
-<span style="color: #408080; font-style: italic">#savefig(&#39;example_sphere_falling_euler.png&#39;, transparent=True)</span>
+savefig(<span style="color: #BA2121">&#39;example_euler_timestep_study.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 show()
 </pre></div>
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 5:  Plots for the logarithmic errors for a falling sphere with constant drag. \( \Delta t \) is reduced by a factor two from one curve to the one immediately below. </p></center>
+<p><img src="chapter1/programs_and_modules/example_euler_timestep_study.png" align="bottom" width=400></p>
+</center>
+
 <p>
 <!-- --- end exercise --- -->
 
