@@ -70,7 +70,7 @@ Automatically generated HTML file from DocOnce source
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u' Example 4: Numerical error as a function of discretization ',
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
                None,
                '___sec14'),
@@ -164,7 +164,7 @@ MathJax.Hub.Config({
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec14">Example 4: Numerical error as a function of discretization </h2>
+<h2 id="___sec14">Example 4: Numerical error as a function of \( \Delta t \) </h2>
 
 <p>
 In this example we will assess how the error of our implementation of
@@ -173,12 +173,7 @@ manner. We will solve a problem with an analytical solution in a loop,
 and for each new solution we do the following: 
 
 <ul>
-<li> Divide the time step</li>
-</ul>
-
-by two (or double the number of time steps) 
-
-<ul>
+<li> Divide the time step by two (or double the number of time steps)</li> 
 <li> Compute the error</li> 
 <li> Plot the error</li> 
 </ul>
