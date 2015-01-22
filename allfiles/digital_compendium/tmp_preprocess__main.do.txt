@@ -1182,7 +1182,11 @@ positive and negative. As the initial value is always correct we discard the fir
 
 @@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
 
-The plot resulting from the code above is shown in Figure (ref{fig:error_evolution}). The difference or distance between the curves seems to be rather constant after an initial transient. 
+The plot resulting from the code above is shown in Figure
+(ref{fig:error_evolution}). The difference or distance between the
+curves seems to be rather constant after an initial transient. As we
+have plotted the logarithm of the absolute value of the error
+$\epsilon_i$, the difference $d_{i+1}$ between two curves is $d_{i+1}= \log10 \espsilon_{i+1}-\log10 \espsilon_{i}$ 
 
 FIGURE:[chapter1/programs_and_modules/example_euler_timestep_study.png, width=600 frac=0.4] Plots for the logarithmic errors for a falling sphere with constant drag. The timestep $\Delta t$ is reduced by a factor two from one curve to the one immediately below.label{fig:error_evolution}
 
