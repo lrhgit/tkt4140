@@ -1140,14 +1140,13 @@ FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler.png, width=40
 
 ${ebox()}
 !split 
-===== Example: Numerical error as a function of discretization =====
+===== Example: Numerical error as a function of $\Delta t$ =====
 
 In this example we will assess how the error of our implementation of
 the Euler method depends on the time step $\Delta t$ in a systematic
 manner. We will solve a problem with an analytical solution in a loop,
 and for each new solution we do the following: 
-* Divide the time step
-by two (or double the number of time steps) 
+* Divide the time step by two (or double the number of time steps) 
 * Compute the error 
 * Plot the error 
 
