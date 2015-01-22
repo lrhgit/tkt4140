@@ -62,12 +62,15 @@ Automatically generated HTML file from DocOnce source
                3,
                None,
                '___sec11'),
-              (u" Euler's method ", 2, None, '___sec12'),
+              (u" Euler's method ",
+               2,
+               u'ex:euler_method',
+               u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u' Example 4: Numerical error as a function of discretization ',
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
                None,
                '___sec14'),
@@ -158,9 +161,7 @@ MathJax.Hub.Config({
 </ul>
 <!-- !split -->
 
-<h2 id="___sec12">Euler's method </h2>
-
-<p>
+<h2 id="ex:euler_method">Euler's method</h2>
 The ODE is given as
 $$
 \begin{align}
@@ -170,7 +171,7 @@ y(x_0)=&y_0
 \end{align}
 $$
 
-Inserting <a href="._main006.html#mjx-eqn-19">(19)</a> we obtain
+By using a first order forward approximation <a href="._main006.html#mjx-eqn-19">(19)</a>  of the derivative in <a href="#mjx-eqn-40">(40)</a> we obtain:
 $$
 \begin{equation*}
 y(x_{n+1})=y(x_n)+h\cdot f(x_n,y(x_n))+O(h^2)

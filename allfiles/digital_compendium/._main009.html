@@ -62,12 +62,15 @@ Automatically generated HTML file from DocOnce source
                3,
                None,
                '___sec11'),
-              (u" Euler's method ", 2, None, '___sec12'),
+              (u" Euler's method ",
+               2,
+               u'ex:euler_method',
+               u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u' Example 4: Numerical error as a function of discretization ',
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
                None,
                '___sec14'),
@@ -344,7 +347,7 @@ legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">
 plot(time, ze2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">3</span>])
 legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (varying CD)&#39;</span>)
 
-time_taylor <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">3</span>, N<span style="color: #666666">+1</span>)
+time_taylor <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, N<span style="color: #666666">+1</span>)
 
 plot(time_taylor, v_taylor(time_taylor))
 legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Taylor (constant CD)&#39;</span>)
@@ -354,7 +357,7 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
 rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
 xlabel(<span style="color: #BA2121">&#39;Time [s]&#39;</span>)
 ylabel(<span style="color: #BA2121">&#39;Velocity [m/s]&#39;</span>)
-savefig(<span style="color: #BA2121">&#39;example_sphere_falling_euler.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+<span style="color: #408080; font-style: italic">#savefig(&#39;example_sphere_falling_euler.png&#39;, transparent=True)</span>
 show()
 </pre></div>
 <p>

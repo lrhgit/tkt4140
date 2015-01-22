@@ -20,7 +20,7 @@ a=1.0
 C=1.01
 dt = C*dx/a
 
-(tmin,tmax) = (0, 0.4)
+(tmin,tmax) = (0, 0.8)
 
 m=round((tmax-tmin)/dt) #Number of temporal intervals
 time=np.linspace(tmin,tmax,m)
@@ -58,7 +58,7 @@ for t in time:
 
     if (np.mod(i,nOutputInt)==0):
         Curve.set_ydata(u)
-        plt.pause(0.0001)
+        plt.pause(0.3)
         plt.title('step = %3d; t = %f' % (i,t))
 
 #Curve.set_ydata(u)

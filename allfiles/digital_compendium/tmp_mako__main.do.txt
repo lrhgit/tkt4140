@@ -1049,7 +1049,7 @@ u''_i = \frac{2\cdot [h\cdot u'(x_i)-(u_i-u_{i-1})]}{h^2}+\frac{h}{3}u'''(x_i)+O
 
 !split
 ===== Euler's method =====
-
+label{ex:euler_method}
 The ODE is given as
 !bt
 \begin{align}
@@ -1058,7 +1058,7 @@ label{eq:1301}
 y(x_0)=&y_0
 \end{align}
 !et
-Inserting (ref{eq:1204a}) we obtain
+By using a first order forward approximation (ref{eq:1204a})  of the derivative in (ref{eq:1301}) we obtain:
 !bt
 \begin{equation*}
 y(x_{n+1})=y(x_n)+h\cdot f(x_n,y(x_n))+O(h^2)
@@ -1137,17 +1137,30 @@ FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler.png, width=40
 
 !ebox
 !split 
-===== Example: Numerical error as a function of discretization =====
+===== Example: Numerical error as a function of $\Delta t$ =====
 
 In this example we will assess how the error of our implementation of
-the Euler method depends on the time step $\delta t$ in a systematic
+the Euler method depends on the time step $\Delta t$ in a systematic
 manner. We will solve a problem with an analytical solution in a loop,
-and for each new solution we do the following:
-    * divide the time step by two (or double the number of time steps)
-    * compute the error 
-    * plot the error curve
+and for each new solution we do the following: 
+* Divide the time step by two (or double the number of time steps) 
+* Compute the error 
+* Plot the error 
 
+Euler's method is a first order method and we therefore expect the
+error to be $O(h)=O(\Delta t)$ and if the timestep is divided by two
+should the error should also be divided by two.
 
+As errors normally are small values and are expected to be smaller and
+smaller for decreasing time steps, we normally do not plot the error
+itself, but rather the logaritm of the absolute value of the
+error. The latter we do due to the fact that we are only interested in
+the order of magnitude of the error, whereas errors may be both
+positive and negative. As the initial value is always correct we discard the first error at time zero to avoid problems with the logarithm of zero in `log_error = np.log10(abs_error[1:])`. 
+
+@@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
+
+FIGURE:[chapter1/programs_and_modules/example_euler_timestep_study.png, width=400 frac=0.4] Plots for the logarithmic errors for a falling sphere with constant drag. The timestep $\Delta t$ is reduced by a factor two from one curve to the one immediately below.
 
 !split
 === Euler's method for a system ===

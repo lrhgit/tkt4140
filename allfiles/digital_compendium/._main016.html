@@ -62,12 +62,15 @@ Automatically generated HTML file from DocOnce source
                3,
                None,
                '___sec11'),
-              (u" Euler's method ", 2, None, '___sec12'),
+              (u" Euler's method ",
+               2,
+               u'ex:euler_method',
+               u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u' Example 4: Numerical error as a function of discretization ',
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
                None,
                '___sec14'),
@@ -295,11 +298,11 @@ The right hand side in <a href="#mjx-eqn-70">(70)</a> is implemented as the foll
 Note that we have used the function <code>cd_sphere()</code> defined in <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a> to calculate the drag coefficient of the smooth sphere.
 
 <p>
-The results are shown for some initial angles in Figure <a href="#fig:smooth_ball_drag">9</a>.
+The results are shown for some initial angles in Figure <a href="#fig:smooth_ball_drag">10</a>.
 
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 9:  Motion of smooth ball with drag. <div id="fig:smooth_ball_drag"></div> </p></center>
+<center><p class="caption">Figure 10:  Motion of smooth ball with drag. <div id="fig:smooth_ball_drag"></div> </p></center>
 <p><img src="chapter1/programs_and_modules/example_particle_motion_2d_1.png" align="bottom" width=700></p>
 </center>
 
@@ -329,11 +332,11 @@ The right hand side in <a href="#mjx-eqn-70">(70)</a> is now implemented as the 
 The function <code>cdcl()</code> (may be downloaded <a href="https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/cdclgolfball.py" target="_blank">here</a>) gives the drag and lift data for a given velocity and spin.
 
 <p>
-The results are shown in Figure <a href="#fig:golf_drag_lift">10</a>. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift.
+The results are shown in Figure <a href="#fig:golf_drag_lift">11</a>. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift.
 
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 10:  Motion of golf ball with drag and lift. <div id="fig:golf_drag_lift"></div> </p></center>
+<center><p class="caption">Figure 11:  Motion of golf ball with drag and lift. <div id="fig:golf_drag_lift"></div> </p></center>
 <p><img src="chapter1/programs_and_modules/example_particle_motion_2d_2.png" align="bottom" width=700></p>
 </center>
 
