@@ -1164,7 +1164,9 @@ positive and negative. As the initial value is always correct we discard the fir
 
 @@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
 
-FIGURE:[chapter1/programs_and_modules/example_euler_timestep_study.png, width=400 frac=0.4] Plots for the logarithmic errors for a falling sphere with constant drag. The timestep $\Delta t$ is reduced by a factor two from one curve to the one immediately below.
+The plot resulting from the code above is shown in Figure (ref{fig:error_evolution}). The difference or distance between the curves seems to be rather constant after an initial transient. 
+
+FIGURE:[chapter1/programs_and_modules/example_euler_timestep_study.png, width=600 frac=0.4] Plots for the logarithmic errors for a falling sphere with constant drag. The timestep $\Delta t$ is reduced by a factor two from one curve to the one immediately below.label{fig:error_evolution}
 
 !split
 === Euler's method for a system ===

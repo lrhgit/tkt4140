@@ -79,7 +79,8 @@ for i in range(Ndts+1):
 
     previous_max_log_err = max_log_error
     
-print 10**(np.mean(error_diff))
+print 10**(np.mean(error_diff)), np.mean(error_diff)
+
 
 # plot analytical solution
 # plot(time,v_a)

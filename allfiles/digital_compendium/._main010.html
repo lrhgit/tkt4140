@@ -274,7 +274,8 @@ error_diff <span style="color: #666666">=</span> []
 
     previous_max_log_err <span style="color: #666666">=</span> max_log_error
     
-<span style="color: #008000; font-weight: bold">print</span> <span style="color: #666666">10**</span>(np<span style="color: #666666">.</span>mean(error_diff))
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #666666">10**</span>(np<span style="color: #666666">.</span>mean(error_diff)), np<span style="color: #666666">.</span>mean(error_diff)
+
 
 <span style="color: #408080; font-style: italic"># plot analytical solution</span>
 <span style="color: #408080; font-style: italic"># plot(time,v_a)</span>
@@ -289,9 +290,12 @@ savefig(<span style="color: #BA2121">&#39;example_euler_timestep_study.png&#39;<
 show()
 </pre></div>
 <p>
+The plot resulting from the code above is shown in Figure (<a href="#fig:error_evolution">5</a>). The difference or distance between the curves seems to be rather constant after an initial transient. 
+
+<p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 5:  Plots for the logarithmic errors for a falling sphere with constant drag. The timestep \( \Delta t \) is reduced by a factor two from one curve to the one immediately below. </p></center>
-<p><img src="chapter1/programs_and_modules/example_euler_timestep_study.png" align="bottom" width=400></p>
+<center><p class="caption">Figure 5:  Plots for the logarithmic errors for a falling sphere with constant drag. The timestep \( \Delta t \) is reduced by a factor two from one curve to the one immediately below.<div id="fig:error_evolution"></div> </p></center>
+<p><img src="chapter1/programs_and_modules/example_euler_timestep_study.png" align="bottom" width=600></p>
 </center>
 
 <p>
