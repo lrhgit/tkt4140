@@ -166,15 +166,15 @@ if __name__ == '__main__':
             msg = '%s failed with error = %g' % (scheme.func_name, max_error)
             assert max_error < tol, msg
 
-    def f3(z, t,a=-0.5,b=-1):
+    def f3(z, t,a=2.0,b=-1.0):
         """ """
-        return [a*z + b]
+        return a*z + b
 
-    def u_nonlin_analytical(u0,t,a=-0.5,b=-1):
+    def u_nonlin_analytical(u0,t,a=2.0,b=-1.0):
         from numpy import exp
-        TOL = 1E-15
+        TOL = 1E-14
         if (abs(a)>TOL):
-            return (u0 + b/2)*exp(a*t)-b/2
+            return (u0 + b/a)*exp(a*t)-b/a
         else:
             return u0 + b*t
             
@@ -183,28 +183,45 @@ if __name__ == '__main__':
 
     def test_convergence():
         """ Test convergence rate of the methods """
-        from numpy import linspace, size, abs, log10
+        from numpy import linspace, size, abs, log10, mean
 
         tol = 1E-15
         T = 6.0  # end of simulation
-        Ndts = 6
-        N = 10  # no of time steps
+        Ndts = 4
+        N = 20  # no of time steps
         time = linspace(0, T, N+1)
 
         z0 = 2
-        
-#        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
-        scheme_list  = [euler]
 
+#        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
+        scheme_list  = [euler, heun, rk4]
+        legends =[]
+        error_diff = []
         for scheme in scheme_list:
             for i in range(Ndts):
                 z = scheme(f3,z0,time)   
-                max_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
-                log_error = log10(max_error[1:]) # Drop first element as it is always zero and casue prob for log10
+                abs_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
+                log_error = log10(abs_error[1:]) # Drop first element as it is always zero and casue prob for log10
+                max_log_err = max(log_error)
                 plot(time[1:], log_error)
+                legends.append(scheme.func_name + str(i))
                 hold('on')
+                
+#                 if i == 0:
+#                     plot(time, u_nonlin_analytical(z0, time))
+#                     legends.append('analytical')
+#                 
+#                 plot(time, z[:,0])
+                if i > 0:
+                    error_diff.append(previous_max_log_err-max_log_err)
+                previous_max_log_err = max_log_err
+                
                 N *=2
                 time = linspace(0, T, N+1)
+        print error_diff
+        print mean(error_diff), 10**(mean(error_diff))
+        
+        legend(legends)
         show()
         
     def plot_ODEschemes_solutions():
