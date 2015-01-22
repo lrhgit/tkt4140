@@ -22,9 +22,9 @@ Automatically generated HTML file from DocOnce source
 </head>
 
 <!-- tocinfo
-{'highest level': 0,
+{'highest level': 1,
  'sections': [(u' Initial value problems for Ordinary Differential Equations ',
-               0,
+               1,
                None,
                '___sec0'),
               (u' Introduction ',
@@ -67,18 +67,22 @@ Automatically generated HTML file from DocOnce source
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u" Euler's method for a system ", 3, None, '___sec14'),
-              (u" Heun's method ", 2, None, '___sec15'),
-              (u" Example 4: Newton's equation ", 2, None, '___sec16'),
-              (u" Example 5: Falling sphere with Heun's method ",
+              (u' Example 4: Numerical error as a function of discretization ',
                2,
                None,
-               '___sec17'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec18'),
-              (u' Example 6: Particle motion in two dimensions ',
+               '___sec14'),
+              (u" Euler's method for a system ", 3, None, '___sec15'),
+              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Example 5: Newton's equation ", 2, None, '___sec17'),
+              (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
-               '___sec19')]}
+               '___sec18'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
+              (u' Example 7: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec20')]}
 end of tocinfo -->
 
 <body>
@@ -115,23 +119,8 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;"><b>Initial value problems for Ordinary Differential Equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
-     <!-- navigation toc: --> <li><a href="._main002.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order systems</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
-     <!-- navigation toc: --> <li><a href="#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
-     <!-- navigation toc: --> <li><a href="._main006.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
-     <!-- navigation toc: --> <li><a href="._main008.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main009.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
-     <!-- navigation toc: --> <li><a href="._main011.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main012.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main013.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main014.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="._main015.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
 
         </ul>
       </li>
@@ -163,7 +152,7 @@ MathJax.Hub.Config({
   <li><a href="._main012.html">13</a></li>
   <li><a href="._main013.html">14</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
   <li><a href="._main005.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
@@ -198,7 +187,7 @@ drag coefficient are expressed by \( m_f \, g \) and \( C_D \), respectively.
 The projected area of the sphere is given by \( A_k = \frac{\pi}{4}d^2 \)
 and \( \frac{1}{2}m_f \) is the hydro-dynamical mass (added mass). The
 expression for the hydro-dynamical mass is derived in White
-<a href="._main015.html#white1999fluid">[2]</a>, page 539-540. To write Equation
+<a href="._main016.html#white1999fluid">[2]</a>, page 539-540. To write Equation
 <a href="#mjx-eqn-12">(12)</a> on a more convenient form we introduce the
 following abbreviations:
 $$
@@ -259,7 +248,7 @@ Equation <a href="#mjx-eqn-13">(13)</a>. We will use the function
 The complete Python program <b>CDsphere.py</b> used to plot the drag
 coefficient in the example above is listed below.  The program uses a
 function <code>cd_sphere</code> which results from a curve fit to the data of
-Evett and Liu <a href="._main015.html#evett19892">[3]</a>. In our setting we will use this
+Evett and Liu <a href="._main016.html#evett19892">[3]</a>. In our setting we will use this
 function for two purposes, namely to demonstrate how functions and modules are
 implemented in Python and finally use these functions in the solution of the ODE in Equations <a href="#mjx-eqn-13">(13)</a> and  <a href="#mjx-eqn-14">(14)</a>. 
 
@@ -448,7 +437,7 @@ Descriptions and explanations of all functions available in <code>pyplot</code> 
   <li><a href="._main012.html">13</a></li>
   <li><a href="._main013.html">14</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
   <li><a href="._main005.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

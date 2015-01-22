@@ -11,6 +11,7 @@ TOC: on
 
 # TKT4140 Numerical Methods with Computer Laboratory.
 
+======= Initial value problems for Ordinary Differential Equations =======
 This digital compendium is based on the first chapter of the
 compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
 be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
@@ -28,7 +29,6 @@ project
 "IKTiSU.":"https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826"
 
 !split
-========= Initial value problems for Ordinary Differential Equations =========
 
 ======= Introduction =======
 label{section:introduction}
@@ -1136,6 +1136,18 @@ The program _FallingSphereEuler.py_ (may be downloaded "here": "https://lrhgit.g
 FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler.png, width=400] Euler's method with $\Delta t=0.5$ s. label{fig:faling_sphere_euler}
 
 !ebox
+!split 
+===== Example: Numerical error as a function of discretization =====
+
+In this example we will assess how the error of our implementation of
+the Euler method depends on the time step $\delta t$ in a systematic
+manner. We will solve a problem with an analytical solution in a loop,
+and for each new solution we do the following:
+    * divide the time step by two (or double the number of time steps)
+    * compute the error 
+    * plot the error curve
+
+
 
 !split
 === Euler's method for a system ===
