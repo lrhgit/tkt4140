@@ -6,6 +6,8 @@ import numpy as np
 # change some default values to make plots more readable 
 LNWDT=5; FNT=11
 rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
+font = {'size' : 16}; rc('font', **font)
+
 
 
 g = 9.81      # Gravity m/s^2
@@ -22,16 +24,6 @@ def f(z, t):
     zout[:] = [z[1], g - alpha*z[1]**2]
     return zout 
 
-def f2(z, t):
-    """2x2 system for sphere with Re-dependent drag."""
-    zout = np.zeros_like(z)
-    v = abs(z[1]) 
-    Re = v*d/nu
-    CD = cd_sphere(Re)
-    alpha = 3.0*rho_f/(4.0*rho_s*d)*CD
-    zout[:] = [z[1], g - alpha*z[1]**2]
-    return zout
-
 # define euler scheme
 def euler(func,z0, time):
     """The Euler scheme for solution of systems of ODEs. 
@@ -45,13 +37,11 @@ def euler(func,z0, time):
     for i in range(len(time)-1):
         dt = time[i+1]-time[i]
         z[i+1,:]=z[i,:] + np.asarray(func(z[i,:],time[i]))*dt
-
     return z
 
 def v_taylor(t):
 #    z = np.zeros_like(t)
     v = np.zeros_like(t)
-
     alpha = 3.0*rho_f/(4.0*rho_s*d)*CD
     v=g*t*(1-alpha*g*t**2)
     return v
@@ -65,14 +55,15 @@ N = 10  # no of time steps
 z0=np.zeros(2)
 z0[0] = 2.0
 
+# Prms for the analytical solution 
 k1 = np.sqrt(g*4*rho_s*d/(3*rho_f*CD))
 k2 = np.sqrt(3*rho_f*g*CD/(4*rho_s*d))
 
-
-Ndts = 4
+Ndts = 4  # Number of times to divide the dt by 2 
 legends=[]
 error_diff = []
-for i in range(Ndts):
+
+for i in range(Ndts+1):
     time = np.linspace(0, T, N+1)
     ze = euler(f, z0, time)     # compute response with constant CD using Euler's method
     v_a = k1*np.tanh(k2*time)   # compute response with constant CD using analytical solution
@@ -81,7 +72,7 @@ for i in range(Ndts):
     max_log_error = np.max(log_error)
     #plot(time, ze[:,1])
     plot(time[1:], log_error)
-    legends.append('euler: N ' + str(N) + ' timesteps' )
+    legends.append('Euler scheme: N ' + str(N) + ' timesteps' )
     N*=2
     if i > 0:
         error_diff.append(previous_max_log_err-max_log_error)
@@ -96,12 +87,9 @@ print 10**(np.mean(error_diff))
 
 # fix plot 
 legend(legends, loc='best', frameon=False)
-font = {'size' : 16}
-rc('font', **font)
 xlabel('Time [s]')
 #ylabel('Velocity [m/s]')
 ylabel('log10-error')
-
-#savefig('example_sphere_falling_euler.png', transparent=True)
+savefig('example_euler_timestep_study.png', transparent=True)
 show()
 
