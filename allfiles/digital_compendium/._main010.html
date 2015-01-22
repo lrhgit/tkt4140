@@ -188,7 +188,7 @@ smaller for decreasing time steps, we normally do not plot the error
 itself, but rather the logaritm of the absolute value of the
 error. The latter we do due to the fact that we are only interested in
 the order of magnitude of the error, whereas errors may be both
-positive and negative.
+positive and negative. As the initial value is always correct we discard the first error at time zero to avoid problems with the logarithm of zero in <code>log_error = np.log10(abs_error[1:])</code>. 
 
 <p>
 
@@ -290,7 +290,7 @@ show()
 </pre></div>
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 5:  Plots for the logarithmic errors for a falling sphere with constant drag. \( \Delta t \) is reduced by a factor two from one curve to the one immediately below. </p></center>
+<center><p class="caption">Figure 5:  Plots for the logarithmic errors for a falling sphere with constant drag. The timestep \( \Delta t \) is reduced by a factor two from one curve to the one immediately below. </p></center>
 <p><img src="chapter1/programs_and_modules/example_euler_timestep_study.png" align="bottom" width=400></p>
 </center>
 
