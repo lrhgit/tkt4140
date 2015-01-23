@@ -1,5 +1,11 @@
 import numpy as np
-from matplotlib.pyplot import plot, show, legend, hold
+from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure
+
+# change some default values to make plots more readable 
+LNWDT=3; FNT=11
+rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
+font = {'size' : 16}; rc('font', **font)
+
 
 # define Euler solver
 def euler(func, z0, time):
@@ -184,12 +190,10 @@ if __name__ == '__main__':
     def test_convergence():
         """ Test convergence rate of the methods """
         from numpy import linspace, size, abs, log10, mean
-
+        figure(0)
         tol = 1E-15
-        T = 8.0  # end of simulation
-        Ndts = 3
-        N = 20  # no of time steps
-        time = linspace(0, T, N+1)
+        T = 8.0   # end of simulation
+        Ndts = 3  # Number of times to refine timestep in convergence test
 
         z0 = 2
 
@@ -198,6 +202,9 @@ if __name__ == '__main__':
         legends =[]
         
         for scheme in scheme_list:
+            N = 10    # no of time steps
+            time = linspace(0, T, N+1)
+
             error_diff = []
             for i in range(Ndts):
                 z = scheme(f3,z0,time)   
@@ -205,7 +212,7 @@ if __name__ == '__main__':
                 log_error = log10(abs_error[1:]) # Drop first element as it is always zero and casue prob for log10
                 max_log_err = max(log_error)
                 plot(time[1:], log_error)
-                legends.append(scheme.func_name + str(i))
+                legends.append(scheme.func_name +': N = ' + str(N))
                 hold('on')
                 
 #                 if i == 0:
@@ -222,32 +229,36 @@ if __name__ == '__main__':
             #print error_diff
             print mean(error_diff), 10**(mean(error_diff))
         
-        legend(legends)
-        show()
+        legend(legends, loc='best')
+        
         
     def plot_ODEschemes_solutions():
-        """Plot the linear solutions for the test schemes in scheme_list"""
+        """Plot the solutions for the test schemes in scheme_list"""
         from numpy import linspace
+        figure()
         T = 1.5  # end of simulation
-        N = 5  # no of time steps
+        N = 50  # no of time steps
         time = linspace(0, T, N+1)
 
-        z0 = np.zeros(1)
-        z0[0] = u_exact(0.0)
-
-        scheme_list  = [euler,euler2, euler3, euler4,heun, heun2, rk4]
+        z0 = 2.0
+        #scheme_list  = [euler,euler2, euler3, euler4,heun, heun2, rk4]
+        scheme_list  = [euler,euler2, euler3, euler4, heun, heun2, rk4]
         legends = []
 
 
         for scheme in scheme_list:
-            z = scheme(f_local,z0,time)
+            z = scheme(f3,z0,time)
             plot(time,z[:,-1])
             legends.append(scheme.func_name)
 
+        plot(time, u_nonlin_analytical(z0, time))
+        legends.append('analytical')
 
-        legend(legends)
-        show()
+
+        legend(legends, loc='best', frameon=False)
+
 
     test_ODEschemes()
     test_convergence()
-    #plot_ODEschemes_solutions()
+    plot_ODEschemes_solutions()
+    show()
