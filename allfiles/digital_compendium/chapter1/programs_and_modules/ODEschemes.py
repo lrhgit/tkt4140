@@ -227,7 +227,7 @@ if __name__ == '__main__':
                 N *=2
                 time = linspace(0, T, N+1)
             #print error_diff
-            print mean(error_diff), 10**(mean(error_diff))
+            #print mean(error_diff), 10**(mean(error_diff))
         
         legend(legends, loc='best')
         
@@ -261,4 +261,5 @@ if __name__ == '__main__':
     test_ODEschemes()
     test_convergence()
     plot_ODEschemes_solutions()
+    #print rcParams.keys()
     show()
