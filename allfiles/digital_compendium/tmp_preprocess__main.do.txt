@@ -1178,7 +1178,9 @@ smaller for decreasing time steps, we normally do not plot the error
 itself, but rather the logaritm of the absolute value of the
 error. The latter we do due to the fact that we are only interested in
 the order of magnitude of the error, whereas errors may be both
-positive and negative. As the initial value is always correct we discard the first error at time zero to avoid problems with the logarithm of zero in `log_error = np.log10(abs_error[1:])`. 
+positive and negative. As the initial value is always correct we
+discard the first error at time zero to avoid problems with the
+logarithm of zero in `log_error = np.log10(abs_error[1:])`.
 
 @@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
 
@@ -1198,8 +1200,8 @@ label{eq:error_approx}
 \end{equation}
 !et
 
-The     print     statements     'print     10**(np.mean(error_diff)),
-np.mean(error_diff)'  return '2.04715154702  0.311149993907', thus  we
+The     print     statement     `print     10**(np.mean(error_diff)),
+np.mean(error_diff)`  returns `2.04715154702  0.311149993907`, thus  we
 see  that   the  error  is   reduced  even  slightly  more   than  the
 theoretically expected value for a first order scheme, i.e. $\Delta t_{i+1} = \Delta t_{i}/2$ yields $\epsilon_{i+1} \approx\epsilon_{i}/2$.
 
