@@ -1116,11 +1116,12 @@ where
 !et
 The analytical solution with $z(0)=0$ and $v(0)=0$ is given by
 !bt
-\begin{equation} label{eq:1304a}
-v(t)=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t), \ z(t)=\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha}
-\end{equation}
+\begin{align} label{eq:1304a}
+ z(t)& =\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha} \\
+v(t) &=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t)
+\end{align}
 !et
-The terminal velocity $v_t$ is found by $\frac{dv}{dt}=0$ which gives $v_t=\sqrt{\frac{g}{\alpha}}$.
+The terminal velocity $v_t$ is found by $\displaystyle \frac{dv}{dt}=0$ which gives $\displaystyle v_t=\sqrt{\frac{g}{\alpha}}$.
 
 We use data from a golf ball: $d= 41\text{ mm}$, $\rho_k = 1275 \text{ kg/m}^3$, $\rho_k = 1.22 \text{ kg/m}^3$, and choose $C_D = 0.4$ which gives $\alpha = 7\cdot 10^{-3}$. The terminal velocity then becomes
 !bt
@@ -1148,9 +1149,9 @@ v_{n+1}=v_n+\Delta t\cdot (g-\alpha\cdot v^2_n),\ n=0,1,\dots
 with $v(0)=0$.
 
 One way of implementing the integration scheme is given in the following function `euler()`:
-@@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py from-to:# define euler scheme@# main program starts here
+@@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py from-to:# define euler scheme@def v_taylor
 
-The program _FallingSphereEuler.py_ (may be downloaded "here": "https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py") computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in ref{example:sphere_freefall}. The complete program is as follows,
+The program _FallingSphereEuler.py_  computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in ref{example:sphere_freefall}. The complete program is as follows,
 
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py
 
@@ -1169,11 +1170,12 @@ and for each new solution we do the following:
 * Compute the error 
 * Plot the error 
 
-Euler's method is a first order method and we therefore expect the
-error to be $O(h)=O(\Delta t)$ and if the timestep is divided by two
-should the error should also be divided by two.
+Euler's method is a first order method and we expect the error to be
+$O(h)=O(\Delta t)$. Consequently if the timestep is divided by two,
+the error should also be divided by two.
 
 As errors normally are small values and are expected to be smaller and
+<<<<<<< HEAD
 smaller for decreasing time steps, we normally do not plot the error
 itself, but rather the logaritm of the absolute value of the
 error. The latter we do due to the fact that we are only interested in
@@ -1181,6 +1183,16 @@ the order of magnitude of the error, whereas errors may be both
 positive and negative. As the initial value is always correct we
 discard the first error at time zero to avoid problems with the
 logarithm of zero in `log_error = np.log10(abs_error[1:])`.
+=======
+smaller for decreasing time steps, we do not plot the error itself,
+but rather the logaritm of the absolute value of the error. We used
+the absolute value to avoid problems with negative values for the
+logarithm as errors may be both positive and negative. However, this
+is not a problem as we are only interested in the order of magnitude
+of the error. As the initial value is always correct we discard the
+first error at time zero to avoid problems with the logarithm of zero
+in `log_error = np.log10(abs_error[1:])`.
+>>>>>>> master
 
 @@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
 
