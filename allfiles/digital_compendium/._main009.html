@@ -187,12 +187,13 @@ $$
 
 The analytical solution with \( z(0)=0 \) and \( v(0)=0 \) is given by
 $$
-\begin{equation} \tag{44}
-v(t)=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t), \ z(t)=\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha}
-\end{equation}
+\begin{align} \tag{44}
+ z(t)& =\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha} \\ 
+v(t) &=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t)
+\end{align}
 $$
 
-The terminal velocity \( v_t \) is found by \( \frac{dv}{dt}=0 \) which gives \( v_t=\sqrt{\frac{g}{\alpha}} \).
+The terminal velocity \( v_t \) is found by \( \displaystyle \frac{dv}{dt}=0 \) which gives \( \displaystyle v_t=\sqrt{\frac{g}{\alpha}} \).
 
 <p>
 We use data from a golf ball: \( d= 41\text{ mm} \), \( \rho_k = 1275 \text{ kg/m}^3 \), \( \rho_k = 1.22 \text{ kg/m}^3 \), and choose \( C_D = 0.4 \) which gives \( \alpha = 7\cdot 10^{-3} \). The terminal velocity then becomes
@@ -244,17 +245,9 @@ One way of implementing the integration scheme is given in the following functio
         z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
 
     <span style="color: #008000; font-weight: bold">return</span> z
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">v_taylor</span>(t):
-<span style="color: #408080; font-style: italic">#    z = np.zeros_like(t)</span>
-    v <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(t)
-
-    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
-    v<span style="color: #666666">=</span>g<span style="color: #666666">*</span>t<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>alpha<span style="color: #666666">*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>)
-    <span style="color: #008000; font-weight: bold">return</span> v
 </pre></div>
 <p>
-The program <b>FallingSphereEuler.py</b> (may be downloaded <a href="https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py" target="_blank">here</a>) computes the solution for the first 10 seconds, using a time step of \( \Delta t=0.5 \) s, and generates the plot in Figure <a href="#fig:faling_sphere_euler">4</a>. In addition to the case of constant drag coefficient, a solution for the case of varying \( C_D \) is included. To find \( C_D \) as function of velocity we use the function <code>cd_sphere()</code> that we implemented in <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. The complete program is as follows,
+The program <b>FallingSphereEuler.py</b>  computes the solution for the first 10 seconds, using a time step of \( \Delta t=0.5 \) s, and generates the plot in Figure <a href="#fig:faling_sphere_euler">4</a>. In addition to the case of constant drag coefficient, a solution for the case of varying \( C_D \) is included. To find \( C_D \) as function of velocity we use the function <code>cd_sphere()</code> that we implemented in <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. The complete program is as follows,
 
 <p>
 

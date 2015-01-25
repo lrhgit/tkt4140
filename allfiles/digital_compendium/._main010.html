@@ -178,17 +178,20 @@ and for each new solution we do the following:
 <li> Plot the error</li> 
 </ul>
 
-Euler's method is a first order method and we therefore expect the
-error to be \( O(h)=O(\Delta t) \) and if the timestep is divided by two
-should the error should also be divided by two.
+Euler's method is a first order method and we expect the error to be
+\( O(h)=O(\Delta t) \). Consequently if the timestep is divided by two,
+the error should also be divided by two.
 
 <p>
 As errors normally are small values and are expected to be smaller and
-smaller for decreasing time steps, we normally do not plot the error
-itself, but rather the logaritm of the absolute value of the
-error. The latter we do due to the fact that we are only interested in
-the order of magnitude of the error, whereas errors may be both
-positive and negative. As the initial value is always correct we discard the first error at time zero to avoid problems with the logarithm of zero in <code>log_error = np.log10(abs_error[1:])</code>. 
+smaller for decreasing time steps, we do not plot the error itself,
+but rather the logaritm of the absolute value of the error. We used
+the absolute value to avoid problems with negative values for the
+logarithm as errors may be both positive and negative. However, this
+is not a problem as we are only interested in the order of magnitude
+of the error. As the initial value is always correct we discard the
+first error at time zero to avoid problems with the logarithm of zero
+in <code>log_error = np.log10(abs_error[1:])</code>.
 
 <p>
 
