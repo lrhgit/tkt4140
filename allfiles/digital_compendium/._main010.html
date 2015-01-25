@@ -74,18 +74,19 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec14'),
-              (u" Euler's method for a system ", 3, None, '___sec15'),
-              (u" Heun's method ", 2, None, '___sec16'),
-              (u" Example 5: Newton's equation ", 2, None, '___sec17'),
+              (u'=', 3, None, '___sec15'),
+              (u" Euler's method for a system ", 3, None, '___sec16'),
+              (u" Heun's method ", 2, None, '___sec17'),
+              (u" Example 5: Newton's equation ", 2, None, '___sec18'),
               (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
-               '___sec18'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
+               '___sec19'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec20'),
               (u' Example 7: Particle motion in two dimensions ',
                2,
                None,
-               '___sec20')]}
+               '___sec21')]}
 end of tocinfo -->
 
 <body>
@@ -185,14 +186,6 @@ the error should also be divided by two.
 <p>
 As errors normally are small values and are expected to be smaller and
 <<<<<<< HEAD
-smaller for decreasing time steps, we normally do not plot the error
-itself, but rather the logaritm of the absolute value of the
-error. The latter we do due to the fact that we are only interested in
-the order of magnitude of the error, whereas errors may be both
-positive and negative. As the initial value is always correct we
-discard the first error at time zero to avoid problems with the
-logarithm of zero in <code>log_error = np.log10(abs_error[1:])</code>.
-=======
 smaller for decreasing time steps, we do not plot the error itself,
 but rather the logaritm of the absolute value of the error. We used
 the absolute value to avoid problems with negative values for the
@@ -201,6 +194,19 @@ is not a problem as we are only interested in the order of magnitude
 of the error. As the initial value is always correct we discard the
 first error at time zero to avoid problems with the logarithm of zero
 in <code>log_error = np.log10(abs_error[1:])</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+=======
+smaller for decreasing time steps, we normally do not plot the error
+itself, but rather the logaritm of the absolute value of the
+error. The latter we do due to the fact that we are only interested in
+the order of magnitude of the error, whereas errors may be both
+positive and negative. As the initial value is always correct we
+discard the first error at time zero to avoid problems with the
+logarithm of zero in <code>log_error = np.log10(abs_error[1:])</code>.
 >>>>>>> master
 
 <p>
@@ -331,9 +337,6 @@ theoretically expected value for a first order scheme, i.e. \( \Delta t_{i+1} = 
 <center><p class="caption">Figure 5:  Plots for the logarithmic errors for a falling sphere with constant drag. The timestep \( \Delta t \) is reduced by a factor two from one curve to the one immediately below.<div id="fig:error_evolution"></div> </p></center>
 <p><img src="chapter1/programs_and_modules/example_euler_timestep_study.png" align="bottom" width=600></p>
 </center>
-
-<p>
-<!-- --- end exercise --- -->
 
 <p>
 <p>
