@@ -1170,26 +1170,13 @@ and for each new solution we do the following:
 * Compute the error 
 * Plot the error 
 
-Euler's method is a first order method and we expect the error to be
-$O(h)=O(\Delta t)$. Consequently if the timestep is divided by two,
-the error should also be divided by two.
-
-As errors normally are small values and are expected to be smaller and
-smaller for decreasing time steps, we normally do not plot the error
-itself, but rather the logaritm of the absolute value of the
-error. The latter we do due to the fact that we are only interested in
-the order of magnitude of the error, whereas errors may be both
-positive and negative. As the initial value is always correct we
-discard the first error at time zero to avoid problems with the
-logarithm of zero in `log_error = np.log10(abs_error[1:])`.
 
 @@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
 
 The plot resulting from the code above is shown in Figure
 (ref{fig:error_evolution}). The difference or distance between the
 curves seems to be rather constant after an initial transient. As we
-have plotted the logarithm of the absolute value of the error
-$\epsilon_i$, the difference $d_{i+1}$ between two curves is $d_{i+1}=
+have plotted the logarithm of the absolute value of the error $\epsilon_i$, the difference $d_{i+1}$ between two curves is $d_{i+1}=
 \log10 \epsilon_{i}-\log10 \epsilon_{i+1} = \displaystyle \log10
 \frac{\epsilon_{i}}{\epsilon_{i+1}}$. A rough visual inspection of Figure
 (ref{fig:error_evolution}) yields $d_{i+1} \approx 0.3$, from which we may deduce:
@@ -1425,7 +1412,6 @@ The complete program _FallingSphereEulerHeun.py_ is listed below. Note that the 
 ${ebox()}
 
 
-Some new text here...
 !split
 ===== Runge-Kutta of 4th order =====
 
