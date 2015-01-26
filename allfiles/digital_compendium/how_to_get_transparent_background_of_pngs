@@ -1,2 +1,0 @@
-Image conversion from pdf to png with transparency:
-convert -density 600 -depth 8 -quality 85 -transparent black  2.pdf 2.png
