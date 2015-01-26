@@ -1,5 +1,6 @@
 import numpy as np
-from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure
+from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure, axhline, close,\
+    xticks, xlabel, ylabel
 
 # change some default values to make plots more readable 
 LNWDT=3; FNT=11
@@ -190,23 +191,24 @@ if __name__ == '__main__':
     def test_convergence():
         """ Test convergence rate of the methods """
         from numpy import linspace, size, abs, log10, mean
-        figure(0)
+        figure()
         tol = 1E-15
         T = 8.0   # end of simulation
-        Ndts = 3  # Number of times to refine timestep in convergence test
+        Ndts = 5 # Number of times to refine timestep in convergence test
 
         z0 = 2
 
 #        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
-        scheme_list  = [euler, heun, rk4]
-        legends =[]
+        scheme_list =[euler, heun, rk4]
+        legends=[]
+        all_errors={}
         
         for scheme in scheme_list:
-            N = 10    # no of time steps
+            N = 30    # no of time steps
             time = linspace(0, T, N+1)
 
             error_diff = []
-            for i in range(Ndts):
+            for i in range(Ndts+1):
                 z = scheme(f3,z0,time)   
                 abs_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
                 log_error = log10(abs_error[1:]) # Drop first element as it is always zero and casue prob for log10
@@ -224,13 +226,34 @@ if __name__ == '__main__':
                     error_diff.append(previous_max_log_err-max_log_err)
                 previous_max_log_err = max_log_err
                 
+                
                 N *=2
                 time = linspace(0, T, N+1)
+                
+            all_errors[scheme.func_name]=error_diff
             #print error_diff
-            #print mean(error_diff), 10**(mean(error_diff))
-        
+            #print mean(error_diff), 10**(mean(error_diff)), error_diff
+            print 10**np.asarray(error_diff)
         legend(legends, loc='best')
         
+        N = N/2**Ndts
+        N_list = [N*2**i for i in range(1,Ndts+1)]
+        N_list = np.asarray(N_list)
+        print N_list         
+        
+        figure()
+        for key in all_errors:
+            plot(N_list,10**(np.asarray(all_errors[key])))
+        
+        axhline(2.0, xmin=0, xmax=N,linestyle=':')
+        axhline(4.0, xmin=0, xmax=N,linestyle=':')
+        axhline(16.0, xmin=0, xmax=N,linestyle=':')
+        xticks(N_list)
+        legends =all_errors.keys()
+        legends.append('theoretical') 
+        legend(legends,loc='best')
+        xlabel('Number of unknowns')
+        ylabel('Error reduction when reducing timestep by two')
         
     def plot_ODEschemes_solutions():
         """Plot the solutions for the test schemes in scheme_list"""
