@@ -1159,8 +1159,7 @@ error. The latter we do due to the fact that we are only interested in
 the order of magnitude of the error, whereas errors may be both
 positive and negative. As the initial value is always correct we
 discard the first error at time zero to avoid problems with the
-logarithm of zero in `log_error = np.log10(abs_error[1:]`. 
-hello...
+logarithm of zero in `log_error = np.log10(abs_error[1:])`.
 
 @@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
 
