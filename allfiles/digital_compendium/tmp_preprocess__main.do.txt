@@ -1610,6 +1610,10 @@ The complete program _ParticleMotion2D.py_ is listed below.
 
 ${ebox()}
 
+!split 
+===== Example: Numerical error as  a function of $\Delta t$ for ODE-schemes =====
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py
+
 
 
 
