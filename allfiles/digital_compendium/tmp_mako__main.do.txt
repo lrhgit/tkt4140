@@ -1150,6 +1150,7 @@ and for each new solution we do the following:
 * Plot the error 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Euler's method is a first order method and we expect the error to be
 $O(h)=O(\Delta t)$. Consequently if the timestep is divided by two,
 the error should also be divided by two.
@@ -1165,15 +1166,26 @@ of the error. As the initial value is always correct we discard the
 first error at time zero to avoid problems with the logarithm of zero
 in `log_error = np.log10(abs_error[1:])`.
 =======
+=======
+Euler's method is a first order method and we expect the error to be
+$O(h)=O(\Delta t)$. Consequently if the timestep is divided by two,
+the error should also be divided by two.
+As errors normally are small values and are expected to be smaller and
+>>>>>>> master
 smaller for decreasing time steps, we normally do not plot the error
 itself, but rather the logaritm of the absolute value of the
 error. The latter we do due to the fact that we are only interested in
 the order of magnitude of the error, whereas errors may be both
 positive and negative. As the initial value is always correct we
 discard the first error at time zero to avoid problems with the
+<<<<<<< HEAD
 logarithm of zero in `log_error = np.log10(abs_error[1:])`.
 >>>>>>> master
 =======
+>>>>>>> master
+=======
+logarithm of zero in `log_error = np.log10(abs_error[1:]`. 
+
 >>>>>>> master
 
 @@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
