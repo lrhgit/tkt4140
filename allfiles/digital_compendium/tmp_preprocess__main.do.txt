@@ -1206,7 +1206,11 @@ logarithm of zero in `log_error = np.log10(abs_error[1:])`.
 >>>>>>> master
 =======
 logarithm of zero in `log_error = np.log10(abs_error[1:]`. 
+<<<<<<< HEAD
 
+>>>>>>> master
+=======
+hello...
 >>>>>>> master
 
 @@@CODE ./chapter1/programs_and_modules/Euler_timestep_ctrl.py
