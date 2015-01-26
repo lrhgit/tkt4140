@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure, axhline, close,\
-    xticks
+    xticks, xlabel, ylabel
 
 # change some default values to make plots more readable 
 LNWDT=3; FNT=11
@@ -252,6 +252,8 @@ if __name__ == '__main__':
         legends =all_errors.keys()
         legends.append('theoretical') 
         legend(legends,loc='best')
+        xlabel('Number of unknowns')
+        ylabel('Error reduction when reducing timestep by two')
         
     def plot_ODEschemes_solutions():
         """Plot the solutions for the test schemes in scheme_list"""
@@ -284,5 +286,3 @@ if __name__ == '__main__':
     plot_ODEschemes_solutions()
     #print rcParams.keys()
     show()
-
-    close()
