@@ -140,12 +140,12 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0010"></a>
+<a name="part0009"></a>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-<li><a href="._main009.html">&laquo;</a></li>
+<li><a href="._main008.html">&laquo;</a></li>
   <li><a href="._main000.html">1</a></li>
-  <li><a href="">...</a></li>
+  <li><a href="._main001.html">2</a></li>
   <li><a href="._main002.html">3</a></li>
   <li><a href="._main003.html">4</a></li>
   <li><a href="._main004.html">5</a></li>
@@ -153,8 +153,8 @@ MathJax.Hub.Config({
   <li><a href="._main006.html">7</a></li>
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
-  <li><a href="._main009.html">10</a></li>
-  <li class="active"><a href="._main010.html">11</a></li>
+  <li class="active"><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
   <li><a href="._main011.html">12</a></li>
   <li><a href="._main012.html">13</a></li>
   <li><a href="._main013.html">14</a></li>
@@ -162,43 +162,102 @@ MathJax.Hub.Config({
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main011.html">&raquo;</a></li>
+  <li><a href="._main010.html">&raquo;</a></li>
 </ul>
-<!-- !split  -->
+<!-- !split -->
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
 
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec14">Example 4: Numerical error as a function of \( \Delta t \) </h2>
+<h2 id="ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</h2>
 
 <p>
-In this example we will assess how the error of our implementation of
-the Euler method depends on the time step \( \Delta t \) in a systematic
-manner. We will solve a problem with an analytical solution in a loop,
-and for each new solution we do the following: 
+We write <a href="._main004.html#mjx-eqn-13">(13)</a> and <a href="._main004.html#mjx-eqn-14">(14)</a> as a system as follows,
+$$
+\begin{align}
+& \frac{dz}{dt}=v \tag{42}\\ 
+& \frac{dv}{dt}=g-\alpha v^2 \tag{43}
+\end{align}
+$$
 
-<ul>
-<li> Divide the time step by two (or double the number of time steps)</li> 
-<li> Compute the error</li> 
-<li> Plot the error</li> 
-</ul>
+where
+$$
+\begin{equation*}
+\alpha =\frac{3\rho _f}{4\rho _k\cdot d}\cdot C_D
+\end{equation*}
+$$
 
-Euler's method is a first order method and we expect the error to be
-\( O(h)=O(\Delta t) \). Consequently if the timestep is divided by two,
-the error should also be divided by two.
-As errors normally are small values and are expected to be smaller and
-smaller for decreasing time steps, we normally do not plot the error
-itself, but rather the logaritm of the absolute value of the
-error. The latter we do due to the fact that we are only interested in
-the order of magnitude of the error, whereas errors may be both
-positive and negative. As the initial value is always correct we
-discard the first error at time zero to avoid problems with the
-logarithm of zero in <code>log_error = np.log10(abs_error[1:])</code>.
+The analytical solution with \( z(0)=0 \) and \( v(0)=0 \) is given by
+$$
+\begin{align} \tag{44}
+ z(t)& =\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha} \\ 
+v(t) &=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t)
+\end{align}
+$$
+
+The terminal velocity \( v_t \) is found by \( \displaystyle \frac{dv}{dt}=0 \) which gives \( \displaystyle v_t=\sqrt{\frac{g}{\alpha}} \).
+
+<p>
+We use data from a golf ball: \( d= 41\text{ mm} \), \( \rho_k = 1275 \text{ kg/m}^3 \), \( \rho_k = 1.22 \text{ kg/m}^3 \), and choose \( C_D = 0.4 \) which gives \( \alpha = 7\cdot 10^{-3} \). The terminal velocity then becomes
+$$
+\begin{equation*}
+v_t = \sqrt{\frac{g}{\alpha}} = 37.44
+\end{equation*}
+$$
+
+
+<p>
+If we use Taylor's method from the section <a href="._main002.html#sec:taylor">Taylor's method</a> we get the following expression by using four terms in the series expansion:
+$$
+\begin{align}
+\tag{45}
+z(t)=&\frac{1}{2}gt^2\cdot (1-\frac{1}{6}\alpha gt^2)\\ 
+v(t)=&g t\cdot (1-\frac{1}{3}\alpha gt^2)
+\end{align}
+$$
+
+
+<p>
+The Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> used on <a href="#mjx-eqn-43">(43)</a> gives
+$$
+\begin{equation}
+\tag{46}
+v_{n+1}=v_n+\Delta t\cdot (g-\alpha\cdot v^2_n),\ n=0,1,\dots
+\end{equation}
+$$
+
+with \( v(0)=0 \).
+
+<p>
+One way of implementing the integration scheme is given in the following function <code>euler()</code>:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func,z0, time):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs. </span>
+<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions, </span>
+<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns </span>
+<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
+    
+    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time),np<span style="color: #666666">.</span>size(z0)))
+    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
+
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
+        z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
+
+    <span style="color: #008000; font-weight: bold">return</span> z
+</pre></div>
+<p>
+The program <b>FallingSphereEuler.py</b>  computes the solution for the first 10 seconds, using a time step of \( \Delta t=0.5 \) s, and generates the plot in Figure <a href="#fig:faling_sphere_euler">4</a>. In addition to the case of constant drag coefficient, a solution for the case of varying \( C_D \) is included. To find \( C_D \) as function of velocity we use the function <code>cd_sphere()</code> that we implemented in <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. The complete program is as follows,
 
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/Euler_timestep_ctrl.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/DragCoefficientGeneric.py;</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/DragCoefficientGeneric.py;</span>
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere    
 <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
 <span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
@@ -206,8 +265,6 @@ logarithm of zero in <code>log_error = np.log10(abs_error[1:])</code>.
 <span style="color: #408080; font-style: italic"># change some default values to make plots more readable </span>
 LNWDT<span style="color: #666666">=5</span>; FNT<span style="color: #666666">=11</span>
 rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
-font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}; rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
-
 
 
 g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity m/s^2</span>
@@ -224,6 +281,16 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
     zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
     <span style="color: #008000; font-weight: bold">return</span> zout 
 
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with Re-dependent drag.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    v <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(z[<span style="color: #666666">1</span>]) 
+    Re <span style="color: #666666">=</span> v<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD <span style="color: #666666">=</span> cd_sphere(Re)
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
+    <span style="color: #008000; font-weight: bold">return</span> zout
+
 <span style="color: #408080; font-style: italic"># define euler scheme</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler</span>(func,z0, time):
     <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs. </span>
@@ -237,11 +304,13 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
         dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
         z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
+
     <span style="color: #008000; font-weight: bold">return</span> z
 
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">v_taylor</span>(t):
 <span style="color: #408080; font-style: italic">#    z = np.zeros_like(t)</span>
     v <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(t)
+
     alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
     v<span style="color: #666666">=</span>g<span style="color: #666666">*</span>t<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>alpha<span style="color: #666666">*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>)
     <span style="color: #008000; font-weight: bold">return</span> v
@@ -249,79 +318,56 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
 <span style="color: #408080; font-style: italic"># main program starts here</span>
 
 T <span style="color: #666666">=</span> <span style="color: #666666">10</span>  <span style="color: #408080; font-style: italic"># end of simulation</span>
-N <span style="color: #666666">=</span> <span style="color: #666666">10</span>  <span style="color: #408080; font-style: italic"># no of time steps</span>
-
+N <span style="color: #666666">=</span> <span style="color: #666666">20</span>  <span style="color: #408080; font-style: italic"># no of time steps</span>
+time <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
 
 z0<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">2</span>)
 z0[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
 
-<span style="color: #408080; font-style: italic"># Prms for the analytical solution </span>
+ze <span style="color: #666666">=</span> euler(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Euler&#39;s method</span>
+ze2 <span style="color: #666666">=</span> euler(f2, z0, time)   <span style="color: #408080; font-style: italic"># compute response with varying CD using Euler&#39;s method</span>
+
 k1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(g<span style="color: #666666">*4*</span>rho_s<span style="color: #666666">*</span>d<span style="color: #666666">/</span>(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>CD))
 k2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>g<span style="color: #666666">*</span>CD<span style="color: #666666">/</span>(<span style="color: #666666">4*</span>rho_s<span style="color: #666666">*</span>d))
+v_a <span style="color: #666666">=</span> k1<span style="color: #666666">*</span>np<span style="color: #666666">.</span>tanh(k2<span style="color: #666666">*</span>time)   <span style="color: #408080; font-style: italic"># compute response with constant CD using analytical solution</span>
 
-Ndts <span style="color: #666666">=</span> <span style="color: #666666">4</span>  <span style="color: #408080; font-style: italic"># Number of times to divide the dt by 2 </span>
+<span style="color: #408080; font-style: italic"># plotting</span>
+
 legends<span style="color: #666666">=</span>[]
-error_diff <span style="color: #666666">=</span> []
+line_type<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;-&#39;</span>,<span style="color: #BA2121">&#39;:&#39;</span>,<span style="color: #BA2121">&#39;.&#39;</span>,<span style="color: #BA2121">&#39;-.&#39;</span>,<span style="color: #BA2121">&#39;--&#39;</span>]
 
-<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Ndts<span style="color: #666666">+1</span>):
-    time <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
-    ze <span style="color: #666666">=</span> euler(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Euler&#39;s method</span>
-    v_a <span style="color: #666666">=</span> k1<span style="color: #666666">*</span>np<span style="color: #666666">.</span>tanh(k2<span style="color: #666666">*</span>time)   <span style="color: #408080; font-style: italic"># compute response with constant CD using analytical solution</span>
-    abs_error<span style="color: #666666">=</span>np<span style="color: #666666">.</span>abs(ze[:,<span style="color: #666666">1</span>] <span style="color: #666666">-</span> v_a)
-    log_error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>log10(abs_error[<span style="color: #666666">1</span>:])
-    max_log_error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>max(log_error)
-    <span style="color: #408080; font-style: italic">#plot(time, ze[:,1])</span>
-    plot(time[<span style="color: #666666">1</span>:], log_error)
-    legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler scheme: N &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N) <span style="color: #666666">+</span> <span style="color: #BA2121">&#39; timesteps&#39;</span> )
-    N<span style="color: #666666">*=2</span>
-    <span style="color: #008000; font-weight: bold">if</span> i <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>:
-        error_diff<span style="color: #666666">.</span>append(previous_max_log_err<span style="color: #666666">-</span>max_log_error)
+plot(time, v_a, line_type[<span style="color: #666666">0</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Analytical (constant CD)&#39;</span>)
 
-    previous_max_log_err <span style="color: #666666">=</span> max_log_error
-    
-<span style="color: #008000; font-weight: bold">print</span> <span style="color: #666666">10**</span>(np<span style="color: #666666">.</span>mean(error_diff)), np<span style="color: #666666">.</span>mean(error_diff)
+plot(time, ze[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">1</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (constant CD)&#39;</span>)
 
+plot(time, ze2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">3</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (varying CD)&#39;</span>)
 
-<span style="color: #408080; font-style: italic"># plot analytical solution</span>
-<span style="color: #408080; font-style: italic"># plot(time,v_a)</span>
-<span style="color: #408080; font-style: italic"># legends.append(&#39;analytical&#39;)</span>
+time_taylor <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, N<span style="color: #666666">+1</span>)
 
-<span style="color: #408080; font-style: italic"># fix plot </span>
+plot(time_taylor, v_taylor(time_taylor))
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Taylor (constant CD)&#39;</span>)
+
 legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
 xlabel(<span style="color: #BA2121">&#39;Time [s]&#39;</span>)
-<span style="color: #408080; font-style: italic">#ylabel(&#39;Velocity [m/s]&#39;)</span>
-ylabel(<span style="color: #BA2121">&#39;log10-error&#39;</span>)
-savefig(<span style="color: #BA2121">&#39;example_euler_timestep_study.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+ylabel(<span style="color: #BA2121">&#39;Velocity [m/s]&#39;</span>)
+<span style="color: #408080; font-style: italic">#savefig(&#39;example_sphere_falling_euler.png&#39;, transparent=True)</span>
 show()
 </pre></div>
 <p>
-The plot resulting from the code above is shown in Figure
-(<a href="#fig:error_evolution">5</a>). The difference or distance between the
-curves seems to be rather constant after an initial transient. As we
-have plotted the logarithm of the absolute value of the error \( \epsilon_i \), the difference \( d_{i+1} \) between two curves is \( d_{i+1}=
-\log10 \epsilon_{i}-\log10 \epsilon_{i+1} = \displaystyle \log10
-\frac{\epsilon_{i}}{\epsilon_{i+1}} \). A rough visual inspection of Figure
-(<a href="#fig:error_evolution">5</a>) yields \( d_{i+1} \approx 0.3 \), from which we may deduce:
-$$
-\begin{equation}
-\log10
-\frac{\epsilon_{i}}{\epsilon_{i+1}} \approx 0.3 \Rightarrow \epsilon_{i+1} \approx 10^{-0.3}\, \epsilon_{i} \approx 0.501\, \epsilon_{i}
-\tag{47}
-\end{equation}
-$$
-
-
-<p>
-The     print     statement     <code>print     10**(np.mean(error_diff)),
-np.mean(error_diff)</code>  returns <code>2.04715154702  0.311149993907</code>, thus  we
-see  that   the  error  is   reduced  even  slightly  more   than  the
-theoretically expected value for a first order scheme, i.e. \( \Delta t_{i+1} = \Delta t_{i}/2 \) yields \( \epsilon_{i+1} \approx\epsilon_{i}/2 \).
-
-<p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 5:  Plots for the logarithmic errors for a falling sphere with constant drag. The timestep \( \Delta t \) is reduced by a factor two from one curve to the one immediately below.<div id="fig:error_evolution"></div> </p></center>
-<p><img src="chapter1/programs_and_modules/example_euler_timestep_study.png" align="bottom" width=600></p>
+<center><p class="caption">Figure 4:  Euler's method with \( \Delta t=0.5 \) s. <div id="fig:faling_sphere_euler"></div> </p></center>
+<p><img src="chapter1/programs_and_modules/example_sphere_falling_euler.png" align="bottom" width=400></p>
 </center>
+
+<p>
+</div>
+<!-- end box -->
+
 
 <p>
 <!-- --- end exercise --- -->
@@ -330,9 +376,9 @@ theoretically expected value for a first order scheme, i.e. \( \Delta t_{i+1} = 
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-<li><a href="._main009.html">&laquo;</a></li>
+<li><a href="._main008.html">&laquo;</a></li>
   <li><a href="._main000.html">1</a></li>
-  <li><a href="">...</a></li>
+  <li><a href="._main001.html">2</a></li>
   <li><a href="._main002.html">3</a></li>
   <li><a href="._main003.html">4</a></li>
   <li><a href="._main004.html">5</a></li>
@@ -340,8 +386,8 @@ theoretically expected value for a first order scheme, i.e. \( \Delta t_{i+1} = 
   <li><a href="._main006.html">7</a></li>
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
-  <li><a href="._main009.html">10</a></li>
-  <li class="active"><a href="._main010.html">11</a></li>
+  <li class="active"><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
   <li><a href="._main011.html">12</a></li>
   <li><a href="._main012.html">13</a></li>
   <li><a href="._main013.html">14</a></li>
@@ -349,7 +395,7 @@ theoretically expected value for a first order scheme, i.e. \( \Delta t_{i+1} = 
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main011.html">&raquo;</a></li>
+  <li><a href="._main010.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

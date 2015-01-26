@@ -126,7 +126,7 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
      <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
 
         </ul>
@@ -140,122 +140,125 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0000"></a>
+<a name="part0015"></a>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-  <li class="active"><a href="._main000.html">1</a></li>
-  <li><a href="._main001.html">2</a></li>
-  <li><a href="._main002.html">3</a></li>
-  <li><a href="._main003.html">4</a></li>
-  <li><a href="._main004.html">5</a></li>
-  <li><a href="._main005.html">6</a></li>
-  <li><a href="._main006.html">7</a></li>
+<li><a href="._main014.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="">...</a></li>
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
-  <li><a href="">...</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li class="active"><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main001.html">&raquo;</a></li>
+  <li><a href="._main016.html">&raquo;</a></li>
 </ul>
-<!-- ------------------- main content ---------------------- -->
+<!-- !split -->
 
-
-
-<div class="jumbotron">
-<center><h1>Numerical Methods for Engineers</h1></center>  <!-- document title -->
-
-
-
-<center><h1>A digital compendium</h1></center>  <!-- document title -->
+<h2 id="___sec19">Runge-Kutta of 4th order </h2>
 
 <p>
-<!-- author(s): Johan Kolstø Sønstabø, and Leif Rune Hellevik -->
+Euler's method and Heun's method belong to the Runge-Kutta family of explicit methods, and is respectively Runge-Kutta of 1st and 2nd order, the latter with one time use of corrector. Explicit Runge-Kutta schemes are single step schemes that try to copy the Taylor series expansion of the differential equation to a given order.
 
-<center>
-<b>Johan Kolstø Sønstabø</b> [1]
+<p>
+The classical Runge-Kutta scheme of 4th order (RK4) is given by
+$$
+\begin{align}
+&k_1=f(x_n,y_n)\nonumber\\ 
+&k_2=f(x_n+\frac{h}{2}, y_n+\frac{h}{2}k_1)\nonumber\\ 
+\tag{62}
+&k_3=f(x_n+\frac{h}{2},y_n+\frac{h}{2}k_2)\\ 
+&k_4=f(x_n+h,y_n+hk_3)\nonumber\\ 
+&y_{n+1}=y_n+\frac{h}{6}(k_1+2k_2+2k_3+k_4)\nonumber
+\end{align}
+$$
+
+
+<p>
+We see that we are actually using Euler's method four times and find a weighted gradient. The local error is of order \( O(h^5) \), while the global is of \( O(h^4) \). We refer to <a href="._main017.html#cheney2012numerical">[6]</a>.
+
+<p>
+Figure <a href="#fig:RK4_illustration">9</a> shows a graphical illustration of the RK4 scheme.
+
+<p>
+In detail we have
+
+<ol>
+ <li> In point \( (x_n,y_n) \) we know the gradient \( k_1 \) and use this when we go forward a step \( h/2 \) where the gradient \( k_2 \) is calculated.</li>
+ <li> With this gradient we start again in point \( (x_n,y_n) \), go forward a step \( h/2 \) and find a new gradient \( k_3 \).</li>
+ <li> With this gradient we start again in point \( (x_n,y_n) \), but go forward a complete step \( h \) and find a new gradient \( k_4 \).</li>
+ <li> The four gradients are averaged with weights \( 1/6 \), \( 2/6 \), \( 2/6 \) and \( 1/6 \). Using the averaged gradient we calculate the final value \( y_{n+1} \).</li>
+</ol>
+
+Each of the steps above are Euler steps.
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 9:  Illustration of the RK4 scheme. <div id="fig:RK4_illustration"></div> </p></center>
+<p><img src="chapter1/12.png" align="bottom" width=400></p>
 </center>
 
-<center>
-<b>Leif Rune Hellevik</b> [1]
-</center>
+<p>
+Using <a href="#mjx-eqn-62">(62)</a> on the equation system in <a href="._main011.html#mjx-eqn-52">(52)</a> we get
+$$
+\begin{align}
+&(y_1)_{n+1}=(y_1)_n +\frac{h}{6}(k_1+2k_2+2k_3+k_4) \nonumber\\ 
+&(y_2)_{n+1}=(y_2)_n +\frac{h}{6}(l_1+2l_2+2l_3+l_4)
+\tag{63} \\ 
+&(y_3)_{n+1}=(y_3)_n +\frac{h}{6}(m_1+2m_2+2m_3+m_4) \nonumber\\ 
+\end{align}
+$$
+
+where
+$$
+\begin{align*}
+k_1&=y_2 \\ 
+l_1&=y_3 \\ 
+m_1&=-y_1y_3\\ 
+\\ 
+k_2&=(y_2+hl_l/2)\\ 
+l_2&=(y_3+hm_1/2)\\ 
+m_2&=-[(y_1+hk_1/2)(y_3+hm_1/2)]\\ 
+\\ 
+k_3&=(y_2+hl_2/2)\\ 
+l_3&=(y_3+hm_2/2)\\ 
+m_3&=-[(y_1+hk_2/2)(y_3+hm_2/2)]\\ 
+\\ 
+k_4&=(y_2+hl_3)\\ 
+l_4&=(y_3+hm_3)\\ 
+m_4&=-[(y_1+hk_3)(y_3+hm_3)
+\end{align*}
+$$
 
 
 <p>
-<!-- institution(s) -->
-
-<center>[1] <b>Department of Structural Engineering, NTNU</b></center>
-<p>
-<center><h4>Jan 26, 2015</h4></center> <!-- date -->
-
-<h2>Table of contents</h2>
-
-<p>
-<a href="#___sec0"> Initial value problems for Ordinary Differential Equations </a><br>
-<a href="._main001.html#section:introduction"> Introduction </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main002.html#sec:taylor"> Taylor's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#subsec:reduction"> Reduction of Higher order Equations </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec4"> Example 1: Reduction of higher order systems </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec5"> Scientific computing with Python </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main004.html#example:sphere_freefall"> Example 2: Sphere in free fall </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main004.html#___sec7"> Python implementation of the drag coefficient function and how to plot it </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main005.html#___sec8"> Python functions with vector arguments and modules </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main005.html#section:Python_module"> How to make a Python-module and some useful programming features </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main006.html#___sec10"> Differences </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main007.html#___sec11"> Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main008.html#ex:euler_method"> Euler's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main009.html#ex:falling_sphere"> Example 3: Falling sphere with constant and varying drag </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main010.html#___sec14"> Example 4: Numerical error as a function of \( \Delta t \) </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main011.html#___sec15"> Euler's method for a system </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main012.html#___sec16"> Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main013.html#___sec17"> Example 5: Newton's equation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main014.html#___sec18"> Example 6: Falling sphere with Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main015.html#___sec19"> Runge-Kutta of 4th order </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main016.html#___sec20"> Example 7: Particle motion in two dimensions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main017.html#___sec21"> Example 8: Numerical error as  a function of \( \Delta t \) for ODE-schemes </a><br>
-</p>
-<p>
-<!-- TKT4140 Numerical Methods with Computer Laboratory. -->
-
-<p>
-
-
-</div> <!-- end jumbotron -->
-
-<h1 id="___sec0">Initial value problems for Ordinary Differential Equations </h1>
-This digital compendium is based on the first chapter of the
-compendium <em>Numeriske Beregninger</em> by J.B. Aarseth. It's intended to
-be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
-
-<p>
-The development of the technical solutions for this digital compendium
-results from collaborations with professor <a href="http://folk.uio.no/hpl/" target="_blank">Hans Petter
-Langtangen</a> at UiO (hpl@simula.no), who has
-developed <a href="https://github.com/hplgit/doconce" target="_blank">Doconce</a> for flexible
-typesetting, and associate professor <a href="http://www.ntnu.edu/employees/hal" target="_blank">Hallvard
-Trætteberg</a> at IDI, NTNU
-(hal@idi.ntnu.no), who has developed the webpage-parser which
-identifies Python-code for integration in Eclipse IDEs (such as
-LiClipse). The latter part of the development has been funded by the
-project
-<a href="https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826" target="_blank">IKTiSU.</a>
+<!-- left out for exercise -->
 
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-  <li class="active"><a href="._main000.html">1</a></li>
-  <li><a href="._main001.html">2</a></li>
-  <li><a href="._main002.html">3</a></li>
-  <li><a href="._main003.html">4</a></li>
-  <li><a href="._main004.html">5</a></li>
-  <li><a href="._main005.html">6</a></li>
-  <li><a href="._main006.html">7</a></li>
+<li><a href="._main014.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="">...</a></li>
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
-  <li><a href="">...</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li class="active"><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main001.html">&raquo;</a></li>
+  <li><a href="._main016.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

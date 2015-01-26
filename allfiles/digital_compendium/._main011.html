@@ -126,7 +126,7 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
      <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
 
         </ul>
@@ -140,12 +140,12 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0000"></a>
+<a name="part0011"></a>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-  <li class="active"><a href="._main000.html">1</a></li>
-  <li><a href="._main001.html">2</a></li>
-  <li><a href="._main002.html">3</a></li>
+<li><a href="._main010.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="">...</a></li>
   <li><a href="._main003.html">4</a></li>
   <li><a href="._main004.html">5</a></li>
   <li><a href="._main005.html">6</a></li>
@@ -153,99 +153,107 @@ MathJax.Hub.Config({
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
-  <li><a href="">...</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li class="active"><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main001.html">&raquo;</a></li>
+  <li><a href="._main012.html">&raquo;</a></li>
 </ul>
-<!-- ------------------- main content ---------------------- -->
+<!-- !split -->
 
+<h3 id="___sec15">Euler's method for a system </h3>
 
+Euler's method may of course also be used for a system. Let's look at a simultaneous system of \( p \) equations
+$$
+\begin{align}
+&y'_1=f_1(x,y_1,y_2,\dots y_p) \nonumber\\ 
+&y'_2=f_2(x,y_1,y_2,\dots y_p) \nonumber\\ 
+&. \tag{48}\\ 
+&.\nonumber\\ 
+&y'_p=f_p(x,y_1,y_2,\dots y_p)\nonumber
+\end{align}
+$$
 
-<div class="jumbotron">
-<center><h1>Numerical Methods for Engineers</h1></center>  <!-- document title -->
+with initial values
+$$
+\begin{equation}
+\tag{49}
+y_1(x_0)=a_1,\ y_2(x_0)=a_2,\dots,\ y_p(x_0)=a_p
+\end{equation}
+$$
 
+Or, in vectorial format as follows,
+$$
+\begin{align}
+\tag{50}
+\mathbf{y'}&=\mathbf{f}(x,\mathbf{y})\\ 
+\mathbf{y}&(x_0)=\mathbf{a} \nonumber
+\end{align}
+$$
 
-
-<center><h1>A digital compendium</h1></center>  <!-- document title -->
-
-<p>
-<!-- author(s): Johan Kolstø Sønstabø, and Leif Rune Hellevik -->
-
-<center>
-<b>Johan Kolstø Sønstabø</b> [1]
-</center>
-
-<center>
-<b>Leif Rune Hellevik</b> [1]
-</center>
-
-
-<p>
-<!-- institution(s) -->
-
-<center>[1] <b>Department of Structural Engineering, NTNU</b></center>
-<p>
-<center><h4>Jan 26, 2015</h4></center> <!-- date -->
-
-<h2>Table of contents</h2>
-
-<p>
-<a href="#___sec0"> Initial value problems for Ordinary Differential Equations </a><br>
-<a href="._main001.html#section:introduction"> Introduction </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main002.html#sec:taylor"> Taylor's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#subsec:reduction"> Reduction of Higher order Equations </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec4"> Example 1: Reduction of higher order systems </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec5"> Scientific computing with Python </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main004.html#example:sphere_freefall"> Example 2: Sphere in free fall </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main004.html#___sec7"> Python implementation of the drag coefficient function and how to plot it </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main005.html#___sec8"> Python functions with vector arguments and modules </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main005.html#section:Python_module"> How to make a Python-module and some useful programming features </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main006.html#___sec10"> Differences </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main007.html#___sec11"> Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main008.html#ex:euler_method"> Euler's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main009.html#ex:falling_sphere"> Example 3: Falling sphere with constant and varying drag </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main010.html#___sec14"> Example 4: Numerical error as a function of \( \Delta t \) </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main011.html#___sec15"> Euler's method for a system </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main012.html#___sec16"> Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main013.html#___sec17"> Example 5: Newton's equation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main014.html#___sec18"> Example 6: Falling sphere with Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main015.html#___sec19"> Runge-Kutta of 4th order </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main016.html#___sec20"> Example 7: Particle motion in two dimensions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main017.html#___sec21"> Example 8: Numerical error as  a function of \( \Delta t \) for ODE-schemes </a><br>
-</p>
-<p>
-<!-- TKT4140 Numerical Methods with Computer Laboratory. -->
+where \( \mathbf{y'} \), \( \mathbf{f} \), \( \mathbf{y} \) and \( \mathbf{a} \) are column vectors with \( p \) components.
 
 <p>
+The Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> used on <a href="#mjx-eqn-50">(50)</a> gives
+$$
+\begin{equation}
+\tag{51}
+\mathbf{y_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+\end{equation}
+$$
 
+For a system of three equations we get
+$$
+\begin{align}
+y'_1=&y_2\nonumber\\ 
+y'_2=&y_3
+\tag{52}\\ 
+y'_3=&-y_1y_3\nonumber
+\end{align}
+$$
 
-</div> <!-- end jumbotron -->
+In this case <a href="#mjx-eqn-51">(51)</a> gives
+$$
+\begin{align}
+&(y_1)_{n+1}=(y_1)_n+h\cdot (y_2)_n\nonumber\\ 
+&(y_2)_{n+1}=(y_2)_n+h\cdot (y_3)_n
+\tag{53}\\ 
+&(y_3)_{n+1}=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n\nonumber\\ 
+\end{align}
+$$
 
-<h1 id="___sec0">Initial value problems for Ordinary Differential Equations </h1>
-This digital compendium is based on the first chapter of the
-compendium <em>Numeriske Beregninger</em> by J.B. Aarseth. It's intended to
-be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
+with \( y_1(x_0)=a_1,\ y_2(x_0)=a_2,\text{ and }y_3(x_0)=a_3 \)
 
 <p>
-The development of the technical solutions for this digital compendium
-results from collaborations with professor <a href="http://folk.uio.no/hpl/" target="_blank">Hans Petter
-Langtangen</a> at UiO (hpl@simula.no), who has
-developed <a href="https://github.com/hplgit/doconce" target="_blank">Doconce</a> for flexible
-typesetting, and associate professor <a href="http://www.ntnu.edu/employees/hal" target="_blank">Hallvard
-Trætteberg</a> at IDI, NTNU
-(hal@idi.ntnu.no), who has developed the webpage-parser which
-identifies Python-code for integration in Eclipse IDEs (such as
-LiClipse). The latter part of the development has been funded by the
-project
-<a href="https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826" target="_blank">IKTiSU.</a>
+In the section <a href="._main003.html#subsec:reduction">Reduction of Higher order Equations</a> we have seen how we can reduce a higher order ODE to a set of first order ODEs. In <a href="._main009.html#mjx-eqn-42">(42)</a> and <a href="._main009.html#mjx-eqn-43">(43)</a> we have the equation \( \frac{d^2z}{dt^2}=g-\alpha\cdot \left(\frac{dz}{dt}\right)^2 \) which we have reduced to a system as
+$$
+\begin{align*}
+\frac{dz}{dt}= v&\\ 
+\frac{dv}{dt}= g&-\alpha\cdot v^2
+\end{align*}
+$$
+
+which gives an Euler scheme as follows,
+$$
+\begin{align*}
+&z_{n+1}=z_n+\Delta t\cdot v_n\\ 
+&v_{n+1}=n_n+\Delta t\cdot [g-\alpha(v_n)^2]\\ 
+&\text{med }z_0=0,\ v_0=0
+\end{align*}
+$$
+
 
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-  <li class="active"><a href="._main000.html">1</a></li>
-  <li><a href="._main001.html">2</a></li>
-  <li><a href="._main002.html">3</a></li>
+<li><a href="._main010.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="">...</a></li>
   <li><a href="._main003.html">4</a></li>
   <li><a href="._main004.html">5</a></li>
   <li><a href="._main005.html">6</a></li>
@@ -253,9 +261,15 @@ project
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
-  <li><a href="">...</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li class="active"><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main001.html">&raquo;</a></li>
+  <li><a href="._main012.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

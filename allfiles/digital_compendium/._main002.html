@@ -126,7 +126,7 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
      <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
 
         </ul>
@@ -140,12 +140,13 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0000"></a>
+<a name="part0002"></a>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-  <li class="active"><a href="._main000.html">1</a></li>
+<li><a href="._main001.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
   <li><a href="._main001.html">2</a></li>
-  <li><a href="._main002.html">3</a></li>
+  <li class="active"><a href="._main002.html">3</a></li>
   <li><a href="._main003.html">4</a></li>
   <li><a href="._main004.html">5</a></li>
   <li><a href="._main005.html">6</a></li>
@@ -153,99 +154,145 @@ MathJax.Hub.Config({
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
   <li><a href="">...</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main001.html">&raquo;</a></li>
+  <li><a href="._main003.html">&raquo;</a></li>
 </ul>
-<!-- ------------------- main content ---------------------- -->
+<!-- !split -->
 
+<h2 id="sec:taylor">Taylor's method</h2>
+Taylor's formula for series expansion of a function \( f(x) \) around \( x_0 \) is given by
+$$
+\begin{equation}
+f(x)=f(x_0)+(x-x_0)\cdot f'(x_0)+\frac{(x-x_0)^2}{2}f''(x_0)+\dots +\frac{(x-x_0)^n}{n !}f^{(n)}(x_0)+ \text{remainder} \nonumber
+\end{equation}
+$$
 
+Let's use this formula to find the first terms in the series expansion for \( \theta(t) \) around \( t=0 \) from the differential equation given in <a href="._main001.html#mjx-eqn-7">(7)</a>:
+$$
+\begin{align*}
+&\ddot{\theta} (t) +\theta (t) = 0 \\ 
+&\theta (0) = \theta_0,\  \dot{\theta}(0)=0
+\end{align*}
+$$
 
-<div class="jumbotron">
-<center><h1>Numerical Methods for Engineers</h1></center>  <!-- document title -->
+We set \( \theta(t) \approx \theta(0)+t\cdot\dot{\theta}(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0) \). By use of the initial conditions \( \theta(0)=\theta_0,\ \dot\theta(0)=0 \) we get
+$$
+\begin{equation}
+\theta(t)\approx\theta_0 +\frac{t^2}{2}\ddot\theta+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)  \nonumber
+\end{equation}
+$$
 
-
-
-<center><h1>A digital compendium</h1></center>  <!-- document title -->
-
-<p>
-<!-- author(s): Johan Kolstø Sønstabø, and Leif Rune Hellevik -->
-
-<center>
-<b>Johan Kolstø Sønstabø</b> [1]
-</center>
-
-<center>
-<b>Leif Rune Hellevik</b> [1]
-</center>
-
-
-<p>
-<!-- institution(s) -->
-
-<center>[1] <b>Department of Structural Engineering, NTNU</b></center>
-<p>
-<center><h4>Jan 26, 2015</h4></center> <!-- date -->
-
-<h2>Table of contents</h2>
+From the differential equation we have \( \ddot\theta(t)=-\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0 \)
 
 <p>
-<a href="#___sec0"> Initial value problems for Ordinary Differential Equations </a><br>
-<a href="._main001.html#section:introduction"> Introduction </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main002.html#sec:taylor"> Taylor's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#subsec:reduction"> Reduction of Higher order Equations </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec4"> Example 1: Reduction of higher order systems </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec5"> Scientific computing with Python </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main004.html#example:sphere_freefall"> Example 2: Sphere in free fall </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main004.html#___sec7"> Python implementation of the drag coefficient function and how to plot it </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main005.html#___sec8"> Python functions with vector arguments and modules </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main005.html#section:Python_module"> How to make a Python-module and some useful programming features </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main006.html#___sec10"> Differences </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main007.html#___sec11"> Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main008.html#ex:euler_method"> Euler's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main009.html#ex:falling_sphere"> Example 3: Falling sphere with constant and varying drag </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main010.html#___sec14"> Example 4: Numerical error as a function of \( \Delta t \) </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main011.html#___sec15"> Euler's method for a system </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main012.html#___sec16"> Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main013.html#___sec17"> Example 5: Newton's equation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main014.html#___sec18"> Example 6: Falling sphere with Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main015.html#___sec19"> Runge-Kutta of 4th order </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main016.html#___sec20"> Example 7: Particle motion in two dimensions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main017.html#___sec21"> Example 8: Numerical error as  a function of \( \Delta t \) for ODE-schemes </a><br>
-</p>
-<p>
-<!-- TKT4140 Numerical Methods with Computer Laboratory. -->
+By differentiation we get \( \dddot\theta(t)=-\dot\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0 \)
 
 <p>
+We now get
+$$
+\begin{equation}
+\theta^{(4)}(t)=-\ddot\theta(t) \to \theta^{(4)}(0)=-\ddot\theta(0)=\theta_0 \nonumber
+\end{equation}
+$$
 
-
-</div> <!-- end jumbotron -->
-
-<h1 id="___sec0">Initial value problems for Ordinary Differential Equations </h1>
-This digital compendium is based on the first chapter of the
-compendium <em>Numeriske Beregninger</em> by J.B. Aarseth. It's intended to
-be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
+Setting this into the expression for \( \theta(t) \) gives \( \theta(t)\approx \theta_0\left(1-\frac{t^2}{2}+\frac{t^4}{24}\right)=\theta_0\left(1-\frac{t^2}{2!}+\frac{t^4}{4!}\right) \)
 
 <p>
-The development of the technical solutions for this digital compendium
-results from collaborations with professor <a href="http://folk.uio.no/hpl/" target="_blank">Hans Petter
-Langtangen</a> at UiO (hpl@simula.no), who has
-developed <a href="https://github.com/hplgit/doconce" target="_blank">Doconce</a> for flexible
-typesetting, and associate professor <a href="http://www.ntnu.edu/employees/hal" target="_blank">Hallvard
-Trætteberg</a> at IDI, NTNU
-(hal@idi.ntnu.no), who has developed the webpage-parser which
-identifies Python-code for integration in Eclipse IDEs (such as
-LiClipse). The latter part of the development has been funded by the
-project
-<a href="https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826" target="_blank">IKTiSU.</a>
+If we include \( n \) terms, we get
+$$
+\begin{equation}
+\theta(t)\approx \theta_0\cdot \left(1-\frac{t^2}{2!}+\frac{t^4}{4!}-\frac{t^6}{6!}+\dots+(-1)^n \frac{t^{2n}}{(2n)!}\right) \nonumber
+\end{equation}
+$$
+
+
+<p>
+If we let \( n \to \infty \) we see that the parentheses give the series for \( \cos(t) \). In this case we have found the exact solution \( \theta(t)=\theta_0\cos(t) \) of the differential equation. Since this equation is linear we manage in this case to find a connection between the coefficients such that we recognize the series expansion of \( \cos(t) \).
+
+<p>
+Let's try the same procedure on the non-linear version <a href="._main001.html#mjx-eqn-5">(5)</a>
+$$
+\begin{align} \nonumber
+\ddot{\theta}(t)& + \sin \left(\theta (t)\right) = 0 \\ 
+\theta (0) &= \theta_0 ,\ \dot\theta (0) = 0 \nonumber
+\end{align}
+$$
+
+We start in the same manner: \( \theta(t) \approx \theta(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0) \).
+From the differential equation we have \( \ddot\theta=-\sin (\theta) \to \ddot\theta(0)=-\sin(\theta_0) \), which by consecutive differentiation gives
+$$
+\begin{align}
+&\dddot\theta=-\cos(\theta)\cdot\dot\theta \to \dddot\theta(0)=0 \nonumber \\ 
+&\theta^{(4)}=\sin(\theta)\cdot\dot\theta^2-\cos(\theta)\cdot\ddot\theta \to \theta^{(4)}(0)=-\ddot\theta(0)\cos(\theta(0))=\sin(\theta_0)\cos(\theta_0) \nonumber
+\end{align}
+$$
+
+Inserted above: \( \theta(t) \approx \theta_0 -\frac{t^2}{2}\sin(\theta_0) + \frac{t^4}{24} \sin (\theta_0) \cos (\theta_0) \).
+
+<p>
+We may include more terms, but this complicates the differentiation and it is hard to find any connection between the coefficients. When we have found an approximation for \( \theta(t) \) we can get an approximation for \( \dot\theta(t) \) by differentiation: \( \dot\theta(t) \approx -t\sin(\theta_0) + \frac{t^3}{8} \sin (\theta_0) \cos (\theta_0) \).
+
+<p>
+Series expansions are often useful around the starting point when we solve initial value problems. The technique may also be used on non-linear equations.
+
+<p>
+Symbolic mathematical programs like <b>Maple</b> and <b>Mathematica</b> do this easily.
+
+<p>
+We will end with one of the earliest known differential equations, which Newton solved with series expansion in 1671.
+$$
+\begin{equation*}
+y'(x) =1-3x+y+x^2+xy,\ y(0)=0
+\end{equation*}
+$$
+
+Series expansion around \( x=0 \) gives
+$$
+\begin{equation*}
+y(x) \approx x\cdot y'(0)+ \frac{x^2}{2} y''(0)+\frac{x^3}{6}y'''(0)+\frac{x^4}{24}y^{(4)}(0)
+\end{equation*}
+$$
+
+From the differential equation we get \( y'(0)=1 \). By consecutive differentiation we get
+$$
+\begin{equation*}
+  \begin{array}{lclclcr}
+    y''(x) &=&-3+y'+2x+xy'+y &\to& y''(0)&=&-2\\ 
+    y'''(x)&=& y''+2+xy''+2y'  &\to& y'''(0)&=& 2\\ 
+    y^{(4)}(x)&=&y'''+xy'''+3y'' &\to &y^{(4)}(0)&=&-4
+  \end{array}
+\end{equation*}
+$$
+
+Inserting above gives \( y(x) \approx x-x^2+\frac{x^3}{3}-\frac{x^4}{6} \).
+
+<p>
+Newton gave the following solution: \( y(x) \approx  x-x^2+\frac{x^3}{3}-\frac{x^4}{6}+ \frac{x^5}{30}-\frac{x^6}{45} \).
+
+<p>
+Now you can check if Newton calculated correctly. Today it is possible to give the solution on closed form with known functions as follows,
+$$
+\begin{align*}
+y(x)=&3\sqrt{2\pi e}\cdot \exp\left[x\left(1+\frac{x}{2}\right)\right]\cdot \left[\text{erf}\left(\frac{\sqrt{2}}{2}(1+x)\right)-\text{erf}\left(\frac{\sqrt{2}}{2}\right)\right]\\ 
++& 4\cdot\left[1-\exp[x\left(1+\frac{x}{2}\right)\right]-x
+\end{align*}
+$$
+
+
+<p>
+Note the combination \( \sqrt{2\pi e} \). See Hairer et al. <a href="._main017.html#hairer2008solving">[1]</a> section 1.2 for more details on classical differential equations.
 
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-  <li class="active"><a href="._main000.html">1</a></li>
+<li><a href="._main001.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
   <li><a href="._main001.html">2</a></li>
-  <li><a href="._main002.html">3</a></li>
+  <li class="active"><a href="._main002.html">3</a></li>
   <li><a href="._main003.html">4</a></li>
   <li><a href="._main004.html">5</a></li>
   <li><a href="._main005.html">6</a></li>
@@ -253,9 +300,11 @@ project
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
   <li><a href="">...</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main001.html">&raquo;</a></li>
+  <li><a href="._main003.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

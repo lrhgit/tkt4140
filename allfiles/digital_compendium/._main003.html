@@ -126,7 +126,7 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
      <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
 
         </ul>
@@ -140,122 +140,193 @@ MathJax.Hub.Config({
 
 <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
 
-<a name="part0000"></a>
+<a name="part0003"></a>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-  <li class="active"><a href="._main000.html">1</a></li>
+<li><a href="._main002.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
   <li><a href="._main001.html">2</a></li>
   <li><a href="._main002.html">3</a></li>
-  <li><a href="._main003.html">4</a></li>
+  <li class="active"><a href="._main003.html">4</a></li>
   <li><a href="._main004.html">5</a></li>
   <li><a href="._main005.html">6</a></li>
   <li><a href="._main006.html">7</a></li>
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
   <li><a href="">...</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main001.html">&raquo;</a></li>
+  <li><a href="._main004.html">&raquo;</a></li>
 </ul>
-<!-- ------------------- main content ---------------------- -->
+<!-- !split -->
 
-
-
-<div class="jumbotron">
-<center><h1>Numerical Methods for Engineers</h1></center>  <!-- document title -->
-
-
-
-<center><h1>A digital compendium</h1></center>  <!-- document title -->
+<h2 id="subsec:reduction">Reduction of Higher order Equations</h2>
 
 <p>
-<!-- author(s): Johan Kolstø Sønstabø, and Leif Rune Hellevik -->
+When we are solving initial value problems, we usually need to write these as sets of first order equations, because most of the program packages require this.
 
-<center>
-<b>Johan Kolstø Sønstabø</b> [1]
-</center>
+<p>
+Example: \( y''(x)+y(x)=0,\ y(0)=a_0,\ y'(0)=b_0 \)
 
-<center>
-<b>Leif Rune Hellevik</b> [1]
-</center>
+<p>
+We may for instance write this equation in a system as follows,
+$$
+\begin{align*}
+y'(x)=&g(x)\\ 
+g'(x)=&-y(x)\\ 
+y(0)=&a_0,\  g(0)=b_0
+\end{align*}
+$$
 
 
 <p>
-<!-- institution(s) -->
+Another example:
+$$
+\begin{align*}
+&y'''(x)+2y''(x)-(y'(x))^2+2y(x)=x^2\\ 
+&y(0)=a_0,\ y'(0)=b_0,\ y''(0)=c_0
+\end{align*}
+$$
 
-<center>[1] <b>Department of Structural Engineering, NTNU</b></center>
-<p>
-<center><h4>Jan 26, 2015</h4></center> <!-- date -->
+We set \( y'(x)=g(x) \) and \( y''(x)=g'(x)=f(x) \), and the system may be written as
+$$
+\begin{align*}
+y'(x)=&g(x)\\ 
+g'(x)=&f(x)\\ 
+f'(x)=&-2f(x)+(g(x))^2-2y(x)+x^2
+\end{align*}
+$$
 
-<h2>Table of contents</h2>
-
-<p>
-<a href="#___sec0"> Initial value problems for Ordinary Differential Equations </a><br>
-<a href="._main001.html#section:introduction"> Introduction </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main002.html#sec:taylor"> Taylor's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#subsec:reduction"> Reduction of Higher order Equations </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec4"> Example 1: Reduction of higher order systems </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec5"> Scientific computing with Python </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main004.html#example:sphere_freefall"> Example 2: Sphere in free fall </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main004.html#___sec7"> Python implementation of the drag coefficient function and how to plot it </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main005.html#___sec8"> Python functions with vector arguments and modules </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main005.html#section:Python_module"> How to make a Python-module and some useful programming features </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main006.html#___sec10"> Differences </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main007.html#___sec11"> Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main008.html#ex:euler_method"> Euler's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main009.html#ex:falling_sphere"> Example 3: Falling sphere with constant and varying drag </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main010.html#___sec14"> Example 4: Numerical error as a function of \( \Delta t \) </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main011.html#___sec15"> Euler's method for a system </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main012.html#___sec16"> Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main013.html#___sec17"> Example 5: Newton's equation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main014.html#___sec18"> Example 6: Falling sphere with Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main015.html#___sec19"> Runge-Kutta of 4th order </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main016.html#___sec20"> Example 7: Particle motion in two dimensions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main017.html#___sec21"> Example 8: Numerical error as  a function of \( \Delta t \) for ODE-schemes </a><br>
-</p>
-<p>
-<!-- TKT4140 Numerical Methods with Computer Laboratory. -->
+with initial values \( y(0)=a_0,\ g(0)=b_0,\ f(0)=c_0 \).
 
 <p>
-
-
-</div> <!-- end jumbotron -->
-
-<h1 id="___sec0">Initial value problems for Ordinary Differential Equations </h1>
-This digital compendium is based on the first chapter of the
-compendium <em>Numeriske Beregninger</em> by J.B. Aarseth. It's intended to
-be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
+This is fair enough for hand calculations, men when we use program packages a more systematic procedure is needed. Let's use the equation above as an example.
 
 <p>
-The development of the technical solutions for this digital compendium
-results from collaborations with professor <a href="http://folk.uio.no/hpl/" target="_blank">Hans Petter
-Langtangen</a> at UiO (hpl@simula.no), who has
-developed <a href="https://github.com/hplgit/doconce" target="_blank">Doconce</a> for flexible
-typesetting, and associate professor <a href="http://www.ntnu.edu/employees/hal" target="_blank">Hallvard
-Trætteberg</a> at IDI, NTNU
-(hal@idi.ntnu.no), who has developed the webpage-parser which
-identifies Python-code for integration in Eclipse IDEs (such as
-LiClipse). The latter part of the development has been funded by the
-project
-<a href="https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826" target="_blank">IKTiSU.</a>
+We start by renaming \( y \) to \( y_1 \). We then get the following procedure:
+$$
+\begin{align*}
+y&'=y'_1=y_2\\ 
+y&''=y''_1=y'_2=y_3
+\end{align*}
+$$
+
+The system may then be written as
+$$
+\begin{align*}
+y'_1(x)=&y_2(x)\\ 
+y'_2(x)=&y_3(x)\\ 
+y'_3(x)=&-2y_3(x)+(y_2(x))^2-2y_1(x)+x^2
+\end{align*}
+$$
+
+with initial conditions \( y_1(0)=a_0,\ y_2(0)=b_0,\ y_3(0)=c_0 \).
+
+<p>
+The general procedure to reduce a higher order ODE to a system of first order ODEs becomes the following:
+
+<p>
+Given the equation
+$$
+\begin{align}
+\tag{10}
+&y^{(m)}=f(x,y,y',y'',\dots,y^{(m-1)})\\ 
+&y(x_0)=a_1,\ y'(x_0)=a_2,\ \dots,y^{(m-1)}(x_0)=a_m \nonumber\\ 
+\end{align}
+$$
+
+where
+$$
+\begin{align*}
+y^{(m)}\equiv \frac{d^my}{dx^m}
+\end{align*}
+$$
+
+with \( y=y_1 \), we set
+$$
+\begin{align}
+&y'_1=y_2 \nonumber \\ \nonumber
+&y'_2=y_3\\ \nonumber
+&.\\ \nonumber
+&.\\ \nonumber
+&y'_{m-1}=y_m\\\nonumber\\\nonumber
+&y_1(x_0)=a_1,y_2(x_0)=a_2,\dots,y_m(x_0)=a_m
+\tag{11}
+\end{align}
+$$
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec4">Example 1: Reduction of higher order systems </h2>
+
+<p>
+Write the following ODE as a system of first order ODEs:
+$$
+\begin{align*}
+y'''-y'y''-(y')^2+2y=x^3 \\ 
+y(0)=a,\ y'(0)=b,\ y''(0)=c
+\end{align*}
+$$
+
+
+<p>
+<!-- !bsol -->
+First we write \( y'''=y'y''+(y')^2-2y+x^3 \).
+
+<p>
+By use of <a href="#mjx-eqn-11">(11)</a> we get
+$$
+\begin{align*}
+&y_1'=y_2\\ 
+&y_2'=y_3\\ 
+&y_3'=y_2y_3+(y_2)^2-2y_1+x^3\\ 
+&y_1(0)=a,\ y_2(0)=b,\ y_3=c
+\end{align*}
+$$
+
+<!-- !esol -->
+<!-- !ec -->
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end exercise --- -->
+
+<h2 id="___sec5">Scientific computing with Python </h2>
+In this course we will use the programming language <b>Python</b> to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example <a href="http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" target="_blank">Intro to scientific computing with Python</a> before proceeding. If you are familiar with <b>Matlab</b> the transfer to Python should not be a problem. 
 
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
-  <li class="active"><a href="._main000.html">1</a></li>
+<li><a href="._main002.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
   <li><a href="._main001.html">2</a></li>
   <li><a href="._main002.html">3</a></li>
-  <li><a href="._main003.html">4</a></li>
+  <li class="active"><a href="._main003.html">4</a></li>
   <li><a href="._main004.html">5</a></li>
   <li><a href="._main005.html">6</a></li>
   <li><a href="._main006.html">7</a></li>
   <li><a href="._main007.html">8</a></li>
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li><a href="._main012.html">13</a></li>
   <li><a href="">...</a></li>
   <li><a href="._main017.html">18</a></li>
-  <li><a href="._main001.html">&raquo;</a></li>
+  <li><a href="._main004.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

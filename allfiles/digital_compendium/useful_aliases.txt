@@ -6,3 +6,10 @@ Add the following aliases in your ~/.bashrc
 alias gitc='git commit -am updates; git push origin master'
 alias gitw='gitc; git checkout gh-pages; git pull origin gh-pages; git merge -m merge master; git push origin gh-pages; git checkout master'
 
+
+
+
+Some other suggestions for maintaining the gh-pages:
+http://oli.jp/2011/github-pages-workflow/
+
+
