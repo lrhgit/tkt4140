@@ -187,7 +187,7 @@ if __name__ == '__main__':
             
  
         
-
+    # Function for convergence test
     def test_convergence():
         """ Test convergence rate of the methods """
         from numpy import linspace, size, abs, log10, mean
