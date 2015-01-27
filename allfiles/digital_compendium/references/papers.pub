@@ -1,0 +1,67 @@
+* articles
+** GOLF BALL AERODYNAMICS.
+   key:       Bearman1976112
+   author:    P.W. Bearman, J.K. Harvey
+   year:      1976
+   journal:   Aeronaut Q
+   volume:    27
+   number:    pt 2
+   pages:     112-122
+   url:       http://www.scopus.com/inward/record.url?eid=2-s2.0-0016949854&partnerID=40&md5=a1d1cc6e8477e33fcd2d5ccf55fc29a8
+   status:    published
+   note:      cited By 119
+   entrytype: article
+   source:    Scopus
+* books
+** 2,500 Solved Problems in Fluid Mechanics and Hydraulics
+   key:       evett19892
+   author:    J. Evett, C. Liu
+   year:      1989
+   publisher: McGraw-Hill Education
+   url:       http://books.google.no/books?id=NBDjWHLKwSQC
+   status:    published
+   isbn:      9780070197848
+   series:    Schaum's Solved Problems Series
+   lccn:      88133730
+   entrytype: book
+** Numerical Mathematics and Computing
+   key:       cheney2012numerical
+   author:    E. Cheney, David Kincaid
+   year:      2012
+   publisher: Cengage Learning
+   status:    published
+   entrytype: book
+** Solving Ordinary Differential Equations I: Nonstiff Problems
+   key:       hairer2008solving
+   author:    Ernst Hairer, Syvert Paul Norsett, Gerhard Wanner
+   year:      2008
+   publisher: Springer Science \& Business
+   volume:    1
+   status:    published
+   entrytype: book
+** The {P}ython Tutorial
+   key:       python14
+   author:    Software Foundation Python
+   year:      2014
+   publisher: Python Software Foundation
+   status:    published
+   entrytype: book
+** A Primer on Scientific Programming With {P}ython
+   key:       langtangen14
+   author:    Hans Petter Langtangen
+   year:      2014
+   publisher: Springer
+   status:    published
+   edition:   Fourth
+   entrytype: book
+** Fluid Mechanics
+   key:       white1999fluid
+   author:    F.M. White
+   year:      1999
+   publisher: WCB/McGraw-Hill
+   url:       http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y
+   status:    published
+   isbn:      9780071168489
+   series:    McGraw-Hill series in mechanical engineering
+   lccn:      98026289
+   entrytype: book

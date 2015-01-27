@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Numerical Methods for Engineers">
+
+<title>Numerical Methods for Engineers</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
+               1,
+               None,
+               '___sec0'),
+              (u' Introduction ',
+               1,
+               u'section:introduction',
+               u'section:introduction'),
+              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u' Reduction of Higher order Equations ',
+               2,
+               u'subsec:reduction',
+               u'subsec:reduction'),
+              (u' Example 1: Reduction of higher order systems ',
+               2,
+               None,
+               '___sec4'),
+              (u' Scientific computing with Python ', 2, None, '___sec5'),
+              (u' Example 2: Sphere in free fall ',
+               2,
+               u'example:sphere_freefall',
+               u'example:sphere_freefall'),
+              (u' Python implementation of the drag coefficient function and how to plot it ',
+               3,
+               None,
+               '___sec7'),
+              (u' Python functions with vector arguments and modules ',
+               2,
+               None,
+               '___sec8'),
+              (u' How to make a Python-module and some useful programming features ',
+               2,
+               u'section:Python_module',
+               u'section:Python_module'),
+              (u' Differences ', 2, None, '___sec10'),
+              (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
+               3,
+               None,
+               '___sec11'),
+              (u" Euler's method ",
+               2,
+               u'ex:euler_method',
+               u'ex:euler_method'),
+              (u' Example 3: Falling sphere with constant and varying drag ',
+               2,
+               u'ex:falling_sphere',
+               u'ex:falling_sphere'),
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
+               2,
+               None,
+               '___sec14'),
+              (u" Euler's method for a system ", 3, None, '___sec15'),
+              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Example 5: Newton's equation ", 2, None, '___sec17'),
+              (u" Example 6: Falling sphere with Heun's method ",
+               2,
+               None,
+               '___sec18'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
+              (u' Example 7: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec20'),
+              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               2,
+               None,
+               '___sec21')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="main.html">Numerical Methods for Engineers</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="#section:introduction" style="font-size: 80%;">Introduction</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._main000.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li class="active"><a href="._main001.html">2</a></li>
+  <li><a href="._main002.html">3</a></li>
+  <li><a href="._main003.html">4</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li><a href="._main005.html">6</a></li>
+  <li><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main017.html">18</a></li>
+  <li><a href="._main002.html">&raquo;</a></li>
+</ul>
+<!-- !split -->
+
+<h1 id="section:introduction">Introduction</h1>
+
+<p>
+With an initial value problem for an ordinary differential equation (ODE) we mean a problem where all boundary conditions are given for one and the same value of the independent variable. For a first order ODE we get e.g.
+$$
+\begin{align}
+\tag{1}
+ y'(x)&=f(x,y) \\ 
+y(x_0)&=a  \nonumber
+\end{align}
+$$
+
+while for a second order ODE we get
+$$
+\begin{align}
+\tag{2}
+y''(x)&=f(x,y,y') \\ 
+y(x_0)&=a,\ y'(x_0) = b \nonumber
+\end{align}
+$$
+
+A first order ODE, as shown in Equation <a href="#mjx-eqn-1">(1)</a>, will always be an <em>initial value problem</em>. For Equation <a href="#mjx-eqn-2">(2)</a>, on the other hand, we can for instance specify the boundary conditions as follows,
+$$
+\begin{align}
+y(x_0)=a,\ y(x_1) = b \nonumber
+\end{align}
+$$
+
+With these boundary conditions Equation <a href="#mjx-eqn-2">(2)</a> presents a <em>boundary value problem</em>. In many applications boundary value problems are more common than initial value problems. But the solution technique for initial value problems may often be applied to solve boundary value problems.
+
+<p>
+Both from an analytical and numerical viewpoint initial value problems are easier to solve than boundary value problems, and methods for solution of initial value problems are more developed than for boundary value problems.
+
+<p>
+If we are to solve an initial value problem of the type in Equation
+<a href="#mjx-eqn-1">(1)</a>, we must first be sure that it has a solution. In
+addition we will demand that this solution is unique, together the two criteria above lead to the following criteria:
+<div class="alert alert-block alert-success alert-text-normal"><b></b>
+<b>The criteria for existence and uniqueness</b> 
+
+<p>
+A sufficient criteria for existence and uniqueness of a solution of the problem in Equation <a href="#mjx-eqn-1">(1)</a> is that both \( f(x,y) \) and \( \frac{\partial
+f}{\partial y} \) are continuous in and around \( x_0 \).
+</div>
+
+For <a href="#mjx-eqn-2">(2)</a> this conditions becomes that \( f(x,y) \),
+\( \frac{\partial f}{\partial y} \) and \( \frac{\partial f}{\partial y'} \)
+are continuous in and around \( x_0 \). Similarly for higher order
+equations.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b></b>
+<b>Violation of the criteria for existence and uniqueness</b>
+$$
+\begin{equation}
+y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
+\end{equation}
+$$
+
+Here \( f=y^\frac{1}{3} \) and \( \frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}} \). \( f \) is continuous in \( x=0 \), but that's not the case for \( \frac{\partial f}{\partial y} \). It may be shown that this ODE has two solutions: \( y=0 \) and \( y=(\frac{2}{3}x)^\frac{2}{3} \). Hopefully this equation doesn't present a physical problem.
+</div>
+
+<b>A mathematical pendulum</b>
+A problem of more interest is shown below.
+
+<p>
+<center><p><img src="chapter1/1.png" align="bottom" width=200></p></center>
+
+<p>
+The figure shows a mathematical pendulum where the motion is described by the following equation:
+$$
+\begin{align}
+ \frac{\partial^2 \theta}{\partial \tau^2} + \frac{g}{l}\sin (\theta) = 0
+\tag{3}\\ 
+\theta (0) = \theta_0 ,\ \frac{d\theta}{d\tau}(0) = 0
+\tag{4}
+\end{align}
+$$
+
+We introduce a dimensionless time \( t \) given by \( t=\sqrt{\frac{g}{l}}\cdot\tau \) such that <a href="#mjx-eqn-3">(3)</a> and <a href="#mjx-eqn-4">(4)</a> may be written as
+$$
+\begin{align}
+\tag{5}
+\ddot{\theta}(t) + \sin (\theta (t)) = 0 \\ 
+\theta (0) = \theta_0 ,\ \dot\theta (0) = 0
+\tag{6}
+\end{align}
+$$
+
+The dot denotes derivation with respect to the dimensionless time \( t \). For small displacements we can set \( \sin (\theta) \approx \theta \), such that <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-6">(6)</a> becomes
+$$
+\begin{align}
+\tag{7}
+\ddot\theta (t)& + \theta (t) = 0 \\ 
+\theta (0)& = \theta_0 ,\ \dot\theta (0) = 0
+\tag{8}
+\end{align}
+$$
+
+
+<p>
+The difference between <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-7">(7)</a> is that the latter is linear, while the first is non-linear. The analytical solution of Equations <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-6">(6)</a> is given in Appendix G.2. in the
+<a href="./NumeriskeBeregninger.pdf" target="_blank">compendium</a>. An \( n \)'th order linear ODE may be written on the form
+$$
+\begin{equation}
+\tag{9}
+a_n(x)y^{(n)}(x)+a_{n-1}(x)y^{(n-1)}(x)+\cdots+a_1(x)y'(x)+a_0(x)y(x)=b(x)
+\end{equation}
+$$
+
+where \( y^{(k)}, k=0,1,\dots n \) is referring to the \( k \)'th derivative and \( y^{(0)}(x)=y(x) \).
+
+<p>
+If one or more of the coefficients \( a_k \) also are functions of at least one \( y^{(k)},\ k = 0,1,\dots n \), the ODE is non-linear. From <a href="#mjx-eqn-9">(9)</a> it follows that <a href="#mjx-eqn-5">(5)</a> is non-linear and <a href="#mjx-eqn-7">(7)</a> is linear.
+
+<p>
+Analytical solutions of non-linear ODEs are rare, and except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
+$$
+\begin{equation}
+a_2(x)\cdot y''(x)+a_1(x)\cdot y'(x) +a_0(x)\cdot y(x) =b(x)\nonumber
+\end{equation}
+$$
+
+
+<p>
+From a numerical point of view the main difference between linear and non-linear equations is the multitude of solutions that may arise when solving non-linear equations. In a linear ODE it will be evident from the equation if there are special critical points where the solution change character, while this is often not the case for non-linear equations.
+
+<p>
+For instance the equation \( y'(x)=y^2(x),\ y(0)=1 \) has the solution \( y(x)=\frac{1}{1-x} \) such that \( y(x) \to \infty  \) for \( x \to 1 \), which isn't evident from the equation itself.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._main000.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li class="active"><a href="._main001.html">2</a></li>
+  <li><a href="._main002.html">3</a></li>
+  <li><a href="._main003.html">4</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li><a href="._main005.html">6</a></li>
+  <li><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main017.html">18</a></li>
+  <li><a href="._main002.html">&raquo;</a></li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

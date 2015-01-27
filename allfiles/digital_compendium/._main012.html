@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Numerical Methods for Engineers">
+
+<title>Numerical Methods for Engineers</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
+               1,
+               None,
+               '___sec0'),
+              (u' Introduction ',
+               1,
+               u'section:introduction',
+               u'section:introduction'),
+              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u' Reduction of Higher order Equations ',
+               2,
+               u'subsec:reduction',
+               u'subsec:reduction'),
+              (u' Example 1: Reduction of higher order systems ',
+               2,
+               None,
+               '___sec4'),
+              (u' Scientific computing with Python ', 2, None, '___sec5'),
+              (u' Example 2: Sphere in free fall ',
+               2,
+               u'example:sphere_freefall',
+               u'example:sphere_freefall'),
+              (u' Python implementation of the drag coefficient function and how to plot it ',
+               3,
+               None,
+               '___sec7'),
+              (u' Python functions with vector arguments and modules ',
+               2,
+               None,
+               '___sec8'),
+              (u' How to make a Python-module and some useful programming features ',
+               2,
+               u'section:Python_module',
+               u'section:Python_module'),
+              (u' Differences ', 2, None, '___sec10'),
+              (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
+               3,
+               None,
+               '___sec11'),
+              (u" Euler's method ",
+               2,
+               u'ex:euler_method',
+               u'ex:euler_method'),
+              (u' Example 3: Falling sphere with constant and varying drag ',
+               2,
+               u'ex:falling_sphere',
+               u'ex:falling_sphere'),
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
+               2,
+               None,
+               '___sec14'),
+              (u" Euler's method for a system ", 3, None, '___sec15'),
+              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Example 5: Newton's equation ", 2, None, '___sec17'),
+              (u" Example 6: Falling sphere with Heun's method ",
+               2,
+               None,
+               '___sec18'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
+              (u' Example 7: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec20'),
+              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               2,
+               None,
+               '___sec21')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="main.html">Numerical Methods for Engineers</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0012"></a>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._main011.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li><a href="._main005.html">6</a></li>
+  <li><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li class="active"><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main017.html">18</a></li>
+  <li><a href="._main013.html">&raquo;</a></li>
+</ul>
+<!-- !split -->
+
+<h2 id="___sec16">Heun's method </h2>
+
+<p>
+From <a href="._main006.html#mjx-eqn-19">(19)</a> or <a href="._main006.html#mjx-eqn-23">(23)</a> we have
+$$
+\begin{equation}
+\tag{54}
+y''(x_n,y_n)=f'\left(x_n,y(x_n,y_n)\right)\approx \frac{f(x_n+h)-f(x_n)}{h}
+\end{equation}
+$$
+
+The Taylor series expansion <a href="._main006.html#mjx-eqn-17">(17)</a> gives
+$$
+\begin{equation*}
+y(x_n+h)=y(x_n)+hy'[x_n,y(x_n)]+\frac{h^2}{2}y''[x_n,y(x_n)]+O(h^3)
+\end{equation*}
+$$
+
+which, inserting <a href="#mjx-eqn-54">(54)</a>, gives
+$$
+\begin{equation}
+\tag{55}
+y_{n+1}=y_n+\frac{h}{2}\cdot [f(x_n,y_n)+f(x_{n+1},y(x_{n+1}))]
+\end{equation}
+$$
+
+
+<p>
+This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if \( f(x,y) \) is only a function of \( x \). Since \( y_{n+1} \) appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function \( f(x,y) \) is non-linear. One way of making the scheme explicit is to use the Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> to calculate \( y(x_{n+1}) \) on the right side of <a href="#mjx-eqn-55">(55)</a>. The resulting scheme is often denoted <b>Heun's method</b>.
+
+<p>
+The scheme for Heun's method becomes
+$$
+\begin{align}
+&y^p_{n+1}=y_n+h\cdot f(x_n,y_n)
+\tag{56} \\ 
+&y_{n +1}=y_n+\frac{h}{2}\cdot[f(x_n,y_n)+f(x_{n+1},y^p_{n+1})]
+\tag{57}
+\end{align}
+$$
+
+Index \( p \) stands for "predicted". <a href="#mjx-eqn-56">(56)</a> is then the predictor and <a href="#mjx-eqn-57">(57)</a> is the corrector. This is a second order method. For more details, see <a href="._main017.html#cheney2012numerical">[6]</a>. Figure <a href="#fig:illustration_heun">6</a> is a graphical illustration of the method.
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 6:  Illustration of Heun's method. <div id="fig:illustration_heun"></div> </p></center>
+<p><img src="chapter1/9.png" align="bottom" width=400></p>
+</center>
+
+<p>
+In principle we could make an iteration procedure where we after using the corrector use the corrected values to correct the corrected values to make a new predictor and so on. This will likely lead to a more accurate solution of the difference scheme, but not necessarily of the differential equation. We are therefore satisfied by using the corrector once. For a system, we get
+$$
+\begin{align}
+& \mathbf{y^p_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+\tag{58}\\ 
+& \mathbf{y_{n+1}}=\mathbf{y_n} +\frac{h}{2}\cdot [\mathbf{f}(x_n,\mathbf{y_n})+\mathbf{f}(x_{n+1},\mathbf{y^p_{n+1}})]
+\tag{59}
+\end{align}
+$$
+
+Note that \( \mathbf{y}^p_{n+1} \) is a temporary variable that is not necessary to store.
+
+<p>
+If we use <a href="#mjx-eqn-58">(58)</a> and <a href="#mjx-eqn-59">(59)</a> on the example in <a href="._main011.html#mjx-eqn-52">(52)</a> we get
+
+<p>
+Predictor:
+$$
+\begin{align*}
+(y_1)^p_{n+1}&=(y_1)_n+h\cdot (y_2)_n&\\ 
+(y_2)^p_{n+1}&=(y_2)_n+h\cdot (y_3)_n&\\ 
+(y_3)^p_{n+1}&=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n
+\end{align*}
+$$
+
+Corrector:
+$$
+\begin{align*}
+(y_1)_{n+1}&=(y_1)_n+0.5h\cdot [(y_2)_n+(y_2)^p_{n+1}]&\\ 
+(y_2)_{n+1}&=(y_2)_n+0.5h\cdot [(y_3)_n+(y_3)^p_{n+1}]&\\ 
+(y_3)_{n+1}&=(y_3)_n-0.5h\cdot [(y_1)_n\cdot (y_3)_n+(y_1)^p_{n+1}\cdot (y_3)^p_{n+1}]
+\end{align*}
+$$
+
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._main011.html">&laquo;</a></li>
+  <li><a href="._main000.html">1</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main004.html">5</a></li>
+  <li><a href="._main005.html">6</a></li>
+  <li><a href="._main006.html">7</a></li>
+  <li><a href="._main007.html">8</a></li>
+  <li><a href="._main008.html">9</a></li>
+  <li><a href="._main009.html">10</a></li>
+  <li><a href="._main010.html">11</a></li>
+  <li><a href="._main011.html">12</a></li>
+  <li class="active"><a href="._main012.html">13</a></li>
+  <li><a href="._main013.html">14</a></li>
+  <li><a href="._main014.html">15</a></li>
+  <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main017.html">18</a></li>
+  <li><a href="._main013.html">&raquo;</a></li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

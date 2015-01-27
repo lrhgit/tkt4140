@@ -1,0 +1,28 @@
+mport numpy as np
+import matplotlib.pyplot as plt
+import random
+from time import sleep
+t=0
+r=3.0
+n=0
+A=[]
+for x in range(10):
+    for y in range(10):
+        A.append([random.uniform(0,1),random.uniform(0,1)])
+fig = plt.figure()
+ax = fig.add_subplot(111)
+for m in range(len(A)):
+    ax.plot(A[m][0],A[m][1], "x", color="blue")
+fig.show()
+sleep(1)
+while n<=100:
+    for m in range(len(A)):
+        A[m][0]=r*A[m][0]*(1-A[m][0])
+        A[m][1]=r*A[m][1]*(1-A[m][1])
+    ax.clear()
+    for m in range(len(A)):
+        ax.plot(A[m][0],A[m][1], "x", color="blue")
+    fig.canvas.draw()
+    sleep(1)
+    n+=1
+

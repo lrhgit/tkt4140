@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="An intro to scientific computing with Python">
+<meta name="keywords" content="doc strings,pickling">
+
+<title>An intro to scientific computing with Python</title>
+
+<!-- Bootstrap style: bootstrap_bluegray -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(u' Optimal backround for reading this note ',
+               3,
+               None,
+               '___sec0'),
+              (u' A scientific application ', 1, None, '___sec1'),
+              (u' Physical problem and mathematical model ',
+               2,
+               None,
+               '___sec2'),
+              (u' Numerical model ', 2, None, '___sec3'),
+              (u' Simple implementation ', 2, None, '___sec4'),
+              (u' Dissection of the code ', 2, None, '___sec5'),
+              (u' More advanced implementation ', 2, None, '___sec6'),
+              (u' Dissection of the code ', 2, None, '___sec7'),
+              (u' The excitation force ', 2, None, '___sec8'),
+              (u' A high-level solve function ', 2, None, '___sec9'),
+              (u' User input ', 1, None, '___sec10'),
+              (u' Positional command-line arguments ', 2, None, '___sec11'),
+              (u' Option-value pairs on the command line ',
+               2,
+               None,
+               '___sec12'),
+              (u' Visual exploration ', 1, None, '___sec13'),
+              (u' Advanced topics ', 1, None, '___sec14'),
+              (u' Symbolic computing via SymPy ', 2, None, '___sec15'),
+              (u' Testing ', 2, None, '___sec16'),
+              (u' Example on a test function ', 3, None, '___sec17'),
+              (u' Test function for the numerical solver ',
+               3,
+               None,
+               '___sec18'),
+              (u' Appendix: Quick motivation for programming with Python ',
+               1,
+               u'app:motivation',
+               u'app:motivation'),
+              (u' Appendix: Scientific Python resources ',
+               1,
+               u'app:resources',
+               u'app:resources'),
+              (u' Full tutorials on scientific programming with Python ',
+               3,
+               None,
+               '___sec21'),
+              (u' NumPy resources ', 3, None, '___sec22'),
+              (u' Useful resources ', 3, None, '___sec23'),
+              (u' Some relevant Python books ', 3, None, '___sec24'),
+              (u' Course material on Python programming in general ',
+               3,
+               None,
+               '___sec25')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="bumpy.html">An intro to scientific computing with Python</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._bumpy002.html#___sec1" style="font-size: 80%;">A scientific application</a></li>
+     <!-- navigation toc: --> <li><a href="._bumpy008.html#___sec10" style="font-size: 80%;">User input</a></li>
+     <!-- navigation toc: --> <li><a href="._bumpy009.html#___sec13" style="font-size: 80%;">Visual exploration</a></li>
+     <!-- navigation toc: --> <li><a href="._bumpy009.html#___sec14" style="font-size: 80%;">Advanced topics</a></li>
+     <!-- navigation toc: --> <li><a href="._bumpy009.html#app:motivation" style="font-size: 80%;">Appendix: Quick motivation for programming with Python</a></li>
+     <!-- navigation toc: --> <li><a href="._bumpy009.html#app:resources" style="font-size: 80%;">Appendix: Scientific Python resources</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0001"></a>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._bumpy000.html">&laquo;</a></li>
+  <li><a href="._bumpy000.html">1</a></li>
+  <li class="active"><a href="._bumpy001.html">2</a></li>
+  <li><a href="._bumpy002.html">3</a></li>
+  <li><a href="._bumpy003.html">4</a></li>
+  <li><a href="._bumpy004.html">5</a></li>
+  <li><a href="._bumpy005.html">6</a></li>
+  <li><a href="._bumpy006.html">7</a></li>
+  <li><a href="._bumpy007.html">8</a></li>
+  <li><a href="._bumpy008.html">9</a></li>
+  <li><a href="._bumpy009.html">10</a></li>
+  <li><a href="._bumpy002.html">&raquo;</a></li>
+</ul>
+<!-- !split -->
+
+<h3 id="___sec0">Optimal backround for reading this note <a name="___sec0"></a></h3>
+
+<ul>
+  <li> Some interest in exploring physics through numerical simulation</li>
+  <li> Some very basic knowledge of differential equations</li>
+  <li> Some very basic knowledge of finite difference approximations</li>
+  <li> Significant interest in exploring Python for scientific computations</li>
+</ul>
+
+<div class="alert alert-block alert-success alert-text-normal"><b></b>
+No background in Python is assumed - the aim is to give an impression of
+how Python can be used in a MATLAB-like fashion to solve a real-world
+physical problem (with low mathematical complexity).
+</div>
+
+
+<p>
+If you need motivation for using Python as programming language,
+see  <a href="._bumpy009.html#app:motivation">Appendix: Quick motivation for programming with Python</a>. Lists of many useful tutorials
+and introductions to Python, with emphasis on scientific computing,
+are found in  <a href="._bumpy009.html#app:resources">Appendix: Scientific Python resources</a>.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pagination">
+<li><a href="._bumpy000.html">&laquo;</a></li>
+  <li><a href="._bumpy000.html">1</a></li>
+  <li class="active"><a href="._bumpy001.html">2</a></li>
+  <li><a href="._bumpy002.html">3</a></li>
+  <li><a href="._bumpy003.html">4</a></li>
+  <li><a href="._bumpy004.html">5</a></li>
+  <li><a href="._bumpy005.html">6</a></li>
+  <li><a href="._bumpy006.html">7</a></li>
+  <li><a href="._bumpy007.html">8</a></li>
+  <li><a href="._bumpy008.html">9</a></li>
+  <li><a href="._bumpy009.html">10</a></li>
+  <li><a href="._bumpy002.html">&raquo;</a></li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+
