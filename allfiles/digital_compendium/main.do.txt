@@ -422,7 +422,7 @@ FIGURE:[chapter1/programs_and_modules/example_sphere.png, height=400 width=600] 
 
 ${ebox()}
 
-
+!split 
 === Python implementation of the drag coefficient function and how to plot it ===
 
 The complete Python program _CDsphere.py_ used to plot the drag
