@@ -318,7 +318,7 @@ script/module with <code>import filename</code>.
 <p>
 A module file should not execute a main program, but rather just
 define functions, import other modules, and define global
-variables. 
+variables.
 Inside modules, the standard practice is to only have functions and
 not any statements outside functions. The reason is that all
 statements in the module file are executed from top to bottom during
@@ -330,12 +330,12 @@ main program arises. To meet these demands Python allows for a
 fortunate construction to let a file act both as a module with
 function definitions only (i.e. no main program) and as an ordinary
 program we can run, with functions and a main program. The latter is possible by letting the
-main program follow an <code>if</code> test of the form: 
+main program follow an <code>if</code> test of the form:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span><span style="color: #BA2121">&#39;__main__&#39;</span>: 
-    <span style="color: #666666">&lt;</span>main program statements<span style="color: #666666">&gt;</span> 
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">if</span> __name__ <span style="color: #666666">==</span><span style="color: #BA2121">&#39;__main__&#39;</span>:
+    <span style="color: #666666">&lt;</span>main program statements<span style="color: #666666">&gt;</span>
 </pre></div>
 <p>
 The <code>__name__</code> variable is automatically defined in any module and
@@ -365,7 +365,7 @@ implementations of the drag coefficient functions from the previous
 section.
 
 <p>
-<b>Python lists and dictionaries</b> 
+<b>Python lists and dictionaries</b>
 
 <ul>
     <li> Lists hold a list of values and are initialized with empty
@@ -408,18 +408,18 @@ which allows for convenient looping over all of the functions with the following
 </pre></div>
 <p>
 <b>Exception handling</b> Python has a very convenient construction for
-testing of potential errors with <a href="https://wiki.python.org/moin/HandlingExceptions" target="_blank">try-except</a> blocks: 
+testing of potential errors with <a href="https://wiki.python.org/moin/HandlingExceptions" target="_blank">try-except</a> blocks:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">try</span>:
-    <span style="color: #666666">&lt;</span>statements<span style="color: #666666">&gt;</span> 
-<span style="color: #008000; font-weight: bold">except</span> ExceptionType1: 
+    <span style="color: #666666">&lt;</span>statements<span style="color: #666666">&gt;</span>
+<span style="color: #008000; font-weight: bold">except</span> ExceptionType1:
     <span style="color: #666666">&lt;</span>remedy <span style="color: #008000; font-weight: bold">for</span> ExceptionType1 errors<span style="color: #666666">&gt;</span>
-<span style="color: #008000; font-weight: bold">except</span> ExceptionType2: 
-    <span style="color: #666666">&lt;</span>remedy <span style="color: #008000; font-weight: bold">for</span> ExceptionType1 errors<span style="color: #666666">&gt;</span> 
+<span style="color: #008000; font-weight: bold">except</span> ExceptionType2:
+    <span style="color: #666666">&lt;</span>remedy <span style="color: #008000; font-weight: bold">for</span> ExceptionType1 errors<span style="color: #666666">&gt;</span>
 <span style="color: #008000; font-weight: bold">except</span>:
-    <span style="color: #666666">&lt;</span>remedy <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">any</span> other errors<span style="color: #666666">&gt;</span> 
+    <span style="color: #666666">&lt;</span>remedy <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">any</span> other errors<span style="color: #666666">&gt;</span>
 </pre></div>
 <p>
 In the <code>DragCoefficientGeneric</code> module, this feature is used to handle
@@ -446,7 +446,7 @@ efficiency is implemented with the codelines:
 </pre></div>
 <p>
 <b>Sorting of dictionaries</b>
-The computed execution times are for convenience stored in the dictionary <code>exec_time</code> to allow for pairing of the names of the functions and their execution time. 
+The computed execution times are for convenience stored in the dictionary <code>exec_time</code> to allow for pairing of the names of the functions and their execution time.
 The dictionary may be <a href="http://stackoverflow.com/questions/575819/sorting-dictionary-keys-in-python" target="_blank">sorted</a> on the values and the corresponding keys sorted are returned by:
 <p>
 
@@ -473,9 +473,9 @@ cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 </pre></div>
 <p>
-Clearly, the function with the boolean variables was fastest, 
-the straight forward vectorized version <code>cd_sphere_py_vector</code> was slowest 
-and the built-in function <code>vectorize</code> was nearly as inefficient. 
+Clearly, the function with the boolean variables was fastest,
+the straight forward vectorized version <code>cd_sphere_py_vector</code> was slowest
+and the built-in function <code>vectorize</code> was nearly as inefficient.
 
 <p>
 The complete module <b>DragCoefficientGeneric</b> is listed below.
