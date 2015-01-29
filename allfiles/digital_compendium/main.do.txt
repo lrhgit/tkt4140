@@ -5,7 +5,6 @@ AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
 TOC: on
 
-_Test: after fixes by hpl._
 
 ## Mako functions and variables
 # #include "mako.txt"
