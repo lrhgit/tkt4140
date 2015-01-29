@@ -1600,7 +1600,7 @@ To investigate whether our implementation of the various ODE-schemes
 have the expected, theoretical order, we proceed in the same manner as
 outlined in a previous example. The complete code is listed at the end
 of this section but we will highlight and explain some details in the
-following. More text...
+following. 
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Function for convergence test@def plot_ODEschemes_solutions
 
