@@ -7,6 +7,7 @@ chapter1/5_new.png
 chapter1/6.png
 chapter1/7.png
 chapter1/programs_and_modules/example_sphere_falling_euler.png
+chapter1/programs_and_modules/example_euler_timestep_study.png
 chapter1/9.png
 chapter1/programs_and_modules/newton_heun.png
 chapter1/programs_and_modules/example_sphere_falling_euler_heun.png
@@ -31,3 +32,5 @@ chapter1/programs_and_modules/example_particle_motion_2d_2.png
 ._main013.html
 ._main014.html
 ._main015.html
+._main016.html
+._main017.html

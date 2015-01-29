@@ -7,9 +7,9 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Digital Compendium for TKT4140">
+<meta name="description" content="Numerical Methods for Engineers">
 
-<title>Digital Compendium for TKT4140</title>
+<title>Numerical Methods for Engineers</title>
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -22,9 +22,9 @@ Automatically generated HTML file from DocOnce source
 </head>
 
 <!-- tocinfo
-{'highest level': 0,
+{'highest level': 1,
  'sections': [(u' Initial value problems for Ordinary Differential Equations ',
-               0,
+               1,
                None,
                '___sec0'),
               (u' Introduction ',
@@ -62,23 +62,34 @@ Automatically generated HTML file from DocOnce source
                3,
                None,
                '___sec11'),
-              (u" Euler's method ", 2, None, '___sec12'),
+              (u" Euler's method ",
+               2,
+               u'ex:euler_method',
+               u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u" Euler's method for a system ", 3, None, '___sec14'),
-              (u" Heun's method ", 2, None, '___sec15'),
-              (u" Example 4: Newton's equation ", 2, None, '___sec16'),
-              (u" Example 5: Falling sphere with Heun's method ",
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
                None,
-               '___sec17'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec18'),
-              (u' Example 6: Particle motion in two dimensions ',
+               '___sec14'),
+              (u" Euler's method for a system ", 3, None, '___sec15'),
+              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Example 5: Newton's equation ", 2, None, '___sec17'),
+              (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
-               '___sec19')]}
+               '___sec18'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
+              (u' Example 7: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec20'),
+              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               2,
+               None,
+               '___sec21')]}
 end of tocinfo -->
 
 <body>
@@ -108,30 +119,15 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="main.html">Digital Compendium for TKT4140</a>
+    <a class="navbar-brand" href="main.html">Numerical Methods for Engineers</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;"><b>Initial value problems for Ordinary Differential Equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
-     <!-- navigation toc: --> <li><a href="._main002.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order systems</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
-     <!-- navigation toc: --> <li><a href="._main004.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
-     <!-- navigation toc: --> <li><a href="._main006.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
-     <!-- navigation toc: --> <li><a href="._main008.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
-     <!-- navigation toc: --> <li><a href="#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
-     <!-- navigation toc: --> <li><a href="._main011.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main012.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main013.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main014.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="._main015.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
 
         </ul>
       </li>
@@ -164,6 +160,8 @@ MathJax.Hub.Config({
   <li><a href="._main013.html">14</a></li>
   <li><a href="._main014.html">15</a></li>
   <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main017.html">18</a></li>
   <li><a href="._main010.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
@@ -174,10 +172,10 @@ MathJax.Hub.Config({
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="ex:falling_sphere">Example 3: Falling sphere with constant and varying drag<a name="ex:falling_sphere"></a></h2>
+<h2 id="ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</h2>
 
 <p>
-We write <a href="._main004.html#mjx-eqn-13">(13)</a> and <a href="._main004.html#mjx-eqn-14">(14)</a> as a sytem as follows,
+We write <a href="._main004.html#mjx-eqn-13">(13)</a> and <a href="._main004.html#mjx-eqn-14">(14)</a> as a system as follows,
 $$
 \begin{align}
 & \frac{dz}{dt}=v \tag{42}\\ 
@@ -194,12 +192,13 @@ $$
 
 The analytical solution with \( z(0)=0 \) and \( v(0)=0 \) is given by
 $$
-\begin{equation} \tag{44}
-v(t)=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t), \ z(t)=\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha}
-\end{equation}
+\begin{align} \tag{44}
+ z(t)& =\frac{\ln(\cosh(\sqrt{\alpha g}\cdot t)}{\alpha} \\ 
+v(t) &=\sqrt{\frac{g}{\alpha}}\cdot \tanh (\sqrt{\alpha g}\cdot t)
+\end{align}
 $$
 
-The terminal velocity \( v_t \) is found by \( \frac{dv}{dt}=0 \) which gives \( v_t=\sqrt{\frac{g}{\alpha}} \).
+The terminal velocity \( v_t \) is found by \( \displaystyle \frac{dv}{dt}=0 \) which gives \( \displaystyle v_t=\sqrt{\frac{g}{\alpha}} \).
 
 <p>
 We use data from a golf ball: \( d= 41\text{ mm} \), \( \rho_k = 1275 \text{ kg/m}^3 \), \( \rho_k = 1.22 \text{ kg/m}^3 \), and choose \( C_D = 0.4 \) which gives \( \alpha = 7\cdot 10^{-3} \). The terminal velocity then becomes
@@ -211,7 +210,7 @@ $$
 
 
 <p>
-If we use Teylor's method from the section <a href="._main002.html#sec:taylor">Taylor's method</a> we get the following expression by using four terms in the series expansion:
+If we use Taylor's method from the section <a href="._main002.html#sec:taylor">Taylor's method</a> we get the following expression by using four terms in the series expansion:
 $$
 \begin{align}
 \tag{45}
@@ -247,13 +246,13 @@ One way of implementing the integration scheme is given in the following functio
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
 
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i] rm <span style="color: #666666">-</span>rf <span style="color: #666666">*~</span> 
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
         z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
 
     <span style="color: #008000; font-weight: bold">return</span> z
 </pre></div>
 <p>
-The program <b>FallingSphereEuler.py</b> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/FallingSphereEuler.py" target="_blank">here</a>) computes the solution for the first 10 seconds, using a time step of \( \Delta t=0.5 \) s, and generates the plot in Figure <a href="#fig:faling_sphere_euler">4</a>. In addition to the case of constant drag coefficient, a solution for the case of varying \( C_D \) is included. To find \( C_D \) as function of velocity we use the function <code>cd_sphere()</code> that we implemented in <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. The complete program is as follows,
+The program <b>FallingSphereEuler.py</b>  computes the solution for the first 10 seconds, using a time step of \( \Delta t=0.5 \) s, and generates the plot in Figure <a href="#fig:faling_sphere_euler">4</a>. In addition to the case of constant drag coefficient, a solution for the case of varying \( C_D \) is included. To find \( C_D \) as function of velocity we use the function <code>cd_sphere()</code> that we implemented in <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. The complete program is as follows,
 
 <p>
 
@@ -303,11 +302,19 @@ CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>
     z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
 
     <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)<span style="color: #666666">-1</span>):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i] rm <span style="color: #666666">-</span>rf <span style="color: #666666">*~</span> 
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>]<span style="color: #666666">-</span>time[i]
         z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],time[i]))<span style="color: #666666">*</span>dt
 
     <span style="color: #008000; font-weight: bold">return</span> z
 
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">v_taylor</span>(t):
+<span style="color: #408080; font-style: italic">#    z = np.zeros_like(t)</span>
+    v <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(t)
+
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
+    v<span style="color: #666666">=</span>g<span style="color: #666666">*</span>t<span style="color: #666666">*</span>(<span style="color: #666666">1-</span>alpha<span style="color: #666666">*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>)
+    <span style="color: #008000; font-weight: bold">return</span> v
+     
 <span style="color: #408080; font-style: italic"># main program starts here</span>
 
 T <span style="color: #666666">=</span> <span style="color: #666666">10</span>  <span style="color: #408080; font-style: italic"># end of simulation</span>
@@ -338,17 +345,22 @@ legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">
 plot(time, ze2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">3</span>])
 legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (varying CD)&#39;</span>)
 
+time_taylor <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, <span style="color: #666666">4</span>, N<span style="color: #666666">+1</span>)
+
+plot(time_taylor, v_taylor(time_taylor))
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Taylor (constant CD)&#39;</span>)
+
 legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
 font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
 rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
 xlabel(<span style="color: #BA2121">&#39;Time [s]&#39;</span>)
 ylabel(<span style="color: #BA2121">&#39;Velocity [m/s]&#39;</span>)
-savefig(<span style="color: #BA2121">&#39;example_sphere_falling_euler.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+<span style="color: #408080; font-style: italic">#savefig(&#39;example_sphere_falling_euler.png&#39;, transparent=True)</span>
 show()
 </pre></div>
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 4:  Euler's method with \( \Delta t=0.5 \) s. <a name="fig:faling_sphere_euler"></a> </p></center>
+<center><p class="caption">Figure 4:  Euler's method with \( \Delta t=0.5 \) s. <div id="fig:faling_sphere_euler"></div> </p></center>
 <p><img src="chapter1/programs_and_modules/example_sphere_falling_euler.png" align="bottom" width=400></p>
 </center>
 
@@ -381,6 +393,8 @@ show()
   <li><a href="._main013.html">14</a></li>
   <li><a href="._main014.html">15</a></li>
   <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main017.html">18</a></li>
   <li><a href="._main010.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

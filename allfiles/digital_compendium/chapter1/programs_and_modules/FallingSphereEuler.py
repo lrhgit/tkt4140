@@ -43,11 +43,19 @@ def euler(func,z0, time):
     z[0,:] = z0
 
     for i in range(len(time)-1):
-        dt = time[i+1]-time[i] rm -rf *~ 
+        dt = time[i+1]-time[i]
         z[i+1,:]=z[i,:] + np.asarray(func(z[i,:],time[i]))*dt
 
     return z
 
+def v_taylor(t):
+#    z = np.zeros_like(t)
+    v = np.zeros_like(t)
+
+    alpha = 3.0*rho_f/(4.0*rho_s*d)*CD
+    v=g*t*(1-alpha*g*t**2)
+    return v
+     
 # main program starts here
 
 T = 10  # end of simulation
@@ -78,11 +86,16 @@ legends.append('Euler (constant CD)')
 plot(time, ze2[:,1], line_type[3])
 legends.append('Euler (varying CD)')
 
+time_taylor = np.linspace(0, 4, N+1)
+
+plot(time_taylor, v_taylor(time_taylor))
+legends.append('Taylor (constant CD)')
+
 legend(legends, loc='best', frameon=False)
 font = {'size' : 16}
 rc('font', **font)
 xlabel('Time [s]')
 ylabel('Velocity [m/s]')
-savefig('example_sphere_falling_euler.png', transparent=True)
+#savefig('example_sphere_falling_euler.png', transparent=True)
 show()
 

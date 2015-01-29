@@ -11,8 +11,7 @@ from numpy.core.multiarray import scalar
 # single-valued function
 def cd_sphere(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
-    # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
-    # Schaum ' s Solved Problems McGraw - Hill 1989.
+    # Curve fitted after fig . A -56 in Evett and Liu: "Fluid Mechanics and Hydraulics"
     
     from numpy import log10,array,polyval    
     
@@ -52,36 +51,38 @@ def cd_sphere_py_vector(ReNrs):
 # vectorized function
 def cd_sphere_vector(Re):
     "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
-    # Curve fitted after fig . A -56 in Evett & Liu :% " Fluid Mechanics & Hydraulics ",
-    # Schaum ' s Solved Problems McGraw - Hill 1989.
+    # Curve fitted after fig . A -56 in Evett and Liu: "Fluid Mechanics and Hydraulics"
 
-    from numpy import log10,array,polyval,where,zeros_like
+    from numpy import log10, array, polyval, where, zeros_like
     CD = zeros_like(Re)
    
-    CD = where(Re<0,0.0,CD)     # condition 1
+    CD = where(Re < 0, 0.0, CD)     # condition 1
     
-    CD = where((Re > 0.0) & (Re <=0.5),24/Re,CD) # condition 2
+    CD = where((Re > 0.0) & (Re <=0.5), 24/Re, CD) # condition 2
 
-    p = array([4.22,-14.05,34.87,0.658])
-    CD = where((Re > 0.5) & (Re <=100.0),polyval(p,1.0/Re),CD) #condition 3
+    p = array([4.22, -14.05, 34.87, 0.658])
+    CD = where((Re > 0.5) & (Re <=100.0), polyval(p, 1.0/Re), CD) #condition 3
 
-    p = array([-30.41,43.72,-17.08,2.41])
-    CD = where((Re >100.0)  & (Re <=1.0e4) ,polyval(p,1.0/log10(Re)),CD) #condition 4
+    p = array([-30.41, 43.72, -17.08, 2.41])
+    CD = where((Re > 100.0)  & (Re <= 1.0e4), polyval(p, 1.0/log10(Re)), CD) #condition 4
 
-    p = array([-0.1584,2.031,-8.472,11.932])
-    CD = where((Re > 1.0e4)  &  (Re <=3.35e5),polyval(p,log10(Re)),CD) #condition 5
+    p = array([-0.1584, 2.031, -8.472, 11.932])
+    CD = where((Re > 1.0e4)  &  (Re <= 3.35e5), polyval(p, log10(Re)), CD) #condition 5
 
-    CD = where((Re > 3.35e5) & (Re <=5.0e5),91.08*(log10(Re/4.5e5))**4 + 0.0764,CD) #condition 6
+    CD = where((Re > 3.35e5) & (Re <= 5.0e5), 91.08*(log10(Re/4.5e5))**4 + 0.0764, CD) #condition 6
 
-    p  = array([-0.06338,1.1905,-7.332,14.93])
-    CD = where((Re > 5.05e5)  &  (Re <=8.0e6),polyval(p,log10(Re)),CD) #condition 7
+    p  = array([-0.06338, 1.1905, -7.332, 14.93])
+    CD = where((Re > 5.05e5)  &  (Re <= 8.0e6), polyval(p, log10(Re)), CD) #condition 7
     
-    CD = where(Re>8.0e6,0.2,CD)  # condition 8
+    CD = where(Re > 8.0e6, 0.2, CD)  # condition 8
     return CD
 
 # vectorized boolean
 def cd_sphere_vector_bool(Re):
-    from numpy import log10,array,polyval,zeros_like
+    "Computes the drag coefficient of a sphere as a function of the Reynolds number Re."
+    # Curve fitted after fig . A -56 in Evett and Liu: "Fluid Mechanics and Hydraulics"
+    
+    from numpy import log10, array, polyval, zeros_like
        
     condition1 = Re < 0
     condition2 = logical_and(0 < Re, Re <= 0.5)
@@ -128,10 +129,11 @@ if __name__ == '__main__':
     ReNrs = logspace(-2,7,num=500)
     
     # make a vectorized version of the function automatically
-    cd_sphere_auto_vector=vectorize(cd_sphere) 
+    cd_sphere_auto_vector = vectorize(cd_sphere) 
     
     # make a list of all function objects
-    funcs =[cd_sphere_py_vector, cd_sphere_vector, cd_sphere_vector_bool, cd_sphere_auto_vector]  # list of functions to test   
+    funcs = [cd_sphere_py_vector, cd_sphere_vector, cd_sphere_vector_bool, \
+             cd_sphere_auto_vector]  # list of functions to test   
     
     
     # Put all exec_times in a dictionary and fncnames in a list 
@@ -152,7 +154,7 @@ if __name__ == '__main__':
         exec_times[name] = time.clock() - t0
     
     # sort the dictionary exec_times on values and return a list of the corresponding keys   
-    exec_keys_sorted = sorted(exec_times,key=exec_times.get)
+    exec_keys_sorted = sorted(exec_times, key=exec_times.get)
     
     # print the exec_times by ascending values
     for name_key in exec_keys_sorted:
@@ -169,7 +171,7 @@ if __name__ == '__main__':
     # plot the result for all functions    
     i=0
     for name in fncnames: 
-        loglog(ReNrs,CD[name],style[i],markersize=10,markevery=mrkevry[i])
+        loglog(ReNrs, CD[name], style[i], markersize=10, markevery=mrkevry[i])
         hold('on')
         i+=1 
     
@@ -178,6 +180,6 @@ if __name__ == '__main__':
     leg.get_frame().set_alpha(0.)
     xlabel('$Re$')
     ylabel('$C_D$')
-    grid('on','both','both')
+    grid('on', 'both', 'both')
     # savefig('example_sphere_generic.png', transparent=True) # save plot if needed
     show()

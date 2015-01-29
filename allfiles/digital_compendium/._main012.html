@@ -7,9 +7,9 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Digital Compendium for TKT4140">
+<meta name="description" content="Numerical Methods for Engineers">
 
-<title>Digital Compendium for TKT4140</title>
+<title>Numerical Methods for Engineers</title>
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -22,9 +22,9 @@ Automatically generated HTML file from DocOnce source
 </head>
 
 <!-- tocinfo
-{'highest level': 0,
+{'highest level': 1,
  'sections': [(u' Initial value problems for Ordinary Differential Equations ',
-               0,
+               1,
                None,
                '___sec0'),
               (u' Introduction ',
@@ -62,23 +62,34 @@ Automatically generated HTML file from DocOnce source
                3,
                None,
                '___sec11'),
-              (u" Euler's method ", 2, None, '___sec12'),
+              (u" Euler's method ",
+               2,
+               u'ex:euler_method',
+               u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u" Euler's method for a system ", 3, None, '___sec14'),
-              (u" Heun's method ", 2, None, '___sec15'),
-              (u" Example 4: Newton's equation ", 2, None, '___sec16'),
-              (u" Example 5: Falling sphere with Heun's method ",
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
                None,
-               '___sec17'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec18'),
-              (u' Example 6: Particle motion in two dimensions ',
+               '___sec14'),
+              (u" Euler's method for a system ", 3, None, '___sec15'),
+              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Example 5: Newton's equation ", 2, None, '___sec17'),
+              (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
-               '___sec19')]}
+               '___sec18'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
+              (u' Example 7: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec20'),
+              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               2,
+               None,
+               '___sec21')]}
 end of tocinfo -->
 
 <body>
@@ -108,30 +119,15 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="main.html">Digital Compendium for TKT4140</a>
+    <a class="navbar-brand" href="main.html">Numerical Methods for Engineers</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;"><b>Initial value problems for Ordinary Differential Equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
-     <!-- navigation toc: --> <li><a href="._main002.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order systems</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
-     <!-- navigation toc: --> <li><a href="._main004.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
-     <!-- navigation toc: --> <li><a href="._main006.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
-     <!-- navigation toc: --> <li><a href="._main008.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main009.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
-     <!-- navigation toc: --> <li><a href="._main011.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main013.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main014.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="._main015.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
 
         </ul>
       </li>
@@ -162,102 +158,96 @@ MathJax.Hub.Config({
   <li><a href="._main013.html">14</a></li>
   <li><a href="._main014.html">15</a></li>
   <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main017.html">18</a></li>
   <li><a href="._main013.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
 
-<!-- begin box -->
-<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+<h2 id="___sec16">Heun's method </h2>
 
 <p>
-<!-- --- begin exercise --- -->
-
-<h2 id="___sec16">Example 4: Newton's equation <a name="___sec16"></a></h2>
-
-<p>
-Let's use Heun's method to solve Newton's equation from the section <a href="._main001.html#section:introduction">Introduction</a>,
+From <a href="._main006.html#mjx-eqn-19">(19)</a> or <a href="._main006.html#mjx-eqn-23">(23)</a> we have
 $$
 \begin{equation}
-\tag{59}
-y'(x)=1-3x+y+x^2+xy,\ y(0)=0
+\tag{54}
+y''(x_n,y_n)=f'\left(x_n,y(x_n,y_n)\right)\approx \frac{f(x_n+h)-f(x_n)}{h}
 \end{equation}
 $$
 
-with analytical solution
+The Taylor series expansion <a href="._main006.html#mjx-eqn-17">(17)</a> gives
+$$
+\begin{equation*}
+y(x_n+h)=y(x_n)+hy'[x_n,y(x_n)]+\frac{h^2}{2}y''[x_n,y(x_n)]+O(h^3)
+\end{equation*}
+$$
+
+which, inserting <a href="#mjx-eqn-54">(54)</a>, gives
+$$
+\begin{equation}
+\tag{55}
+y_{n+1}=y_n+\frac{h}{2}\cdot [f(x_n,y_n)+f(x_{n+1},y(x_{n+1}))]
+\end{equation}
+$$
+
+
+<p>
+This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if \( f(x,y) \) is only a function of \( x \). Since \( y_{n+1} \) appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function \( f(x,y) \) is non-linear. One way of making the scheme explicit is to use the Euler scheme <a href="._main008.html#mjx-eqn-41">(41)</a> to calculate \( y(x_{n+1}) \) on the right side of <a href="#mjx-eqn-55">(55)</a>. The resulting scheme is often denoted <b>Heun's method</b>.
+
+<p>
+The scheme for Heun's method becomes
 $$
 \begin{align}
-y(x)=&3\sqrt{2\pi e}\cdot \exp\left(x\left(1+\frac{x}{2}\right)\right)\cdot \left[\mbox{erf}\left(\frac{\sqrt{2}}{2}(1+x)\right)-\mbox{erf}\left(\frac{\sqrt{2}}{2}\right)\right]\nonumber \\ 
-	+&4\cdot \left[1-\exp\left(x\left(1+\frac{x}{2}\right)\right)\right]-x
-\tag{60}
+&y^p_{n+1}=y_n+h\cdot f(x_n,y_n)
+\tag{56} \\ 
+&y_{n +1}=y_n+\frac{h}{2}\cdot[f(x_n,y_n)+f(x_{n+1},y^p_{n+1})]
+\tag{57}
 \end{align}
 $$
 
+Index \( p \) stands for "predicted". <a href="#mjx-eqn-56">(56)</a> is then the predictor and <a href="#mjx-eqn-57">(57)</a> is the corrector. This is a second order method. For more details, see <a href="._main017.html#cheney2012numerical">[6]</a>. Figure <a href="#fig:illustration_heun">6</a> is a graphical illustration of the method.
 
-<p>
-Here we have \( f(x,y)=1-3x+y+x^2+xy = 1+x(x-3)+(1+x)y \)
-
-<p>
-The following program <b>NewtonHeun.py</b> solves this problem using Heun's method, and the resulting figure is shown in Figure <a href="#fig:newton_heun">6</a>.
-
-<p>
-
-<!-- code=python (!bc pypro) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/NewtonHeun.py</span>
-<span style="color: #408080; font-style: italic"># Program Newton</span>
-<span style="color: #408080; font-style: italic"># Computes the solution of Newton&#39;s 1st order equation (1671):</span>
-<span style="color: #408080; font-style: italic"># dy/dx = 1-3*x + y + x^2 +x*y , y(0) = 0</span>
-<span style="color: #408080; font-style: italic"># using Heun&#39;s method.</span>
-
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
-
-xend <span style="color: #666666">=</span> <span style="color: #666666">2</span>
-dx <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
-steps <span style="color: #666666">=</span> np<span style="color: #666666">.</span>int(np<span style="color: #666666">.</span>round(xend<span style="color: #666666">/</span>dx, <span style="color: #666666">0</span>)) <span style="color: #666666">+</span> <span style="color: #666666">1</span> 
-y, x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((steps,<span style="color: #666666">1</span>), <span style="color: #008000">float</span>), np<span style="color: #666666">.</span>zeros((steps,<span style="color: #666666">1</span>), <span style="color: #008000">float</span>)
-y[<span style="color: #666666">0</span>], x[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>, <span style="color: #666666">0.0</span>
-
-<span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,steps<span style="color: #666666">-1</span>):
-    x[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> (n<span style="color: #666666">+1</span>)<span style="color: #666666">*</span>dx
-    xn <span style="color: #666666">=</span> x[n]
-    fn <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">+</span> xn<span style="color: #666666">*</span>(xn<span style="color: #666666">-3</span>) <span style="color: #666666">+</span> y[n]<span style="color: #666666">*</span>(<span style="color: #666666">1+</span>xn)
-    yp <span style="color: #666666">=</span> y[n] <span style="color: #666666">+</span> dx<span style="color: #666666">*</span>fn    
-    xnp1 <span style="color: #666666">=</span> x[n<span style="color: #666666">+1</span>]
-    fnp1 <span style="color: #666666">=</span> <span style="color: #666666">1</span> <span style="color: #666666">+</span> xnp1<span style="color: #666666">*</span>(xnp1<span style="color: #666666">-3</span>) <span style="color: #666666">+</span> yp<span style="color: #666666">*</span>(<span style="color: #666666">1+</span>xnp1)
-    y[n<span style="color: #666666">+1</span>] <span style="color: #666666">=</span> y[n] <span style="color: #666666">+</span> <span style="color: #666666">0.5*</span>dx<span style="color: #666666">*</span>(fn<span style="color: #666666">+</span>fnp1)
-
-<span style="color: #408080; font-style: italic"># Analytical solution</span>
-<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scipy.special</span> <span style="color: #008000; font-weight: bold">import</span> erf
-a <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">2</span>)<span style="color: #666666">/2</span>
-t1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>exp(x<span style="color: #666666">*</span>(<span style="color: #666666">1+</span> x<span style="color: #666666">/2</span>))
-t2 <span style="color: #666666">=</span> erf((<span style="color: #666666">1+</span>x)<span style="color: #666666">*</span>a)<span style="color: #666666">-</span>erf(a)
-ya <span style="color: #666666">=</span> <span style="color: #666666">3*</span>np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">2*</span>np<span style="color: #666666">.</span>pi<span style="color: #666666">*</span>np<span style="color: #666666">.</span>exp(<span style="color: #666666">1</span>))<span style="color: #666666">*</span>t1<span style="color: #666666">*</span>t2 <span style="color: #666666">+</span> <span style="color: #666666">4*</span>(<span style="color: #666666">1-</span>t1)<span style="color: #666666">-</span>x
-
-<span style="color: #408080; font-style: italic"># plotting</span>
-<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pylab</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">py</span>
-py<span style="color: #666666">.</span>plot(x, y, <span style="color: #BA2121">&#39;-b.&#39;</span>, x, ya, <span style="color: #BA2121">&#39;-g.&#39;</span>)
-py<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;x&#39;</span>)
-py<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;y&#39;</span>)
-font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
-py<span style="color: #666666">.</span>rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
-py<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;Solution to Newton</span><span style="color: #BB6622; font-weight: bold">\&#39;</span><span style="color: #BA2121">s equation&#39;</span>)
-py<span style="color: #666666">.</span>legend([<span style="color: #BA2121">&#39;Heun&#39;</span>, <span style="color: #BA2121">&#39;Analytical&#39;</span>], loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
-py<span style="color: #666666">.</span>grid()
-py<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;newton_heun.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
-py<span style="color: #666666">.</span>show()
-</pre></div>
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 6:  Velocity of falling sphere using Euler's and Heun's methods. <a name="fig:newton_heun"></a> </p></center>
-<p><img src="chapter1/programs_and_modules/newton_heun.png" align="bottom" width=400></p>
+<center><p class="caption">Figure 6:  Illustration of Heun's method. <div id="fig:illustration_heun"></div> </p></center>
+<p><img src="chapter1/9.png" align="bottom" width=400></p>
 </center>
 
 <p>
-</div>
-<!-- end box -->
+In principle we could make an iteration procedure where we after using the corrector use the corrected values to correct the corrected values to make a new predictor and so on. This will likely lead to a more accurate solution of the difference scheme, but not necessarily of the differential equation. We are therefore satisfied by using the corrector once. For a system, we get
+$$
+\begin{align}
+& \mathbf{y^p_{n+1}}=\mathbf{y_n}+h\cdot \mathbf{f}(x_n,\mathbf{y_n})
+\tag{58}\\ 
+& \mathbf{y_{n+1}}=\mathbf{y_n} +\frac{h}{2}\cdot [\mathbf{f}(x_n,\mathbf{y_n})+\mathbf{f}(x_{n+1},\mathbf{y^p_{n+1}})]
+\tag{59}
+\end{align}
+$$
 
+Note that \( \mathbf{y}^p_{n+1} \) is a temporary variable that is not necessary to store.
 
 <p>
-<!-- --- end exercise --- -->
+If we use <a href="#mjx-eqn-58">(58)</a> and <a href="#mjx-eqn-59">(59)</a> on the example in <a href="._main011.html#mjx-eqn-52">(52)</a> we get
+
+<p>
+Predictor:
+$$
+\begin{align*}
+(y_1)^p_{n+1}&=(y_1)_n+h\cdot (y_2)_n&\\ 
+(y_2)^p_{n+1}&=(y_2)_n+h\cdot (y_3)_n&\\ 
+(y_3)^p_{n+1}&=(y_3)_n-h\cdot (y_1)_n\cdot (y_3)_n
+\end{align*}
+$$
+
+Corrector:
+$$
+\begin{align*}
+(y_1)_{n+1}&=(y_1)_n+0.5h\cdot [(y_2)_n+(y_2)^p_{n+1}]&\\ 
+(y_2)_{n+1}&=(y_2)_n+0.5h\cdot [(y_3)_n+(y_3)^p_{n+1}]&\\ 
+(y_3)_{n+1}&=(y_3)_n-0.5h\cdot [(y_1)_n\cdot (y_3)_n+(y_1)^p_{n+1}\cdot (y_3)^p_{n+1}]
+\end{align*}
+$$
+
 
 <p>
 <p>
@@ -278,6 +268,8 @@ py<span style="color: #666666">.</span>show()
   <li><a href="._main013.html">14</a></li>
   <li><a href="._main014.html">15</a></li>
   <li><a href="._main015.html">16</a></li>
+  <li><a href="._main016.html">17</a></li>
+  <li><a href="._main017.html">18</a></li>
   <li><a href="._main013.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
