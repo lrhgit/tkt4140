@@ -162,42 +162,131 @@ MathJax.Hub.Config({
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main018.html">19</a></li>
   <li><a href="._main009.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
 
-<h2 id="ex:euler_method">Euler's method</h2>
-The ODE is given as
+<h3 id="___sec11">Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) </h3>
+
+This term often appears in difference equations, and it may be clever to treat the term as it is instead of first execute the differentiation.
+
+<p>
+<b>Central differences</b>
+We use central differences (recall Figure <a href="._main007.html#fig:1.5">2</a>) as follows,
 $$
-\begin{align}
-\tag{40}
-\frac{dy}{dx} = y'(x)&=f(x,y)\\ 
-y(x_0)=&y_0
-\end{align}
+\begin{align*}
+\frac{d}{dx}\left[p(x)\cdot \frac{d}{dx}u(x)\right]\bigg|_i \approx& \frac{[p(x)\cdot u'(x)]|_{i+\frac{1}{2}}-[p(x)\cdot u'(x)]|_{i-\frac{1}{2}}}{h}\\ 
+=& \frac{p(x_{i+\frac{1}{2}})\cdot u'(x_{i+\frac{1}{2}})-p(x_{i-\frac{1}{2}})\cdot u'(x_{i-\frac{1}{2}})}{h}
+\end{align*}
 $$
 
-By using a first order forward approximation <a href="._main006.html#mjx-eqn-19">(19)</a>  of the derivative in <a href="#mjx-eqn-40">(40)</a> we obtain:
+Using central differences again, we get
 $$
 \begin{equation*}
-y(x_{n+1})=y(x_n)+h\cdot f(x_n,y(x_n))+O(h^2)
+u'(x_{i+\frac{1}{2}}) \approx \frac{u_{i+1}-u_i}{h},\ u'(x_{i-\frac{1}{2}}) \approx \frac{u_{i}-u_{i-1}}{h},\ 
 \end{equation*}
 $$
 
-or
+which inserted in the previous equation gives the final expression
 $$
 \begin{equation}
-\tag{41}
-y_{n+1}=y_n+h\cdot f(x_n,y_n)
+\tag{33}
+\frac{d}{dx}\left[p(x)\cdot \frac{d}{dx}u(x)\right]\bigg|_i \approx \frac{p_{i-\frac{1}{2}}\cdot {u_{i-1}-(p_{i+\frac{1}{2}}+p_{i-\frac{1}{2}})\cdot u_i+p_{i+\frac{1}{2}}\cdot u_{i+1}}}{h^2} + \text{error term}
 \end{equation}
 $$
 
-<a href="#mjx-eqn-41">(41)</a> is a difference equation and the scheme is called <b>Euler's method</b> (1768). The scheme is illustrated graphically in Figure <a href="#fig:1.7">3</a>. Euler's method is a first order method, since the expression for \( y'(x) \) is first order of \( h \). The method has a global error of order \( h \), and a local of order \( h^2 \).
+where
+$$
+\begin{equation*}
+\text{error term} =-\frac{h^2}{24}\cdot \frac{d}{dx} \bigg(p(x)\cdot u'''(x)+[p(x)\cdot u'(x)]''\bigg) + O(h^3)
+\end{equation*}
+$$
+
+If \( p(x_{1+\frac{1}{2}}) \) and \( p(x_{1-\frac{1}{2}}) \) cannot be found directly, we use
+$$
+\begin{equation}
+\tag{34}
+p(x_{1+\frac{1}{2}})\approx \frac{1}{2}(p_{i+1}+p_i),\ p(x_{1-\frac{1}{2}}) \approx \frac{1}{2}(p_i+p_{i-1})
+\end{equation}
+$$
+
+Note that for \( p(x)=1=\text{constant} \) we get the usual expression
+$$
+\begin{equation*}
+\frac{d^2u}{dx^2}\bigg|_i=\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}+O(h^2)
+\end{equation*}
+$$
+
+<b>Forward differences</b>
+We start with
+$$
+\begin{align*}
+\frac{d}{dx}\left[p(x)\cdot \frac{du}{dx}\right]\bigg|_i &\approx \frac{p(x_{i+\frac{1}{2}})\cdot u'(x_{i+\frac{1}{2}})-p(x_i)\cdot u'(x_i)}{\frac{h}{2}}\\ 
+ &\approx \frac{p(x_{i+\frac{1}{2}})\cdot\left( \frac{u_{i+1}-u_i}{h}\right) -p(x_i)\cdot u'(x_i)}{\frac{h}{2}}
+\end{align*}
+$$
+
+which gives
+$$
+\begin{equation}
+\tag{35}
+\frac{d}{dx}\left[p(x)\cdot \frac{du}{dx}\right]\bigg|_i = \frac{2\cdot [p(x_{i+\frac{1}{2}})\cdot {(u_{i+1}-u_i)-h\cdot p(x_i)\cdot u'(x_i)]}}{h^2} +\text{error term}
+\end{equation}
+$$
+
+where
+$$
+\begin{equation}
+\tag{36}
+\text{error term} =- \frac{h}{12}[3p''(x_i)\cdot u'(x_i)+6p'(x_i)\cdot u''(x_i)+4p(x_i)\cdot u'''(x_i)]+O(h^2)
+\end{equation}
+$$
+
+We have kept the term \( u'(x_i) \) since <a href="#mjx-eqn-35">(35)</a> usually is used at the boundary, and \( u'(x_i) \) may be prescribed there.
+For \( p(x)=1=\text{constant} \) we get the expression
+$$
+\begin{equation}
+\tag{37}
+u''_i = \frac{2\cdot [u_{i+1}-u_i-h\cdot u'(x_i)]}{h^2}-\frac{h}{3}u'''(x_i)+O(h^2)
+\end{equation}
+$$
+
 
 <p>
-<center> <!-- figure -->
-<center><p class="caption">Figure 3:  Graphical illustration of Euler's method. <div id="fig:1.7"></div> </p></center>
-<p><img src="chapter1/7.png" align="bottom" width=400></p>
-</center>
+<b>Backward Differences</b>
+We start with
+$$
+\begin{align*}
+\frac{d}{dx}\left[p(x)\frac{du}{dx}\right]\bigg|_i \approx& \frac{p(x_i)\cdot u'(x_i)-p(x_i)\cdot u'(x_{i-\frac{1}{2}})\cdot u'(x_{i-\frac{1}{2}})}{\frac{h}{2}}\\ \approx& \frac{p(x_i)\cdot u'(x_i)-p(x_{i-\frac{1}{2}})\left(\frac{u_i-u_{i-1}}{h}\right)}{\frac{h}{2}}
+\end{align*}
+$$
+
+which gives
+$$
+\begin{equation}
+\tag{38}
+\frac{d}{dx}\left[p(x)\frac{du}{dx}\right]\bigg|_i = \frac{2\cdot [h\cdot p(x_i)u'(x_i)-p(x_{i-\frac{1}{2}})\cdot (u_i-u_{i-1})]}{h^2}+\text{error term}
+\end{equation}
+$$
+
+where
+$$
+\begin{equation}
+\tag{39}
+\text{error term}=\frac{h}{12}[3p''(x_i)\cdot u'(x_i)+6p'(x_i)\cdot u''(x_i)+4p(x_i)\cdot u'''(x_i)]+O(h^2)
+\end{equation}
+$$
+
+This is the same error term as in <a href="#mjx-eqn-36">(36)</a> except from the sign. Also here we have kept the term \( u'(x_i) \) since <a href="#mjx-eqn-39">(39)</a> usually is used at the boundary where \( u'(x_i) \) may be prescribed.
+For \( p(x)=1=\text{constant} \) we get the expression
+$$
+\begin{equation}
+u''_i = \frac{2\cdot [h\cdot u'(x_i)-(u_i-u_{i-1})]}{h^2}+\frac{h}{3}u'''(x_i)+O(h^2)
+\end{equation}
+$$
+
 
 <p>
 <p>
@@ -222,6 +311,8 @@ $$
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
+  <li><a href="">...</a></li>
+  <li><a href="._main018.html">19</a></li>
   <li><a href="._main009.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
