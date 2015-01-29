@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure, axhline, close,\
-    xticks, xlabel, ylabel
+    xticks, xlabel, ylabel, savefig
 
 # change some default values to make plots more readable 
 LNWDT=3; FNT=11
@@ -251,6 +251,7 @@ if __name__ == '__main__':
         legend(legends,loc='best')
         xlabel('Number of unknowns')
         ylabel('Error reduction when reducing timestep by two')
+        savefig('ConvergenceODEschemes.png', transparent=True)
         
     def plot_ODEschemes_solutions():
         """Plot the solutions for the test schemes in scheme_list"""
