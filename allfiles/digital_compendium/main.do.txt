@@ -1602,6 +1602,17 @@ outlined in a previous example. The complete code is listed at the end
 of this section but we will highlight and explain some details in the
 following. 
 
+To test the numerical order for the schemes we apply the to a somewhat general linear ODE:
+!bt
+\begin{align}
+ label{eq:gen_lin_ode}
+ u'(t)&= a \, y + b \\
+ u(t_0)&= u_0 \nonumber
+\end{align}
+!et
+which has the analytical solution:
+
+
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Function for convergence test@def plot_ODEschemes_solutions
 
 FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}

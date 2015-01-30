@@ -171,6 +171,18 @@ of this section but we will highlight and explain some details in the
 following. 
 
 <p>
+To test the numerical order for the schemes we apply the to a somewhat general linear ODE:
+$$
+\begin{align}
+ \tag{73}
+ u'(t)&= a \, y + b \\ 
+ u(t_0)&= u_0 \nonumber
+\end{align}
+$$
+
+which has the analytical solution:
+
+<p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_convergence</span>():
