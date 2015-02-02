@@ -5,6 +5,7 @@ AUTHOR: Leif Rune Hellevik at Department of Structural Engineering, NTNU
 DATE: today
 TOC: on
 
+
 ## Mako functions and variables
 # #include "mako.txt"
 
@@ -62,10 +63,10 @@ If we are to solve an initial value problem of the type in Equation
 (ref{eq:1101}), we must first be sure that it has a solution. In
 addition we will demand that this solution is unique, together the two criteria above lead to the following criteria:
 !bblock
-_The criteria for existence and uniqueness_ 
+_The criteria for existence and uniqueness_
 
 A sufficient criteria for existence and uniqueness of a solution of the problem in Equation (ref{eq:1101}) is that both $f(x,y)$ and $\frac{\partial
-f}{\partial y}$ are continuous in and around $x_0$. 
+f}{\partial y}$ are continuous in and around $x_0$.
 !eblock
 For (ref{eq:1102}) this conditions becomes that $f(x,y)$,
 $\frac{\partial f}{\partial y}$ and $\frac{\partial f}{\partial y'}$
@@ -79,7 +80,7 @@ _Violation of the criteria for existence and uniqueness_
 y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
 \end{equation}
 !et
-Here $f=y^\frac{1}{3}$ and $\frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}}$. $f$ is continuous in $x=0$, but that's not the case for $\frac{\partial f}{\partial y}$. It may be shown that this ODE has two solutions: $y=0$ and $y=(\frac{2}{3}x)^\frac{2}{3}$. Hopefully this equation doesn't present a physical problem. 
+Here $f=y^\frac{1}{3}$ and $\frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}}$. $f$ is continuous in $x=0$, but that's not the case for $\frac{\partial f}{\partial y}$. It may be shown that this ODE has two solutions: $y=0$ and $y=(\frac{2}{3}x)^\frac{2}{3}$. Hopefully this equation doesn't present a physical problem.
 !eblock
 _A mathematical pendulum_
 A problem of more interest is shown below.
@@ -352,7 +353,7 @@ By use of (ref{eq:1128}) we get
 ${ebox()}
 
 ===== Scientific computing with Python =====
-In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem. 
+In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
 
 !split
 ${bbox()}
@@ -421,15 +422,15 @@ FIGURE:[chapter1/programs_and_modules/example_sphere.png, height=400 width=600] 
 
 ${ebox()}
 
-
-=== Python implementation of the drag coefficient function and how to plot it === 
+!split 
+=== Python implementation of the drag coefficient function and how to plot it ===
 
 The complete Python program _CDsphere.py_ used to plot the drag
 coefficient in the example above is listed below.  The program uses a
 function `cd_sphere` which results from a curve fit to the data of
 Evett and Liu cite{evett19892}. In our setting we will use this
 function for two purposes, namely to demonstrate how functions and modules are
-implemented in Python and finally use these functions in the solution of the ODE in Equations (ref{eq:sphere_1st_order}) and  (ref{eq:sphere_second_order}). 
+implemented in Python and finally use these functions in the solution of the ODE in Equations (ref{eq:sphere_1st_order}) and  (ref{eq:sphere_second_order}).
 
 @@@CODE ./chapter1/programs_and_modules/CDsphere.py
 
@@ -533,7 +534,7 @@ script/module with `import filename`.
 
 A module file should not execute a main program, but rather just
 define functions, import other modules, and define global
-variables. 
+variables.
 Inside modules, the standard practice is to only have functions and
 not any statements outside functions. The reason is that all
 statements in the module file are executed from top to bottom during
@@ -545,11 +546,11 @@ main program arises. To meet these demands Python allows for a
 fortunate construction to let a file act both as a module with
 function definitions only (i.e. no main program) and as an ordinary
 program we can run, with functions and a main program. The latter is possible by letting the
-main program follow an `if` test of the form: 
-!bc pycod 
-if __name__ =='__main__': 
-    <main program statements> 
-!ec 
+main program follow an `if` test of the form:
+!bc pycod
+if __name__ =='__main__':
+    <main program statements>
+!ec
 The `__name__` variable is automatically defined in any module and
 equals the module name if the module is imported in another
 program/script, but when the module file is executed as a program,
@@ -574,7 +575,7 @@ features in Python. The functions in the module are the various
 implementations of the drag coefficient functions from the previous
 section.
 
-_Python lists and dictionaries_ 
+_Python lists and dictionaries_
     * Lists hold a list of values and are initialized with empty
       brackets, e.g. `fncnames = []`. The values of the list are
       accessed with an index, starting from zero. The first value of
@@ -599,31 +600,31 @@ To illustrate a very powerful feature of Python data structures
 allowing for lists of e.g. function objects we put all the function
 names in a list with the statement:
 
-@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# make a list of all function objects@# Put all exec_times in a dictionary and fncnames in a list 
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# make a list of all function objects@# Put all exec_times in a dictionary and fncnames in a list
 
 which allows for convenient looping over all of the functions with the following construction:
 
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:fncnames =@try:
 
 _Exception handling_ Python has a very convenient construction for
-testing of potential errors with "try-except": "https://wiki.python.org/moin/HandlingExceptions" blocks: 
+testing of potential errors with "try-except": "https://wiki.python.org/moin/HandlingExceptions" blocks:
 !bc pycod
 try:
-    <statements> 
-except ExceptionType1: 
+    <statements>
+except ExceptionType1:
     <remedy for ExceptionType1 errors>
-except ExceptionType2: 
-    <remedy for ExceptionType1 errors> 
+except ExceptionType2:
+    <remedy for ExceptionType1 errors>
 except:
-    <remedy for any other errors> 
-!ec 
+    <remedy for any other errors>
+!ec
 
 In the `DragCoefficientGeneric` module, this feature is used to handle
 the function name for a function which has been vectorized
 automatically. For such a function `func.func_name` has no value and
 will return an error, and the name may be found by the statements in
 the exception block.
-      
+
 _Efficiency and benchmarking_ The function `clock` in the module
 "time": "https://docs.python.org/2/library/time.html", return a time
 expressed in seconds for the current statement and is frequently used
@@ -632,12 +633,12 @@ time `t0` recored immediately before a function call from the time
 immediately after the function call, an estimate of the elapsed
 cpu-time is obtained. In our module `DragCoefficientGeneric` the
 efficiency is implemented with the codelines:
-@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# benchmark@# sort the dictionary 
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# benchmark@# sort the dictionary
 
 _Sorting of dictionaries_
-The computed execution times are for convenience stored in the dictionary `exec_time` to allow for pairing of the names of the functions and their execution time. 
+The computed execution times are for convenience stored in the dictionary `exec_time` to allow for pairing of the names of the functions and their execution time.
 The dictionary may be "sorted":"http://stackoverflow.com/questions/575819/sorting-dictionary-keys-in-python" on the values and the corresponding keys sorted are returned by:
-@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# sort the dictionary@# print the 
+@@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# sort the dictionary@# print the
 Afterwards the results may be printed with name and execution time, ordered by the latter, with the most efficient function at the top:
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py from-to:# print the @# set fontsize
 
@@ -649,9 +650,9 @@ cd_sphere_vector        execution time = 0.000641
 cd_sphere_auto_vector   execution time = 0.009497
 cd_sphere_py_vector     execution time = 0.010144
 !ec
-Clearly, the function with the boolean variables was fastest, 
-the straight forward vectorized version `cd_sphere_py_vector` was slowest 
-and the built-in function `vectorize` was nearly as inefficient. 
+Clearly, the function with the boolean variables was fastest,
+the straight forward vectorized version `cd_sphere_py_vector` was slowest
+and the built-in function `vectorize` was nearly as inefficient.
 
 The complete module _DragCoefficientGeneric_ is listed below.
 
@@ -1140,22 +1141,21 @@ The program _FallingSphereEuler.py_  computes the solution for the first 10 seco
 FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler.png, width=400] Euler's method with $\Delta t=0.5$ s. label{fig:faling_sphere_euler}
 
 ${ebox()}
-!split 
+!split
 
 ===== Example: Numerical error as a function of $\Delta t$ =====
 
 In this example we will assess how the error of our implementation of
 the Euler method depends on the time step $\Delta t$ in a systematic
 manner. We will solve a problem with an analytical solution in a loop,
-and for each new solution we do the following: 
-* Divide the time step by two (or double the number of time steps) 
-* Compute the error 
-* Plot the error 
+and for each new solution we do the following:
+* Divide the time step by two (or double the number of time steps)
+* Compute the error
+* Plot the error
 
 Euler's method is a first order method and we expect the error to be
 $O(h)=O(\Delta t)$. Consequently if the timestep is divided by two,
 the error should also be divided by two.
-
 As errors normally are small values and are expected to be smaller and
 smaller for decreasing time steps, we normally do not plot the error
 itself, but rather the logaritm of the absolute value of the
@@ -1170,8 +1170,7 @@ logarithm of zero in `log_error = np.log10(abs_error[1:])`.
 The plot resulting from the code above is shown in Figure
 (ref{fig:error_evolution}). The difference or distance between the
 curves seems to be rather constant after an initial transient. As we
-have plotted the logarithm of the absolute value of the error
-$\epsilon_i$, the difference $d_{i+1}$ between two curves is $d_{i+1}=
+have plotted the logarithm of the absolute value of the error $\epsilon_i$, the difference $d_{i+1}$ between two curves is $d_{i+1}=
 \log10 \epsilon_{i}-\log10 \epsilon_{i+1} = \displaystyle \log10
 \frac{\epsilon_{i}}{\epsilon_{i+1}}$. A rough visual inspection of Figure
 (ref{fig:error_evolution}) yields $d_{i+1} \approx 0.3$, from which we may deduce:
@@ -1406,6 +1405,7 @@ The complete program _FallingSphereEulerHeun.py_ is listed below. Note that the 
 
 ${ebox()}
 
+
 !split
 ===== Runge-Kutta of 4th order =====
 
@@ -1593,6 +1593,18 @@ The complete program _ParticleMotion2D.py_ is listed below.
 
 ${ebox()}
 
+!split
+===== Example: Numerical error as  a function of $\Delta t$ for ODE-schemes =====
+
+To investigate whether our implementation of the various ODE-schemes
+have the expected, theoretical order, we proceed in the same manner as
+outlined in a previous example. The complete code is listed at the end
+of this section but we will highlight and explain some details in the
+following. 
+
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Function for convergence test@def plot_ODEschemes_solutions
+
+FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
 
 
 

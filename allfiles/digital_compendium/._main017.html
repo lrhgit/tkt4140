@@ -7,13 +7,13 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="Digital Compendium for TKT4140">
+<meta name="description" content="Numerical Methods for Engineers">
 
-<title>Digital Compendium for TKT4140</title>
+<title>Numerical Methods for Engineers</title>
 
 <!-- Bootstrap style: bootstrap_bluegray -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https:://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_bootstrap/css/bootstrap_bluegray.css" rel="stylesheet">
 <!-- not necessary
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 -->
@@ -22,9 +22,9 @@ Automatically generated HTML file from DocOnce source
 </head>
 
 <!-- tocinfo
-{'highest level': 0,
+{'highest level': 1,
  'sections': [(u' Initial value problems for Ordinary Differential Equations ',
-               0,
+               1,
                None,
                '___sec0'),
               (u' Introduction ',
@@ -36,7 +36,7 @@ Automatically generated HTML file from DocOnce source
                2,
                u'subsec:reduction',
                u'subsec:reduction'),
-              (u' Example 1: Reduction of higher order system ',
+              (u' Example 1: Reduction of higher order systems ',
                2,
                None,
                '___sec4'),
@@ -53,7 +53,7 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec8'),
-              (u' How to make a Python-module ',
+              (u' How to make a Python-module and some useful programming features ',
                2,
                u'section:Python_module',
                u'section:Python_module'),
@@ -62,23 +62,34 @@ Automatically generated HTML file from DocOnce source
                3,
                None,
                '___sec11'),
-              (u" Euler's method ", 2, None, '___sec12'),
+              (u" Euler's method ",
+               2,
+               u'ex:euler_method',
+               u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
                2,
                u'ex:falling_sphere',
                u'ex:falling_sphere'),
-              (u" Euler's method for a system ", 3, None, '___sec14'),
-              (u" Heun's method ", 2, None, '___sec15'),
-              (u" Example 4: Newton's equation ", 2, None, '___sec16'),
-              (u" Example 5: Falling sphere with Heun's method ",
+              (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
                None,
-               '___sec17'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec18'),
-              (u' Example 6: Particle motion in two dimensions ',
+               '___sec14'),
+              (u" Euler's method for a system ", 3, None, '___sec15'),
+              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Example 5: Newton's equation ", 2, None, '___sec17'),
+              (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
-               '___sec19')]}
+               '___sec18'),
+              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
+              (u' Example 7: Particle motion in two dimensions ',
+               2,
+               None,
+               '___sec20'),
+              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               2,
+               None,
+               '___sec21')]}
 end of tocinfo -->
 
 <body>
@@ -108,30 +119,15 @@ MathJax.Hub.Config({
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="main.html">Digital Compendium for TKT4140</a>
+    <a class="navbar-brand" href="main.html">Numerical Methods for Engineers</a>
   </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;"><b>Initial value problems for Ordinary Differential Equations</b></a></li>
-     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
-     <!-- navigation toc: --> <li><a href="._main002.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main003.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main004.html#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 1: Reduction of higher order system</a></li>
-     <!-- navigation toc: --> <li><a href="._main005.html#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
-     <!-- navigation toc: --> <li><a href="._main006.html#example:sphere_freefall" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 2: Sphere in free fall</a></li>
-     <!-- navigation toc: --> <li><a href="._main007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
-     <!-- navigation toc: --> <li><a href="._main007.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How to make a Python-module</a></li>
-     <!-- navigation toc: --> <li><a href="._main008.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Differences</a></li>
-     <!-- navigation toc: --> <li><a href="._main010.html#___sec12" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Euler's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main011.html#ex:falling_sphere" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 3: Falling sphere with constant and varying drag</a></li>
-     <!-- navigation toc: --> <li><a href="._main013.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 4: Newton's equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main015.html#___sec17" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 5: Falling sphere with Heun's method</a></li>
-     <!-- navigation toc: --> <li><a href="._main016.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example 6: Particle motion in two dimensions</a></li>
+     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
 
         </ul>
       </li>
@@ -159,6 +155,8 @@ MathJax.Hub.Config({
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
   <li class="active"><a href="._main017.html">18</a></li>
+  <li><a href="._main018.html">19</a></li>
+  <li><a href="._main018.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
 
@@ -168,10 +166,10 @@ MathJax.Hub.Config({
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec19">Example 6: Particle motion in two dimensions <a name="___sec19"></a></h2>
+<h2 id="___sec20">Example 7: Particle motion in two dimensions </h2>
 
 <p>
-In this example we will calculate the motion of a particle in two dimensions. First we will calculate the motion of a smooth ball with drag coefficient given by the previously defined function <code>cd_sphere()</code> (see <a href="._main006.html#example:sphere_freefall">Example 2: Sphere in free fall</a>), and then of a golf ball with drag and lift.
+In this example we will calculate the motion of a particle in two dimensions. First we will calculate the motion of a smooth ball with drag coefficient given by the previously defined function <code>cd_sphere()</code> (see <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a>), and then of a golf ball with drag and lift.
 
 <p>
 The problem is illustrated in the following figure:
@@ -181,13 +179,13 @@ The problem is illustrated in the following figure:
 where \( v \) is the absolute velocity, \( v_f= \) is the velocity of the fluid, \( v_r=v-v_f \) is the relative velocity between the fluid and the ball, \( \alpha \) is the elevation angle, \( v_0 \) is the initial velocity and \( \phi \) is the angle between the \( x \)-axis and \( v_r \).
 
 <p>
-\( \mathbf{F}_l \) is the lift force stemming from the rotation of the ball (the Magnus-effect) and is normal to \( v_r \). With the given direction the ball rotates counter-clockwise (backspin). \( \mathbf{F}_d \) is the fluids resistance against the motion and is parallell to \( v_r \). These forces are given by
+\( \mathbf{F}_l \) is the lift force stemming from the rotation of the ball (the Magnus-effect) and is normal to \( v_r \). With the given direction the ball rotates counter-clockwise (backspin). \( \mathbf{F}_d \) is the fluids resistance against the motion and is parallel to \( v_r \). These forces are given by
 $$
 \begin{align}
 \mathbf{F}_d=\frac{1}{2}\rho _f AC_Dv_r^2
-\tag{63}\\ 
+\tag{64}\\ 
 \mathbf{F}_l=\frac{1}{2}\rho _f AC_Lv_r^2
-\tag{64}
+\tag{65}
 \end{align}
 $$
 
@@ -199,10 +197,10 @@ $$
 Newton's law in \( x \)- and \( y \)-directions gives
 $$
 \begin{align}
-\tag{65}
+\tag{66}
 \frac{dv_x}{dt}&= -\rho _f\frac{A}{2m}v_r^2(C_D\cdot \cos(\phi)+C_L\sin(\phi)) \\ 
 \frac{dv_y}{dt}&=\rho _f\frac{A}{2m}v_r^2(C_L\cdot \cos(\phi)-C_D\sin(\phi))-g
-\tag{66}
+\tag{67}
 \end{align}
 $$
 
@@ -218,16 +216,16 @@ $$
 
 
 <p>
-We assume that the particle is a sphere, such that \( C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd} \) as in <a href="._main006.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. Here \( d \) is the diameter of the sphere and \( \rho_k \) the density of the sphere.
+We assume that the particle is a sphere, such that \( C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd} \) as in <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. Here \( d \) is the diameter of the sphere and \( \rho_k \) the density of the sphere.
 
 <p>
-Now <a href="#mjx-eqn-65">(65)</a> and <a href="#mjx-eqn-66">(66)</a> become
+Now <a href="#mjx-eqn-66">(66)</a> and <a href="#mjx-eqn-67">(67)</a> become
 $$
 \begin{align}
-\tag{67}
+\tag{68}
 \frac{dv_x}{dt} &= -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry})\\ 
 \frac{dv_y}{dt} &= C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-
-\tag{68}g
+\tag{69}g
 \end{align}
 $$
 
@@ -239,7 +237,7 @@ $$
 &\frac{dx}{dt}=v_x \nonumber \\ 
 & \frac{dy}{dt}=v_y \nonumber\\ 
 & \frac{dv_x}{dt} = -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry})
-\tag{69}\\ 
+\tag{70}\\ 
 &\frac{dv_y}{dt} = C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-g \nonumber
 \end{align}
 $$
@@ -252,7 +250,7 @@ $$
 &\frac{dy_1}{dt}=y_3\nonumber\\ 
 & \frac{dy_2}{dt}=y_4\nonumber\\ 
 & \frac{dy_3}{dt} = -C\cdot v_r(C_D\cdot v_{rx}+C_L\cdot v_{ry})
-\tag{70}\\ 
+\tag{71}\\ 
 &\frac{dy_4}{dt} = C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-g\nonumber
 \end{align}
 $$
@@ -279,15 +277,15 @@ $$
 Let's first look at the case of a smooth ball. We use the following data (which are the data for a golf ball):
 $$
 \begin{equation*}
-\tag{71}
+\tag{72}
 \text{Diameter } d = 41 \text{mm},\text{ mass } m = 46\text{g which gives } \rho_k=\frac{6m}{\pi d^3} = 1275 \text{kg/m}^3
 \end{equation*}
 $$
 
-We use the initial velocity \( v_0=50 \) m/s and solve <a href="#mjx-eqn-70">(70)</a> using the Runge-Kutta 4 scheme. In this example we have used the Python package <b>Odespy</b> (ODE Software in Python), which offers a large collection of functions for solving ODE's. The RK4 scheme available in Odespy is used herein.
+We use the initial velocity \( v_0=50 \) m/s and solve <a href="#mjx-eqn-71">(71)</a> using the Runge-Kutta 4 scheme. In this example we have used the Python package <b>Odespy</b> (ODE Software in Python), which offers a large collection of functions for solving ODE's. The RK4 scheme available in Odespy is used herein.
 
 <p>
-The right hand side in <a href="#mjx-eqn-70">(70)</a> is implemented as the following function:
+The right hand side in <a href="#mjx-eqn-71">(71)</a> is implemented as the following function:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
@@ -303,14 +301,14 @@ The right hand side in <a href="#mjx-eqn-70">(70)</a> is implemented as the foll
     zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">2</span>], z[<span style="color: #666666">3</span>], <span style="color: #666666">-</span>C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CD<span style="color: #666666">*</span>vrx), C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(<span style="color: #666666">-</span>CD<span style="color: #666666">*</span>vry) <span style="color: #666666">-</span> g]
 </pre></div>
 <p>
-Note that we have used the function <code>cd_sphere()</code> defined in <a href="._main006.html#example:sphere_freefall">Example 2: Sphere in free fall</a> to calculate the drag coefficient of the smooth sphere.
+Note that we have used the function <code>cd_sphere()</code> defined in <a href="._main004.html#example:sphere_freefall">Example 2: Sphere in free fall</a> to calculate the drag coefficient of the smooth sphere.
 
 <p>
-The results are shown for some initial angles in Figure <a href="#fig:smooth_ball_drag">9</a>.
+The results are shown for some initial angles in Figure <a href="#fig:smooth_ball_drag">10</a>.
 
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 9:  Motion of smooth ball with drag. <a name="fig:smooth_ball_drag"></a> </p></center>
+<center><p class="caption">Figure 10:  Motion of smooth ball with drag. <div id="fig:smooth_ball_drag"></div> </p></center>
 <p><img src="chapter1/programs_and_modules/example_particle_motion_2d_1.png" align="bottom" width=700></p>
 </center>
 
@@ -318,10 +316,10 @@ The results are shown for some initial angles in Figure <a href="#fig:smooth_bal
 <hr>
 
 <p>
-Now let's look at the same case for a golf ball. The dimension and weight are the same as for the sphere. Now we need to account for the lift force from the spin of the ball. In addition, the drag data for a golf ball are completely different from the smooth sphere. We use the data from Bearman and Harvey <a href="#Bearman1976112">[7]</a> who measured the drag and lift of a golf ball for different spin velocities in a vindtunnel. We choose as an example 3500 rpm, and an initial velocity of \( v_0=50 \) m/s.
+Now let's look at the same case for a golf ball. The dimension and weight are the same as for the sphere. Now we need to account for the lift force from the spin of the ball. In addition, the drag data for a golf ball are completely different from the smooth sphere. We use the data from Bearman and Harvey <a href="._main018.html#Bearman1976112">[7]</a> who measured the drag and lift of a golf ball for different spin velocities in a vindtunnel. We choose as an example 3500 rpm, and an initial velocity of \( v_0=50 \) m/s.
 
 <p>
-The right hand side in <a href="#mjx-eqn-70">(70)</a> is now implemented as the following function:
+The right hand side in <a href="#mjx-eqn-71">(71)</a> is now implemented as the following function:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
@@ -337,14 +335,14 @@ The right hand side in <a href="#mjx-eqn-70">(70)</a> is now implemented as the 
     zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">2</span>], z[<span style="color: #666666">3</span>], <span style="color: #666666">-</span>C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CD<span style="color: #666666">*</span>vrx <span style="color: #666666">+</span> CL<span style="color: #666666">*</span>vry), C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CL<span style="color: #666666">*</span>vrx <span style="color: #666666">-</span> CD<span style="color: #666666">*</span>vry) <span style="color: #666666">-</span> g]
 </pre></div>
 <p>
-The function <code>cdcl()</code> (may be downloaded <a href="https://raw.githubusercontent.com/lrhgit/tkt4140/master/allfiles/Utviklingsprosjekt/chapter1/programs_and_modules/cdclgolfball.py" target="_blank">here</a>) gives the drag and lift data for a given velocity and spin.
+The function <code>cdcl()</code> (may be downloaded <a href="https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/cdclgolfball.py" target="_blank">here</a>) gives the drag and lift data for a given velocity and spin.
 
 <p>
-The results are shown in in Figure <a href="#fig:golf_drag_lift">10</a>. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift.
+The results are shown in Figure <a href="#fig:golf_drag_lift">11</a>. The motion of a golf ball with drag but without lift is also included. We see that the golf ball goes much farther than the smooth sphere, due to less drag and the lift.
 
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 10:  Motion of golf ball with drag and lift. <a name="fig:golf_drag_lift"></a> </p></center>
+<center><p class="caption">Figure 11:  Motion of golf ball with drag and lift. <div id="fig:golf_drag_lift"></div> </p></center>
 <p><img src="chapter1/programs_and_modules/example_particle_motion_2d_2.png" align="bottom" width=700></p>
 </center>
 
@@ -478,49 +476,9 @@ show()
 
 
 <p>
-<!-- begin bibliography -->
-
-<ol>
- <li> <a name="hairer2008solving"></a> <b>E. Hairer, S. P. Norsett and G. Wanner</b>. 
-    <em>Solving Ordinary Differential Equations I: Nonstiff Problems</em>,
-    Springer Science &amp; Business,
-    2008.</li>
- <li> <a name="white1999fluid"></a> <b>F. White</b>. 
-    <em>Fluid Mechanics</em>,
-    WCB/McGraw-Hill,
-    1999,
-    <a href="http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y" target="_blank"><tt>http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y</tt></a>.</li>
- <li> <a name="evett19892"></a> <b>J. Evett and C. Liu</b>. 
-    <em>2,500 Solved Problems in Fluid Mechanics and Hydraulics</em>,
-    McGraw-Hill Education,
-    1989,
-    <a href="http://books.google.no/books?id=NBDjWHLKwSQC" target="_blank"><tt>http://books.google.no/books?id=NBDjWHLKwSQC</tt></a>.</li>
- <li> <a name="langtangen14"></a> <b>H. P. Langtangen</b>. 
-    <em>A Primer on Scientific Programming With Python</em>,
-    Springer,
-    2014.</li>
- <li> <a name="python14"></a> <b>S. F. Python</b>. 
-    <em>The Python Tutorial</em>,
-    Python Software Foundation,
-    2014.</li>
- <li> <a name="cheney2012numerical"></a> <b>E. Cheney and D. Kincaid</b>. 
-    <em>Numerical Mathematics and Computing</em>,
-    Cengage Learning,
-    2012.</li>
- <li> <a name="Bearman1976112"></a> <b>P. Bearman and J. Harvey</b>. 
-    GOLF BALL AERODYNAMICS.,
-    <em>Aeronaut Q</em>,
-    27(pt 2),
-    pp. 112-122,
-    1976,
-    <a href="http://www.scopus.com/inward/record.url?eid=2-s2.0-0016949854&partnerID=40&md5=a1d1cc6e8477e33fcd2d5ccf55fc29a8" target="_blank"><tt>http://www.scopus.com/inward/record.url?eid=2-s2.0-0016949854&partnerID=40&md5=a1d1cc6e8477e33fcd2d5ccf55fc29a8</tt></a>.</li>
-</ol>
-
-<!-- end bibliography -->
-
-<p>
 <!-- --- end exercise --- -->
 
+<p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
@@ -536,6 +494,8 @@ show()
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
   <li class="active"><a href="._main017.html">18</a></li>
+  <li><a href="._main018.html">19</a></li>
+  <li><a href="._main018.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

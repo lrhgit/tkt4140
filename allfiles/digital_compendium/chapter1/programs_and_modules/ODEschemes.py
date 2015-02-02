@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure, axhline, close,\
-    xticks
+    xticks, xlabel, ylabel, savefig
 
 # change some default values to make plots more readable 
 LNWDT=3; FNT=11
@@ -187,7 +187,7 @@ if __name__ == '__main__':
             
  
         
-
+    # Function for convergence test
     def test_convergence():
         """ Test convergence rate of the methods """
         from numpy import linspace, size, abs, log10, mean
@@ -211,19 +211,14 @@ if __name__ == '__main__':
             for i in range(Ndts+1):
                 z = scheme(f3,z0,time)   
                 abs_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
-                log_error = log10(abs_error[1:]) # Drop first element as it is always zero and casue prob for log10
+                log_error = log10(abs_error[1:]) # Drop first element as it is always zero to avoid log10-problems 
                 max_log_err = max(log_error)
                 plot(time[1:], log_error)
                 legends.append(scheme.func_name +': N = ' + str(N))
                 hold('on')
                 
-#                 if i == 0:
-#                     plot(time, u_nonlin_analytical(z0, time))
-#                     legends.append('analytical')
-#                 
-#                 plot(time, z[:,0])
-                if i > 0:
-                    error_diff.append(previous_max_log_err-max_log_err)
+                if i > 0: # Compute the log10 error difference
+                    error_diff.append(previous_max_log_err-max_log_err) 
                 previous_max_log_err = max_log_err
                 
                 
@@ -234,6 +229,7 @@ if __name__ == '__main__':
             #print error_diff
             #print mean(error_diff), 10**(mean(error_diff)), error_diff
             print 10**np.asarray(error_diff)
+
         legend(legends, loc='best')
         
         N = N/2**Ndts
@@ -245,6 +241,7 @@ if __name__ == '__main__':
         for key in all_errors:
             plot(N_list,10**(np.asarray(all_errors[key])))
         
+        # Plot theoretical error reductions for first, second and fourth order schemes
         axhline(2.0, xmin=0, xmax=N,linestyle=':')
         axhline(4.0, xmin=0, xmax=N,linestyle=':')
         axhline(16.0, xmin=0, xmax=N,linestyle=':')
@@ -252,6 +249,9 @@ if __name__ == '__main__':
         legends =all_errors.keys()
         legends.append('theoretical') 
         legend(legends,loc='best')
+        xlabel('Number of unknowns')
+        ylabel('Error reduction when reducing timestep by two')
+        savefig('ConvergenceODEschemes.png', transparent=True)
         
     def plot_ODEschemes_solutions():
         """Plot the solutions for the test schemes in scheme_list"""
@@ -284,5 +284,3 @@ if __name__ == '__main__':
     plot_ODEschemes_solutions()
     #print rcParams.keys()
     show()
-
-    close()
