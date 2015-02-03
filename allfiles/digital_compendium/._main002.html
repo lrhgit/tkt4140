@@ -22,25 +22,25 @@ Automatically generated HTML file from DocOnce source
 </head>
 
 <!-- tocinfo
-{'highest level': 1,
- 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
-               1,
+{'highest level': 0,
+ 'sections': [(u' Scientific computing with Python ', 1, None, '___sec0'),
+              (u' Chapter 1: Initial value problems for Ordinary Differential Equations ',
+               0,
                None,
-               '___sec0'),
+               '___sec1'),
               (u' Introduction ',
                1,
                u'section:introduction',
                u'section:introduction'),
-              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u" Taylor's method ", 1, u'sec:taylor', u'sec:taylor'),
               (u' Reduction of Higher order Equations ',
-               2,
+               1,
                u'subsec:reduction',
                u'subsec:reduction'),
               (u' Example 1: Reduction of higher order systems ',
                2,
                None,
-               '___sec4'),
-              (u' Scientific computing with Python ', 2, None, '___sec5'),
+               '___sec5'),
               (u' Example 2: Sphere in free fall ',
                2,
                u'example:sphere_freefall',
@@ -50,20 +50,20 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec7'),
               (u' Python functions with vector arguments and modules ',
-               2,
+               1,
                None,
                '___sec8'),
               (u' How to make a Python-module and some useful programming features ',
-               2,
+               1,
                u'section:Python_module',
                u'section:Python_module'),
-              (u' Differences ', 2, None, '___sec10'),
+              (u' Differences ', 1, None, '___sec10'),
               (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
                3,
                None,
                '___sec11'),
               (u" Euler's method ",
-               2,
+               1,
                u'ex:euler_method',
                u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
@@ -75,21 +75,25 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec14'),
               (u" Euler's method for a system ", 3, None, '___sec15'),
-              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Heun's method ", 1, None, '___sec16'),
               (u" Example 5: Newton's equation ", 2, None, '___sec17'),
               (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
                '___sec18'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
-              (u' Example 7: Particle motion in two dimensions ',
+              (u' Runge-Kutta of 4th order ', 1, None, '___sec19'),
+              (u' Example 7: Falling sphere using RK4 ',
+               2,
+               u'example:falling_sphere_RK4',
+               u'example:falling_sphere_RK4'),
+              (u' Example 8: Particle motion in two dimensions ',
                2,
                None,
-               '___sec20'),
-              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               '___sec21'),
+              (u' Example 9: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
                2,
                None,
-               '___sec21')]}
+               '___sec22')]}
 end of tocinfo -->
 
 <body>
@@ -126,8 +130,17 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;"><b>Chapter 1: Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main004.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main010.html#ex:euler_method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
 
         </ul>
       </li>
@@ -157,133 +170,143 @@ MathJax.Hub.Config({
   <li><a href="._main010.html">11</a></li>
   <li><a href="._main011.html">12</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main018.html">19</a></li>
+  <li><a href="._main020.html">21</a></li>
   <li><a href="._main003.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
 
-<h2 id="sec:taylor">Taylor's method</h2>
-Taylor's formula for series expansion of a function \( f(x) \) around \( x_0 \) is given by
-$$
-\begin{equation}
-f(x)=f(x_0)+(x-x_0)\cdot f'(x_0)+\frac{(x-x_0)^2}{2}f''(x_0)+\dots +\frac{(x-x_0)^n}{n !}f^{(n)}(x_0)+ \text{remainder} \nonumber
-\end{equation}
-$$
+<h1 class="page-header" id="___sec1">Chapter 1: Initial value problems for Ordinary Differential Equations <a name="___sec1"></a></h1>
 
-Let's use this formula to find the first terms in the series expansion for \( \theta(t) \) around \( t=0 \) from the differential equation given in <a href="._main001.html#mjx-eqn-7">(7)</a>:
-$$
-\begin{align*}
-&\ddot{\theta} (t) +\theta (t) = 0 \\ 
-&\theta (0) = \theta_0,\  \dot{\theta}(0)=0
-\end{align*}
-$$
-
-We set \( \theta(t) \approx \theta(0)+t\cdot\dot{\theta}(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0) \). By use of the initial conditions \( \theta(0)=\theta_0,\ \dot\theta(0)=0 \) we get
-$$
-\begin{equation}
-\theta(t)\approx\theta_0 +\frac{t^2}{2}\ddot\theta+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0)  \nonumber
-\end{equation}
-$$
-
-From the differential equation we have \( \ddot\theta(t)=-\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0 \)
+<h1 id="section:introduction">Introduction<a name="section:introduction"></a></h1>
 
 <p>
-By differentiation we get \( \dddot\theta(t)=-\dot\theta(t)\to \ddot\theta(0)=-\theta(0)=-\theta_0 \)
-
-<p>
-We now get
-$$
-\begin{equation}
-\theta^{(4)}(t)=-\ddot\theta(t) \to \theta^{(4)}(0)=-\ddot\theta(0)=\theta_0 \nonumber
-\end{equation}
-$$
-
-Setting this into the expression for \( \theta(t) \) gives \( \theta(t)\approx \theta_0\left(1-\frac{t^2}{2}+\frac{t^4}{24}\right)=\theta_0\left(1-\frac{t^2}{2!}+\frac{t^4}{4!}\right) \)
-
-<p>
-If we include \( n \) terms, we get
-$$
-\begin{equation}
-\theta(t)\approx \theta_0\cdot \left(1-\frac{t^2}{2!}+\frac{t^4}{4!}-\frac{t^6}{6!}+\dots+(-1)^n \frac{t^{2n}}{(2n)!}\right) \nonumber
-\end{equation}
-$$
-
-
-<p>
-If we let \( n \to \infty \) we see that the parentheses give the series for \( \cos(t) \). In this case we have found the exact solution \( \theta(t)=\theta_0\cos(t) \) of the differential equation. Since this equation is linear we manage in this case to find a connection between the coefficients such that we recognize the series expansion of \( \cos(t) \).
-
-<p>
-Let's try the same procedure on the non-linear version <a href="._main001.html#mjx-eqn-5">(5)</a>
-$$
-\begin{align} \nonumber
-\ddot{\theta}(t)& + \sin \left(\theta (t)\right) = 0 \\ 
-\theta (0) &= \theta_0 ,\ \dot\theta (0) = 0 \nonumber
-\end{align}
-$$
-
-We start in the same manner: \( \theta(t) \approx \theta(0)+\frac{t^2}{2}\ddot\theta(0)+\frac{t^3}{6}\dddot\theta(0)+\frac{t^4}{24}\theta^{(4)}(0) \).
-From the differential equation we have \( \ddot\theta=-\sin (\theta) \to \ddot\theta(0)=-\sin(\theta_0) \), which by consecutive differentiation gives
+With an initial value problem for an ordinary differential equation (ODE) we mean a problem where all boundary conditions are given for one and the same value of the independent variable. For a first order ODE we get e.g.
 $$
 \begin{align}
-&\dddot\theta=-\cos(\theta)\cdot\dot\theta \to \dddot\theta(0)=0 \nonumber \\ 
-&\theta^{(4)}=\sin(\theta)\cdot\dot\theta^2-\cos(\theta)\cdot\ddot\theta \to \theta^{(4)}(0)=-\ddot\theta(0)\cos(\theta(0))=\sin(\theta_0)\cos(\theta_0) \nonumber
+\tag{1}
+ y'(x)&=f(x,y) \\ 
+y(x_0)&=a  \nonumber
 \end{align}
 $$
 
-Inserted above: \( \theta(t) \approx \theta_0 -\frac{t^2}{2}\sin(\theta_0) + \frac{t^4}{24} \sin (\theta_0) \cos (\theta_0) \).
+while for a second order ODE we get
+
+$$
+\begin{align}
+\tag{2}
+y''(x)&=f(x,y,y') \\ 
+y(x_0)&=a,\ y'(x_0) = b \nonumber
+\end{align}
+$$
+
+A first order ODE, as shown in Equation <a href="#mjx-eqn-1">(1)</a>, will always be an <em>initial value problem</em>. For Equation <a href="#mjx-eqn-2">(2)</a>, on the other hand, we can for instance specify the boundary conditions as follows,
+$$
+\begin{align}
+y(x_0)=a,\ y(x_1) = b \nonumber
+\end{align}
+$$
+
+With these boundary conditions Equation <a href="#mjx-eqn-2">(2)</a> presents a <em>boundary value problem</em>. In many applications boundary value problems are more common than initial value problems. But the solution technique for initial value problems may often be applied to solve boundary value problems.
 
 <p>
-We may include more terms, but this complicates the differentiation and it is hard to find any connection between the coefficients. When we have found an approximation for \( \theta(t) \) we can get an approximation for \( \dot\theta(t) \) by differentiation: \( \dot\theta(t) \approx -t\sin(\theta_0) + \frac{t^3}{8} \sin (\theta_0) \cos (\theta_0) \).
+Both from an analytical and numerical viewpoint initial value problems are easier to solve than boundary value problems, and methods for solution of initial value problems are more developed than for boundary value problems.
 
 <p>
-Series expansions are often useful around the starting point when we solve initial value problems. The technique may also be used on non-linear equations.
+If we are to solve an initial value problem of the type in Equation
+<a href="#mjx-eqn-1">(1)</a>, we must first be sure that it has a solution. In
+addition we will demand that this solution is unique, together the two criteria above lead to the following criteria:
+<div class="alert alert-block alert-success alert-text-normal"><b></b>
+<b>The criteria for existence and uniqueness</b>
 
 <p>
-Symbolic mathematical programs like <b>Maple</b> and <b>Mathematica</b> do this easily.
+A sufficient criteria for existence and uniqueness of a solution of the problem in Equation <a href="#mjx-eqn-1">(1)</a> is that both \( f(x,y) \) and \( \frac{\partial
+f}{\partial y} \) are continuous in and around \( x_0 \).
+</div>
+
+For <a href="#mjx-eqn-2">(2)</a> this conditions becomes that \( f(x,y) \),
+\( \frac{\partial f}{\partial y} \) and \( \frac{\partial f}{\partial y'} \)
+are continuous in and around \( x_0 \). Similarly for higher order
+equations.
 
 <p>
-We will end with one of the earliest known differential equations, which Newton solved with series expansion in 1671.
+<div class="alert alert-block alert-success alert-text-normal"><b></b>
+<b>Violation of the criteria for existence and uniqueness</b>
 $$
-\begin{equation*}
-y'(x) =1-3x+y+x^2+xy,\ y(0)=0
-\end{equation*}
-$$
-
-Series expansion around \( x=0 \) gives
-$$
-\begin{equation*}
-y(x) \approx x\cdot y'(0)+ \frac{x^2}{2} y''(0)+\frac{x^3}{6}y'''(0)+\frac{x^4}{24}y^{(4)}(0)
-\end{equation*}
+\begin{equation}
+y' = y^{\frac{1}{3}},\ y(0)=0 \nonumber
+\end{equation}
 $$
 
-From the differential equation we get \( y'(0)=1 \). By consecutive differentiation we get
-$$
-\begin{equation*}
-  \begin{array}{lclclcr}
-    y''(x) &=&-3+y'+2x+xy'+y &\to& y''(0)&=&-2\\ 
-    y'''(x)&=& y''+2+xy''+2y'  &\to& y'''(0)&=& 2\\ 
-    y^{(4)}(x)&=&y'''+xy'''+3y'' &\to &y^{(4)}(0)&=&-4
-  \end{array}
-\end{equation*}
-$$
+Here \( f=y^\frac{1}{3} \) and \( \frac{\partial f}{\partial y}=\frac{1}{3y^\frac{2}{3}} \). \( f \) is continuous in \( x=0 \), but that's not the case for \( \frac{\partial f}{\partial y} \). It may be shown that this ODE has two solutions: \( y=0 \) and \( y=(\frac{2}{3}x)^\frac{2}{3} \). Hopefully this equation doesn't present a physical problem.
+</div>
 
-Inserting above gives \( y(x) \approx x-x^2+\frac{x^3}{3}-\frac{x^4}{6} \).
+<b>A mathematical pendulum</b>
+A problem of more interest is shown below.
 
 <p>
-Newton gave the following solution: \( y(x) \approx  x-x^2+\frac{x^3}{3}-\frac{x^4}{6}+ \frac{x^5}{30}-\frac{x^6}{45} \).
+<center><p><img src="chapter1/1.png" align="bottom" width=200></p></center>
 
 <p>
-Now you can check if Newton calculated correctly. Today it is possible to give the solution on closed form with known functions as follows,
+The figure shows a mathematical pendulum where the motion is described by the following equation:
 $$
-\begin{align*}
-y(x)=&3\sqrt{2\pi e}\cdot \exp\left[x\left(1+\frac{x}{2}\right)\right]\cdot \left[\text{erf}\left(\frac{\sqrt{2}}{2}(1+x)\right)-\text{erf}\left(\frac{\sqrt{2}}{2}\right)\right]\\ 
-+& 4\cdot\left[1-\exp[x\left(1+\frac{x}{2}\right)\right]-x
-\end{align*}
+\begin{align}
+ \frac{\partial^2 \theta}{\partial \tau^2} + \frac{g}{l}\sin (\theta) = 0
+\tag{3}\\ 
+\theta (0) = \theta_0 ,\ \frac{d\theta}{d\tau}(0) = 0
+\tag{4}
+\end{align}
+$$
+
+We introduce a dimensionless time \( t \) given by \( t=\sqrt{\frac{g}{l}}\cdot\tau \) such that <a href="#mjx-eqn-3">(3)</a> and <a href="#mjx-eqn-4">(4)</a> may be written as
+$$
+\begin{align}
+\tag{5}
+\ddot{\theta}(t) + \sin (\theta (t)) = 0 \\ 
+\theta (0) = \theta_0 ,\ \dot\theta (0) = 0
+\tag{6}
+\end{align}
+$$
+
+The dot denotes derivation with respect to the dimensionless time \( t \). For small displacements we can set \( \sin (\theta) \approx \theta \), such that <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-6">(6)</a> becomes
+$$
+\begin{align}
+\tag{7}
+\ddot\theta (t)& + \theta (t) = 0 \\ 
+\theta (0)& = \theta_0 ,\ \dot\theta (0) = 0
+\tag{8}
+\end{align}
 $$
 
 
 <p>
-Note the combination \( \sqrt{2\pi e} \). See Hairer et al. <a href="._main018.html#hairer2008solving">[1]</a> section 1.2 for more details on classical differential equations.
+The difference between <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-7">(7)</a> is that the latter is linear, while the first is non-linear. The analytical solution of Equations <a href="#mjx-eqn-5">(5)</a> and <a href="#mjx-eqn-6">(6)</a> is given in Appendix G.2. in the
+<a href="./NumeriskeBeregninger.pdf" target="_blank">compendium</a>. An \( n \)'th order linear ODE may be written on the form
+$$
+\begin{equation}
+\tag{9}
+a_n(x)y^{(n)}(x)+a_{n-1}(x)y^{(n-1)}(x)+\cdots+a_1(x)y'(x)+a_0(x)y(x)=b(x)
+\end{equation}
+$$
+
+where \( y^{(k)}, k=0,1,\dots n \) is referring to the \( k \)'th derivative and \( y^{(0)}(x)=y(x) \).
+
+<p>
+If one or more of the coefficients \( a_k \) also are functions of at least one \( y^{(k)},\ k = 0,1,\dots n \), the ODE is non-linear. From <a href="#mjx-eqn-9">(9)</a> it follows that <a href="#mjx-eqn-5">(5)</a> is non-linear and <a href="#mjx-eqn-7">(7)</a> is linear.
+
+<p>
+Analytical solutions of non-linear ODEs are rare, and except from some special types, there are no general ways of finding such solutions. Therefore non-linear equations must usually be solved numerically. In many cases this is also the case for linear equations. For instance it doesn't exist a method to solve the general second order linear ODE given by
+$$
+\begin{equation}
+a_2(x)\cdot y''(x)+a_1(x)\cdot y'(x) +a_0(x)\cdot y(x) =b(x)\nonumber
+\end{equation}
+$$
+
+
+<p>
+From a numerical point of view the main difference between linear and non-linear equations is the multitude of solutions that may arise when solving non-linear equations. In a linear ODE it will be evident from the equation if there are special critical points where the solution change character, while this is often not the case for non-linear equations.
+
+<p>
+For instance the equation \( y'(x)=y^2(x),\ y(0)=1 \) has the solution \( y(x)=\frac{1}{1-x} \) such that \( y(x) \to \infty  \) for \( x \to 1 \), which isn't evident from the equation itself.
 
 <p>
 <p>
@@ -303,7 +326,7 @@ Note the combination \( \sqrt{2\pi e} \). See Hairer et al. <a href="._main018.h
   <li><a href="._main010.html">11</a></li>
   <li><a href="._main011.html">12</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main018.html">19</a></li>
+  <li><a href="._main020.html">21</a></li>
   <li><a href="._main003.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

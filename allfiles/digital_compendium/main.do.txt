@@ -11,7 +11,6 @@ TOC: on
 
 # TKT4140 Numerical Methods with Computer Laboratory.
 
-======= Initial value problems for Ordinary Differential Equations =======
 This digital compendium is based on the first chapter of the
 compendium *Numeriske Beregninger* by J.B. Aarseth. It's intended to
 be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
@@ -29,6 +28,12 @@ project
 "IKTiSU.":"https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826"
 
 !split
+======= Scientific computing with Python =======
+In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
+
+!split
+
+========= Chapter 1: Initial value problems for Ordinary Differential Equations =========
 
 ======= Introduction =======
 label{section:introduction}
@@ -42,6 +47,7 @@ y(x_0)&=a  \nonumber
 \end{align}
 !et
 while for a second order ODE we get
+
 !bt
 \begin{align}
 label{eq:1102}
@@ -139,7 +145,7 @@ From a numerical point of view the main difference between linear and non-linear
 For instance the equation $y'(x)=y^2(x),\ y(0)=1$ has the solution $y(x)=\frac{1}{1-x}$ such that $y(x) \to \infty $ for $x \to 1$, which isn't evident from the equation itself.
 
 !split
-===== Taylor's method =====
+======= Taylor's method =======
 label{sec:taylor}
 Taylor's formula for series expansion of a function $f(x)$ around $x_0$ is given by
 !bt
@@ -241,7 +247,7 @@ y(x)=&3\sqrt{2\pi e}\cdot \exp\left[x\left(1+\frac{x}{2}\right)\right]\cdot \lef
 Note the combination $\sqrt{2\pi e}$. See Hairer et al. cite{hairer2008solving} section 1.2 for more details on classical differential equations.
 
 !split
-===== Reduction of Higher order Equations =====
+======= Reduction of Higher order Equations =======
 label{subsec:reduction}
 
 When we are solving initial value problems, we usually need to write these as sets of first order equations, because most of the program packages require this.
@@ -351,9 +357,6 @@ By use of (ref{eq:1128}) we get
 #!esol
 #!ec
 ${ebox()}
-
-===== Scientific computing with Python =====
-In this course we will use the programming language _Python_ to solve numerical problems. Students not familiar with Python are strongly recommended to work through the example "Intro to scientific computing with Python": "http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/python_intro/doc/src/bumpy.html" before proceeding. If you are familiar with _Matlab_ the transfer to Python should not be a problem.
 
 !split
 ${bbox()}
@@ -468,7 +471,7 @@ To change the font size the function `rc` is used. This function takes in the ob
 Descriptions and explanations of all functions available in `pyplot` may be found "here": "http://matplotlib.org/api/pyplot_summary.html".
 
 !split
-===== Python functions with vector arguments and modules =====
+======= Python functions with vector arguments and modules =======
 
 For many numerical problems variables are most conveniently expressed
 by arrays containing many numbers (i.e. vectors) rather than single
@@ -519,7 +522,7 @@ To provide a convenient and practical means to compare the various
 implementations of the drag function, we have collected them all in a
 file _DragCoefficientGeneric.py_. This file constitutes a Python module which is a concept we will discuss in section ref{section:Python_module}.
 
-===== How to make a Python-module and some useful programming features =====
+======= How to make a Python-module and some useful programming features =======
 label{section:Python_module}
 
 _Python modules_ A module is a file containing Python definitions and
@@ -659,7 +662,7 @@ The complete module _DragCoefficientGeneric_ is listed below.
 @@@CODE ./chapter1/programs_and_modules/DragCoefficientGeneric.py
 
 !split
-===== Differences =====
+======= Differences =======
 
 We will study some simple methods to solve initial value
 problems. Later we shall see that these methods also may be used to
@@ -951,7 +954,7 @@ Central differences:
 === Treatment of the term $\frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right]$ ===
 This term often appears in difference equations, and it may be clever to treat the term as it is instead of first execute the differentiation.
 
-__Central differences__
+__Central differences:__
 We use central differences (recall Figure ref{fig:1.5}) as follows,
 !bt
 \begin{align*}
@@ -991,7 +994,7 @@ Note that for $p(x)=1=\text{constant}$ we get the usual expression
 \frac{d^2u}{dx^2}\bigg|_i=\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}+O(h^2)
 \end{equation*}
 !et
-__Forward differences__
+__Forward differences:__
 We start with
 !bt
 \begin{align*}
@@ -1022,7 +1025,7 @@ u''_i = \frac{2\cdot [u_{i+1}-u_i-h\cdot u'(x_i)]}{h^2}-\frac{h}{3}u'''(x_i)+O(h
 \end{equation}
 !et
 
-__Backward Differences__
+__Backward Differences:__
 We start with
 !bt
 \begin{align*}
@@ -1052,7 +1055,7 @@ u''_i = \frac{2\cdot [h\cdot u'(x_i)-(u_i-u_{i-1})]}{h^2}+\frac{h}{3}u'''(x_i)+O
 !et
 
 !split
-===== Euler's method =====
+======= Euler's method =======
 label{ex:euler_method}
 The ODE is given as
 !bt
@@ -1143,6 +1146,7 @@ FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler.png, width=40
 ${ebox()}
 !split
 
+${bbox()}
 ===== Example: Numerical error as a function of $\Delta t$ =====
 
 In this example we will assess how the error of our implementation of
@@ -1189,6 +1193,8 @@ theoretically expected value for a first order scheme, i.e. $\Delta t_{i+1} = \D
 
 
 FIGURE:[chapter1/programs_and_modules/example_euler_timestep_study.png, width=600 frac=0.4] Plots for the logarithmic errors for a falling sphere with constant drag. The timestep $\Delta t$ is reduced by a factor two from one curve to the one immediately below.label{fig:error_evolution}
+
+${ebox()}
 
 !split
 === Euler's method for a system ===
@@ -1263,7 +1269,7 @@ which gives an Euler scheme as follows,
 !et
 
 !split
-===== Heun's method =====
+======= Heun's method =======
 
 From (ref{eq:1204a}) or (ref{eq:1205a}) we have
 !bt
@@ -1407,7 +1413,7 @@ ${ebox()}
 
 
 !split
-===== Runge-Kutta of 4th order =====
+======= Runge-Kutta of 4th order =======
 
 Euler's method and Heun's method belong to the Runge-Kutta family of explicit methods, and is respectively Runge-Kutta of 1st and 2nd order, the latter with one time use of corrector. Explicit Runge-Kutta schemes are single step schemes that try to copy the Taylor series expansion of the differential equation to a given order.
 
@@ -1466,8 +1472,22 @@ m_4&=-[(y_1+hk_3)(y_3+hm_3)
 \end{align*}
 !et
 
-# left out for exercise
-## #include "falling_sphere_rk4.do.txt"
+!split
+${bbox()}
+===== Example: Falling sphere using RK4 =====
+label{example:falling_sphere_RK4}
+
+Let's implement the RK4 scheme and add it to the falling sphere example. The scheme has been implemented in the function `rk4()`, and is given below
+
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define rk4 scheme@return z
+
+Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme _FallingSphereEulerHeunRK4.py_ is listed below. The functions `euler`, `heun` and `rk4` are imported from the programme _ODEschemes.py_. 
+
+FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun_rk4.png, width=400] Velocity of falling sphere using Euler, Heun and RK4. label{fig:falling_sphere_euler_heun_rk4}
+
+@@@CODE ./chapter1/programs_and_modules/FallingSphereEulerHeunRK4.py
+
+${ebox()}
 
 !split
 ${bbox()}
@@ -1594,6 +1614,7 @@ The complete program _ParticleMotion2D.py_ is listed below.
 ${ebox()}
 
 !split
+${bbox()}
 ===== Example: Numerical error as  a function of $\Delta t$ for ODE-schemes =====
 
 To investigate whether our implementation of the various ODE-schemes
@@ -1606,6 +1627,9 @@ following.
 
 FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
 
+Complete code:
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py
 
+${ebox()}
 
 BIBFILE: references/papers.pub
