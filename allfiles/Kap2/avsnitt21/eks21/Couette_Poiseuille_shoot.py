@@ -8,7 +8,7 @@ rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
 font = {'size' : 16}; rc('font', **font)
 
 
-N=20
+N=200
 L = 1.0
 y = np.linspace(0,L,N+1)
 
@@ -47,13 +47,15 @@ for dpdx in dpdx_list:
     z = rk4(f, z0, y)
 
     plot(z[:,0],y,'-.')
-    legends.append('rk4: '+str(dpdx))
+    legends.append('rk4: dp='+str(dpdx))
     
     # Plot the analytical solution
     plot(u_a(y, dpdx),y,':')
-    legends.append('exact:'+str(dpdx))
+    legends.append('exa: dp='+str(dpdx))
 
 # Add the labels
 legend(legends,loc='best',frameon=False) # Add the legends
+xlabel('u/U0')
+ylabel('y/L')
 show()
 
