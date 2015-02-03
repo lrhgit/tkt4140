@@ -22,25 +22,25 @@ Automatically generated HTML file from DocOnce source
 </head>
 
 <!-- tocinfo
-{'highest level': 1,
- 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
-               1,
+{'highest level': 0,
+ 'sections': [(u' Scientific computing with Python ', 1, None, '___sec0'),
+              (u' Chapter 1: Initial value problems for Ordinary Differential Equations ',
+               0,
                None,
-               '___sec0'),
+               '___sec1'),
               (u' Introduction ',
                1,
                u'section:introduction',
                u'section:introduction'),
-              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u" Taylor's method ", 1, u'sec:taylor', u'sec:taylor'),
               (u' Reduction of Higher order Equations ',
-               2,
+               1,
                u'subsec:reduction',
                u'subsec:reduction'),
               (u' Example 1: Reduction of higher order systems ',
                2,
                None,
-               '___sec4'),
-              (u' Scientific computing with Python ', 2, None, '___sec5'),
+               '___sec5'),
               (u' Example 2: Sphere in free fall ',
                2,
                u'example:sphere_freefall',
@@ -50,20 +50,20 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec7'),
               (u' Python functions with vector arguments and modules ',
-               2,
+               1,
                None,
                '___sec8'),
               (u' How to make a Python-module and some useful programming features ',
-               2,
+               1,
                u'section:Python_module',
                u'section:Python_module'),
-              (u' Differences ', 2, None, '___sec10'),
+              (u' Differences ', 1, None, '___sec10'),
               (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
                3,
                None,
                '___sec11'),
               (u" Euler's method ",
-               2,
+               1,
                u'ex:euler_method',
                u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
@@ -75,21 +75,25 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec14'),
               (u" Euler's method for a system ", 3, None, '___sec15'),
-              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Heun's method ", 1, None, '___sec16'),
               (u" Example 5: Newton's equation ", 2, None, '___sec17'),
               (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
                '___sec18'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
-              (u' Example 7: Particle motion in two dimensions ',
+              (u' Runge-Kutta of 4th order ', 1, None, '___sec19'),
+              (u' Example 7: Falling sphere using RK4 ',
+               2,
+               u'example:falling_sphere_RK4',
+               u'example:falling_sphere_RK4'),
+              (u' Example 8: Particle motion in two dimensions ',
                2,
                None,
-               '___sec20'),
-              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               '___sec21'),
+              (u' Example 9: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
                2,
                None,
-               '___sec21')]}
+               '___sec22')]}
 end of tocinfo -->
 
 <body>
@@ -126,8 +130,17 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#___sec1" style="font-size: 80%;"><b>Chapter 1: Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main004.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main010.html#ex:euler_method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
 
         </ul>
       </li>
@@ -154,7 +167,7 @@ MathJax.Hub.Config({
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main018.html">19</a></li>
+  <li><a href="._main020.html">21</a></li>
   <li><a href="._main001.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- main content ---------------------- -->
@@ -185,43 +198,43 @@ MathJax.Hub.Config({
 
 <center>[1] <b>Department of Structural Engineering, NTNU</b></center>
 <p>
+<<<<<<< HEAD
 <center><h4>Jan 30, 2015</h4></center> <!-- date -->
+=======
+<center><h4>Feb 3, 2015</h4></center> <!-- date -->
+>>>>>>> master
 
 <h2>Table of contents</h2>
 
 <p>
-<a href="#___sec0"> Initial value problems for Ordinary Differential Equations </a><br>
-<a href="._main001.html#section:introduction"> Introduction </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main002.html#sec:taylor"> Taylor's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#subsec:reduction"> Reduction of Higher order Equations </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec4"> Example 1: Reduction of higher order systems </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main003.html#___sec5"> Scientific computing with Python </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main004.html#example:sphere_freefall"> Example 2: Sphere in free fall </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main005.html#___sec7"> Python implementation of the drag coefficient function and how to plot it </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main006.html#___sec8"> Python functions with vector arguments and modules </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main006.html#section:Python_module"> How to make a Python-module and some useful programming features </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main007.html#___sec10"> Differences </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main008.html#___sec11"> Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main009.html#ex:euler_method"> Euler's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main010.html#ex:falling_sphere"> Example 3: Falling sphere with constant and varying drag </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main011.html#___sec14"> Example 4: Numerical error as a function of \( \Delta t \) </a><br>
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main012.html#___sec15"> Euler's method for a system </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main013.html#___sec16"> Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main014.html#___sec17"> Example 5: Newton's equation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main015.html#___sec18"> Example 6: Falling sphere with Heun's method </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main016.html#___sec19"> Runge-Kutta of 4th order </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main017.html#___sec20"> Example 7: Particle motion in two dimensions </a><br>
-&nbsp; &nbsp; &nbsp; <a href="._main018.html#___sec21"> Example 8: Numerical error as  a function of \( \Delta t \) for ODE-schemes </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main001.html#___sec0"> Scientific computing with Python </a><br>
+<a href="._main002.html#___sec1"> Chapter 1: Initial value problems for Ordinary Differential Equations </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main002.html#section:introduction"> Introduction </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main003.html#sec:taylor"> Taylor's method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main004.html#subsec:reduction"> Reduction of Higher order Equations </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main004.html#___sec5"> Example 1: Reduction of higher order systems </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main005.html#example:sphere_freefall"> Example 2: Sphere in free fall </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main006.html#___sec7"> Python implementation of the drag coefficient function and how to plot it </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main007.html#___sec8"> Python functions with vector arguments and modules </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main007.html#section:Python_module"> How to make a Python-module and some useful programming features </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main008.html#___sec10"> Differences </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main009.html#___sec11"> Treatment of the term \( \frac{d}{dx} \left[ p(x) \frac{d}{dx} u(x)\right] \) </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main010.html#ex:euler_method"> Euler's method </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main011.html#ex:falling_sphere"> Example 3: Falling sphere with constant and varying drag </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main012.html#___sec14"> Example 4: Numerical error as a function of \( \Delta t \) </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main013.html#___sec15"> Euler's method for a system </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main014.html#___sec16"> Heun's method </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main015.html#___sec17"> Example 5: Newton's equation </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main016.html#___sec18"> Example 6: Falling sphere with Heun's method </a><br>
+&nbsp; &nbsp; &nbsp; <a href="._main017.html#___sec19"> Runge-Kutta of 4th order </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main018.html#example:falling_sphere_RK4"> Example 7: Falling sphere using RK4 </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main019.html#___sec21"> Example 8: Particle motion in two dimensions </a><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="._main020.html#___sec22"> Example 9: Numerical error as  a function of \( \Delta t \) for ODE-schemes </a><br>
 </p>
 <p>
 <!-- TKT4140 Numerical Methods with Computer Laboratory. -->
 
 <p>
-
-
-</div> <!-- end jumbotron -->
-
-<h1 id="___sec0">Initial value problems for Ordinary Differential Equations </h1>
 This digital compendium is based on the first chapter of the
 compendium <em>Numeriske Beregninger</em> by J.B. Aarseth. It's intended to
 be used in the course TKT4140 Numerical Methods with Computer Laboratory at NTNU.
@@ -240,6 +253,13 @@ project
 <a href="https://www.ntnu.no/wiki/pages/viewpage.action?pageId=72646826" target="_blank">IKTiSU.</a>
 
 <p>
+
+
+<p><a href="._main001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
+
+
+</div> <!-- end jumbotron -->
+
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
@@ -254,7 +274,7 @@ project
   <li><a href="._main008.html">9</a></li>
   <li><a href="._main009.html">10</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main018.html">19</a></li>
+  <li><a href="._main020.html">21</a></li>
   <li><a href="._main001.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
