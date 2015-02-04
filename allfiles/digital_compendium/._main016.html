@@ -72,8 +72,8 @@ Automatically generated HTML file from DocOnce source
                u'ex:falling_sphere'),
               (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
-               None,
-               '___sec14'),
+               u'ex:num_error',
+               u'ex:num_error'),
               (u" Euler's method for a system ", 3, None, '___sec15'),
               (u" Heun's method ", 1, None, '___sec16'),
               (u" Example 5: Newton's equation ", 2, None, '___sec17'),
@@ -185,7 +185,7 @@ MathJax.Hub.Config({
 <h2 id="___sec18">Example 6: Falling sphere with Heun's method </h2>
 
 <p>
-Let's go back to <a href="._main011.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, and implement a new function <code>heun()</code> in the program <a href="https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>.
+Let's go back to (<a href="._main011.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>), and implement a new function <code>heun()</code> in the program <a href="https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>.
 
 <p>
 We recall the system of equations as
@@ -243,7 +243,7 @@ One possible way of implementing this scheme is given in the following function 
         z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (f_np(z[i,:],t) <span style="color: #666666">+</span> f_np(zp,t<span style="color: #666666">+</span>dt))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
 </pre></div>
 <p>
-Using the same time steps as in <a href="._main011.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, we get the response plotted in Figure <a href="#fig:falling_sphere_euler_heun">8</a>.
+Using the same time steps as in (<a href="._main011.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>), we get the response plotted in Figure <a href="#fig:falling_sphere_euler_heun">8</a>.
 
 <p>
 <center> <!-- figure -->

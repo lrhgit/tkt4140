@@ -530,7 +530,7 @@ statements and represents a convenient way of collecting useful and
 related functions, classes or Python code in a single file. A
 motivation to implement the drag coefficient function was that we
 should be able to import it in other programs to solve e.g. the
-problems outlined in ref{example:sphere_freefall}. In general, a file
+problems outlined in (ref{example:sphere_freefall}). In general, a file
 containing Python-code may be executed either as a main program
 (script), typically with `python filename.py` or imported in another
 script/module with `import filename`.
@@ -1137,7 +1137,7 @@ with $v(0)=0$.
 One way of implementing the integration scheme is given in the following function `euler()`:
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py from-to:# define euler scheme@def v_taylor
 
-The program _FallingSphereEuler.py_  computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in ref{example:sphere_freefall}. The complete program is as follows,
+The program _FallingSphereEuler.py_  computes the solution for the first 10 seconds, using a time step of $\Delta t=0.5$ s, and generates the plot in Figure ref{fig:faling_sphere_euler}. In addition to the case of constant drag coefficient, a solution for the case of varying $C_D$ is included. To find $C_D$ as function of velocity we use the function `cd_sphere()` that we implemented in (ref{example:sphere_freefall}). The complete program is as follows,
 
 @@@CODE ./chapter1/programs_and_modules/FallingSphereEuler.py
 
@@ -1148,7 +1148,7 @@ ${ebox()}
 
 ${bbox()}
 ===== Example: Numerical error as a function of $\Delta t$ =====
-
+label{ex:num_error}
 In this example we will assess how the error of our implementation of
 the Euler method depends on the time step $\Delta t$ in a systematic
 manner. We will solve a problem with an analytical solution in a loop,
@@ -1371,7 +1371,7 @@ ${ebox()}
 ${bbox()}
 ===== Example: Falling sphere with Heun's method =====
 
-Let's go back to ref{ex:falling_sphere}, and implement a new function `heun()` in the program "FallingSphereEuler.py": "https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py".
+Let's go back to (ref{ex:falling_sphere}), and implement a new function `heun()` in the program "FallingSphereEuler.py": "https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py".
 
 We recall the system of equations as
 !bt
@@ -1401,7 +1401,7 @@ with initial values $z_0=z(0)=0,\ v_0=v(0)=0$. Note that we don't use the predic
 One possible way of implementing this scheme is given in the following function named `heun()`, in the program _ODEschemes.py_:
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define Heun solver@return z
 
-Using the same time steps as in ref{ex:falling_sphere}, we get the response plotted in Figure ref{fig:falling_sphere_euler_heun}.
+Using the same time steps as in (ref{ex:falling_sphere}), we get the response plotted in Figure ref{fig:falling_sphere_euler_heun}.
 
 FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun.png, width=400] Velocity of falling sphere using Euler's and Heun's methods. label{fig:falling_sphere_euler_heun}
 
@@ -1529,7 +1529,7 @@ From the figure we have
 \end{align*}
 !et
 
-We assume that the particle is a sphere, such that $C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd}$ as in ref{example:sphere_freefall}. Here $d$ is the diameter of the sphere and $\rho_k$ the density of the sphere.
+We assume that the particle is a sphere, such that $C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd}$ as in (ref{example:sphere_freefall}). Here $d$ is the diameter of the sphere and $\rho_k$ the density of the sphere.
 
 Now (ref{eq:1505a}) and (ref{eq:1505b}) become
 !bt
@@ -1588,7 +1588,7 @@ We use the initial velocity $v_0=50$ m/s and solve (ref{eq:1508}) using the Rung
 The right hand side in (ref{eq:1508}) is implemented as the following function:
 @@@CODE ./chapter1/programs_and_modules/ParticleMotion2D.py from-to:# smooth ball@return zout
 
-Note that we have used the function `cd_sphere()` defined in ref{example:sphere_freefall} to calculate the drag coefficient of the smooth sphere.
+Note that we have used the function `cd_sphere()` defined in (ref{example:sphere_freefall}) to calculate the drag coefficient of the smooth sphere.
 
 The results are shown for some initial angles in Figure ref{fig:smooth_ball_drag}.
 
@@ -1617,9 +1617,9 @@ ${ebox()}
 ${bbox()}
 ===== Example: Numerical error as  a function of $\Delta t$ for ODE-schemes =====
 
-To investigate whether our implementation of the various ODE-schemes
+To investigate whether the various ODE-schemes in our module 'ODEschemes.py' 
 have the expected, theoretical order, we proceed in the same manner as
-outlined in a previous example. The complete code is listed at the end
+outlined in ref{ex:num_error}. The complete code is listed at the end
 of this section but we will highlight and explain some details in the
 following. 
 
@@ -1640,8 +1640,12 @@ u =\begin{cases}
 \end{cases}
 \end{equation}
 !et
-and:
 
+The right hand side defining the differential equation has been
+implemented in function `f3` and the function for the corresponding
+analytical solution is computed by `u_nonlin_analytical`:
+
+@@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# f3 defines an ODE with ananlytical solution in u_nonlin_analytical@# Function for convergence test
 
 # u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right .
 
