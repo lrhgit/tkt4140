@@ -72,8 +72,8 @@ Automatically generated HTML file from DocOnce source
                u'ex:falling_sphere'),
               (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
-               None,
-               '___sec14'),
+               u'ex:num_error',
+               u'ex:num_error'),
               (u" Euler's method for a system ", 3, None, '___sec15'),
               (u" Heun's method ", 1, None, '___sec16'),
               (u" Example 5: Newton's equation ", 2, None, '___sec17'),
@@ -180,9 +180,9 @@ MathJax.Hub.Config({
 <h2 id="___sec22">Example 9: Numerical error as  a function of \( \Delta t \) for ODE-schemes </h2>
 
 <p>
-To investigate whether our implementation of the various ODE-schemes
+To investigate whether the various ODE-schemes in our module 'ODEschemes.py' 
 have the expected, theoretical order, we proceed in the same manner as
-outlined in a previous example. The complete code is listed at the end
+outlined in <a href="._main012.html#ex:num_error">Example 4: Numerical error as a function of \( \Delta t \)</a>. The complete code is listed at the end
 of this section but we will highlight and explain some details in the
 following. 
 
@@ -206,8 +206,27 @@ u =\begin{cases}
 \end{equation}
 $$
 
-and:
 
+<p>
+The right hand side defining the differential equation has been
+implemented in function <code>f3</code> and the function for the corresponding
+analytical solution is computed by <code>u_nonlin_analytical</code>:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>(z, t,a<span style="color: #666666">=2.0</span>,b<span style="color: #666666">=-1.0</span>):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; &quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>z <span style="color: #666666">+</span> b
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">u_nonlin_analytical</span>(u0, t, a<span style="color: #666666">=2.0</span>, b<span style="color: #666666">=-1.0</span>):
+        <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> exp
+        TOL <span style="color: #666666">=</span> <span style="color: #666666">1E-14</span>
+        <span style="color: #008000; font-weight: bold">if</span> (<span style="color: #008000">abs</span>(a)<span style="color: #666666">&gt;</span>TOL):
+            <span style="color: #008000; font-weight: bold">return</span> (u0 <span style="color: #666666">+</span> b<span style="color: #666666">/</span>a)<span style="color: #666666">*</span>exp(a<span style="color: #666666">*</span>t)<span style="color: #666666">-</span>b<span style="color: #666666">/</span>a
+        <span style="color: #008000; font-weight: bold">else</span>:
+            <span style="color: #008000; font-weight: bold">return</span> u0 <span style="color: #666666">+</span> b<span style="color: #666666">*</span>t
+</pre></div>
 <p>
 <!-- u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right . -->
 
@@ -476,6 +495,7 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
             msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> failed with error = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (scheme<span style="color: #666666">.</span>func_name, max_error)
             <span style="color: #008000; font-weight: bold">assert</span> max_error <span style="color: #666666">&lt;</span> tol, msg
 
+    <span style="color: #408080; font-style: italic"># f3 defines an ODE with ananlytical solution in u_nonlin_analytical</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>(z, t,a<span style="color: #666666">=2.0</span>,b<span style="color: #666666">=-1.0</span>):
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; &quot;&quot;&quot;</span>
         <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>z <span style="color: #666666">+</span> b

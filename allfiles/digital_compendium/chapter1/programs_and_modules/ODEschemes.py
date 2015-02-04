@@ -175,6 +175,7 @@ if __name__ == '__main__':
             msg = '%s failed with error = %g' % (scheme.func_name, max_error)
             assert max_error < tol, msg
 
+    # f3 defines an ODE with ananlytical solution in u_nonlin_analytical
     def f3(z, t,a=2.0,b=-1.0):
         """ """
         return a*z + b
