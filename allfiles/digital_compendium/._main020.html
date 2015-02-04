@@ -245,7 +245,19 @@ the error of previous grid.
 
 <p>
 The Euler scheme <a href="._main010.html#mjx-eqn-41">(41)</a> is \( O(h) \), whereas the Heun scheme
-<a href="._main014.html#mjx-eqn-56">(56)</a> is \( O(h^2) \), and Runge-Kutta <a href="._main017.html#mjx-eqn-62">(62)</a> is \( O(h^4) \).
+<a href="._main014.html#mjx-eqn-56">(56)</a> is \( O(h^2) \), and Runge-Kutta <a href="._main017.html#mjx-eqn-62">(62)</a> is
+\( O(h^4) \), where the \( h \) denote a generic step size which for the
+current example is the timestep \( \Delta t \). The order of a particular
+scheme is given exponent \( n \) in the error term \( O(h^n) \). Concequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
+
+<p>
+By letting \( \epsilon_{i+1} \) and \( \epsilon_i \) denote the errors on to consecutive grids with corresponding timpesteps \( \displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2} \). The errors \( \epsilon_{i+1} \) and \( \epsilon_{i} \) for a scheme of order \( n \) are then related by:
+$$
+\begin{equation*}
+\epsilon_{i+1} = \frac{1}{2^n} \epsilon_{i}
+\end{equation*}
+$$
+
 
 <p>
 <!-- u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right . -->
