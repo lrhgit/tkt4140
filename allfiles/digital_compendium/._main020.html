@@ -231,7 +231,19 @@ analytical solution is computed by <code>u_nonlin_analytical</code>:
 <hr>
 
 <p>
-We have listed the function <code>test_convergence</code> below in will comment on some of the details with respect to implementation in the following.
+We have listed the function <code>test_convergence</code> below in will comment
+on some of the details with respect to implementation in the
+following.
+
+<p>
+The basic idea for the convergence test is that we start out by
+solving numerically an ODE with an analytical solution on a relatively
+coarse grid, allowing for direct computations of the error. We then
+reduce the timestep by a factor two (or double the grid size),
+repeatedly, and compute the error for each grid and compare it with
+the error of previous grid.
+
+<p>
 <!-- u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right . -->
 
 <p>
