@@ -1660,8 +1660,7 @@ repeatedly, and compute the error for each grid and compare it with
 the error of previous grid.
 
 The Euler scheme (ref{eq:1302}) is $O(h)$, whereas the Heun scheme
-(ref{eq:1403a} and ref{eq:1403b}) is $O(h^2)$, and Runge-Kutta
-(ref{eq:1501}) is $O(h^4)$.
+(ref{eq:1403a}) is $O(h^2)$, and Runge-Kutta (ref{eq:1501}) is $O(h^4)$.
 
 # u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right .
 
