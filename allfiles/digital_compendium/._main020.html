@@ -177,7 +177,7 @@ MathJax.Hub.Config({
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec22">Example 9: Numerical error as  a function of \( \Delta t \) for ODE-schemes <a name="___sec22"></a></h2>
+<h2 id="___sec22">Example 9: Numerical error as  a function of \( \Delta t \) for ODE-schemes </h2>
 
 <p>
 To investigate whether our implementation of the various ODE-schemes
@@ -185,6 +185,18 @@ have the expected, theoretical order, we proceed in the same manner as
 outlined in a previous example. The complete code is listed at the end
 of this section but we will highlight and explain some details in the
 following. 
+
+<p>
+To test the numerical order for the schemes we apply the to a somewhat general linear ODE:
+$$
+\begin{align}
+ \tag{73}
+ u'(t)&= a \, y + b \\ 
+ u(t_0)&= u_0 \nonumber
+\end{align}
+$$
+
+which has the analytical solution:
 
 <p>
 
@@ -265,7 +277,7 @@ following.
 </pre></div>
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 13:  The convergence rate for the various ODE-solvers a function of the number of timesteps. <a name="fig:convergence_rate"></a> </p></center>
+<center><p class="caption">Figure 13:  The convergence rate for the various ODE-solvers a function of the number of timesteps. <div id="fig:convergence_rate"></div> </p></center>
 <p><img src="chapter1/programs_and_modules/ConvergenceODEschemes.png" align="bottom" width=700></p>
 </center>
 
@@ -581,33 +593,33 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
 <!-- begin bibliography -->
 
 <ol>
- <li> <a name="hairer2008solving"></a> <b>E. Hairer, S. P. Norsett and G. Wanner</b>. 
+ <li> <div id="hairer2008solving"></div> <b>E. Hairer, S. P. Norsett and G. Wanner</b>. 
     <em>Solving Ordinary Differential Equations I: Nonstiff Problems</em>,
     Springer Science &amp; Business,
     2008.</li>
- <li> <a name="white1999fluid"></a> <b>F. White</b>. 
+ <li> <div id="white1999fluid"></div> <b>F. White</b>. 
     <em>Fluid Mechanics</em>,
     WCB/McGraw-Hill,
     1999,
     <a href="http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y" target="_blank"><tt>http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y</tt></a>.</li>
- <li> <a name="evett19892"></a> <b>J. Evett and C. Liu</b>. 
+ <li> <div id="evett19892"></div> <b>J. Evett and C. Liu</b>. 
     <em>2,500 Solved Problems in Fluid Mechanics and Hydraulics</em>,
     McGraw-Hill Education,
     1989,
     <a href="http://books.google.no/books?id=NBDjWHLKwSQC" target="_blank"><tt>http://books.google.no/books?id=NBDjWHLKwSQC</tt></a>.</li>
- <li> <a name="langtangen14"></a> <b>H. P. Langtangen</b>. 
+ <li> <div id="langtangen14"></div> <b>H. P. Langtangen</b>. 
     <em>A Primer on Scientific Programming With Python</em>,
     Springer,
     2014.</li>
- <li> <a name="python14"></a> <b>S. F. Python</b>. 
+ <li> <div id="python14"></div> <b>S. F. Python</b>. 
     <em>The Python Tutorial</em>,
     Python Software Foundation,
     2014.</li>
- <li> <a name="cheney2012numerical"></a> <b>E. Cheney and D. Kincaid</b>. 
+ <li> <div id="cheney2012numerical"></div> <b>E. Cheney and D. Kincaid</b>. 
     <em>Numerical Mathematics and Computing</em>,
     Cengage Learning,
     2012.</li>
- <li> <a name="Bearman1976112"></a> <b>P. Bearman and J. Harvey</b>. 
+ <li> <div id="Bearman1976112"></div> <b>P. Bearman and J. Harvey</b>. 
     GOLF BALL AERODYNAMICS.,
     <em>Aeronaut Q</em>,
     27(pt 2),
