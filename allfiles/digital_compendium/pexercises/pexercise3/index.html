@@ -79,7 +79,7 @@ MathJax.Hub.Config({
 <p>
 <!-- institution(s) -->
 <p>
-<center><h4>Feb 3, 2015</h4></center> <!-- date -->
+<center><h4>Feb 4, 2015</h4></center> <!-- date -->
 <p>
 
 
@@ -106,7 +106,7 @@ $$
 \end{equation}
 $$
 
-Here \( \boldsymbol{F}=[F_x,F_y] \) is the force on the satellite from the Earth, \( G \) is the gravitational constant, \( M \) is the mass of the Earth, \( r \) is the distance between the centre of the Earth and the satellite and \( \boldsymbol{e}_r \) is a (unit) directional vector in the direction of the satellite from the centre of the Earth (see Figure <a href="#fig:fig1">1</a>). We are modelling the Earth and the satellite as point masses, and we pretend that the Earth is not moving. We define a coordinate system with the origin in the centre of the Earth, and let the \( x \)- and \( y \)-axes point as shown in the figure. The position of the satellite in this system is given by the vector \( \boldsymbol{r}=[x,y] \), with length \( r=\sqrt{x^2+y^2} \), and the velocity is given by \( \boldsymbol{v}=[u,v] \). Now we have that \( \boldsymbol{e}_r=\frac{\boldsymbol{r}}{r} \), and can thus write \eqref{eq:Newton} as
+Here \( \boldsymbol{F}=[F_x,F_y] \) is the force on the satellite from the Earth, \( G \) is the gravitational constant, \( M \) is the mass of the Earth, \( r \) is the distance between the center of the Earth and the satellite and \( \boldsymbol{e}_r \) is a (unit) directional vector in the direction of the satellite from the center of the Earth (see Figure <a href="#fig:fig1">1</a>). We are modelling the Earth and the satellite as point masses, and we pretend that the Earth is not moving. We define a coordinate system with the origin in the center of the Earth, and let the \( x \)- and \( y \)-axes point as shown in the figure. The position of the satellite in this system is given by the vector \( \boldsymbol{r}=[x,y] \), with length \( r=\sqrt{x^2+y^2} \), and the velocity is given by \( \boldsymbol{v}=[u,v] \). Now we have that \( \boldsymbol{e}_r=\frac{\boldsymbol{r}}{r} \), and can thus write \eqref{eq:Newton} as
 $$
 \begin{equation}
 \boldsymbol{F}=-G\frac{Mm}{r^3}\boldsymbol{r}
@@ -176,7 +176,7 @@ $$
 <h2 id="problem:generalized">Problem 2: Generalized second order scheme<a name="problem:generalized"></a></h2>
 
 <p>
-Write a Python programme that solves the system in \eqref{eq:system} using the generalized second order scheme (see lecture notes).
+Write a Python program that solves the system in \eqref{eq:system} using the generalized second order scheme (see lecture notes).
 
 <p>
 <b>a)</b>
@@ -223,7 +223,7 @@ Change the initial conditions to \( x_0=1.0 \), \( y_0=0.0 \), \( u_0=0.0 \) and
 <h2 id="problem:convergence">Problem 3: Convergence test<a name="problem:convergence"></a></h2>
 
 <p>
-Test the convergence of the scheme implemented in <a href="#problem:generalized">Problem 2: Generalized second order scheme</a>. Start with the program <b>ODEschemes.py</b> in the Digital Compendium (<a href="http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/._main021.html" target="_blank"><tt>http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/._main021.html</tt></a>) and add your solver. Show that the scheme is of second order.
+Test the convergence of the scheme implemented in <a href="#problem:generalized">Problem 2: Generalized second order scheme</a>. Start with the program <b>ODEschemes.py</b> in the Digital Compendium (<a href="http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/._main020.html" target="_blank"><tt>http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/._main020.html</tt></a>) and add your solver. Show that the scheme is of second order.
 
 <p>
 <!-- removed !bsol ... !esol environment
