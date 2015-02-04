@@ -1642,7 +1642,7 @@ u =\begin{cases}
 !et
 
 The right hand side defining the differential equation has been
-implemented in function `f3` and the function for the corresponding
+implemented in function `f3` and the corresponding
 analytical solution is computed by `u_nonlin_analytical`:
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# f3 defines an ODE with ananlytical solution in u_nonlin_analytical@# Function for convergence test
