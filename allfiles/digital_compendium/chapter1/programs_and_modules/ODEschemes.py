@@ -193,7 +193,7 @@ if __name__ == '__main__':
     # Function for convergence test
     def test_convergence():
         """ Test convergence rate of the methods """
-        from numpy import linspace, size, abs, log10, mean
+        from numpy import linspace, size, abs, log10, mean, log2
         figure()
         tol = 1E-15
         T = 8.0   # end of simulation
@@ -218,7 +218,7 @@ if __name__ == '__main__':
             for i in range(Ndts+1):
                 z = scheme(f3, z0, time)   
                 abs_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
-                log_error = log10(abs_error[1:]) # Drop first element as it is always zero to avoid log10-problems
+                log_error = log2(abs_error[1:]) # Drop first element as it is always zero to avoid log10-problems
                 max_log_err = max(log_error)
                 plot(time[1:], log_error, linestyles[i]+colors[iclr], markevery=N/5)
                 legends.append(scheme.func_name +': N = ' + str(N))
@@ -250,19 +250,19 @@ if __name__ == '__main__':
         
         figure()
         for key in all_errors:
-            plot(N_list, 10**(np.asarray(all_errors[key])))
+            plot(N_list, (np.asarray(all_errors[key])))
         
         # Plot theoretical error reductions for first, second and fourth order schemes
+        axhline(1.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(2.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(4.0, xmin=0, xmax=N, linestyle=':', color='k')
-        axhline(16.0, xmin=0, xmax=N, linestyle=':', color='k')
         xticks(N_list)
         legends = all_errors.keys()
         legends.append('theoretical') 
         legend(legends, loc='best', frameon=False)
         xlabel('Number of unknowns')
         ylabel('Error reduction when reducing timestep by two')
-        axis([0, max(N_list), 0, 17])
+        axis([0, max(N_list), 0, 5])
         savefig('ConvergenceODEschemes.png', transparent=True)
         
     def plot_ODEschemes_solutions():
@@ -286,8 +286,6 @@ if __name__ == '__main__':
 
         plot(time, u_nonlin_analytical(z0, time))
         legends.append('analytical')
-
-
         legend(legends, loc='best', frameon=False)
 
 
