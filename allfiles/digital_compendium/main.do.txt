@@ -1646,7 +1646,9 @@ implemented in function `f3` and the corresponding
 analytical solution is computed by `u_nonlin_analytical`:
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# f3 defines an ODE with ananlytical solution in u_nonlin_analytical@# Function for convergence test
+-----
 
+We have listed the function `test_convergence` below in will comment on some of the details with respect to implementation in the following.
 # u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right .
 
 
