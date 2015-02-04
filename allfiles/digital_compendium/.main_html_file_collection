@@ -12,9 +12,11 @@ chapter1/9.png
 chapter1/programs_and_modules/newton_heun.png
 chapter1/programs_and_modules/example_sphere_falling_euler_heun.png
 chapter1/12.png
+chapter1/programs_and_modules/example_sphere_falling_euler_heun_rk4.png
 chapter1/14.png
 chapter1/programs_and_modules/example_particle_motion_2d_1.png
 chapter1/programs_and_modules/example_particle_motion_2d_2.png
+chapter1/programs_and_modules/ConvergenceODEschemes.png
 ./NumeriskeBeregninger.pdf
 ._main000.html
 ._main001.html
@@ -35,3 +37,5 @@ chapter1/programs_and_modules/example_particle_motion_2d_2.png
 ._main016.html
 ._main017.html
 ._main018.html
+._main019.html
+._main020.html

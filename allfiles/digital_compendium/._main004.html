@@ -22,25 +22,25 @@ Automatically generated HTML file from DocOnce source
 </head>
 
 <!-- tocinfo
-{'highest level': 1,
- 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
-               1,
+{'highest level': 0,
+ 'sections': [(u' Scientific computing with Python ', 1, None, '___sec0'),
+              (u' Chapter 1: Initial value problems for Ordinary Differential Equations ',
+               0,
                None,
-               '___sec0'),
+               '___sec1'),
               (u' Introduction ',
                1,
                u'section:introduction',
                u'section:introduction'),
-              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u" Taylor's method ", 1, u'sec:taylor', u'sec:taylor'),
               (u' Reduction of Higher order Equations ',
-               2,
+               1,
                u'subsec:reduction',
                u'subsec:reduction'),
               (u' Example 1: Reduction of higher order systems ',
                2,
                None,
-               '___sec4'),
-              (u' Scientific computing with Python ', 2, None, '___sec5'),
+               '___sec5'),
               (u' Example 2: Sphere in free fall ',
                2,
                u'example:sphere_freefall',
@@ -50,20 +50,20 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec7'),
               (u' Python functions with vector arguments and modules ',
-               2,
+               1,
                None,
                '___sec8'),
               (u' How to make a Python-module and some useful programming features ',
-               2,
+               1,
                u'section:Python_module',
                u'section:Python_module'),
-              (u' Differences ', 2, None, '___sec10'),
+              (u' Differences ', 1, None, '___sec10'),
               (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
                3,
                None,
                '___sec11'),
               (u" Euler's method ",
-               2,
+               1,
                u'ex:euler_method',
                u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
@@ -75,21 +75,25 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec14'),
               (u" Euler's method for a system ", 3, None, '___sec15'),
-              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Heun's method ", 1, None, '___sec16'),
               (u" Example 5: Newton's equation ", 2, None, '___sec17'),
               (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
                '___sec18'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
-              (u' Example 7: Particle motion in two dimensions ',
+              (u' Runge-Kutta of 4th order ', 1, None, '___sec19'),
+              (u' Example 7: Falling sphere using RK4 ',
+               2,
+               u'example:falling_sphere_RK4',
+               u'example:falling_sphere_RK4'),
+              (u' Example 8: Particle motion in two dimensions ',
                2,
                None,
-               '___sec20'),
-              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               '___sec21'),
+              (u' Example 9: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
                2,
                None,
-               '___sec21')]}
+               '___sec22')]}
 end of tocinfo -->
 
 <body>
@@ -126,8 +130,17 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#___sec1" style="font-size: 80%;"><b>Chapter 1: Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
+     <!-- navigation toc: --> <li><a href="#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main010.html#ex:euler_method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
 
         </ul>
       </li>
@@ -159,10 +172,108 @@ MathJax.Hub.Config({
   <li><a href="._main012.html">13</a></li>
   <li><a href="._main013.html">14</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main018.html">19</a></li>
+  <li><a href="._main020.html">21</a></li>
   <li><a href="._main005.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
+
+<h1 id="subsec:reduction">Reduction of Higher order Equations</h1>
+
+<p>
+When we are solving initial value problems, we usually need to write these as sets of first order equations, because most of the program packages require this.
+
+<p>
+Example: \( y''(x)+y(x)=0,\ y(0)=a_0,\ y'(0)=b_0 \)
+
+<p>
+We may for instance write this equation in a system as follows,
+$$
+\begin{align*}
+y'(x)=&g(x)\\ 
+g'(x)=&-y(x)\\ 
+y(0)=&a_0,\  g(0)=b_0
+\end{align*}
+$$
+
+
+<p>
+Another example:
+$$
+\begin{align*}
+&y'''(x)+2y''(x)-(y'(x))^2+2y(x)=x^2\\ 
+&y(0)=a_0,\ y'(0)=b_0,\ y''(0)=c_0
+\end{align*}
+$$
+
+We set \( y'(x)=g(x) \) and \( y''(x)=g'(x)=f(x) \), and the system may be written as
+$$
+\begin{align*}
+y'(x)=&g(x)\\ 
+g'(x)=&f(x)\\ 
+f'(x)=&-2f(x)+(g(x))^2-2y(x)+x^2
+\end{align*}
+$$
+
+with initial values \( y(0)=a_0,\ g(0)=b_0,\ f(0)=c_0 \).
+
+<p>
+This is fair enough for hand calculations, men when we use program packages a more systematic procedure is needed. Let's use the equation above as an example.
+
+<p>
+We start by renaming \( y \) to \( y_1 \). We then get the following procedure:
+$$
+\begin{align*}
+y&'=y'_1=y_2\\ 
+y&''=y''_1=y'_2=y_3
+\end{align*}
+$$
+
+The system may then be written as
+$$
+\begin{align*}
+y'_1(x)=&y_2(x)\\ 
+y'_2(x)=&y_3(x)\\ 
+y'_3(x)=&-2y_3(x)+(y_2(x))^2-2y_1(x)+x^2
+\end{align*}
+$$
+
+with initial conditions \( y_1(0)=a_0,\ y_2(0)=b_0,\ y_3(0)=c_0 \).
+
+<p>
+The general procedure to reduce a higher order ODE to a system of first order ODEs becomes the following:
+
+<p>
+Given the equation
+$$
+\begin{align}
+\tag{10}
+&y^{(m)}=f(x,y,y',y'',\dots,y^{(m-1)})\\ 
+&y(x_0)=a_1,\ y'(x_0)=a_2,\ \dots,y^{(m-1)}(x_0)=a_m \nonumber\\ 
+\end{align}
+$$
+
+where
+$$
+\begin{align*}
+y^{(m)}\equiv \frac{d^my}{dx^m}
+\end{align*}
+$$
+
+with \( y=y_1 \), we set
+$$
+\begin{align}
+&y'_1=y_2 \nonumber \\ \nonumber
+&y'_2=y_3\\ \nonumber
+&.\\ \nonumber
+&.\\ \nonumber
+&y'_{m-1}=y_m\\\nonumber\\\nonumber
+&y_1(x_0)=a_1,y_2(x_0)=a_2,\dots,y_m(x_0)=a_m
+\tag{11}
+\end{align}
+$$
+
+
+<p>
 
 <!-- begin box -->
 <div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
@@ -170,81 +281,35 @@ MathJax.Hub.Config({
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="example:sphere_freefall">Example 2: Sphere in free fall</h2>
+<h2 id="___sec5">Example 1: Reduction of higher order systems </h2>
 
 <p>
-<center><p><img src="chapter1/programs_and_modules/2.png" align="bottom" width=200></p></center>
+Write the following ODE as a system of first order ODEs:
+$$
+\begin{align*}
+y'''-y'y''-(y')^2+2y=x^3 \\ 
+y(0)=a,\ y'(0)=b,\ y''(0)=c
+\end{align*}
+$$
+
 
 <p>
-The figure shows a falling sphere with a diameter \( d \) and mass \( m \)
-that falls vertically in a fluid. Use of Newton's 2nd law in the
-\( z \)-direction gives
-$$
-\begin{equation}
-\tag{12}
-m\frac{dv}{dt} = mg-m_fg-\frac{1}{2}m_f\frac{dv}{dt}-\frac{1}{2}\rho_fv\left|v\right|A_kC_D,
-\end{equation}
-$$
-
-where the different terms are interpreted as follows: \( m=\rho_k V \),
-where \( \rho_k \) is the density of the sphere and \( V \) is the sphere
-volume.  The mass of the displaced fluid is given by \( m_f=\rho_f V \),
-where \( \rho_f \) is the density of the fluid, whereas buoyancy and the
-drag coefficient are expressed by \( m_f \, g \) and \( C_D \), respectively.
-The projected area of the sphere is given by \( A_k = \frac{\pi}{4}d^2 \)
-and \( \frac{1}{2}m_f \) is the hydro-dynamical mass (added mass). The
-expression for the hydro-dynamical mass is derived in White
-<a href="._main018.html#white1999fluid">[2]</a>, page 539-540. To write Equation
-<a href="#mjx-eqn-12">(12)</a> on a more convenient form we introduce the
-following abbreviations:
-$$
-\begin{equation}
-\rho=\frac{\rho_f}{\rho_k},\ A=1+\frac{\rho}{2}, \ B=(1-\rho)g,\ C=\frac{3\rho}{4d}.
-\end{equation}
-$$
-
-in addition to the drag coefficient \( C_D \) which is a function of the Reynolds number \( \displaystyle R_e = \frac{vd}{\nu} \), where \( \nu \) is the kinematical viscosity. Equation <a href="#mjx-eqn-12">(12)</a> may then be written as
-$$
-\begin{equation}
-\tag{13}
-\frac{dv}{dt}=\frac{1}{A}(B-C\cdot v\left|v\right|C_d).
-\end{equation}
-$$
-
-In air we may often neglect the buoyancy term and the hydro-dynamical
-mass, whereas this is not the case for a liquid. Introducing
-\( v=\frac{dz}{dt} \) in Equation <a href="#mjx-eqn-13">(13)</a>, we get a 2nd
-order ODE as follows
-$$
-\begin{equation}
-\tag{14}
-\frac{d^2z}{dt^2}=\frac{1}{A}\left(B-C\cdot \frac{dz}{dt}\bigg|\frac{dz}{dt}\bigg|C_d\right)
-\end{equation}
-$$
-
-For Equation <a href="#mjx-eqn-14">(14)</a> two initial conditions must
-be specified, e.g. \( v=v_0 \) and \( z=z_0 \) for \( t=0 \).
+<!-- !bsol -->
+First we write \( y'''=y'y''+(y')^2-2y+x^3 \).
 
 <p>
-Figure <a href="#fig:CDsphere">1</a> illustrates \( C_D \) as a function of \( Re \). The values in the plot are not as accurate as the number of digits in the
-program might indicate. For example is the location and the size of
-the "valley" in the diagram strongly dependent of the degree of
-turbulence in the free stream and the roughness of the sphere. As
-the drag coefficient \( C_D \) is a function of the Reynolds number, it is
-also a function of the solution \( v \) (i.e. the velocity) of the ODE in
-Equation <a href="#mjx-eqn-13">(13)</a>. We will use the function
-\( C_D(Re) \) as an example of how functions may be implemented in Python.
+By use of <a href="#mjx-eqn-11">(11)</a> we get
+$$
+\begin{align*}
+&y_1'=y_2\\ 
+&y_2'=y_3\\ 
+&y_3'=y_2y_3+(y_2)^2-2y_1+x^3\\ 
+&y_1(0)=a,\ y_2(0)=b,\ y_3=c
+\end{align*}
+$$
 
-<p>
-<center> <!-- figure -->
-<center><p class="caption">Figure 1:  Drag coefficient \( C_D \) as function of the Reynold's number \( R_e \). <div id="fig:CDsphere"></div> </p></center>
-<p><img src="chapter1/programs_and_modules/example_sphere.png" align="bottom" height=400 width=600></p>
-</center>
-
-<p>
-<!-- @@@CODE ./chapter1/programs_and_modules/CDsphere.py from-to: # Define the function cd_sphere@^# Make plot -->
-
-<p>
+<!-- !esol -->
+<!-- !ec -->
 </div>
 <!-- end box -->
 
@@ -272,7 +337,7 @@ Equation <a href="#mjx-eqn-13">(13)</a>. We will use the function
   <li><a href="._main012.html">13</a></li>
   <li><a href="._main013.html">14</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main018.html">19</a></li>
+  <li><a href="._main020.html">21</a></li>
   <li><a href="._main005.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
