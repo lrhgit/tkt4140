@@ -261,7 +261,7 @@ if __name__ == '__main__':
         legends.append('theoretical') 
         legend(legends, loc='best', frameon=False)
         xlabel('Number of unknowns')
-        ylabel('Error reduction when reducing timestep by two')
+        ylabel('Scheme order approximation')
         axis([0, max(N_list), 0, 5])
         savefig('ConvergenceODEschemes.png', transparent=True)
         
