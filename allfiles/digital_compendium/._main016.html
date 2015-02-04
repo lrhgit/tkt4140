@@ -22,25 +22,25 @@ Automatically generated HTML file from DocOnce source
 </head>
 
 <!-- tocinfo
-{'highest level': 1,
- 'sections': [(u' Initial value problems for Ordinary Differential Equations ',
-               1,
+{'highest level': 0,
+ 'sections': [(u' Scientific computing with Python ', 1, None, '___sec0'),
+              (u' Chapter 1: Initial value problems for Ordinary Differential Equations ',
+               0,
                None,
-               '___sec0'),
+               '___sec1'),
               (u' Introduction ',
                1,
                u'section:introduction',
                u'section:introduction'),
-              (u" Taylor's method ", 2, u'sec:taylor', u'sec:taylor'),
+              (u" Taylor's method ", 1, u'sec:taylor', u'sec:taylor'),
               (u' Reduction of Higher order Equations ',
-               2,
+               1,
                u'subsec:reduction',
                u'subsec:reduction'),
               (u' Example 1: Reduction of higher order systems ',
                2,
                None,
-               '___sec4'),
-              (u' Scientific computing with Python ', 2, None, '___sec5'),
+               '___sec5'),
               (u' Example 2: Sphere in free fall ',
                2,
                u'example:sphere_freefall',
@@ -50,20 +50,20 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec7'),
               (u' Python functions with vector arguments and modules ',
-               2,
+               1,
                None,
                '___sec8'),
               (u' How to make a Python-module and some useful programming features ',
-               2,
+               1,
                u'section:Python_module',
                u'section:Python_module'),
-              (u' Differences ', 2, None, '___sec10'),
+              (u' Differences ', 1, None, '___sec10'),
               (u' Treatment of the term $\\frac{d}{dx} \\left[ p(x) \\frac{d}{dx} u(x)\\right]$ ',
                3,
                None,
                '___sec11'),
               (u" Euler's method ",
-               2,
+               1,
                u'ex:euler_method',
                u'ex:euler_method'),
               (u' Example 3: Falling sphere with constant and varying drag ',
@@ -75,21 +75,25 @@ Automatically generated HTML file from DocOnce source
                None,
                '___sec14'),
               (u" Euler's method for a system ", 3, None, '___sec15'),
-              (u" Heun's method ", 2, None, '___sec16'),
+              (u" Heun's method ", 1, None, '___sec16'),
               (u" Example 5: Newton's equation ", 2, None, '___sec17'),
               (u" Example 6: Falling sphere with Heun's method ",
                2,
                None,
                '___sec18'),
-              (u' Runge-Kutta of 4th order ', 2, None, '___sec19'),
-              (u' Example 7: Particle motion in two dimensions ',
+              (u' Runge-Kutta of 4th order ', 1, None, '___sec19'),
+              (u' Example 7: Falling sphere using RK4 ',
+               2,
+               u'example:falling_sphere_RK4',
+               u'example:falling_sphere_RK4'),
+              (u' Example 8: Particle motion in two dimensions ',
                2,
                None,
-               '___sec20'),
-              (u' Example 8: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
+               '___sec21'),
+              (u' Example 9: Numerical error as  a function of $\\Delta t$ for ODE-schemes ',
                2,
                None,
-               '___sec21')]}
+               '___sec22')]}
 end of tocinfo -->
 
 <body>
@@ -126,8 +130,17 @@ MathJax.Hub.Config({
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: --> <li><a href="._main000.html#___sec0" style="font-size: 80%;">Initial value problems for Ordinary Differential Equations</a></li>
-     <!-- navigation toc: --> <li><a href="._main001.html#section:introduction" style="font-size: 80%;">Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main001.html#___sec0" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Scientific computing with Python</a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#___sec1" style="font-size: 80%;"><b>Chapter 1: Initial value problems for Ordinary Differential Equations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main002.html#section:introduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Introduction</a></li>
+     <!-- navigation toc: --> <li><a href="._main003.html#sec:taylor" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Taylor's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main004.html#subsec:reduction" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Reduction of Higher order Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#___sec8" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Python functions with vector arguments and modules</a></li>
+     <!-- navigation toc: --> <li><a href="._main007.html#section:Python_module" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;How to make a Python-module and some useful programming features</a></li>
+     <!-- navigation toc: --> <li><a href="._main008.html#___sec10" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Differences</a></li>
+     <!-- navigation toc: --> <li><a href="._main010.html#ex:euler_method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
+     <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
 
         </ul>
       </li>
@@ -157,88 +170,181 @@ MathJax.Hub.Config({
   <li class="active"><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
   <li><a href="._main018.html">19</a></li>
+  <li><a href="._main019.html">20</a></li>
+  <li><a href="._main020.html">21</a></li>
   <li><a href="._main017.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
 
-<h2 id="___sec19">Runge-Kutta of 4th order </h2>
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
 
 <p>
-Euler's method and Heun's method belong to the Runge-Kutta family of explicit methods, and is respectively Runge-Kutta of 1st and 2nd order, the latter with one time use of corrector. Explicit Runge-Kutta schemes are single step schemes that try to copy the Taylor series expansion of the differential equation to a given order.
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec18">Example 6: Falling sphere with Heun's method </h2>
 
 <p>
-The classical Runge-Kutta scheme of 4th order (RK4) is given by
-$$
-\begin{align}
-&k_1=f(x_n,y_n)\nonumber\\ 
-&k_2=f(x_n+\frac{h}{2}, y_n+\frac{h}{2}k_1)\nonumber\\ 
-\tag{62}
-&k_3=f(x_n+\frac{h}{2},y_n+\frac{h}{2}k_2)\\ 
-&k_4=f(x_n+h,y_n+hk_3)\nonumber\\ 
-&y_{n+1}=y_n+\frac{h}{6}(k_1+2k_2+2k_3+k_4)\nonumber
-\end{align}
-$$
-
+Let's go back to <a href="._main011.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, and implement a new function <code>heun()</code> in the program <a href="https://lrhgit.github.io/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/FallingSphereEuler.py" target="_blank">FallingSphereEuler.py</a>.
 
 <p>
-We see that we are actually using Euler's method four times and find a weighted gradient. The local error is of order \( O(h^5) \), while the global is of \( O(h^4) \). We refer to <a href="._main018.html#cheney2012numerical">[6]</a>.
-
-<p>
-Figure <a href="#fig:RK4_illustration">9</a> shows a graphical illustration of the RK4 scheme.
-
-<p>
-In detail we have
-
-<ol>
- <li> In point \( (x_n,y_n) \) we know the gradient \( k_1 \) and use this when we go forward a step \( h/2 \) where the gradient \( k_2 \) is calculated.</li>
- <li> With this gradient we start again in point \( (x_n,y_n) \), go forward a step \( h/2 \) and find a new gradient \( k_3 \).</li>
- <li> With this gradient we start again in point \( (x_n,y_n) \), but go forward a complete step \( h \) and find a new gradient \( k_4 \).</li>
- <li> The four gradients are averaged with weights \( 1/6 \), \( 2/6 \), \( 2/6 \) and \( 1/6 \). Using the averaged gradient we calculate the final value \( y_{n+1} \).</li>
-</ol>
-
-Each of the steps above are Euler steps.
-
-<p>
-<center> <!-- figure -->
-<center><p class="caption">Figure 9:  Illustration of the RK4 scheme. <div id="fig:RK4_illustration"></div> </p></center>
-<p><img src="chapter1/12.png" align="bottom" width=400></p>
-</center>
-
-<p>
-Using <a href="#mjx-eqn-62">(62)</a> on the equation system in <a href="._main012.html#mjx-eqn-52">(52)</a> we get
-$$
-\begin{align}
-&(y_1)_{n+1}=(y_1)_n +\frac{h}{6}(k_1+2k_2+2k_3+k_4) \nonumber\\ 
-&(y_2)_{n+1}=(y_2)_n +\frac{h}{6}(l_1+2l_2+2l_3+l_4)
-\tag{63} \\ 
-&(y_3)_{n+1}=(y_3)_n +\frac{h}{6}(m_1+2m_2+2m_3+m_4) \nonumber\\ 
-\end{align}
-$$
-
-where
+We recall the system of equations as
 $$
 \begin{align*}
-k_1&=y_2 \\ 
-l_1&=y_3 \\ 
-m_1&=-y_1y_3\\ 
-\\ 
-k_2&=(y_2+hl_l/2)\\ 
-l_2&=(y_3+hm_1/2)\\ 
-m_2&=-[(y_1+hk_1/2)(y_3+hm_1/2)]\\ 
-\\ 
-k_3&=(y_2+hl_2/2)\\ 
-l_3&=(y_3+hm_2/2)\\ 
-m_3&=-[(y_1+hk_2/2)(y_3+hm_2/2)]\\ 
-\\ 
-k_4&=(y_2+hl_3)\\ 
-l_4&=(y_3+hm_3)\\ 
-m_4&=-[(y_1+hk_3)(y_3+hm_3)
+&\frac{dz}{dt}=v\\ 
+&\frac{dv}{dt}=g-\alpha v^2
 \end{align*}
 $$
 
+which by use of Heun's method in <a href="._main014.html#mjx-eqn-58">(58)</a> and <a href="._main014.html#mjx-eqn-59">(59)</a> becomes
 
 <p>
-<!-- left out for exercise -->
+Predictor:
+$$
+\begin{align}
+z^p_{n+1}&=z_n+\Delta t v_n \\ 
+v^p_{n+1}&= v_n +\Delta t \cdot (g-\alpha v^2_n) \nonumber
+\end{align}
+$$
+
+Corrector:
+$$
+\begin{align}
+z_{n+1}&=z_n+0.5\Delta t \cdot (v_n+v^p_{n+1}) \\ 
+v_{n+1}&=v_n+0.5\Delta t \cdot \left[2g-\alpha[v^2_n+(v^p_{n+1})^2\right] \nonumber
+\end{align}
+$$
+
+with initial values \( z_0=z(0)=0,\ v_0=v(0)=0 \). Note that we don't use the predictor \( z^p_{n+1} \) since it doesn't appear on the right hand side of the equation system.
+
+<p>
+One possible way of implementing this scheme is given in the following function named <code>heun()</code>, in the program <b>ODEschemes.py</b>:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func, z0, time):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Heun scheme for solution of systems of ODEs.</span>
+<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions,</span>
+<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns</span>
+<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
+
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f_np</span>(z,t):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;A local function to ensure that the return of func is an np array</span>
+<span style="color: #BA2121; font-style: italic">        and to avoid lengthy code for implementation of the Heun algorithm&quot;&quot;&quot;</span>
+        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>asarray(func(z,t))
+
+    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time), np<span style="color: #666666">.</span>size(z0)))
+    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
+    zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
+
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
+        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> time[i]
+        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> f_np(z[i,:],t)<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
+        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (f_np(z[i,:],t) <span style="color: #666666">+</span> f_np(zp,t<span style="color: #666666">+</span>dt))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
+</pre></div>
+<p>
+Using the same time steps as in <a href="._main011.html#ex:falling_sphere">Example 3: Falling sphere with constant and varying drag</a>, we get the response plotted in Figure <a href="#fig:falling_sphere_euler_heun">8</a>.
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 8:  Velocity of falling sphere using Euler's and Heun's methods. <div id="fig:falling_sphere_euler_heun"></div> </p></center>
+<p><img src="chapter1/programs_and_modules/example_sphere_falling_euler_heun.png" align="bottom" width=400></p>
+</center>
+
+<p>
+The complete program <b>FallingSphereEulerHeun.py</b> is listed below. Note that the solver functions <code>euler</code> and <code>heun</code> are imported from the script <b>ODEschemes.py</b>.
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># chapter1/programs_and_modules/FallingSphereEulerHeun.py;ODEschemes.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/programs_and_modules/ODEschemes.py;</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">DragCoefficientGeneric</span> <span style="color: #008000; font-weight: bold">import</span> cd_sphere
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">ODEschemes</span> <span style="color: #008000; font-weight: bold">import</span> euler, heun
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">import</span> <span style="color: #666666">*</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+
+<span style="color: #408080; font-style: italic"># change some default values to make plots more readable </span>
+LNWDT<span style="color: #666666">=5</span>; FNT<span style="color: #666666">=11</span>
+rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
+
+g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>      <span style="color: #408080; font-style: italic"># Gravity m/s^2</span>
+d <span style="color: #666666">=</span> <span style="color: #666666">41.0e-3</span>   <span style="color: #408080; font-style: italic"># Diameter of the sphere</span>
+rho_f <span style="color: #666666">=</span> <span style="color: #666666">1.22</span>  <span style="color: #408080; font-style: italic"># Density of fluid [kg/m^3]</span>
+rho_s <span style="color: #666666">=</span> <span style="color: #666666">1275</span>  <span style="color: #408080; font-style: italic"># Density of sphere [kg/m^3]</span>
+nu <span style="color: #666666">=</span> <span style="color: #666666">1.5e-5</span>   <span style="color: #408080; font-style: italic"># Kinematical viscosity [m^2/s]</span>
+CD <span style="color: #666666">=</span> <span style="color: #666666">0.4</span>      <span style="color: #408080; font-style: italic"># Constant drag coefficient</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with constant drag.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
+    <span style="color: #008000; font-weight: bold">return</span> zout 
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f2</span>(z, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;2x2 system for sphere with Re-dependent drag.&quot;&quot;&quot;</span>
+    zout <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z)
+    v <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(z[<span style="color: #666666">1</span>]) 
+    Re <span style="color: #666666">=</span> v<span style="color: #666666">*</span>d<span style="color: #666666">/</span>nu
+    CD <span style="color: #666666">=</span> cd_sphere(Re)
+    alpha <span style="color: #666666">=</span> <span style="color: #666666">3.0*</span>rho_f<span style="color: #666666">/</span>(<span style="color: #666666">4.0*</span>rho_s<span style="color: #666666">*</span>d)<span style="color: #666666">*</span>CD
+    zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">1</span>], g <span style="color: #666666">-</span> alpha<span style="color: #666666">*</span>z[<span style="color: #666666">1</span>]<span style="color: #666666">**2</span>]
+    <span style="color: #008000; font-weight: bold">return</span> zout
+        
+<span style="color: #408080; font-style: italic"># main program starts here</span>
+
+T <span style="color: #666666">=</span> <span style="color: #666666">10</span>  <span style="color: #408080; font-style: italic"># end of simulation</span>
+N <span style="color: #666666">=</span> <span style="color: #666666">20</span>  <span style="color: #408080; font-style: italic"># no of time steps</span>
+time <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
+
+z0<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros(<span style="color: #666666">2</span>)
+z0[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
+
+ze <span style="color: #666666">=</span> euler(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Euler&#39;s method</span>
+ze2 <span style="color: #666666">=</span> euler(f2, z0, time)   <span style="color: #408080; font-style: italic"># compute response with varying CD using Euler&#39;s method</span>
+
+zh <span style="color: #666666">=</span> heun(f, z0, time)     <span style="color: #408080; font-style: italic"># compute response with constant CD using Heun&#39;s method</span>
+zh2 <span style="color: #666666">=</span> heun(f2, z0, time)   <span style="color: #408080; font-style: italic"># compute response with varying CD using Heun&#39;s method</span>
+
+k1 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(g<span style="color: #666666">*4*</span>rho_s<span style="color: #666666">*</span>d<span style="color: #666666">/</span>(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>CD))
+k2 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(<span style="color: #666666">3*</span>rho_f<span style="color: #666666">*</span>g<span style="color: #666666">*</span>CD<span style="color: #666666">/</span>(<span style="color: #666666">4*</span>rho_s<span style="color: #666666">*</span>d))
+v_a <span style="color: #666666">=</span> k1<span style="color: #666666">*</span>np<span style="color: #666666">.</span>tanh(k2<span style="color: #666666">*</span>time)   <span style="color: #408080; font-style: italic"># compute response with constant CD using analytical solution</span>
+
+<span style="color: #408080; font-style: italic"># plotting</span>
+
+legends<span style="color: #666666">=</span>[]
+line_type<span style="color: #666666">=</span>[<span style="color: #BA2121">&#39;-&#39;</span>,<span style="color: #BA2121">&#39;:&#39;</span>,<span style="color: #BA2121">&#39;.&#39;</span>,<span style="color: #BA2121">&#39;-.&#39;</span>,<span style="color: #BA2121">&#39;--&#39;</span>]
+
+plot(time, v_a, line_type[<span style="color: #666666">0</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Analytical (constant CD)&#39;</span>)
+
+plot(time, ze[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">1</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (constant CD)&#39;</span>)
+
+plot(time, zh[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">2</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Heun (constant CD)&#39;</span>)
+
+plot(time, ze2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">3</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Euler (varying CD)&#39;</span>)
+
+plot(time, zh2[:,<span style="color: #666666">1</span>], line_type[<span style="color: #666666">4</span>])
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Heun (varying CD)&#39;</span>)
+
+legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;size&#39;</span> : <span style="color: #666666">16</span>}
+rc(<span style="color: #BA2121">&#39;font&#39;</span>, <span style="color: #666666">**</span>font)
+xlabel(<span style="color: #BA2121">&#39;Time [s]&#39;</span>)
+ylabel(<span style="color: #BA2121">&#39;Velocity [m/s]&#39;</span>)
+savefig(<span style="color: #BA2121">&#39;example_sphere_falling_euler_heun.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
+show()
+</pre></div>
+<p>
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end exercise --- -->
 
 <p>
 <p>
@@ -258,6 +364,8 @@ $$
   <li class="active"><a href="._main016.html">17</a></li>
   <li><a href="._main017.html">18</a></li>
   <li><a href="._main018.html">19</a></li>
+  <li><a href="._main019.html">20</a></li>
+  <li><a href="._main020.html">21</a></li>
   <li><a href="._main017.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
