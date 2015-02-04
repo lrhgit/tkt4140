@@ -187,16 +187,29 @@ of this section but we will highlight and explain some details in the
 following. 
 
 <p>
-To test the numerical order for the schemes we apply the to a somewhat general linear ODE:
+To test the numerical order for the schemes we solve a somewhat general linear ODE:
 $$
 \begin{align}
  \tag{73}
- u'(t)&= a \, y + b \\ 
+ u'(t)&= a \, u + b \\ 
  u(t_0)&= u_0 \nonumber
 \end{align}
 $$
 
-which has the analytical solution:
+which has the analytical solutions:
+$$
+\begin{equation}
+u =\begin{cases}
+ \left (u_0 + \frac{b}{a} \right )   \; e^{a\, t} -\frac{b}{a},& \quad a \neq 0 \\ 
+ u_0 + b\, t, &\quad a = 0 
+\end{cases}
+\end{equation}
+$$
+
+and:
+
+<p>
+<!-- u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right . -->
 
 <p>
 
