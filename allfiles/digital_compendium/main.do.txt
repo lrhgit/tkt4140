@@ -1690,24 +1690,31 @@ the clause `order_approx.append(previous_max_log_err -
 max_log_err)`. Note that we can not compute this for the first
 iteration (`i=0`), and that we use a an initial empty list
 `order_approx` to store the approximation of the order `n` for each
-grid refinement.
+grid refinement. For each grid and for each grid we plot the
+$\log_2(\epsilon)$ as a function of time with: `plot(time[1:],
+log_error, linestyles[i]+colors[iclr], markevery=N/5)` and for each
+plot we construct the corresponding legend by appending a new element
+to the legends-list `legends.append(scheme.func_name +': N = ' + str(N))`.   This construct produces a string with both the scheme name and the number of elements $N$. The plot is not reproduced below, but you may see the result by downloading and running the module yourself. 
 
-Having completed the given number of refinements for a specific scheme
+Having completed the given number of refinements `Ndts` for a specific scheme
 we store the `order_approx` for the scheme in a dictionary using the
 name of the scheme as a key by `all_scheme_orders[scheme.func_name] =
-order_approx`. This allows for an illustrative plot of the order estimate for each scheme with the clause 
+order_approx`. This allows for an illustrative plot of the order estimate for each scheme with the clause:
 !bc
 for key in all_scheme_orders:
             plot(N_list, (np.asarray(all_scheme_orders[key])))
 !ec
-# u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right .
+and the resulting plot is shown in Figure ref{fig:convergence_rate} 
+FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
+
+
+The complete function `test_convergence` is 
 
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Function for convergence test@def plot_ODEschemes_solutions
 
-FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
 
-Complete code:
+The complete module `ODEschemes` is listed below:
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py
 
 ${ebox()}

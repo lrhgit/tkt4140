@@ -218,7 +218,7 @@ if __name__ == '__main__':
             for i in range(Ndts+1):
                 z = scheme(f3, z0, time)   
                 abs_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
-                log_error = log2(abs_error[1:]) # Drop first element to avoid log2-problems (first elt is zero)
+                log_error = log2(abs_error[1:]) # Drop 1st elt to avoid log2-problems (1st elt is zero)
                 max_log_err = max(log_error)
                 plot(time[1:], log_error, linestyles[i]+colors[iclr], markevery=N/5)
                 legends.append(scheme.func_name +': N = ' + str(N))
@@ -227,15 +227,11 @@ if __name__ == '__main__':
                 if i > 0: # Compute the log2 error difference
                     order_approx.append(previous_max_log_err - max_log_err) 
                 previous_max_log_err = max_log_err
-                
-                
+
                 N *=2
                 time = linspace(0, T, N+1)
             
             all_scheme_orders[scheme.func_name] = order_approx
-#             print order_approx
-#             print mean(order_approx), 10**(mean(order_approx)), order_approx
-#             print 10**np.asarray(order_approx)
             iclr += 1
 
         legend(legends, loc='best')
@@ -246,13 +242,12 @@ if __name__ == '__main__':
         N = N/2**Ndts
         N_list = [N*2**i for i in range(1, Ndts+1)]
         N_list = np.asarray(N_list)
-#         print N_list         
         
         figure()
         for key in all_scheme_orders:
             plot(N_list, (np.asarray(all_scheme_orders[key])))
         
-        # Plot theoretical error reductions for first, second and fourth order schemes
+        # Plot theoretical n for 1st, 2nd and 4th order schemes
         axhline(1.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(2.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(4.0, xmin=0, xmax=N, linestyle=':', color='k')
