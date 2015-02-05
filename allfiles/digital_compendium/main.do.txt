@@ -1667,10 +1667,19 @@ scheme is given exponent $n$ in the error term $O(h^n)$. Concequently, the Euler
 
 By letting $\epsilon_{i+1}$ and $\epsilon_i$ denote the errors on to consecutive grids with corresponding timpesteps $\displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2}$. The errors $\epsilon_{i+1}$ and $\epsilon_{i}$ for a scheme of order $n$ are then related by:
 !bt
-\begin{equation*}
+\begin{equation}
+label{eq:eps}
 \epsilon_{i+1} = \frac{1}{2^n} \epsilon_{i}
-\end{equation*}
+\end{equation}
 !et
+Consequently, whenever  $\epsilon_{i+1}$ and $\epsilon_{i}$ are known from consequtive simulations and estimate of the order of the scheme may be obtained by:
+!bt
+\begin{equation}
+label{eq:epsapprox}
+ n \approx \log2 \frac{\epsilon_{i}}{\epsilon_{i+1}}
+\end{equation}
+!et
+
 
 # u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right .
 
