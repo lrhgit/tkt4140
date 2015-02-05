@@ -1162,7 +1162,7 @@ $O(h)=O(\Delta t)$. Consequently if the timestep is divided by two,
 the error should also be divided by two.
 As errors normally are small values and are expected to be smaller and
 smaller for decreasing time steps, we normally do not plot the error
-itself, but rather the logaritm of the absolute value of the
+itself, but rather the logarithm of the absolute value of the
 error. The latter we do due to the fact that we are only interested in
 the order of magnitude of the error, whereas errors may be both
 positive and negative. As the initial value is always correct we
@@ -1481,7 +1481,7 @@ Let's implement the RK4 scheme and add it to the falling sphere example. The sch
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# define rk4 scheme@return z
 
-Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete programme _FallingSphereEulerHeunRK4.py_ is listed below. The functions `euler`, `heun` and `rk4` are imported from the programme _ODEschemes.py_. 
+Figure ref{fig:falling_sphere_euler_heun_rk4} shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete program _FallingSphereEulerHeunRK4.py_ is listed below. The functions `euler`, `heun` and `rk4` are imported from the program _ODEschemes.py_. 
 
 FIGURE:[chapter1/programs_and_modules/example_sphere_falling_euler_heun_rk4.png, width=400] Velocity of falling sphere using Euler, Heun and RK4. label{fig:falling_sphere_euler_heun_rk4}
 
@@ -1663,16 +1663,16 @@ The Euler scheme (ref{eq:1302}) is $O(h)$, whereas the Heun scheme
 (ref{eq:1403a}) is $O(h^2)$, and Runge-Kutta (ref{eq:1501}) is
 $O(h^4)$, where the $h$ denote a generic step size which for the
 current example is the timestep $\Delta t$. The order of a particular
-scheme is given exponent $n$ in the error term $O(h^n)$. Concequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
+scheme is given exponent $n$ in the error term $O(h^n)$. Consequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
 
-By letting $\epsilon_{i+1}$ and $\epsilon_i$ denote the errors on to consecutive grids with corresponding timpesteps $\displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2}$. The errors $\epsilon_{i+1}$ and $\epsilon_{i}$ for a scheme of order $n$ are then related by:
+By letting $\epsilon_{i+1}$ and $\epsilon_i$ denote the errors on to consecutive grids with corresponding timesteps $\displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2}$. The errors $\epsilon_{i+1}$ and $\epsilon_{i}$ for a scheme of order $n$ are then related by:
 !bt
 \begin{equation}
 label{eq:eps}
 \epsilon_{i+1} = \frac{1}{2^n} \epsilon_{i}
 \end{equation}
 !et
-Consequently, whenever  $\epsilon_{i+1}$ and $\epsilon_{i}$ are known from consequtive simulations and estimate of the order of the scheme may be obtained by:
+Consequently, whenever  $\epsilon_{i+1}$ and $\epsilon_{i}$ are known from consecutive simulations and estimate of the order of the scheme may be obtained by:
 !bt
 \begin{equation}
 label{eq:epsapprox}
@@ -1683,7 +1683,7 @@ label{eq:epsapprox}
 In the function `test_convergence` the schemes we will subject to a
 convergence test in a list `scheme_list`. This allows for a convenient
 loop over all schemes with the clause: `for scheme in
-scheme_list:`. Susequnently, for each scheme we refine the initial
+scheme_list:`. Subsequently, for each scheme we refine the initial
 grid (`N=30`) `Ndts` times in the loop `for i in range(Ndts+1)` and
 solve and compute the order estimate given by (ref{eq:epsapprox}) with
 the clause `order_approx.append(previous_max_log_err -
@@ -1704,17 +1704,16 @@ order_approx`. This allows for an illustrative plot of the order estimate for ea
 for key in all_scheme_orders:
             plot(N_list, (np.asarray(all_scheme_orders[key])))
 !ec
-and the resulting plot is shown in Figure ref{fig:convergence_rate} 
+and the resulting plot is shown in Figure ref{fig:convergence_rate}, and we see that our numerical approximations for the orders of our schemes approach the theoretical values as the number of timesteps increase (or as the timestep is reduced by a factor two consecutively).  
 FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
 
 
-The complete function `test_convergence` is 
-
+The complete function `test_convergence` is a part of the module `ODEschemes` and is isolated below:
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Function for convergence test@def plot_ODEschemes_solutions
 
 
-The complete module `ODEschemes` is listed below:
+The complete module `ODEschemes` is listed below and may easily be downloaded in your Eclipse/LiClipse IDE:
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py
 
 ${ebox()}

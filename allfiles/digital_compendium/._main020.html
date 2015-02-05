@@ -248,10 +248,10 @@ The Euler scheme <a href="._main010.html#mjx-eqn-41">(41)</a> is \( O(h) \), whe
 <a href="._main014.html#mjx-eqn-56">(56)</a> is \( O(h^2) \), and Runge-Kutta <a href="._main017.html#mjx-eqn-62">(62)</a> is
 \( O(h^4) \), where the \( h \) denote a generic step size which for the
 current example is the timestep \( \Delta t \). The order of a particular
-scheme is given exponent \( n \) in the error term \( O(h^n) \). Concequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
+scheme is given exponent \( n \) in the error term \( O(h^n) \). Consequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
 
 <p>
-By letting \( \epsilon_{i+1} \) and \( \epsilon_i \) denote the errors on to consecutive grids with corresponding timpesteps \( \displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2} \). The errors \( \epsilon_{i+1} \) and \( \epsilon_{i} \) for a scheme of order \( n \) are then related by:
+By letting \( \epsilon_{i+1} \) and \( \epsilon_i \) denote the errors on to consecutive grids with corresponding timesteps \( \displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2} \). The errors \( \epsilon_{i+1} \) and \( \epsilon_{i} \) for a scheme of order \( n \) are then related by:
 $$
 \begin{equation}
 \tag{74}
@@ -259,7 +259,7 @@ $$
 \end{equation}
 $$
 
-Consequently, whenever  \( \epsilon_{i+1} \) and \( \epsilon_{i} \) are known from consequtive simulations and estimate of the order of the scheme may be obtained by:
+Consequently, whenever  \( \epsilon_{i+1} \) and \( \epsilon_{i} \) are known from consecutive simulations and estimate of the order of the scheme may be obtained by:
 $$
 \begin{equation}
 \tag{75}
@@ -272,7 +272,7 @@ $$
 In the function <code>test_convergence</code> the schemes we will subject to a
 convergence test in a list <code>scheme_list</code>. This allows for a convenient
 loop over all schemes with the clause: <code>for scheme in
-scheme_list:</code>. Susequnently, for each scheme we refine the initial
+scheme_list:</code>. Subsequently, for each scheme we refine the initial
 grid (<code>N=30</code>) <code>Ndts</code> times in the loop <code>for i in range(Ndts+1)</code> and
 solve and compute the order estimate given by <a href="#mjx-eqn-75">(75)</a> with
 the clause <code>order_approx.append(previous_max_log_err -
@@ -297,7 +297,7 @@ order_approx</code>. This allows for an illustrative plot of the order estimate 
             plot(N_list, (np.asarray(all_scheme_orders[key])))
 </pre></div>
 <p>
-and the resulting plot is shown in Figure <a href="#fig:convergence_rate">13</a> 
+and the resulting plot is shown in Figure <a href="#fig:convergence_rate">13</a>, and we see that our numerical approximations for the orders of our schemes approach the theoretical values as the number of timesteps increase (or as the timestep is reduced by a factor two consecutively).  
 
 <p>
 <center> <!-- figure -->
@@ -306,7 +306,7 @@ and the resulting plot is shown in Figure <a href="#fig:convergence_rate">13</a>
 </center>
 
 <p>
-The complete function <code>test_convergence</code> is 
+The complete function <code>test_convergence</code> is a part of the module <code>ODEschemes</code> and is isolated below:
 
 <p>
 
@@ -381,7 +381,7 @@ The complete function <code>test_convergence</code> is
         savefig(<span style="color: #BA2121">&#39;ConvergenceODEschemes.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 <p>
-The complete module <code>ODEschemes</code> is listed below:
+The complete module <code>ODEschemes</code> is listed below and may easily be downloaded in your Eclipse/LiClipse IDE:
 <p>
 
 <!-- code=python (!bc pypro) typeset with pygments style "default" -->
