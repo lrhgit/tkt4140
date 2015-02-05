@@ -1648,7 +1648,39 @@ analytical solution is computed by `u_nonlin_analytical`:
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# f3 defines an ODE with ananlytical solution in u_nonlin_analytical@# Function for convergence test
 -----
 
-We have listed the function `test_convergence` below in will comment on some of the details with respect to implementation in the following.
+We have listed the function `test_convergence` below in will comment
+on some of the details with respect to implementation in the
+following.
+
+The basic idea for the convergence test is that we start out by
+solving numerically an ODE with an analytical solution on a relatively
+coarse grid, allowing for direct computations of the error. We then
+reduce the timestep by a factor two (or double the grid size),
+repeatedly, and compute the error for each grid and compare it with
+the error of previous grid.
+
+The Euler scheme (ref{eq:1302}) is $O(h)$, whereas the Heun scheme
+(ref{eq:1403a}) is $O(h^2)$, and Runge-Kutta (ref{eq:1501}) is
+$O(h^4)$, where the $h$ denote a generic step size which for the
+current example is the timestep $\Delta t$. The order of a particular
+scheme is given exponent $n$ in the error term $O(h^n)$. Concequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
+
+By letting $\epsilon_{i+1}$ and $\epsilon_i$ denote the errors on to consecutive grids with corresponding timpesteps $\displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2}$. The errors $\epsilon_{i+1}$ and $\epsilon_{i}$ for a scheme of order $n$ are then related by:
+!bt
+\begin{equation}
+label{eq:eps}
+\epsilon_{i+1} = \frac{1}{2^n} \epsilon_{i}
+\end{equation}
+!et
+Consequently, whenever  $\epsilon_{i+1}$ and $\epsilon_{i}$ are known from consequtive simulations and estimate of the order of the scheme may be obtained by:
+!bt
+\begin{equation}
+label{eq:epsapprox}
+ n \approx \log2 \frac{\epsilon_{i}}{\epsilon_{i+1}}
+\end{equation}
+!et
+
+
 # u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right .
 
 

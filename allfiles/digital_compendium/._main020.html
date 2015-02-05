@@ -231,7 +231,44 @@ analytical solution is computed by <code>u_nonlin_analytical</code>:
 <hr>
 
 <p>
-We have listed the function <code>test_convergence</code> below in will comment on some of the details with respect to implementation in the following.
+We have listed the function <code>test_convergence</code> below in will comment
+on some of the details with respect to implementation in the
+following.
+
+<p>
+The basic idea for the convergence test is that we start out by
+solving numerically an ODE with an analytical solution on a relatively
+coarse grid, allowing for direct computations of the error. We then
+reduce the timestep by a factor two (or double the grid size),
+repeatedly, and compute the error for each grid and compare it with
+the error of previous grid.
+
+<p>
+The Euler scheme <a href="._main010.html#mjx-eqn-41">(41)</a> is \( O(h) \), whereas the Heun scheme
+<a href="._main014.html#mjx-eqn-56">(56)</a> is \( O(h^2) \), and Runge-Kutta <a href="._main017.html#mjx-eqn-62">(62)</a> is
+\( O(h^4) \), where the \( h \) denote a generic step size which for the
+current example is the timestep \( \Delta t \). The order of a particular
+scheme is given exponent \( n \) in the error term \( O(h^n) \). Concequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
+
+<p>
+By letting \( \epsilon_{i+1} \) and \( \epsilon_i \) denote the errors on to consecutive grids with corresponding timpesteps \( \displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2} \). The errors \( \epsilon_{i+1} \) and \( \epsilon_{i} \) for a scheme of order \( n \) are then related by:
+$$
+\begin{equation}
+\tag{74}
+\epsilon_{i+1} = \frac{1}{2^n} \epsilon_{i}
+\end{equation}
+$$
+
+Consequently, whenever  \( \epsilon_{i+1} \) and \( \epsilon_{i} \) are known from consequtive simulations and estimate of the order of the scheme may be obtained by:
+$$
+\begin{equation}
+\tag{75}
+ n \approx \log2 \frac{\epsilon_{i}}{\epsilon_{i+1}}
+\end{equation}
+$$
+
+
+<p>
 <!-- u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right . -->
 
 <p>
@@ -239,7 +276,7 @@ We have listed the function <code>test_convergence</code> below in will comment 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
 <div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_convergence</span>():
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Test convergence rate of the methods &quot;&quot;&quot;</span>
-        <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace, size, <span style="color: #008000">abs</span>, log10, mean
+        <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace, size, <span style="color: #008000">abs</span>, log10, mean, log2
         figure()
         tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
         T <span style="color: #666666">=</span> <span style="color: #666666">8.0</span>   <span style="color: #408080; font-style: italic"># end of simulation</span>
@@ -264,7 +301,7 @@ We have listed the function <code>test_convergence</code> below in will comment 
             <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Ndts<span style="color: #666666">+1</span>):
                 z <span style="color: #666666">=</span> scheme(f3, z0, time)   
                 abs_error <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(u_nonlin_analytical(z0, time)<span style="color: #666666">-</span>z[:,<span style="color: #666666">0</span>])
-                log_error <span style="color: #666666">=</span> log10(abs_error[<span style="color: #666666">1</span>:]) <span style="color: #408080; font-style: italic"># Drop first element as it is always zero to avoid log10-problems</span>
+                log_error <span style="color: #666666">=</span> log2(abs_error[<span style="color: #666666">1</span>:]) <span style="color: #408080; font-style: italic"># Drop first element as it is always zero to avoid log10-problems</span>
                 max_log_err <span style="color: #666666">=</span> <span style="color: #008000">max</span>(log_error)
                 plot(time[<span style="color: #666666">1</span>:], log_error, linestyles[i]<span style="color: #666666">+</span>colors[iclr], markevery<span style="color: #666666">=</span>N<span style="color: #666666">/5</span>)
                 legends<span style="color: #666666">.</span>append(scheme<span style="color: #666666">.</span>func_name <span style="color: #666666">+</span><span style="color: #BA2121">&#39;: N = &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N))
@@ -296,19 +333,19 @@ We have listed the function <code>test_convergence</code> below in will comment 
         
         figure()
         <span style="color: #008000; font-weight: bold">for</span> key <span style="color: #AA22FF; font-weight: bold">in</span> all_errors:
-            plot(N_list, <span style="color: #666666">10**</span>(np<span style="color: #666666">.</span>asarray(all_errors[key])))
+            plot(N_list, (np<span style="color: #666666">.</span>asarray(all_errors[key])))
         
         <span style="color: #408080; font-style: italic"># Plot theoretical error reductions for first, second and fourth order schemes</span>
+        axhline(<span style="color: #666666">1.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         axhline(<span style="color: #666666">2.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         axhline(<span style="color: #666666">4.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
-        axhline(<span style="color: #666666">16.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         xticks(N_list)
         legends <span style="color: #666666">=</span> all_errors<span style="color: #666666">.</span>keys()
         legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;theoretical&#39;</span>) 
         legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
         xlabel(<span style="color: #BA2121">&#39;Number of unknowns&#39;</span>)
-        ylabel(<span style="color: #BA2121">&#39;Error reduction when reducing timestep by two&#39;</span>)
-        axis([<span style="color: #666666">0</span>, <span style="color: #008000">max</span>(N_list), <span style="color: #666666">0</span>, <span style="color: #666666">17</span>])
+        ylabel(<span style="color: #BA2121">&#39;Scheme order approximation&#39;</span>)
+        axis([<span style="color: #666666">0</span>, <span style="color: #008000">max</span>(N_list), <span style="color: #666666">0</span>, <span style="color: #666666">5</span>])
         savefig(<span style="color: #BA2121">&#39;ConvergenceODEschemes.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 </pre></div>
 <p>
@@ -517,7 +554,7 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
     <span style="color: #408080; font-style: italic"># Function for convergence test</span>
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_convergence</span>():
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Test convergence rate of the methods &quot;&quot;&quot;</span>
-        <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace, size, <span style="color: #008000">abs</span>, log10, mean
+        <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace, size, <span style="color: #008000">abs</span>, log10, mean, log2
         figure()
         tol <span style="color: #666666">=</span> <span style="color: #666666">1E-15</span>
         T <span style="color: #666666">=</span> <span style="color: #666666">8.0</span>   <span style="color: #408080; font-style: italic"># end of simulation</span>
@@ -542,7 +579,7 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
             <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(Ndts<span style="color: #666666">+1</span>):
                 z <span style="color: #666666">=</span> scheme(f3, z0, time)   
                 abs_error <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(u_nonlin_analytical(z0, time)<span style="color: #666666">-</span>z[:,<span style="color: #666666">0</span>])
-                log_error <span style="color: #666666">=</span> log10(abs_error[<span style="color: #666666">1</span>:]) <span style="color: #408080; font-style: italic"># Drop first element as it is always zero to avoid log10-problems</span>
+                log_error <span style="color: #666666">=</span> log2(abs_error[<span style="color: #666666">1</span>:]) <span style="color: #408080; font-style: italic"># Drop first element as it is always zero to avoid log10-problems</span>
                 max_log_err <span style="color: #666666">=</span> <span style="color: #008000">max</span>(log_error)
                 plot(time[<span style="color: #666666">1</span>:], log_error, linestyles[i]<span style="color: #666666">+</span>colors[iclr], markevery<span style="color: #666666">=</span>N<span style="color: #666666">/5</span>)
                 legends<span style="color: #666666">.</span>append(scheme<span style="color: #666666">.</span>func_name <span style="color: #666666">+</span><span style="color: #BA2121">&#39;: N = &#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(N))
@@ -574,19 +611,19 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
         
         figure()
         <span style="color: #008000; font-weight: bold">for</span> key <span style="color: #AA22FF; font-weight: bold">in</span> all_errors:
-            plot(N_list, <span style="color: #666666">10**</span>(np<span style="color: #666666">.</span>asarray(all_errors[key])))
+            plot(N_list, (np<span style="color: #666666">.</span>asarray(all_errors[key])))
         
         <span style="color: #408080; font-style: italic"># Plot theoretical error reductions for first, second and fourth order schemes</span>
+        axhline(<span style="color: #666666">1.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         axhline(<span style="color: #666666">2.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         axhline(<span style="color: #666666">4.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
-        axhline(<span style="color: #666666">16.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         xticks(N_list)
         legends <span style="color: #666666">=</span> all_errors<span style="color: #666666">.</span>keys()
         legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;theoretical&#39;</span>) 
         legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
         xlabel(<span style="color: #BA2121">&#39;Number of unknowns&#39;</span>)
-        ylabel(<span style="color: #BA2121">&#39;Error reduction when reducing timestep by two&#39;</span>)
-        axis([<span style="color: #666666">0</span>, <span style="color: #008000">max</span>(N_list), <span style="color: #666666">0</span>, <span style="color: #666666">17</span>])
+        ylabel(<span style="color: #BA2121">&#39;Scheme order approximation&#39;</span>)
+        axis([<span style="color: #666666">0</span>, <span style="color: #008000">max</span>(N_list), <span style="color: #666666">0</span>, <span style="color: #666666">5</span>])
         savefig(<span style="color: #BA2121">&#39;ConvergenceODEschemes.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
         
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_ODEschemes_solutions</span>():
@@ -610,8 +647,6 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
 
         plot(time, u_nonlin_analytical(z0, time))
         legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;analytical&#39;</span>)
-
-
         legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
 
 
