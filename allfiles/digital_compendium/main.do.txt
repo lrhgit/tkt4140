@@ -1708,13 +1708,12 @@ and the resulting plot is shown in Figure ref{fig:convergence_rate}
 FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
 
 
-The complete function `test_convergence` is 
-
+The complete function `test_convergence` is a part of the module `ODEschemes` and is isolated below:
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Function for convergence test@def plot_ODEschemes_solutions
 
 
-The complete module `ODEschemes` is listed below:
+The complete module `ODEschemes` is listed below and may easily be downloaded in your Eclipse/LiClipse IDE:
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py
 
 ${ebox()}
