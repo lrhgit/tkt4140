@@ -1676,11 +1676,30 @@ Consequently, whenever  $\epsilon_{i+1}$ and $\epsilon_{i}$ are known from conse
 !bt
 \begin{equation}
 label{eq:epsapprox}
- n \approx \log2 \frac{\epsilon_{i}}{\epsilon_{i+1}}
+ n \approx \log_2 \frac{\epsilon_{i}}{\epsilon_{i+1}}
 \end{equation}
 !et
 
+In the function `test_convergence` the schemes we will subject to a
+convergence test in a list `scheme_list`. This allows for a convenient
+loop over all schemes with the clause: `for scheme in
+scheme_list:`. Susequnently, for each scheme we refine the initial
+grid (`N=30`) `Ndts` times in the loop `for i in range(Ndts+1)` and
+solve and compute the order estimate given by (ref{eq:epsapprox}) with
+the clause `order_approx.append(previous_max_log_err -
+max_log_err)`. Note that we can not compute this for the first
+iteration (`i=0`), and that we use a an initial empty list
+`order_approx` to store the approximation of the order `n` for each
+grid refinement.
 
+Having completed the given number of refinements for a specific scheme
+we store the `order_approx` for the scheme in a dictionary using the
+name of the scheme as a key by `all_scheme_orders[scheme.func_name] =
+order_approx`. This allows for an illustrative plot of the order estimate for each scheme with the clause 
+!bc
+for key in all_scheme_orders:
+            plot(N_list, (np.asarray(all_scheme_orders[key])))
+!ec
 # u &= \left { \left (u_0 + \frac{b}{a} \right) e^{a\, t} -\frac{b}{a}, \quad a \neq 0 \right .
 
 
