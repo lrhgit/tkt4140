@@ -204,7 +204,7 @@ if __name__ == '__main__':
 #        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
         scheme_list =[euler, heun, rk4]
         legends=[]
-        all_errors={}
+        all_scheme_orders={}
         
         colors = ['r', 'g', 'b', 'm', 'k', 'y', 'c']
         linestyles = ['-', '--', '-.', ':', 'v--', '*-.']
@@ -213,29 +213,29 @@ if __name__ == '__main__':
             N = 30    # no of time steps
             time = linspace(0, T, N+1)
 
-            error_diff = []
+            order_approx = []
             
             for i in range(Ndts+1):
                 z = scheme(f3, z0, time)   
                 abs_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
-                log_error = log2(abs_error[1:]) # Drop first element as it is always zero to avoid log10-problems
+                log_error = log2(abs_error[1:]) # Drop first element to avoid log2-problems (first elt is zero)
                 max_log_err = max(log_error)
                 plot(time[1:], log_error, linestyles[i]+colors[iclr], markevery=N/5)
                 legends.append(scheme.func_name +': N = ' + str(N))
                 hold('on')
                 
-                if i > 0: # Compute the log10 error difference
-                    error_diff.append(previous_max_log_err - max_log_err) 
+                if i > 0: # Compute the log2 error difference
+                    order_approx.append(previous_max_log_err - max_log_err) 
                 previous_max_log_err = max_log_err
                 
                 
                 N *=2
                 time = linspace(0, T, N+1)
             
-            all_errors[scheme.func_name] = error_diff
-#             print error_diff
-#             print mean(error_diff), 10**(mean(error_diff)), error_diff
-#             print 10**np.asarray(error_diff)
+            all_scheme_orders[scheme.func_name] = order_approx
+#             print order_approx
+#             print mean(order_approx), 10**(mean(order_approx)), order_approx
+#             print 10**np.asarray(order_approx)
             iclr += 1
 
         legend(legends, loc='best')
@@ -249,15 +249,15 @@ if __name__ == '__main__':
 #         print N_list         
         
         figure()
-        for key in all_errors:
-            plot(N_list, (np.asarray(all_errors[key])))
+        for key in all_scheme_orders:
+            plot(N_list, (np.asarray(all_scheme_orders[key])))
         
         # Plot theoretical error reductions for first, second and fourth order schemes
         axhline(1.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(2.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(4.0, xmin=0, xmax=N, linestyle=':', color='k')
         xticks(N_list)
-        legends = all_errors.keys()
+        legends = all_scheme_orders.keys()
         legends.append('theoretical') 
         legend(legends, loc='best', frameon=False)
         xlabel('Number of unknowns')
