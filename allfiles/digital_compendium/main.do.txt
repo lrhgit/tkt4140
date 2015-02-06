@@ -1713,4 +1713,7 @@ The complete module `ODEschemes` is listed below and may easily be downloaded in
 
 ${ebox()}
 
+!split
+========= References =========
+
 BIBFILE: references/papers.pub
