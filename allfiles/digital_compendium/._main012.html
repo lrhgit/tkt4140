@@ -72,8 +72,8 @@ Automatically generated HTML file from DocOnce source
                u'ex:falling_sphere'),
               (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
-               None,
-               '___sec14'),
+               u'ex:num_error',
+               u'ex:num_error'),
               (u" Euler's method for a system ", 3, None, '___sec15'),
               (u" Heun's method ", 1, None, '___sec16'),
               (u" Example 5: Newton's equation ", 2, None, '___sec17'),
@@ -188,7 +188,7 @@ MathJax.Hub.Config({
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec14">Example 4: Numerical error as a function of \( \Delta t \) </h2>
+<h2 id="ex:num_error">Example 4: Numerical error as a function of \( \Delta t \)</h2>
 
 <p>
 In this example we will assess how the error of our implementation of
@@ -207,7 +207,7 @@ Euler's method is a first order method and we expect the error to be
 the error should also be divided by two.
 As errors normally are small values and are expected to be smaller and
 smaller for decreasing time steps, we normally do not plot the error
-itself, but rather the logaritm of the absolute value of the
+itself, but rather the logarithm of the absolute value of the
 error. The latter we do due to the fact that we are only interested in
 the order of magnitude of the error, whereas errors may be both
 positive and negative. As the initial value is always correct we

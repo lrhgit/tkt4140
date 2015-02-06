@@ -175,6 +175,7 @@ if __name__ == '__main__':
             msg = '%s failed with error = %g' % (scheme.func_name, max_error)
             assert max_error < tol, msg
 
+    # f3 defines an ODE with ananlytical solution in u_nonlin_analytical
     def f3(z, t,a=2.0,b=-1.0):
         """ """
         return a*z + b
@@ -192,7 +193,7 @@ if __name__ == '__main__':
     # Function for convergence test
     def test_convergence():
         """ Test convergence rate of the methods """
-        from numpy import linspace, size, abs, log10, mean
+        from numpy import linspace, size, abs, log10, mean, log2
         figure()
         tol = 1E-15
         T = 8.0   # end of simulation
@@ -203,7 +204,7 @@ if __name__ == '__main__':
 #        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
         scheme_list =[euler, heun, rk4]
         legends=[]
-        all_errors={}
+        all_scheme_orders={}
         
         colors = ['r', 'g', 'b', 'm', 'k', 'y', 'c']
         linestyles = ['-', '--', '-.', ':', 'v--', '*-.']
@@ -212,29 +213,25 @@ if __name__ == '__main__':
             N = 30    # no of time steps
             time = linspace(0, T, N+1)
 
-            error_diff = []
+            order_approx = []
             
             for i in range(Ndts+1):
                 z = scheme(f3, z0, time)   
                 abs_error = abs(u_nonlin_analytical(z0, time)-z[:,0])
-                log_error = log10(abs_error[1:]) # Drop first element as it is always zero to avoid log10-problems
+                log_error = log2(abs_error[1:]) # Drop 1st elt to avoid log2-problems (1st elt is zero)
                 max_log_err = max(log_error)
                 plot(time[1:], log_error, linestyles[i]+colors[iclr], markevery=N/5)
                 legends.append(scheme.func_name +': N = ' + str(N))
                 hold('on')
                 
-                if i > 0: # Compute the log10 error difference
-                    error_diff.append(previous_max_log_err - max_log_err) 
+                if i > 0: # Compute the log2 error difference
+                    order_approx.append(previous_max_log_err - max_log_err) 
                 previous_max_log_err = max_log_err
-                
-                
+
                 N *=2
                 time = linspace(0, T, N+1)
             
-            all_errors[scheme.func_name] = error_diff
-#             print error_diff
-#             print mean(error_diff), 10**(mean(error_diff)), error_diff
-#             print 10**np.asarray(error_diff)
+            all_scheme_orders[scheme.func_name] = order_approx
             iclr += 1
 
         legend(legends, loc='best')
@@ -245,23 +242,22 @@ if __name__ == '__main__':
         N = N/2**Ndts
         N_list = [N*2**i for i in range(1, Ndts+1)]
         N_list = np.asarray(N_list)
-#         print N_list         
         
         figure()
-        for key in all_errors:
-            plot(N_list, 10**(np.asarray(all_errors[key])))
+        for key in all_scheme_orders:
+            plot(N_list, (np.asarray(all_scheme_orders[key])))
         
-        # Plot theoretical error reductions for first, second and fourth order schemes
+        # Plot theoretical n for 1st, 2nd and 4th order schemes
+        axhline(1.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(2.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(4.0, xmin=0, xmax=N, linestyle=':', color='k')
-        axhline(16.0, xmin=0, xmax=N, linestyle=':', color='k')
         xticks(N_list)
-        legends = all_errors.keys()
+        legends = all_scheme_orders.keys()
         legends.append('theoretical') 
         legend(legends, loc='best', frameon=False)
         xlabel('Number of unknowns')
-        ylabel('Error reduction when reducing timestep by two')
-        axis([0, max(N_list), 0, 17])
+        ylabel('Scheme order approximation')
+        axis([0, max(N_list), 0, 5])
         savefig('ConvergenceODEschemes.png', transparent=True)
         
     def plot_ODEschemes_solutions():
@@ -285,8 +281,6 @@ if __name__ == '__main__':
 
         plot(time, u_nonlin_analytical(z0, time))
         legends.append('analytical')
-
-
         legend(legends, loc='best', frameon=False)
 
 

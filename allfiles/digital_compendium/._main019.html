@@ -72,8 +72,8 @@ Automatically generated HTML file from DocOnce source
                u'ex:falling_sphere'),
               (u' Example 4: Numerical error as a function of $\\Delta t$ ',
                2,
-               None,
-               '___sec14'),
+               u'ex:num_error',
+               u'ex:num_error'),
               (u" Euler's method for a system ", 3, None, '___sec15'),
               (u" Heun's method ", 1, None, '___sec16'),
               (u" Example 5: Newton's equation ", 2, None, '___sec17'),
@@ -229,7 +229,7 @@ $$
 
 
 <p>
-We assume that the particle is a sphere, such that \( C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd} \) as in <a href="._main005.html#example:sphere_freefall">Example 2: Sphere in free fall</a>. Here \( d \) is the diameter of the sphere and \( \rho_k \) the density of the sphere.
+We assume that the particle is a sphere, such that \( C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd} \) as in (<a href="._main005.html#example:sphere_freefall">Example 2: Sphere in free fall</a>). Here \( d \) is the diameter of the sphere and \( \rho_k \) the density of the sphere.
 
 <p>
 Now <a href="#mjx-eqn-66">(66)</a> and <a href="#mjx-eqn-67">(67)</a> become
@@ -314,7 +314,7 @@ The right hand side in <a href="#mjx-eqn-71">(71)</a> is implemented as the foll
     zout[:] <span style="color: #666666">=</span> [z[<span style="color: #666666">2</span>], z[<span style="color: #666666">3</span>], <span style="color: #666666">-</span>C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(CD<span style="color: #666666">*</span>vrx), C<span style="color: #666666">*</span>vr<span style="color: #666666">*</span>(<span style="color: #666666">-</span>CD<span style="color: #666666">*</span>vry) <span style="color: #666666">-</span> g]
 </pre></div>
 <p>
-Note that we have used the function <code>cd_sphere()</code> defined in <a href="._main005.html#example:sphere_freefall">Example 2: Sphere in free fall</a> to calculate the drag coefficient of the smooth sphere.
+Note that we have used the function <code>cd_sphere()</code> defined in (<a href="._main005.html#example:sphere_freefall">Example 2: Sphere in free fall</a>) to calculate the drag coefficient of the smooth sphere.
 
 <p>
 The results are shown for some initial angles in Figure <a href="#fig:smooth_ball_drag">11</a>.
