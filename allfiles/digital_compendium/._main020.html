@@ -229,7 +229,7 @@ analytical solution is computed by <code>u_nonlin_analytical</code>:
 </pre></div>
 <p>
 <hr>
-The basic idea for the convergence test in  the function <code>test_convergence</code> is that we start out by
+The basic idea for the convergence test in  the function <code>convergence_test</code> is that we start out by
 solving numerically an ODE with an analytical solution on a relatively
 coarse grid, allowing for direct computations of the error. We then
 reduce the timestep by a factor two (or double the grid size),
@@ -262,7 +262,7 @@ $$
 
 
 <p>
-In the function <code>test_convergence</code> the schemes we will subject to a
+In the function <code>convergence_test</code> the schemes we will subject to a
 convergence test in a list <code>scheme_list</code>. This allows for a convenient
 loop over all schemes with the clause: <code>for scheme in
 scheme_list:</code>. Subsequently, for each scheme we refine the initial
@@ -281,13 +281,13 @@ to the legends-list <code>legends.append(scheme.func_name +': N = ' + str(N))</c
 <p>
 Having completed the given number of refinements <code>Ndts</code> for a specific scheme
 we store the <code>order_approx</code> for the scheme in a dictionary using the
-name of the scheme as a key by <code>all_scheme_orders[scheme.func_name] =
+name of the scheme as a key by <code>schemes_orders[scheme.func_name] =
 order_approx</code>. This allows for an illustrative plot of the order estimate for each scheme with the clause:
 <p>
 
 <!-- code=text typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">for key in all_scheme_orders:
-            plot(N_list, (np.asarray(all_scheme_orders[key])))
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">for key in schemes_orders:
+            plot(N_list, (np.asarray(schemes_orders[key])))
 </pre></div>
 <p>
 and the resulting plot is shown in Figure <a href="#fig:convergence_rate">13</a>, and we see that our numerical approximations for the orders of our schemes approach the theoretical values as the number of timesteps increase (or as the timestep is reduced by a factor two consecutively).  
@@ -299,12 +299,12 @@ and the resulting plot is shown in Figure <a href="#fig:convergence_rate">13</a>
 </center>
 
 <p>
-The complete function <code>test_convergence</code> is a part of the module <code>ODEschemes</code> and is isolated below:
+The complete function <code>convergence_test</code> is a part of the module <code>ODEschemes</code> and is isolated below:
 
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_convergence</span>():
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">convergence_test</span>():
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Test convergence rate of the methods &quot;&quot;&quot;</span>
         <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace, size, <span style="color: #008000">abs</span>, log10, mean, log2
         figure()
@@ -314,15 +314,14 @@ The complete function <code>test_convergence</code> is a part of the module <cod
 
         z0 <span style="color: #666666">=</span> <span style="color: #666666">2</span>
 
-<span style="color: #408080; font-style: italic">#        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]</span>
-        scheme_list <span style="color: #666666">=</span>[euler, heun, rk4]
+        schemes <span style="color: #666666">=</span>[euler, heun, rk4]
         legends<span style="color: #666666">=</span>[]
-        all_scheme_orders<span style="color: #666666">=</span>{}
+        schemes_order<span style="color: #666666">=</span>{}
         
         colors <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;r&#39;</span>, <span style="color: #BA2121">&#39;g&#39;</span>, <span style="color: #BA2121">&#39;b&#39;</span>, <span style="color: #BA2121">&#39;m&#39;</span>, <span style="color: #BA2121">&#39;k&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>, <span style="color: #BA2121">&#39;c&#39;</span>]
         linestyles <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;-&#39;</span>, <span style="color: #BA2121">&#39;--&#39;</span>, <span style="color: #BA2121">&#39;-.&#39;</span>, <span style="color: #BA2121">&#39;:&#39;</span>, <span style="color: #BA2121">&#39;v--&#39;</span>, <span style="color: #BA2121">&#39;*-.&#39;</span>]
         iclr <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> scheme_list:
+        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> schemes:
             N <span style="color: #666666">=</span> <span style="color: #666666">30</span>    <span style="color: #408080; font-style: italic"># no of time steps</span>
             time <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
 
@@ -344,7 +343,7 @@ The complete function <code>test_convergence</code> is a part of the module <cod
                 N <span style="color: #666666">*=2</span>
                 time <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
             
-            all_scheme_orders[scheme<span style="color: #666666">.</span>func_name] <span style="color: #666666">=</span> order_approx
+            schemes_order[scheme<span style="color: #666666">.</span>func_name] <span style="color: #666666">=</span> order_approx
             iclr <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
 
         legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>)
@@ -357,15 +356,15 @@ The complete function <code>test_convergence</code> is a part of the module <cod
         N_list <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(N_list)
         
         figure()
-        <span style="color: #008000; font-weight: bold">for</span> key <span style="color: #AA22FF; font-weight: bold">in</span> all_scheme_orders:
-            plot(N_list, (np<span style="color: #666666">.</span>asarray(all_scheme_orders[key])))
+        <span style="color: #008000; font-weight: bold">for</span> key <span style="color: #AA22FF; font-weight: bold">in</span> schemes_order:
+            plot(N_list, (np<span style="color: #666666">.</span>asarray(schemes_order[key])))
         
         <span style="color: #408080; font-style: italic"># Plot theoretical n for 1st, 2nd and 4th order schemes</span>
         axhline(<span style="color: #666666">1.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         axhline(<span style="color: #666666">2.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         axhline(<span style="color: #666666">4.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         xticks(N_list)
-        legends <span style="color: #666666">=</span> all_scheme_orders<span style="color: #666666">.</span>keys()
+        legends <span style="color: #666666">=</span> schemes_order<span style="color: #666666">.</span>keys()
         legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;theoretical&#39;</span>) 
         legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
         xlabel(<span style="color: #BA2121">&#39;Number of unknowns&#39;</span>)
@@ -406,55 +405,6 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
 
     <span style="color: #008000; font-weight: bold">return</span> z
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler2</span>(func, z0, time):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs.</span>
-<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions,</span>
-<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns</span>
-<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
-
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f_np</span>(z,t):
-        <span style="color: #008000; font-weight: bold">return</span> np<span style="color: #666666">.</span>asarray(func(z, t))
-
-    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time), np<span style="color: #666666">.</span>size(z0)))
-    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
-
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> t
-        z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> f_np(z[i,:],t)<span style="color: #666666">*</span>dt
-
-    <span style="color: #008000; font-weight: bold">return</span> z
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler3</span>(func, z0, time):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs.</span>
-<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions,</span>
-<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns</span>
-<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
-
-    time_local <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(time)
-    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time_local), np<span style="color: #666666">.</span>size(z0)))
-    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> <span style="color: #008000">float</span>(z0)
-
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time_local[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
-        dt <span style="color: #666666">=</span> time_local[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> t
-        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:], t))<span style="color: #666666">*</span>dt
-
-    <span style="color: #008000; font-weight: bold">return</span> z
-
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">euler4</span>(func, z0, time):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Euler scheme for solution of systems of ODEs.</span>
-<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions,</span>
-<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns</span>
-<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
-
-    time_local <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(time)
-    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time_local), np<span style="color: #666666">.</span>size(z0)))
-    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> <span style="color: #008000">float</span>(z0)
-
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time_local[<span style="color: #666666">1</span>:]):
-        dt <span style="color: #666666">=</span> t <span style="color: #666666">-</span> time_local[i]
-        z[i<span style="color: #666666">+1</span>,:]<span style="color: #666666">=</span>z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:], time_local[i]))<span style="color: #666666">*</span>dt
-
-    <span style="color: #008000; font-weight: bold">return</span> z
 
 <span style="color: #408080; font-style: italic"># define Heun solver</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun</span>(func, z0, time):
@@ -479,22 +429,6 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
 
     <span style="color: #008000; font-weight: bold">return</span> z
 
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">heun2</span>(func, z0, time):
-    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;The Heun scheme for solution of systems of ODEs.</span>
-<span style="color: #BA2121; font-style: italic">    z0 is a vector for the initial conditions,</span>
-<span style="color: #BA2121; font-style: italic">    the right hand side of the system is represented by func which returns</span>
-<span style="color: #BA2121; font-style: italic">    a vector with the same size as z0 .&quot;&quot;&quot;</span>
-
-    z <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((np<span style="color: #666666">.</span>size(time), np<span style="color: #666666">.</span>size(z0)))
-    z[<span style="color: #666666">0</span>,:] <span style="color: #666666">=</span> z0
-    zp <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(z0)
-
-    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">0</span>:<span style="color: #666666">-1</span>]):
-        dt <span style="color: #666666">=</span> time[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> time[i]
-        zp <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(z[i,:],t))<span style="color: #666666">*</span>dt   <span style="color: #408080; font-style: italic"># Predictor step</span>
-        z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> (np<span style="color: #666666">.</span>asarray(func(z[i,:],t)) <span style="color: #666666">+</span> np<span style="color: #666666">.</span>asarray(func(zp,t<span style="color: #666666">+</span>dt)))<span style="color: #666666">*</span>dt<span style="color: #666666">/2.0</span> <span style="color: #408080; font-style: italic"># Corrector step</span>
-
-    <span style="color: #008000; font-weight: bold">return</span> z
 
 <span style="color: #408080; font-style: italic"># define rk4 scheme</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">rk4</span>(func, z0, time):
@@ -547,9 +481,9 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
         z0 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #666666">1</span>)
         z0[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> u_exact(<span style="color: #666666">0.0</span>)
 
-        scheme_list  <span style="color: #666666">=</span> [euler, euler2, euler3, euler4, heun, heun2, rk4]
+        scheme  <span style="color: #666666">=</span> [euler, heun, rk4]
 
-        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> scheme_list:
+        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> scheme:
             z <span style="color: #666666">=</span> scheme(f, z0, time)
             max_error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>max(u_exact(time) <span style="color: #666666">-</span> z[:,<span style="color: #666666">0</span>])
             msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> failed with error = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (scheme<span style="color: #666666">.</span>func_name, max_error)
@@ -568,10 +502,9 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
         <span style="color: #008000; font-weight: bold">else</span>:
             <span style="color: #008000; font-weight: bold">return</span> u0 <span style="color: #666666">+</span> b<span style="color: #666666">*</span>t
             
- 
-        
+         
     <span style="color: #408080; font-style: italic"># Function for convergence test</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_convergence</span>():
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">convergence_test</span>():
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; Test convergence rate of the methods &quot;&quot;&quot;</span>
         <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace, size, <span style="color: #008000">abs</span>, log10, mean, log2
         figure()
@@ -581,15 +514,14 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
 
         z0 <span style="color: #666666">=</span> <span style="color: #666666">2</span>
 
-<span style="color: #408080; font-style: italic">#        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]</span>
-        scheme_list <span style="color: #666666">=</span>[euler, heun, rk4]
+        schemes <span style="color: #666666">=</span>[euler, heun, rk4]
         legends<span style="color: #666666">=</span>[]
-        all_scheme_orders<span style="color: #666666">=</span>{}
+        schemes_order<span style="color: #666666">=</span>{}
         
         colors <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;r&#39;</span>, <span style="color: #BA2121">&#39;g&#39;</span>, <span style="color: #BA2121">&#39;b&#39;</span>, <span style="color: #BA2121">&#39;m&#39;</span>, <span style="color: #BA2121">&#39;k&#39;</span>, <span style="color: #BA2121">&#39;y&#39;</span>, <span style="color: #BA2121">&#39;c&#39;</span>]
         linestyles <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;-&#39;</span>, <span style="color: #BA2121">&#39;--&#39;</span>, <span style="color: #BA2121">&#39;-.&#39;</span>, <span style="color: #BA2121">&#39;:&#39;</span>, <span style="color: #BA2121">&#39;v--&#39;</span>, <span style="color: #BA2121">&#39;*-.&#39;</span>]
         iclr <span style="color: #666666">=</span> <span style="color: #666666">0</span>
-        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> scheme_list:
+        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> schemes:
             N <span style="color: #666666">=</span> <span style="color: #666666">30</span>    <span style="color: #408080; font-style: italic"># no of time steps</span>
             time <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
 
@@ -611,7 +543,7 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
                 N <span style="color: #666666">*=2</span>
                 time <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
             
-            all_scheme_orders[scheme<span style="color: #666666">.</span>func_name] <span style="color: #666666">=</span> order_approx
+            schemes_order[scheme<span style="color: #666666">.</span>func_name] <span style="color: #666666">=</span> order_approx
             iclr <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
 
         legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>)
@@ -624,15 +556,15 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
         N_list <span style="color: #666666">=</span> np<span style="color: #666666">.</span>asarray(N_list)
         
         figure()
-        <span style="color: #008000; font-weight: bold">for</span> key <span style="color: #AA22FF; font-weight: bold">in</span> all_scheme_orders:
-            plot(N_list, (np<span style="color: #666666">.</span>asarray(all_scheme_orders[key])))
+        <span style="color: #008000; font-weight: bold">for</span> key <span style="color: #AA22FF; font-weight: bold">in</span> schemes_order:
+            plot(N_list, (np<span style="color: #666666">.</span>asarray(schemes_order[key])))
         
         <span style="color: #408080; font-style: italic"># Plot theoretical n for 1st, 2nd and 4th order schemes</span>
         axhline(<span style="color: #666666">1.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         axhline(<span style="color: #666666">2.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         axhline(<span style="color: #666666">4.0</span>, xmin<span style="color: #666666">=0</span>, xmax<span style="color: #666666">=</span>N, linestyle<span style="color: #666666">=</span><span style="color: #BA2121">&#39;:&#39;</span>, color<span style="color: #666666">=</span><span style="color: #BA2121">&#39;k&#39;</span>)
         xticks(N_list)
-        legends <span style="color: #666666">=</span> all_scheme_orders<span style="color: #666666">.</span>keys()
+        legends <span style="color: #666666">=</span> schemes_order<span style="color: #666666">.</span>keys()
         legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;theoretical&#39;</span>) 
         legend(legends, loc<span style="color: #666666">=</span><span style="color: #BA2121">&#39;best&#39;</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
         xlabel(<span style="color: #BA2121">&#39;Number of unknowns&#39;</span>)
@@ -641,7 +573,7 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
         savefig(<span style="color: #BA2121">&#39;ConvergenceODEschemes.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
         
     <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_ODEschemes_solutions</span>():
-        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Plot the solutions for the test schemes in scheme_list&quot;&quot;&quot;</span>
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Plot the solutions for the test schemes in schemes&quot;&quot;&quot;</span>
         <span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> linspace
         figure()
         T <span style="color: #666666">=</span> <span style="color: #666666">1.5</span>  <span style="color: #408080; font-style: italic"># end of simulation</span>
@@ -649,12 +581,11 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
         time <span style="color: #666666">=</span> linspace(<span style="color: #666666">0</span>, T, N<span style="color: #666666">+1</span>)
 
         z0 <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
-        <span style="color: #408080; font-style: italic">#scheme_list  = [euler,euler2, euler3, euler4,heun, heun2, rk4]</span>
-        scheme_list  <span style="color: #666666">=</span> [euler, heun, rk4]
+
+        schemes  <span style="color: #666666">=</span> [euler, heun, rk4]
         legends <span style="color: #666666">=</span> []
 
-
-        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> scheme_list:
+        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> schemes:
             z <span style="color: #666666">=</span> scheme(f3, z0, time)
             plot(time, z[:,<span style="color: #666666">-1</span>])
             legends<span style="color: #666666">.</span>append(scheme<span style="color: #666666">.</span>func_name)
@@ -665,9 +596,8 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
 
 
     test_ODEschemes()
-    test_convergence()
+    convergence_test()
     plot_ODEschemes_solutions()
-<span style="color: #408080; font-style: italic">#     print rcParams.keys()</span>
     show()
 </pre></div>
 <p>

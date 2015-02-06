@@ -219,5 +219,4 @@ if __name__ == '__main__':
     test_ODEschemes()
     convergence_test()
     plot_ODEschemes_solutions()
-#     print rcParams.keys()
     show()
