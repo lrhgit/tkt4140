@@ -1660,32 +1660,32 @@ $O(h^4)$, where the $h$ denote a generic step size which for the
 current example is the timestep $\Delta t$. The order of a particular
 scheme is given exponent $n$ in the error term $O(h^n)$. Consequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
 
-By letting $\epsilon_{i+1}$ and $\epsilon_i$ denote the errors on to consecutive grids with corresponding timesteps $\displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2}$. The errors $\epsilon_{i+1}$ and $\epsilon_{i}$ for a scheme of order $n$ are then related by:
+By letting $\epsilon_{i+1}$ and $\epsilon_i$ denote the errors on two consecutive grids with corresponding timesteps $\displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2}$. The errors $\epsilon_{i+1}$ and $\epsilon_{i}$ for a scheme of order $n$ are then related by:
 !bt
 \begin{equation}
 label{eq:eps}
 \epsilon_{i+1} = \frac{1}{2^n} \epsilon_{i}
 \end{equation}
 !et
-Consequently, whenever  $\epsilon_{i+1}$ and $\epsilon_{i}$ are known from consecutive simulations and estimate of the order of the scheme may be obtained by:
+Consequently, whenever  $\epsilon_{i+1}$ and $\epsilon_{i}$ are known from consecutive simulations an estimate of the order of the scheme may be obtained by:
 !bt
 \begin{equation}
 label{eq:epsapprox}
  n \approx \log_2 \frac{\epsilon_{i}}{\epsilon_{i+1}}
 \end{equation}
 !et
+The theoretical value of $n$ is thus $n=1$ for Euler's method, $n=2$ for Heun's method and $n=4$ for RK4.
 
 In the function `convergence_test` the schemes we will subject to a
-convergence test in a list `scheme_list`. This allows for a convenient
-loop over all schemes with the clause: `for scheme in
+convergence test is ordered in a list `scheme_list`. This allows for a convenient loop over all schemes with the clause: `for scheme in
 scheme_list:`. Subsequently, for each scheme we refine the initial
-grid (`N=30`) `Ndts` times in the loop `for i in range(Ndts+1)` and
+grid (`N=30`) `Ndts` times in the loop `for i in range(Ndts+1):` and
 solve and compute the order estimate given by (ref{eq:epsapprox}) with
 the clause `order_approx.append(previous_max_log_err -
 max_log_err)`. Note that we can not compute this for the first
 iteration (`i=0`), and that we use a an initial empty list
 `order_approx` to store the approximation of the order `n` for each
-grid refinement. For each grid and for each grid we plot the
+grid refinement. For each grid we plot
 $\log_2(\epsilon)$ as a function of time with: `plot(time[1:],
 log_error, linestyles[i]+colors[iclr], markevery=N/5)` and for each
 plot we construct the corresponding legend by appending a new element
@@ -1695,7 +1695,7 @@ Having completed the given number of refinements `Ndts` for a specific scheme
 we store the `order_approx` for the scheme in a dictionary using the
 name of the scheme as a key by `schemes_orders[scheme.func_name] =
 order_approx`. This allows for an illustrative plot of the order estimate for each scheme with the clause:
-!bc
+!bc pycod
 for key in schemes_orders:
             plot(N_list, (np.asarray(schemes_orders[key])))
 !ec
@@ -1712,5 +1712,8 @@ The complete module `ODEschemes` is listed below and may easily be downloaded in
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py
 
 ${ebox()}
+
+!split
+========= References =========
 
 BIBFILE: references/papers.pub
