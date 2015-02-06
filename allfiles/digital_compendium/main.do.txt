@@ -1647,12 +1647,7 @@ analytical solution is computed by `u_nonlin_analytical`:
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# f3 defines an ODE with ananlytical solution in u_nonlin_analytical@# Function for convergence test
 -----
-
-We have listed the function `test_convergence` below in will comment
-on some of the details with respect to implementation in the
-following.
-
-The basic idea for the convergence test is that we start out by
+The basic idea for the convergence test in  the function `test_convergence` is that we start out by
 solving numerically an ODE with an analytical solution on a relatively
 coarse grid, allowing for direct computations of the error. We then
 reduce the timestep by a factor two (or double the grid size),
