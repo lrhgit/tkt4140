@@ -1700,7 +1700,7 @@ for key in schemes_orders:
             plot(N_list, (np.asarray(schemes_orders[key])))
 !ec
 and the resulting plot is shown in Figure ref{fig:convergence_rate}, and we see that our numerical approximations for the orders of our schemes approach the theoretical values as the number of timesteps increase (or as the timestep is reduced by a factor two consecutively).  
-FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
+FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=500] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
 
 
 The complete function `convergence_test` is a part of the module `ODEschemes` and is isolated below:
