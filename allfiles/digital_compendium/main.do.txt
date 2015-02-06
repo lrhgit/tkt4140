@@ -1647,7 +1647,7 @@ analytical solution is computed by `u_nonlin_analytical`:
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# f3 defines an ODE with ananlytical solution in u_nonlin_analytical@# Function for convergence test
 -----
-The basic idea for the convergence test in  the function `test_convergence` is that we start out by
+The basic idea for the convergence test in  the function `convergence_test` is that we start out by
 solving numerically an ODE with an analytical solution on a relatively
 coarse grid, allowing for direct computations of the error. We then
 reduce the timestep by a factor two (or double the grid size),
@@ -1675,7 +1675,7 @@ label{eq:epsapprox}
 \end{equation}
 !et
 
-In the function `test_convergence` the schemes we will subject to a
+In the function `convergence_test` the schemes we will subject to a
 convergence test in a list `scheme_list`. This allows for a convenient
 loop over all schemes with the clause: `for scheme in
 scheme_list:`. Subsequently, for each scheme we refine the initial
@@ -1693,17 +1693,17 @@ to the legends-list `legends.append(scheme.func_name +': N = ' + str(N))`.   Thi
 
 Having completed the given number of refinements `Ndts` for a specific scheme
 we store the `order_approx` for the scheme in a dictionary using the
-name of the scheme as a key by `all_scheme_orders[scheme.func_name] =
+name of the scheme as a key by `schemes_orders[scheme.func_name] =
 order_approx`. This allows for an illustrative plot of the order estimate for each scheme with the clause:
 !bc
-for key in all_scheme_orders:
-            plot(N_list, (np.asarray(all_scheme_orders[key])))
+for key in schemes_orders:
+            plot(N_list, (np.asarray(schemes_orders[key])))
 !ec
 and the resulting plot is shown in Figure ref{fig:convergence_rate}, and we see that our numerical approximations for the orders of our schemes approach the theoretical values as the number of timesteps increase (or as the timestep is reduced by a factor two consecutively).  
 FIGURE:[chapter1/programs_and_modules/ConvergenceODEschemes.png, width=700] The convergence rate for the various ODE-solvers a function of the number of timesteps. label{fig:convergence_rate}
 
 
-The complete function `test_convergence` is a part of the module `ODEschemes` and is isolated below:
+The complete function `convergence_test` is a part of the module `ODEschemes` and is isolated below:
 
 @@@CODE ./chapter1/programs_and_modules/ODEschemes.py from-to:# Function for convergence test@def plot_ODEschemes_solutions
 
