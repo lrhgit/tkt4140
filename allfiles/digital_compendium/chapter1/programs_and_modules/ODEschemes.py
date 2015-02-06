@@ -102,9 +102,9 @@ if __name__ == '__main__':
         z0 = np.zeros(1)
         z0[0] = u_exact(0.0)
 
-        scheme  = [euler, heun, rk4]
+        schemes  = [euler, heun, rk4]
 
-        for scheme in scheme:
+        for scheme in schemes:
             z = scheme(f, z0, time)
             max_error = np.max(u_exact(time) - z[:,0])
             msg = '%s failed with error = %g' % (scheme.func_name, max_error)
