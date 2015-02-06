@@ -481,9 +481,9 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
         z0 <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros(<span style="color: #666666">1</span>)
         z0[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> u_exact(<span style="color: #666666">0.0</span>)
 
-        scheme  <span style="color: #666666">=</span> [euler, heun, rk4]
+        schemes  <span style="color: #666666">=</span> [euler, heun, rk4]
 
-        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> scheme:
+        <span style="color: #008000; font-weight: bold">for</span> scheme <span style="color: #AA22FF; font-weight: bold">in</span> schemes:
             z <span style="color: #666666">=</span> scheme(f, z0, time)
             max_error <span style="color: #666666">=</span> np<span style="color: #666666">.</span>max(u_exact(time) <span style="color: #666666">-</span> z[:,<span style="color: #666666">0</span>])
             msg <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s</span><span style="color: #BA2121"> failed with error = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (scheme<span style="color: #666666">.</span>func_name, max_error)
