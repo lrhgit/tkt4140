@@ -26,55 +26,6 @@ def euler(func, z0, time):
 
     return z
 
-def euler2(func, z0, time):
-    """The Euler scheme for solution of systems of ODEs.
-    z0 is a vector for the initial conditions,
-    the right hand side of the system is represented by func which returns
-    a vector with the same size as z0 ."""
-
-    def f_np(z,t):
-        return np.asarray(func(z, t))
-
-    z = np.zeros((np.size(time), np.size(z0)))
-    z[0,:] = z0
-
-    for i, t in enumerate(time[0:-1]):
-        dt = time[i+1] - t
-        z[i+1,:]=z[i,:] + f_np(z[i,:],t)*dt
-
-    return z
-
-def euler3(func, z0, time):
-    """The Euler scheme for solution of systems of ODEs.
-    z0 is a vector for the initial conditions,
-    the right hand side of the system is represented by func which returns
-    a vector with the same size as z0 ."""
-
-    time_local = np.asarray(time)
-    z = np.zeros((np.size(time_local), np.size(z0)))
-    z[0,:] = float(z0)
-
-    for i, t in enumerate(time_local[0:-1]):
-        dt = time_local[i+1] - t
-        z[i+1,:] = z[i,:] + np.asarray(func(z[i,:], t))*dt
-
-    return z
-
-def euler4(func, z0, time):
-    """The Euler scheme for solution of systems of ODEs.
-    z0 is a vector for the initial conditions,
-    the right hand side of the system is represented by func which returns
-    a vector with the same size as z0 ."""
-
-    time_local = np.asarray(time)
-    z = np.zeros((np.size(time_local), np.size(z0)))
-    z[0,:] = float(z0)
-
-    for i, t in enumerate(time_local[1:]):
-        dt = t - time_local[i]
-        z[i+1,:]=z[i,:] + np.asarray(func(z[i,:], time_local[i]))*dt
-
-    return z
 
 # define Heun solver
 def heun(func, z0, time):
@@ -99,22 +50,6 @@ def heun(func, z0, time):
 
     return z
 
-def heun2(func, z0, time):
-    """The Heun scheme for solution of systems of ODEs.
-    z0 is a vector for the initial conditions,
-    the right hand side of the system is represented by func which returns
-    a vector with the same size as z0 ."""
-
-    z = np.zeros((np.size(time), np.size(z0)))
-    z[0,:] = z0
-    zp = np.zeros_like(z0)
-
-    for i, t in enumerate(time[0:-1]):
-        dt = time[i+1] - time[i]
-        zp = z[i,:] + np.asarray(func(z[i,:],t))*dt   # Predictor step
-        z[i+1,:] = z[i,:] + (np.asarray(func(z[i,:],t)) + np.asarray(func(zp,t+dt)))*dt/2.0 # Corrector step
-
-    return z
 
 # define rk4 scheme
 def rk4(func, z0, time):
@@ -167,9 +102,9 @@ if __name__ == '__main__':
         z0 = np.zeros(1)
         z0[0] = u_exact(0.0)
 
-        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
+        scheme  = [euler, heun, rk4]
 
-        for scheme in scheme_list:
+        for scheme in scheme:
             z = scheme(f, z0, time)
             max_error = np.max(u_exact(time) - z[:,0])
             msg = '%s failed with error = %g' % (scheme.func_name, max_error)
@@ -188,10 +123,9 @@ if __name__ == '__main__':
         else:
             return u0 + b*t
             
- 
-        
+         
     # Function for convergence test
-    def test_convergence():
+    def convergence_test():
         """ Test convergence rate of the methods """
         from numpy import linspace, size, abs, log10, mean, log2
         figure()
@@ -201,15 +135,14 @@ if __name__ == '__main__':
 
         z0 = 2
 
-#        scheme_list  = [euler, euler2, euler3, euler4, heun, heun2, rk4]
-        scheme_list =[euler, heun, rk4]
+        schemes =[euler, heun, rk4]
         legends=[]
-        all_scheme_orders={}
+        schemes_order={}
         
         colors = ['r', 'g', 'b', 'm', 'k', 'y', 'c']
         linestyles = ['-', '--', '-.', ':', 'v--', '*-.']
         iclr = 0
-        for scheme in scheme_list:
+        for scheme in schemes:
             N = 30    # no of time steps
             time = linspace(0, T, N+1)
 
@@ -231,7 +164,7 @@ if __name__ == '__main__':
                 N *=2
                 time = linspace(0, T, N+1)
             
-            all_scheme_orders[scheme.func_name] = order_approx
+            schemes_order[scheme.func_name] = order_approx
             iclr += 1
 
         legend(legends, loc='best')
@@ -244,15 +177,15 @@ if __name__ == '__main__':
         N_list = np.asarray(N_list)
         
         figure()
-        for key in all_scheme_orders:
-            plot(N_list, (np.asarray(all_scheme_orders[key])))
+        for key in schemes_order:
+            plot(N_list, (np.asarray(schemes_order[key])))
         
         # Plot theoretical n for 1st, 2nd and 4th order schemes
         axhline(1.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(2.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(4.0, xmin=0, xmax=N, linestyle=':', color='k')
         xticks(N_list)
-        legends = all_scheme_orders.keys()
+        legends = schemes_order.keys()
         legends.append('theoretical') 
         legend(legends, loc='best', frameon=False)
         xlabel('Number of unknowns')
@@ -261,7 +194,7 @@ if __name__ == '__main__':
         savefig('ConvergenceODEschemes.png', transparent=True)
         
     def plot_ODEschemes_solutions():
-        """Plot the solutions for the test schemes in scheme_list"""
+        """Plot the solutions for the test schemes in schemes"""
         from numpy import linspace
         figure()
         T = 1.5  # end of simulation
@@ -269,12 +202,11 @@ if __name__ == '__main__':
         time = linspace(0, T, N+1)
 
         z0 = 2.0
-        #scheme_list  = [euler,euler2, euler3, euler4,heun, heun2, rk4]
-        scheme_list  = [euler, heun, rk4]
+
+        schemes  = [euler, heun, rk4]
         legends = []
 
-
-        for scheme in scheme_list:
+        for scheme in schemes:
             z = scheme(f3, z0, time)
             plot(time, z[:,-1])
             legends.append(scheme.func_name)
@@ -285,6 +217,6 @@ if __name__ == '__main__':
 
 
     test_ODEschemes()
-    test_convergence()
+    convergence_test()
     plot_ODEschemes_solutions()
     show()
