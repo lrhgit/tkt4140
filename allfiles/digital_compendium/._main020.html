@@ -177,7 +177,7 @@ MathJax.Hub.Config({
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="___sec22">Example 9: Numerical error as  a function of \( \Delta t \) for ODE-schemes </h2>
+<h2 id="___sec22">Example 9: Numerical error as  a function of \( \Delta t \) for ODE-schemes <a name="___sec22"></a></h2>
 
 <p>
 To investigate whether the various ODE-schemes in our module 'ODEschemes.py' 
@@ -215,7 +215,7 @@ analytical solution is computed by <code>u_nonlin_analytical</code>:
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>(z, t,a<span style="color: #666666">=2.0</span>,b<span style="color: #666666">=-1.0</span>):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>(z, t, a<span style="color: #666666">=2.0</span>, b<span style="color: #666666">=-1.0</span>):
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; &quot;&quot;&quot;</span>
         <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>z <span style="color: #666666">+</span> b
 
@@ -244,7 +244,7 @@ current example is the timestep \( \Delta t \). The order of a particular
 scheme is given exponent \( n \) in the error term \( O(h^n) \). Consequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
 
 <p>
-By letting \( \epsilon_{i+1} \) and \( \epsilon_i \) denote the errors on to consecutive grids with corresponding timesteps \( \displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2} \). The errors \( \epsilon_{i+1} \) and \( \epsilon_{i} \) for a scheme of order \( n \) are then related by:
+By letting \( \epsilon_{i+1} \) and \( \epsilon_i \) denote the errors on two consecutive grids with corresponding timesteps \( \displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2} \). The errors \( \epsilon_{i+1} \) and \( \epsilon_{i} \) for a scheme of order \( n \) are then related by:
 $$
 \begin{equation}
 \tag{74}
@@ -252,7 +252,7 @@ $$
 \end{equation}
 $$
 
-Consequently, whenever  \( \epsilon_{i+1} \) and \( \epsilon_{i} \) are known from consecutive simulations and estimate of the order of the scheme may be obtained by:
+Consequently, whenever  \( \epsilon_{i+1} \) and \( \epsilon_{i} \) are known from consecutive simulations an estimate of the order of the scheme may be obtained by:
 $$
 \begin{equation}
 \tag{75}
@@ -260,19 +260,19 @@ $$
 \end{equation}
 $$
 
+The theoretical value of \( n \) is thus \( n=1 \) for Euler's method, \( n=2 \) for Heun's method and \( n=4 \) for RK4.
 
 <p>
 In the function <code>convergence_test</code> the schemes we will subject to a
-convergence test in a list <code>scheme_list</code>. This allows for a convenient
-loop over all schemes with the clause: <code>for scheme in
+convergence test is ordered in a list <code>scheme_list</code>. This allows for a convenient loop over all schemes with the clause: <code>for scheme in
 scheme_list:</code>. Subsequently, for each scheme we refine the initial
-grid (<code>N=30</code>) <code>Ndts</code> times in the loop <code>for i in range(Ndts+1)</code> and
+grid (<code>N=30</code>) <code>Ndts</code> times in the loop <code>for i in range(Ndts+1):</code> and
 solve and compute the order estimate given by <a href="#mjx-eqn-75">(75)</a> with
 the clause <code>order_approx.append(previous_max_log_err -
 max_log_err)</code>. Note that we can not compute this for the first
 iteration (<code>i=0</code>), and that we use a an initial empty list
 <code>order_approx</code> to store the approximation of the order <code>n</code> for each
-grid refinement. For each grid and for each grid we plot the
+grid refinement. For each grid we plot
 \( \log_2(\epsilon) \) as a function of time with: <code>plot(time[1:],
 log_error, linestyles[i]+colors[iclr], markevery=N/5)</code> and for each
 plot we construct the corresponding legend by appending a new element
@@ -285,16 +285,16 @@ name of the scheme as a key by <code>schemes_orders[scheme.func_name] =
 order_approx</code>. This allows for an illustrative plot of the order estimate for each scheme with the clause:
 <p>
 
-<!-- code=text typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">for key in schemes_orders:
-            plot(N_list, (np.asarray(schemes_orders[key])))
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">for</span> key <span style="color: #AA22FF; font-weight: bold">in</span> schemes_orders:
+            plot(N_list, (np<span style="color: #666666">.</span>asarray(schemes_orders[key])))
 </pre></div>
 <p>
 and the resulting plot is shown in Figure <a href="#fig:convergence_rate">13</a>, and we see that our numerical approximations for the orders of our schemes approach the theoretical values as the number of timesteps increase (or as the timestep is reduced by a factor two consecutively).  
 
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 13:  The convergence rate for the various ODE-solvers a function of the number of timesteps. <div id="fig:convergence_rate"></div> </p></center>
+<center><p class="caption">Figure 13:  The convergence rate for the various ODE-solvers a function of the number of timesteps. <a name="fig:convergence_rate"></a> </p></center>
 <p><img src="chapter1/programs_and_modules/ConvergenceODEschemes.png" align="bottom" width=500></p>
 </center>
 
@@ -490,7 +490,7 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
             <span style="color: #008000; font-weight: bold">assert</span> max_error <span style="color: #666666">&lt;</span> tol, msg
 
     <span style="color: #408080; font-style: italic"># f3 defines an ODE with ananlytical solution in u_nonlin_analytical</span>
-    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>(z, t,a<span style="color: #666666">=2.0</span>,b<span style="color: #666666">=-1.0</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f3</span>(z, t, a<span style="color: #666666">=2.0</span>, b<span style="color: #666666">=-1.0</span>):
         <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot; &quot;&quot;&quot;</span>
         <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>z <span style="color: #666666">+</span> b
 
@@ -609,33 +609,33 @@ font <span style="color: #666666">=</span> {<span style="color: #BA2121">&#39;si
 <!-- begin bibliography -->
 
 <ol>
- <li> <div id="hairer2008solving"></div> <b>E. Hairer, S. P. Norsett and G. Wanner</b>. 
+ <li> <a name="hairer2008solving"></a> <b>E. Hairer, S. P. Norsett and G. Wanner</b>. 
     <em>Solving Ordinary Differential Equations I: Nonstiff Problems</em>,
     Springer Science &amp; Business,
     2008.</li>
- <li> <div id="white1999fluid"></div> <b>F. White</b>. 
+ <li> <a name="white1999fluid"></a> <b>F. White</b>. 
     <em>Fluid Mechanics</em>,
     WCB/McGraw-Hill,
     1999,
     <a href="http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y" target="_blank"><tt>http://books.google.no/books/about/Fluid_mechanics.html?id=fa_pAAAAMAAJ&redir_esc=y</tt></a>.</li>
- <li> <div id="evett19892"></div> <b>J. Evett and C. Liu</b>. 
+ <li> <a name="evett19892"></a> <b>J. Evett and C. Liu</b>. 
     <em>2,500 Solved Problems in Fluid Mechanics and Hydraulics</em>,
     McGraw-Hill Education,
     1989,
     <a href="http://books.google.no/books?id=NBDjWHLKwSQC" target="_blank"><tt>http://books.google.no/books?id=NBDjWHLKwSQC</tt></a>.</li>
- <li> <div id="langtangen14"></div> <b>H. P. Langtangen</b>. 
+ <li> <a name="langtangen14"></a> <b>H. P. Langtangen</b>. 
     <em>A Primer on Scientific Programming With Python</em>,
     Springer,
     2014.</li>
- <li> <div id="python14"></div> <b>S. F. Python</b>. 
+ <li> <a name="python14"></a> <b>S. F. Python</b>. 
     <em>The Python Tutorial</em>,
     Python Software Foundation,
     2014.</li>
- <li> <div id="cheney2012numerical"></div> <b>E. Cheney and D. Kincaid</b>. 
+ <li> <a name="cheney2012numerical"></a> <b>E. Cheney and D. Kincaid</b>. 
     <em>Numerical Mathematics and Computing</em>,
     Cengage Learning,
     2012.</li>
- <li> <div id="Bearman1976112"></div> <b>P. Bearman and J. Harvey</b>. 
+ <li> <a name="Bearman1976112"></a> <b>P. Bearman and J. Harvey</b>. 
     GOLF BALL AERODYNAMICS.,
     <em>Aeronaut Q</em>,
     27(pt 2),
