@@ -40,7 +40,7 @@ solvers.append(Kutta4(f))
 
 from numpy import linspace, exp
 T = 30  # end of simulation
-N = 150  # no of time steps
+N = 5000  # no of time steps
 time = linspace(0, T, N+1)
 
 
