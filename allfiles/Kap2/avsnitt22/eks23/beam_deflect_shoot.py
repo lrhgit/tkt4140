@@ -26,14 +26,14 @@ def f(z, t):
     zout[:] = [z[1],-alpha2*cos(z[0]),sin(z[0])]
     return zout 
 
-alpha2 = 2.0 
+alpha2 = 5.0 
 beta=0.0 # Boundary value at y = L
 
 solvers = [euler, heun, rk4] #list of solvers
 solver=solvers[2] # select specific solver
 
 # Guessed values
-s=[2.0, 5.0]
+s=[-2.0, 5.0]
 
 z0=np.zeros(3)
 
@@ -68,8 +68,13 @@ legends.append('dtheta/dl')
 plot(y,z[:,2])
 legends.append('deflection y')
 
+
+
 # Add the labels
 legend(legends,loc='best',frameon=False) # Add the legends
 ylabel('theta theta')
 xlabel('y/L')
+#grid(b=True, which='both', axis='both',linestyle='-')
+grid(b=True, which='both', color='0.65',linestyle='-')
+
 show()

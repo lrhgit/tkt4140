@@ -46,7 +46,7 @@ time = linspace(0, T, N+1)
 
 from matplotlib.pyplot import *
 #change some default values to make plots more readable on the screen
-LNWDT=5; FNT=25
+LNWDT=3; FNT=20
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 figure()
 legends=[]

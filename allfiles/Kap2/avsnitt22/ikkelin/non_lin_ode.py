@@ -36,7 +36,7 @@ solvers = [euler, heun, rk4] #list of solvers
 solver=solvers[2] # select specific solver
 
 # Guessed values
-s=[-10.0,-5.0]
+s=[2.0,5.0]
 
 z0=np.zeros(2)
 z0[0] = 4.0
@@ -66,8 +66,8 @@ legends=[] # empty list to append legends as plots are generated
 plot(x,z[:,0])
 legends.append('y')
 
-plot(x,y_analytical(x),':')
-legends.append('analytical')
+plot(x,y_analytical(x),':^')
+legends.append('y analytical')
 
 # Add the labels
 legend(legends,loc='best',frameon=False) # Add the legends
