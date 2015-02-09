@@ -39,13 +39,6 @@
    volume:    1
    status:    published
    entrytype: book
-** The {P}ython Tutorial
-   key:       python14
-   author:    Software Foundation Python
-   year:      2014
-   publisher: Python Software Foundation
-   status:    published
-   entrytype: book
 ** A Primer on Scientific Programming With {P}ython
    key:       langtangen14
    author:    Hans Petter Langtangen
@@ -65,3 +58,11 @@
    series:    McGraw-Hill series in mechanical engineering
    lccn:      98026289
    entrytype: book
+* manuals
+** The {P}ython Tutorial
+   key:          python14
+   author:       NN
+   year:         2014
+   status:       published
+   organization: Python Software Foundation
+   entrytype:    manual
