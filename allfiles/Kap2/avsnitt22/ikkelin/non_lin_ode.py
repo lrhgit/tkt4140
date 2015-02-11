@@ -9,7 +9,7 @@ rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
 font = {'size' : 16}; rc('font', **font)
 
 
-N=20
+N=40
 L = 1.0
 x = np.linspace(0,L,N+1)
 
@@ -36,7 +36,7 @@ solvers = [euler, heun, rk4] #list of solvers
 solver=solvers[2] # select specific solver
 
 # Guessed values
-s=[2.0,5.0]
+s=[-34.0,-20]
 
 z0=np.zeros(2)
 z0[0] = 4.0

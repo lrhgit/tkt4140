@@ -41,6 +41,7 @@ plot(s_guesses,phi)
 
 # Add the labels
 legend(legends,loc='best',frameon=False) # Add the legends
+title('alpha2 = ' + str(alpha2))
 ylabel('phi')
 xlabel('s')
 grid(b=True, which='both')
