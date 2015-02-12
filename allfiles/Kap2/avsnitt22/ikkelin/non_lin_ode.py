@@ -9,9 +9,9 @@ rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
 font = {'size' : 16}; rc('font', **font)
 
 
-N=20
+N=40
 L = 1.0
-y = np.linspace(0,L,N+1)
+x = np.linspace(0,L,N+1)
 
 def dsfunction(phi0,phi1,s0,s1):
     if (abs(phi1-phi0)>0.0):   
@@ -21,32 +21,36 @@ def dsfunction(phi0,phi1,s0,s1):
 
 
 def f(z, t):
-    """RHS for deflection of beam"""
     zout = np.zeros_like(z)
-    zout[:] = [z[1],-alpha2*cos(z[0]),sin(z[0])]
+    zout[:] = [z[1],3.0*z[0]**2/2.0]
     return zout 
 
-alpha2 = 5.0 
-beta=0.0 # Boundary value at y = L
+
+def y_analytical(x):
+    return 4.0/(1.0+x)**2
+  
+
+beta=1.0 # Boundary value at x = L
 
 solvers = [euler, heun, rk4] #list of solvers
 solver=solvers[2] # select specific solver
 
 # Guessed values
-s=[2.5, 5.0]
+s=[-34.0,-20]
 
-z0=np.zeros(3)
-
+z0=np.zeros(2)
+z0[0] = 4.0
 z0[1] = s[0]
-z = solver(f,z0,y)
-phi0 = z[-1,1] - beta
+
+z = solver(f,z0,x)
+phi0 = z[-1,0] - beta
 
 nmax=10
-eps = 1.0e-10
+eps = 1.0e-3
 for n in range(nmax):
     z0[1] = s[1]
-    z = solver(f,z0,y)
-    phi1 = z[-1,1] - beta
+    z = solver(f,z0,x)
+    phi1 = z[-1,0] - beta
     ds = dsfunction(phi0,phi1,s[0],s[1])
     s[0]  = s[1]
     s[1] +=  ds
@@ -59,22 +63,14 @@ for n in range(nmax):
 
 legends=[] # empty list to append legends as plots are generated
 
-plot(y,z[:,0])
-legends.append('theta')
+plot(x,z[:,0])
+legends.append('y')
 
-plot(y,z[:,1])
-legends.append('dtheta/dl')
-
-plot(y,z[:,2])
-legends.append('deflection y')
-
-
+plot(x,y_analytical(x),':^')
+legends.append('y analytical')
 
 # Add the labels
 legend(legends,loc='best',frameon=False) # Add the legends
-ylabel('theta theta')
-xlabel('y/L')
-#grid(b=True, which='both', axis='both',linestyle='-')
-grid(b=True, which='both', color='0.65',linestyle='-')
-
+ylabel('y')
+xlabel('x/L')
 show()
