@@ -20,7 +20,7 @@ x = np.linspace(xmin,xmax,n+1,'float')
 dx = float(xmax-xmin)/n
 
 a=1.0 
-C=0.99
+C=0.999
 dt = C*dx/a
 
 (tmin,tmax) = (0, 1.5)
@@ -89,10 +89,7 @@ legends=['Lax-Wendroff','Analytical']
 plt.legend(legends,loc=3,frameon=False)
 curves = [curve1, curve2]
 plt.xlabel('x')
-
-
 plt.ylabel('Velocity')
-#anim = animation.FuncAnimation(fig, animate, frames=un, interval=100)
 anim = animation.FuncAnimation(fig, animate, init_func=init,frames=len(time), interval=100, blit=False)
 plt.show()
 
