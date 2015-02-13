@@ -21,9 +21,9 @@ solver=solvers[0] # select specific solver
 
 from numpy import linspace, exp, abs
 xmin = 0
-xmax = 5.75
+xmax = 12.0
 
-N = 50  # no x-values
+N = 200  # no x-values
 x = linspace(xmin, xmax, N+1)
 
 # Guessed values
@@ -59,14 +59,15 @@ for n in range(nmax):
 
 
 plot(u[:,1],x,u[:,2],x)
-xlabel('eta')
-ylabel('u og u\'')
+xlabel('u og u\'')
+ylabel('eta')
+
 
 legends=[]
 legends.append('velocity')
 legends.append('wall shear stress')
 legend(legends,loc='best',frameon=False)
-title('Solution of the Blaisus with '+str(solver.func_name)+'-shoot')
+title('Solution of the Blaisus eqn with '+str(solver.func_name)+'-shoot')
 show()
 close() #Close the window opened by show() 
 print 'the end'
