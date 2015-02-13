@@ -4,9 +4,6 @@ from matplotlib.pyplot import *
 LNWDT=3; FNT=20
 matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size'] = FNT
 
-# Import odespy a module with many ode-solvers
-import odespy
-
 def fblasius(y, x):
     """ODE-system for the Blasius-equation"""
     return [y[1],y[2], -y[0]*y[2]]
@@ -19,7 +16,7 @@ def dsfunction(phi0,phi1,s0,s1):
         return 0.0
 
 solvers = [euler, heun, rk4] #list of solvers
-solver=solvers[2] # select specific solver
+solver=solvers[0] # select specific solver
 
 
 from numpy import linspace, exp, abs
@@ -66,8 +63,10 @@ xlabel('eta')
 ylabel('u og u\'')
 
 legends=[]
-legends.append(solver.func_name)
+legends.append('velocity')
+legends.append('wall shear stress')
 legend(legends,loc='best',frameon=False)
+title('Solution of the Blaisus with '+str(solver.func_name)+'-shoot')
 show()
 close() #Close the window opened by show() 
 print 'the end'
