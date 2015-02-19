@@ -1714,6 +1714,60 @@ The complete module `ODEschemes` is listed below and may easily be downloaded in
 ${ebox()}
 
 !split
+======= Convection problems and hyperbolic PDEs =======
+The classical advection equation is very often used as an example of a hyperbolic partial differential equation which illustrates many features of convection problems, while still being linear:
+!bt
+\begin{equation}\label{eq:6101}
+\frac{\partial u}{\partial t} + a_0 \frac{\partial u}{\partial x} = 0
+\end{equation}
+!et
+
+Another convenient feature of the model equation (ref{eq:6101}) is
+that is has an analytical solution:
+!bt
+\begin{equation}\label{eq:hyp_analytical}
+u = u_0 \, f(x-a_0\,t )
+\end{equation}
+!et
+and represents a wave propagating with a constant velocity $a_0$ with
+unchanged shape. When $a_0>0$, the wave propagates in the positive
+x-direction, whereas for $a_0<0$, the wave propagates in the negative
+x-direction. 
+
+Equation (ref{eq:6101}) may serve as a model-equation for a
+compressible fluid, e.g if $u$ denote pressure it represents a
+pressure wave propagating with the velocity $a_0$. The advection
+equation may also be used to model the propgation of pressure or flow
+in a compliant pipe, such as a blood vessel.
+
+===== Forward in time central in space discretization ===== 
+
+We may discretize (ref{eq:6101}) with a forward difference in time and
+a central difference in space, normally abberviated as FTCS-scheme:
+!bt
+\begin{equation*}
+label{eq:FTCS_comp}
+\frac{\partial u}{\partial t} \approx \frac{u_j^{n+1}-u_j^n}{\Delta t}, \qquad  \frac{\partial u}{\partial x}\approx \frac{u_{j+1}^n-u_{j-1}^n}{2 \Delta x}
+\end{equation*}
+!et
+and we may substitute the approximations (ref{eq:FTCS_comp}) into the advection equation (ref{eq:6101}) to yield:
+!bt
+\begin{equation}
+label{eq:6201}
+u_j^{n+1} = u_j^n - \frac{C}{2}(u_{j+1}^n-u_{j-1}^n)
+\end{equation}
+!et
+For convenience we have introduced the the non-dimensional Courant-number: 
+!bt
+\begin{equation}
+label{eq:6202}
+C = a_0\frac{\Delta t}{\Delta x}
+\end{equation}
+!et
+
+!split 
+
+
 ========= References =========
 
 BIBFILE: references/papers.pub
