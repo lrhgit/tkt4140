@@ -14,7 +14,7 @@ matplotlib.rcParams['lines.linewidth'] = LNWDT; matplotlib.rcParams['font.size']
 
 # Set simulation parameters
 beta = 3.0
-h = 0.1               # element size
+h = 0.001               # element size
 L =1.0               # length of domain
 n = int(round(L/h))  # # of unknowns, assuming known bndry values at outlet
 x=np.arange(n+1)*h      # x includes min and max at boundaries were bc are imposed.
@@ -33,7 +33,7 @@ a=np.ones(n-1)                  # sub-diagonal
 b=-np.ones(n)*(2+(beta*h)**2)   # diagonal
 c=a.copy()                      # super-diagonal
 # particular diagonal values due to derivative bc
-version1=0
+version1=1
 if (version1==1):
     c[0]=2.0
 else:      

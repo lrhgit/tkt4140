@@ -184,7 +184,7 @@ if __name__ == '__main__':
         axhline(1.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(2.0, xmin=0, xmax=N, linestyle=':', color='k')
         axhline(4.0, xmin=0, xmax=N, linestyle=':', color='k')
-        xticks(N_list)
+        xticks(N_list, rotation=-70)
         legends = schemes_order.keys()
         legends.append('theoretical') 
         legend(legends, loc='best', frameon=False)

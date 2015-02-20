@@ -17,7 +17,7 @@ def f(x):
 n=80  #Number of space intervals
 
 x = np.linspace(xmin,xmax,n+1,'float')
-dx = float(xmax-xmin)/n
+dx = float(xmax-xmin)/n 
 
 a=1.0 
 C=0.999
@@ -46,6 +46,7 @@ for i, t in enumerate(time[1:]):
     u[1:n] = C*(1+C)/2*u[0:n-1] + (1-C**2)*u[1:n] - C*(1-C)/2*u[2:n+1]
 
     u[-1] = u_bc(x[-1]-a*dt) # interpolate along a characteristic
+    
     un[i,:] = u[:]
 
 
@@ -55,16 +56,6 @@ def init():
     return curves,
 
 
-def animate_old(data):
-    #x = np.linspace(0,4,nx)
-    y = data
-    for i, curve in enumerate(curves):
-        if (i==0):
-            curve.set_ydata(1.1*y)
-        else:
-            curve.set_ydata(y)
-    
-    return curves
 
 def animate(i):
     #x = np.linspace(0,4,nx)
