@@ -44,7 +44,7 @@ for i, t in enumerate(time[1:]):
     u_bc = interpolate.interp1d(x[-2:], u[-2:]) 
     
     u[1:n] = C*(1+C)/2*u[0:n-1] + (1-C**2)*u[1:n] - C*(1-C)/2*u[2:n+1]
-    
+
     u[-1] = u_bc(x[-1]-a*dt) # interpolate along a characteristic
     un[i,:] = u[:]
 
