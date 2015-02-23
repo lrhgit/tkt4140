@@ -21,9 +21,9 @@ solver=solvers[0] # select specific solver
 
 from numpy import linspace, exp, abs
 xmin = 0
-xmax = 12.0
+xmax = 5.750
 
-N = 200  # no x-values
+N = 400  # no x-values
 x = linspace(xmin, xmax, N+1)
 
 # Guessed values
@@ -70,7 +70,6 @@ legend(legends,loc='best',frameon=False)
 title('Solution of the Blaisus eqn with '+str(solver.func_name)+'-shoot')
 show()
 close() #Close the window opened by show() 
-print 'the end'
 
 
 

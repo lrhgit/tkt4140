@@ -20,7 +20,7 @@ x = np.linspace(xmin,xmax,n+1,'float')
 dx = float(xmax-xmin)/n
 
 a=1.0 
-C=0.999
+C=1.0
 dt = C*dx/a
 
 (tmin,tmax) = (0, 1.5)
@@ -54,17 +54,6 @@ def init():
         curve.set_data([], [])
     return curves,
 
-
-def animate_old(data):
-    #x = np.linspace(0,4,nx)
-    y = data
-    for i, curve in enumerate(curves):
-        if (i==0):
-            curve.set_ydata(1.1*y)
-        else:
-            curve.set_ydata(y)
-    
-    return curves
 
 def animate(i):
     #x = np.linspace(0,4,nx)
