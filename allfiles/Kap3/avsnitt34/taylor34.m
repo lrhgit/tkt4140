@@ -8,7 +8,7 @@
 clear all; close all; clc;
 set(0,'DefaultLineLineWidth',2,'DefaultAxesFontName','Arial','DefaultAxesFontSize',20);
 
-h = 0.05; % steplength
+h = 0.05 ; % steplength
 ni = 1/h; % No. of intervals
 % Choose h so that ni is an integer.
 n = ni-1; % No. of equations
@@ -17,9 +17,8 @@ nitr = 6; % No. of iterations
 a = ones(n,1) ; % subdiagonal
 % a  is no destroyed in the elimination 
 %--- Initialize
-c = zeros(n,1); % superdiagonal 
-ym = c; b = ym; d = ym; 
-
+ym = zeros(n,1); b = ym; d = ym; 
+c = ones(n,1);
 
 
 fprintf('        Itr.      max. deviat.  \n');
@@ -28,7 +27,6 @@ it = 0; itmax = 15; dymax = 1.0; RelTol = 1.0e-10;
 
 while (dymax > RelTol) & (it < itmax)
    it = it +1;	
-   c = ones(n,1);
    b = -(2.0 + fac*ym); % main diagonal
    d = -(fac*0.5)*ym.^2 ; % right hand side 
    d(n) = d(n)- 1.0;
