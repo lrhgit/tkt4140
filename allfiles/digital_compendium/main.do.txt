@@ -1758,6 +1758,7 @@ u_j^{n+1} = u_j^n - \frac{C}{2}(u_{j+1}^n-u_{j-1}^n)
 \end{equation}
 !et
 For convenience we have introduced the the non-dimensional Courant-number: 
+idx{Courant-tallet}
 !bt
 \begin{equation}
 label{eq:6202}
