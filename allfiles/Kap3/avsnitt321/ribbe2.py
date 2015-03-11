@@ -31,7 +31,9 @@ def theta_analytical(beta,x):
 #Create matrix for linalg solver
 a=np.ones(n-1)                  # sub-diagonal
 b=-np.ones(n)*(2+(beta*h)**2)   # diagonal
-c=a.copy()                      # super-diagonal
+c=np.ones(n-1)                  # sub-diagonal
+#c=a.copy()                      # super-diagl, copy as elts are modified later
+#c=a
 # particular diagonal values due to derivative bc
 version1=1
 if (version1==1):
