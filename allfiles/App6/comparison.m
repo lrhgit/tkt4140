@@ -6,12 +6,17 @@ beta = -0.0;
 [x,y]=falknerSkanSecant(beta);
 xmax=max(x);
 
-[x2,y2] = falknerSkanPenta(beta,0.1,xmax);
+h=x(2)-x(1) % Compute h used for Secant method
+disp('h - '), h
+
+h=h/10.0
+
 
 [x2,y2] = falknerSkanPenta(beta,h,xmax);
 
 
-plot(y(:,2),x,'o',y(:,3),x,'-.',y2(1,1:end-1)',x2(1:end),'o',y2(2,1:end-1)',x2(1:end),'o');
+%plot(y(:,2),x,'o',y(:,3),x,'-.',y2(1,1:end-1)',x2(1:end),'o',y2(2,1:end-1)',x2(1:end),'o');
+plot(y(:,2),x,y(:,3),x,y2(1,1:end-1)',x2(1:end),y2(2,1:end-1)',x2(1:end));
 
 
 ylabel('\eta')
