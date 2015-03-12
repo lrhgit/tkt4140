@@ -184,7 +184,7 @@ h=0.1
 
 Nx=int((np.rint(Lx/h)-1)) # number of points in x-direction
 Ny=int((np.rint(Ly/h)+1)) # number of points in y-direction
-print 'Nx=',Nx,' Ny=', Ny
+#print 'Nx=',Nx,' Ny=', Ny
 N=Nx*Ny
 
 x = np.linspace(0, Lx, Nx+2)
