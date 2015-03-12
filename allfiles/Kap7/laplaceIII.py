@@ -146,11 +146,11 @@ def subplot3D(x,y,p,Npx=1,Npy=1,Cp=1, title=''):
 #     ax.set_ylim(0,1)
 
 
-def convergence_test(h=0.25,Lx=2.0,Ly=1.0,Ndhs=6):
+def convergence_test(h=0.25,Lx=2.0,Ly=1.0,Nhs=6):
     
     order_approx=[]
     
-    for i in range(Ndhs):
+    for i in range(Nhs):
         Nx=int((np.rint(Lx/h)-1)) # number of points in x-direction
         Ny=int((np.rint(Ly/h)+1)) # number of points in y-direction
         N=Nx*Ny
@@ -172,7 +172,7 @@ def convergence_test(h=0.25,Lx=2.0,Ly=1.0,Ndhs=6):
         previous_L1norm=log2L1
         h=h/2.0 
         
-    plt.plot(range(1,Ndhs), order_approx)
+    plt.plot(range(1,Nhs), order_approx)
         
     return 
 
