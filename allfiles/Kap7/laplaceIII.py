@@ -108,6 +108,7 @@ def laplace_directsolver_y_order(T,Nx,Ny,y):
     #sparse matrix instance
     A=sc.sparse.spdiags(diagonals, [-Ny,-1,0,1,Ny], N, N,format='csc') 
 #    print A.todense()
+
     
     d=np.zeros(N)
     d[-Ny:]=-y # set the last Ny elts to -y
@@ -176,9 +177,9 @@ def convergence_test(h=0.25,Lx=2.0,Ly=1.0,Ndhs=6):
     return 
 
 # Geometry
-Lx=2.0
+Lx=1.0
 Ly=1.0
-h=0.1
+h=0.25
 
 
 Nx=int((np.rint(Lx/h)-1)) # number of points in x-direction
