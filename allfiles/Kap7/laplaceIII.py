@@ -177,9 +177,9 @@ def convergence_test(h=0.25,Lx=2.0,Ly=1.0,Ndhs=6):
     return 
 
 # Geometry
-Lx=1.0
+Lx=2.0
 Ly=1.0
-h=0.25
+h=0.1
 
 
 Nx=int((np.rint(Lx/h)-1)) # number of points in x-direction
