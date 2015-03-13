@@ -89,7 +89,7 @@ def T2(x,y):
     return T
 
 
-def plot2D(x, y, p):
+def plot3D(x, y, p):
     fig = plt.figure(figsize=(11,7), dpi=100)
     ax = fig.gca(projection='3d')
     X,Y = np.meshgrid(x,y)
@@ -107,10 +107,10 @@ X,Y = np.meshgrid(x, y)
 
 Ta=T_analytical(X,Y)
 
-plot2D(x,y,Ta)
+plot3D(x,y,Ta)
 plt.title('Analytical solution')
 
-plot2D(x,y,T)
+plot3D(x,y,T)
 plt.title('numerical')
 
 
