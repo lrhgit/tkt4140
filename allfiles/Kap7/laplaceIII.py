@@ -1,7 +1,11 @@
 '''
 Created on Mar 5, 2015
-
-Heat equation d2T/dx2 + d2T/dy2 = 0
+ 
+Solution of Heat equation d2T/dx2 + d2T/dy2 = 0
+Robin BCs
+          dT/dy = 0 at y=0 and y=1
+          T=0 at x=0
+          T=y at x=2.0
 
 @author: leifh
 '''

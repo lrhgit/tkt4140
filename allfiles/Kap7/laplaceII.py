@@ -1,6 +1,13 @@
 '''
 Created on Mar 5, 2015
 
+Solution of Heat equation d2T/dx2 + d2T/dy2 = 0
+
+Robin BCs
+          dT/dy = 0 at y=0 
+          dT/dx = 0 at x=0 
+          T=1 at y=1
+          T=0 at x=0
 @author: leifh
 '''
 import numpy as np
