@@ -25,7 +25,7 @@ from numpy import cosh, cos
 width = 1.0
 height = width
 
-Nx = 20 # number of points in x-direction
+Nx = 4 # number of points in x-direction
 Ny = Nx # number of points in y-direction
 h = width/Nx
 N = Nx*Ny
@@ -35,23 +35,23 @@ h=width/Nx
 def laplace_direct_xdir(N):
     diagonals=np.zeros((5,N))
     
-    diagonals[0,:]=1.0   # -Nx diagonal, the last Nx-elt are not used         
+    diagonals[0,:]=1.0         # -Nx diagonal, the last Nx-elt are not used         
  
-    diagonals[1,:]=1.0          
-    diagonals[1,Nx-1::Nx]=0.0  # Left dT/dy           
+    diagonals[1,:]=1.0         # 1 diagonal, the last elt is not used                
+    diagonals[1,Nx-1::Nx]=0.0  # dT/dx=0 at x=0,every Nx-th elt to 0  
     
-    diagonals[2,:]=-4.0         
+    diagonals[2,:]=-4.0        # main diagonal    
     
-    diagonals[3,:]=1.0
-    diagonals[3,1::Nx]=2.0           # every 4th elt set to 2,staring at idx           
-    diagonals[3,Nx::Nx]=0.0  # Left dT/dy           
+    diagonals[3,:]=1.0         # 1 diagonal, the last elt is not used                
+    diagonals[3,1::Nx]=2.0     # dT/dx=0 at x=0, every Nx-th elt to 2 
+    diagonals[3,Nx::Nx]=0.0    # T=0  at x=1, every Nx-th elt 0 
     
-    diagonals[4,:]=1.0       # Nx-diagonal,the frst Nx-elts are not used
-    diagonals[4,Nx:2*Nx]=2.0 
+    diagonals[4,:]=1.0       
+    diagonals[4,Nx:2*Nx]=2.0   # dT/dy=0 at y= 0
 
     
     A=sc.sparse.spdiags(diagonals, [-Nx,-1,0,1,Nx], N, N,format='csc') #sparse matrix instance
-#     print A.todense()
+    #print A.todense()
     
     d=np.zeros(N)
     d[-Nx:]=-1.0 # set the last Nx elts to -1.0
