@@ -74,20 +74,20 @@ MathJax.Hub.Config({
 <p>
 <!-- institution(s) -->
 <p>
-<center><h4>Mar 3, 2015</h4></center> <!-- date -->
+<center><h4>Mar 13, 2015</h4></center> <!-- date -->
 <p>
 
 
 </div> <!-- end jumbotron -->
 
-<h1 id="___sec0">Elliptical partial differential equations <a name="___sec0"></a></h1>
+<h1 id="___sec0">Elliptical partial differential equations </h1>
 
 <p>
 In this exercise we shall solve an elliptical PDE. We are going to find the stationary solution of the temperature field in a quadratic beam cross-section, see Figure <a href="#fig:problem">1</a>. The temperature is known on the surface of the beam, so this is a problem with Dirichlet boundary conditions.
 
 <p>
 <center> <!-- figure -->
-<center><p class="caption">Figure 1:  Beam cross-section. <a name="fig:problem"></a> </p></center>
+<center><p class="caption">Figure 1:  Beam cross-section. <div id="fig:problem"></div> </p></center>
 <p><img src="problem.png" align="bottom" width=300></p>
 </center>
 
@@ -105,7 +105,7 @@ $$
 <p>
 <!-- --- begin exercise --- -->
 
-<h2 id="problem:temp_field">Problem 1: Stationary temperature field in beam cross-section<a name="problem:temp_field"></a></h2>
+<h2 id="problem:temp_field">Problem 1: Stationary temperature field in beam cross-section</h2>
 
 <p>
 Discretize the geometry with equal number of nodes in \( x \)-, and \( y \)-direction (choose a suitable step size). Choose a suitable difference scheme, and find the stationary temperature field in the beam cross-section (solution of \eqref{eq:pde}) numerically.
@@ -129,23 +129,27 @@ One way of showing the results is to use a 3D-plot of the temperature distributi
 <span style="color: #408080; font-style: italic"># defining variables</span>
 x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">-5</span>, <span style="color: #666666">5</span>, <span style="color: #666666">40</span>)
 y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(<span style="color: #666666">-5</span>, <span style="color: #666666">5</span>, <span style="color: #666666">40</span>)
-X, Y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>meshgrid(x, y) <span style="color: #408080; font-style: italic"># used to vectorize function of two variables</span>
-R <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(X<span style="color: #666666">**2</span> <span style="color: #666666">+</span> Y<span style="color: #666666">**2</span>) <span style="color: #408080; font-style: italic"># vectorized function of two variables</span>
-T <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sin(R)
-Tmax <span style="color: #666666">=</span> np<span style="color: #666666">.</span>max(T) <span style="color: #408080; font-style: italic"># find max for axes limit</span>
-Tmin <span style="color: #666666">=</span> np<span style="color: #666666">.</span>min(T) <span style="color: #408080; font-style: italic"># find min for axes limit</span>
+R <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((<span style="color: #666666">40</span>, <span style="color: #666666">40</span>))
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,<span style="color: #666666">40</span>):
+    <span style="color: #008000; font-weight: bold">for</span> j <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span> (<span style="color: #666666">0</span>,<span style="color: #666666">40</span>):
+        R[i,j] <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sqrt(x[i]<span style="color: #666666">**2</span> <span style="color: #666666">+</span> y[j]<span style="color: #666666">**2</span>)
+        
+T <span style="color: #666666">=</span> np<span style="color: #666666">.</span>sin(R) <span style="color: #408080; font-style: italic"># calculate function to plot</span>
 
-<span style="color: #408080; font-style: italic"># creating plot</span>
-fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
-ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>add_subplot(<span style="color: #666666">111</span>, projection<span style="color: #666666">=</span><span style="color: #BA2121">&#39;3d&#39;</span>) <span style="color: #408080; font-style: italic"># generates 3d axes</span>
-ax<span style="color: #666666">.</span>set_zlim3d(Tmin, Tmax) <span style="color: #408080; font-style: italic"># sets axis limits</span>
-surf <span style="color: #666666">=</span> ax<span style="color: #666666">.</span>plot_surface(X, Y, T, rstride<span style="color: #666666">=1</span>, cstride<span style="color: #666666">=1</span>, cmap<span style="color: #666666">=</span>coolwarm, linewidth<span style="color: #666666">=0.5</span>, antialiased<span style="color: #666666">=</span><span style="color: #008000">True</span>) <span style="color: #408080; font-style: italic"># plots the surface</span>
-fig<span style="color: #666666">.</span>colorbar(surf, shrink<span style="color: #666666">=0.5</span>, aspect<span style="color: #666666">=5</span>) <span style="color: #408080; font-style: italic"># adds a colorbar</span>
-plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;Plot example&#39;</span>)
-ax<span style="color: #666666">.</span>set_xlabel(<span style="color: #BA2121">&#39;X axis&#39;</span>)
-ax<span style="color: #666666">.</span>set_ylabel(<span style="color: #BA2121">&#39;Y axis&#39;</span>)
-ax<span style="color: #666666">.</span>set_zlabel(<span style="color: #BA2121">&#39;Z axis&#39;</span>)
-ax<span style="color: #666666">.</span>view_init(elev<span style="color: #666666">=30.</span>, azim<span style="color: #666666">=-140</span>) <span style="color: #408080; font-style: italic"># defines the viewing angle</span>
+<span style="color: #408080; font-style: italic"># plotting</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot3D</span>(x, y, p):
+    fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure(figsize<span style="color: #666666">=</span>(<span style="color: #666666">11</span>,<span style="color: #666666">7</span>), dpi<span style="color: #666666">=100</span>)
+    ax <span style="color: #666666">=</span> fig<span style="color: #666666">.</span>gca(projection<span style="color: #666666">=</span><span style="color: #BA2121">&#39;3d&#39;</span>) <span style="color: #408080; font-style: italic"># generates 3d axes</span>
+    X,Y <span style="color: #666666">=</span> np<span style="color: #666666">.</span>meshgrid(x,y) <span style="color: #408080; font-style: italic"># creates matrices X and Y with dimension Nx times Ny from row and column vectors x and y with dimension Nx and Ny, respectively. </span>
+    surf <span style="color: #666666">=</span> ax<span style="color: #666666">.</span>plot_surface(X,Y,p[:], rstride<span style="color: #666666">=1</span>, cstride<span style="color: #666666">=1</span>, cmap<span style="color: #666666">=</span>coolwarm,linewidth<span style="color: #666666">=0.5</span>, antialiased<span style="color: #666666">=</span><span style="color: #008000">False</span>) <span style="color: #408080; font-style: italic"># plots the surface</span>
+    ax<span style="color: #666666">.</span>set_zlim3d(np<span style="color: #666666">.</span>min(T), np<span style="color: #666666">.</span>max(T)) <span style="color: #408080; font-style: italic"># sets axis limits</span>
+    fig<span style="color: #666666">.</span>colorbar(surf, shrink<span style="color: #666666">=0.5</span>, aspect<span style="color: #666666">=5</span>) <span style="color: #408080; font-style: italic"># adds a colorbar</span>
+    ax<span style="color: #666666">.</span>view_init(elev<span style="color: #666666">=30.</span>, azim<span style="color: #666666">=-140</span>) <span style="color: #408080; font-style: italic"># defines the initial viewing angle</span>
+    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;x-values&#39;</span>)
+    plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;y-values&#39;</span>)
+
+fig <span style="color: #666666">=</span> plot3D(x, y, T)
+plt<span style="color: #666666">.</span>title(<span style="color: #BA2121">&#39;Example plot&#39;</span>)
 
 plt<span style="color: #666666">.</span>savefig(<span style="color: #BA2121">&#39;surfaceplotexample.png&#39;</span>, transparent<span style="color: #666666">=</span><span style="color: #008000">True</span>)
 plt<span style="color: #666666">.</span>show()
