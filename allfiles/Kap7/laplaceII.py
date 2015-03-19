@@ -68,6 +68,23 @@ def laplace_direct_xdir(N):
     
     return T
 
+def laplace2d(T, dx, dy, l1_eps):
+    l1norm = 1.0
+    Tn = np.empty_like(T)
+    
+    while l1norm > l1_eps:
+        Tn = T.copy()
+
+        T[1:-1,1:-1] = (dx**2*(Tn[2:,1:-1]+Tn[0:-2,1:-1])+dy**2*(Tn[1:-1,2:]+Tn[1:-1,0:-2]))/(2*(dx**2+dy**2)) 
+        T[1:-1,0] = (dx**2*(Tn[2:,0]+Tn[0:-2,0])+dy**2*(2*Tn[1:-1,1]))/(2*(dx**2+dy**2)) 
+        T[0,1:-1] = (dx**2*(2*Tn[1,1:-1])+dy**2*(Tn[0,2:]+Tn[0,0:-2]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0
+        T[0,0] = (dx**2*(2*Tn[1,0])+dy**2*(2*Tn[0,1]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0
+        T[:,-1] = 0       ##T = 0 @ x = 1.0
+        T[-1,:] = 1.0    ##T = 1 @ y = 1.0
+#        l1norm = (sum(abs(T[:])-abs(Tn[:])))/sum(abs(Tn[:]))
+        l1norm = sum(sum(abs(T[:,:]-Tn[:,:])))/sum(sum(abs(Tn[:,:])))
+    
+    return T
 
 
 def T_analytical(x,y):
@@ -84,18 +101,6 @@ def T_analytical(x,y):
     return T
 
     
-def T2(x,y):
-    N_inf=30
-    T = np.zeros_like(x)
-    n=1.0
-    for n in range(1,N_inf+1):
-        lambda_n = (2*n-1)*np.pi/2.0
-        An = 2*(-1)**(n-1)/(lambda_n*cosh(lambda_n))
-        T+=An*np.cosh(lambda_n*x)*np.cos(lambda_n*y)
-    
-    return T
-
-
 def plot3D(x, y, p):
     fig = plt.figure(figsize=(11,7), dpi=100)
     ax = fig.gca(projection='3d')
@@ -104,9 +109,30 @@ def plot3D(x, y, p):
     ax.view_init(30,225)
     plt.xlabel('x-values')
     plt.ylabel('y-values')
+    
+def subplot3D(x,y,p,Npx=1,Npy=1,Cp=1, title=''):
+    if (Cp==1):
+        fig = plt.figure()
+    else:
+        fig=plt.gcf()
+    
+    ax = fig.add_subplot(Npx, Npy, Cp, projection='3d')
+        
+    X,Y = np.meshgrid(x,y)
+    surf = ax.plot_surface(X,Y,p[:], rstride=1, cstride=1, cmap=cm.coolwarm,
+            linewidth=0, antialiased=False)
+    plt.title(title)
+    plt.xlabel('x-values')
+    plt.ylabel('y-values')
+    ax.view_init(30,225)
+    
 
 T = np.zeros((Ny+1,Nx+1))
 T=laplace_direct_xdir(N)
+
+Ti = np.zeros((Ny+1,Nx+1))
+Ti=laplace2d(Ti, h, h, 0.00001)
+
 
 x = np.linspace(0, width, Nx+1)
 y = np.linspace(0, height, Ny+1)
@@ -114,11 +140,19 @@ X,Y = np.meshgrid(x, y)
 
 Ta=T_analytical(X,Y)
 
-plot3D(x,y,Ta)
-plt.title('Analytical solution')
+# plot3D(x,y,Ta)
+# plt.title('Analytical solution')
+# 
+# plot3D(x,y,T)
+# plt.title('numerical')
+# 
+# plot3D(x,y,Ti)
+# plt.title('iterative')
 
-plot3D(x,y,T)
-plt.title('numerical')
+
+subplot3D(x,y,Ta,Npx=2,Npy=2,Cp=1,title='analytic')
+subplot3D(x,y,T,Npx=2,Npy=2,Cp=2,title='numerical')
+subplot3D(x,y,Ti,Npx=2,Npy=2,Cp=3,title= 'iterative solver')
 
 
 plt.show()
