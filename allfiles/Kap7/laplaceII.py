@@ -25,10 +25,11 @@ from numpy import cosh, cos
 width = 1.0
 height = width
 
-Nx = 4 # number of points in x-direction
+Nx = 30 # number of points in x-direction
 Ny = Nx # number of points in y-direction
 h = width/Nx
 N = Nx*Ny
+
 
 h=width/Nx
 
@@ -68,23 +69,98 @@ def laplace_direct_xdir(N):
     
     return T
 
-def laplace2d(T, dx, dy, l1_eps):
+def laplace_jacobian_iteration(T, dx, dy, l1_eps):
     l1norm = 1.0
     Tn = np.empty_like(T)
     
+    k=0
     while l1norm > l1_eps:
-        Tn = T.copy()
-
-        T[1:-1,1:-1] = (dx**2*(Tn[2:,1:-1]+Tn[0:-2,1:-1])+dy**2*(Tn[1:-1,2:]+Tn[1:-1,0:-2]))/(2*(dx**2+dy**2)) 
-        T[1:-1,0] = (dx**2*(Tn[2:,0]+Tn[0:-2,0])+dy**2*(2*Tn[1:-1,1]))/(2*(dx**2+dy**2)) 
-        T[0,1:-1] = (dx**2*(2*Tn[1,1:-1])+dy**2*(Tn[0,2:]+Tn[0,0:-2]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0
-        T[0,0] = (dx**2*(2*Tn[1,0])+dy**2*(2*Tn[0,1]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0
+        
         T[:,-1] = 0       ##T = 0 @ x = 1.0
         T[-1,:] = 1.0    ##T = 1 @ y = 1.0
+        Tn = T.copy()
+        
+        T[1:-1,1:-1] = (dx**2*(Tn[2:,1:-1]+Tn[0:-2,1:-1])+dy**2*(Tn[1:-1,2:]+Tn[1:-1,0:-2]))/(2*(dx**2+dy**2)) 
+        
+        T[1:-1,0] = (dx**2*(Tn[2:,0]+Tn[0:-2,0])+dy**2*(2*Tn[1:-1,1]))/(2*(dx**2+dy**2)) 
+        
+        T[0,1:-1] = (dx**2*(2*Tn[1,1:-1])+dy**2*(Tn[0,2:]+Tn[0,0:-2]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0
+        T[0,0] = (dx**2*(2*Tn[1,0])+dy**2*(2*Tn[0,1]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0
 #        l1norm = (sum(abs(T[:])-abs(Tn[:])))/sum(abs(Tn[:]))
         l1norm = sum(sum(abs(T[:,:]-Tn[:,:])))/sum(sum(abs(Tn[:,:])))
+        k+=1
     
+    print 'Jacobian iterations complete after ', k, ' iterations.'
     return T
+
+# def laplace2D_GaussSeidel_SOR(T, dx, dy,l1_eps, w=1.5):
+#    l1norm = 1.0
+#    
+#    R=np.zeros_like(T)  # Residual
+#    T[:,0] = 0        ##T = 0 @ x = 0
+#    T[-1,:] = 1.0       ##T = y @ x = 2
+# 
+#    i=0   
+#    while (l1norm>l1_eps):
+#        
+#        Tn = T.copy() # copy after BC imposistion to avoid div zero in norm
+#        R[0,1:-1] = w*(2*T[1,1:-1]+T[0,2:]+T[0,0:-2]-4.0*T[0,1:-1])/4.0
+#        R[1:-1,0]= w*(T[2:,0]+T[0:-2,0]+2*T[1:-1,1]- 4.0*T[1:-1,0])/4.0
+# 
+#        R[1:-1,1:-1]= w*(T[2:,1:-1]+T[0:-2,1:-1]+T[1:-1,2:]+T[1:-1,0:-2]- 4.0*T[1:-1,1:-1])/4.0
+#        R[0,0]= w*(2*T[1,0]+2*T[0,1]-4.0*T[0,0])/4.0
+#        T+=R
+#        i+=1
+#        l1norm = sum(sum(abs(T-Tn)))/sum(sum(abs(Tn)))
+# 
+# 
+#    print 'SOR completed ',i, 'iterations'
+#    return T
+
+def laplace2D_GaussSeidel_SOR_slow(T, dx, dy,l1_eps, w=1.5):
+   l1norm = 1.0
+   
+   R=np.zeros_like(T)  # Residual
+   T[:,0] = 0        ##T = 0 @ x = 0
+   T[-1,:] = 1.0       ##T = y @ x = 2
+   resid=0.0 
+   (nx,ny)=np.shape(T)
+   k=0 
+#    ro=np.cos(np.pi/nx)
+#    w=0.8*2.0/(1 + np.sqrt(1 - ro**2))
+#    print w
+      
+   while (l1norm>l1_eps):
+       dTsum=0
+       Tn = T.copy() # copy after BC imposistion to avoid div zero in norm
+       for i in range(1,nx-1):
+           resid = w*(2*T[1,i]+T[0,i+1]+T[0,i-1]-4.0*T[0,i])
+           dT=w*resid/4.0
+           T[0,i]+=dT
+           dTsum+=abs(dT)
+           
+       for j in range(1,ny-1):    
+           resid= w*(T[j+1,0]+T[j-1,0]+2*T[j,1]- 4.0*T[j,0])
+           dT=w*resid/4.0
+           T[j,0]+=dT
+           dTsum+=abs(dT)
+           
+       for j in range(1,ny-1):
+           for i in range(1,nx-1):
+               resid= w*(T[j+1,i]+T[j-1,i]+T[j,i+1]+T[j,i-1]-4.0*T[j,i])
+               dT=w*resid/4.0
+               T[j,i]+=dT
+               dTsum+=abs(dT)
+       
+       
+       T[0,0]= (2*T[1,0]+2*T[0,1])/4.0
+       
+       k+=1
+       l1norm = dTsum/sum(sum(abs(Tn)))
+
+
+   print 'Gauss-Seidel SOR iterations complete after ',i, ' iterations'
+   return T
 
 
 def T_analytical(x,y):
@@ -128,11 +204,15 @@ def subplot3D(x,y,p,Npx=1,Npy=1,Cp=1, title=''):
     
 
 T = np.zeros((Ny+1,Nx+1))
+tic=time.clock()
 T=laplace_direct_xdir(N)
+print 'Direct solver time:',time.clock()-tic 
+
 
 Ti = np.zeros((Ny+1,Nx+1))
-Ti=laplace2d(Ti, h, h, 0.00001)
-
+tic=time.clock()
+Ti=laplace_jacobian_iteration(Ti, h, h, 0.00001)
+print 'Jacobian solver time:',time.clock()-tic 
 
 x = np.linspace(0, width, Nx+1)
 y = np.linspace(0, height, Ny+1)
@@ -140,19 +220,15 @@ X,Y = np.meshgrid(x, y)
 
 Ta=T_analytical(X,Y)
 
-# plot3D(x,y,Ta)
-# plt.title('Analytical solution')
-# 
-# plot3D(x,y,T)
-# plt.title('numerical')
-# 
-# plot3D(x,y,Ti)
-# plt.title('iterative')
+Tsor=np.zeros((Ny+1,Nx+1))
+tic=time.clock()
+Tsor=laplace2D_GaussSeidel_SOR_slow(Tsor,h,h,1.0E-3,w=1.4)
+print 'Gauss-Seidel solver time:',time.clock()-tic 
 
-
-subplot3D(x,y,Ta,Npx=2,Npy=2,Cp=1,title='analytic')
-subplot3D(x,y,T,Npx=2,Npy=2,Cp=2,title='numerical')
-subplot3D(x,y,Ti,Npx=2,Npy=2,Cp=3,title= 'iterative solver')
+subplot3D(x,y,Ta,Npx=2,Npy=2,Cp=1,title='Analytic')
+subplot3D(x,y,T,Npx=2,Npy=2,Cp=2,title='Direct solver')
+subplot3D(x,y,Ti,Npx=2,Npy=2,Cp=3,title= 'Jacobian iterative solver')
+subplot3D(x,y,Tsor,Npx=2,Npy=2,Cp=4,title= 'Gauss-Seidel SOR')
 
 
 plt.show()
