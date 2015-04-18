@@ -95,8 +95,8 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec22'),
-              (u' Convection problems and hyperbolic PDEs ',
-               1,
+              (u' Chapter 6: Convection problems and hyperbolic PDEs ',
+               0,
                None,
                '___sec23'),
               (u' Forward in time central in space discretization ',
@@ -151,7 +151,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main010.html#ex:euler_method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
      <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Convection problems and hyperbolic PDEs</a></li>
+     <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="._main022.html#___sec25" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
@@ -222,7 +222,7 @@ Let's implement the RK4 scheme and add it to the falling sphere example. The sch
         z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> dt<span style="color: #666666">/6.0*</span>(k1 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k2 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k3 <span style="color: #666666">+</span> k4) <span style="color: #408080; font-style: italic"># Corrector step</span>
 </pre></div>
 <p>
-Figure <a href="#fig:falling_sphere_euler_heun_rk4">10</a> shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete program <b>FallingSphereEulerHeunRK4.py</b> is listed below. The functions <code>euler</code>, <code>heun</code> and <code>rk4</code> are imported from the program <b>ODEschemes.py</b>. 
+Figure <a href="#fig:falling_sphere_euler_heun_rk4">10</a> shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete program <b>FallingSphereEulerHeunRK4.py</b> is listed below. The functions <code>euler</code>, <code>heun</code> and <code>rk4</code> are imported from the program <b>ODEschemes.py</b>.
 
 <p>
 <center> <!-- figure -->

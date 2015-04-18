@@ -95,8 +95,8 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec22'),
-              (u' Convection problems and hyperbolic PDEs ',
-               1,
+              (u' Chapter 6: Convection problems and hyperbolic PDEs ',
+               0,
                None,
                '___sec23'),
               (u' Forward in time central in space discretization ',
@@ -151,7 +151,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main010.html#ex:euler_method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
      <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Convection problems and hyperbolic PDEs</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="._main022.html#___sec25" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
@@ -185,14 +185,14 @@ MathJax.Hub.Config({
 </ul>
 <!-- !split -->
 
-<h1 id="___sec23">Convection problems and hyperbolic PDEs </h1>
+<h1 id="___sec23">Chapter 6: Convection problems and hyperbolic PDEs </h1> <!-- chapter heading -->
 The classical advection equation is very often used as an example of a hyperbolic partial differential equation which illustrates many features of convection problems, while still being linear:
 $$
-\begin{equation}\tag{76}
+\begin{equation}
+ \tag{76}
 \frac{\partial u}{\partial t} + a_0 \frac{\partial u}{\partial x} = 0
 \end{equation}
 $$
-
 
 <p>
 Another convenient feature of the model equation <a href="#mjx-eqn-76">(76)</a> is
@@ -204,9 +204,9 @@ u = u_0 \, f(x-a_0\,t )
 $$
 
 and represents a wave propagating with a constant velocity \( a_0 \) with
-unchanged shape. When \( a_0>0 \), the wave propagates in the positive
+unchanged shape. When \( a_0 > 0 \), the wave propagates in the positive
 x-direction, whereas for \( a_0 < 0 \), the wave propagates in the negative
-x-direction. 
+x-direction.
 
 <p>
 Equation <a href="#mjx-eqn-76">(76)</a> may serve as a model-equation for a
@@ -235,7 +235,7 @@ u_j^{n+1} = u_j^n - \frac{C}{2}(u_{j+1}^n-u_{j-1}^n)
 \end{equation}
 $$
 
-For convenience we have introduced the the non-dimensional Courant-number: 
+For convenience we have introduced the the non-dimensional <a href="http://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition" target="_blank">Courant-Friedrich-Lewy</a> number (or CFL-number for short): 
 $$
 \begin{equation}
 \tag{80}
@@ -243,6 +243,92 @@ C = a_0\frac{\Delta t}{\Delta x}
 \end{equation}
 $$
 
+<p>
+The scheme in <a href="#mjx-eqn-79">(79)</a> is first order in time and second order in space (.i.e. \( (O(\Delta t) + O(\Delta x^2)) \)), and as explicit in time as can bee seen both from Fig. (ref(fig:FTCS)) and <a href="#mjx-eqn-79">(79)</a>.
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 14:  Illustration of the first order in time central in space scheme. <div id="fig:FTCS"></div> </p></center>
+<p><img src="chapter6/fig01.png" align="bottom" width=400></p>
+</center>
+
+<p>
+We will try to solve model equation <a href="#mjx-eqn-76">(76)</a> with the scheme <a href="#mjx-eqn-79">(79)</a> and initial conditions illustrated in Fig <a href="#fig:FTCS_init">15</a> with the mathematical representation:
+$$
+\begin{equation*}
+\begin{array}{c}
+u(x,0) = 1 \text{ for } x < 0.5\\ 
+u(x,0) = 0 \text{ for } x > 0.5
+\end{array}
+\end{equation*}
+$$
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 15:  Initial values for the advection equaution <a href="#mjx-eqn-76">(76)</a>. <div id="fig:FTCS_init"></div> </p></center>
+<p><img src="chapter6/fig02.png" align="bottom" width=400></p>
+</center>
+
+<p>
+Solutions for three CFL-numbers: C=0.25, 0.5 and 1.0 are illustrated
+in Fig. (<a href="#fig:FTCS_sol">16</a>).  Large oscillations are observed for all
+values of the CFL-number, even though they seem to be sligtly reduced
+for smaller C-values, thus we have indications of an unstable scheme.
+As a first approach observe that the coefficient for \( u^n_{j+1} \) in
+<a href="#mjx-eqn-79">(79)</a> always will be negative, and thus the criterion of
+positive coefficients (PC-criterion) may not be satisfied for any
+value of \( C \).
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 16:  Computed solutions with the <a href="#mjx-eqn-79">(79)</a>. Dotted line: analytical solution, solid line: computed soultion. <div id="fig:FTCS_sol"></div> </p></center>
+<p><img src="chapter6/fig03.png" align="bottom" width=400></p>
+</center>
+
+<p>
+However, as we know that the PC-criterion may be too
+strict in some cases, we proceed with a von Neumann analysis by introducing the numerical amplification factor \( G^n \) for the error \( E^n_j \) in the numerical scheme to be analyzed
+$$
+\begin{equation}
+\tag{81}
+u^n_j\to E^n_j=G^n\cdot e^{i\cdot \beta x_j}
+\end{equation}
+$$
+
+Substitution of <a href="#mjx-eqn-81">(81)</a> into <a href="#mjx-eqn-79">(79)</a> yields:
+$$
+\begin{equation*}
+G^{n+1}e^{i\cdot \beta \cdot x_j} = G^ne^{i \cdot \beta \cdot x_j}-\frac{C}{2}\left(G^ne^{i\cdot \beta x_{j+1}}- G^ne^{i\cdot \beta x_{j-1}}\right)
+\end{equation*}
+$$
+
+which after division with  \( G^ne^{i\cdot \beta \cdot x_j} \) and introduction of the simplified notation \( \delta = \beta \cdot h \)  yields:
+$$
+\begin{equation*}
+G = 1 - \frac{C}{2}\left(e^{i\cdot \beta h}-e^{-i \cdot \beta h}\right) = 1 - i \cdot C \sin(\delta)
+\end{equation*}
+$$
+
+where the trigonometric relations:
+$$
+\begin{align} \tag{82}
+&2\cos(x)=e^{ix}+e^{-ix}\\ 
+&i\cdot 2\sin(x)=e^{ix}-e^{-ix}\\ 
+&\cos(x)=1-2\sin^2(\frac{x}{2})
+\end{align}
+$$
+
+<p>
+have been introduced for convenience. Finally, we get the following
+expression for the numerical ampliciation factor:
+
+$$
+\begin{equation*}
+|G|=\sqrt{1+C^2\sin^2(\delta)} \geq 1 \text{ for all } C \text{ and } \delta
+\end{equation*}
+$$
+
+and concequently the FTCS-scheme unconditionally unstable for the advection equation and not a viable scheme. Even a very small C-value will not suffice to dampe the oscillations.
 
 <p>
 <p>
