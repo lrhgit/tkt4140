@@ -1,3 +1,4 @@
+
 TITLE: Numerical Methods for Engineers
 TITLE: A digital compendium
 AUTHOR: Johan Kolstø Sønstabø at Department of Structural Engineering, NTNU
@@ -1714,10 +1715,11 @@ The complete module `ODEschemes` is listed below and may easily be downloaded in
 ${ebox()}
 
 !split
-======= Convection problems and hyperbolic PDEs =======
+========= Chapter 6: Convection problems and hyperbolic PDEs =========
 The classical advection equation is very often used as an example of a hyperbolic partial differential equation which illustrates many features of convection problems, while still being linear:
 !bt
-\begin{equation}\label{eq:6101}
+\begin{equation}
+ label{eq:6101}
 \frac{\partial u}{\partial t} + a_0 \frac{\partial u}{\partial x} = 0
 \end{equation}
 !et
@@ -1730,8 +1732,8 @@ u = u_0 \, f(x-a_0\,t )
 \end{equation}
 !et
 and represents a wave propagating with a constant velocity $a_0$ with
-unchanged shape. When $a_0>0$, the wave propagates in the positive
-x-direction, whereas for $a_0<0$, the wave propagates in the negative
+unchanged shape. When $a_0 > 0$, the wave propagates in the positive
+x-direction, whereas for $a_0 < 0$, the wave propagates in the negative
 x-direction. 
 
 Equation (ref{eq:6101}) may serve as a model-equation for a
@@ -1757,7 +1759,7 @@ label{eq:6201}
 u_j^{n+1} = u_j^n - \frac{C}{2}(u_{j+1}^n-u_{j-1}^n)
 \end{equation}
 !et
-For convenience we have introduced the the non-dimensional Courant-number: 
+For convenience we have introduced the the non-dimensional "Courant-Friedrich-Lewy":"http://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition" number (or CFL-number for short): 
 idx{Courant-tallet}
 !bt
 \begin{equation}
@@ -1766,9 +1768,74 @@ C = a_0\frac{\Delta t}{\Delta x}
 \end{equation}
 !et
 
+The scheme in (ref{eq:6201}) is first order in time and second order in space (.i.e. $(O(\Delta t) + O(\Delta x^2))$), and as explicit in time as can bee seen both from Fig. (ref(fig:FTCS)) and (ref{eq:6201}). 
+
+FIGURE:[chapter6/fig01.png, width=400] Illustration of the first order in time central in space scheme. label{fig:FTCS}
+
+We will try to solve model equation (ref{eq:6101}) with the scheme (ref{eq:6201}) and initial conditions illustrated in Fig ref{fig:FTCS_init} with the mathematical representation:
+!bt
+\begin{equation*}
+\begin{array}{c}
+u(x,0) = 1 \text{ for } x < 0.5\\
+u(x,0) = 0 \text{ for } x > 0.5
+\end{array}
+\end{equation*}
+!et
+
+FIGURE:[chapter6/fig02.png, width=400] Initial values for the advection equaution (ref{eq:6101}). label{fig:FTCS_init}
+
+Solutions for three CFL-numbers: C=0.25, 0.5 and 1.0 are illustrated
+in Fig. (ref{fig:FTCS_sol}).  Large oscillations are observed for all
+values of the CFL-number, even though they seem to be sligtly reduced
+for smaller C-values, thus we have indications of an unstable scheme.
+As a first approach observe that the coefficient for $u^n_{j+1}$ in
+(ref{eq:6201}) always will be negative, and thus the criterion of
+positive coefficients (PC-criterion) may not be satisfied for any
+value of $C$. 
+
+FIGURE:[chapter6/fig03.png, width=400] Computed solutions with the (ref{eq:6201}). Dotted line: analytical solution, solid line: computed soultion. label{fig:FTCS_sol}
+
+However, as we know that the PC-criterion may be too
+strict in some cases, we proceed with a von Neumann analysis by introducing the numerical amplification factor $G^n$ for the error $E^n_j$ in the numerical scheme to be analyzed
+!bt
+\begin{equation}
+label{eq:5309}
+u^n_j\to E^n_j=G^n\cdot e^{i\cdot \beta x_j}
+\end{equation}
+!et
+Substitution of (ref{eq:5309}) into (ref{eq:6201}) yields:
+!bt
+\begin{equation*}
+G^{n+1}e^{i\cdot \beta \cdot x_j} = G^ne^{i \cdot \beta \cdot x_j}-\frac{C}{2}\left(G^ne^{i\cdot \beta x_{j+1}}- G^ne^{i\cdot \beta x_{j-1}}\right)
+\end{equation*}
+!et
+which after division with  $G^ne^{i\cdot \beta \cdot x_j}$ and introduction of the simplified notation $\delta = \beta \cdot h$  yields:
+!bt
+\begin{equation*}
+G = 1 - \frac{C}{2}\left(e^{i\cdot \beta h}-e^{-i \cdot \beta h}\right) = 1 - i \cdot C \sin(\delta)
+\end{equation*}
+!et
+where the trigonometric relations:
+!bt
+\begin{align} label{eq:53114}
+&2\cos(x)=e^{ix}+e^{-ix}\\
+&i\cdot 2\sin(x)=e^{ix}-e^{-ix}\\
+&\cos(x)=1-2\sin^2(\frac{x}{2})
+\end{align}
+!et 
+
+have been introduced for convenience. Finally, we get the following
+expression for the numerical ampliciation factor:
+
+!bt
+\begin{equation*}
+|G|=\sqrt{1+C^2\sin^2(\delta)} \geq 1 \text{ for all } C \text{ and } \delta
+\end{equation*}
+!et
+and concequently the FTCS-scheme unconditionally unstable for the advection equation and not a viable scheme. Even a very small C-value will not suffice to dampe the oscillations. 
+
+
 !split 
-
-
 ========= References =========
 
 BIBFILE: references/papers.pub

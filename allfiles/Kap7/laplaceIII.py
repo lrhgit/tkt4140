@@ -20,6 +20,10 @@ import scipy.sparse.linalg
 import time
 from numpy import cosh, cos, sum, abs, log2
 from pprint import pprint
+from matplotlib.pyplot import rcParams,rc
+LNWDT=3; FNT=6
+rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
+font = {'size' : 12}; rc('font', **font)
 
 
 
@@ -34,24 +38,98 @@ def T_analytical(x,y):
     return T
 
     
-def laplace2d(T, y, dx, dy, l1_eps):
+def laplace2D_jacobi(T, y, dx, dy, l1_eps):
    l1norm = 1
    Tn = np.empty_like(T)
-
-   while l1norm > l1_eps:
-       Tn = T.copy()
-       T[1:-1,1:-1] = (dy**2*(Tn[2:,1:-1]+Tn[0:-2,1:-1])+dx**2*(Tn[1:-1,2:]+Tn[1:-1,0:-2]))/(2*(dx**2+dy**2)) 
-       T[0,0] = (dy**2*(Tn[1,0]+Tn[-1,0])+dx**2*(Tn[0,1]+Tn[0,-1]))/(2*(dx**2+dy**2))
-       T[-1,-1] = (dy**2*(Tn[0,-1]+Tn[-2,-1])+dx**2*(Tn[-1,0]+Tn[-1,-2]))/(2*(dx**2+dy**2)) 
+   i=0
    
-       T[:,0] = 0        ##T = 0 @ x = 0
-       T[:,-1] = y        ##T = y @ x = 2
-       T[0,:] = T[1,:]        ##dp/dy = 0 @ y = 0
-       T[-1,:] = T[-2,:]    ##dp/dy = 0 @ y = 1
-       l1norm = (sum(abs(T[:])-abs(Tn[:])))/sum(abs(Tn[:]))
-    
+   while l1norm > l1_eps:
+        T[:,0] = 0      # T = 0 @ x = 0
+        T[:,-1] = y     # T = y @ x = 2
+
+        Tn = T.copy()   # copy after BC imposistion to avoid div zero in norm
+
+        T[1:-1,1:-1] = (dx**2*(Tn[2:,1:-1]+Tn[0:-2,1:-1])+dy**2*(Tn[1:-1,2:]+Tn[1:-1,0:-2]))/(2*(dx**2+dy**2)) 
+        T[0,1:-1] = (dx**2*(2*Tn[1,1:-1])+dy**2*(Tn[0,2:]+Tn[0,0:-2]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0
+        T[-1,1:-1] = (dx**2*(2*Tn[-2,1:-1])+dy**2*(Tn[-1,2:]+Tn[-1,0:-2]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=1
+        i+=1
+                
+        l1norm = sum(abs(T-Tn))/sum(abs(Tn))
+        
+   print 'completed ',i, 'iterations'
    return T
         
+def laplace2D_GaussSeidel(T, y, dx, dy, l1_eps):
+   l1norm = 1
+   
+   i=0
+   while l1norm > l1_eps:
+        T[:,0] = 0        ##T = 0 @ x = 0
+        T[:,-1] = y        ##T = y @ x = 2
+       
+        Tn = T.copy() # copy after BC imposistion to avoid div zero in norm
+
+        T[1:-1,1:-1] = (dx**2*(T[2:,1:-1]+T[0:-2,1:-1])+dy**2*(T[1:-1,2:]+T[1:-1,0:-2]))/(2*(dx**2+dy**2)) 
+        T[0,1:-1] = (dx**2*(2*T[1,1:-1])+dy**2*(T[0,2:]+T[0,0:-2]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0
+        T[-1,1:-1] = (dx**2*(2*T[-2,1:-1])+dy**2*(T[-1,2:]+T[-1,0:-2]))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=1
+        i+=1
+        
+        l1norm = sum(abs(T-Tn))/sum(abs(Tn))
+    
+   print 'completed ',i, 'iterations'
+   return T
+
+def laplace2D_GaussSeidel_SOR_general(T, y, dx, dy,l1_eps, w=1.5,):
+   l1norm = 1
+   
+   R=np.zeros_like(T)  # Residual
+   T[:,0] = 0        ##T = 0 @ x = 0
+   T[:,-1] = y        ##T = y @ x = 2
+       
+   i=0
+   while l1norm > l1_eps:
+        
+        Tn = T.copy() # copy after BC imposistion to avoid div zero in norm
+        R[1:-1,1:-1]= w*(dx**2*(T[2:,1:-1]+T[0:-2,1:-1])+dy**2*(T[1:-1,2:]+T[1:-1,0:-2])
+                        - T[1:-1,1:-1]*2*(dx**2+dy**2))/(2*(dx**2+dy**2)) 
+        
+        R[0,1:-1] = w*(dx**2*(2*T[1,1:-1])+dy**2*(T[0,2:]+T[0,0:-2]) 
+                     -T[0,1:-1]*2*(dx**2+dy**2))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=0 
+        R[-1,1:-1] = w*(dx**2*(2*T[-2,1:-1])+dy**2*(T[-1,2:]+T[-1,0:-2])
+                      -T[-1,1:-1]*2*(dx**2+dy**2))/(2*(dx**2+dy**2)) #dT/dy = 0 @ y=1
+        T+=R
+        i+=1
+        
+        l1norm = sum(abs(T-Tn))/sum(abs(Tn))
+    
+   print 'SOR completed ',i, 'iterations'
+   return T
+
+def laplace2D_GaussSeidel_SOR(T, y, dx, dy,l1_eps, w=1.5,):
+   l1norm = 1
+   
+   R=np.zeros_like(T)  # Residual
+   T[:,0] = 0        ##T = 0 @ x = 0
+   T[:,-1] = y        ##T = y @ x = 2
+       
+   i=0
+   while l1norm > l1_eps:
+        
+        Tn = T.copy() # copy after BC imposistion to avoid div zero in norm
+        R[1:-1,1:-1]= w*(T[2:,1:-1]+T[0:-2,1:-1]+T[1:-1,2:]+T[1:-1,0:-2]
+                        - 4.0*T[1:-1,1:-1])/4.0
+        
+        #R[0,1:-1] = w*(2*T[1,1:-1]+T[0,2:]+T[0,0:-2]-4.0*T[0,1:-1])/4.0
+        #R[-1,1:-1] = w*(2*T[-2,1:-1]+T[-1,2:]+T[-1,0:-2]-4.0*T[-1,1:-1])/4.0
+        T+=R
+        i+=1
+        
+        l1norm = sum(abs(T-Tn))/sum(abs(Tn))
+    
+   print 'SOR completed ',i, 'iterations'
+   return T
+
+
 
 
 def laplace_directsolver_x_order(T,N,y):
@@ -200,31 +278,34 @@ Ta=T_analytical(X,Y)
 
 # iterative solver
 T3 = np.zeros((Ny,Nx+2))
-##boundary conditions
-T3[:,0] = 0        ##p = 0 @ x = 0
-T3[:,-1] = y        ##p = y @ x = 2
-T3[0,:] = T3[1,:]        ##dp/dy = 0 @ y = 0
-T3[-1,:] = T3[-2,:]    ##dp/dy = 0 @ y = 1
+T4 = np.zeros((Ny,Nx+2))
+T6 = np.zeros((Ny,Nx+2))
+T7 = np.zeros((Ny,Nx+2))
  
- 
-T3=laplace2d(T3, y, h, h, 0.0000000000000001)
+T3=laplace2D_jacobi(T3, y, h, h, 1.0E-5)
+T4=laplace2D_GaussSeidel(T4, y, h, h, 1.0E-5)
+T6=laplace2D_GaussSeidel_SOR(T6, y, h, h, 1.0E-5,w=1.3)
+T7=laplace2D_GaussSeidel_SOR_general(T7, y, h, h, 1.0E-5,w=1.0)
 
 T2 = np.zeros((Ny,Nx+2))
 T2=laplace_directsolver_x_order(T2,N,y)
  
-T4 = np.zeros((Ny,Nx+2))
-T4=laplace_directsolver_y_order(T4,Nx,Ny,y)
+T5 = np.zeros((Ny,Nx+2))
+T5=laplace_directsolver_y_order(T4,Nx,Ny,y)
 # L1norm = (sum(abs(T4[:])-abs(Ta[:])))/sum(abs(Ta[:]))
 # print 'L1n =', L1norm
 #  
 subplot3D(x,y,Ta,Npx=2,Npy=2,Cp=1,title='analytic')
 subplot3D(x,y,T2,Npx=2,Npy=2,Cp=3,title='directsolver x-dir')
 subplot3D(x,y,T4,Npx=2,Npy=2,Cp=2,title='directsolver y-dir')
-subplot3D(x,y,T3,Npx=2,Npy=2,Cp=4,title= 'iterative solver')
+#subplot3D(x,y,T3,Npx=2,Npy=2,Cp=4,title= 'iterative solver')
+subplot3D(x,y,T7,Npx=2,Npy=2,Cp=4,title= 'SOR solver')
 
-plt.figure()
-convergence_test()
 
+# plt.figure()
+# convergence_test()
+# plt.xlabel('h-level')
+# plt.ylabel('order-approx')
 
 plt.show()
 plt.close()

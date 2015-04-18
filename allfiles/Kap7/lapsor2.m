@@ -57,3 +57,6 @@ while relres > reltol
     relres = dTsum/Tsum; 
 end
 
+
+plot3d(x,y,T)
+

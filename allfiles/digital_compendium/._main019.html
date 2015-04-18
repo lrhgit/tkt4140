@@ -95,8 +95,8 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec22'),
-              (u' Convection problems and hyperbolic PDEs ',
-               1,
+              (u' Chapter 6: Convection problems and hyperbolic PDEs ',
+               0,
                None,
                '___sec23'),
               (u' Forward in time central in space discretization ',
@@ -151,7 +151,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main010.html#ex:euler_method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
      <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Convection problems and hyperbolic PDEs</a></li>
+     <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="._main022.html#___sec25" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
@@ -216,7 +216,6 @@ $$
 \end{align}
 $$
 
-
 <p>
 \( C_D \) is the drag coefficient, \( C_L \) is the lift coefficient, \( A \) is the area projected in the velocity direction and \( \rho_F \) is the density of the fluid.
 
@@ -231,7 +230,6 @@ $$
 \end{align}
 $$
 
-
 <p>
 From the figure we have
 $$
@@ -240,7 +238,6 @@ $$
 \sin(\phi)&=\frac{v_{ry}}{v_r}
 \end{align*}
 $$
-
 
 <p>
 We assume that the particle is a sphere, such that \( C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd} \) as in (<a href="._main005.html#example:sphere_freefall">Example 2: Sphere in free fall</a>). Here \( d \) is the diameter of the sphere and \( \rho_k \) the density of the sphere.
@@ -256,7 +253,6 @@ $$
 \end{align}
 $$
 
-
 <p>
 With \( \frac{dx}{dt}=v_x \) and \( \frac{dy}{dt}=v_y \) we get a system of 1st order equations as follows,
 $$
@@ -268,7 +264,6 @@ $$
 &\frac{dv_y}{dt} = C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-g \nonumber
 \end{align}
 $$
-
 
 <p>
 Introducing the notation \( x=y_1 \), \( y=y_2 \), \( v_x=y_3 \), \( v_y=y_4 \), we get
@@ -282,7 +277,6 @@ $$
 \end{align}
 $$
 
-
 <p>
 Here we have \( v_{rx}=v_x-v_{fx}=y_3-v_{fx},\ v_{ry}=v_y-v_{fy}=y_4-v_{fy},\\ v_r=\sqrt{v_{rx}^2+v_{ry}^2} \)
 
@@ -295,7 +289,6 @@ y_3&=v_0\cos(\alpha)\\
 y_4&=v_0\sin(\alpha)
 \end{align*}
 $$
-
 
 <p>
 <hr>
