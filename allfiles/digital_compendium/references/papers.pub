@@ -40,13 +40,27 @@
    status:    published
    entrytype: book
 ** A Primer on Scientific Programming With {P}ython
-   key:       langtangen14
+   key:       Langtangen2011primer
    author:    Hans Petter Langtangen
-   year:      2014
+   year:      2011
    publisher: Springer
    status:    published
-   edition:   Fourth
+   isbn:      978-36425495882
+   added-at:  20100
+   edition:   fourth
    entrytype: book
+   address:   Berlin; Heidelberg; New York
+** Hyperbolic Systems of Conservation Laws and the Mathematical Theory of Shock Waves
+   key:       lax73
+   author:    Peter D. Lax
+   year:      1973
+   publisher: Society for Industrial and Applied Mathematics
+   url:       http://opac.inria.fr/record=b1083269
+   status:    published
+   isbn:      0-89871-177-0
+   series:    Regional conference series in applied mathematics
+   entrytype: book
+   address:   Philadelphia
 ** Fluid Mechanics
    key:       white1999fluid
    author:    F.M. White
@@ -58,11 +72,13 @@
    series:    McGraw-Hill series in mechanical engineering
    lccn:      98026289
    entrytype: book
-* manuals
-** The {P}ython Tutorial
-   key:          python14
-   author:       NN
-   year:         2014
-   status:       published
-   organization: Python Software Foundation
-   entrytype:    manual
+* reports
+** The Effect of Viscosity in Hypervelocity Impact Cratering
+   key:         maccormack69
+   author:      Robert William MacCormack
+   year:        1969
+   institution: Astronautics
+   number:      AIAA-69-354
+   url:         http://opac.inria.fr/record=b1070875
+   status:      published
+   entrytype:   techreport

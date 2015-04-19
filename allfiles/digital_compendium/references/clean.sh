@@ -9,3 +9,4 @@ do
 
 done
 
+publish export papers.bib

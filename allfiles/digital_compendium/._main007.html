@@ -99,11 +99,20 @@ Automatically generated HTML file from DocOnce source
                0,
                None,
                '___sec23'),
+              (u' The advection equation ', 1, None, '___sec24'),
               (u' Forward in time central in space discretization ',
                2,
                None,
-               '___sec24'),
-              (u' References ', 0, None, '___sec25')]}
+               '___sec25'),
+              (u' Lax Wendroff Scheme ', 3, None, '___sec26'),
+              (u' Lax-Wendroff for non-linear systems of hyperbolic PDEs ',
+               3,
+               None,
+               '___sec27'),
+              (u' Burgers equation ', 1, None, '___sec28'),
+              (u' The Lax-Friedrich Scheme ', 3, None, '___sec29'),
+              (u' Lax-Wendroff Scheme ', 3, None, '___sec30'),
+              (u' References ', 0, None, '___sec31')]}
 end of tocinfo -->
 
 <body>
@@ -152,7 +161,9 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
      <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
-     <!-- navigation toc: --> <li><a href="._main022.html#___sec25" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main021.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The advection equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main022.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Burgers equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main023.html#___sec31" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -187,7 +198,7 @@ MathJax.Hub.Config({
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main022.html">23</a></li>
+  <li><a href="._main023.html">24</a></li>
   <li><a href="._main008.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
@@ -349,7 +360,7 @@ variables.
 Inside modules, the standard practice is to only have functions and
 not any statements outside functions. The reason is that all
 statements in the module file are executed from top to bottom during
-import in another module/script <a href="._main022.html#langtangen14">[4]</a>, and thus a
+import in another module/script <a href="._main023.html#Langtangen2011primer">[4]</a>, and thus a
 desirable behavior is no output to avoid confusion. However, in many
 situations it is also desirable to allow for tests or demonstration of
 usage inside the module file, and for such situations the need for a
@@ -376,7 +387,7 @@ as the <em>test block</em> of a module.
 
 <p>
 The module name is the file name without the suffix <code>.py</code>
-<a href="._main022.html#python14">[5]</a>, i.e. the module contained in the module file <code>filename.py</code> has the
+<a href="._main023.html#Langtangen2011primer">[4]</a>, i.e. the module contained in the module file <code>filename.py</code> has the
 module name <code>filename</code>. Note that a module can contain executable
 statements as well as function definitions. These statements are
 intended to initialize the module and are executed only the first time
@@ -719,7 +730,7 @@ The complete module <b>DragCoefficientGeneric</b> is listed below.
   <li><a href="._main015.html">16</a></li>
   <li><a href="._main016.html">17</a></li>
   <li><a href="">...</a></li>
-  <li><a href="._main022.html">23</a></li>
+  <li><a href="._main023.html">24</a></li>
   <li><a href="._main008.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
