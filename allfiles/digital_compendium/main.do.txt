@@ -542,7 +542,7 @@ variables.
 Inside modules, the standard practice is to only have functions and
 not any statements outside functions. The reason is that all
 statements in the module file are executed from top to bottom during
-import in another module/script cite{langtangen14}, and thus a
+import in another module/script cite{Langtangen2011primer}, and thus a
 desirable behavior is no output to avoid confusion. However, in many
 situations it is also desirable to allow for tests or demonstration of
 usage inside the module file, and for such situations the need for a
@@ -565,7 +565,7 @@ statements>`.  The `<main program statements>` is normally referred to
 as the *test block* of a module.
 
 The module name is the file name without the suffix `.py`
-cite{python14}, i.e. the module contained in the module file `filename.py` has the
+cite{Langtangen2011primer}, i.e. the module contained in the module file `filename.py` has the
 module name `filename`. Note that a module can contain executable
 statements as well as function definitions. These statements are
 intended to initialize the module and are executed only the first time
@@ -1716,6 +1716,8 @@ ${ebox()}
 
 !split
 ========= Chapter 6: Convection problems and hyperbolic PDEs =========
+
+======= The advection equation =======
 The classical advection equation is very often used as an example of a hyperbolic partial differential equation which illustrates many features of convection problems, while still being linear:
 !bt
 \begin{equation}
@@ -1741,6 +1743,15 @@ compressible fluid, e.g if $u$ denote pressure it represents a
 pressure wave propagating with the velocity $a_0$. The advection
 equation may also be used to model the propgation of pressure or flow
 in a compliant pipe, such as a blood vessel.
+
+To allow for generalization we will also when appropriate write (ref{eq:6101}) on the following form:
+!bt
+\begin{equation}
+\frac{\partial u}{\partial t} +  \frac{\partial F}{\partial x} = 0
+label{eq:generic_linear}
+\end{equation}
+!et
+where for the linear advection equation $F(u) = a_0\; u$. 
 
 ===== Forward in time central in space discretization ===== 
 
@@ -1834,7 +1845,196 @@ expression for the numerical ampliciation factor:
 !et
 and concequently the FTCS-scheme unconditionally unstable for the advection equation and not a viable scheme. Even a very small C-value will not suffice to dampe the oscillations. 
 
+=== Lax Wendroff Scheme === 
 
+This scheme was proposed in 1960 by P.D. Lax and B. Wendroff
+cite{lax73} for solving, approximately, systems of hyperbolic
+conservation laws on the generic for given in
+(ref{eq:generic_linear}).
+
+A large class of numerical methods for solving
+(ref{eq:generic_linear}) are the so-called conservative methods:
+
+!bt
+\begin{equation}
+u_j^{n+1} = u_j^{n} + \frac{\Delta t}{\Delta x} \left ( F_{i-1/2} - F_{i+1/2} \right ) 
+label{eq:conservative_methods}
+\end{equation}
+!et
+
+__Linear advection__ 
+
+The Lax–Wendroff method belongs to the class of conservative schemes
+(ref{eq:generic_linear}) and can be derived in various ways. For
+simplcity, we will derive the method by using a simple model equation
+for (ref{eq:generic_linear}), namley the linear advection equation
+with $F(u)=a\,u$ as in (ref{eq:6101}), where $a$ is a constant
+propagation velocity. The Lax-Wendroff outset is a Taylor approximation of $u_j^{n+1}$:
+!bt
+\begin{equation}
+u_j^{n+1}=u_j^n+\Delta t \frac{\partial u}{\partial t}\Bigg|_j^n + \frac{(\Delta t)}{2}\frac{\partial^2u}{\partial t^2}\Bigg|_j^n+\cdots
+label{eq:taylor_lw}
+\end{equation}
+!et
+From the differential equation (ref{eq:generic_linear}) we get by differentiation 
+!bt
+\begin{equation}
+\begin{array}{c}
+\dfrac{\partial u}{\partial t}\Bigg|_j^n = -a_0\dfrac{\partial u}{\partial x}\Bigg|_j^n 
+ \qquad \text{ and} \qquad
+\dfrac{\partial^2u}{\partial t^2}\Bigg|_j^n = a_0^2\dfrac{\partial^2u}{\partial x^2}\Bigg|_j^n
+\end{array}
+label{eq:6501}
+\end{equation}
+!et
+Before substitution of (ref{eq:6501}) in the Taylor expansion (ref{eq:taylor_lw}) we approximate the spatial derivatives by central differences:
+!bt
+\begin{equation}
+\dfrac{\partial u}{\partial x}\Bigg|_j^n  \approx \dfrac{u_{j+1}^n-u_{j-1}^n}{(2\Delta x)}
+\qquad \text{ and } 
+\qquad \dfrac{\partial^2u}{\partial x^2}\Bigg|_j^n \approx \dfrac{u_{j+1}^n -2u_j^n + u_{j-1}^n}{(\Delta x)^2}
+label{eq:lw_cd}
+\end{equation}
+!et
+and then the Lax-Wendroff scheme follows by substitution:
+!bt
+\begin{equation}
+label{eq:6503}
+u_j^{n+1}=u_j^n-\frac{C}{2}\left( u_{j+1}^n-u_{j-1}^n \right) + \frac{C^2}{2}\left( u_{j+1}^n - 2u_j^n+u_{j-1}^n \right)
+\end{equation}
+!et
+with the local truncation error  $T_j^n$:
+!bt
+\begin{equation}
+T_j^n = \frac{1}{6}\cdot \left[ (\Delta t)^2 \frac{\partial^3u}{\partial t^3} + a_0(\Delta x)^2 \frac{\partial^3u}{\partial x^3}\right]_j^n = O[(\Delta t)^2,(\Delta x)^2]
+label{}
+\end{equation}
+!et
+The resulting difference equation in (ref{eq:6503}) may also be formulated:
+!bt
+\begin{equation}
+label{eq:6505}
+u_j^{n+1} = \frac{C}{2}(1+C)u_{j-1}^n + (1-C^2)u_j^n - \frac{C}{2}(1-C)u_{j+1}^n
+\end{equation}
+!et
+
+FIGURE:[chapter6/fig06.png, width=400] Schematic of the Lax-Wendroff scheme. label{fig:LW}
+
+
+=== Lax-Wendroff for non-linear systems of hyperbolic PDEs ===
+
+For non-linear equations (ref{eq:generic_linear}) the Lax–Wendroff
+method is no longer unique and naturally various methods have been
+suggested. The challenge for a non-linear $F(u)$, the substitution of
+temporal derivatives with spatial derivatives (see (ref{eq:6501})) is
+not straightforward and unique.
+
+__Ricthmyer Scheme__ 
+One of the earliest extensions of the scheme is the "Richtmyer two-step
+Lax–Wendroff method":"http://www.encyclopediaofmath.org/index.php/Lax-Wendroff_method", which is on the conservative form (ref{eq:conservative_methods}) with the numerical fluxes computed as follows:
+
+!bt
+\begin{align}
+&u_{j+1/2}^{n+1/2} = \frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{n} \right ) +
+\frac{1}{2} \frac{\Delta t}{\Delta x} \left (F_j^n - F_{j+1}^n \right )\\
+& F_{i+1/2} = F(u_{j+1/2}^{n+1/2})
+\end{align}
+!et
+
+__MacCormack Scheme__ 
+A popular extension or variant of the Lax-Wendroff schemes is the MacCormack scheme cite{maccormack69}
+!bt
+\begin{align}
+& u_j^p =u_j^n + \frac{\Delta t}{\Delta x} \left (F_{j}^{n} - F_{j+1}^{n} \right ) \\
+& u_j^{n+1} =\frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{p} \right ) + 
+  \frac{1}{2} \frac{\Delta t}{\Delta x} \left (F_{j-1}^{p} - F_{j}^{p} \right ) \\
+label{}
+\end{align}
+!et
+where $F_{j}^{p}=F(u_{j}^{p})$. 
+
+
+!split
+
+======= Burgers equation ======= 
+
+The 1D Burgers equation is a simple (if on the simplest) non-linear
+hyperbolic equation commonly used as a model equation to illustrate various numerical schemes for non-linear hyperbolic differential equations. It is normally prestented as:
+!bt
+\begin{equation}
+\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = 0
+label{eq:burger_nc}
+\end{equation}
+!et
+
+To enable us to present schemes for a greater variety of hyperbolic
+differenctial equations and to better handle shocks (i.e
+discontinuities in the solution), we will present our model equation
+on conservative form:
+!bt
+\begin{equation}
+\frac{\partial u}{\partial t} +  \frac{\partial }{\partial x} \left (\frac{u^2}{2} \right) = 0
+label{eq:burger_co}
+\end{equation}
+!et
+and by introducing a flux function 
+!bt
+\begin{equation}
+ F(u) = \frac{u^2}{2}
+ label{eq:F}
+\end{equation}
+!et
+
+the conservative formulation of the Burgers equation may be
+represented by a generic transport equation:
+
+!bt
+\begin{equation}
+\frac{\partial u}{\partial t} +  \frac{\partial F(u)}{\partial x}  = 0
+label{eq:burger_F}
+\end{equation}
+!et
+
+
+=== The Lax-Friedrich Scheme ===
+
+Lax-Friedrichs scheme is an explicit, first order scheme, using
+forward-difference in time and central-difference in space.  However,
+the scheme is stabilized by averaging  $u^n_i$ over the neighbour cells in the in the temporal approximation:
+!bt
+\begin{equation}
+\frac{u_i^{n+1}-\frac{1}{2}(u^n_{i+1}+u^n_{i-1})}{\Delta t} = -\frac{F^n_{i+1}-F^n_{i-1}}{2 \Delta x}
+label{eq:LF-1}
+\end{equation}
+!et
+The Lax-Friedrich scheme is the obtained by isolation $u^{n+1}_i$ at the right hand side:
+!bt
+\begin{equation}
+u_i^{n+1} = \frac{1}{2}(u^n_{i+1}+u^n_{i-1}) - \frac{\Delta t}{2 \Delta x}(F^n_{i+1}-F^n_{i-1})
+label{}
+\end{equation}
+!et
+
+=== Lax-Wendroff Scheme ===
+The Lax-Wendroff scheme may be derived by considering the Taylor series expansion about $u^{n}$:
+!bt
+\begin{equation}
+u^{n+1} = u^n + u_t \Delta t + \frac{(\Delta t)^2}{2}u_{tt} + \ldots
+label{eq:LWtaylor}
+\end{equation}
+!et
+To proceed further, the time partial derivaties must be expressed by means of the PDE to be solved. 
+Now substitute spatial derivatives for the time derivatives
+
+E_t = -AE_x
+
+$$u_t = -E_x$$
+
+where $A = \frac{\partial E}{\partial u} = u$ is the Jacobian for Burgers equation.
+
+This, when plugged into the full Burgers equation, should yield
+
+$$\frac{u_i^{n+1} - u_i^n}{\Delta t} = \frac{-E^n_{i+1}-E^n_{i-1}}{2 \Delta x} + \frac{\Delta t}{2} \left(\frac{(A \frac{\partial E}{\partial x})^n_{i+\frac{1}{2}}-(A \frac{\partial E}{\partial x})^n_{i-\frac{1}{2}}}{\Delta x}\right)$$
 !split 
 ========= References =========
 
