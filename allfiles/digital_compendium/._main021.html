@@ -104,7 +104,7 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec25'),
-              (u' Lax Wendroff Scheme ', 3, None, '___sec26'),
+              (u' Lax Wendroff Schemes ', 3, None, '___sec26'),
               (u' Lax-Wendroff for non-linear systems of hyperbolic PDEs ',
                3,
                None,
@@ -355,10 +355,10 @@ $$
 
 and concequently the FTCS-scheme unconditionally unstable for the advection equation and not a viable scheme. Even a very small C-value will not suffice to dampe the oscillations.
 
-<h3 id="___sec26">Lax Wendroff Scheme </h3>
+<h3 id="___sec26">Lax Wendroff Schemes </h3>
 
 <p>
-This scheme was proposed in 1960 by P.D. Lax and B. Wendroff
+These schemes were proposed in 1960 by P.D. Lax and B. Wendroff
 <a href="._main023.html#lax73">[7]</a> for solving, approximately, systems of hyperbolic
 conservation laws on the generic for given in
 <a href="#mjx-eqn-78">(78)</a>.
@@ -467,19 +467,79 @@ $$
 $$
 
 <p>
+<b>Lax-Wendroff two step</b>
+
+<p>
+A <a href="http://en.wikipedia.org/wiki/Lax%E2%80%93Wendroff_method" target="_blank">Lax-Wendroff two step
+method</a> is
+outlined in the following. In the first step \( u(x, t) \) evaluated at
+half time steps \( n + 1/2 \) and half grid points \( j+1/2 \). In the
+second step values at the next time step \( n + 1 \) are calculated using the data for \( n \) and
+\( n + 1/2 \).
+
+<p>
+First step:
+$$
+\begin{align}
+& u_{j+1/2}^{n+1/2} = \frac{1}{2} \left (u_{j+1}^{n} + u_{j}^{n} \right )
+ - \frac{\Delta t}{2 \Delta x} \left (F(u_{j+1}^{n}) - F(u_{j}^{n}) \right ) \\ 
+& u_{j-1/2}^{n+1/2} = \frac{1}{2} \left (u_{j}^{n} + u_{j-1}^{n} \right )
+ - \frac{\Delta t}{2 \Delta x} \left (F(u_{j}^{n}) - F(u_{j-1}^{n}) \right ) 
+\tag{90}
+
+\end{align}
+$$
+
+<p>
+Second step:
+$$
+\begin{equation}
+u_{j}^{n+1} = u_{j}^{n} - \frac{\Delta t}{\Delta x} 
+\left ( F(u_{j+1/2}^{n+1/2}) - F(u_{j-1/2}^{n+1/2}) \right )
+\tag{91}
+\end{equation}
+$$
+
+<p>
 <b>MacCormack Scheme</b>
 
-A popular extension or variant of the Lax-Wendroff schemes is the MacCormack scheme <a href="._main023.html#maccormack69">[8]</a>
+<p>
+A simpler and popular extension/variant of Lax-Wendroff schemes like
+in the previous section, is the MacCormack scheme
+<a href="._main023.html#maccormack69">[8]</a>:
+
 $$
 \begin{align}
 & u_j^p =u_j^n + \frac{\Delta t}{\Delta x} \left (F_{j}^{n} - F_{j+1}^{n} \right ) \\ 
 & u_j^{n+1} =\frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{p} \right ) + 
   \frac{1}{2} \frac{\Delta t}{\Delta x} \left (F_{j-1}^{p} - F_{j}^{p} \right ) \\ 
-\label{}
+\tag{92}
 \end{align}
 $$
 
-where \( F_{j}^{p}=F(u_{j}^{p}) \).
+<p>
+where we have introduced the convention \( F_{j}^{p}=F(u_{j}^{p}) \).
+
+<p>
+Note that in the predictor step we employ the conservative formula
+<a href="#mjx-eqn-84">(84)</a> for a time \( \Delta t \) with forward
+differencing, i.e. . \( F_{j+1/2} = F^n{j+1}=F(u^n{j+1}) \). In the
+corrector step may be interpreted as using
+<a href="#mjx-eqn-84">(84)</a> for a time \( \Delta t/2 \) with initial
+condition \( \frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{p} \right ) \) and
+backward differencing.
+
+<p>
+Another MacCormack scheme may be obtained by reversing the predictor and
+corrector steps. Note that the MacCormack scheme <a href="#mjx-eqn-92">(92)</a>  is not written
+in conservative form <a href="#mjx-eqn-84">(84)</a>. However, it easy to express the scheme in
+conservative form by expressing the flux in <a href="#mjx-eqn-84">(84)</a> as:
+$$
+\begin{equation}
+F_{j+1}^{m} = \frac{1}{2} \left (F_j^p + F_{j+1}^n \right ) 
+\label{}
+\end{equation}
+$$
 
 <p>
 <p>

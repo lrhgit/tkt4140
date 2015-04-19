@@ -104,7 +104,7 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec25'),
-              (u' Lax Wendroff Scheme ', 3, None, '___sec26'),
+              (u' Lax Wendroff Schemes ', 3, None, '___sec26'),
               (u' Lax-Wendroff for non-linear systems of hyperbolic PDEs ',
                3,
                None,
@@ -204,7 +204,7 @@ hyperbolic equation commonly used as a model equation to illustrate various nume
 $$
 \begin{equation}
 \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = 0
-\tag{90}
+\tag{93}
 \end{equation}
 $$
 
@@ -216,7 +216,7 @@ on conservative form:
 $$
 \begin{equation}
 \frac{\partial u}{\partial t} +  \frac{\partial }{\partial x} \left (\frac{u^2}{2} \right) = 0
-\tag{91}
+\tag{94}
 \end{equation}
 $$
 
@@ -224,7 +224,7 @@ and by introducing a flux function
 $$
 \begin{equation}
  F(u) = \frac{u^2}{2}
- \tag{92}
+ \tag{95}
 \end{equation}
 $$
 
@@ -235,7 +235,7 @@ represented by a generic transport equation:
 $$
 \begin{equation}
 \frac{\partial u}{\partial t} +  \frac{\partial F(u)}{\partial x}  = 0
-\tag{93}
+\tag{96}
 \end{equation}
 $$
 
@@ -248,7 +248,7 @@ the scheme is stabilized by averaging  \( u^n_i \) over the neighbour cells in t
 $$
 \begin{equation}
 \frac{u_i^{n+1}-\frac{1}{2}(u^n_{i+1}+u^n_{i-1})}{\Delta t} = -\frac{F^n_{i+1}-F^n_{i-1}}{2 \Delta x}
-\tag{94}
+\tag{97}
 \end{equation}
 $$
 
@@ -266,7 +266,7 @@ The Lax-Wendroff scheme may be derived by considering the Taylor series expansio
 $$
 \begin{equation}
 u^{n+1} = u^n + u_t \Delta t + \frac{(\Delta t)^2}{2}u_{tt} + \ldots
-\tag{95}
+\tag{98}
 \end{equation}
 $$
 
