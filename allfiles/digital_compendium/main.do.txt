@@ -1756,7 +1756,7 @@ where for the linear advection equation $F(u) = a_0\; u$.
 ===== Forward in time central in space discretization ===== 
 
 We may discretize (ref{eq:6101}) with a forward difference in time and
-a central difference in space, normally abberviated as FTCS-scheme:
+a central difference in space, normally abberviated as the FTCS-scheme:
 !bt
 \begin{equation*}
 label{eq:FTCS_comp}
@@ -1770,7 +1770,7 @@ label{eq:6201}
 u_j^{n+1} = u_j^n - \frac{C}{2}(u_{j+1}^n-u_{j-1}^n)
 \end{equation}
 !et
-For convenience we have introduced the the non-dimensional "Courant-Friedrich-Lewy":"http://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition" number (or CFL-number for short): 
+For convenience we have introduced the non-dimensional "Courant-Friedrich-Lewy":"http://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition" number (or CFL-number for short): 
 idx{Courant-tallet}
 !bt
 \begin{equation}
@@ -1779,7 +1779,7 @@ C = a_0\frac{\Delta t}{\Delta x}
 \end{equation}
 !et
 
-The scheme in (ref{eq:6201}) is first order in time and second order in space (.i.e. $(O(\Delta t) + O(\Delta x^2))$), and as explicit in time as can bee seen both from Fig. (ref(fig:FTCS)) and (ref{eq:6201}). 
+The scheme in (ref{eq:6201}) is first order in time and second order in space (i.e. $(O(\Delta t) + O(\Delta x^2))$), and explicit in time as can bee seen both from Fig. (ref{fig:FTCS}) and (ref{eq:6201}). 
 
 FIGURE:[chapter6/fig01.png, width=400] Illustration of the first order in time central in space scheme. label{fig:FTCS}
 
@@ -1798,7 +1798,7 @@ FIGURE:[chapter6/fig02.png, width=400] Initial values for the advection equautio
 Solutions for three CFL-numbers: C=0.25, 0.5 and 1.0 are illustrated
 in Fig. (ref{fig:FTCS_sol}).  Large oscillations are observed for all
 values of the CFL-number, even though they seem to be sligtly reduced
-for smaller C-values, thus we have indications of an unstable scheme.
+for smaller C-values,; thus we have indications of an unstable scheme.
 As a first approach observe that the coefficient for $u^n_{j+1}$ in
 (ref{eq:6201}) always will be negative, and thus the criterion of
 positive coefficients (PC-criterion) may not be satisfied for any
@@ -1843,13 +1843,13 @@ expression for the numerical ampliciation factor:
 |G|=\sqrt{1+C^2\sin^2(\delta)} \geq 1 \text{ for all } C \text{ and } \delta
 \end{equation*}
 !et
-and concequently the FTCS-scheme unconditionally unstable for the advection equation and not a viable scheme. Even a very small C-value will not suffice to dampe the oscillations. 
+and concequently the FTCS-scheme is unconditionally unstable for the advection equation and is thus not a viable scheme. Even a very small value of C will not suffice to dampe the oscillations. 
 
 === Lax Wendroff Schemes === 
 
 These schemes were proposed in 1960 by P.D. Lax and B. Wendroff
 cite{lax73} for solving, approximately, systems of hyperbolic
-conservation laws on the generic for given in
+conservation laws on the generic form given in
 (ref{eq:generic_linear}).
 
 A large class of numerical methods for solving
@@ -1866,8 +1866,8 @@ __Linear advection__
 
 The Lax–Wendroff method belongs to the class of conservative schemes
 (ref{eq:generic_linear}) and can be derived in various ways. For
-simplcity, we will derive the method by using a simple model equation
-for (ref{eq:generic_linear}), namley the linear advection equation
+simplicity, we will derive the method by using a simple model equation
+for (ref{eq:generic_linear}), namely the linear advection equation
 with $F(u)=a\,u$ as in (ref{eq:6101}), where $a$ is a constant
 propagation velocity. The Lax-Wendroff outset is a Taylor approximation of $u_j^{n+1}$:
 !bt
@@ -1910,13 +1910,15 @@ T_j^n = \frac{1}{6}\cdot \left[ (\Delta t)^2 \frac{\partial^3u}{\partial t^3} + 
 label{}
 \end{equation}
 !et
-The resulting difference equation in (ref{eq:6503}) may also be formulated:
+The resulting difference equation in (ref{eq:6503}) may also be formulated as:
 !bt
 \begin{equation}
 label{eq:6505}
 u_j^{n+1} = \frac{C}{2}(1+C)u_{j-1}^n + (1-C^2)u_j^n - \frac{C}{2}(1-C)u_{j+1}^n
 \end{equation}
 !et
+
+An example of how to implement the Lax-Wendroff scheme is given as follows,
 
 FIGURE:[chapter6/fig06.png, width=400] Schematic of the Lax-Wendroff scheme. label{fig:LW}
 
@@ -1925,8 +1927,8 @@ FIGURE:[chapter6/fig06.png, width=400] Schematic of the Lax-Wendroff scheme. lab
 
 For non-linear equations (ref{eq:generic_linear}) the Lax–Wendroff
 method is no longer unique and naturally various methods have been
-suggested. The challenge for a non-linear $F(u)$, the substitution of
-temporal derivatives with spatial derivatives (see (ref{eq:6501})) is
+suggested. The challenge for a non-linear $F(u)$ is that the substitution of
+temporal derivatives with spatial derivatives (as we did in (ref{eq:6501})) is
 not straightforward and unique.
 
 __Ricthmyer Scheme__ 
@@ -1937,7 +1939,7 @@ Lax–Wendroff method":"http://www.encyclopediaofmath.org/index.php/Lax-Wendroff
 \begin{align}
 &u_{j+1/2}^{n+1/2} = \frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{n} \right ) +
 \frac{1}{2} \frac{\Delta t}{\Delta x} \left (F_j^n - F_{j+1}^n \right )\\
-& F_{i+1/2} = F(u_{j+1/2}^{n+1/2})
+& F_{j+1/2} = F(u_{j+1/2}^{n+1/2})
 \end{align}
 !et
 
@@ -1945,7 +1947,7 @@ __Lax-Wendroff two step__
 
 A "Lax-Wendroff two step
 method":"http://en.wikipedia.org/wiki/Lax%E2%80%93Wendroff_method" is
-outlined in the following. In the first step $u(x, t)$ evaluated at
+outlined in the following. In the first step $u(x, t)$ is evaluated at
 half time steps $n + 1/2$ and half grid points $j+1/2$. In the
 second step values at the next time step $n + 1$ are calculated using the data for $n$ and
 $n + 1/2$.
@@ -1991,7 +1993,7 @@ where we have introduced the convention $F_{j}^{p}=F(u_{j}^{p})$.
 
 Note that in the predictor step we employ the conservative formula
 (ref{eq:conservative_methods}) for a time $\Delta t$ with forward
-differencing, i.e. . $F_{j+1/2} = F^n{j+1}=F(u^n{j+1})$. In the
+differencing, i.e. . $F_{j+1/2} = F^n_{j+1}=F(u^n_{j+1})$. The
 corrector step may be interpreted as using
 (ref{eq:conservative_methods}) for a time $\Delta t/2$ with initial
 condition $\frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{p} \right )$ and
@@ -2013,7 +2015,7 @@ label{}
 
 ======= Burgers equation ======= 
 
-The 1D Burgers equation is a simple (if on the simplest) non-linear
+The 1D Burgers equation is a simple (if not the simplest) non-linear
 hyperbolic equation commonly used as a model equation to illustrate various numerical schemes for non-linear hyperbolic differential equations. It is normally prestented as:
 !bt
 \begin{equation}
@@ -2054,7 +2056,7 @@ label{eq:burger_F}
 === The Lax-Friedrich Scheme ===
 
 Lax-Friedrichs scheme is an explicit, first order scheme, using
-forward-difference in time and central-difference in space.  However,
+forward difference in time and central difference in space.  However,
 the scheme is stabilized by averaging  $u^n_i$ over the neighbour cells in the in the temporal approximation:
 !bt
 \begin{equation}
@@ -2081,15 +2083,21 @@ label{eq:LWtaylor}
 To proceed further, the time partial derivaties must be expressed by means of the PDE to be solved. 
 Now substitute spatial derivatives for the time derivatives
 
-E_t = -AE_x
-
-$$u_t = -E_x$$
+!bt
+\begin{align}
+E_t &= -AE_x
+label{} \\
+u_t &= -E_x
+label{}
+\end{align}
+!et
 
 where $A = \frac{\partial E}{\partial u} = u$ is the Jacobian for Burgers equation.
 
 This, when plugged into the full Burgers equation, should yield
 
 $$\frac{u_i^{n+1} - u_i^n}{\Delta t} = \frac{-E^n_{i+1}-E^n_{i-1}}{2 \Delta x} + \frac{\Delta t}{2} \left(\frac{(A \frac{\partial E}{\partial x})^n_{i+\frac{1}{2}}-(A \frac{\partial E}{\partial x})^n_{i-\frac{1}{2}}}{\Delta x}\right)$$
+
 !split 
 ========= References =========
 
