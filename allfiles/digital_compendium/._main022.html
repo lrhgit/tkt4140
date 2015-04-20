@@ -199,7 +199,7 @@ MathJax.Hub.Config({
 <h1 id="___sec28">Burgers equation </h1>
 
 <p>
-The 1D Burgers equation is a simple (if on the simplest) non-linear
+The 1D Burgers equation is a simple (if not the simplest) non-linear
 hyperbolic equation commonly used as a model equation to illustrate various numerical schemes for non-linear hyperbolic differential equations. It is normally prestented as:
 $$
 \begin{equation}
@@ -243,7 +243,7 @@ $$
 
 <p>
 Lax-Friedrichs scheme is an explicit, first order scheme, using
-forward-difference in time and central-difference in space.  However,
+forward difference in time and central difference in space.  However,
 the scheme is stabilized by averaging  \( u^n_i \) over the neighbour cells in the in the temporal approximation:
 $$
 \begin{equation}
@@ -273,10 +273,14 @@ $$
 To proceed further, the time partial derivaties must be expressed by means of the PDE to be solved. 
 Now substitute spatial derivatives for the time derivatives
 
-<p>
-E_t = -AE_x
-
-$$u_t = -E_x$$
+$$
+\begin{align}
+E_t &= -AE_x
+\label{} \\ 
+u_t &= -E_x
+\label{}
+\end{align}
+$$
 
 <p>
 where \( A = \frac{\partial E}{\partial u} = u \) is the Jacobian for Burgers equation.
@@ -285,6 +289,8 @@ where \( A = \frac{\partial E}{\partial u} = u \) is the Jacobian for Burgers eq
 This, when plugged into the full Burgers equation, should yield
 
 $$\frac{u_i^{n+1} - u_i^n}{\Delta t} = \frac{-E^n_{i+1}-E^n_{i-1}}{2 \Delta x} + \frac{\Delta t}{2} \left(\frac{(A \frac{\partial E}{\partial x})^n_{i+\frac{1}{2}}-(A \frac{\partial E}{\partial x})^n_{i-\frac{1}{2}}}{\Delta x}\right)$$
+
+<p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
 <ul class="pagination">
