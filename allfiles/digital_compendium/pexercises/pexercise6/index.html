@@ -88,7 +88,7 @@ MathJax.Hub.Config({
 <h1 id="___sec0">Hyperbolic partial differential equations </h1>
 
 <p>
-Hyperbolic partial differential equations have been used to model wave phenomena occuring in many physical problems, e.g. shallow water waves for Tsunami predictions and blood flow in compliant vessels. For the latter, the governing mass- and momentum equations may be integrated over the vessel cross-section \( A \), yielding:
+Hyperbolic partial differential equations have been used to model wave phenomena occurring in many physical problems, e.g. shallow water waves for Tsunami predictions and blood flow in compliant vessels. For the latter, the governing mass- and momentum equations may be integrated over the vessel cross-section \( A \), yielding:
 $$
 \begin{align}
   &\frac{\partial A}{\partial t} + \frac{\partial Q}{\partial x} = 0 \label{eq:mass}\\ 
@@ -136,7 +136,7 @@ where \( A \) is given by equation \eqref{eq:const}.
 
 <p>
 In this exercise we will solve the inviscid governing equations for blood
-flow in compliant vessels (equations \eqref{eq:massII} and \eqref{eq:momII}) on conservative form numerially, with various schemes
+flow in compliant vessels (equations \eqref{eq:massII} and \eqref{eq:momII}) on conservative form numerically, with various schemes
 for hyperbolic PDEs. First we will write the problem on flux form, and then solve it using the MacCormack scheme and the Lax-Friedrich scheme. It is strongly recommended to read the <a href="http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/._main021.html" target="_blank">pages in the digital compendium that treats this topic</a> before starting.
 
 <p>
@@ -159,7 +159,7 @@ $$
 
 <p>
 <b>Boundary conditions.</b>
-As boundary condition we will set the values at the boundaries (\( x = 0 \) and \( x = 10 \)) equal to the value in the neighbooring points, as follows
+As boundary condition we will set the values at the boundaries (\( x = 0 \) and \( x = 10 \)) equal to the value in the neighboring points, as follows
 $$
 \begin{align}
 \mathbf u_{i=0}^n &= \mathbf u_{i=1}^n
@@ -200,7 +200,7 @@ Solve the equations \eqref{eq:massII} and \eqref{eq:momII} developed above
 
 <p>
 <b>Hint 1.</b>
-It can be shown that the linearized invicid forms of \eqref{eq:massII} and \eqref{eq:momII} have solutions of the form:
+It can be shown that the linearized inviscid forms of \eqref{eq:massII} and \eqref{eq:momII} have solutions of the form:
 $$
 \begin{equation}
 p = p_0 \, f(x-ct) + p^{'}_0 \, g(x+ct)=p_f + p_b \qquad \text { and } \qquad 
@@ -209,7 +209,7 @@ Q = Q_0 \, f(x-ct) + Q^{'}_0 \, g(x+ct) =Q_f + Q_b
 \end{equation}
 $$
 
-i.e. the pressure \( p \) is composed of two waves \( p_f \) and \( p_b \), respectivelyt, propagating opposite directions with identical wave speed \( c \):
+i.e. the pressure \( p \) is composed of two waves \( p_f \) and \( p_b \), respectively, propagating opposite directions with identical wave speed \( c \):
 $$
 \begin{equation}
  c^2 = \frac{A_0}{\rho C}
@@ -237,7 +237,7 @@ $$
 Use \eqref{eq:nonlin_pwv} to compute the CFL-number for numerical schemes.
 
 <p>
-It can also be show that:
+It can also be shown that:
 $$
 \begin{equation}
 \frac{p_0}{Q_0} = \frac{\rho c}{A_0} = Z_c
@@ -245,7 +245,7 @@ $$
 \end{equation}
 $$
 
-where \( Z_c \) is called the characteristic impedance \( Z_c \).  For a given intital pressure field, use \( Z_c \) to compute a corresponding flow field by Q=p/Z_c$.
+where \( Z_c \) is called the characteristic impedance \( Z_c \).  For a given initial pressure field, use \( Z_c \) to compute a corresponding flow field by Q=p/Z_c$.
 
 <p>
 <!-- --- end hint in exercise --- -->
