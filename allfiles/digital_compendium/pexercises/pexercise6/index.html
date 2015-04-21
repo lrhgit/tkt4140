@@ -74,12 +74,15 @@ MathJax.Hub.Config({
 <b>Johan Kolstø Sønstabø</b> 
 </center>
 
+
 <p>
 <!-- institution(s) -->
 
 <p>
-<center><h4>Apr 20, 2015</h4></center> <!-- date -->
+<center><h4>Apr 21, 2015</h4></center> <!-- date -->
 <p>
+
+
 </div> <!-- end jumbotron -->
 
 <h1 id="___sec0">Hyperbolic partial differential equations </h1>
@@ -138,7 +141,7 @@ for hyperbolic PDEs. First we will write the problem on flux form, and then solv
 
 <p>
 <b>Discretization.</b>
-We let \( x \) go from 0 to 10, and discretize the domain with \( Nx = 100 \) points. Calculate a suitable time step using the stability condition.
+We let \( x \) go from 0 to 10, and discretize the domain with \( Nx = 100 \) points. Calculate a suitable time step using the stability condition. 
 
 <p>
 <b>Initial conditions.</b>
@@ -153,6 +156,7 @@ p(x) = \left\{
 \end{align}
 $$
 
+
 <p>
 <b>Boundary conditions.</b>
 As boundary condition we will set the values at the boundaries (\( x = 0 \) and \( x = 10 \)) equal to the value in the neighbooring points, as follows
@@ -163,6 +167,7 @@ $$
 \mathbf u_{i=N}^n &= \mathbf u_{i=N-1}^n
 \end{align}
 $$
+
 
 <p>
 <b>Constants.</b>
@@ -179,25 +184,77 @@ $$
 \end{align}
 $$
 
+
 <p>
 <!-- removed !bans ... !eans environment
  --><!-- (because of the command-line option --without_answers)
  -->
 <p>
 <b>b)</b>
-Solve the equations developed above using the <a href="http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/._main021.html" target="_blank">MacCormack scheme.</a>
+Solve the equations \eqref{eq:massII} and \eqref{eq:momII} developed above
+ using the <a href="http://lrhgit.github.io/tkt4140/allfiles/digital_compendium/._main021.html" target="_blank">MacCormack
+ scheme.</a>.
 
 <p>
 <!-- --- begin hint in exercise --- -->
 
 <p>
-<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
- data-target="#exer_1_1" style="font-size: 80%;"></a>
-<b>Hint.</b>
-<div class="collapse-group">
-<p><div class="collapse" id="exer_1_1">
+<b>Hint 1.</b>
+It can be shown that the linearized invicid forms of \eqref{eq:massII} and \eqref{eq:momII} have solutions of the form:
+$$
+\begin{equation}
+p = p_0 \, f(x-ct) + p^{'}_0 \, g(x+ct)=p_f + p_b \qquad \text { and } \qquad 
+Q = Q_0 \, f(x-ct) + Q^{'}_0 \, g(x+ct) =Q_f + Q_b
+\label{}
+\end{equation}
+$$
+
+i.e. the pressure \( p \) is composed of two waves \( p_f \) and \( p_b \), respectivelyt, propagating opposite directions with identical wave speed \( c \):
+$$
+\begin{equation}
+ c^2 = \frac{A_0}{\rho C}
+\label{eq:pwv}
+\end{equation}
+$$
+
+When nonlinearities (i.e. the convective terms) are accounted for, solutions on the following form may be found:
+$$
+\begin{equation}
+p = p_0 \, f(x-c_f t) + p^{'}_0 \, g(x+c_b t)=p_f + p_b \qquad \text { and } \qquad 
+Q = Q_0 \, f(x-c_f t) + Q^{'}_0 \, g(x+c_b t) =Q_f + Q_b
+\label{}
+\end{equation}
+$$
+
+where:
+$$
+\begin{equation}
+c_f = c + v_0 \qquad  \text{and} \qquad   c_b = c - v_0, \qquad \text{with} \qquad v_0=\frac{Q_0}{A_0} 
+\label{eq:nonlin_pwv}
+\end{equation}
+$$
+
+Use \eqref{eq:nonlin_pwv} to compute the CFL-number for numerical schemes.
 
 <p>
+It can also be show that:
+$$
+\begin{equation}
+\frac{p_0}{Q_0} = \frac{\rho c}{A_0} = Z_c
+\label{eq:Zc}
+\end{equation}
+$$
+
+where \( Z_c \) is called the characteristic impedance \( Z_c \).  For a given intital pressure field, use \( Z_c \) to compute a corresponding flow field by Q=p/Z_c$.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint 2.</b>
 Use the code template given below (fill in the missing lines).
 <p>
 
@@ -331,11 +388,6 @@ anim <span style="color: #666666">=</span> animation<span style="color: #666666"
 <span style="color: #408080; font-style: italic"># show the figure</span>
 plt<span style="color: #666666">.</span>show()
 </pre></div>
-<p>
-</div></p>
-</div>
-</p>
-
 <p>
 <!-- --- end hint in exercise --- -->
 
