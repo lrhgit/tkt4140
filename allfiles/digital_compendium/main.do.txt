@@ -1918,9 +1918,21 @@ u_j^{n+1} = \frac{C}{2}(1+C)u_{j-1}^n + (1-C^2)u_j^n - \frac{C}{2}(1-C)u_{j+1}^n
 \end{equation}
 !et
 
-An example of how to implement the Lax-Wendroff scheme is given as follows,
+The explicit Lax Wendroff stenticl is illustrated in Fig. (ref{fig:LW})
+
+
+
 
 FIGURE:[chapter6/fig06.png, width=400] Schematic of the Lax-Wendroff scheme. label{fig:LW}
+
+An example of how to implement the Lax-Wendroff scheme is given as follows:
+@@@CODE ../Kap6/advection_schemes.py from-to:# Lax-Wendroff@# Lax-Friedrich
+
+
+A complete example showing how a range of hyperbolic schemes are
+implemented and applied to a particular example:
+
+@@@CODE ../Kap6/advection_schemes.py 
 
 
 === Lax-Wendroff for non-linear systems of hyperbolic PDEs ===
@@ -1969,9 +1981,15 @@ Second step:
 \begin{equation}
 u_{j}^{n+1} = u_{j}^{n} - \frac{\Delta t}{\Delta x} 
 \left ( F(u_{j+1/2}^{n+1/2}) - F(u_{j-1/2}^{n+1/2}) \right )
-label{eq:2nd}
+label{eq:lw_2nd}
 \end{equation}
 !et
+
+Notice that for a linear flux $F=a_0 \, u$, the two-step Lax-Wendroff
+method ((ref{eq:lw_1st}) and (ref{eq:lw_2nd})) may be shown to reduce
+to the one-step Lax-Wendroff method outlined in (ref{eq:6503}) or
+(ref{eq:6505}).
+
 
 __MacCormack Scheme__ 
 
@@ -2009,6 +2027,22 @@ F_{j+1}^{m} = \frac{1}{2} \left (F_j^p + F_{j+1}^n \right )
 label{}
 \end{equation}
 !et
+
+For a linear flux $F(u) = a_0 \, u$, one may show that the MacCormack scheme in 
+(ref{eq:maccormack}) reduces to a two-step scheme:
+!bt
+\begin{align}
+& u_j^p =  + C \left ( u_j^n - u_{j+1}^n \right ) label{eq:macC1}\\
+& u_j^{n+1} = \frac{1}{2} \left ( u_j^n + u_j^p \right )+ \frac{C}{2} \left ( u_{j-1}^p - u_{j}^p \right ) label{eq:macC2}
+\end{align}
+!et
+
+and substitution of (ref{eq:macC1}) into (ref{eq:macC2}) shows that
+the MacCormack scheme is identical to the Lax-Wendroff scheme (ref{eq:6505}) for the
+linear advection flux. A python implementation is given by:
+
+@@@CODE ../Kap6/advection_schemes.py from-to:# macCormack for advection quation@# Discretize
+
 
 
 !split

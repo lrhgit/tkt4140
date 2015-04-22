@@ -437,13 +437,180 @@ u_j^{n+1} = \frac{C}{2}(1+C)u_{j-1}^n + (1-C^2)u_j^n - \frac{C}{2}(1-C)u_{j+1}^n
 $$
 
 <p>
-An example of how to implement the Lax-Wendroff scheme is given as follows,
+The explicit Lax Wendroff stenticl is illustrated in Fig. (<a href="#fig:LW">17</a>)
 
 <p>
 <center> <!-- figure -->
 <center><p class="caption">Figure 17:  Schematic of the Lax-Wendroff scheme. <div id="fig:LW"></div> </p></center>
 <p><img src="chapter6/fig06.png" align="bottom" width=400></p>
 </center>
+
+<p>
+An example of how to implement the Lax-Wendroff scheme is given as follows:
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">lax_wendroff</span>(u): 
+    u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> c<span style="color: #666666">/2.0*</span>(<span style="color: #666666">1+</span>c)<span style="color: #666666">*</span>u[:<span style="color: #666666">-2</span>] <span style="color: #666666">+</span> (<span style="color: #666666">1-</span>c<span style="color: #666666">**2</span>)<span style="color: #666666">*</span>u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> c<span style="color: #666666">/2.0*</span>(<span style="color: #666666">1-</span>c)<span style="color: #666666">*</span>u[<span style="color: #666666">2</span>:]
+    <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+</pre></div>
+<p>
+A complete example showing how a range of hyperbolic schemes are
+implemented and applied to a particular example:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic"># ../Kap6/advection_schemes.py</span>
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">np</span>
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">matplotlib</span> <span style="color: #008000; font-weight: bold">import</span> animation
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">scipy</span> <span style="color: #008000; font-weight: bold">import</span> interpolate
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> where
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">math</span> <span style="color: #008000; font-weight: bold">import</span> sin
+
+LNWDT<span style="color: #666666">=2</span>; FNT<span style="color: #666666">=15</span>
+plt<span style="color: #666666">.</span>rcParams[<span style="color: #BA2121">&#39;lines.linewidth&#39;</span>] <span style="color: #666666">=</span> LNWDT; plt<span style="color: #666666">.</span>rcParams[<span style="color: #BA2121">&#39;font.size&#39;</span>] <span style="color: #666666">=</span> FNT
+
+a <span style="color: #666666">=</span> <span style="color: #666666">1.0</span> <span style="color: #408080; font-style: italic"># wave speed</span>
+tmin, tmax <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>, <span style="color: #666666">1.0</span> <span style="color: #408080; font-style: italic"># start and stop time of simulation</span>
+xmin, xmax <span style="color: #666666">=</span> <span style="color: #666666">0.0</span>, <span style="color: #666666">1.0</span> <span style="color: #408080; font-style: italic"># start and end of spatial domain</span>
+Nx <span style="color: #666666">=</span> <span style="color: #666666">80</span> <span style="color: #408080; font-style: italic"># number of spatial points</span>
+c <span style="color: #666666">=</span> <span style="color: #666666">0.9</span> <span style="color: #408080; font-style: italic"># courant number, need c&lt;=1 for stability</span>
+
+init_func<span style="color: #666666">=0</span>   <span style="color: #408080; font-style: italic"># Select stair case function (0) or sin^2 function (1)</span>
+
+<span style="color: #408080; font-style: italic"># function defining the initial condition</span>
+<span style="color: #008000; font-weight: bold">if</span> (init_func<span style="color: #666666">==0</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Assigning a value of 1.0 for values less than 0.1&quot;&quot;&quot;</span>
+        f <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(x)
+        f[np<span style="color: #666666">.</span>where(x <span style="color: #666666">&lt;=</span> <span style="color: #666666">0.1</span>)] <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+        <span style="color: #008000; font-weight: bold">return</span> f
+<span style="color: #008000; font-weight: bold">elif</span>(init_func<span style="color: #666666">==1</span>):
+    <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+        <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;A smooth sin^2 function between x_left and x_right&quot;&quot;&quot;</span>
+        f <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros_like(x)
+        x_left <span style="color: #666666">=</span> <span style="color: #666666">0.25</span>
+        x_right <span style="color: #666666">=</span> <span style="color: #666666">0.75</span>
+        xm <span style="color: #666666">=</span> (x_right<span style="color: #666666">-</span>x_left)<span style="color: #666666">/2.0</span>
+        f <span style="color: #666666">=</span> where((x<span style="color: #666666">&gt;</span>x_left) <span style="color: #666666">&amp;</span> (x<span style="color: #666666">&lt;</span>x_right), np<span style="color: #666666">.</span>sin(np<span style="color: #666666">.</span>pi<span style="color: #666666">*</span>(x<span style="color: #666666">-</span>x_left)<span style="color: #666666">/</span>(x_right<span style="color: #666666">-</span>x_left))<span style="color: #666666">**4</span>,f) 
+        <span style="color: #008000; font-weight: bold">return</span> f
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">ftbs</span>(u): <span style="color: #408080; font-style: italic"># forward time backward space</span>
+    u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (<span style="color: #666666">1-</span>c)<span style="color: #666666">*</span>u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> c<span style="color: #666666">*</span>u[:<span style="color: #666666">-2</span>]
+    <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+
+<span style="color: #408080; font-style: italic"># Lax-Wendroff</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">lax_wendroff</span>(u): 
+    u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> c<span style="color: #666666">/2.0*</span>(<span style="color: #666666">1+</span>c)<span style="color: #666666">*</span>u[:<span style="color: #666666">-2</span>] <span style="color: #666666">+</span> (<span style="color: #666666">1-</span>c<span style="color: #666666">**2</span>)<span style="color: #666666">*</span>u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> c<span style="color: #666666">/2.0*</span>(<span style="color: #666666">1-</span>c)<span style="color: #666666">*</span>u[<span style="color: #666666">2</span>:]
+    <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+
+<span style="color: #408080; font-style: italic"># Lax-Friedrich</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">lax_friedrich</span>(u):
+    u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (u[:<span style="color: #666666">-2</span>] <span style="color: #666666">+</span>u[<span style="color: #666666">2</span>:])<span style="color: #666666">/2.0</span> <span style="color: #666666">-</span>  c<span style="color: #666666">*</span>(u[<span style="color: #666666">2</span>:] <span style="color: #666666">-</span> u[:<span style="color: #666666">-2</span>])<span style="color: #666666">/2.0</span>
+    <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] 
+
+<span style="color: #408080; font-style: italic"># macCormack for advection quation</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">macCormack</span>(u):
+    up <span style="color: #666666">=</span> u<span style="color: #666666">.</span>copy()
+    up[:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> u[:<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> c<span style="color: #666666">*</span>(u[<span style="color: #666666">1</span>:]<span style="color: #666666">-</span>u[:<span style="color: #666666">-1</span>])
+    u[<span style="color: #666666">1</span>:] <span style="color: #666666">=</span> <span style="color: #666666">.5*</span>(u[<span style="color: #666666">1</span>:]<span style="color: #666666">+</span>up[<span style="color: #666666">1</span>:] <span style="color: #666666">-</span>  c<span style="color: #666666">*</span>(up[<span style="color: #666666">1</span>:]<span style="color: #666666">-</span>up[:<span style="color: #666666">-1</span>]))
+    <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] 
+
+<span style="color: #408080; font-style: italic"># Discretize</span>
+x <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(xmin, xmax, Nx<span style="color: #666666">+1</span>) <span style="color: #408080; font-style: italic"># discretization of space</span>
+dx <span style="color: #666666">=</span> <span style="color: #008000">float</span>((xmax<span style="color: #666666">-</span>xmin)<span style="color: #666666">/</span>Nx) <span style="color: #408080; font-style: italic"># spatial step size</span>
+dt <span style="color: #666666">=</span> c<span style="color: #666666">/</span>a<span style="color: #666666">*</span>dx <span style="color: #408080; font-style: italic"># stable time step calculated from stability requirement</span>
+Nt <span style="color: #666666">=</span> <span style="color: #008000">int</span>((tmax<span style="color: #666666">-</span>tmin)<span style="color: #666666">/</span>dt) <span style="color: #408080; font-style: italic"># number of time steps</span>
+time <span style="color: #666666">=</span> np<span style="color: #666666">.</span>linspace(tmin, tmax, Nt) <span style="color: #408080; font-style: italic"># discretization of time</span>
+
+<span style="color: #408080; font-style: italic"># solve from tmin to tmax</span>
+
+<span style="color: #408080; font-style: italic">#solvers = [ftbs,lax_wendroff,lax_friedrich,macCormack]</span>
+<span style="color: #408080; font-style: italic">#solvers = [ftbs,lax_wendroff,macCormack]</span>
+<span style="color: #408080; font-style: italic">#solvers = [ftbs,lax_wendroff]</span>
+solvers <span style="color: #666666">=</span> [ftbs,lax_friedrich]
+
+
+u_solutions<span style="color: #666666">=</span>np<span style="color: #666666">.</span>zeros((<span style="color: #008000">len</span>(solvers),<span style="color: #008000">len</span>(time),<span style="color: #008000">len</span>(x)))
+uanalytical <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((<span style="color: #008000">len</span>(time), <span style="color: #008000">len</span>(x))) <span style="color: #408080; font-style: italic"># holds the analytical solution</span>
+
+
+    
+<span style="color: #008000; font-weight: bold">for</span> k, solver <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(solvers): <span style="color: #408080; font-style: italic"># Solve for all solvers in list</span>
+    u <span style="color: #666666">=</span> f(x)
+    un <span style="color: #666666">=</span> np<span style="color: #666666">.</span>zeros((<span style="color: #008000">len</span>(time), <span style="color: #008000">len</span>(x))) <span style="color: #408080; font-style: italic"># holds the numerical solution</span>
+
+    <span style="color: #008000; font-weight: bold">for</span> i, t <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(time[<span style="color: #666666">1</span>:]):
+        
+        <span style="color: #008000; font-weight: bold">if</span> k<span style="color: #666666">==0</span>:
+            uanalytical[i,:] <span style="color: #666666">=</span> f(x<span style="color: #666666">-</span>a<span style="color: #666666">*</span>t) <span style="color: #408080; font-style: italic"># compute analytical solution for this time step</span>
+            
+        u_bc <span style="color: #666666">=</span> interpolate<span style="color: #666666">.</span>interp1d(x[<span style="color: #666666">-2</span>:], u[<span style="color: #666666">-2</span>:]) <span style="color: #408080; font-style: italic"># interplate at right bndry</span>
+        
+        u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> solver(u[:]) <span style="color: #408080; font-style: italic"># calculate numerical solution of interior</span>
+        u[<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> u_bc(x[<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> a<span style="color: #666666">*</span>dt) <span style="color: #408080; font-style: italic"># interpolate along a characteristic to find the boundary value</span>
+        
+        un[i,:] <span style="color: #666666">=</span> u[:] <span style="color: #408080; font-style: italic"># storing the solution for plotting</span>
+    
+    u_solutions[k,:,:] <span style="color: #666666">=</span> un
+
+
+
+<span style="color: #408080; font-style: italic">### Animation </span>
+ 
+<span style="color: #408080; font-style: italic"># First set up the figure, the axis, and the plot element we want to animate</span>
+fig <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>figure()
+ax <span style="color: #666666">=</span> plt<span style="color: #666666">.</span>axes(xlim<span style="color: #666666">=</span>(xmin,xmax), ylim<span style="color: #666666">=</span>(np<span style="color: #666666">.</span>min(un), np<span style="color: #666666">.</span>max(un)<span style="color: #666666">*1.1</span>))
+
+lines<span style="color: #666666">=</span>[]     <span style="color: #408080; font-style: italic"># list for plot lines for solvers and analytical solutions</span>
+legends<span style="color: #666666">=</span>[]   <span style="color: #408080; font-style: italic"># list for legends for solvers and analytical solutions</span>
+
+<span style="color: #008000; font-weight: bold">for</span> solver <span style="color: #AA22FF; font-weight: bold">in</span> solvers:
+    line, <span style="color: #666666">=</span> ax<span style="color: #666666">.</span>plot([], [])
+    lines<span style="color: #666666">.</span>append(line)
+    legends<span style="color: #666666">.</span>append(solver<span style="color: #666666">.</span>func_name)
+
+line, <span style="color: #666666">=</span> ax<span style="color: #666666">.</span>plot([], []) <span style="color: #408080; font-style: italic">#add extra plot line for analytical solution</span>
+lines<span style="color: #666666">.</span>append(line)
+legends<span style="color: #666666">.</span>append(<span style="color: #BA2121">&#39;Analytical&#39;</span>)
+
+plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;x-coordinate [-]&#39;</span>)
+plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;Amplitude [-]&#39;</span>)
+plt<span style="color: #666666">.</span>legend(legends, loc<span style="color: #666666">=3</span>, frameon<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+ 
+<span style="color: #408080; font-style: italic"># initialization function: plot the background of each frame</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">init</span>():
+    <span style="color: #008000; font-weight: bold">for</span> line <span style="color: #AA22FF; font-weight: bold">in</span> lines:
+        line<span style="color: #666666">.</span>set_data([], [])
+    <span style="color: #008000; font-weight: bold">return</span> lines,
+
+<span style="color: #408080; font-style: italic"># animation function.  This is called sequentially</span>
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">animate</span>(i):
+    <span style="color: #008000; font-weight: bold">for</span> k, line <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(lines):
+        <span style="color: #008000; font-weight: bold">if</span> (k<span style="color: #666666">==0</span>):
+            line<span style="color: #666666">.</span>set_data(x, un[i,:])
+        <span style="color: #008000; font-weight: bold">else</span>:
+            line<span style="color: #666666">.</span>set_data(x, uanalytical[i,:])
+    <span style="color: #008000; font-weight: bold">return</span> lines,
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">animate_alt</span>(i):
+    <span style="color: #008000; font-weight: bold">for</span> k, line <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">enumerate</span>(lines):
+        <span style="color: #008000; font-weight: bold">if</span> (k<span style="color: #666666">==</span><span style="color: #008000">len</span>(lines)<span style="color: #666666">-1</span>):
+            line<span style="color: #666666">.</span>set_data(x, uanalytical[i,:])
+        <span style="color: #008000; font-weight: bold">else</span>:
+            line<span style="color: #666666">.</span>set_data(x, u_solutions[k,i,:])
+    <span style="color: #008000; font-weight: bold">return</span> lines,
+
+ 
+<span style="color: #408080; font-style: italic"># call the animator.  blit=True means only re-draw the parts that have changed.</span>
+anim <span style="color: #666666">=</span> animation<span style="color: #666666">.</span>FuncAnimation(fig, animate_alt, init_func<span style="color: #666666">=</span>init, frames<span style="color: #666666">=</span>Nt, interval<span style="color: #666666">=100</span>, blit<span style="color: #666666">=</span><span style="color: #008000">False</span>)
+ 
+ 
+plt<span style="color: #666666">.</span>show()
+</pre></div>
 
 <h3 id="___sec27">Lax-Wendroff for non-linear systems of hyperbolic PDEs </h3>
 
@@ -503,6 +670,12 @@ u_{j}^{n+1} = u_{j}^{n} - \frac{\Delta t}{\Delta x}
 $$
 
 <p>
+Notice that for a linear flux \( F=a_0 \, u \), the two-step Lax-Wendroff
+method (<a href="#mjx-eqn-90">(90)</a> and <a href="#mjx-eqn-91">(91)</a>) may be shown to reduce
+to the one-step Lax-Wendroff method outlined in <a href="#mjx-eqn-88">(88)</a> or
+<a href="#mjx-eqn-89">(89)</a>.
+
+<p>
 <b>MacCormack Scheme</b>
 
 <p>
@@ -543,6 +716,30 @@ F_{j+1}^{m} = \frac{1}{2} \left (F_j^p + F_{j+1}^n \right )
 \end{equation}
 $$
 
+<p>
+For a linear flux \( F(u) = a_0 \, u \), one may show that the MacCormack scheme in 
+<a href="#mjx-eqn-92">(92)</a> reduces to a two-step scheme:
+$$
+\begin{align}
+& u_j^p =  + C \left ( u_j^n - u_{j+1}^n \right ) \tag{93}\\ 
+& u_j^{n+1} = \frac{1}{2} \left ( u_j^n + u_j^p \right )+ \frac{C}{2} \left ( u_{j-1}^p - u_{j}^p \right ) \tag{94}
+\end{align}
+$$
+
+<p>
+and substitution of <a href="#mjx-eqn-93">(93)</a> into <a href="#mjx-eqn-94">(94)</a> shows that
+the MacCormack scheme is identical to the Lax-Wendroff scheme <a href="#mjx-eqn-89">(89)</a> for the
+linear advection flux. A python implementation is given by:
+
+<p>
+
+<!-- code=python (!bc pycod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">macCormack</span>(u):
+    up <span style="color: #666666">=</span> u<span style="color: #666666">.</span>copy()
+    up[:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> u[:<span style="color: #666666">-1</span>] <span style="color: #666666">-</span> c<span style="color: #666666">*</span>(u[<span style="color: #666666">1</span>:]<span style="color: #666666">-</span>u[:<span style="color: #666666">-1</span>])
+    u[<span style="color: #666666">1</span>:] <span style="color: #666666">=</span> <span style="color: #666666">.5*</span>(u[<span style="color: #666666">1</span>:]<span style="color: #666666">+</span>up[<span style="color: #666666">1</span>:] <span style="color: #666666">-</span>  c<span style="color: #666666">*</span>(up[<span style="color: #666666">1</span>:]<span style="color: #666666">-</span>up[:<span style="color: #666666">-1</span>]))
+    <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
+</pre></div>
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
