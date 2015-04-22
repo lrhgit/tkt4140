@@ -2072,31 +2072,6 @@ label{}
 \end{equation}
 !et
 
-=== Lax-Wendroff Scheme ===
-The Lax-Wendroff scheme may be derived by considering the Taylor series expansion about $u^{n}$:
-!bt
-\begin{equation}
-u^{n+1} = u^n + u_t \Delta t + \frac{(\Delta t)^2}{2}u_{tt} + \ldots
-label{eq:LWtaylor}
-\end{equation}
-!et
-To proceed further, the time partial derivaties must be expressed by means of the PDE to be solved. 
-Now substitute spatial derivatives for the time derivatives
-
-!bt
-\begin{align}
-E_t &= -AE_x
-label{} \\
-u_t &= -E_x
-label{}
-\end{align}
-!et
-
-where $A = \frac{\partial E}{\partial u} = u$ is the Jacobian for Burgers equation.
-
-This, when plugged into the full Burgers equation, should yield
-
-$$\frac{u_i^{n+1} - u_i^n}{\Delta t} = \frac{-E^n_{i+1}-E^n_{i-1}}{2 \Delta x} + \frac{\Delta t}{2} \left(\frac{(A \frac{\partial E}{\partial x})^n_{i+\frac{1}{2}}-(A \frac{\partial E}{\partial x})^n_{i-\frac{1}{2}}}{\Delta x}\right)$$
 
 !split 
 ========= References =========

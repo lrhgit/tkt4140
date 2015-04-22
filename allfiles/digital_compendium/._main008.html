@@ -111,8 +111,7 @@ Automatically generated HTML file from DocOnce source
                '___sec27'),
               (u' Burgers equation ', 1, None, '___sec28'),
               (u' The Lax-Friedrich Scheme ', 3, None, '___sec29'),
-              (u' Lax-Wendroff Scheme ', 3, None, '___sec30'),
-              (u' References ', 0, None, '___sec31')]}
+              (u' References ', 0, None, '___sec30')]}
 end of tocinfo -->
 
 <body>
@@ -163,7 +162,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="._main021.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The advection equation</a></li>
      <!-- navigation toc: --> <li><a href="._main022.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Burgers equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main023.html#___sec31" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main023.html#___sec30" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -236,6 +235,7 @@ $$
 \end{equation*}
 $$
 
+
 <p>
 Backward differences:
 $$
@@ -245,6 +245,7 @@ $$
 \end{equation}
 $$
 
+
 <p>
 Central differences:
 $$
@@ -252,6 +253,7 @@ $$
 \delta y_{j+\frac{1}{2}}=y_{j+1}-y_j
 \end{equation*}
 $$
+
 
 <p>
 The linear difference operators \( \Delta \), \( \nabla \) and \( \delta \) are useful when we are deriving more complicated expressions. An example of usage is as follows,
@@ -261,6 +263,7 @@ $$
 =y_{j+1}-y_j-(y_j-y_{j-1})=y_{j+1}-2y_j+y_{j-1}
 \end{equation*}
 $$
+
 
 <p>
 We will mainly write out the formulas entirely instead of using operators.
@@ -275,6 +278,7 @@ y(x)=&y(x_0)+y'(x_0)\cdot (x-x_0)+\frac{1}{2}y''(x_0)\cdot (x-x_0)^2 + \\
 \end{align}
 $$
 
+
 <p>
 The remainder \( R_n \) is given by
 $$
@@ -283,6 +287,7 @@ R_n&=\frac{1}{(n+1)!}y^{(n+1)}(\xi)\cdot (x-x_0)^{n+1}\\
 &\text{where } \xi \in (x_0,x) \nonumber
 \end{align}
 $$
+
 
 <p>
 By use of <a href="#mjx-eqn-16">(16)</a> we get
@@ -305,6 +310,7 @@ y(x_{j-1}) \equiv y(x_j-h)=y(x_j)-hy'(x_j)+\frac{h^2}{2}y''(x_j)+\dots+\frac{h^k
 \end{equation}
 $$
 
+
 <p>
 We will here and subsequently assume that \( h \) is positive.
 
@@ -317,6 +323,7 @@ y'(x_j)=\frac{y(x_{j+1})-y(x_j)}{h}+O(h)
 \end{equation}
 $$
 
+
 <p>
 We solve <a href="#mjx-eqn-18">(18)</a> with respect to \( y' \):
 $$
@@ -325,6 +332,7 @@ $$
 y'(x_j)=\frac{y(x_{j})-y(x_{j-1})}{h}+O(h)
 \end{equation}
 $$
+
 
 <p>
 By addition of <a href="#mjx-eqn-18">(18)</a> and <a href="#mjx-eqn-17">(17)</a> we get
@@ -335,6 +343,7 @@ y''(x_j)=\frac{y(x_{j+1})-2y(x_{j})+y(x_{j-1})}{h^2}+O(h^2)
 \end{equation}
 $$
 
+
 <p>
 By subtraction of <a href="#mjx-eqn-18">(18)</a> from <a href="#mjx-eqn-17">(17)</a> we get
 $$
@@ -343,6 +352,7 @@ $$
 y'(x_j)=\frac{y(x_{j+1})-y(x_{j-1})}{2h}+O(h^2)
 \end{equation}
 $$
+
 
 <p>
 <b>Notation:</b> We let \( y(x_j) \) always denote the function \( y(x) \) with \( x=x_j \). We use \( y_j \) both for the numerical and analytical value. Which is which will be implied.
@@ -361,6 +371,7 @@ $$
 &y'_j=\frac{y_{j+1}-y_{j-1}}{2h}\ ;\  \text{truncation error}\ O(h^2)
 \end{align}
 $$
+
 
 <p>
 <a href="#mjx-eqn-23">(23)</a> is a forward difference, <a href="#mjx-eqn-24">(24)</a> is a backward difference while <a href="#mjx-eqn-25">(25)</a> and <a href="#mjx-eqn-26">(26)</a> are central differences.
@@ -382,6 +393,7 @@ y''_j(x_j)=\left(\frac{y_{j+1}-y_j}{h}-\frac{y_{j}-y_{j-1}}{h}\right)\cdot \frac
 \end{equation*}
 $$
 
+
 <p>
 <a href="#mjx-eqn-26">(26)</a>:
 
@@ -390,6 +402,7 @@ $$
 y'_j=\left(\frac{y_{j+1}-y_j}{h}-\frac{y_{j}+y_{j-1}}{h}\right)\cdot \frac{1}{2}=\frac{y_{j+1}-y_{j-1}}{2h}
 \end{equation*}
 $$
+
 
 <p>
 To find the truncation error we must use the Taylor series expansion.

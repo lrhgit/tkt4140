@@ -111,8 +111,7 @@ Automatically generated HTML file from DocOnce source
                '___sec27'),
               (u' Burgers equation ', 1, None, '___sec28'),
               (u' The Lax-Friedrich Scheme ', 3, None, '___sec29'),
-              (u' Lax-Wendroff Scheme ', 3, None, '___sec30'),
-              (u' References ', 0, None, '___sec31')]}
+              (u' References ', 0, None, '___sec30')]}
 end of tocinfo -->
 
 <body>
@@ -163,7 +162,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="._main021.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The advection equation</a></li>
      <!-- navigation toc: --> <li><a href="._main022.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Burgers equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main023.html#___sec31" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main023.html#___sec30" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -211,7 +210,7 @@ To investigate whether the various ODE-schemes in our module 'ODEschemes.py'
 have the expected, theoretical order, we proceed in the same manner as
 outlined in <a href="._main012.html#ex:num_error">Example 4: Numerical error as a function of \( \Delta t \)</a>. The complete code is listed at the end
 of this section but we will highlight and explain some details in the
-following.
+following. 
 
 <p>
 To test the numerical order for the schemes we solve a somewhat general linear ODE:
@@ -232,6 +231,7 @@ u =\begin{cases}
 \end{cases}
 \end{equation}
 $$
+
 
 <p>
 The right hand side defining the differential equation has been
@@ -267,7 +267,7 @@ The Euler scheme <a href="._main010.html#mjx-eqn-41">(41)</a> is \( O(h) \), whe
 <a href="._main014.html#mjx-eqn-56">(56)</a> is \( O(h^2) \), and Runge-Kutta <a href="._main017.html#mjx-eqn-62">(62)</a> is
 \( O(h^4) \), where the \( h \) denote a generic step size which for the
 current example is the timestep \( \Delta t \). The order of a particular
-scheme is given exponent \( n \) in the error term \( O(h^n) \). Consequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order.
+scheme is given exponent \( n \) in the error term \( O(h^n) \). Consequently, the Euler scheme is a first oder scheme, Heun is second order, whereas Runge-Kutta is fourth order. 
 
 <p>
 By letting \( \epsilon_{i+1} \) and \( \epsilon_i \) denote the errors on two consecutive grids with corresponding timesteps \( \displaystyle \Delta t_{i+1} = \frac{\Delta t_i}{2} \). The errors \( \epsilon_{i+1} \) and \( \epsilon_{i} \) for a scheme of order \( n \) are then related by:
@@ -302,7 +302,7 @@ grid refinement. For each grid we plot
 \( \log_2(\epsilon) \) as a function of time with: <code>plot(time[1:],
 log_error, linestyles[i]+colors[iclr], markevery=N/5)</code> and for each
 plot we construct the corresponding legend by appending a new element
-to the legends-list <code>legends.append(scheme.func_name +': N = ' + str(N))</code>.   This construct produces a string with both the scheme name and the number of elements \( N \). The plot is not reproduced below, but you may see the result by downloading and running the module yourself.
+to the legends-list <code>legends.append(scheme.func_name +': N = ' + str(N))</code>.   This construct produces a string with both the scheme name and the number of elements \( N \). The plot is not reproduced below, but you may see the result by downloading and running the module yourself. 
 
 <p>
 Having completed the given number of refinements <code>Ndts</code> for a specific scheme
@@ -316,7 +316,7 @@ order_approx</code>. This allows for an illustrative plot of the order estimate 
             plot(N_list, (np<span style="color: #666666">.</span>asarray(schemes_orders[key])))
 </pre></div>
 <p>
-and the resulting plot is shown in Figure <a href="#fig:convergence_rate">13</a>, and we see that our numerical approximations for the orders of our schemes approach the theoretical values as the number of timesteps increase (or as the timestep is reduced by a factor two consecutively).
+and the resulting plot is shown in Figure <a href="#fig:convergence_rate">13</a>, and we see that our numerical approximations for the orders of our schemes approach the theoretical values as the number of timesteps increase (or as the timestep is reduced by a factor two consecutively).  
 
 <p>
 <center> <!-- figure -->
