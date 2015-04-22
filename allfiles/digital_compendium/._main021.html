@@ -95,15 +95,23 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec22'),
-              (u' Convection problems and hyperbolic PDEs ',
-               1,
+              (u' Chapter 6: Convection problems and hyperbolic PDEs ',
+               0,
                None,
                '___sec23'),
+              (u' The advection equation ', 1, None, '___sec24'),
               (u' Forward in time central in space discretization ',
                2,
                None,
-               '___sec24'),
-              (u' References ', 0, None, '___sec25')]}
+               '___sec25'),
+              (u' Lax Wendroff Schemes ', 3, None, '___sec26'),
+              (u' Lax-Wendroff for non-linear systems of hyperbolic PDEs ',
+               3,
+               None,
+               '___sec27'),
+              (u' Burgers equation ', 1, None, '___sec28'),
+              (u' The Lax-Friedrich Scheme ', 3, None, '___sec29'),
+              (u' References ', 0, None, '___sec30')]}
 end of tocinfo -->
 
 <body>
@@ -151,8 +159,10 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main010.html#ex:euler_method" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Euler's method</a></li>
      <!-- navigation toc: --> <li><a href="._main014.html#___sec16" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Heun's method</a></li>
      <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Convection problems and hyperbolic PDEs</a></li>
-     <!-- navigation toc: --> <li><a href="._main022.html#___sec25" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The advection equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main022.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Burgers equation</a></li>
+     <!-- navigation toc: --> <li><a href="._main023.html#___sec30" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -181,14 +191,18 @@ MathJax.Hub.Config({
   <li><a href="._main020.html">21</a></li>
   <li class="active"><a href="._main021.html">22</a></li>
   <li><a href="._main022.html">23</a></li>
+  <li><a href="._main023.html">24</a></li>
   <li><a href="._main022.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
 
-<h1 id="___sec23">Convection problems and hyperbolic PDEs </h1>
+<h1 id="___sec23">Chapter 6: Convection problems and hyperbolic PDEs </h1> <!-- chapter heading -->
+
+<h1 id="___sec24">The advection equation </h1>
 The classical advection equation is very often used as an example of a hyperbolic partial differential equation which illustrates many features of convection problems, while still being linear:
 $$
-\begin{equation}\tag{76}
+\begin{equation}
+ \tag{76}
 \frac{\partial u}{\partial t} + a_0 \frac{\partial u}{\partial x} = 0
 \end{equation}
 $$
@@ -204,7 +218,7 @@ u = u_0 \, f(x-a_0\,t )
 $$
 
 and represents a wave propagating with a constant velocity \( a_0 \) with
-unchanged shape. When \( a_0>0 \), the wave propagates in the positive
+unchanged shape. When \( a_0 > 0 \), the wave propagates in the positive
 x-direction, whereas for \( a_0 < 0 \), the wave propagates in the negative
 x-direction. 
 
@@ -215,31 +229,330 @@ pressure wave propagating with the velocity \( a_0 \). The advection
 equation may also be used to model the propgation of pressure or flow
 in a compliant pipe, such as a blood vessel.
 
-<h2 id="___sec24">Forward in time central in space discretization </h2>
+<p>
+To allow for generalization we will also when appropriate write <a href="#mjx-eqn-76">(76)</a> on the following form:
+$$
+\begin{equation}
+\frac{\partial u}{\partial t} +  \frac{\partial F}{\partial x} = 0
+\tag{78}
+\end{equation}
+$$
+
+where for the linear advection equation \( F(u) = a_0\; u \).
+
+<h2 id="___sec25">Forward in time central in space discretization </h2>
 
 <p>
 We may discretize <a href="#mjx-eqn-76">(76)</a> with a forward difference in time and
-a central difference in space, normally abberviated as FTCS-scheme:
+a central difference in space, normally abberviated as the FTCS-scheme:
 $$
 \begin{equation*}
-\tag{78}
+\tag{79}
 \frac{\partial u}{\partial t} \approx \frac{u_j^{n+1}-u_j^n}{\Delta t}, \qquad  \frac{\partial u}{\partial x}\approx \frac{u_{j+1}^n-u_{j-1}^n}{2 \Delta x}
 \end{equation*}
 $$
 
-and we may substitute the approximations <a href="#mjx-eqn-78">(78)</a> into the advection equation <a href="#mjx-eqn-76">(76)</a> to yield:
+and we may substitute the approximations <a href="#mjx-eqn-79">(79)</a> into the advection equation <a href="#mjx-eqn-76">(76)</a> to yield:
 $$
 \begin{equation}
-\tag{79}
+\tag{80}
 u_j^{n+1} = u_j^n - \frac{C}{2}(u_{j+1}^n-u_{j-1}^n)
 \end{equation}
 $$
 
-For convenience we have introduced the the non-dimensional Courant-number: 
+For convenience we have introduced the non-dimensional <a href="http://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition" target="_blank">Courant-Friedrich-Lewy</a> number (or CFL-number for short): 
 $$
 \begin{equation}
-\tag{80}
+\tag{81}
 C = a_0\frac{\Delta t}{\Delta x}
+\end{equation}
+$$
+
+
+<p>
+The scheme in <a href="#mjx-eqn-80">(80)</a> is first order in time and second order in space (i.e. \( (O(\Delta t) + O(\Delta x^2)) \)), and explicit in time as can bee seen both from Fig. (<a href="#fig:FTCS">14</a>) and <a href="#mjx-eqn-80">(80)</a>. 
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 14:  Illustration of the first order in time central in space scheme. <div id="fig:FTCS"></div> </p></center>
+<p><img src="chapter6/fig01.png" align="bottom" width=400></p>
+</center>
+
+<p>
+We will try to solve model equation <a href="#mjx-eqn-76">(76)</a> with the scheme <a href="#mjx-eqn-80">(80)</a> and initial conditions illustrated in Fig <a href="#fig:FTCS_init">15</a> with the mathematical representation:
+$$
+\begin{equation*}
+\begin{array}{c}
+u(x,0) = 1 \text{ for } x < 0.5\\ 
+u(x,0) = 0 \text{ for } x > 0.5
+\end{array}
+\end{equation*}
+$$
+
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 15:  Initial values for the advection equaution <a href="#mjx-eqn-76">(76)</a>. <div id="fig:FTCS_init"></div> </p></center>
+<p><img src="chapter6/fig02.png" align="bottom" width=400></p>
+</center>
+
+<p>
+Solutions for three CFL-numbers: C=0.25, 0.5 and 1.0 are illustrated
+in Fig. (<a href="#fig:FTCS_sol">16</a>).  Large oscillations are observed for all
+values of the CFL-number, even though they seem to be sligtly reduced
+for smaller C-values,; thus we have indications of an unstable scheme.
+As a first approach observe that the coefficient for \( u^n_{j+1} \) in
+<a href="#mjx-eqn-80">(80)</a> always will be negative, and thus the criterion of
+positive coefficients (PC-criterion) may not be satisfied for any
+value of \( C \). 
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 16:  Computed solutions with the <a href="#mjx-eqn-80">(80)</a>. Dotted line: analytical solution, solid line: computed soultion. <div id="fig:FTCS_sol"></div> </p></center>
+<p><img src="chapter6/fig03.png" align="bottom" width=400></p>
+</center>
+
+<p>
+However, as we know that the PC-criterion may be too
+strict in some cases, we proceed with a von Neumann analysis by introducing the numerical amplification factor \( G^n \) for the error \( E^n_j \) in the numerical scheme to be analyzed
+$$
+\begin{equation}
+\tag{82}
+u^n_j\to E^n_j=G^n\cdot e^{i\cdot \beta x_j}
+\end{equation}
+$$
+
+Substitution of <a href="#mjx-eqn-82">(82)</a> into <a href="#mjx-eqn-80">(80)</a> yields:
+$$
+\begin{equation*}
+G^{n+1}e^{i\cdot \beta \cdot x_j} = G^ne^{i \cdot \beta \cdot x_j}-\frac{C}{2}\left(G^ne^{i\cdot \beta x_{j+1}}- G^ne^{i\cdot \beta x_{j-1}}\right)
+\end{equation*}
+$$
+
+which after division with  \( G^ne^{i\cdot \beta \cdot x_j} \) and introduction of the simplified notation \( \delta = \beta \cdot h \)  yields:
+$$
+\begin{equation*}
+G = 1 - \frac{C}{2}\left(e^{i\cdot \beta h}-e^{-i \cdot \beta h}\right) = 1 - i \cdot C \sin(\delta)
+\end{equation*}
+$$
+
+where the trigonometric relations:
+$$
+\begin{align} \tag{83}
+&2\cos(x)=e^{ix}+e^{-ix}\\ 
+&i\cdot 2\sin(x)=e^{ix}-e^{-ix}\\ 
+&\cos(x)=1-2\sin^2(\frac{x}{2})
+\end{align}
+$$
+
+
+<p>
+have been introduced for convenience. Finally, we get the following
+expression for the numerical ampliciation factor:
+
+$$
+\begin{equation*}
+|G|=\sqrt{1+C^2\sin^2(\delta)} \geq 1 \text{ for all } C \text{ and } \delta
+\end{equation*}
+$$
+
+and concequently the FTCS-scheme is unconditionally unstable for the advection equation and is thus not a viable scheme. Even a very small value of C will not suffice to dampe the oscillations.
+
+<h3 id="___sec26">Lax Wendroff Schemes </h3>
+
+<p>
+These schemes were proposed in 1960 by P.D. Lax and B. Wendroff
+<a href="._main023.html#lax73">[7]</a> for solving, approximately, systems of hyperbolic
+conservation laws on the generic form given in
+<a href="#mjx-eqn-78">(78)</a>.
+
+<p>
+A large class of numerical methods for solving
+<a href="#mjx-eqn-78">(78)</a> are the so-called conservative methods:
+
+$$
+\begin{equation}
+u_j^{n+1} = u_j^{n} + \frac{\Delta t}{\Delta x} \left ( F_{i-1/2} - F_{i+1/2} \right ) 
+\tag{84}
+\end{equation}
+$$
+
+
+<p>
+<b>Linear advection</b>
+
+
+<p>
+The Lax–Wendroff method belongs to the class of conservative schemes
+<a href="#mjx-eqn-78">(78)</a> and can be derived in various ways. For
+simplicity, we will derive the method by using a simple model equation
+for <a href="#mjx-eqn-78">(78)</a>, namely the linear advection equation
+with \( F(u)=a\,u \) as in <a href="#mjx-eqn-76">(76)</a>, where \( a \) is a constant
+propagation velocity. The Lax-Wendroff outset is a Taylor approximation of \( u_j^{n+1} \):
+$$
+\begin{equation}
+u_j^{n+1}=u_j^n+\Delta t \frac{\partial u}{\partial t}\Bigg|_j^n + \frac{(\Delta t)}{2}\frac{\partial^2u}{\partial t^2}\Bigg|_j^n+\cdots
+\tag{85}
+\end{equation}
+$$
+
+From the differential equation <a href="#mjx-eqn-78">(78)</a> we get by differentiation 
+$$
+\begin{equation}
+\begin{array}{c}
+\dfrac{\partial u}{\partial t}\Bigg|_j^n = -a_0\dfrac{\partial u}{\partial x}\Bigg|_j^n 
+ \qquad \text{ and} \qquad
+\dfrac{\partial^2u}{\partial t^2}\Bigg|_j^n = a_0^2\dfrac{\partial^2u}{\partial x^2}\Bigg|_j^n
+\end{array}
+\tag{86}
+\end{equation}
+$$
+
+Before substitution of <a href="#mjx-eqn-86">(86)</a> in the Taylor expansion <a href="#mjx-eqn-85">(85)</a> we approximate the spatial derivatives by central differences:
+$$
+\begin{equation}
+\dfrac{\partial u}{\partial x}\Bigg|_j^n  \approx \dfrac{u_{j+1}^n-u_{j-1}^n}{(2\Delta x)}
+\qquad \text{ and } 
+\qquad \dfrac{\partial^2u}{\partial x^2}\Bigg|_j^n \approx \dfrac{u_{j+1}^n -2u_j^n + u_{j-1}^n}{(\Delta x)^2}
+\tag{87}
+\end{equation}
+$$
+
+and then the Lax-Wendroff scheme follows by substitution:
+$$
+\begin{equation}
+\tag{88}
+u_j^{n+1}=u_j^n-\frac{C}{2}\left( u_{j+1}^n-u_{j-1}^n \right) + \frac{C^2}{2}\left( u_{j+1}^n - 2u_j^n+u_{j-1}^n \right)
+\end{equation}
+$$
+
+with the local truncation error  \( T_j^n \):
+$$
+\begin{equation}
+T_j^n = \frac{1}{6}\cdot \left[ (\Delta t)^2 \frac{\partial^3u}{\partial t^3} + a_0(\Delta x)^2 \frac{\partial^3u}{\partial x^3}\right]_j^n = O[(\Delta t)^2,(\Delta x)^2]
+\label{}
+\end{equation}
+$$
+
+The resulting difference equation in <a href="#mjx-eqn-88">(88)</a> may also be formulated as:
+$$
+\begin{equation}
+\tag{89}
+u_j^{n+1} = \frac{C}{2}(1+C)u_{j-1}^n + (1-C^2)u_j^n - \frac{C}{2}(1-C)u_{j+1}^n
+\end{equation}
+$$
+
+
+<p>
+An example of how to implement the Lax-Wendroff scheme is given as follows,
+
+<p>
+<center> <!-- figure -->
+<center><p class="caption">Figure 17:  Schematic of the Lax-Wendroff scheme. <div id="fig:LW"></div> </p></center>
+<p><img src="chapter6/fig06.png" align="bottom" width=400></p>
+</center>
+
+<h3 id="___sec27">Lax-Wendroff for non-linear systems of hyperbolic PDEs </h3>
+
+<p>
+For non-linear equations <a href="#mjx-eqn-78">(78)</a> the Lax–Wendroff
+method is no longer unique and naturally various methods have been
+suggested. The challenge for a non-linear \( F(u) \) is that the substitution of
+temporal derivatives with spatial derivatives (as we did in <a href="#mjx-eqn-86">(86)</a>) is
+not straightforward and unique.
+
+<p>
+<b>Ricthmyer Scheme</b>
+
+One of the earliest extensions of the scheme is the <a href="http://www.encyclopediaofmath.org/index.php/Lax-Wendroff_method" target="_blank">Richtmyer two-step
+Lax–Wendroff method</a>, which is on the conservative form <a href="#mjx-eqn-84">(84)</a> with the numerical fluxes computed as follows:
+
+$$
+\begin{align}
+&u_{j+1/2}^{n+1/2} = \frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{n} \right ) +
+\frac{1}{2} \frac{\Delta t}{\Delta x} \left (F_j^n - F_{j+1}^n \right )\\ 
+& F_{j+1/2} = F(u_{j+1/2}^{n+1/2})
+\end{align}
+$$
+
+
+<p>
+<b>Lax-Wendroff two step</b>
+
+
+<p>
+A <a href="http://en.wikipedia.org/wiki/Lax%E2%80%93Wendroff_method" target="_blank">Lax-Wendroff two step
+method</a> is
+outlined in the following. In the first step \( u(x, t) \) is evaluated at
+half time steps \( n + 1/2 \) and half grid points \( j+1/2 \). In the
+second step values at the next time step \( n + 1 \) are calculated using the data for \( n \) and
+\( n + 1/2 \).
+
+<p>
+First step:
+$$
+\begin{align}
+& u_{j+1/2}^{n+1/2} = \frac{1}{2} \left (u_{j+1}^{n} + u_{j}^{n} \right )
+ - \frac{\Delta t}{2 \Delta x} \left (F(u_{j+1}^{n}) - F(u_{j}^{n}) \right ) \\ 
+& u_{j-1/2}^{n+1/2} = \frac{1}{2} \left (u_{j}^{n} + u_{j-1}^{n} \right )
+ - \frac{\Delta t}{2 \Delta x} \left (F(u_{j}^{n}) - F(u_{j-1}^{n}) \right ) 
+\tag{90}
+
+\end{align}
+$$
+
+
+<p>
+Second step:
+$$
+\begin{equation}
+u_{j}^{n+1} = u_{j}^{n} - \frac{\Delta t}{\Delta x} 
+\left ( F(u_{j+1/2}^{n+1/2}) - F(u_{j-1/2}^{n+1/2}) \right )
+\tag{91}
+\end{equation}
+$$
+
+
+<p>
+<b>MacCormack Scheme</b>
+
+
+<p>
+A simpler and popular extension/variant of Lax-Wendroff schemes like
+in the previous section, is the MacCormack scheme
+<a href="._main023.html#maccormack69">[8]</a>:
+
+$$
+\begin{align}
+& u_j^p =u_j^n + \frac{\Delta t}{\Delta x} \left (F_{j}^{n} - F_{j+1}^{n} \right ) \\ 
+& u_j^{n+1} =\frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{p} \right ) + 
+  \frac{1}{2} \frac{\Delta t}{\Delta x} \left (F_{j-1}^{p} - F_{j}^{p} \right ) \\ 
+\tag{92}
+\end{align}
+$$
+
+
+<p>
+where we have introduced the convention \( F_{j}^{p}=F(u_{j}^{p}) \).
+
+<p>
+Note that in the predictor step we employ the conservative formula
+<a href="#mjx-eqn-84">(84)</a> for a time \( \Delta t \) with forward
+differencing, i.e. . \( F_{j+1/2} = F^n_{j+1}=F(u^n_{j+1}) \). The
+corrector step may be interpreted as using
+<a href="#mjx-eqn-84">(84)</a> for a time \( \Delta t/2 \) with initial
+condition \( \frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{p} \right ) \) and
+backward differencing.
+
+<p>
+Another MacCormack scheme may be obtained by reversing the predictor and
+corrector steps. Note that the MacCormack scheme <a href="#mjx-eqn-92">(92)</a>  is not written
+in conservative form <a href="#mjx-eqn-84">(84)</a>. However, it easy to express the scheme in
+conservative form by expressing the flux in <a href="#mjx-eqn-84">(84)</a> as:
+$$
+\begin{equation}
+F_{j+1}^{m} = \frac{1}{2} \left (F_j^p + F_{j+1}^n \right ) 
+\label{}
 \end{equation}
 $$
 
@@ -261,6 +574,7 @@ $$
   <li><a href="._main020.html">21</a></li>
   <li class="active"><a href="._main021.html">22</a></li>
   <li><a href="._main022.html">23</a></li>
+  <li><a href="._main023.html">24</a></li>
   <li><a href="._main022.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

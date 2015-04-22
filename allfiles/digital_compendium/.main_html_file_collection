@@ -17,6 +17,10 @@ chapter1/14.png
 chapter1/programs_and_modules/example_particle_motion_2d_1.png
 chapter1/programs_and_modules/example_particle_motion_2d_2.png
 chapter1/programs_and_modules/ConvergenceODEschemes.png
+chapter6/fig01.png
+chapter6/fig02.png
+chapter6/fig03.png
+chapter6/fig06.png
 ./NumeriskeBeregninger.pdf
 ._main000.html
 ._main001.html
@@ -41,3 +45,4 @@ chapter1/programs_and_modules/ConvergenceODEschemes.png
 ._main020.html
 ._main021.html
 ._main022.html
+._main023.html
