@@ -1,3 +1,5 @@
+# ../Kap6/advection_schemes.py
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import animation
@@ -37,21 +39,23 @@ def ftbs(u): # forward time backward space
     u[1:-1] = (1-c)*u[1:-1] + c*u[:-2]
     return u[1:-1]
 
-def lax_wendroff(u): # Lax-Wendroff
+# Lax-Wendroff
+def lax_wendroff(u): 
     u[1:-1] = c/2.0*(1+c)*u[:-2] + (1-c**2)*u[1:-1] - c/2.0*(1-c)*u[2:]
     return u[1:-1]
 
+# Lax-Friedrich
 def lax_friedrich(u):
     u[1:-1] = (u[:-2] +u[2:])/2.0 -  c*(u[2:] - u[:-2])/2.0
     return u[1:-1] 
 
+# macCormack for advection quation
 def macCormack(u):
     up = u.copy()
     up[:-1] = u[:-1] - c*(u[1:]-u[:-1])
     u[1:] = .5*(u[1:]+up[1:] -  c*(up[1:]-up[:-1]))
     return u[1:-1] 
 
- 
 # Discretize
 x = np.linspace(xmin, xmax, Nx+1) # discretization of space
 dx = float((xmax-xmin)/Nx) # spatial step size

@@ -203,7 +203,7 @@ hyperbolic equation commonly used as a model equation to illustrate various nume
 $$
 \begin{equation}
 \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = 0
-\tag{93}
+\tag{95}
 \end{equation}
 $$
 
@@ -215,7 +215,7 @@ on conservative form:
 $$
 \begin{equation}
 \frac{\partial u}{\partial t} +  \frac{\partial }{\partial x} \left (\frac{u^2}{2} \right) = 0
-\tag{94}
+\tag{96}
 \end{equation}
 $$
 
@@ -223,7 +223,7 @@ and by introducing a flux function
 $$
 \begin{equation}
  F(u) = \frac{u^2}{2}
- \tag{95}
+ \tag{97}
 \end{equation}
 $$
 
@@ -234,7 +234,7 @@ represented by a generic transport equation:
 $$
 \begin{equation}
 \frac{\partial u}{\partial t} +  \frac{\partial F(u)}{\partial x}  = 0
-\tag{96}
+\tag{98}
 \end{equation}
 $$
 
@@ -247,7 +247,7 @@ the scheme is stabilized by averaging  \( u^n_i \) over the neighbour cells in t
 $$
 \begin{equation}
 \frac{u_i^{n+1}-\frac{1}{2}(u^n_{i+1}+u^n_{i-1})}{\Delta t} = -\frac{F^n_{i+1}-F^n_{i-1}}{2 \Delta x}
-\tag{97}
+\tag{99}
 \end{equation}
 $$
 
