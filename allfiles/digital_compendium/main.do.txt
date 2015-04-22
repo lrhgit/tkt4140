@@ -1983,7 +1983,7 @@ cite{maccormack69}:
 !bt
 \begin{align}
 & u_j^p =u_j^n + \frac{\Delta t}{\Delta x} \left (F_{j}^{n} - F_{j+1}^{n} \right ) \\
-& u_j^{n+1} =\frac{1}{2} \left (u_{j}^{n} + u_{j+1}^{p} \right ) + 
+& u_j^{n+1} =\frac{1}{2} \left (u_{j}^{n} + u_{j}^{p} \right ) + 
   \frac{1}{2} \frac{\Delta t}{\Delta x} \left (F_{j-1}^{p} - F_{j}^{p} \right ) \\
 label{eq:maccormack}
 \end{align}

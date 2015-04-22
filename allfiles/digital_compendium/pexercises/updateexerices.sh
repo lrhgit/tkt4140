@@ -31,8 +31,8 @@ done
 =======
 #!/bin/bash
 
-SVNDIR=~/Documents/tkt4140/Pythonovingar
-#SVNDIR=~/Dokument/tkt4140/Pythonovingar
+#SVNDIR=~/Documents/tkt4140/Pythonovingar
+SVNDIR=~/Dokument/tkt4140/Pythonovingar
 
 #echo $SVNDIR/tkt4140/Pythonovingar/poving?
 
