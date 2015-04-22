@@ -111,8 +111,7 @@ Automatically generated HTML file from DocOnce source
                '___sec27'),
               (u' Burgers equation ', 1, None, '___sec28'),
               (u' The Lax-Friedrich Scheme ', 3, None, '___sec29'),
-              (u' Lax-Wendroff Scheme ', 3, None, '___sec30'),
-              (u' References ', 0, None, '___sec31')]}
+              (u' References ', 0, None, '___sec30')]}
 end of tocinfo -->
 
 <body>
@@ -163,7 +162,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="._main021.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The advection equation</a></li>
      <!-- navigation toc: --> <li><a href="._main022.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Burgers equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main023.html#___sec31" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main023.html#___sec30" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -228,6 +227,7 @@ $$
 \end{align}
 $$
 
+
 <p>
 \( C_D \) is the drag coefficient, \( C_L \) is the lift coefficient, \( A \) is the area projected in the velocity direction and \( \rho_F \) is the density of the fluid.
 
@@ -242,6 +242,7 @@ $$
 \end{align}
 $$
 
+
 <p>
 From the figure we have
 $$
@@ -250,6 +251,7 @@ $$
 \sin(\phi)&=\frac{v_{ry}}{v_r}
 \end{align*}
 $$
+
 
 <p>
 We assume that the particle is a sphere, such that \( C=\rho _f\frac{A}{2m}=\frac{3\rho_f}{4\rho_kd} \) as in (<a href="._main005.html#example:sphere_freefall">Example 2: Sphere in free fall</a>). Here \( d \) is the diameter of the sphere and \( \rho_k \) the density of the sphere.
@@ -265,6 +267,7 @@ $$
 \end{align}
 $$
 
+
 <p>
 With \( \frac{dx}{dt}=v_x \) and \( \frac{dy}{dt}=v_y \) we get a system of 1st order equations as follows,
 $$
@@ -276,6 +279,7 @@ $$
 &\frac{dv_y}{dt} = C\cdot v_r(C_L\cdot v_{rx}-C_D\cdot v_{ry})-g \nonumber
 \end{align}
 $$
+
 
 <p>
 Introducing the notation \( x=y_1 \), \( y=y_2 \), \( v_x=y_3 \), \( v_y=y_4 \), we get
@@ -289,6 +293,7 @@ $$
 \end{align}
 $$
 
+
 <p>
 Here we have \( v_{rx}=v_x-v_{fx}=y_3-v_{fx},\ v_{ry}=v_y-v_{fy}=y_4-v_{fy},\\ v_r=\sqrt{v_{rx}^2+v_{ry}^2} \)
 
@@ -301,6 +306,7 @@ y_3&=v_0\cos(\alpha)\\
 y_4&=v_0\sin(\alpha)
 \end{align*}
 $$
+
 
 <p>
 <hr>

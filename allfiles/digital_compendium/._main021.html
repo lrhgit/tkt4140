@@ -111,8 +111,7 @@ Automatically generated HTML file from DocOnce source
                '___sec27'),
               (u' Burgers equation ', 1, None, '___sec28'),
               (u' The Lax-Friedrich Scheme ', 3, None, '___sec29'),
-              (u' Lax-Wendroff Scheme ', 3, None, '___sec30'),
-              (u' References ', 0, None, '___sec31')]}
+              (u' References ', 0, None, '___sec30')]}
 end of tocinfo -->
 
 <body>
@@ -163,7 +162,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The advection equation</a></li>
      <!-- navigation toc: --> <li><a href="._main022.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Burgers equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main023.html#___sec31" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main023.html#___sec30" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -208,6 +207,7 @@ $$
 \end{equation}
 $$
 
+
 <p>
 Another convenient feature of the model equation <a href="#mjx-eqn-76">(76)</a> is
 that is has an analytical solution:
@@ -220,7 +220,7 @@ $$
 and represents a wave propagating with a constant velocity \( a_0 \) with
 unchanged shape. When \( a_0 > 0 \), the wave propagates in the positive
 x-direction, whereas for \( a_0 < 0 \), the wave propagates in the negative
-x-direction.
+x-direction. 
 
 <p>
 Equation <a href="#mjx-eqn-76">(76)</a> may serve as a model-equation for a
@@ -268,8 +268,9 @@ C = a_0\frac{\Delta t}{\Delta x}
 \end{equation}
 $$
 
+
 <p>
-The scheme in <a href="#mjx-eqn-80">(80)</a> is first order in time and second order in space (i.e. \( (O(\Delta t) + O(\Delta x^2)) \)), and explicit in time as can bee seen both from Fig. (<a href="#fig:FTCS">14</a>) and <a href="#mjx-eqn-80">(80)</a>.
+The scheme in <a href="#mjx-eqn-80">(80)</a> is first order in time and second order in space (i.e. \( (O(\Delta t) + O(\Delta x^2)) \)), and explicit in time as can bee seen both from Fig. (<a href="#fig:FTCS">14</a>) and <a href="#mjx-eqn-80">(80)</a>. 
 
 <p>
 <center> <!-- figure -->
@@ -288,6 +289,7 @@ u(x,0) = 0 \text{ for } x > 0.5
 \end{equation*}
 $$
 
+
 <p>
 <center> <!-- figure -->
 <center><p class="caption">Figure 15:  Initial values for the advection equaution <a href="#mjx-eqn-76">(76)</a>. <div id="fig:FTCS_init"></div> </p></center>
@@ -302,7 +304,7 @@ for smaller C-values,; thus we have indications of an unstable scheme.
 As a first approach observe that the coefficient for \( u^n_{j+1} \) in
 <a href="#mjx-eqn-80">(80)</a> always will be negative, and thus the criterion of
 positive coefficients (PC-criterion) may not be satisfied for any
-value of \( C \).
+value of \( C \). 
 
 <p>
 <center> <!-- figure -->
@@ -343,6 +345,7 @@ $$
 \end{align}
 $$
 
+
 <p>
 have been introduced for convenience. Finally, we get the following
 expression for the numerical ampliciation factor:
@@ -374,8 +377,10 @@ u_j^{n+1} = u_j^{n} + \frac{\Delta t}{\Delta x} \left ( F_{i-1/2} - F_{i+1/2} \r
 \end{equation}
 $$
 
+
 <p>
 <b>Linear advection</b>
+
 
 <p>
 The Lax–Wendroff method belongs to the class of conservative schemes
@@ -437,6 +442,7 @@ u_j^{n+1} = \frac{C}{2}(1+C)u_{j-1}^n + (1-C^2)u_j^n - \frac{C}{2}(1-C)u_{j+1}^n
 \end{equation}
 $$
 
+
 <p>
 An example of how to implement the Lax-Wendroff scheme is given as follows,
 
@@ -469,8 +475,10 @@ $$
 \end{align}
 $$
 
+
 <p>
 <b>Lax-Wendroff two step</b>
+
 
 <p>
 A <a href="http://en.wikipedia.org/wiki/Lax%E2%80%93Wendroff_method" target="_blank">Lax-Wendroff two step
@@ -493,6 +501,7 @@ $$
 \end{align}
 $$
 
+
 <p>
 Second step:
 $$
@@ -503,8 +512,10 @@ u_{j}^{n+1} = u_{j}^{n} - \frac{\Delta t}{\Delta x}
 \end{equation}
 $$
 
+
 <p>
 <b>MacCormack Scheme</b>
+
 
 <p>
 A simpler and popular extension/variant of Lax-Wendroff schemes like
@@ -519,6 +530,7 @@ $$
 \tag{92}
 \end{align}
 $$
+
 
 <p>
 where we have introduced the convention \( F_{j}^{p}=F(u_{j}^{p}) \).
@@ -543,6 +555,7 @@ F_{j+1}^{m} = \frac{1}{2} \left (F_j^p + F_{j+1}^n \right )
 \label{}
 \end{equation}
 $$
+
 
 <p>
 <p>
