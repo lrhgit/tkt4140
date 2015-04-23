@@ -104,14 +104,21 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec25'),
-              (u' Lax Wendroff Schemes ', 3, None, '___sec26'),
+              (u' The Lax-Friedrich Scheme ', 3, None, '___sec26'),
+              (u' Lax Wendroff Schemes ', 3, None, '___sec27'),
               (u' Lax-Wendroff for non-linear systems of hyperbolic PDEs ',
                3,
                None,
-               '___sec27'),
-              (u' Burgers equation ', 1, None, '___sec28'),
-              (u' The Lax-Friedrich Scheme ', 3, None, '___sec29'),
-              (u' References ', 0, None, '___sec30')]}
+               '___sec28'),
+              (u' Code example for various schemes for the advenction equation ',
+               3,
+               None,
+               '___sec29'),
+              (u' Example 10: Burgers equation ',
+               2,
+               u'examp:Burger',
+               u'examp:Burger'),
+              (u' References ', 0, None, '___sec31')]}
 end of tocinfo -->
 
 <body>
@@ -161,8 +168,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
      <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="._main021.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The advection equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main022.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Burgers equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main023.html#___sec30" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main022.html#___sec31" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -194,7 +200,6 @@ MathJax.Hub.Config({
   <li><a href="._main020.html">21</a></li>
   <li><a href="._main021.html">22</a></li>
   <li><a href="._main022.html">23</a></li>
-  <li><a href="._main023.html">24</a></li>
   <li><a href="._main019.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
@@ -233,7 +238,7 @@ Let's implement the RK4 scheme and add it to the falling sphere example. The sch
         z[i<span style="color: #666666">+1</span>,:] <span style="color: #666666">=</span> z[i,:] <span style="color: #666666">+</span> dt<span style="color: #666666">/6.0*</span>(k1 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k2 <span style="color: #666666">+</span> <span style="color: #666666">2.0*</span>k3 <span style="color: #666666">+</span> k4) <span style="color: #408080; font-style: italic"># Corrector step</span>
 </pre></div>
 <p>
-Figure <a href="#fig:falling_sphere_euler_heun_rk4">10</a> shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete program <b>FallingSphereEulerHeunRK4.py</b> is listed below. The functions <code>euler</code>, <code>heun</code> and <code>rk4</code> are imported from the program <b>ODEschemes.py</b>.
+Figure <a href="#fig:falling_sphere_euler_heun_rk4">10</a> shows the results using Euler, Heun and RK4. AS seen, RK4 and Heun are more accurate than Euler. The complete program <b>FallingSphereEulerHeunRK4.py</b> is listed below. The functions <code>euler</code>, <code>heun</code> and <code>rk4</code> are imported from the program <b>ODEschemes.py</b>. 
 
 <p>
 <center> <!-- figure -->
@@ -364,7 +369,6 @@ show()
   <li><a href="._main020.html">21</a></li>
   <li><a href="._main021.html">22</a></li>
   <li><a href="._main022.html">23</a></li>
-  <li><a href="._main023.html">24</a></li>
   <li><a href="._main019.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->

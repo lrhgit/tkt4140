@@ -1774,7 +1774,7 @@ For convenience we have introduced the non-dimensional "Courant-Friedrich-Lewy":
 idx{Courant-tallet}
 !bt
 \begin{equation}
-label{eq:6202}
+label{eq:CFL}
 C = a_0\frac{\Delta t}{\Delta x}
 \end{equation}
 !et
@@ -1844,6 +1844,36 @@ expression for the numerical ampliciation factor:
 \end{equation*}
 !et
 and concequently the FTCS-scheme is unconditionally unstable for the advection equation and is thus not a viable scheme. Even a very small value of C will not suffice to dampe the oscillations. 
+
+=== The Lax-Friedrich Scheme ===
+
+Lax-Friedrichs scheme is an explicit, first order scheme, using
+forward difference in time and central difference in space.  However,
+the scheme is stabilized by averaging  $u^n_i$ over the neighbour cells in the in the temporal approximation:
+!bt
+\begin{equation}
+\frac{u_i^{n+1}-\frac{1}{2}(u^n_{i+1}+u^n_{i-1})}{\Delta t} = -\frac{F^n_{i+1}-F^n_{i-1}}{2 \Delta x}
+label{eq:LF-1}
+\end{equation}
+!et
+The Lax-Friedrich scheme is the obtained by isolation $u^{n+1}_i$ at the right hand side:
+!bt
+u_i^{n+1} = \frac{1}{2}(u^n_{i+1}+u^n_{i-1}) - \frac{\Delta t}{2 \Delta x}(F^n_{i+1}-F^n_{i-1})\begin{equation}
+label{}
+\end{equation}
+!et
+
+By assuming a linear flux $F=a_0 \, u$ it may be shown that the Lax-Friedrich scheme takes the form:
+!bt
+\begin{equation}
+u_i^{n+1} = \frac{1}{2}(u^n_{i+1}+u^n_{i-1}) - \frac{C}{2}(u^n_{i+1}-u^n_{i-1})
+label{}
+\end{equation}
+!et
+where we have introduced the CFL-number as given by (ref{eq:CFL}) and have the simple python-implementation: 
+
+
+@@@CODE ../Kap6/advection_schemes.py from-to:# Lax-Friedrich@# macCormack for advection quation
 
 === Lax Wendroff Schemes === 
 
@@ -1929,10 +1959,6 @@ An example of how to implement the Lax-Wendroff scheme is given as follows:
 @@@CODE ../Kap6/advection_schemes.py from-to:# Lax-Wendroff@# Lax-Friedrich
 
 
-A complete example showing how a range of hyperbolic schemes are
-implemented and applied to a particular example:
-
-@@@CODE ../Kap6/advection_schemes.py 
 
 
 === Lax-Wendroff for non-linear systems of hyperbolic PDEs ===
@@ -2043,11 +2069,17 @@ linear advection flux. A python implementation is given by:
 
 @@@CODE ../Kap6/advection_schemes.py from-to:# macCormack for advection quation@# Discretize
 
+=== Code example for various schemes for the advenction equation ===
+A complete example showing how a range of hyperbolic schemes are
+implemented and applied to a particular example:
+
+@@@CODE ../Kap6/advection_schemes.py 
 
 
-!split
 
-======= Burgers equation ======= 
+
+===== Example: Burgers equation =====
+label{examp:Burger}
 
 The 1D Burgers equation is a simple (if not the simplest) non-linear
 hyperbolic equation commonly used as a model equation to illustrate various numerical schemes for non-linear hyperbolic differential equations. It is normally prestented as:
@@ -2087,24 +2119,19 @@ label{eq:burger_F}
 !et
 
 
-=== The Lax-Friedrich Scheme ===
+# !bsol
+# !esol
 
-Lax-Friedrichs scheme is an explicit, first order scheme, using
-forward difference in time and central difference in space.  However,
-the scheme is stabilized by averaging  $u^n_i$ over the neighbour cells in the in the temporal approximation:
-!bt
-\begin{equation}
-\frac{u_i^{n+1}-\frac{1}{2}(u^n_{i+1}+u^n_{i-1})}{\Delta t} = -\frac{F^n_{i+1}-F^n_{i-1}}{2 \Delta x}
-label{eq:LF-1}
-\end{equation}
-!et
-The Lax-Friedrich scheme is the obtained by isolation $u^{n+1}_i$ at the right hand side:
-!bt
-\begin{equation}
-u_i^{n+1} = \frac{1}{2}(u^n_{i+1}+u^n_{i-1}) - \frac{\Delta t}{2 \Delta x}(F^n_{i+1}-F^n_{i-1})
-label{}
-\end{equation}
-!et
+# !bsubex
+# subexercise...
+
+# !bsol
+# !esol
+# !esubex
+
+
+
+
 
 
 !split 

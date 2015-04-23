@@ -104,14 +104,21 @@ Automatically generated HTML file from DocOnce source
                2,
                None,
                '___sec25'),
-              (u' Lax Wendroff Schemes ', 3, None, '___sec26'),
+              (u' The Lax-Friedrich Scheme ', 3, None, '___sec26'),
+              (u' Lax Wendroff Schemes ', 3, None, '___sec27'),
               (u' Lax-Wendroff for non-linear systems of hyperbolic PDEs ',
                3,
                None,
-               '___sec27'),
-              (u' Burgers equation ', 1, None, '___sec28'),
-              (u' The Lax-Friedrich Scheme ', 3, None, '___sec29'),
-              (u' References ', 0, None, '___sec30')]}
+               '___sec28'),
+              (u' Code example for various schemes for the advenction equation ',
+               3,
+               None,
+               '___sec29'),
+              (u' Example 10: Burgers equation ',
+               2,
+               u'examp:Burger',
+               u'examp:Burger'),
+              (u' References ', 0, None, '___sec31')]}
 end of tocinfo -->
 
 <body>
@@ -161,8 +168,7 @@ MathJax.Hub.Config({
      <!-- navigation toc: --> <li><a href="._main017.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Runge-Kutta of 4th order</a></li>
      <!-- navigation toc: --> <li><a href="._main021.html#___sec23" style="font-size: 80%;"><b>Chapter 6: Convection problems and hyperbolic PDEs</b></a></li>
      <!-- navigation toc: --> <li><a href="._main021.html#___sec24" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The advection equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main022.html#___sec28" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Burgers equation</a></li>
-     <!-- navigation toc: --> <li><a href="._main023.html#___sec30" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="._main022.html#___sec31" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -198,7 +204,6 @@ MathJax.Hub.Config({
   <li><a href="._main020.html">21</a></li>
   <li><a href="._main021.html">22</a></li>
   <li><a href="._main022.html">23</a></li>
-  <li><a href="._main023.html">24</a></li>
   <li><a href="._main015.html">&raquo;</a></li>
 </ul>
 <!-- !split -->
@@ -229,6 +234,7 @@ y_{n+1}=y_n+\frac{h}{2}\cdot [f(x_n,y_n)+f(x_{n+1},y(x_{n+1}))]
 \end{equation}
 $$
 
+
 <p>
 This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if \( f(x,y) \) is only a function of \( x \). Since \( y_{n+1} \) appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function \( f(x,y) \) is non-linear. One way of making the scheme explicit is to use the Euler scheme <a href="._main010.html#mjx-eqn-41">(41)</a> to calculate \( y(x_{n+1}) \) on the right side of <a href="#mjx-eqn-55">(55)</a>. The resulting scheme is often denoted <b>Heun's method</b>.
 
@@ -243,7 +249,7 @@ $$
 \end{align}
 $$
 
-Index \( p \) stands for "predicted". <a href="#mjx-eqn-56">(56)</a> is then the predictor and <a href="#mjx-eqn-57">(57)</a> is the corrector. This is a second order method. For more details, see <a href="._main023.html#cheney2012numerical">[5]</a>. Figure <a href="#fig:illustration_heun">6</a> is a graphical illustration of the method.
+Index \( p \) stands for "predicted". <a href="#mjx-eqn-56">(56)</a> is then the predictor and <a href="#mjx-eqn-57">(57)</a> is the corrector. This is a second order method. For more details, see <a href="._main022.html#cheney2012numerical">[5]</a>. Figure <a href="#fig:illustration_heun">6</a> is a graphical illustration of the method.
 
 <p>
 <center> <!-- figure -->
@@ -286,6 +292,7 @@ $$
 \end{align*}
 $$
 
+
 <p>
 <p>
 <!-- navigation buttons at the bottom of the page -->
@@ -310,7 +317,6 @@ $$
   <li><a href="._main020.html">21</a></li>
   <li><a href="._main021.html">22</a></li>
   <li><a href="._main022.html">23</a></li>
-  <li><a href="._main023.html">24</a></li>
   <li><a href="._main015.html">&raquo;</a></li>
 </ul>
 <!-- ------------------- end of main content --------------- -->
