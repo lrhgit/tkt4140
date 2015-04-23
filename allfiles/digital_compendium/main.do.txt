@@ -1875,6 +1875,9 @@ where we have introduced the CFL-number as given by (ref{eq:CFL}) and have the s
 
 @@@CODE ../Kap6/advection_schemes.py from-to:# Lax-Friedrich@# macCormack for advection quation
 
+whereas a more generic flux implementation is implemented as:
+@@@CODE ../Kap6/advection_schemes.py from-to:# Lax-Friedrich Flux formulation@# Lax-Friedrich
+
 === Lax Wendroff Schemes === 
 
 These schemes were proposed in 1960 by P.D. Lax and B. Wendroff
