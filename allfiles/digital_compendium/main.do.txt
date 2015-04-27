@@ -1872,8 +1872,7 @@ label{}
 !et
 where we have introduced the CFL-number as given by (ref{eq:CFL}) and have the simple python-implementation: 
 
-
-@@@CODE ../Kap6/advection_schemes.py from-to:# Lax-Friedrich@# macCormack for advection quation
+@@@CODE ../Kap6/advection_schemes.py from-to:# Lax-Friedrich Advection@# macCormack for advection quation
 
 whereas a more generic flux implementation is implemented as:
 @@@CODE ../Kap6/advection_schemes.py from-to:# Lax-Friedrich Flux formulation@# Lax-Friedrich
