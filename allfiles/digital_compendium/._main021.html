@@ -398,12 +398,7 @@ where we have introduced the CFL-number as given by <a href="#mjx-eqn-81">(81)</
 <p>
 
 <!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">lax_friedrich_Flux</span>(u):
-    u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (u[:<span style="color: #666666">-2</span>] <span style="color: #666666">+</span>u[<span style="color: #666666">2</span>:])<span style="color: #666666">/2.0</span> <span style="color: #666666">-</span>  dt<span style="color: #666666">*</span>(F(u[<span style="color: #666666">2</span>:])<span style="color: #666666">-</span>F(u[:<span style="color: #666666">-2</span>]))<span style="color: #666666">/</span>(<span style="color: #666666">2.0*</span>dx)
-    <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] 
-
-<span style="color: #408080; font-style: italic"># Lax-Friedrich</span>
-<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">lax_friedrich</span>(u):
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">lax_friedrich</span>(u):
     u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (u[:<span style="color: #666666">-2</span>] <span style="color: #666666">+</span>u[<span style="color: #666666">2</span>:])<span style="color: #666666">/2.0</span> <span style="color: #666666">-</span>  c<span style="color: #666666">*</span>(u[<span style="color: #666666">2</span>:] <span style="color: #666666">-</span> u[:<span style="color: #666666">-2</span>])<span style="color: #666666">/2.0</span>
     <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>]
 </pre></div>
@@ -717,7 +712,7 @@ init_func<span style="color: #666666">=0</span>   <span style="color: #408080; f
     u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (u[:<span style="color: #666666">-2</span>] <span style="color: #666666">+</span>u[<span style="color: #666666">2</span>:])<span style="color: #666666">/2.0</span> <span style="color: #666666">-</span>  dt<span style="color: #666666">*</span>(F(u[<span style="color: #666666">2</span>:])<span style="color: #666666">-</span>F(u[:<span style="color: #666666">-2</span>]))<span style="color: #666666">/</span>(<span style="color: #666666">2.0*</span>dx)
     <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] 
 
-<span style="color: #408080; font-style: italic"># Lax-Friedrich</span>
+<span style="color: #408080; font-style: italic"># Lax-Friedrich Advection</span>
 <span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">lax_friedrich</span>(u):
     u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> (u[:<span style="color: #666666">-2</span>] <span style="color: #666666">+</span>u[<span style="color: #666666">2</span>:])<span style="color: #666666">/2.0</span> <span style="color: #666666">-</span>  c<span style="color: #666666">*</span>(u[<span style="color: #666666">2</span>:] <span style="color: #666666">-</span> u[:<span style="color: #666666">-2</span>])<span style="color: #666666">/2.0</span>
     <span style="color: #008000; font-weight: bold">return</span> u[<span style="color: #666666">1</span>:<span style="color: #666666">-1</span>] 
