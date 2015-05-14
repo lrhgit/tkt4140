@@ -234,7 +234,6 @@ y_{n+1}=y_n+\frac{h}{2}\cdot [f(x_n,y_n)+f(x_{n+1},y(x_{n+1}))]
 \end{equation}
 $$
 
-
 <p>
 This formula is called the trapezoidal formula, since it reduces to computing an integral with the trapezoidal rule if \( f(x,y) \) is only a function of \( x \). Since \( y_{n+1} \) appears on both sides of the equation, this is an implicit formula which means that we need to solve a system of non-linear algebraic equations if the function \( f(x,y) \) is non-linear. One way of making the scheme explicit is to use the Euler scheme <a href="._main010.html#mjx-eqn-41">(41)</a> to calculate \( y(x_{n+1}) \) on the right side of <a href="#mjx-eqn-55">(55)</a>. The resulting scheme is often denoted <b>Heun's method</b>.
 
@@ -291,7 +290,6 @@ $$
 (y_3)_{n+1}&=(y_3)_n-0.5h\cdot [(y_1)_n\cdot (y_3)_n+(y_1)^p_{n+1}\cdot (y_3)^p_{n+1}]
 \end{align*}
 $$
-
 
 <p>
 <p>
