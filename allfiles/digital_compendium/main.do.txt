@@ -2060,7 +2060,7 @@ For a linear flux $F(u) = a_0 \, u$, one may show that the MacCormack scheme in
 (ref{eq:maccormack}) reduces to a two-step scheme:
 !bt
 \begin{align}
-& u_j^p =  + C \left ( u_j^n - u_{j+1}^n \right ) label{eq:macC1}\\
+& u_j^p = u_j^n  + C \left ( u_j^n - u_{j+1}^n \right ) label{eq:macC1}\\
 & u_j^{n+1} = \frac{1}{2} \left ( u_j^n + u_j^p \right )+ \frac{C}{2} \left ( u_{j-1}^p - u_{j}^p \right ) label{eq:macC2}
 \end{align}
 !et
