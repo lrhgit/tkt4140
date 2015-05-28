@@ -1858,7 +1858,8 @@ label{eq:LF-1}
 !et
 The Lax-Friedrich scheme is the obtained by isolation $u^{n+1}_i$ at the right hand side:
 !bt
-u_i^{n+1} = \frac{1}{2}(u^n_{i+1}+u^n_{i-1}) - \frac{\Delta t}{2 \Delta x}(F^n_{i+1}-F^n_{i-1})\begin{equation}
+\begin{equation}
+u_i^{n+1} = \frac{1}{2}(u^n_{i+1}+u^n_{i-1}) - \frac{\Delta t}{2 \Delta x}(F^n_{i+1}-F^n_{i-1})
 label{}
 \end{equation}
 !et
@@ -2000,7 +2001,6 @@ First step:
 & u_{j-1/2}^{n+1/2} = \frac{1}{2} \left (u_{j}^{n} + u_{j-1}^{n} \right )
  - \frac{\Delta t}{2 \Delta x} \left (F(u_{j}^{n}) - F(u_{j-1}^{n}) \right ) 
 label{eq:lw_1st}
-
 \end{align}
 !et
 
