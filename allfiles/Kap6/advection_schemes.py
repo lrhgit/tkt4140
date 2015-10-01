@@ -3,6 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import animation
+from matplotlib.pyplot import savefig
 from scipy import interpolate
 from numpy import where
 from math import sin
@@ -11,7 +12,7 @@ LNWDT=2; FNT=15
 plt.rcParams['lines.linewidth'] = LNWDT; plt.rcParams['font.size'] = FNT
 
 a = 1.0 # wave speed
-tmin, tmax = 0.0, 1.0 # start and stop time of simulation
+tmin, tmax = 0.0, .50 # start and stop time of simulation
 xmin, xmax = 0.0, 1.0 # start and end of spatial domain
 Nx = 80 # number of spatial points
 c = 0.9 # courant number, need c<=1 for stability
@@ -73,7 +74,8 @@ time = np.linspace(tmin, tmax, Nt) # discretization of time
 #solvers = [ftbs,lax_wendroff,lax_friedrich,macCormack]
 #solvers = [ftbs,lax_wendroff,macCormack]
 #solvers = [ftbs,lax_wendroff]
-solvers = [ftbs,lax_friedrich]
+#solvers = [ftbs,lax_friedrich, lax_wendroff]
+solvers = [ftbs,lax_wendroff]
 
 
 u_solutions=np.zeros((len(solvers),len(time),len(x)))
@@ -121,7 +123,7 @@ legends.append('Analytical')
 
 plt.xlabel('x-coordinate [-]')
 plt.ylabel('Amplitude [-]')
-plt.legend(legends, loc=3, frameon=False)
+#plt.legend(legends, loc=3, frameon=False)
  
 # initialization function: plot the background of each frame
 def init():
@@ -149,6 +151,8 @@ def animate_alt(i):
  
 # call the animator.  blit=True means only re-draw the parts that have changed.
 anim = animation.FuncAnimation(fig, animate_alt, init_func=init, frames=Nt, interval=100, blit=False)
- 
- 
+
+# plt.plot(x,u_solutions[1,30,:],x,u_solutions[0,30,:],x,uanalytical[30,:])
+# 
+# savefig('advection_schemes.png', transparent=True) # save plot if needed 
 plt.show()

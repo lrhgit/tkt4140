@@ -139,9 +139,9 @@ def implicit_numpy_solver_v2(u_left=1.0, u_right=0.0, nx=20, r=0.5, xmin=0.0, xm
 
 ## Main program starts here
 
-nx = 20 # number of nodes
+nx = 40 # number of nodes
 L  = 1.0    # length of beam
-tmax = 0.25    # time length
+tmax = 0.1    # time length
 theta = 1.0    # parameter for implicitness: theta=0.5 Crank-Nicholson, theta=1.0 fully implicit
 
 solvernames = [explicit_python_solver,explicit_numpy_solver,implicit_numpy_solver]
@@ -167,7 +167,7 @@ plt.xlabel('Position on beam')
 plt.ylabel('Temperature')
 
 ## Solve with implicit solver and get solution for each timestep
-x, time, uv = implicit_numpy_solver_v2(u_left=100.0, u_right=0.0, nx=nx, r=0.5, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0)
+x, time, uv = implicit_numpy_solver_v2(u_left=100.0, u_right=0.0, nx=nx, r=10.0, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0)
 
 def update_line(num, data, line):
     line.set_data(data[0],data[1][:,num])

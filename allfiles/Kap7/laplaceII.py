@@ -202,6 +202,7 @@ def subplot3D(x,y,p,Npx=1,Npy=1,Cp=1, title=''):
     plt.ylabel('y-values')
     ax.view_init(30,225)
     
+# main program
 
 T = np.zeros((Ny+1,Nx+1))
 tic=time.clock()
@@ -211,7 +212,7 @@ print 'Direct solver time:',time.clock()-tic
 
 Ti = np.zeros((Ny+1,Nx+1))
 tic=time.clock()
-Ti=laplace_jacobian_iteration(Ti, h, h, 0.00001)
+Ti=laplace_jacobian_iteration(Ti, h, h, 1.0E-5)
 print 'Jacobian solver time:',time.clock()-tic 
 
 x = np.linspace(0, width, Nx+1)
