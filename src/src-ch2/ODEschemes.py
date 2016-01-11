@@ -1,4 +1,4 @@
-# chapter2/src-ch2/ODEschemes.py
+# src/src-ch2/ODEschemes.py
 
 import numpy as np
 from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure, axhline, close,\

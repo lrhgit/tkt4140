@@ -1,4 +1,4 @@
-# chapter2/src-ch2/phi_plot_non_lin_ode.py;ODEschemes.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter2/src-ch2/ODEschemes.py;
+# src/src-ch2/phi_plot_non_lin_ode.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch2/ODEschemes.py;
 
 from ODEschemes import euler, heun, rk4
 from numpy import cos, sin

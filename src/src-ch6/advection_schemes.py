@@ -1,4 +1,4 @@
-# ../Kap6/advection_schemes.py
+# src/src-ch6/advection_schemes.py
 
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,4 +1,4 @@
-# chapter7/src-ch7/test_solvers.py
+# src/src-ch7/test_solvers.py
 import scipy 
 import scipy.linalg
 import scipy.sparse

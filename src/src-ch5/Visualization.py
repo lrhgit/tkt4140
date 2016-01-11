@@ -1,4 +1,4 @@
-# chapter5/src-ch6/startup.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter5/src-ch6/TRIdiagonalSolvers.py;
+# src/src-ch5/startup.py
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -48,7 +48,7 @@ def createAnimation(NumericalSolutions, analyticalSolution, scheme_names, r_vect
         xlim=(np.min(analyticalSolution), np.max(analyticalSolution))
         ylim=(r_vector[0],r_vector[-1])
     ax = plt.axes(xlim=xlim, ylim=ylim)
-    time_text = ax.text(0.75, 0.95, '', transform=ax.transAxes)
+    time_text = ax.text(0.5, 0.95, '', transform=ax.transAxes)
     dt = time[1]-time[0]
     
     lines=[]     # list for plot lines for solvers and analytical solutions
@@ -113,7 +113,7 @@ def createAnimation(NumericalSolutions, analyticalSolution, scheme_names, r_vect
     anim = animation.FuncAnimation(fig, animate_alt, init_func=init, frames=len(time)/jump, interval=10, blit=False)
 #    Writer = animation.writers['ffmpeg']
 #    writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
-#    #anim.save('../fig-ch5/startup.mov', writer=writer)
+#    #anim.save('../mov-ch5/couette_0.5.mov', writer=writer)
     endTime = timeModule.time()
     print """        Animation created, CPU time: {0}""".format(endTime - startTime)
     

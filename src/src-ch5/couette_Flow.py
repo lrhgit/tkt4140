@@ -1,4 +1,4 @@
-# chapter5/src-ch6/startup.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter5/src-ch6/TRIdiagonalSolvers.py;
+# src/src-ch5/couette_Flow.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch5/TRIdiagonalSolvers.py;
 
 
 import numpy as np
@@ -129,11 +129,11 @@ if __name__ == '__main__':
     def test_MES():
         """Code verification using the Method of Exact solution"""
         print """\n######## Started test 'test_MES()': #########"""
-        N = 40 # No. of parts
+        N = 30 # No. of parts
         h = 1./N # length of r-step
-        D = 0.2 # numerical diffusion number
+        D = 0.5 # numerical diffusion number
         dt = D*h**2
-        T = 0.05
+        T = 0.2
         time = np.arange(0, T + dt, dt)
         y = np.linspace(0, 1, N +1)
         
@@ -160,7 +160,7 @@ if __name__ == '__main__':
                         uAnalytic[i + 1, k] = analyticSolution(y_variable, t)
                 
                 # calculate numerical solutions at time t        
-                uNew = solveNextTimestepCouetteCrank(theta, D, N, uOld)
+                uNew = solveNextTimestepCouette(theta, D, N, uOld)
                 uOld = uNew
                 uSolutions[scheme, i + 1, :] =  uNew
                 
@@ -315,7 +315,7 @@ if __name__ == '__main__':
         h = 1./N # length of r-step
         D = 0.45 # numerical diffusion number
         dt = D*h**2
-        nmax = 259 # No. of time-steps
+        nmax = 400 # No. of time-steps
         T = nmax*dt
         time = np.linspace(0, T, nmax + 1)
         y = np.linspace(0, 1, N +1)
@@ -339,7 +339,7 @@ if __name__ == '__main__':
             for scheme, theta in enumerate(schemesTheta):
                 uold = ustart
                 drawing = 0
-                jump = 2
+                jump = 16
                 for i, t in enumerate(time[1:]):
                     if scheme==0:
                         #only calculate analytical solution once
@@ -356,32 +356,33 @@ if __name__ == '__main__':
                         axarr[row][scheme].plot(y, unew, lstyle[scheme])
                         axarr[row][scheme].set_xlim(0, 1)
                         axarr[row][scheme].set_ylim(0, 1.1)
-                        if i == 12:
-                            # as time develops draw fewer plots
-                            drawing = 4
-                            jump = 4
-                        if i == 32:
-                            drawing = 5
-                            jump = 8
-                        if i == 96:
-                            drawing = 6
-                            jump = 16
+#                         if i == 12:
+#                             # as time develops draw fewer plots
+#                             drawing = 4
+#                             jump = 4
+#                         if i == 32:
+#                             drawing = 5
+#                             jump = 8
+#                         if i == 96:
+#                             drawing = 6
+#                             jump = 16
                 if row == 0:
                     axarr[row][scheme].set_title(schemesNames[scheme])
+                    axarr[row][scheme].text(0.4, 0.4,'increasing \ntime')
+                    axarr[row][scheme].arrow(0.25, 0.4, 0.1, 0.17) #, head_width=0.03, head_length=0.05, fc='k', ec='k'
                 if row == len(NumericaldiffusionList)-1:
-                    axarr[row][scheme].set_xlabel('radius [-]')
+                    axarr[row][scheme].set_xlabel('Velocity [-]')
                 if scheme == 0:
-                    axarr[row][scheme].set_ylabel('Velocity [-]')
-                    axarr[row][scheme].text(-0.5, 0.5, 'D = {0}'.format(D))
-        plt.suptitle('test_Stability: Results from Stability test with different schemes and numerical Difussion number D')
+                    axarr[row][scheme].set_ylabel('radius [-]')
+                    axarr[row][scheme].text(-0.3, 0.7, 'D = {0}  '[0:9].format(D), rotation=90)
+        #plt.suptitle('test_Stability: Results from Stability test with different schemes and numerical Difussion number D')
         
         endTime = timeModule.time()
         print """        Finished Stability test
         CPU time: {0}""".format(endTime - startTime)
-        #plt.show()
-        
-        
-        #plt.show()
+        plt.tight_layout()
+#        #plt.savefig('../fig-ch5/couette3.png' , transparent=True)
+#        #plt.savefig('../fig-ch5/couette3.pdf' , transparent=False)
 
     test_MES()
     #test_MES_convergence()

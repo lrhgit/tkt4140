@@ -1,4 +1,4 @@
-# chapter3/src-ch3/delay34.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter3/src-ch3/TRIdiagonalSolvers.py;
+# src/src-ch3/delay34.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch3/TRIdiagonalSolvers.py;
 
 
 import numpy as np

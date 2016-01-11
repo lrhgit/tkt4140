@@ -1,4 +1,4 @@
-# chapter3/src-ch3/delta34.py;ODEschemes.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter2/src-ch3/ODEschemes.py;
+# src/src-ch3/delta34.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch3/ODEschemes.py;
 
 
 import numpy as np

@@ -1,4 +1,4 @@
-# chapter5/src-ch6/startup.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter5/src-ch6/TRIdiagonalSolvers.py;
+# src/src-ch5/sphereAnimation.py
 
 import numpy as np
 import matplotlib.pyplot as plt

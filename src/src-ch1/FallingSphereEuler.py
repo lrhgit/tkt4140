@@ -1,4 +1,4 @@
-# chapter1/src-ch1/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter1/src-ch1/DragCoefficientGeneric.py;
+# src/src-ch1/FallingSphereEuler.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/src/src-ch1/DragCoefficientGeneric.py;
 from DragCoefficientGeneric import cd_sphere    
 from matplotlib.pyplot import *
 import numpy as np

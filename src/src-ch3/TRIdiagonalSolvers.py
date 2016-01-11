@@ -1,4 +1,4 @@
-# chapter3/src-ch3/TRIdiagonalSolvers.py
+# src/src-ch3/TRIdiagonalSolvers.py
 
 import numpy as np
 from matplotlib.pyplot import *

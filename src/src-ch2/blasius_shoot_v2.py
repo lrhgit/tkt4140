@@ -1,4 +1,4 @@
-# chapter2/src-ch2/blasius_shoot_v2.py;ODEschemes.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter2/src-ch2/ODEschemes.py;
+# src/src-ch2/blasius_shoot_v2.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch2/ODEschemes.py;
 
 from ODEschemes import euler, heun, rk4
 from matplotlib.pyplot import *

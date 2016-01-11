@@ -1,4 +1,4 @@
-# chapter1/src-ch1/MMS_example1.py; ODEschemes.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter2/src-ch1/ODEschemes.py;
+# src/src-ch1/MMS_example1.py; ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch1/ODEschemes.py;
 
 import numpy as np
 from ODEschemes import euler, heun, rk4

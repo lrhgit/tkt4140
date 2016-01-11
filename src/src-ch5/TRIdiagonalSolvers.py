@@ -1,4 +1,4 @@
-# chapter2/src-ch6/beam_deflect_shoot.py;ODEschemes.py @ git@lrhgit/tkt4140/allfiles/digital_compendium/chapter2/src-ch6/ODEschemes.py;
+# src/src-ch5/beam_deflect_shoot.py
 
 #from ODEschemes import euler, heun, rk4
 #from numpy import cos, sin
