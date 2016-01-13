@@ -1,4 +1,4 @@
-# src/src-ch2/Couette_Poiseuille_shoot.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch2/ODEschemes.py;
+# src-ch2/Couette_Poiseuille_shoot.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch2/ODEschemes.py;
 
 from ODEschemes import euler, heun, rk4
 import numpy as np

@@ -1,4 +1,4 @@
-# src/src-ch1/ParticleMotion2D.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/src/src-ch1/DragCoefficientGeneric.py;cdclgolfball.py @ git@lrhgit/tkt4140/src/src-ch1/cdclgolfball.py;
+# src-ch1/ParticleMotion2D.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/src/src-ch1/DragCoefficientGeneric.py;cdclgolfball.py @ git@lrhgit/tkt4140/src/src-ch1/cdclgolfball.py;
 
 from DragCoefficientGeneric import cd_sphere
 from cdclgolfball import cdcl  

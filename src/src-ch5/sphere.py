@@ -1,4 +1,4 @@
-# src/src-ch5/sphere.py
+# src-ch5/sphere.py
 
 
 #import matplotlib.pyplot as plt

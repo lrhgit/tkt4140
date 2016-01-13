@@ -1,4 +1,4 @@
-# src/src-ch5/startupPythonic.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch5/TRIdiagonalSolvers.py;
+# src-ch5/startupPythonic.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch5/TRIdiagonalSolvers.py;
 
 
 import numpy as np

@@ -1,4 +1,4 @@
-# src/src-ch5/startupv3.py
+# src-ch5/startupv3.py
 
 
 import numpy as np

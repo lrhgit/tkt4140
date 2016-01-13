@@ -1,4 +1,4 @@
-# src/src-ch3/compareMethods.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch3/TRIdiagonalSolvers.py;
+# src-ch3/compareMethods.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch3/TRIdiagonalSolvers.py;
 
 import numpy as np
 from matplotlib.pyplot import *

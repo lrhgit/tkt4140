@@ -1,4 +1,4 @@
-# src/src-ch1/FallingSphereEulerHeunRK4.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch1/ODEschemes.py;
+# src-ch1/FallingSphereEulerHeunRK4.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch1/ODEschemes.py;
 
 from DragCoefficientGeneric import cd_sphere
 from ODEschemes import euler, heun, rk4 

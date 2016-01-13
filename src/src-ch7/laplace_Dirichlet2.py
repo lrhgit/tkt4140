@@ -1,4 +1,4 @@
-# src/src-ch7/laplace_Diriclhet2.py
+# src-ch7/laplace_Diriclhet2.py
 import numpy as np
 import scipy 
 import scipy.linalg

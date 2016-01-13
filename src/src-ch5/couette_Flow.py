@@ -1,4 +1,4 @@
-# src/src-ch5/couette_Flow.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch5/TRIdiagonalSolvers.py;
+# src-ch5/couette_Flow.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch5/TRIdiagonalSolvers.py;
 
 
 import numpy as np

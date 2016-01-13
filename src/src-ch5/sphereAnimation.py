@@ -1,4 +1,4 @@
-# src/src-ch5/sphereAnimation.py
+# src-ch5/sphereAnimation.py
 
 import numpy as np
 import matplotlib.pyplot as plt

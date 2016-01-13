@@ -92,7 +92,7 @@ theta = odefun(lambda t, y: [y[1], -y[0]], 0, [theta0, 0], tol = 0.5, degree=2, 
     0, means that the initial values are taken at t = 0. this is also the t that odefun will evaluate the taylor series around
     [theta0, 0] are the initial values of [y1, y2]"""
 
-time = np.linspace(0,5*2*np.pi, 101)
+time = np.linspace(0,5*2*np.pi, 10)
 y = np.zeros_like(time)
 for k, t in enumerate(time):
     y[k] = theta(t)[0] # evaluate the solution at time t, theta(t) is a vector of [theta, theta']. [0] means assigning Y[k] to theta 

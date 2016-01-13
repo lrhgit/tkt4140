@@ -1,4 +1,4 @@
-# src/src-ch1/ODEschemes.py
+# src-ch1/ODEschemes.py
 
 import numpy as np
 from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure, axhline, close,\

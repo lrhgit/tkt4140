@@ -1,4 +1,4 @@
-# src/src-ch5/beam_deflect_shoot.py
+# src-ch5/beam_deflect_shoot.py
 
 #from ODEschemes import euler, heun, rk4
 #from numpy import cos, sin

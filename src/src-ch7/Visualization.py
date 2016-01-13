@@ -1,4 +1,4 @@
-# src/src-ch7/Visualization.py
+# src-ch7/Visualization.py
 import numpy as np
 import matplotlib.pylab as plt
 

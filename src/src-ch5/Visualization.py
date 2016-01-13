@@ -1,4 +1,4 @@
-# src/src-ch5/startup.py
+# src-ch5/startup.py
 
 import numpy as np
 import matplotlib.pyplot as plt

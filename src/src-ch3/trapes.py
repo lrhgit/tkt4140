@@ -1,4 +1,4 @@
-# src/src-ch3/trapes.py;
+# src-ch3/trapes.py;
 
 import numpy as np
 from matplotlib.pyplot import *

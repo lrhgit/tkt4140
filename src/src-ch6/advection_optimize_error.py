@@ -1,4 +1,4 @@
-# src/src-ch6/advection_optimize_error.py
+# src-ch6/advection_optimize_error.py
 
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,4 +1,4 @@
-# src/src-ch1/FallingSphereGeneric.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/src/src-ch1/DragCoefficientGeneric.py;
+# src-ch1/FallingSphereGeneric.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/src/src-ch1/DragCoefficientGeneric.py;
 
 from DragCoefficientGeneric import cd_sphere   
 import odespy

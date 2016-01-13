@@ -1,4 +1,4 @@
-# chapter0/src-ch0/systemCheck.py
+# src-ch0/systemCheck.py
 
 def systemCheck():
     '''

@@ -1,4 +1,4 @@
-# src/src-ch1/DragCoefficientGeneric.py
+# src-ch1/DragCoefficientGeneric.py
 
 from numpy import linspace,array,append,logspace,zeros_like,where,vectorize,\
     logical_and

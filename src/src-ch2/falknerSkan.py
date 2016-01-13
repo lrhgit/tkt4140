@@ -1,4 +1,4 @@
-# src/src-ch2/falknerSkan.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch2/ODEschemes.py;
+# src-ch2/falknerSkan.py;ODEschemes.py @ git@lrhgit/tkt4140/src/src-ch2/ODEschemes.py;
 
 from ODEschemes import euler, heun, rk4
 from numpy import cos, sin

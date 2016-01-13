@@ -1,4 +1,4 @@
-# src/src-ch1/CDsphere.py
+# src-ch1/CDsphere.py
 
 from numpy import logspace, zeros
 
