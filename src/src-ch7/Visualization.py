@@ -50,10 +50,10 @@ def plot_Surface_yx(Temp, Ttop, xmax, ymax, Nx, Ny, nx, ny):
     dT=int(Ttop/nTicks)
     Tticklist=range(0,Ttop+1,dT)
     ax.set_zticks(Tticklist)
-    
+    plt.tight_layout()
 
 #    fig.colorbar(surf, shrink=0.5, aspect=5)
-    plt.show()
+    return fig
 
 def plot_SurfaceNeumann_xy(Temp, Ttop, Tright, xmax, ymax, Nx, Ny, nxTicks=4, nyTicks=4):
     from mpl_toolkits.mplot3d import Axes3D
