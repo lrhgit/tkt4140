@@ -7,7 +7,6 @@ from matplotlib.pyplot import plot, show, legend, hold,rcParams,rc, figure, axhl
 # change some default values to make plots more readable 
 LNWDT=3; FNT=10
 rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
-font = {'size' : 10}; rc('font', **font)
 
 
 # define Euler solver
@@ -34,19 +33,14 @@ def heun(func, z0, time):
     the right hand side of the system is represented by func which returns
     a vector with the same size as z0 ."""
 
-    def f_np(z,t):
-        """A local function to ensure that the return of func is an np array
-        and to avoid lengthy code for implementation of the Heun algorithm"""
-        return np.asarray(func(z,t))
-
     z = np.zeros((np.size(time), np.size(z0)))
     z[0,:] = z0
     zp = np.zeros_like(z0)
 
     for i, t in enumerate(time[0:-1]):
         dt = time[i+1] - time[i]
-        zp = z[i,:] + f_np(z[i,:],t)*dt   # Predictor step
-        z[i+1,:] = z[i,:] + (f_np(z[i,:],t) + f_np(zp,t+dt))*dt/2.0 # Corrector step
+        zp = z[i,:] + np.asarray(func(z[i,:],t))*dt   # Predictor step
+        z[i+1,:] = z[i,:] + (np.asarray(func(z[i,:],t)) + np.asarray(func(zp,t+dt)))*dt/2.0 # Corrector step
 
     return z
 

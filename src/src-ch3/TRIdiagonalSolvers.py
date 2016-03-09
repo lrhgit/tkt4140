@@ -1,12 +1,6 @@
 # src-ch3/TRIdiagonalSolvers.py
 
 import numpy as np
-from matplotlib.pyplot import *
-
-# change some default values to make plots more readable 
-LNWDT=3; FNT=11
-rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
-font = {'size' : 16}; rc('font', **font)
 
 
 def tdma(a, b, c, d):

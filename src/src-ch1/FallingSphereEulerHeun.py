@@ -72,8 +72,7 @@ plot(time, zh2[:,1], line_type[4])
 legends.append('Heun (varying CD)')
 
 legend(legends, loc='best', frameon=False)
-font = {'size' : 16}
-rc('font', **font)
+
 xlabel('Time [s]')
 ylabel('Velocity [m/s]')
 #savefig('example_sphere_falling_euler_heun.png', transparent=True)

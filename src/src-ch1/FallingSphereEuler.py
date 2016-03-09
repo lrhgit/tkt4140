@@ -4,7 +4,7 @@ from matplotlib.pyplot import *
 import numpy as np
 
 # change some default values to make plots more readable 
-LNWDT=5; FNT=11
+LNWDT=2; FNT=11
 rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
 
 
