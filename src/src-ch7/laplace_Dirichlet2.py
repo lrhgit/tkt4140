@@ -15,8 +15,8 @@ LNWDT=2; FNT=15
 plt.rcParams['lines.linewidth'] = LNWDT; plt.rcParams['font.size'] = FNT
 
 # Set temperature at the top
-Ttop=30
-Tbottom=0.0
+Ttop=100
+Tbottom=10
 Tleft=10.0
 Tright=10.0
 
@@ -25,7 +25,7 @@ ymax=1.5
  
 # Set simulation parameters
 #need hx=(1/nx)=hy=(1.5/ny)
-Nx = 20
+Nx = 100
 h=xmax/Nx
 Ny = int(ymax/h)
 

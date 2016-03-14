@@ -127,7 +127,7 @@ if __name__ == '__main__':
     print "max(abs(TempXY-TempYX)) < 10^-10: ", max_difference<1e-10
     print "np.linalg.norm(TempXY-TempYX, np.inf): ", np.linalg.norm(TempXY_converted-TempYX, np.inf)
     print "\n"
-    plot_Surface_yx(TempYX, Ttop, xmax, ymax, Nx, Ny, nx, ny)
+    fig = plot_Surface_yx(TempYX, Ttop, xmax, ymax, Nx, Ny, nx, ny)
     plt.show()
     
 

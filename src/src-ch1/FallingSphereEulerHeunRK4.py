@@ -83,8 +83,7 @@ legends.append('RK4 (varying CD)')
 
 legend(legends, loc='best', frameon=False)
 
-font = {'size' : 16}
-rc('font', **font)
+
 xlabel('Time [s]')
 ylabel('Velocity [m/s]')
 #savefig('example_sphere_falling_euler_heun_rk4.png', transparent=True)

@@ -30,11 +30,15 @@ ya = 3*np.sqrt(2*np.pi*np.exp(1))*t1*t2 + 4*(1-t1)-x
 
 # plotting
 import matplotlib.pylab as plt
+
+# change some default values to make plots more readable 
+LNWDT=2; FNT=11
+plt.rcParams['lines.linewidth'] = LNWDT; plt.rcParams['font.size'] = FNT
+
 plt.plot(x, y, '-b.', x, ya, '-g.')
 plt.xlabel('x')
 plt.ylabel('y')
-font = {'size' : 16}
-plt.rc('font', **font)
+
 plt.title('Solution to Newton\'s equation')
 plt.legend(['Heun', 'Analytical'], loc='best', frameon=False)
 plt.grid()

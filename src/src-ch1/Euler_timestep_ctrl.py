@@ -1,12 +1,12 @@
+# coding: utf-8
 # src-ch1/Euler_timestep_ctrl.py;DragCoefficientGeneric.py @ git@lrhgit/tkt4140/src/src-ch1/DragCoefficientGeneric.py;
 from DragCoefficientGeneric import cd_sphere    
 from matplotlib.pyplot import *
 import numpy as np
 
 # change some default values to make plots more readable 
-LNWDT=5; FNT=11
+LNWDT=2; FNT=11
 rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
-font = {'size' : 16}; rc('font', **font)
 
 
 
@@ -68,9 +68,9 @@ for i in range(Ndts+1):
     ze = euler(f, z0, time)     # compute response with constant CD using Euler's method
     v_a = k1*np.tanh(k2*time)   # compute response with constant CD using analytical solution
     abs_error=np.abs(ze[:,1] - v_a)
-    log_error = np.log10(abs_error[1:])
+    log_error = np.log2(abs_error[1:])
     max_log_error = np.max(log_error)
-    #plot(time, ze[:,1])
+    
     plot(time[1:], log_error)
     legends.append('Euler scheme: N ' + str(N) + ' timesteps' )
     N*=2
@@ -79,7 +79,8 @@ for i in range(Ndts+1):
 
     previous_max_log_err = max_log_error
     
-print 10**(np.mean(error_diff)), np.mean(error_diff)
+print 'Approximate order of scheme n =', np.mean(error_diff)
+print 'Approximate error reuduction by dt=dt/2:', 1/2**(np.mean(error_diff))
 
 
 # plot analytical solution
@@ -90,7 +91,6 @@ print 10**(np.mean(error_diff)), np.mean(error_diff)
 legend(legends, loc='best', frameon=False)
 xlabel('Time [s]')
 #ylabel('Velocity [m/s]')
-ylabel('log10-error')
+ylabel('log2-error')
 #savefig('example_euler_timestep_study.png', transparent=True)
 show()
-
