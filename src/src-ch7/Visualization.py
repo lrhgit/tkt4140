@@ -71,6 +71,41 @@ def plot_Surface_yx_simple(X,Y,T):
         
     return fig, ax
 
+def plot_Surface_yx_3subplots(X,Y,T1,T2,T3,Titles):
+    from mpl_toolkits.mplot3d import Axes3D
+    from matplotlib import cm
+    from matplotlib.ticker import LinearLocator, FormatStrFormatter
+    
+    fig = plt.figure(figsize=plt.figaspect(0.3)) #3 times as wide as high
+
+    ax = fig.add_subplot(1,3,1,projection='3d')
+    surf = ax.plot_surface(X, Y, T1, rstride=1, cstride=1, cmap=cm.coolwarm,
+                           linewidth=0, antialiased=False)
+
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('T [$^o$C]')
+    ax.set_title(Titles[0])
+    
+    ax = fig.add_subplot(1,3,2,projection='3d')
+    surf = ax.plot_surface(X, Y, T2, rstride=1, cstride=1, cmap=cm.coolwarm,
+                           linewidth=0, antialiased=False)
+
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('T [$^o$C]')
+    ax.set_title(Titles[1])
+    
+    ax = fig.add_subplot(1,3,3,projection='3d')
+    surf = ax.plot_surface(X, Y, T3, rstride=1, cstride=1, cmap=cm.coolwarm,
+                           linewidth=0, antialiased=False)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('T [$^o$C]')
+    ax.set_title(Titles[2])
+        
+    return fig, ax
+
 def plot_SurfaceNeumann_xy(Temp, Ttop, Tright, xmax, ymax, Nx, Ny, nxTicks=4, nyTicks=4):
     from mpl_toolkits.mplot3d import Axes3D
     from matplotlib import cm
