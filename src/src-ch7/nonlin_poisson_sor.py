@@ -47,8 +47,9 @@ print 'omega={0:.2f}'.format(omega)
  
 iteration = 0
 rel_res=1.0
- 
-# Gauss-Seidel iterative solution
+
+# First method 
+# Python Gauss-Seidel method
 tic=time.clock()
 while (rel_res > reltol):
     du_max=0.0
@@ -56,9 +57,9 @@ while (rel_res > reltol):
         for i in range(1, nx + 1):
             R = (U[j,i-1]+U[j-1,i]+U[j,i+1]+U[j+1,i]-4.0*U[j,i]) + h**2*(U[j,i]**2+1.0)
             df=4-2*h**2*U[j,i]
-            dT = omega*R/df
-            U[j,i]+=dT
-            du_max=np.max([np.abs(dT),du_max])
+            dU = omega*R/df
+            U[j,i]+=dU
+            du_max=np.max([np.abs(dU),du_max])
          
     rel_res=du_max/np.max(np.abs(U))
     iteration+=1
@@ -69,19 +70,23 @@ print "Python Gauss-Seidel CPU-time:\t{0:0.2f}. \t Nr. iterations {1}".format(to
  
 iteration = 0
 rel_res=1.0
+
+# Second method
 # Jacobi iterative solution
 tic=time.clock()
 while (rel_res > reltol):
     R2 = (U2[1:-1,0:-2]+U2[0:-2,1:-1]+U2[1:-1,2:]+U2[2:,1:-1]-4.0*U2[1:-1,1:-1]) + h**2*(U2[1:-1,1:-1]**2+1.0)
     df=4-2*h**2*U2[1:-1,1:-1]
-    du2 = R2/df
-    U2[1:-1,1:-1]+=du2
-    rel_res=np.max(du2)/np.max(U2)
+    dU2 = R2/df
+    U2[1:-1,1:-1]+=dU2
+    rel_res=np.max(dU2)/np.max(U2)
     iteration+=1    
  
 toc=time.clock()
 print "Jacobi CPU-time:\t\t{0:0.2f}. \t Nr. iterations {1}".format(toc-tic,iteration)
 
+# Third method
+# Cython Gauss-Seidel method 
 rel_res=1.0
 tic=time.clock() 
 U3, relreturn, itsused=gs.gauss(U,reltol,h, omega)  
