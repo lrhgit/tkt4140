@@ -37,6 +37,7 @@ X, Y = np.meshgrid(x, y)
 
 U = np.zeros_like(X)
 U2 = U.copy()
+U3 = U.copy()
 
 reltol=1.0e-3
  
@@ -60,8 +61,10 @@ while (rel_res > reltol):
             dU = omega*R/df
             U[j,i]+=dU
             du_max=np.max([np.abs(dU),du_max])
+
          
     rel_res=du_max/np.max(np.abs(U))
+#     print 'rel_res=',rel_res
     iteration+=1
      
 toc=time.clock()
@@ -89,7 +92,7 @@ print "Jacobi CPU-time:\t\t{0:0.2f}. \t Nr. iterations {1}".format(toc-tic,itera
 # Cython Gauss-Seidel method 
 rel_res=1.0
 tic=time.clock() 
-U3, relreturn, itsused=gs.gauss(U,reltol,h, omega)  
+U3, relreturn, itsused=gs.gauss(U3,reltol,h, omega)  
 toc=time.clock()
 print "Cython Gauss-Seidel CPU-time:\t{0:0.2f}. \t Nr. iterations {1}".format(toc-tic,itsused)
 
