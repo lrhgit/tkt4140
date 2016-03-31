@@ -1,11 +1,13 @@
 # src-ch5/couette_Flow_FTCS.py;Visualization.py @ git@lrhgit/tkt4140/src/src-ch5/Visualization.py;
 
+import matplotlib; matplotlib.use('Qt4Agg')
+import matplotlib.pylab as plt
+plt.get_current_fig_manager().window.raise_()
 
 import numpy as np
 from math import exp, sin, pi
 
-
-def analyticSolution(y, t, N=100):
+def analyticSolution_old(y, t, N=100):
     
     """ Method that calculates the analytical solution to the differential equation:
         du/dt = d^2(u)/dx^2 , u = u(y,t), 0 < y < 1
@@ -28,6 +30,28 @@ def analyticSolution(y, t, N=100):
     u = 1 - y - (2/pi)*sumValue
     return u
 
+def analyticSolution(y, t, N=100):
+    
+    """ Method that calculates the analytical solution to the differential equation:
+        du/dt = d^2(u)/dx^2 , u = u(y,t), 0 < y < 1
+        Boundary conditions: u(0, t) = 1, u(1, t) = 0
+        Initial condition: u(t, 0) = 0 t<0,  u(t, 0) = 1 t>0
+            
+        Args:
+            y(np.array): radial coordinat
+            t(float): time
+            N(int): truncation integer. Truncate sumation after N elements
+
+    
+        Returns:
+            w(float): velocity, us - ur
+    """
+    sumValue = 0
+    for n in range(1,N+1):
+        temp = np.exp(-t*(n*np.pi)**2)*np.sin(n*np.pi*y)/n
+        sumValue += temp
+    u = 1 - y - (2/pi)*sumValue
+    return u
 
 def solveNextTimestepFTCS(Uold, D):
     """ Method that solves the transient couetteflow using the FTCS-scheme..
@@ -58,50 +82,42 @@ def solveNextTimestepFTCS(Uold, D):
     Unew[0] = 1
     
     return Unew
-
-
-
             
 if __name__ == '__main__':
     
     import numpy as np
     from Visualization import createAnimation
+
+
+    D = 0.5 # numerical diffusion number
     
-    D = 0.4
-    
-    N = 20
+    N = 20 
     Y = np.linspace(0, 1, N + 1)
     h = Y[1] - Y[0]
-    dt = D*h**2 # numerical diffusion number
+    dt = D*h**2 
     T = 0.2 # simulation time
     time = np.arange(0, T + dt, dt)
     
-    
     # solution matrices:
-    Usolutions = np.zeros((len(time), N + 1))
-    Usolutions[0, 0] = 1 # no slip condition at the plate boundary
+    U = np.zeros((len(time), N + 1))
+    U[0, 0] = 1 # no slip condition at the plate boundary
     
     Uanalytic = np.zeros((len(time), N + 1))
-    Uanalytic[0, 0] = 1
+    Uanalytic[0, 0] = U[0,0]
     
     
     for n, t in enumerate(time[1:]):
         
-        Uold = Usolutions[n, :]
-        Unew = solveNextTimestepFTCS(Uold, D)
+        Uold = U[n, :]
         
-        Unew_analytic = np.zeros_like(Y)
-        
-        for i, y in enumerate(Y):
-            Unew_analytic[i] = analyticSolution(y, t)
-            
-        Usolutions[n + 1, :] = Unew
-        Uanalytic[n + 1, :] = Unew_analytic
-        
-    Usolutions_Visualization = np.zeros((1, len(time), N + 1))
-    Usolutions_Visualization[0, :, :] = Usolutions
+        U[n + 1, :] = solveNextTimestepFTCS(Uold, D)
+
+        Uanalytic[n + 1, :] = analyticSolution(Y, t, 100) 
+               
+    U_Visualization = np.zeros((1, len(time), N + 1))
+    U_Visualization[0, :, :] = U
     
-    createAnimation(Usolutions_Visualization, Uanalytic, ["FTCS"], Y, time, symmetric=False)
+    createAnimation(U_Visualization, Uanalytic, ["FTCS"], Y, time, symmetric=False)
 
     
     
