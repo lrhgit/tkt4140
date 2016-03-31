@@ -31,7 +31,7 @@ def analyticSolution(y, t, N=100):
     u = 1 - y - (2/pi)*sumValue
     return u
 
-def solveNextTimestepFTCS(Uold, D):
+def solveNextTimestepFTCS(Uold, D, U_l=1, U_r=0):
     """ Method that solves the transient couetteflow using the FTCS-scheme..
         At time t=t0 the plate starts moving at y=0
         The method solves only for the next time-step.
@@ -57,7 +57,8 @@ def solveNextTimestepFTCS(Uold, D):
     Uold_mid = Uold[1:-1]
     
     Unew[1:-1] = D*(Uold_plus + Uold_minus) + (1 - 2*D)*Uold_mid
-    Unew[0] = 1
+    Unew[0] = U_l
+    Unew[-1] = U_r
     
     return Unew
             
@@ -66,20 +67,24 @@ if __name__ == '__main__':
     import numpy as np
     from Visualization import createAnimation
 
-
-    D = 0.5 # numerical diffusion number
+    D = 0.49 # numerical diffusion number
     
     N = 20 
-    Y = np.linspace(0, 1, N + 1)
-    h = Y[1] - Y[0]
+    y = np.linspace(0, 1, N + 1)
+    h = y[1] - y[0]
     dt = D*h**2 
     T = 0.2 # simulation time
     time = np.arange(0, T + dt, dt)
     
+    # Spatial BC
+    U_left = 1.0 # Must be 1 for analytical solution
+    U_right = 0.0 # Must be 0 for analytical solution
+
     # solution matrices:
     U = np.zeros((len(time), N + 1))
-    U[0, 0] = 1 # no slip condition at the plate boundary
-    
+    U[0, 0] = U_left   # no slip condition at the plate boundary
+    U[0,-1] = U_right 
+#     
     Uanalytic = np.zeros((len(time), N + 1))
     Uanalytic[0, 0] = U[0,0]
     
@@ -88,14 +93,14 @@ if __name__ == '__main__':
         
         Uold = U[n, :]
         
-        U[n + 1, :] = solveNextTimestepFTCS(Uold, D)
+        U[n + 1, :] = solveNextTimestepFTCS(Uold, D, U_l=U_left, U_r=U_right)
 
-        Uanalytic[n + 1, :] = analyticSolution(Y, t, 100) 
+        Uanalytic[n + 1, :] = analyticSolution(y,t) 
                
     U_Visualization = np.zeros((1, len(time), N + 1))
     U_Visualization[0, :, :] = U
     
-    createAnimation(U_Visualization, Uanalytic, ["FTCS"], Y, time, symmetric=False)
+    createAnimation(U_Visualization, Uanalytic, ["FTCS"], y, time, symmetric=False)
 
     
     
