@@ -7,28 +7,6 @@ plt.get_current_fig_manager().window.raise_()
 import numpy as np
 from math import exp, sin, pi
 
-def analyticSolution_old(y, t, N=100):
-    
-    """ Method that calculates the analytical solution to the differential equation:
-        du/dt = d^2(u)/dx^2 , u = u(y,t), 0 < y < 1
-        Boundary conditions: u(0, t) = 1, u(1, t) = 0
-        Initial condition: u(t, 0) = 0 t<0,  u(t, 0) = 1 t>0
-            
-        Args:
-            y(float): radial coordinat
-            t(float): time
-            N(int): truncation integer. Truncate sumation after N elements
-
-    
-        Returns:
-            w(float): velocity, us - ur
-    """
-    sumValue = 0
-    for n in range(1,N+1):
-        temp = exp(-t*(n*pi)**2)*sin(n*pi*y)/n
-        sumValue += temp
-    u = 1 - y - (2/pi)*sumValue
-    return u
 
 def analyticSolution(y, t, N=100):
     
