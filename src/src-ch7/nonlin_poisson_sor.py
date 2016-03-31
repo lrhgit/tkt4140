@@ -64,7 +64,7 @@ while (rel_res > reltol):
 
          
     rel_res=du_max/np.max(np.abs(U))
-#     print 'rel_res=',rel_res
+
     iteration+=1
      
 toc=time.clock()

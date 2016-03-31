@@ -43,7 +43,7 @@ def createAnimation(NumericalSolutions, analyticalSolution, scheme_names, r_vect
     #print """\n        Creating animation"""
      
     #startTime = timeModule.time()
-    fig = plt.figure()
+    fig = plt.gcf()
     if symmetric:
         xlim=(np.min(analyticalSolution), np.max(analyticalSolution))
         ylim=(-r_vector[-1],r_vector[-1])
@@ -114,9 +114,9 @@ def createAnimation(NumericalSolutions, analyticalSolution, scheme_names, r_vect
         jump = 1
     # call the animator.  blit=True means only re-draw the parts that have changed.
     anim = animation.FuncAnimation(fig, animate_alt, init_func=init, frames=len(time)/jump, interval=10, blit=False)
-    Writer = animation.writers['ffmpeg']
-    writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
-    anim.save('../mov-ch5/couette_FTCS.mov', writer=writer)
+#    Writer = animation.writers['ffmpeg']
+#    writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+#    anim.save('../mov-ch5/couette_FTCS.mov', writer=writer)
     #endTime = timeModule.time()
     #print """        Animation created, CPU time: {0}""".format(endTime - startTime)
     

@@ -41,9 +41,11 @@ y = np.linspace(0, ymax, Ny + 1)
 
 X, Y = np.meshgrid(x, y)
 
+
+
+# Initialize T and impose boundary values
 T = np.zeros_like(X)
 
-# set the imposed boundary values
 T[-1,:] = Ttop
 T[0,:] = Tbottom
 T[:,0] = Tleft
@@ -61,6 +63,7 @@ for iteration in range(20):
 toc=time.clock()
 print 'GS solver time:',toc-tic
 
+# visualize solutions
 
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm

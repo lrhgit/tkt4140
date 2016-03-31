@@ -1,11 +1,23 @@
+import cython
+cimport cython
+
 import numpy as np
 cimport numpy as np
 
-def gauss(np.ndarray[np.float64_t, ndim=2] U, double reltol, double h, double omega):
+DTYPE = np.float64
+ctypedef np.float64_t DTYPE_t
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+@cython.nonecheck(False)
+
+
+cpdef gauss(np.ndarray[DTYPE_t, ndim=2] U, double reltol, double h, double omega):
     cdef Py_ssize_t i, j, it
     cdef double rel_res, dU_max, df, dU, R
-    
-    
+
+    cdef unsigned int rows = U.shape[0]
+    cdef unsigned int cols = U.shape[1]
     
     it=0
     rel_res=1.0
@@ -14,8 +26,8 @@ def gauss(np.ndarray[np.float64_t, ndim=2] U, double reltol, double h, double om
     
     while ((rel_res>reltol) and (it<=itmax)):
         dU_max=0.0
-        for j in range(1,U.shape[0]-2):
-                for i in range(1,U.shape[1]-2):
+        for j in range(1,rows-2):
+                for i in range(1,cols-2):
                     R = (U[j,i-1]+U[j-1,i]+U[j,i+1]+U[j+1,i]-4.0*U[j,i]) + h**2*(U[j,i]**2+1.0)
                     df=4.0-2*h**2*U[j,i]
                     dU =  omega*R/df
