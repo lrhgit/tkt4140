@@ -31,7 +31,7 @@ def analyticSolution(y, t, N=100):
     u = 1 - y - (2/pi)*sumValue
     return u
 
-def solveNextTimestepFTCS(Uold, D, U_l=1, U_r=0):
+def solveNextTimestepFTCS(Uold, D, U_b=1, U_t=0):
     """ Method that solves the transient couetteflow using the FTCS-scheme..
         At time t=t0 the plate starts moving at y=0
         The method solves only for the next time-step.
@@ -57,8 +57,8 @@ def solveNextTimestepFTCS(Uold, D, U_l=1, U_r=0):
     Uold_mid = Uold[1:-1]
     
     Unew[1:-1] = D*(Uold_plus + Uold_minus) + (1 - 2*D)*Uold_mid
-    Unew[0] = U_l
-    Unew[-1] = U_r
+    Unew[0] = U_b
+    Unew[-1] = U_t
     
     return Unew
             
@@ -77,13 +77,13 @@ if __name__ == '__main__':
     time = np.arange(0, T + dt, dt)
     
     # Spatial BC
-    U_left = 1.0 # Must be 1 for analytical solution
-    U_right = 0.0 # Must be 0 for analytical solution
+    U_bottom = 1.0 # Must be 1 for analytical solution
+    U_top = 0.0 # Must be 0 for analytical solution
 
     # solution matrices:
     U = np.zeros((len(time), N + 1))
-    U[0, 0] = U_left   # no slip condition at the plate boundary
-    U[0,-1] = U_right 
+    U[0, 0] = U_bottom   # no slip condition at the plate boundary
+    U[0,-1] = U_top 
 #     
     Uanalytic = np.zeros((len(time), N + 1))
     Uanalytic[0, 0] = U[0,0]
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         
         Uold = U[n, :]
         
-        U[n + 1, :] = solveNextTimestepFTCS(Uold, D, U_l=U_left, U_r=U_right)
+        U[n + 1, :] = solveNextTimestepFTCS(Uold, D, U_b=U_bottom, U_t=U_top)
 
         Uanalytic[n + 1, :] = analyticSolution(y,t) 
                
