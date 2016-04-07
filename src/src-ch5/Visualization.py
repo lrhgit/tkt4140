@@ -1,9 +1,12 @@
 # src-ch5/startup.py
 
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pylab as plt
 from matplotlib import animation
 import time as timeModule
+
+LNWDT=3; FNT=15
+plt.rcParams['lines.linewidth'] = LNWDT; plt.rcParams['font.size'] = FNT
 
 def animateSphere(r,Tmatrix, ntot):
         
@@ -37,10 +40,10 @@ def createAnimation(NumericalSolutions, analyticalSolution, scheme_names, r_vect
 
     """Method that creates and saves the animation of uNumeric and uAnalytic. 
     """
-    print """\n        Creating animation"""
+    #print """\n        Creating animation"""
      
-    startTime = timeModule.time()
-    fig = plt.figure()
+    #startTime = timeModule.time()
+    fig = plt.gcf()
     if symmetric:
         xlim=(np.min(analyticalSolution), np.max(analyticalSolution))
         ylim=(-r_vector[-1],r_vector[-1])
@@ -53,7 +56,7 @@ def createAnimation(NumericalSolutions, analyticalSolution, scheme_names, r_vect
     
     lines=[]     # list for plot lines for solvers and analytical solutions
     legends=[]   # list for legends for solvers and analytical solutions
-    lstyle = ['r-', 'b:', 'c.', 'y-.']
+    lstyle = ['r-', 'b--', 'c.', 'y:']
     line, = ax.plot([], [], lstyle[0]) #add extra plot line for analytical solution
     lines.append(line)
     legends.append('Analytical')
@@ -113,9 +116,9 @@ def createAnimation(NumericalSolutions, analyticalSolution, scheme_names, r_vect
     anim = animation.FuncAnimation(fig, animate_alt, init_func=init, frames=len(time)/jump, interval=10, blit=False)
 #    Writer = animation.writers['ffmpeg']
 #    writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
-#    #anim.save('../mov-ch5/couette_0.5.mov', writer=writer)
-    endTime = timeModule.time()
-    print """        Animation created, CPU time: {0}""".format(endTime - startTime)
+#    anim.save('../mov-ch5/couette_FTCS.mov', writer=writer)
+    #endTime = timeModule.time()
+    #print """        Animation created, CPU time: {0}""".format(endTime - startTime)
     
     plt.show()
     
