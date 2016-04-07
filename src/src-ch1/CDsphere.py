@@ -42,9 +42,11 @@ for i in i_list:
 
 # Make plot
 from matplotlib import pyplot
+# change some default values to make plots more readable 
+LNWDT=2; FNT=11
+pyplot.rcParams['lines.linewidth'] = LNWDT; pyplot.rcParams['font.size'] = FNT
+
 pyplot.plot(Re, CD, '-b')
-font = {'size' : 16}
-pyplot.rc('font', **font)
 pyplot.yscale('log')
 pyplot.xscale('log')
 pyplot.xlabel('$Re$')

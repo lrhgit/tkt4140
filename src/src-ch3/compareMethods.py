@@ -1,17 +1,21 @@
 # src-ch3/compareMethods.py;TRIdiagonalSolvers.py @ git@lrhgit/tkt4140/src/src-ch3/TRIdiagonalSolvers.py;
 
 import numpy as np
+
 from matplotlib.pyplot import *
+
+# change some default values to make plots more readable 
+LNWDT=4; FNT=16; rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
+
+
+#import pyplot_local
+
 from TRIdiagonalSolvers import tdma
 from TRIdiagonalSolvers import tripiv
 """A more compact script comparing solutions using three different 
     linearization methods: delay, taylor and deltavalues
 """
 
-# change some default values to make plots more readable 
-LNWDT=3; FNT=11
-rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
-font = {'size' : 16}; rc('font', **font)
 
 
 

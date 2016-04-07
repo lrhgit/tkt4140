@@ -5,9 +5,12 @@
 #       dt     dx dx
 #
 # along with boundary conditions
+import matplotlib; matplotlib.use('Qt4Agg')
+import matplotlib.pylab as plt
+plt.get_current_fig_manager().window.raise_() # to raise fig above LiClipse
 
-import matplotlib.pyplot as plt
-import matplotlib
+# import matplotlib.pyplot as plt
+# import matplotlib
 import numpy as np
 import scipy as sc
 import scipy.sparse
@@ -150,7 +153,6 @@ lstyle = ['r-', ':', '.', '-.', '--']
 i = 0
 legends=[]
 
-fig0 = plt.figure(0)
 for solve in solvernames:
     tic = time.time()
     x, u = solve(u_left=100.0, u_right=0.0, nx=nx, r=0.5, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0)
@@ -167,7 +169,7 @@ plt.xlabel('Position on beam')
 plt.ylabel('Temperature')
 
 ## Solve with implicit solver and get solution for each timestep
-x, time, uv = implicit_numpy_solver_v2(u_left=100.0, u_right=0.0, nx=nx, r=0.5, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0)
+x, time, uv = implicit_numpy_solver_v2(u_left=100.0, u_right=0.0, nx=nx, r=0.9, xmin=0.0, xmax=L, tmin=0.0, tmax=tmax, k=1.0, theta=0.4)
 
 def update_line(num, data, line):
     line.set_data(data[0],data[1][:,num])

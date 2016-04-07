@@ -6,9 +6,9 @@ import numpy as np
 from matplotlib.pyplot import *
 
 # change some default values to make plots more readable 
-LNWDT=3; FNT=11
+LNWDT=3; FNT=16
 rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
-font = {'size' : 16}; rc('font', **font)
+
 
 
 N=40
@@ -38,7 +38,7 @@ solvers = [euler, heun, rk4] #list of solvers
 solver=solvers[2] # select specific solver
 
 # Guessed values
-s=[-34.0,-20]
+s=[-3.0,-9]
 
 z0=np.zeros(2)
 z0[0] = 4.0

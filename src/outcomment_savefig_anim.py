@@ -4,7 +4,7 @@ print 'path: ', path
 for chap in os.listdir(path):
     print "dir/file: ", chap
     if os.path.isdir(chap):
-        for file_name in os.listdir(chap):
+        for file_name in os.listdir(path+'/'+chap):
             if file_name[-3:]== '.py':
                 old_file = path+'/'+chap+'/'+file_name
                 new_file = path+'/'+chap+'/'+file_name + '.tmp'
