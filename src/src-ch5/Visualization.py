@@ -86,7 +86,7 @@ def createAnimation(NumericalSolutions, analyticalSolution, scheme_names, r_vect
     
     if symmetric:
         r_vector2 = -1*r_vector[::-1]
-        r_vector = np.append(r_vector2, r_vector)
+        r_vector = np.append(r_vector, r_vector2)
     
     def animate_alt(i):
         i = i*jump
