@@ -120,7 +120,7 @@ if __name__ == '__main__':
     
     N = 25 # No. of parts
     h = 1./N # length of r-step
-    D = 0.51 # numerical diffusion number
+    D = 0.4 # numerical diffusion number
     dt = D*h**2
     nmax = 1500 # No. of time-steps
     T = nmax*dt
@@ -142,7 +142,7 @@ if __name__ == '__main__':
     tic = timeModule.time()
     for n in range(nmax):
         
-        wNew = thetaScheme_numpy_V1(theta, D, N, wOld)
+        wNew = thetaSchemeNumpyV1(theta, D, N, wOld)
         uNew = 1 - r**2 - wNew
         
         
