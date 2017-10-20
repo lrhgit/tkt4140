@@ -1,4 +1,4 @@
-# src-ch5/startup.py
+# src-ch5/Visualization.py
 
 import numpy as np
 import matplotlib.pylab as plt

@@ -1,4 +1,4 @@
- # src-ch3/section321/ribbe2.py
+# src-ch3/section321/ribbe1.py
 
 import numpy as np
 import scipy as sc

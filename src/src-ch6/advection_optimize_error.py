@@ -116,11 +116,13 @@ with open('advection_scheme_errors.txt', 'r') as FILENAME:
             
             lineNumber += 1
       
-FILENAME.close()
+FILENAME.close()    
 
 # convert lists to numpy arrays:
 hxList = np.asarray(hxList) 
 htList = np.asarray(htList) 
+
+
 
 E_ftbs = np.asarray(E_ftbs) 
 E_lax_friedrich = np.asarray(E_lax_friedrich) 

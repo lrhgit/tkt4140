@@ -1,20 +1,19 @@
 # src-ch6/advection_schemes.py
 
 import numpy as np
-import matplotlib.pyplot as plt
 from matplotlib import animation
 from scipy import interpolate
 from numpy import where
 from math import sin
 
+import matplotlib; matplotlib.use('Qt4Agg')
+import matplotlib.pylab as plt
+plt.get_current_fig_manager().window.raise_()
+
+
 LNWDT=2; FNT=15
 plt.rcParams['lines.linewidth'] = LNWDT; plt.rcParams['font.size'] = FNT
 
-a = 1.0 # wave speed
-tmin, tmax = 0.0, 1.0 # start and stop time of simulation
-xmin, xmax = 0.0, 2.0 # start and end of spatial domain
-Nx = 80 # number of spatial points
-c = 0.9 # courant number, need c<=1 for stability
 
 init_func=1   # Select stair case function (0) or sin^2 function (1)
 
@@ -61,6 +60,15 @@ def macCormack(u):
     u[1:] = .5*(u[1:]+up[1:] -  c*(up[1:]-up[:-1]))
     return u[1:-1] 
 
+
+# Constants and parameters
+a = 1.0 # wave speed
+tmin, tmax = 0.0, 1.0 # start and stop time of simulation
+xmin, xmax = 0.0, 2.0 # start and end of spatial domain
+Nx = 80 # number of spatial points
+c = 0.9 # courant number, need c<=1 for stability
+
+
 # Discretize
 x = np.linspace(xmin, xmax, Nx+1) # discretization of space
 dx = float((xmax-xmin)/Nx) # spatial step size
@@ -70,11 +78,10 @@ time = np.linspace(tmin, tmax, Nt) # discretization of time
 
 # solve from tmin to tmax
 
-#solvers = [ftbs,lax_wendroff,lax_friedrich,macCormack]
+solvers = [ftbs,lax_wendroff,lax_friedrich,macCormack]
 #solvers = [ftbs,lax_wendroff,macCormack]
 #solvers = [ftbs,lax_wendroff]
-solvers = [lax_wendroff]
-
+#solvers = [ftbs]
 
 u_solutions=np.zeros((len(solvers),len(time),len(x)))
 uanalytical = np.zeros((len(time), len(x))) # holds the analytical solution

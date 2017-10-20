@@ -25,7 +25,7 @@ ymax=1.5
  
 # Set simulation parameters
 #need hx=(1/nx)=hy=(1.5/ny)
-Nx = 100
+Nx = 20
 h=xmax/Nx
 Ny = int(ymax/h)
 

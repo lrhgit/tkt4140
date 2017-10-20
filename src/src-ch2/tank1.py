@@ -17,15 +17,15 @@ def tank1(y, x):
         y(array): an array containg w and its derivatives up to third order.
         x(array): independent variable
     Returns:
-        dwdx(array): RHS of the system of first order differential equations 
+        dydx(array): RHS of the system of first order differential equations 
     """
-    dwdx = np.zeros_like(y)
-    dwdx[0] = y[1]
-    dwdx[1] = y[2]
-    dwdx[2] = y[3]
-    dwdx[3] = -4*beta4*(y[0]+1-x)
+    dydx = np.zeros_like(y)
+    dydx[0] = y[1]
+    dydx[1] = y[2]
+    dydx[2] = y[3]
+    dydx[3] = -4*beta4*(y[0]+1-x)
     
-    return dwdx
+    return dydx
 
 # === main program ===
 R = 8.5 # Radius [m]
@@ -46,6 +46,8 @@ r = np.array([0, 1, 0])
 phi = np.zeros(3)
 psi = np.zeros(3)
 
+
+# evaluate the boundary value error functions for the initial guesses in s and r 
 for k in range(3):
     y0 = np.array([0, 0, s[k], r[k]])
     y = solver(tank1, y0, x)
@@ -53,13 +55,13 @@ for k in range(3):
     psi[k]=y[-1, 3]
     
 # calculate correct r and s
-phi1, phi2, phi3, psi1, psi2, psi3 = phi[0], phi[1], phi[2], psi[0], psi[1], psi[2]
-nev = (psi3 - psi1)*(phi2 - phi1) - (phi3 - phi1)*(psi2 - psi1)
+denominator = (psi[2] - psi[0])*(phi[1] - phi[0]) - (phi[2] - phi[0])*(psi[1] - psi[0])
 
-rstar = (phi3*psi1 - psi3*phi1)/nev
-sstar = (psi2*phi1 - phi2*psi1)/nev
+rstar = (phi[2]*psi[0] - psi[2]*phi[0])/denominator
+sstar = (psi[1]*phi[0] - phi[1]*psi[0])/denominator
 print 'rstar', rstar, 'sstar', sstar
 
+# compute the correct solution with the correct initial guesses
 y0 = np.array([0, 0, sstar, rstar])
 y = solver(tank1, y0, x)
 
@@ -67,8 +69,8 @@ legendList=[]
 
 plot(x,-y[:,3]/beta**2)
 plot(x,-y[:,2]/beta)
-legendList.append('v(x) / $\eta$ ')
-legendList.append(' m(x)/ \beta}^2 ')
+legendList.append(r'$v(x)/\beta^2$ ')
+legendList.append(r'$m(x)/\beta$ ')
 # Add the labels
 legend(legendList,loc='best',frameon=False)
 ylabel('v, m')

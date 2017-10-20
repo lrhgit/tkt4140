@@ -1,8 +1,7 @@
-# src-ch5/couette_Flow_FTCS.py;Visualization.py @ git@lrhgit/tkt4140/src/src-ch5/Visualization.py;
+# src-ch5/couette_FTCS.py;Visualization.py @ git@lrhgit/tkt4140/src/src-ch5/Visualization.py;
 
-import matplotlib; matplotlib.use('Qt4Agg')
+import matplotlib; matplotlib.use('Qt5Agg')
 import matplotlib.pylab as plt
-plt.get_current_fig_manager().window.raise_()
 
 import numpy as np
 from math import exp, sin, pi

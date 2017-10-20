@@ -62,19 +62,19 @@ for n in range(nmax):
 legends=[] # empty list to append legends as plots are generated
 
 plot(y,z[:,0])
-legends.append('theta')
+legends.append(r'$\theta$')
 
 plot(y,z[:,1])
-legends.append('dtheta/dl')
+legends.append(r'$d\theta/dl$')
 
 plot(y,z[:,2])
-legends.append('deflection y')
+legends.append(r'$y$')
 
 
 
 # Add the labels
 legend(legends,loc='best',frameon=False) # Add the legends
-ylabel('theta theta')
+ylabel(r'$\theta, d\theta/dl, y$')
 xlabel('y/L')
 #grid(b=True, which='both', axis='both',linestyle='-')
 grid(b=True, which='both', color='0.65',linestyle='-')

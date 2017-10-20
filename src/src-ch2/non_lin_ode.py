@@ -38,7 +38,8 @@ solvers = [euler, heun, rk4] #list of solvers
 solver=solvers[2] # select specific solver
 
 # Guessed values
-s=[-3.0,-9]
+# s=[-3.0,-9]
+s=[-40.0,-10.0]
 
 z0=np.zeros(2)
 z0[0] = 4.0

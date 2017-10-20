@@ -55,7 +55,7 @@ def Newton_solver_sympy(error, h, x0):
         Jinv = np.asarray(JacobiInvfunc(x))
         xnew = x - np.dot(Jinv, F)
         x = xnew
-        #print "n, x: ", n, x
+#        print "n, x: ", n, x, F
     x[0] = round(x[0], 2)
     x[1] = round(x[1], 3)
  
@@ -139,6 +139,10 @@ rk4Error = np.asarray(schemes_error["rk4"])
 [C_heun, p_heun] = Newton_solver_sympy(heunError, ht, [1,2])
 [C_rk4, p_rk4] = Newton_solver_sympy(rk4Error, ht, [1,4])
 
+print C_euler, p_euler
+print C_heun, p_heun
+print C_rk4, p_rk4
+
 from sympy import latex
 h = symbols('h')
 epsilon_euler = C_euler*h**p_euler
@@ -157,15 +161,26 @@ N_list = [N*2**i for i in range(1, Ntds + 2)]
 N_list = np.asarray(N_list)
 
 plt.figure()
-plt.plot(N_list, np.log2(eulerError), 'b')
-plt.plot(N_list, np.log2(epsilon_euler(ht)), 'b--')
-plt.plot(N_list, np.log2(heunError), 'g')
-plt.plot(N_list, np.log2(epsilon_heun(ht)), 'g--')
-plt.plot(N_list, np.log2(rk4Error), 'r')
-plt.plot(N_list, np.log2(epsilon_rk4(ht)), 'r--')
-LegendList = ['${\epsilon}_{euler}$', epsilon_euler_latex, '${\epsilon}_{heun}$', epsilon_heun_latex, '${\epsilon}_{rk4}$', epsilon_rk4_latex]
-plt.legend(LegendList, loc='best', frameon=False)
-plt.xlabel('N')
+
+# plt.plot(N_list, np.log2(eulerError), 'b')
+# plt.plot(N_list, np.log2(epsilon_euler(ht)), 'b--')
+# plt.plot(N_list, np.log2(heunError), 'g')
+# plt.plot(N_list, np.log2(epsilon_heun(ht)), 'g--')
+# plt.plot(N_list, np.log2(rk4Error), 'r')
+# plt.plot(N_list, np.log2(epsilon_rk4(ht)), 'r--')
+
+
+plt.plot(np.log2(N_list), np.log2(eulerError), 'b')
+plt.plot(np.log2(N_list), np.log2(epsilon_euler(ht)), 'b--')
+plt.plot(np.log2(N_list), np.log2(heunError), 'g')
+plt.plot(np.log2(N_list), np.log2(epsilon_heun(ht)), 'g--')
+plt.plot(np.log2(N_list), np.log2(rk4Error), 'r')
+plt.plot(np.log2(N_list), np.log2(epsilon_rk4(ht)), 'r--')
+
+
+LegendList = ['${\epsilon}_{Euler}$', epsilon_euler_latex, '${\epsilon}_{Heun}$', epsilon_heun_latex, '${\epsilon}_{RK4}$', epsilon_rk4_latex]
+plt.legend(LegendList, loc='best', frameon=False,fontsize='20')
+plt.xlabel('log2(N)')
 plt.ylabel('log2($\epsilon$)')
 #plt.savefig('../fig-ch1/MMS_example2.png')
 plt.show()

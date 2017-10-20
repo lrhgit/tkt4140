@@ -692,6 +692,7 @@ if __name__ == '__main__':
 
     #test_MES()
     #test_MES_convergence()
+    test_MES()
     test_Stability()
     #test_CPUtime()
     plt.show()

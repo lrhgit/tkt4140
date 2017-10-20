@@ -6,10 +6,13 @@ import numpy as np
 from matplotlib.pyplot import *
 
 # change some default values to make plots more readable 
-LNWDT=3; FNT=11
-rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
+LNWDT=2; FNT=15; FMLY='helvetica';
+rcParams['lines.linewidth'] = LNWDT
+rcParams['font.size'] = FNT
+rcParams['font.family'] = FMLY
 
-def Sys1(y, x):
+
+def SubProblem1(y, x):
     """ system 1 of Governing differential equation on beam bending with constant cross section
     Args:
         y(array): an array containg y and its derivatives up to second order. (RHS)
@@ -22,7 +25,7 @@ def Sys1(y, x):
     
     return yout
 
-def Sys2(y, x):
+def SubProblem2(y, x):
     """ system 2 of Governing differential equation on beam bending with constant cross section
     Args:
         y(array): an array containg y and its derivatives up to second order. (RHS)
@@ -50,8 +53,8 @@ s = [0, 1] # guessed values
 y0Sys1 = [0, s[0]] # initial values of u and u'
 y0Sys2 = [0, s[1]] 
 
-u0 = solver(Sys1, y0Sys1,x)
-u1 = solver(Sys2, y0Sys2,x)
+u0 = solver(SubProblem1, y0Sys1,x)
+u1 = solver(SubProblem2, y0Sys2,x)
 
 u0 = u0[:,0] # extract deflection from solution data
 u1 = u1[:,0] 
@@ -70,5 +73,7 @@ legend(legendList,loc='best',frameon=False)
 ylabel('u')
 xlabel('x')
 grid(b=True, which='both', color='0.65',linestyle='-')
-
+#savefig('../fig-ch2/beam_deflect_shoot_constant.png', transparent=True)
+#savefig('../fig-ch2/beam_deflect_shoot_constant.pdf', transparent=True)
+#sh
 show()

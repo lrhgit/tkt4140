@@ -11,19 +11,19 @@ rcParams['lines.linewidth'] = LNWDT; rcParams['font.size'] = FNT
 font = {'size' : 16}; rc('font', **font)
 
 h = 0.05 # steplength
-n = round(1./h)-1 # number of equations
-print n
+n = int(round(1./h)-1) # number of equations
 fac = (3.)*h**2
 
 #initilizing:
 x = np.linspace(h,1-h,n)
-print x
-ym = -20*x*(1-x) # initial guess of y. ym = np.zeros(n) will converge to y1. ym = -20*x*(1-x) for instance will converge to y2
+ym = -20*x*(1-x) # initial guess of y. 
+
+#ym = np.zeros(n) # will converge to y1. ym = -20*x*(1-x) for instance will converge to y2
 
 
-it, itmax, dymax, relTol = 0, 15, 1., 10**-10
+it, itmax, dymax, RelTol = 0, 15, 1., 10**-10
 legends=[]
-while (dymax > relTol) and (it < itmax):
+while (dymax > RelTol) and (it < itmax):
     """iteration process of linearized system of equations using taylor 
     """
     plot(x,ym) # plot ym for iteration No. it
@@ -40,10 +40,10 @@ while (dymax > relTol) and (it < itmax):
     dymax  = np.max(np.abs((ym1-ym)/ym))
     ym = ym1
 
-    print 'it = {},  dymax = {} '.format(it, dymax)
+    print('it = {},  dymax = {} '.format(it, dymax))
     
 legend(legends,loc='best',frameon=False)
-show()
+
 
 ya = 4./(1+x)**2
 feil = np.abs((ym1-ya)/ya)
@@ -53,6 +53,7 @@ for l in range(len(x)):
     print 'x = {},  y = {},  ya = {}'.format(x[l], ym1[l], ya[l])
 
 
+figure()
 
 # plotting:
 legends=[] # empty list to append legends as plots are generated
